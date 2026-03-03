@@ -1,13 +1,17 @@
+import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { ProblemSection } from "@/components/sections/ProblemSection";
-import { ProductPreviewSection } from "@/components/sections/ProductPreviewSection";
-import { DemoSection } from "@/components/sections/DemoSection";
-import { ComingSoonSection } from "@/components/sections/ComingSoonSection";
-import { SocialProofSection } from "@/components/sections/SocialProofSection";
-import { WaitlistSection } from "@/components/sections/WaitlistSection";
 import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 import AbstractBackground from "@/components/ui/AbstractBackground";
+
+const ProblemSection = dynamic(() => import("@/components/sections/ProblemSection").then((mod) => mod.ProblemSection), {
+  ssr: true,
+});
+const WaitlistSection = dynamic(() => import("@/components/sections/WaitlistSection").then((mod) => mod.WaitlistSection), {
+  ssr: true,
+});
+const Footer = dynamic(() => import("@/components/layout/Footer").then((mod) => mod.Footer), {
+  ssr: true,
+});
 
 export default function Home() {
   return (

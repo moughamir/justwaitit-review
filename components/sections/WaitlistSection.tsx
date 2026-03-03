@@ -1,29 +1,11 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { WaitlistForm } from "./waitlist-form";
-
-const sectionVariants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
-  },
-};
 
 export function WaitlistSection() {
   return (
     <section id="waitlist" className="relative min-h-screen flex items-center justify-center px-4 snap-start overflow-hidden py-20">
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[800px] h-[800px] bg-aq-blue/10 rounded-full blur-[160px] pointer-events-none animate-glow" />
-      <motion.div
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="mx-auto max-w-4xl w-full relative z-10"
-      >
+      <div className="mx-auto max-w-4xl w-full relative z-10 animate-in fade-in slide-in-from-bottom-8 duration-1000 fill-mode-both">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
           {/* Incentives */}
           <div className="lg:col-span-2 space-y-8 text-center lg:text-left">
@@ -77,7 +59,7 @@ export function WaitlistSection() {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

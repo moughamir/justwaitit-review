@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { TypoLogo } from "@/components/ui/TypoLogo";
+import { StaticTypoLogo } from "@/components/ui/StaticTypoLogo";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, useRef } from "react";
 
@@ -13,7 +12,7 @@ export function Header() {
 
   useEffect(() => {
     const scrollContainer = document.querySelector('.lg\\:h-screen.lg\\:snap-y') as HTMLElement;
-    
+
     if (!scrollContainer) return;
 
     const handleScroll = () => {
@@ -48,11 +47,9 @@ export function Header() {
   }, [lastScrollY]);
 
   return (
-    <motion.header
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: isHidden ? -120 : 0, opacity: isHidden ? 0 : 1 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="top-0 right-0 left-0 z-50 fixed px-4 py-4 pointer-events-none"
+    <header
+      className={`top-0 right-0 left-0 z-50 fixed px-4 py-4 pointer-events-none transition-all duration-300 ease-in-out ${isHidden ? '-translate-y-[120px] opacity-0' : 'translate-y-0 opacity-100'
+        } animate-in fade-in slide-in-from-top-full fill-mode-both`}
     >
       <nav aria-label="Main Navigation" className="flex justify-between items-center bg-neutral-100/25 backdrop-blur-sm mx-auto px-4 sm:px-6 py-3 rounded-2xl max-w-5xl pointer-events-auto glass-strong">
         <Link
@@ -60,10 +57,9 @@ export function Header() {
           className="flex items-center"
           aria-label="Anaqio Home"
         >
-          <TypoLogo
+          <StaticTypoLogo
             className="w-auto h-5 sm:h-6"
             theme="light"
-            animate={false}
           />
           <span className="sr-only">anaqio</span>
         </Link>
@@ -74,13 +70,12 @@ export function Header() {
             className="backdrop-blur-xl"
             onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
             aria-label="Scroll to Waitlist Section"
-            
           >
             Join Waitlist
           </Button>
 
         </div>
       </nav>
-    </motion.header>
+    </header>
   );
 }
