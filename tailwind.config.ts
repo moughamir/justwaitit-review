@@ -1,4 +1,5 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss';
+import animate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -51,13 +52,49 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        // Anaqio Brand Colors
+        aq: {
+          blue: "#2563EB",
+          purple: "#7C3AED",
+          white: "#F8FAFC",
+          ink: "#0F172A",
+          slate: "#334155",
+          muted: "#94A3B8",
+          border: "#E2E8F0",
+          surface: "#F1F5F9",
+          grad: {
+            start: "#3F57AF",
+            mid1: "#484DA9",
+            mid2: "#6049A8",
+            end: "#6F47A7",
+          },
+        },
+      },
+      fontFamily: {
+        display: ['var(--font-space-grotesk)', 'sans-serif'],
+        ui: ['var(--font-inter)', 'sans-serif'],
+        body: ['var(--font-inter)', 'sans-serif'],
+        label: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        editorial: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        wordmark: ['Bodoni Moda', 'Georgia', 'serif'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-mono)', 'monospace'],
+        serif: ['var(--font-instrument-serif)', 'serif'],
+      },
+      letterSpacing: {
+        'display': '-0.02em',
+        'editorial': '0.02em',
+        'label': '0.3em',
+        'wide-xl': '0.4em',
       },
       borderRadius: {
         lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        md: "calc(var(--radius) - 4px)",
+        sm: "calc(var(--radius) - 8px)",
+        xl: "16px",
+        full: "999px",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 } satisfies Config;

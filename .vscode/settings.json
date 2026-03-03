@@ -1,0 +1,46 @@
+{
+    "kiroAgent.configureMCP": "Enabled",
+    "piny.project_settings": {
+        "open-pages": [
+            "pinyfakepage.html"
+        ],
+        "component-settings": {
+            "components/layout/Header.tsx:::Temp": {
+                "route": "/"
+            }
+        },
+        "app-routes": {
+            "routes": [
+                "/",
+                "/auth/error",
+                "/auth/forgot-password",
+                "/auth/login",
+                "/auth/sign-up",
+                "/auth/sign-up-success",
+                "/auth/update-password",
+                "/brand",
+                "/cookies",
+                "/early-access",
+                "/legal-mentions",
+                "/privacy",
+                "/protected",
+                "/terms"
+            ],
+            "current_route": "/"
+        },
+        "urls": {
+            "pinyfakepage.html": {
+                "open-page-views": [
+                    {
+                        "w": 480,
+                        "h": 0
+                    }
+                ]
+            }
+        },
+        "tw-external-config": {},
+        "source-folders": null,
+        "preview-url": "http://localhost:3000",
+        "ai-project-brief": null
+    }
+}

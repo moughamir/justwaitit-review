@@ -58,28 +58,29 @@ export function SignUpForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="noise-overlay border-white/5">
         <CardHeader>
-          <CardTitle className="text-2xl">Join anaqio</CardTitle>
-          <CardDescription>Create your account to get started</CardDescription>
+          <CardTitle className="text-3xl font-bold font-display">Join anaqio</CardTitle>
+          <CardDescription className="font-body">Create your studio account to get started</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 relative z-10">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="name@company.com"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Password</Label>
                 </div>
                 <Input
                   id="password"
@@ -87,11 +88,12 @@ export function SignUpForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="repeat-password">Repeat Password</Label>
+                  <Label htmlFor="repeat-password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Repeat Password</Label>
                 </div>
                 <Input
                   id="repeat-password"
@@ -99,17 +101,18 @@ export function SignUpForm({
                   required
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating an account..." : "Sign up"}
+              {error && <p className="text-xs font-medium text-destructive">{error}</p>}
+              <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
+                {isLoading ? "Provisioning Account..." : "Create Account"}
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-6 text-center text-sm font-body text-muted-foreground">
               Already have an account?{" "}
-              <Link href="/auth/login" className="underline underline-offset-4">
-                Login
+              <Link href="/auth/login" className="text-foreground font-semibold underline underline-offset-4 hover:text-aq-blue transition-colors">
+                Sign in
               </Link>
             </div>
           </form>

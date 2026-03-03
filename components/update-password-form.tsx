@@ -44,30 +44,31 @@ export function UpdatePasswordForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="noise-overlay border-white/5">
         <CardHeader>
-          <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-          <CardDescription>
-            Please enter your new password below.
+          <CardTitle className="text-3xl font-bold font-display tracking-tight">Security Update</CardTitle>
+          <CardDescription className="font-body pt-2">
+            Configure your new studio access credentials
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleForgotPassword}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 relative z-10">
               <div className="grid gap-2">
-                <Label htmlFor="password">New password</Label>
+                <Label htmlFor="password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">New Password</Label>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="New password"
+                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Saving..." : "Save new password"}
+              {error && <p className="text-xs font-medium text-destructive">{error}</p>}
+              <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
+                {isLoading ? "Updating Security..." : "Confirm New Password"}
               </Button>
             </div>
           </form>

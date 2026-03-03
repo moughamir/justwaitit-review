@@ -49,35 +49,36 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="noise-overlay border-white/5">
         <CardHeader>
-          <CardTitle className="text-2xl">Welcome to anaqio</CardTitle>
-          <CardDescription>
-            Sign in to your account to continue
+          <CardTitle className="text-3xl font-bold font-display">Welcome back</CardTitle>
+          <CardDescription className="font-body">
+            Sign in to your anaqio studio account
           </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-6 relative z-10">
               <div className="grid gap-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Email</Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="m@example.com"
+                  placeholder="name@company.com"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Password</Label>
                   <Link
                     href="/auth/forgot-password"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    className="ml-auto inline-block text-xs font-semibold text-aq-blue hover:text-aq-purple transition-colors"
                   >
-                    Forgot your password?
+                    Forgot password?
                   </Link>
                 </div>
                 <Input
@@ -86,20 +87,21 @@ export function LoginForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  className="bg-background/50 border-white/10"
                 />
               </div>
-              {error && <p className="text-sm text-red-500">{error}</p>}
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Logging in..." : "Login"}
+              {error && <p className="text-xs font-medium text-destructive">{error}</p>}
+              <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
+                {isLoading ? "Authenticating..." : "Sign In"}
               </Button>
             </div>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
+            <div className="mt-6 text-center text-sm font-body text-muted-foreground">
+              New to anaqio?{" "}
               <Link
                 href="/auth/sign-up"
-                className="underline underline-offset-4"
+                className="text-foreground font-semibold underline underline-offset-4 hover:text-aq-blue transition-colors"
               >
-                Sign up
+                Create an account
               </Link>
             </div>
           </form>

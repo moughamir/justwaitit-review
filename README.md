@@ -1,22 +1,5 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
-
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
-
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
-
+# ANAQIO
+ AI-driven virtual studio for fashion commerce.
 ## Features
 
 - Works across the entire [Next.js](https://nextjs.org) stack
@@ -53,19 +36,12 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
 
 1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
 
-2. Create a Next.js app using the Supabase Starter template npx command
+2. Create a Next.js app using the Supabase Starter template command
 
    ```bash
-   npx create-next-app --example with-supabase with-supabase-app
+   bun x create-next-app --example with-supabase with-supabase-app
    ```
 
-   ```bash
-   yarn create next-app --example with-supabase with-supabase-app
-   ```
-
-   ```bash
-   pnpm create next-app --example with-supabase with-supabase-app
-   ```
 
 3. Use `cd` to change into the app's directory
 
@@ -89,7 +65,7 @@ If you wish to just develop locally and not deploy to Vercel, [follow the steps 
 5. You can now run the Next.js local development server:
 
    ```bash
-   npm run dev
+   bun dev
    ```
 
    The starter kit should now be running on [localhost:3000](http://localhost:3000/).

@@ -47,53 +47,52 @@ export function ForgotPasswordForm({
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       {success ? (
-        <Card>
+        <Card className="noise-overlay border-white/5">
           <CardHeader>
-            <CardTitle className="text-2xl">Check Your Email</CardTitle>
-            <CardDescription>Password reset instructions sent</CardDescription>
+            <CardTitle className="text-3xl font-bold font-display tracking-tight">Check Your Inbox</CardTitle>
+            <CardDescription className="font-body pt-2">Password reset instructions sent</CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground">
-              If you registered using your email and password, you will receive
-              a password reset email.
+            <p className="text-sm text-muted-foreground leading-relaxed font-body">
+              If you have an account registered with that email, you will receive
+              a link to securely reset your credentials shortly.
             </p>
           </CardContent>
         </Card>
       ) : (
-        <Card>
+        <Card className="noise-overlay border-white/5">
           <CardHeader>
-            <CardTitle className="text-2xl">Reset Your Password</CardTitle>
-            <CardDescription>
-              Type in your email and we&apos;ll send you a link to reset your
-              password
+            <CardTitle className="text-3xl font-bold font-display tracking-tight">Recover Access</CardTitle>
+            <CardDescription className="font-body pt-2">
+              Enter your email to receive recovery instructions
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleForgotPassword}>
-              <div className="flex flex-col gap-6">
+              <div className="flex flex-col gap-6 relative z-10">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Email Address</Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="name@company.com"
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="bg-background/50 border-white/10"
                   />
                 </div>
-                {error && <p className="text-sm text-red-500">{error}</p>}
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Sending..." : "Send reset email"}
+                {error && <p className="text-xs font-medium text-destructive">{error}</p>}
+                <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
+                  {isLoading ? "Sending Link..." : "Recover Password"}
                 </Button>
               </div>
-              <div className="mt-4 text-center text-sm">
-                Already have an account?{" "}
+              <div className="mt-6 text-center text-sm font-body">
                 <Link
                   href="/auth/login"
-                  className="underline underline-offset-4"
+                  className="text-muted-foreground hover:text-foreground font-semibold underline underline-offset-4 transition-colors"
                 >
-                  Login
+                  Back to Sign In
                 </Link>
               </div>
             </form>
