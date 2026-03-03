@@ -1,68 +1,111 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect, useRef } from 'react';
 
 const AbstractBackground = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let width: number, height: number;
+    let animationFrameId: number;
+
+    // Anaqio brand colors - blue and purple gradient palette
+    const colors = ['#2563EB', '#7C3AED', '#3F57AF', '#6049A8', '#6F47A7'];
+    const blobs: Blob[] = [];
+
+    class Blob {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      r: number;
+      color: string;
+
+      constructor() {
+        this.r = Math.random() * 200 + 200; // Radius
+        this.x = Math.random() * (width - this.r * 2) + this.r;
+        this.y = Math.random() * (height - this.r * 2) + this.r;
+        // Velocity - slower for more elegant movement
+        this.vx = (Math.random() - 0.5) * 1.5;
+        this.vy = (Math.random() - 0.5) * 1.5;
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // Bounce off edges
+        if (this.x + this.r > width || this.x - this.r < 0) this.vx *= -1;
+        if (this.y + this.r > height || this.y - this.r < 0) this.vy *= -1;
+      }
+
+      draw() {
+        if (!ctx) return;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    const init = () => {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+
+      // Create initial blobs
+      blobs.length = 0;
+      for (let i = 0; i < 6; i++) {
+        blobs.push(new Blob());
+      }
+    };
+
+    const animate = () => {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, width, height);
+
+      blobs.forEach(blob => {
+        blob.update();
+        blob.draw();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const handleResize = () => {
+      init();
+    };
+
+    // Setup
+    window.addEventListener('resize', handleResize);
+    init();
+    animate();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
   return (
-    <>
-      <style dangerouslySetInnerHTML={{
-        __html: `
-        @keyframes blob1 {
-          0% { transform: translate(-20%, -20%) scale(1); }
-          33% { transform: translate(20%, 10%) scale(1.2); }
-          66% { transform: translate(-10%, 20%) scale(0.9); }
-          100% { transform: translate(-20%, -20%) scale(1); }
-        }
-        @keyframes blob2 {
-          0% { transform: translate(20%, 20%) scale(0.9); }
-          33% { transform: translate(-20%, -10%) scale(1.1); }
-          66% { transform: translate(10%, -20%) scale(1); }
-          100% { transform: translate(20%, 20%) scale(0.9); }
-        }
-        @keyframes blob3 {
-          0% { transform: translate(10%, -10%) scale(1.1); }
-          33% { transform: translate(30%, 20%) scale(0.8); }
-          66% { transform: translate(-20%, 30%) scale(1.2); }
-          100% { transform: translate(10%, -10%) scale(1.1); }
-        }
-        .blob {
-          position: absolute;
-          border-radius: 50%;
-          will-change: transform;
-        }
-        .blob-1 {
-          top: 20%; left: 20%; width: 50vw; height: 50vh;
-          background: radial-gradient(circle, rgba(37,99,235,0.8) 0%, rgba(37,99,235,0) 70%);
-          animation: blob1 15s infinite linear;
-        }
-        .blob-2 {
-          top: 40%; right: 10%; width: 60vw; height: 60vh;
-          background: radial-gradient(circle, rgba(124,58,237,0.6) 0%, rgba(124,58,237,0) 70%);
-          animation: blob2 18s infinite linear;
-        }
-        .blob-3 {
-          bottom: 10%; left: 30%; width: 45vw; height: 45vh;
-          background: radial-gradient(circle, rgba(63,87,175,0.7) 0%, rgba(63,87,175,0) 70%);
-          animation: blob3 20s infinite linear;
-        }
-      `}} />
-      <div
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1,
-          overflow: 'hidden',
-          filter: 'blur(80px)',
-          opacity: 0.4,
-          pointerEvents: 'none',
-        }}
-      >
-        <div className="blob blob-1" />
-        <div className="blob blob-2" />
-        <div className="blob blob-3" />
-      </div>
-    </>
+    <canvas
+      ref={canvasRef}
+      className="top-0 left-0 -z-10 fixed w-full h-full pointer-events-none"
+      style={{
+        filter: 'blur(80px)',
+        opacity: 0.4,
+      }}
+      aria-hidden="true"
+    />
   );
 };
 
