@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "skills": {
+    "canvas-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "a2fe47d24b3fd8e52faef731fff099c557e698083cd644b2e5695cc4dd8c7715"
+    },
+    "cloudflare": {
+      "source": "cloudflare/skills",
+      "sourceType": "github",
+      "computedHash": "02ef72b4906d295d03da15d52357babdef06a762f0374b85c89c73c9b22a7bad"
+    },
+    "design-motion-principles": {
+      "source": "kylezantos/design-motion-principles",
+      "sourceType": "github",
+      "computedHash": "d37d75f60df4a1e9592544a509e9ca65121b76b1cb5e3847c58fd33cb157d2fc"
+    },
+    "eslint-prettier-config": {
+      "source": "patricio0312rev/skills",
+      "sourceType": "github",
+      "computedHash": "dd1365afc6c06f6c8555d0624669e70c6873057da70a92b045e948329dc1b906"
+    },
+    "framer-motion-animator": {
+      "source": "patricio0312rev/skills",
+      "sourceType": "github",
+      "computedHash": "d0137ba04049bf8926bc80f6a5e2b82d94b5633b6445a85dbfb26ab4f1b104c6"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "computedHash": "063a0e6448123cd359ad0044cc46b0e490cc7964d45ef4bb9fd842bd2ffbca67"
+    },
+    "git-workflow": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "56149f114d4a4a5b6f939540a8fcb474a80c438c1308bfeb7e027b7514ca3451"
+    },
+    "lighthouse": {
+      "source": "onnokh/lighthouse",
+      "sourceType": "github",
+      "computedHash": "94bf9e0d6c9d8489d53d378a81584ca75df11c29f255feb6351292e02e839097"
+    },
+    "motion": {
+      "source": "onmax/nuxt-skills",
+      "sourceType": "github",
+      "computedHash": "45d0803ea76f82fa40af91858472fb4528a8ce4c2a9a710b785e796cd5b3fe98"
+    },
+    "next-best-practices": {
+      "source": "vercel-labs/next-skills",
+      "sourceType": "github",
+      "computedHash": "515ba75178bd44875812d9a560bdf14651f86709f89cf1d4f209638e879807f3"
+    },
+    "nextjs-app-router-patterns": {
+      "source": "wshobson/agents",
+      "sourceType": "github",
+      "computedHash": "59fb01d2fad75636fbf99b505b7212490cc0e2a79a99bbf103a255c8e18904f1"
+    },
+    "nextjs-best-practices": {
+      "source": "davila7/claude-code-templates",
+      "sourceType": "github",
+      "computedHash": "7b31199cce0f9a1b17acdf880469b0f9ddf9eb63577b1fde567def461d888287"
+    },
+    "nextjs-react-typescript": {
+      "source": "mindrally/skills",
+      "sourceType": "github",
+      "computedHash": "eb995cc826bf48498e0e90969fc7dadfa2ec634002c26cfcfde565134cefa738"
+    },
+    "nextjs-seo": {
+      "source": "laguagu/claude-code-nextjs-skills",
+      "sourceType": "github",
+      "computedHash": "cb162b4dddde7d73157a338d2a86347b816e67db691c39a8c29f1e1e7145cba5"
+    },
+    "threejs-webgl": {
+      "source": "freshtechbro/claudedesignskills",
+      "sourceType": "github",
+      "computedHash": "9b2cfc1e6512ad6c41e4e9ba56c301d619c2cfd63722793258f4424013ec4b22"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "3462ec83f862abb2d532953df33a4dbf87f4616849da5d4b5cc7c13601aaf997"
+    },
+    "web-design-guidelines": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "a6a44d5498f7e8f68289902f3dedfc6f38ae0cee1e96527c80724cf27f727c2a"
+    },
+    "webgl": {
+      "source": "martinholovsky/claude-skills-generator",
+      "sourceType": "github",
+      "computedHash": "981e4742ad032bb9e44a13dc1e03266f207e56fdfe4ed33108731837de3686b8"
+    }
+  }
+}

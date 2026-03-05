@@ -1,9 +1,9 @@
-import { MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
-    : 'https://anaqio.com'
+    : 'https://anaqio.com';
 
   const routes = [
     '',
@@ -18,7 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(),
     changeFrequency: 'monthly' as const,
     priority: route === '' ? 1 : 0.8,
-  }))
+  }));
 
-  return [...routes]
+  return [...routes];
 }

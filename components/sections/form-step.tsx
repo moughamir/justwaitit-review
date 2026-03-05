@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import { memo } from "react";
-import { Input } from "@/components/ui/input";
-import { cn } from "@/lib/utils";
-import type { FormStepProps } from "@/lib/types/waitlist-form";
+import { memo } from 'react';
+
+import type { FormStepProps } from '@/lib/types/waitlist-form';
+
+import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 export const FormStep = memo(function FormStep({
   step,
@@ -16,15 +18,15 @@ export const FormStep = memo(function FormStep({
   return (
     <div className="space-y-5">
       {/* Step title and description */}
-      <div className="space-y-2 mb-6 text-center">
-        <h3 className="font-bold text-foreground text-xl">{step.title}</h3>
-        <p className="text-muted-foreground text-sm">{step.description}</p>
+      <div className="mb-6 space-y-2 text-center">
+        <h3 className="text-xl font-bold text-foreground">{step.title}</h3>
+        <p className="text-sm text-muted-foreground">{step.description}</p>
       </div>
 
       {/* Form fields */}
       <div className="space-y-5">
         {step.fields.map((field) => {
-          const fieldValue = formData[field.name] || "";
+          const fieldValue = formData[field.name] ?? '';
           const fieldError = errors[field.name];
           const fieldId = `${step.id}-${field.name}`;
 
@@ -32,13 +34,13 @@ export const FormStep = memo(function FormStep({
             <div key={field.name} className="space-y-2">
               <label
                 htmlFor={fieldId}
-                className="ml-1 font-bold text-muted-foreground text-xs uppercase tracking-widest"
+                className="ml-1 text-xs font-bold uppercase tracking-widest text-muted-foreground"
               >
                 {field.label}
               </label>
 
               {/* Text and Email inputs */}
-              {(field.type === "text" || field.type === "email") && (
+              {(field.type === 'text' || field.type === 'email') && (
                 <Input
                   id={fieldId}
                   type={field.type}
@@ -50,10 +52,10 @@ export const FormStep = memo(function FormStep({
                   onChange={(e) => onChange(field.name, e.target.value)}
                   onBlur={() => onBlur(field.name)}
                   className={cn(
-                    "bg-background/40 border-white/10 rounded-xl h-12",
-                    "placeholder:text-muted-foreground/30",
-                    "focus:border-aq-blue/50 transition-all px-4",
-                    fieldError && "border-destructive/50"
+                    'h-12 rounded-xl border-white/10 bg-background/40',
+                    'placeholder:text-muted-foreground/30',
+                    'px-4 transition-all focus:border-aq-blue/50',
+                    fieldError && 'border-destructive/50'
                   )}
                   aria-invalid={!!fieldError}
                   aria-describedby={fieldError ? `${fieldId}-error` : undefined}
@@ -61,7 +63,7 @@ export const FormStep = memo(function FormStep({
               )}
 
               {/* Select dropdown */}
-              {field.type === "select" && (
+              {field.type === 'select' && (
                 <select
                   id={fieldId}
                   name={field.name}
@@ -71,18 +73,18 @@ export const FormStep = memo(function FormStep({
                   onChange={(e) => onChange(field.name, e.target.value)}
                   onBlur={() => onBlur(field.name)}
                   className={cn(
-                    "flex border border-white/10 rounded-xl w-full h-12",
-                    "bg-background/40 px-4 py-2 text-sm shadow-sm",
-                    "transition-colors focus:border-aq-blue/50 focus:outline-none",
-                    "disabled:cursor-not-allowed disabled:opacity-50",
-                    "appearance-none text-foreground",
-                    fieldError && "border-destructive/50"
+                    'flex h-12 w-full rounded-xl border border-white/10',
+                    'bg-background/40 px-4 py-2 text-sm shadow-sm',
+                    'transition-colors focus:border-aq-blue/50 focus:outline-none',
+                    'disabled:cursor-not-allowed disabled:opacity-50',
+                    'appearance-none text-foreground',
+                    fieldError && 'border-destructive/50'
                   )}
                   aria-invalid={!!fieldError}
                   aria-describedby={fieldError ? `${fieldId}-error` : undefined}
                 >
                   <option value="" disabled>
-                    {field.placeholder || `Select ${field.label}`}
+                    {field.placeholder ?? `Select ${field.label}`}
                   </option>
                   {field.options?.map((option) => (
                     <option key={option.value} value={option.value}>
@@ -96,7 +98,7 @@ export const FormStep = memo(function FormStep({
               {fieldError && (
                 <p
                   id={`${fieldId}-error`}
-                  className="ml-1 font-medium text-destructive text-xs"
+                  className="ml-1 text-xs font-medium text-destructive"
                   role="alert"
                 >
                   {fieldError}

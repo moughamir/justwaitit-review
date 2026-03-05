@@ -1,25 +1,26 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useState } from "react";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { createClient } from '@/lib/supabase/client';
+import { cn } from '@/lib/utils';
 
 export function ForgotPasswordForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
+}: React.ComponentPropsWithoutRef<'div'>) {
+  const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -38,40 +39,51 @@ export function ForgotPasswordForm({
       if (error) throw error;
       setSuccess(true);
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       {success ? (
         <Card className="noise-overlay border-white/5">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold font-display tracking-tight">Check Your Inbox</CardTitle>
-            <CardDescription className="font-body pt-2">Password reset instructions sent</CardDescription>
+            <CardTitle className="font-display text-3xl font-bold tracking-tight">
+              Check Your Inbox
+            </CardTitle>
+            <CardDescription className="pt-2 font-body">
+              Password reset instructions sent
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <p className="text-sm text-muted-foreground leading-relaxed font-body">
-              If you have an account registered with that email, you will receive
-              a link to securely reset your credentials shortly.
+            <p className="font-body text-sm leading-relaxed text-muted-foreground">
+              If you have an account registered with that email, you will
+              receive a link to securely reset your credentials shortly.
             </p>
           </CardContent>
         </Card>
       ) : (
         <Card className="noise-overlay border-white/5">
           <CardHeader>
-            <CardTitle className="text-3xl font-bold font-display tracking-tight">Recover Access</CardTitle>
-            <CardDescription className="font-body pt-2">
+            <CardTitle className="font-display text-3xl font-bold tracking-tight">
+              Recover Access
+            </CardTitle>
+            <CardDescription className="pt-2 font-body">
               Enter your email to receive recovery instructions
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleForgotPassword}>
-              <div className="flex flex-col gap-6 relative z-10">
+              <div className="relative z-10 flex flex-col gap-6">
                 <div className="grid gap-2">
-                  <Label htmlFor="email" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Email Address</Label>
+                  <Label
+                    htmlFor="email"
+                    className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                  >
+                    Email Address
+                  </Label>
                   <Input
                     id="email"
                     type="email"
@@ -79,18 +91,27 @@ export function ForgotPasswordForm({
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="bg-background/50 border-white/10"
+                    className="border-white/10 bg-background/50"
                   />
                 </div>
-                {error && <p className="text-xs font-medium text-destructive">{error}</p>}
-                <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
-                  {isLoading ? "Sending Link..." : "Recover Password"}
+                {error && (
+                  <p className="text-xs font-medium text-destructive">
+                    {error}
+                  </p>
+                )}
+                <Button
+                  type="submit"
+                  variant="brand"
+                  className="h-11 w-full"
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Sending Link...' : 'Recover Password'}
                 </Button>
               </div>
-              <div className="mt-6 text-center text-sm font-body">
+              <div className="mt-6 text-center font-body text-sm">
                 <Link
                   href="/auth/login"
-                  className="text-muted-foreground hover:text-foreground font-semibold underline underline-offset-4 transition-colors"
+                  className="font-semibold text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
                 >
                   Back to Sign In
                 </Link>

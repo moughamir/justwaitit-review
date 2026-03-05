@@ -1,20 +1,21 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { GraphicLogo } from "./GraphicLogo";
-import { TypoLogo } from "./TypoLogo";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
+import { GraphicLogo } from './GraphicLogo';
+import { TypoLogo } from './TypoLogo';
 
 interface HeroLogoCompositionProps {
   onComplete?: () => void;
-  theme?: "light" | "dark";
+  theme?: 'light' | 'dark';
   className?: string;
 }
 
 export function HeroLogoComposition({
   onComplete,
-  theme = "dark",
-  className = ""
+  theme = 'dark',
+  className = '',
 }: HeroLogoCompositionProps) {
   const [isOpening, setIsOpening] = useState(false);
   const [isUnmounting, setIsUnmounting] = useState(false);
@@ -42,25 +43,34 @@ export function HeroLogoComposition({
     <AnimatePresence>
       {!isUnmounting && (
         <motion.div
-          className={`relative flex items-center justify-center w-[300px] h-[300px] sm:w-[400px] sm:h-[400px] ${className}`}
-          exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)", transition: { duration: 1, ease: "easeInOut" } }}
+          className={`relative flex h-[300px] w-[300px] items-center justify-center sm:h-[400px] sm:w-[400px] ${className}`}
+          exit={{
+            opacity: 0,
+            scale: 1.1,
+            filter: 'blur(10px)',
+            transition: { duration: 1, ease: 'easeInOut' },
+          }}
         >
           {/* TypoLogo (Revealed underneath) */}
           <motion.div
-            className="absolute inset-0 flex items-center justify-center z-10"
-            initial={{ opacity: 0, scale: 0.8, filter: "blur(10px)" }}
+            className="absolute inset-0 z-10 flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.8, filter: 'blur(10px)' }}
             animate={
               isOpening
-                ? { opacity: 1, scale: 1, filter: "blur(0px)" }
-                : { opacity: 0, scale: 0.8, filter: "blur(10px)" }
+                ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
+                : { opacity: 0, scale: 0.8, filter: 'blur(10px)' }
             }
             transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
-            <TypoLogo theme={theme} animate={false} className="w-[80%] drop-shadow-[0_0_30px_rgba(124,58,237,0.5)]" />
+            <TypoLogo
+              theme={theme}
+              animate={false}
+              className="w-[80%] drop-shadow-[0_0_30px_rgba(124,58,237,0.5)]"
+            />
           </motion.div>
 
           {/* GraphicLogo (Parallax Overlay) */}
-          <div className="absolute inset-0 z-20 pointer-events-none drop-shadow-2xl">
+          <div className="pointer-events-none absolute inset-0 z-20 drop-shadow-2xl">
             <GraphicLogo animate={true} isOpening={isOpening} />
           </div>
         </motion.div>

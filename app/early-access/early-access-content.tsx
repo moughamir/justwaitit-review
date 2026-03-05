@@ -1,97 +1,124 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
-import { WaitlistForm } from "@/components/sections/waitlist-form";
+import Link from 'next/link';
+
+import { Footer } from '@/components/layout/Footer';
+import { Header } from '@/components/layout/Header';
+import { WaitlistForm } from '@/components/sections/waitlist-form';
 
 export function EarlyAccessContent() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-body selection:bg-aq-blue/20">
+    <div className="min-h-screen bg-background font-body text-foreground selection:bg-aq-blue/20">
       <Header />
-      
+
       <main className="noise-overlay">
         {/* HERO */}
-        <section className="relative min-h-screen flex items-center px-6 pt-20 overflow-hidden">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="space-y-8 relative z-10">
+        <section className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20">
+          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
+            <div className="relative z-10 space-y-8">
               <div className="flex items-center gap-3">
                 <div className="h-px w-8 bg-aq-blue" />
-                <span className="text-[10px] uppercase tracking-[0.3em] font-bold text-aq-blue">
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
                   Early Access · 2026
                 </span>
               </div>
-              
-              <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold font-display tracking-tight leading-[0.9]">
+
+              <h1 className="font-display text-6xl font-bold leading-[0.9] tracking-tight sm:text-7xl lg:text-8xl">
                 Fashion&apos;s <br />
-                <span className="text-brand-gradient">Virtual Studio</span> <br />
-                <span className="italic font-normal">powered by AI.</span>
+                <span className="text-brand-gradient">Virtual Studio</span>{' '}
+                <br />
+                <span className="font-normal italic">powered by AI.</span>
               </h1>
-              
-              <p className="text-lg text-muted-foreground max-w-md leading-relaxed font-body">
-                Anaqio provides a professional AI-driven workspace to create, 
-                stage, and sell fashion — without traditional production overhead.
+
+              <p className="max-w-md font-body text-lg leading-relaxed text-muted-foreground">
+                Anaqio provides a professional AI-driven workspace to create,
+                stage, and sell fashion — without traditional production
+                overhead.
               </p>
 
-              <div className="max-w-md relative">
+              <div className="relative max-w-md">
                 <WaitlistForm source="early-access-hero" variant="simple" />
-                <p className="mt-4 text-[10px] text-muted-foreground uppercase tracking-widest font-medium">
-                  By joining you agree to our <Link href="/privacy" className="text-foreground underline">Privacy</Link> & <Link href="/terms" className="text-foreground underline">Terms</Link>
+                <p className="mt-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
+                  By joining you agree to our{' '}
+                  <Link href="/privacy" className="text-foreground underline">
+                    Privacy
+                  </Link>{' '}
+                  &{' '}
+                  <Link href="/terms" className="text-foreground underline">
+                    Terms
+                  </Link>
                 </p>
               </div>
             </div>
 
             <div className="relative hidden lg:block">
-              <div className="aspect-[4/5] bg-secondary/20 rounded-[3rem] border border-white/5 relative overflow-hidden group shadow-2xl">
-                <div className="absolute inset-0 bg-brand-gradient opacity-10 group-hover:opacity-20 transition-opacity duration-700" />
+              <div className="group relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/5 bg-secondary/20 shadow-2xl">
+                <div className="bg-brand-gradient absolute inset-0 opacity-10 transition-opacity duration-700 group-hover:opacity-20" />
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-32 h-32 rounded-full border border-aq-blue/20 flex items-center justify-center animate-glow">
-                    <div className="w-24 h-24 rounded-full border border-aq-purple/20 animate-pulse flex items-center justify-center font-display font-bold text-[10px] text-center tracking-widest uppercase text-aq-blue">
-                      Studio<br/>Layer
+                  <div className="animate-glow flex h-32 w-32 items-center justify-center rounded-full border border-aq-blue/20">
+                    <div className="flex h-24 w-24 animate-pulse items-center justify-center rounded-full border border-aq-purple/20 text-center font-display text-[10px] font-bold uppercase tracking-widest text-aq-blue">
+                      Studio
+                      <br />
+                      Layer
                     </div>
                   </div>
                 </div>
                 <div className="absolute bottom-12 left-12 space-y-2">
                   <div className="h-px w-12 bg-white/20" />
-                  <p className="text-xs uppercase tracking-[0.4em] font-bold text-white/40">Visual Engine v1.0</p>
+                  <p className="text-xs font-bold uppercase tracking-[0.4em] text-white/40">
+                    Visual Engine v1.0
+                  </p>
                 </div>
               </div>
-              <div className="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-aq-ink border border-white/10 flex items-center justify-center shadow-xl animate-float">
-                <span className="font-display font-bold text-aq-blue text-xs tracking-tighter">AI-D</span>
+              <div className="animate-float absolute -right-6 -top-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-aq-ink shadow-xl">
+                <span className="font-display text-xs font-bold tracking-tighter text-aq-blue">
+                  AI-D
+                </span>
               </div>
             </div>
           </div>
         </section>
 
         {/* STATS */}
-        <section className="py-24 border-y border-border/50">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12">
+        <section className="border-y border-border/50 py-24">
+          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-6 lg:grid-cols-4">
             {[
-              ["10×", "Faster Content Creation"],
-              ["90%", "Lower Production Cost"],
-              ["∞", "Creative Freedom"],
-              ["01", "Unified Studio Platform"],
+              ['10×', 'Faster Content Creation'],
+              ['90%', 'Lower Production Cost'],
+              ['∞', 'Creative Freedom'],
+              ['01', 'Unified Studio Platform'],
             ].map(([num, label]) => (
               <div key={label} className="space-y-2">
-                <div className="text-5xl font-bold font-display tracking-tighter text-foreground">{num}</div>
-                <div className="text-[10px] uppercase tracking-[0.2em] font-bold text-aq-blue">{label}</div>
+                <div className="font-display text-5xl font-bold tracking-tighter text-foreground">
+                  {num}
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-aq-blue">
+                  {label}
+                </div>
               </div>
             ))}
           </div>
         </section>
 
         {/* CTA */}
-        <section className="py-32 px-6">
-          <div className="max-w-5xl mx-auto bg-aq-ink rounded-[3rem] p-12 lg:p-24 border border-white/5 shadow-2xl relative overflow-hidden text-center space-y-12">
-            <div className="absolute inset-0 bg-brand-gradient opacity-5 pointer-events-none" />
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-display tracking-tight leading-tight relative z-10">
+        <section className="px-6 py-32">
+          <div className="relative mx-auto max-w-5xl space-y-12 overflow-hidden rounded-[3rem] border border-white/5 bg-aq-ink p-12 text-center shadow-2xl lg:p-24">
+            <div className="bg-brand-gradient pointer-events-none absolute inset-0 opacity-5" />
+            <h2 className="relative z-10 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Be first to enter <br />
-              the <span className="text-brand-gradient">future of fashion</span>.
+              the <span className="text-brand-gradient">future of fashion</span>
+              .
             </h2>
-            
-            <div className="max-w-md mx-auto relative z-10 space-y-6">
-              <WaitlistForm source="early-access-cta" variant="simple" className="flex-col sm:flex-row" />
-              <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">Limited slots available for v1.0</p>
+
+            <div className="relative z-10 mx-auto max-w-md space-y-6">
+              <WaitlistForm
+                source="early-access-cta"
+                variant="simple"
+                className="flex-col sm:flex-row"
+              />
+              <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
+                Limited slots available for v1.0
+              </p>
             </div>
           </div>
         </section>

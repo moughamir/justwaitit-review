@@ -1,0 +1,126 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - navigation "Main Navigation" [ref=e3]:
+      - link "Anaqio Home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+        - generic [ref=e22]: anaqio
+      - button "Scroll to Waitlist Section" [ref=e24] [cursor=pointer]: Join Waitlist
+    - generic [ref=e25]:
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - heading "Skip the Studio. Ship the Collection." [level=1] [ref=e31]:
+              - text: Skip the Studio.
+              - text: Ship the Collection.
+            - paragraph [ref=e32]: Stop paying 5,000–20,000 MAD for unpredictable photoshoots. Anaqio's AI replaces expensive sets and models so you can style and launch your next campaign today.
+          - generic [ref=e33]:
+            - button "Get Early Access to Anaqio" [ref=e35] [cursor=pointer]:
+              - generic [ref=e36]: Secure Beta Access
+              - generic [ref=e38]:
+                - img
+            - generic [ref=e39]:
+              - generic [ref=e40]: Only 200 Spots
+              - generic [ref=e41]: Takes 30 seconds
+        - generic [ref=e43]:
+          - generic [ref=e45]:
+            - generic [ref=e46]: SYS.01
+            - generic [ref=e47]: AQ-CORE
+          - generic [ref=e48]:
+            - heading "Fluid Reality" [level=3] [ref=e49]:
+              - text: Fluid
+              - text: Reality
+            - paragraph [ref=e51]: Physics-based lighting and structural fabric AI simulations.
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - heading "The Old Way is Costing You." [level=2] [ref=e57]:
+            - text: The Old Way is
+            - text: Costing You.
+          - paragraph [ref=e58]: Fashion ecommerce moves fast. Waiting weeks and paying premium rates for traditional photography holds your brand back.
+        - generic [ref=e59]:
+          - generic [ref=e60]:
+            - img [ref=e63]
+            - generic [ref=e66]:
+              - heading "Expensive Productions" [level=3] [ref=e67]
+              - paragraph [ref=e68]: Traditional studio shoots cost thousands in equipment, talent, and logistics.
+          - generic [ref=e69]:
+            - img [ref=e72]
+            - generic [ref=e75]:
+              - heading "Slow Time-to-Market" [level=3] [ref=e76]
+              - paragraph [ref=e77]: Weeks of planning and editing delay your collection's digital launch.
+          - generic [ref=e78]:
+            - img [ref=e81]
+            - generic [ref=e84]:
+              - heading "Creative Limits" [level=3] [ref=e85]
+              - paragraph [ref=e86]: Physical constraints limit your ability to experiment with diverse environments and styles.
+      - generic [ref=e90]:
+        - generic [ref=e91]:
+          - generic [ref=e92]:
+            - heading "Why Join Early?" [level=2] [ref=e93]:
+              - text: Why Join
+              - text: Early?
+            - paragraph [ref=e94]: Join 200+ Moroccan brands upgrading their visual commerce.
+          - generic [ref=e95]:
+            - generic [ref=e99]:
+              - heading "30-Minute Turnarounds" [level=4] [ref=e100]
+              - paragraph [ref=e101]: Go from raw garment imagery to a 4K editorial lookbook before your morning espresso cools.
+            - generic [ref=e105]:
+              - heading "Save 15,000+ MAD Per Campaign" [level=4] [ref=e106]
+              - paragraph [ref=e107]: Eliminate model fees, location scouting, and lighting rentals with 100% AI-generated sets.
+            - generic [ref=e111]:
+              - heading "Casablanca's Private Beta" [level=4] [ref=e112]
+              - paragraph [ref=e113]: Limited to 200 early-access brands locking in pioneer DH pricing before our public launch.
+        - generic [ref=e114]:
+          - generic [ref=e115]:
+            - heading "Request an invitation to the atelier." [level=3] [ref=e116]
+            - paragraph [ref=e117]: Only 200 early-access spots available. Takes 30 seconds.
+          - generic [ref=e118]:
+            - progressbar [ref=e119]:
+              - button "Step 1 of 3" [disabled] [ref=e121]
+              - button "Step 2 of 3" [disabled] [ref=e125]
+              - button "Step 3 of 3" [disabled] [ref=e128]
+            - generic [ref=e130]:
+              - generic [ref=e131]:
+                - heading "Identity" [level=3] [ref=e132]
+                - paragraph [ref=e133]: Let's start with the basics
+              - generic [ref=e134]:
+                - generic [ref=e135]:
+                  - text: Name
+                  - textbox "Name" [ref=e136]:
+                    - /placeholder: Your name
+                - generic [ref=e137]:
+                  - text: Email
+                  - textbox "Email" [ref=e138]:
+                    - /placeholder: professional@email.com
+            - button "Continue →" [ref=e140] [cursor=pointer]
+          - paragraph [ref=e141]:
+            - text: By joining you agree to our
+            - link "Terms" [ref=e142] [cursor=pointer]:
+              - /url: /terms
+            - text: and
+            - link "Privacy Policy" [ref=e143] [cursor=pointer]:
+              - /url: /privacy
+            - text: .
+      - generic [ref=e145]:
+        - generic [ref=e147]:
+          - paragraph [ref=e148]: ANAQIO™
+          - paragraph [ref=e149]: Your Digital Atelier. Create. Style. Launch.
+          - paragraph [ref=e150]: © 2026 Anaqio. All rights reserved.
+        - navigation "Footer Navigation" [ref=e151]:
+          - link "Brand" [ref=e152] [cursor=pointer]:
+            - /url: /brand
+          - link "Legal" [ref=e153] [cursor=pointer]:
+            - /url: /legal-mentions
+          - link "Terms" [ref=e154] [cursor=pointer]:
+            - /url: /terms
+          - link "Privacy" [ref=e155] [cursor=pointer]:
+            - /url: /privacy
+          - link "Cookies" [ref=e156] [cursor=pointer]:
+            - /url: /cookies
+  - button "Open Next.js Dev Tools" [ref=e162] [cursor=pointer]:
+    - img [ref=e163]
+  - alert [ref=e166]
+```

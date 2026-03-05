@@ -1,10 +1,11 @@
-import { MetadataRoute } from 'next'
+import { type MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Anaqio — AI Visual Studio for Fashion Commerce',
     short_name: 'Anaqio',
-    description: 'AI Visual Studio empowering fashion brands with cutting-edge digital tools.',
+    description:
+      'AI Visual Studio empowering fashion brands with cutting-edge digital tools.',
     start_url: '/',
     display: 'standalone',
     background_color: '#F8FAFC',
@@ -16,5 +17,5 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/x-icon',
       },
     ],
-  }
+  };
 }

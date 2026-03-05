@@ -1,9 +1,11 @@
-"use client";
+'use client';
 
-import { memo } from "react";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import type { StepIndicatorProps } from "@/lib/types/waitlist-form";
+import { motion } from 'framer-motion';
+import { memo } from 'react';
+
+import type { StepIndicatorProps } from '@/lib/types/waitlist-form';
+
+import { cn } from '@/lib/utils';
 
 export const ProgressIndicator = memo(function ProgressIndicator({
   currentStep,
@@ -11,7 +13,13 @@ export const ProgressIndicator = memo(function ProgressIndicator({
   onStepClick,
 }: StepIndicatorProps) {
   return (
-    <div className="flex justify-center items-center gap-2 mb-8" role="progressbar" aria-valuenow={currentStep} aria-valuemin={1} aria-valuemax={totalSteps}>
+    <div
+      className="mb-8 flex items-center justify-center gap-2"
+      role="progressbar"
+      aria-valuenow={currentStep}
+      aria-valuemin={1}
+      aria-valuemax={totalSteps}
+    >
       {Array.from({ length: totalSteps }, (_, index) => {
         const stepNumber = index + 1;
         const isCompleted = stepNumber < currentStep;
@@ -26,27 +34,27 @@ export const ProgressIndicator = memo(function ProgressIndicator({
               onClick={() => onStepClick?.(stepNumber)}
               disabled={!onStepClick}
               className={cn(
-                "relative rounded-full w-3 h-3 transition-all duration-300",
-                "focus:outline-none focus:ring-2 focus:ring-aq-blue/50 focus:ring-offset-2",
-                isCurrent && "w-4 h-4",
-                isCompleted && "bg-aq-blue cursor-pointer hover:scale-110",
-                isCurrent && "bg-aq-blue shadow-lg shadow-aq-blue/50",
-                isUpcoming && "bg-muted-foreground/20",
-                !onStepClick && "cursor-default"
+                'relative h-3 w-3 rounded-full transition-all duration-300',
+                'focus:outline-none focus:ring-2 focus:ring-aq-blue/50 focus:ring-offset-2',
+                isCurrent && 'h-4 w-4',
+                isCompleted && 'cursor-pointer bg-aq-blue hover:scale-110',
+                isCurrent && 'bg-aq-blue shadow-lg shadow-aq-blue/50',
+                isUpcoming && 'bg-muted-foreground/20',
+                !onStepClick && 'cursor-default'
               )}
               aria-label={`Step ${stepNumber} of ${totalSteps}`}
-              aria-current={isCurrent ? "step" : undefined}
+              aria-current={isCurrent ? 'step' : undefined}
             >
               {/* Glow effect for current step */}
               {isCurrent && (
                 <motion.div
-                  className="absolute inset-0 bg-aq-blue rounded-full"
+                  className="absolute inset-0 rounded-full bg-aq-blue"
                   initial={{ scale: 1, opacity: 0.5 }}
                   animate={{ scale: 1.5, opacity: 0 }}
                   transition={{
                     duration: 1.5,
                     repeat: Infinity,
-                    ease: "easeOut",
+                    ease: 'easeOut',
                   }}
                 />
               )}
@@ -56,9 +64,9 @@ export const ProgressIndicator = memo(function ProgressIndicator({
             {stepNumber < totalSteps && (
               <div
                 className={cn(
-                  "mx-1 w-8 h-0.5 transition-all duration-300",
-                  isCompleted && "bg-aq-blue",
-                  !isCompleted && "bg-muted-foreground/20"
+                  'mx-1 h-0.5 w-8 transition-all duration-300',
+                  isCompleted && 'bg-aq-blue',
+                  !isCompleted && 'bg-muted-foreground/20'
                 )}
               />
             )}

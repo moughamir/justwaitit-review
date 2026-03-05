@@ -1,36 +1,37 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 
 export function BrandIdentityContent() {
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [error, setError] = useState(false);
 
   // Check if already authorized in this session
   useEffect(() => {
-    const authorized = sessionStorage.getItem("brand_authorized");
-    if (authorized === "true") {
+    const authorized = sessionStorage.getItem('brand_authorized');
+    if (authorized === 'true') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsAuthorized(true);
     }
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === "anaqio2026") {
+    if (password === 'anaqio2026') {
       setIsAuthorized(true);
       setError(false);
-      sessionStorage.setItem("brand_authorized", "true");
+      sessionStorage.setItem('brand_authorized', 'true');
     } else {
       setError(true);
-      setPassword("");
+      setPassword('');
     }
   };
 
   if (!isAuthorized) {
     return (
-      <div className="min-h-screen bg-[#0a0a08] flex items-center justify-center px-4 font-body antialiased text-[#f0ebe3]">
+      <div className="flex min-h-screen items-center justify-center bg-[#0a0a08] px-4 font-body text-[#f0ebe3] antialiased">
         <style
           dangerouslySetInnerHTML={{
             __html: `
@@ -147,7 +148,7 @@ export function BrandIdentityContent() {
           </form>
           <Link
             href="/"
-            className="inline-block mt-8 text-[11px] text-[#5a5950] uppercase tracking-[0.1em] hover:text-[#c9a96e] transition-colors"
+            className="mt-8 inline-block text-[11px] uppercase tracking-[0.1em] text-[#5a5950] transition-colors hover:text-[#c9a96e]"
           >
             ← Back to Home
           </Link>
@@ -733,19 +734,31 @@ export function BrandIdentityContent() {
             <div>
               <div className="cover-eyebrow">Visual Brand Identity — v1.0</div>
               <div className="cover-brand">ANAQIO</div>
-              <div className="cover-tagline">AI-Driven Virtual Studio<br />for Fashion Commerce</div>
+              <div className="cover-tagline">
+                AI-Driven Virtual Studio
+                <br />
+                for Fashion Commerce
+              </div>
             </div>
             <div className="cover-meta">
-              <strong>Owner</strong> Amal Ait Oukharaz<br />
-              <strong>Trademark Filing</strong> OMPIC PR-237456<br />
-              <strong>Class</strong> 42 — Logiciel-service [SaaS]<br />
-              <strong>Filed</strong> 17 February 2026 · Casablanca, Morocco<br />
+              <strong>Owner</strong> Amal Ait Oukharaz
+              <br />
+              <strong>Trademark Filing</strong> OMPIC PR-237456
+              <br />
+              <strong>Class</strong> 42 — Logiciel-service [SaaS]
+              <br />
+              <strong>Filed</strong> 17 February 2026 · Casablanca, Morocco
+              <br />
               <strong>Document</strong> Brand Identity Guidelines · 2026
             </div>
           </div>
           <div className="cover-right">
             <div className="logo-hero-wrap">
-              <svg viewBox="0 0 800 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <svg
+                viewBox="0 0 800 300"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                 <defs>
                   <linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="0%">
                     <stop offset="0%" stopColor="#3F57AF" />
@@ -759,17 +772,93 @@ export function BrandIdentityContent() {
                   </linearGradient>
                 </defs>
                 <g transform="translate(320,30)">
-                  <path d="M60 0 C60 0 60 18 40 18" stroke="url(#cg2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M0 60 L120 60" stroke="url(#cg2)" strokeWidth={5} strokeLinecap="round" />
-                  <path d="M40 18 C20 18 0 35 0 60" stroke="url(#cg2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M40 18 C60 18 120 35 120 60" stroke="url(#cg2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M20 60 L20 120 L100 120 L100 60" stroke="url(#cg2)" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" fill="rgba(37,99,235,0.06)" />
-                  <line x1="35" y1="75" x2="85" y2="75" stroke="url(#cg2)" strokeWidth={2} strokeOpacity="0.4" />
-                  <line x1="35" y1="88" x2="85" y2="88" stroke="url(#cg2)" strokeWidth={2} strokeOpacity="0.4" />
-                  <line x1="35" y1="101" x2="65" y2="101" stroke="url(#cg2)" strokeWidth={2} strokeOpacity="0.4" />
+                  <path
+                    d="M60 0 C60 0 60 18 40 18"
+                    stroke="url(#cg2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M0 60 L120 60"
+                    stroke="url(#cg2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M40 18 C20 18 0 35 0 60"
+                    stroke="url(#cg2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M40 18 C60 18 120 35 120 60"
+                    stroke="url(#cg2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M20 60 L20 120 L100 120 L100 60"
+                    stroke="url(#cg2)"
+                    strokeWidth={4}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="rgba(37,99,235,0.06)"
+                  />
+                  <line
+                    x1="35"
+                    y1="75"
+                    x2="85"
+                    y2="75"
+                    stroke="url(#cg2)"
+                    strokeWidth={2}
+                    strokeOpacity="0.4"
+                  />
+                  <line
+                    x1="35"
+                    y1="88"
+                    x2="85"
+                    y2="88"
+                    stroke="url(#cg2)"
+                    strokeWidth={2}
+                    strokeOpacity="0.4"
+                  />
+                  <line
+                    x1="35"
+                    y1="101"
+                    x2="65"
+                    y2="101"
+                    stroke="url(#cg2)"
+                    strokeWidth={2}
+                    strokeOpacity="0.4"
+                  />
                 </g>
-                <text x="400" y="220" fontFamily="Space Grotesk, sans-serif" fontSize="72" fontWeight="700" fill="url(#cg)" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
-                <text x="400" y="252" fontFamily="Inter, sans-serif" fontSize="14" fontWeight="400" fill="rgba(255,255,255,0.4)" textAnchor="middle" letterSpacing="3">AI VIRTUAL STUDIO</text>
+                <text
+                  x="400"
+                  y="220"
+                  fontFamily="Space Grotesk, sans-serif"
+                  fontSize="72"
+                  fontWeight="700"
+                  fill="url(#cg)"
+                  textAnchor="middle"
+                  letterSpacing="-1"
+                >
+                  ANAQIO
+                </text>
+                <text
+                  x="400"
+                  y="252"
+                  fontFamily="Inter, sans-serif"
+                  fontSize="14"
+                  fontWeight="400"
+                  fill="rgba(255,255,255,0.4)"
+                  textAnchor="middle"
+                  letterSpacing="3"
+                >
+                  AI VIRTUAL STUDIO
+                </text>
               </svg>
             </div>
           </div>
@@ -778,7 +867,9 @@ export function BrandIdentityContent() {
         {/* DOC NAV */}
         <nav className="doc-nav">
           <div className="doc-nav-inner">
-            <Link href="/" className="brand">Anaqio</Link>
+            <Link href="/" className="brand">
+              Anaqio
+            </Link>
             <a href="#logo">Logo</a>
             <a href="#colors">Colors</a>
             <a href="#typography">Typography</a>
@@ -794,11 +885,20 @@ export function BrandIdentityContent() {
           <section className="brand-section" id="logo">
             <div className="section-label">01 · Logo System</div>
             <h2 className="section-title">The Anaqio Mark</h2>
-            <p className="section-desc">The Anaqio logo is a mixed mark composed of a fashion icon and a geometric wordmark, unified by a blue-to-violet gradient. The icon references a clothing hanger — a direct nod to fashion commerce.</p>
+            <p className="section-desc">
+              The Anaqio logo is a mixed mark composed of a fashion icon and a
+              geometric wordmark, unified by a blue-to-violet gradient. The icon
+              references a clothing hanger — a direct nod to fashion commerce.
+            </p>
 
-            <div className="logo-grid" style={{ marginBottom: "24px" }}>
+            <div className="logo-grid" style={{ marginBottom: '24px' }}>
               <div className="logo-cell light">
-                <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "220px" }}>
+                <svg
+                  viewBox="0 0 300 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '220px' }}
+                >
                   <defs>
                     <linearGradient id="lg1" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#3F57AF" />
@@ -807,130 +907,510 @@ export function BrandIdentityContent() {
                       <stop offset="100%" stopColor="#6F47A7" />
                     </linearGradient>
                   </defs>
-                  <text x="150" y="75" fontFamily="Syne,sans-serif" fontSize="48" fontWeight="800" fill="url(#lg1)" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
-                  <text x="150" y="100" fontFamily="Plus Jakarta Sans,sans-serif" fontSize="10" fontWeight="400" fill="#94A3B8" textAnchor="middle" letterSpacing="3">AI VIRTUAL STUDIO</text>
+                  <text
+                    x="150"
+                    y="75"
+                    fontFamily="Syne,sans-serif"
+                    fontSize="48"
+                    fontWeight="800"
+                    fill="url(#lg1)"
+                    textAnchor="middle"
+                    letterSpacing="-1"
+                  >
+                    ANAQIO
+                  </text>
+                  <text
+                    x="150"
+                    y="100"
+                    fontFamily="Plus Jakarta Sans,sans-serif"
+                    fontSize="10"
+                    fontWeight="400"
+                    fill="#94A3B8"
+                    textAnchor="middle"
+                    letterSpacing="3"
+                  >
+                    AI VIRTUAL STUDIO
+                  </text>
                 </svg>
                 <span className="logo-cell-label">On White</span>
               </div>
               <div className="logo-cell surface">
-                <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "220px" }}>
+                <svg
+                  viewBox="0 0 300 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '220px' }}
+                >
                   <defs>
                     <linearGradient id="lg2" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#3F57AF" />
                       <stop offset="100%" stopColor="#6F47A7" />
                     </linearGradient>
                   </defs>
-                  <text x="150" y="75" fontFamily="Syne,sans-serif" fontSize="48" fontWeight="800" fill="url(#lg2)" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
-                  <text x="150" y="100" fontFamily="Plus Jakarta Sans,sans-serif" fontSize="10" fontWeight="400" fill="#94A3B8" textAnchor="middle" letterSpacing="3">AI VIRTUAL STUDIO</text>
+                  <text
+                    x="150"
+                    y="75"
+                    fontFamily="Syne,sans-serif"
+                    fontSize="48"
+                    fontWeight="800"
+                    fill="url(#lg2)"
+                    textAnchor="middle"
+                    letterSpacing="-1"
+                  >
+                    ANAQIO
+                  </text>
+                  <text
+                    x="150"
+                    y="100"
+                    fontFamily="Plus Jakarta Sans,sans-serif"
+                    fontSize="10"
+                    fontWeight="400"
+                    fill="#94A3B8"
+                    textAnchor="middle"
+                    letterSpacing="3"
+                  >
+                    AI VIRTUAL STUDIO
+                  </text>
                 </svg>
                 <span className="logo-cell-label">On Surface</span>
               </div>
               <div className="logo-cell dark">
-                <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "220px" }}>
+                <svg
+                  viewBox="0 0 300 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '220px' }}
+                >
                   <defs>
                     <linearGradient id="lg3" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#3F57AF" />
                       <stop offset="100%" stopColor="#6F47A7" />
                     </linearGradient>
                   </defs>
-                  <text x="150" y="75" fontFamily="Syne,sans-serif" fontSize="48" fontWeight="800" fill="url(#lg3)" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
-                  <text x="150" y="100" fontFamily="Plus Jakarta Sans,sans-serif" fontSize="10" fontWeight="400" fill="rgba(255,255,255,0.35)" textAnchor="middle" letterSpacing="3">AI VIRTUAL STUDIO</text>
+                  <text
+                    x="150"
+                    y="75"
+                    fontFamily="Syne,sans-serif"
+                    fontSize="48"
+                    fontWeight="800"
+                    fill="url(#lg3)"
+                    textAnchor="middle"
+                    letterSpacing="-1"
+                  >
+                    ANAQIO
+                  </text>
+                  <text
+                    x="150"
+                    y="100"
+                    fontFamily="Plus Jakarta Sans,sans-serif"
+                    fontSize="10"
+                    fontWeight="400"
+                    fill="rgba(255,255,255,0.35)"
+                    textAnchor="middle"
+                    letterSpacing="3"
+                  >
+                    AI VIRTUAL STUDIO
+                  </text>
                 </svg>
                 <span className="logo-cell-label">On Dark</span>
               </div>
               <div className="logo-cell gradient-bg">
-                <svg viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "220px" }}>
-                  <text x="150" y="75" fontFamily="Syne,sans-serif" fontSize="48" fontWeight="800" fill="white" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
-                  <text x="150" y="100" fontFamily="Plus Jakarta Sans,sans-serif" fontSize="10" fontWeight="400" fill="rgba(255,255,255,0.55)" textAnchor="middle" letterSpacing="3">AI VIRTUAL STUDIO</text>
+                <svg
+                  viewBox="0 0 300 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '220px' }}
+                >
+                  <text
+                    x="150"
+                    y="75"
+                    fontFamily="Syne,sans-serif"
+                    fontSize="48"
+                    fontWeight="800"
+                    fill="white"
+                    textAnchor="middle"
+                    letterSpacing="-1"
+                  >
+                    ANAQIO
+                  </text>
+                  <text
+                    x="150"
+                    y="100"
+                    fontFamily="Plus Jakarta Sans,sans-serif"
+                    fontSize="10"
+                    fontWeight="400"
+                    fill="rgba(255,255,255,0.55)"
+                    textAnchor="middle"
+                    letterSpacing="3"
+                  >
+                    AI VIRTUAL STUDIO
+                  </text>
                 </svg>
                 <span className="logo-cell-label">On Gradient</span>
               </div>
               <div className="logo-cell light">
-                <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "80px" }}>
+                <svg
+                  viewBox="0 0 120 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '80px' }}
+                >
                   <defs>
                     <linearGradient id="ig1" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#2563EB" />
                       <stop offset="100%" stopColor="#7C3AED" />
                     </linearGradient>
                   </defs>
-                  <path d="M60 4 C60 4 60 22 40 22" stroke="url(#ig1)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M0 64 L120 64" stroke="url(#ig1)" strokeWidth={5} strokeLinecap="round" />
-                  <path d="M40 22 C20 22 0 39 0 64" stroke="url(#ig1)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M40 22 C60 22 120 39 120 64" stroke="url(#ig1)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M18 64 L18 128 L102 128 L102 64" stroke="url(#ig1)" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" fill="rgba(37,99,235,0.05)" />
-                  <line x1="32" y1="80" x2="88" y2="80" stroke="url(#ig1)" strokeWidth={2.5} strokeOpacity="0.5" strokeLinecap="round" />
-                  <line x1="32" y1="95" x2="88" y2="95" stroke="url(#ig1)" strokeWidth={2.5} strokeOpacity="0.5" strokeLinecap="round" />
-                  <line x1="32" y1="110" x2="64" y2="110" stroke="url(#ig1)" strokeWidth={2.5} strokeOpacity="0.5" strokeLinecap="round" />
+                  <path
+                    d="M60 4 C60 4 60 22 40 22"
+                    stroke="url(#ig1)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M0 64 L120 64"
+                    stroke="url(#ig1)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M40 22 C20 22 0 39 0 64"
+                    stroke="url(#ig1)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M40 22 C60 22 120 39 120 64"
+                    stroke="url(#ig1)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M18 64 L18 128 L102 128 L102 64"
+                    stroke="url(#ig1)"
+                    strokeWidth={4}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="rgba(37,99,235,0.05)"
+                  />
+                  <line
+                    x1="32"
+                    y1="80"
+                    x2="88"
+                    y2="80"
+                    stroke="url(#ig1)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.5"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="32"
+                    y1="95"
+                    x2="88"
+                    y2="95"
+                    stroke="url(#ig1)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.5"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="32"
+                    y1="110"
+                    x2="64"
+                    y2="110"
+                    stroke="url(#ig1)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.5"
+                    strokeLinecap="round"
+                  />
                 </svg>
                 <span className="logo-cell-label">Icon Mark</span>
               </div>
               <div className="logo-cell dark">
-                <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ maxWidth: "80px" }}>
+                <svg
+                  viewBox="0 0 120 140"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  style={{ maxWidth: '80px' }}
+                >
                   <defs>
                     <linearGradient id="ig2" x1="0%" y1="0%" x2="100%" y2="0%">
                       <stop offset="0%" stopColor="#2563EB" />
                       <stop offset="100%" stopColor="#7C3AED" />
                     </linearGradient>
                   </defs>
-                  <path d="M60 4 C60 4 60 22 40 22" stroke="url(#ig2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M0 64 L120 64" stroke="url(#ig2)" strokeWidth={5} strokeLinecap="round" />
-                  <path d="M40 22 C20 22 0 39 0 64" stroke="url(#ig2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M40 22 C60 22 120 39 120 64" stroke="url(#ig2)" strokeWidth={5} strokeLinecap="round" fill="none" />
-                  <path d="M18 64 L18 128 L102 128 L102 64" stroke="url(#ig2)" strokeWidth={4} strokeLinecap="round" strokeLinejoin="round" fill="rgba(37,99,235,0.12)" />
-                  <line x1="32" y1="80" x2="88" y2="80" stroke="url(#ig2)" strokeWidth={2.5} strokeOpacity="0.6" strokeLinecap="round" />
-                  <line x1="32" y1="95" x2="88" y2="95" stroke="url(#ig2)" strokeWidth={2.5} strokeOpacity="0.6" strokeLinecap="round" />
-                  <line x1="32" y1="110" x2="64" y2="110" stroke="url(#ig2)" strokeWidth={2.5} strokeOpacity="0.6" strokeLinecap="round" />
+                  <path
+                    d="M60 4 C60 4 60 22 40 22"
+                    stroke="url(#ig2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M0 64 L120 64"
+                    stroke="url(#ig2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M40 22 C20 22 0 39 0 64"
+                    stroke="url(#ig2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M40 22 C60 22 120 39 120 64"
+                    stroke="url(#ig2)"
+                    strokeWidth={5}
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                  <path
+                    d="M18 64 L18 128 L102 128 L102 64"
+                    stroke="url(#ig2)"
+                    strokeWidth={4}
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    fill="rgba(37,99,235,0.12)"
+                  />
+                  <line
+                    x1="32"
+                    y1="80"
+                    x2="88"
+                    y2="80"
+                    stroke="url(#ig2)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.6"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="32"
+                    y1="95"
+                    x2="88"
+                    y2="95"
+                    stroke="url(#ig2)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.6"
+                    strokeLinecap="round"
+                  />
+                  <line
+                    x1="32"
+                    y1="110"
+                    x2="64"
+                    y2="110"
+                    stroke="url(#ig2)"
+                    strokeWidth={2.5}
+                    strokeOpacity="0.6"
+                    strokeLinecap="round"
+                  />
                 </svg>
                 <span className="logo-cell-label">Icon on Dark</span>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Clear Space</h3>
-            <p style={{ fontSize: "14px", color: "var(--aq-slate)", marginBottom: "24px" }}>Always maintain a minimum clear space equal to the height of the letter "A" in the wordmark (value: <code style={{ fontFamily: "var(--font-mono)", background: "var(--aq-surface)", padding: "2px 6px", borderRadius: "4px" }}>x</code>) on all sides.</p>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Clear Space
+            </h3>
+            <p
+              style={{
+                fontSize: '14px',
+                color: 'var(--aq-slate)',
+                marginBottom: '24px',
+              }}
+            >
+              Always maintain a minimum clear space equal to the height of the
+              letter "A" in the wordmark (value:{' '}
+              <code
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  background: 'var(--aq-surface)',
+                  padding: '2px 6px',
+                  borderRadius: '4px',
+                }}
+              >
+                x
+              </code>
+              ) on all sides.
+            </p>
             <div className="logo-clearspace">
               <div className="clearspace-diagram">
-                <div style={{ width: "60px", height: "60px" }}></div>
-                <div className="logo-box" style={{ borderColor: "var(--aq-blue)" }}>
-                  <svg viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "160px" }}>
-                    <defs><linearGradient id="cls" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stopColor="#3F57AF" /><stop offset="100%" stopColor="#6F47A7" /></linearGradient></defs>
-                    <text x="100" y="46" fontFamily="Syne,sans-serif" fontSize="48" fontWeight="800" fill="url(#cls)" textAnchor="middle" letterSpacing="-1">ANAQIO</text>
+                <div style={{ width: '60px', height: '60px' }} />
+                <div
+                  className="logo-box"
+                  style={{ borderColor: 'var(--aq-blue)' }}
+                >
+                  <svg
+                    viewBox="0 0 200 60"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ width: '160px' }}
+                  >
+                    <defs>
+                      <linearGradient
+                        id="cls"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="0%"
+                      >
+                        <stop offset="0%" stopColor="#3F57AF" />
+                        <stop offset="100%" stopColor="#6F47A7" />
+                      </linearGradient>
+                    </defs>
+                    <text
+                      x="100"
+                      y="46"
+                      fontFamily="Syne,sans-serif"
+                      fontSize="48"
+                      fontWeight="800"
+                      fill="url(#cls)"
+                      textAnchor="middle"
+                      letterSpacing="-1"
+                    >
+                      ANAQIO
+                    </text>
                   </svg>
                   <span className="x-mark x-top">x</span>
                   <span className="x-mark x-bottom">x</span>
                   <span className="x-mark x-left">x</span>
                   <span className="x-mark x-right">x</span>
                 </div>
-                <div style={{ width: "60px", height: "60px" }}></div>
+                <div style={{ width: '60px', height: '60px' }} />
               </div>
-              <div style={{ maxWidth: "280px" }}>
-                <p style={{ fontSize: "13px", color: "var(--aq-slate)", lineHeight: 1.7 }}><strong style={{ color: "var(--aq-ink)" }}>Minimum clear space</strong> is the height of the capital "A" in the wordmark. This zone must remain free of all other graphic elements, text, or imagery. Never compromise the logo's breathing room.</p>
-                <p style={{ fontSize: "13px", color: "var(--aq-slate)", lineHeight: 1.7, marginTop: "12px" }}><strong style={{ color: "var(--aq-ink)" }}>Minimum size:</strong> 120px wide on digital, 30mm wide in print.</p>
+              <div style={{ maxWidth: '280px' }}>
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: 'var(--aq-slate)',
+                    lineHeight: 1.7,
+                  }}
+                >
+                  <strong style={{ color: 'var(--aq-ink)' }}>
+                    Minimum clear space
+                  </strong>{' '}
+                  is the height of the capital "A" in the wordmark. This zone
+                  must remain free of all other graphic elements, text, or
+                  imagery. Never compromise the logo's breathing room.
+                </p>
+                <p
+                  style={{
+                    fontSize: '13px',
+                    color: 'var(--aq-slate)',
+                    lineHeight: 1.7,
+                    marginTop: '12px',
+                  }}
+                >
+                  <strong style={{ color: 'var(--aq-ink)' }}>
+                    Minimum size:
+                  </strong>{' '}
+                  120px wide on digital, 30mm wide in print.
+                </p>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 8px", color: "var(--aq-ink)" }}>Logo Don'ts</h3>
-            <p style={{ fontSize: "14px", color: "var(--aq-slate)", marginBottom: "16px" }}>Never modify the logo in the following ways:</p>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 8px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Logo Don'ts
+            </h3>
+            <p
+              style={{
+                fontSize: '14px',
+                color: 'var(--aq-slate)',
+                marginBottom: '16px',
+              }}
+            >
+              Never modify the logo in the following ways:
+            </p>
             <div className="dont-grid">
               <div className="dont-card">
                 <div className="dont-visual">
-                  <span style={{ fontFamily: "Syne,sans-serif", fontSize: "28px", fontWeight: 800, color: "#EF4444", opacity: 0.6 }}>ANAQIO</span>
+                  <span
+                    style={{
+                      fontFamily: 'Syne,sans-serif',
+                      fontSize: '28px',
+                      fontWeight: 800,
+                      color: '#EF4444',
+                      opacity: 0.6,
+                    }}
+                  >
+                    ANAQIO
+                  </span>
                 </div>
                 <div className="dont-label">✕ Wrong Color</div>
-                <div className="dont-desc">Never apply solid non-brand colors. The wordmark must always use the gradient or approved mono versions.</div>
+                <div className="dont-desc">
+                  Never apply solid non-brand colors. The wordmark must always
+                  use the gradient or approved mono versions.
+                </div>
               </div>
               <div className="dont-card">
                 <div className="dont-visual">
-                  <span style={{ fontFamily: "Syne,sans-serif", fontSize: "28px", fontWeight: 800, background: "linear-gradient(135deg,#3F57AF,#6F47A7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", transform: "skewX(-12deg)", display: "block" }}>ANAQIO</span>
+                  <span
+                    style={{
+                      fontFamily: 'Syne,sans-serif',
+                      fontSize: '28px',
+                      fontWeight: 800,
+                      background: 'linear-gradient(135deg,#3F57AF,#6F47A7)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      transform: 'skewX(-12deg)',
+                      display: 'block',
+                    }}
+                  >
+                    ANAQIO
+                  </span>
                 </div>
                 <div className="dont-label">✕ Skew / Distort</div>
-                <div className="dont-desc">Never stretch, skew, rotate, or otherwise distort the proportions of the logo.</div>
+                <div className="dont-desc">
+                  Never stretch, skew, rotate, or otherwise distort the
+                  proportions of the logo.
+                </div>
               </div>
               <div className="dont-card">
-                <div className="dont-visual" style={{ background: "linear-gradient(135deg,#2563EB,#7C3AED)", borderRadius: "8px", width: "100%" }}>
-                  <span style={{ fontFamily: "Syne,sans-serif", fontSize: "28px", fontWeight: 800, background: "linear-gradient(135deg,#3F57AF,#6F47A7)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>ANAQIO</span>
+                <div
+                  className="dont-visual"
+                  style={{
+                    background: 'linear-gradient(135deg,#2563EB,#7C3AED)',
+                    borderRadius: '8px',
+                    width: '100%',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontFamily: 'Syne,sans-serif',
+                      fontSize: '28px',
+                      fontWeight: 800,
+                      background: 'linear-gradient(135deg,#3F57AF,#6F47A7)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                    }}
+                  >
+                    ANAQIO
+                  </span>
                 </div>
                 <div className="dont-label">✕ Gradient on Gradient</div>
-                <div className="dont-desc">Never place the gradient wordmark on a gradient background. Use the white version instead.</div>
+                <div className="dont-desc">
+                  Never place the gradient wordmark on a gradient background.
+                  Use the white version instead.
+                </div>
               </div>
             </div>
           </section>
@@ -938,113 +1418,321 @@ export function BrandIdentityContent() {
           <section className="brand-section" id="colors">
             <div className="section-label">02 · Color System</div>
             <h2 className="section-title">Brand Palette</h2>
-            <p className="section-desc">Three primary colors registered with OMPIC as part of the trademark filing, extended into a full spectrum including gradients, surface tones, and semantic states.</p>
+            <p className="section-desc">
+              Three primary colors registered with OMPIC as part of the
+              trademark filing, extended into a full spectrum including
+              gradients, surface tones, and semantic states.
+            </p>
 
             <div className="color-palette-main">
               <div className="color-swatch">
-                <div className="color-swatch-block tall" style={{ background: "#2563EB" }}>
+                <div
+                  className="color-swatch-block tall"
+                  style={{ background: '#2563EB' }}
+                >
                   <span className="ompic-badge">
-                    <svg viewBox="0 0 12 12" fill="currentColor"><circle cx={6} cy={6} r={5} fill="white" opacity="0.3" /><path d="M4 6l2 2 4-4" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" /></svg>
+                    <svg viewBox="0 0 12 12" fill="currentColor">
+                      <circle cx={6} cy={6} r={5} fill="white" opacity="0.3" />
+                      <path
+                        d="M4 6l2 2 4-4"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                     OMPIC Registered
                   </span>
                 </div>
                 <div className="color-swatch-info">
                   <div className="color-name">Anaqio Blue</div>
                   <div className="color-values">
-                    <div className="color-value"><strong>HEX</strong> #2563EB</div>
-                    <div className="color-value"><strong>RGB</strong> 37, 99, 235</div>
-                    <div className="color-value"><strong>HSL</strong> 221°, 83%, 53%</div>
-                    <div className="color-value"><strong>CMYK</strong> 84, 58, 0, 8</div>
-                    <div className="color-value"><strong>Pantone</strong> 2728 C (approx.)</div>
+                    <div className="color-value">
+                      <strong>HEX</strong> #2563EB
+                    </div>
+                    <div className="color-value">
+                      <strong>RGB</strong> 37, 99, 235
+                    </div>
+                    <div className="color-value">
+                      <strong>HSL</strong> 221°, 83%, 53%
+                    </div>
+                    <div className="color-value">
+                      <strong>CMYK</strong> 84, 58, 0, 8
+                    </div>
+                    <div className="color-value">
+                      <strong>Pantone</strong> 2728 C (approx.)
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="color-swatch">
-                <div className="color-swatch-block tall" style={{ background: "#7C3AED" }}>
+                <div
+                  className="color-swatch-block tall"
+                  style={{ background: '#7C3AED' }}
+                >
                   <span className="ompic-badge">
-                    <svg viewBox="0 0 12 12" fill="currentColor"><circle cx={6} cy={6} r={5} fill="white" opacity="0.3" /><path d="M4 6l2 2 4-4" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" /></svg>
+                    <svg viewBox="0 0 12 12" fill="currentColor">
+                      <circle cx={6} cy={6} r={5} fill="white" opacity="0.3" />
+                      <path
+                        d="M4 6l2 2 4-4"
+                        stroke="white"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                     OMPIC Registered
                   </span>
                 </div>
                 <div className="color-swatch-info">
                   <div className="color-name">Anaqio Violet</div>
                   <div className="color-values">
-                    <div className="color-value"><strong>HEX</strong> #7C3AED</div>
-                    <div className="color-value"><strong>RGB</strong> 124, 58, 237</div>
-                    <div className="color-value"><strong>HSL</strong> 263°, 83%, 58%</div>
-                    <div className="color-value"><strong>CMYK</strong> 48, 76, 0, 7</div>
-                    <div className="color-value"><strong>Pantone</strong> 2665 C (approx.)</div>
+                    <div className="color-value">
+                      <strong>HEX</strong> #7C3AED
+                    </div>
+                    <div className="color-value">
+                      <strong>RGB</strong> 124, 58, 237
+                    </div>
+                    <div className="color-value">
+                      <strong>HSL</strong> 263°, 83%, 58%
+                    </div>
+                    <div className="color-value">
+                      <strong>CMYK</strong> 48, 76, 0, 7
+                    </div>
+                    <div className="color-value">
+                      <strong>Pantone</strong> 2665 C (approx.)
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="color-swatch">
-                <div className="color-swatch-block tall" style={{ background: "#F8FAFC", border: "1px solid #E2E8F0" }}>
-                  <span className="ompic-badge" style={{ color: "var(--aq-slate)", background: "rgba(0,0,0,0.06)", borderColor: "rgba(0,0,0,0.1)" }}>
-                    <svg viewBox="0 0 12 12" fill="currentColor"><circle cx={6} cy={6} r={5} fill="black" opacity="0.15" /><path d="M4 6l2 2 4-4" stroke="var(--aq-slate)" strokeWidth="1.5" fill="none" strokeLinecap="round" /></svg>
+                <div
+                  className="color-swatch-block tall"
+                  style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}
+                >
+                  <span
+                    className="ompic-badge"
+                    style={{
+                      color: 'var(--aq-slate)',
+                      background: 'rgba(0,0,0,0.06)',
+                      borderColor: 'rgba(0,0,0,0.1)',
+                    }}
+                  >
+                    <svg viewBox="0 0 12 12" fill="currentColor">
+                      <circle cx={6} cy={6} r={5} fill="black" opacity="0.15" />
+                      <path
+                        d="M4 6l2 2 4-4"
+                        stroke="var(--aq-slate)"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                      />
+                    </svg>
                     OMPIC Registered
                   </span>
                 </div>
                 <div className="color-swatch-info">
                   <div className="color-name">Anaqio White</div>
                   <div className="color-values">
-                    <div className="color-value"><strong>HEX</strong> #F8FAFC</div>
-                    <div className="color-value"><strong>RGB</strong> 248, 250, 252</div>
-                    <div className="color-value"><strong>HSL</strong> 210°, 40%, 98%</div>
-                    <div className="color-value"><strong>CMYK</strong> 2, 1, 0, 1</div>
-                    <div className="color-value"><strong>Use</strong> Backgrounds, text on dark</div>
+                    <div className="color-value">
+                      <strong>HEX</strong> #F8FAFC
+                    </div>
+                    <div className="color-value">
+                      <strong>RGB</strong> 248, 250, 252
+                    </div>
+                    <div className="color-value">
+                      <strong>HSL</strong> 210°, 40%, 98%
+                    </div>
+                    <div className="color-value">
+                      <strong>CMYK</strong> 2, 1, 0, 1
+                    </div>
+                    <div className="color-value">
+                      <strong>Use</strong> Backgrounds, text on dark
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Extended Palette</h3>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Extended Palette
+            </h3>
             <div className="extended-palette">
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#DBEAFE", border: "1px solid #BFDBFE" }}></div><div className="ext-info"><div className="ext-name">Blue 100</div><div className="ext-hex">#DBEAFE</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#93C5FD" }}></div><div className="ext-info"><div className="ext-name">Blue 300</div><div className="ext-hex">#93C5FD</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#2563EB" }}></div><div className="ext-info"><div className="ext-name">Blue 600 ★</div><div className="ext-hex">#2563EB</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#1D4ED8" }}></div><div className="ext-info"><div className="ext-name">Blue 700</div><div className="ext-hex">#1D4ED8</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#EDE9FE", border: "1px solid #DDD6FE" }}></div><div className="ext-info"><div className="ext-name">Violet 100</div><div className="ext-hex">#EDE9FE</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#A78BFA" }}></div><div className="ext-info"><div className="ext-name">Violet 400</div><div className="ext-hex">#A78BFA</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#7C3AED" }}></div><div className="ext-info"><div className="ext-name">Violet 600 ★</div><div className="ext-hex">#7C3AED</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#5B21B6" }}></div><div className="ext-info"><div className="ext-name">Violet 800</div><div className="ext-hex">#5B21B6</div></div></div>
+              <div className="ext-swatch">
+                <div
+                  className="ext-color"
+                  style={{ background: '#DBEAFE', border: '1px solid #BFDBFE' }}
+                />
+                <div className="ext-info">
+                  <div className="ext-name">Blue 100</div>
+                  <div className="ext-hex">#DBEAFE</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#93C5FD' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Blue 300</div>
+                  <div className="ext-hex">#93C5FD</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#2563EB' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Blue 600 ★</div>
+                  <div className="ext-hex">#2563EB</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#1D4ED8' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Blue 700</div>
+                  <div className="ext-hex">#1D4ED8</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div
+                  className="ext-color"
+                  style={{ background: '#EDE9FE', border: '1px solid #DDD6FE' }}
+                />
+                <div className="ext-info">
+                  <div className="ext-name">Violet 100</div>
+                  <div className="ext-hex">#EDE9FE</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#A78BFA' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Violet 400</div>
+                  <div className="ext-hex">#A78BFA</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#7C3AED' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Violet 600 ★</div>
+                  <div className="ext-hex">#7C3AED</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#5B21B6' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Violet 800</div>
+                  <div className="ext-hex">#5B21B6</div>
+                </div>
+              </div>
             </div>
 
-            <div className="extended-palette" style={{ marginTop: "8px" }}>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#F8FAFC", border: "1px solid #E2E8F0" }}></div><div className="ext-info"><div className="ext-name">White ★</div><div className="ext-hex">#F8FAFC</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#F1F5F9" }}></div><div className="ext-info"><div className="ext-name">Surface</div><div className="ext-hex">#F1F5F9</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#E2E8F0" }}></div><div className="ext-info"><div className="ext-name">Border</div><div className="ext-hex">#E2E8F0</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#94A3B8" }}></div><div className="ext-info"><div className="ext-name">Muted</div><div className="ext-hex">#94A3B8</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#334155" }}></div><div className="ext-info"><div className="ext-name">Slate</div><div className="ext-hex">#334155</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#0F172A" }}></div><div className="ext-info"><div className="ext-name">Ink</div><div className="ext-hex">#0F172A</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#10B981" }}></div><div className="ext-info"><div className="ext-name">Success</div><div className="ext-hex">#10B981</div></div></div>
-              <div className="ext-swatch"><div className="ext-color" style={{ background: "#EF4444" }}></div><div className="ext-info"><div className="ext-name">Error</div><div className="ext-hex">#EF4444</div></div></div>
+            <div className="extended-palette" style={{ marginTop: '8px' }}>
+              <div className="ext-swatch">
+                <div
+                  className="ext-color"
+                  style={{ background: '#F8FAFC', border: '1px solid #E2E8F0' }}
+                />
+                <div className="ext-info">
+                  <div className="ext-name">White ★</div>
+                  <div className="ext-hex">#F8FAFC</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#F1F5F9' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Surface</div>
+                  <div className="ext-hex">#F1F5F9</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#E2E8F0' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Border</div>
+                  <div className="ext-hex">#E2E8F0</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#94A3B8' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Muted</div>
+                  <div className="ext-hex">#94A3B8</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#334155' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Slate</div>
+                  <div className="ext-hex">#334155</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#0F172A' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Ink</div>
+                  <div className="ext-hex">#0F172A</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#10B981' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Success</div>
+                  <div className="ext-hex">#10B981</div>
+                </div>
+              </div>
+              <div className="ext-swatch">
+                <div className="ext-color" style={{ background: '#EF4444' }} />
+                <div className="ext-info">
+                  <div className="ext-name">Error</div>
+                  <div className="ext-hex">#EF4444</div>
+                </div>
+              </div>
             </div>
           </section>
 
           <section className="brand-section" id="gradients">
             <div className="section-label">03 · Gradient System</div>
             <h2 className="section-title">The Brand Gradient</h2>
-            <p className="section-desc">The signature gradient flows from Anaqio Blue through a rich mid-spectrum to Anaqio Violet. It is the most distinctive visual element of the brand.</p>
+            <p className="section-desc">
+              The signature gradient flows from Anaqio Blue through a rich
+              mid-spectrum to Anaqio Violet. It is the most distinctive visual
+              element of the brand.
+            </p>
 
-            <div className="gradient-strip"></div>
+            <div className="gradient-strip" />
             <div className="gradient-stops">
               <div className="gradient-stop">
-                <div className="gradient-stop-color" style={{ background: "#3F57AF" }}></div>
+                <div
+                  className="gradient-stop-color"
+                  style={{ background: '#3F57AF' }}
+                />
                 <div className="gradient-stop-hex">#3F57AF</div>
                 <div className="gradient-stop-pos">0%</div>
               </div>
               <div className="gradient-stop">
-                <div className="gradient-stop-color" style={{ background: "#484DA9" }}></div>
+                <div
+                  className="gradient-stop-color"
+                  style={{ background: '#484DA9' }}
+                />
                 <div className="gradient-stop-hex">#484DA9</div>
                 <div className="gradient-stop-pos">32%</div>
               </div>
               <div className="gradient-stop">
-                <div className="gradient-stop-color" style={{ background: "#6049A8" }}></div>
+                <div
+                  className="gradient-stop-color"
+                  style={{ background: '#6049A8' }}
+                />
                 <div className="gradient-stop-hex">#6049A8</div>
                 <div className="gradient-stop-pos">67%</div>
               </div>
               <div className="gradient-stop">
-                <div className="gradient-stop-color" style={{ background: "#6F47A7" }}></div>
+                <div
+                  className="gradient-stop-color"
+                  style={{ background: '#6F47A7' }}
+                />
                 <div className="gradient-stop-hex">#6F47A7</div>
                 <div className="gradient-stop-pos">100%</div>
               </div>
@@ -1052,24 +1740,59 @@ export function BrandIdentityContent() {
 
             <div className="gradient-cards">
               <div className="gradient-card">
-                <div className="gradient-card-vis" style={{ background: "linear-gradient(90deg,#3F57AF,#484DA9,#6049A8,#6F47A7)" }}></div>
+                <div
+                  className="gradient-card-vis"
+                  style={{
+                    background:
+                      'linear-gradient(90deg,#3F57AF,#484DA9,#6049A8,#6F47A7)',
+                  }}
+                />
                 <div className="gradient-card-info">
                   <div className="gradient-card-name">Horizontal (Primary)</div>
-                  <div className="gradient-card-code">linear-gradient(90deg,<br />#3F57AF, #484DA9,<br />#6049A8, #6F47A7)</div>
+                  <div className="gradient-card-code">
+                    linear-gradient(90deg,
+                    <br />
+                    #3F57AF, #484DA9,
+                    <br />
+                    #6049A8, #6F47A7)
+                  </div>
                 </div>
               </div>
               <div className="gradient-card">
-                <div className="gradient-card-vis" style={{ background: "linear-gradient(135deg,#2563EB,#7C3AED)" }}></div>
+                <div
+                  className="gradient-card-vis"
+                  style={{
+                    background: 'linear-gradient(135deg,#2563EB,#7C3AED)',
+                  }}
+                />
                 <div className="gradient-card-info">
                   <div className="gradient-card-name">Diagonal (Vivid)</div>
-                  <div className="gradient-card-code">linear-gradient(135deg,<br />#2563EB,<br />#7C3AED)</div>
+                  <div className="gradient-card-code">
+                    linear-gradient(135deg,
+                    <br />
+                    #2563EB,
+                    <br />
+                    #7C3AED)
+                  </div>
                 </div>
               </div>
               <div className="gradient-card">
-                <div className="gradient-card-vis" style={{ background: "radial-gradient(ellipse at 30% 50%,#2563EB,#7C3AED)" }}></div>
+                <div
+                  className="gradient-card-vis"
+                  style={{
+                    background:
+                      'radial-gradient(ellipse at 30% 50%,#2563EB,#7C3AED)',
+                  }}
+                />
                 <div className="gradient-card-info">
                   <div className="gradient-card-name">Radial (Glow)</div>
-                  <div className="gradient-card-code">radial-gradient(ellipse<br />at 30% 50%,<br />#2563EB, #7C3AED)</div>
+                  <div className="gradient-card-code">
+                    radial-gradient(ellipse
+                    <br />
+                    at 30% 50%,
+                    <br />
+                    #2563EB, #7C3AED)
+                  </div>
                 </div>
               </div>
             </div>
@@ -1078,152 +1801,535 @@ export function BrandIdentityContent() {
           <section className="brand-section" id="typography">
             <div className="section-label">04 · Typography</div>
             <h2 className="section-title">Type System</h2>
-            <p className="section-desc">Two fonts, one purpose: to feel both technically precise and creatively expressive — like Anaqio itself.</p>
+            <p className="section-desc">
+              Two fonts, one purpose: to feel both technically precise and
+              creatively expressive — like Anaqio itself.
+            </p>
 
             <div className="type-specimen">
-              <div className="type-family-name">Display — Syne · Google Fonts (Free)</div>
-              <div className="type-display-sample">Fashion meets<br />Intelligence.</div>
-              <div className="type-body-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 400, fontSize: "16px", color: "var(--aq-slate)", marginTop: "16px" }}>Syne is a geometric sans-serif with distinctive character — designed for editorial contexts. Its strong weight contrast and optical precision make it ideal for Anaqio's headings, wordmark weight, and display contexts.</div>
-              <div className="type-weights" style={{ marginTop: "32px", flexWrap: "wrap", gap: "16px" }}>
+              <div className="type-family-name">
+                Display — Syne · Google Fonts (Free)
+              </div>
+              <div className="type-display-sample">
+                Fashion meets
+                <br />
+                Intelligence.
+              </div>
+              <div
+                className="type-body-sample"
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 400,
+                  fontSize: '16px',
+                  color: 'var(--aq-slate)',
+                  marginTop: '16px',
+                }}
+              >
+                Syne is a geometric sans-serif with distinctive character —
+                designed for editorial contexts. Its strong weight contrast and
+                optical precision make it ideal for Anaqio's headings, wordmark
+                weight, and display contexts.
+              </div>
+              <div
+                className="type-weights"
+                style={{ marginTop: '32px', flexWrap: 'wrap', gap: '16px' }}
+              >
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 400 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 400,
+                    }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Regular 400</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 500 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 500,
+                    }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Medium 500</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 600 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">SemiBold 600</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 700 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 700,
+                    }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Bold 700</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-display)", fontWeight: 800 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontWeight: 800,
+                    }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">ExtraBold 800 ★</div>
                 </div>
               </div>
             </div>
 
             <div className="type-specimen">
-              <div className="type-family-name">Body — Plus Jakarta Sans · Google Fonts (Free)</div>
-              <div style={{ fontFamily: "var(--font-body)", fontSize: "40px", fontWeight: 600, color: "var(--aq-ink)", lineHeight: 1.1, marginBottom: "16px" }}>The studio where<br />fashion is made.</div>
-              <div className="type-body-sample">Plus Jakarta Sans is a contemporary grotesk typeface optimized for screens and UI. Its wide optical range — from 300 to 800 weight — makes it versatile for body copy, labels, captions, interface text, and subheadings. It pairs with Syne's editorial weight without competing.</div>
-              <div className="type-weights" style={{ marginTop: "32px" }}>
+              <div className="type-family-name">
+                Body — Plus Jakarta Sans · Google Fonts (Free)
+              </div>
+              <div
+                style={{
+                  fontFamily: 'var(--font-body)',
+                  fontSize: '40px',
+                  fontWeight: 600,
+                  color: 'var(--aq-ink)',
+                  lineHeight: 1.1,
+                  marginBottom: '16px',
+                }}
+              >
+                The studio where
+                <br />
+                fashion is made.
+              </div>
+              <div className="type-body-sample">
+                Plus Jakarta Sans is a contemporary grotesk typeface optimized
+                for screens and UI. Its wide optical range — from 300 to 800
+                weight — makes it versatile for body copy, labels, captions,
+                interface text, and subheadings. It pairs with Syne's editorial
+                weight without competing.
+              </div>
+              <div className="type-weights" style={{ marginTop: '32px' }}>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-body)", fontWeight: 300 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Light 300</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-body)", fontWeight: 400 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Regular 400 ★</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-body)", fontWeight: 500 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 500 }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">Medium 500</div>
                 </div>
                 <div className="type-weight">
-                  <div className="type-weight-sample" style={{ fontFamily: "var(--font-body)", fontWeight: 600 }}>Aa</div>
+                  <div
+                    className="type-weight-sample"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 600 }}
+                  >
+                    Aa
+                  </div>
                   <div className="type-weight-label">SemiBold 600 ★</div>
                 </div>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Type Scale</h3>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Type Scale
+            </h3>
             <div className="type-scale">
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-5xl</div>
-                <div className="type-scale-sample" style={{ fontSize: "48px", fontWeight: 800, letterSpacing: "-0.02em" }}>Display</div>
+                <div
+                  className="type-scale-sample"
+                  style={{
+                    fontSize: '48px',
+                    fontWeight: 800,
+                    letterSpacing: '-0.02em',
+                  }}
+                >
+                  Display
+                </div>
                 <div className="type-scale-meta">48px / 800 / −0.02em</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-4xl</div>
-                <div className="type-scale-sample" style={{ fontSize: "36px", fontWeight: 700 }}>Heading 1</div>
+                <div
+                  className="type-scale-sample"
+                  style={{ fontSize: '36px', fontWeight: 700 }}
+                >
+                  Heading 1
+                </div>
                 <div className="type-scale-meta">36px / 700 / −0.01em</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-3xl</div>
-                <div className="type-scale-sample" style={{ fontSize: "28px", fontWeight: 700 }}>Heading 2</div>
+                <div
+                  className="type-scale-sample"
+                  style={{ fontSize: '28px', fontWeight: 700 }}
+                >
+                  Heading 2
+                </div>
                 <div className="type-scale-meta">28px / 700</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-2xl</div>
-                <div className="type-scale-sample" style={{ fontSize: "22px", fontWeight: 600 }}>Heading 3</div>
+                <div
+                  className="type-scale-sample"
+                  style={{ fontSize: '22px', fontWeight: 600 }}
+                >
+                  Heading 3
+                </div>
                 <div className="type-scale-meta">22px / 600</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-xl</div>
-                <div className="type-scale-sample" style={{ fontSize: "18px", fontWeight: 600, fontFamily: "var(--font-body)" }}>Large Body</div>
+                <div
+                  className="type-scale-sample"
+                  style={{
+                    fontSize: '18px',
+                    fontWeight: 600,
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Large Body
+                </div>
                 <div className="type-scale-meta">18px / 600</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-base</div>
-                <div className="type-scale-sample" style={{ fontSize: "16px", fontWeight: 400, fontFamily: "var(--font-body)" }}>Body text — readable and comfortable for longer content.</div>
+                <div
+                  className="type-scale-sample"
+                  style={{
+                    fontSize: '16px',
+                    fontWeight: 400,
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Body text — readable and comfortable for longer content.
+                </div>
                 <div className="type-scale-meta">16px / 400 / 1.7</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-sm</div>
-                <div className="type-scale-sample" style={{ fontSize: "14px", fontWeight: 400, fontFamily: "var(--font-body)" }}>Small text for captions and secondary information.</div>
+                <div
+                  className="type-scale-sample"
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: 400,
+                    fontFamily: 'var(--font-body)',
+                  }}
+                >
+                  Small text for captions and secondary information.
+                </div>
                 <div className="type-scale-meta">14px / 400</div>
               </div>
               <div className="type-scale-row">
                 <div className="type-scale-token">--text-xs</div>
-                <div className="type-scale-sample" style={{ fontSize: "12px", fontWeight: 500, fontFamily: "var(--font-body)", letterSpacing: "0.12em", textTransform: "uppercase" }}>LABEL · CAPTION · TAG</div>
+                <div
+                  className="type-scale-sample"
+                  style={{
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    fontFamily: 'var(--font-body)',
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  LABEL · CAPTION · TAG
+                </div>
                 <div className="type-scale-meta">12px / 500 / +0.12em</div>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Monospace — JetBrains Mono</h3>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Monospace — JetBrains Mono
+            </h3>
             <div className="mono-sample">
-              <span className="cmt">/* Anaqio Design Tokens — CSS */</span><br />
-              <span className="kw">:root</span> {"{"}<br />
-              &nbsp;&nbsp;<span className="prop">--aq-blue:</span>    <span className="val">#2563EB</span>;   <span className="cmt">/* OMPIC Colour 1 */</span><br />
-              &nbsp;&nbsp;<span className="prop">--aq-purple:</span>  <span className="val">#7C3AED</span>;   <span className="cmt">/* OMPIC Colour 2 */</span><br />
-              &nbsp;&nbsp;<span className="prop">--aq-white:</span>   <span className="val">#F8FAFC</span>;   <span className="cmt">/* OMPIC Colour 3 */</span><br />
-              &nbsp;&nbsp;<span className="prop">--font-display:</span> <span className="str">'Syne'</span>, sans-serif;<br />
-              &nbsp;&nbsp;<span className="prop">--font-body:</span>    <span className="str">'Plus Jakarta Sans'</span>, sans-serif;<br />
-              {"}"}
+              <span className="cmt">{'/* Anaqio Design Tokens — CSS */'}</span>
+              <br />
+              <span className="kw">:root</span> {'{'}
+              <br />
+              &nbsp;&nbsp;<span className="prop">--aq-blue:</span>{' '}
+              <span className="val">#2563EB</span>;{' '}
+              <span className="cmt">{'/* OMPIC Colour 1 */'}</span>
+              <br />
+              &nbsp;&nbsp;<span className="prop">--aq-purple:</span>{' '}
+              <span className="val">#7C3AED</span>;{' '}
+              <span className="cmt">{'/* OMPIC Colour 2 */'}</span>
+              <br />
+              &nbsp;&nbsp;<span className="prop">--aq-white:</span>{' '}
+              <span className="val">#F8FAFC</span>;{' '}
+              <span className="cmt">{'/* OMPIC Colour 3 */'}</span>
+              <br />
+              &nbsp;&nbsp;<span className="prop">--font-display:</span>{' '}
+              <span className="str">'Syne'</span>, sans-serif;
+              <br />
+              &nbsp;&nbsp;<span className="prop">--font-body:</span>{' '}
+              <span className="str">'Plus Jakarta Sans'</span>, sans-serif;
+              <br />
+              {'}'}
             </div>
           </section>
 
           <section className="brand-section" id="spacing">
             <div className="section-label">05 · Spacing &amp; Grid</div>
             <h2 className="section-title">Spatial System</h2>
-            <p className="section-desc">An 8-point base grid. All spacing values are multiples of 4px. The base unit is 8px — use it consistently to create rhythm and visual coherence.</p>
+            <p className="section-desc">
+              An 8-point base grid. All spacing values are multiples of 4px. The
+              base unit is 8px — use it consistently to create rhythm and visual
+              coherence.
+            </p>
 
-            <div className="spacing-row"><div className="spacing-token">--sp-xs</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "4px" }}></div><div className="spacing-value">4px</div></div><div className="spacing-usage">Icon padding, micro gaps</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-sm</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "8px" }}></div><div className="spacing-value">8px</div></div><div className="spacing-usage">Between label and input, badge padding</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-md</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "16px" }}></div><div className="spacing-value">16px</div></div><div className="spacing-usage">Card padding (sm), element gap</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-lg</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "24px" }}></div><div className="spacing-value">24px</div></div><div className="spacing-usage">Card padding, section inner gap</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-xl</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "32px" }}></div><div className="spacing-value">32px</div></div><div className="spacing-usage">Section header gap, grid column gap</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-2xl</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "48px" }}></div><div className="spacing-value">48px</div></div><div className="spacing-usage">Intra-section spacing, card groups</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-3xl</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "64px" }}></div><div className="spacing-value">64px</div></div><div className="spacing-usage">Between major sections</div></div>
-            <div className="spacing-row"><div className="spacing-token">--sp-4xl</div><div className="spacing-bar-wrap"><div className="spacing-bar" style={{ width: "96px" }}></div><div className="spacing-value">96px</div></div><div className="spacing-usage">Hero and section vertical padding</div></div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-xs</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '4px' }} />
+                <div className="spacing-value">4px</div>
+              </div>
+              <div className="spacing-usage">Icon padding, micro gaps</div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-sm</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '8px' }} />
+                <div className="spacing-value">8px</div>
+              </div>
+              <div className="spacing-usage">
+                Between label and input, badge padding
+              </div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-md</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '16px' }} />
+                <div className="spacing-value">16px</div>
+              </div>
+              <div className="spacing-usage">
+                Card padding (sm), element gap
+              </div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-lg</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '24px' }} />
+                <div className="spacing-value">24px</div>
+              </div>
+              <div className="spacing-usage">
+                Card padding, section inner gap
+              </div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-xl</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '32px' }} />
+                <div className="spacing-value">32px</div>
+              </div>
+              <div className="spacing-usage">
+                Section header gap, grid column gap
+              </div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-2xl</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '48px' }} />
+                <div className="spacing-value">48px</div>
+              </div>
+              <div className="spacing-usage">
+                Intra-section spacing, card groups
+              </div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-3xl</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '64px' }} />
+                <div className="spacing-value">64px</div>
+              </div>
+              <div className="spacing-usage">Between major sections</div>
+            </div>
+            <div className="spacing-row">
+              <div className="spacing-token">--sp-4xl</div>
+              <div className="spacing-bar-wrap">
+                <div className="spacing-bar" style={{ width: '96px' }} />
+                <div className="spacing-value">96px</div>
+              </div>
+              <div className="spacing-usage">
+                Hero and section vertical padding
+              </div>
+            </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "20px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Border Radius</h3>
-            <div style={{ display: "flex", gap: "20px", flexWrap: "wrap", alignItems: "flex-end" }}>
-              <div style={{ textAlign: "center" }}>
-                <div style={{ width: "64px", height: "64px", background: "var(--aq-gradient-diag)", borderRadius: "4px", margin: "0 auto 8px" }}></div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--aq-muted)" }}>--r-sm<br />4px</div>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '20px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Border Radius
+            </h3>
+            <div
+              style={{
+                display: 'flex',
+                gap: '20px',
+                flexWrap: 'wrap',
+                alignItems: 'flex-end',
+              }}
+            >
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    width: '64px',
+                    height: '64px',
+                    background: 'var(--aq-gradient-diag)',
+                    borderRadius: '4px',
+                    margin: '0 auto 8px',
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--aq-muted)',
+                  }}
+                >
+                  --r-sm
+                  <br />
+                  4px
+                </div>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <div style={{ width: "72px", height: "72px", background: "var(--aq-gradient-diag)", borderRadius: "8px", margin: "0 auto 8px" }}></div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--aq-muted)" }}>--r-md<br />8px</div>
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    width: '72px',
+                    height: '72px',
+                    background: 'var(--aq-gradient-diag)',
+                    borderRadius: '8px',
+                    margin: '0 auto 8px',
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--aq-muted)',
+                  }}
+                >
+                  --r-md
+                  <br />
+                  8px
+                </div>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <div style={{ width: "80px", height: "80px", background: "var(--aq-gradient-diag)", borderRadius: "12px", margin: "0 auto 8px" }}></div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--aq-muted)" }}>--r-lg<br />12px</div>
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    background: 'var(--aq-gradient-diag)',
+                    borderRadius: '12px',
+                    margin: '0 auto 8px',
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--aq-muted)',
+                  }}
+                >
+                  --r-lg
+                  <br />
+                  12px
+                </div>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <div style={{ width: "88px", height: "88px", background: "var(--aq-gradient-diag)", borderRadius: "16px", margin: "0 auto 8px" }}></div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--aq-muted)" }}>--r-xl<br />16px</div>
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    width: '88px',
+                    height: '88px',
+                    background: 'var(--aq-gradient-diag)',
+                    borderRadius: '16px',
+                    margin: '0 auto 8px',
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--aq-muted)',
+                  }}
+                >
+                  --r-xl
+                  <br />
+                  16px
+                </div>
               </div>
-              <div style={{ textAlign: "center" }}>
-                <div style={{ width: "80px", height: "40px", background: "var(--aq-gradient-diag)", borderRadius: "999px", margin: "0 auto 8px" }}></div>
-                <div style={{ fontFamily: "var(--font-mono)", fontSize: "11px", color: "var(--aq-muted)" }}>--r-full<br />999px</div>
+              <div style={{ textAlign: 'center' }}>
+                <div
+                  style={{
+                    width: '80px',
+                    height: '40px',
+                    background: 'var(--aq-gradient-diag)',
+                    borderRadius: '999px',
+                    margin: '0 auto 8px',
+                  }}
+                />
+                <div
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: '11px',
+                    color: 'var(--aq-muted)',
+                  }}
+                >
+                  --r-full
+                  <br />
+                  999px
+                </div>
               </div>
             </div>
           </section>
@@ -1231,9 +2337,22 @@ export function BrandIdentityContent() {
           <section className="brand-section" id="components">
             <div className="section-label">06 · Components</div>
             <h2 className="section-title">UI Building Blocks</h2>
-            <p className="section-desc">Core interface components showing how the Anaqio brand system translates into product UI elements.</p>
+            <p className="section-desc">
+              Core interface components showing how the Anaqio brand system
+              translates into product UI elements.
+            </p>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, marginBottom: "16px", color: "var(--aq-ink)" }}>Buttons</h3>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '18px',
+                fontWeight: 700,
+                marginBottom: '16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Buttons
+            </h3>
             <div className="comp-row">
               <a className="btn btn-primary">Join Waitlist</a>
               <a className="btn btn-secondary">Learn More</a>
@@ -1242,61 +2361,413 @@ export function BrandIdentityContent() {
               <a className="btn btn-primary btn-lg">Get Early Access →</a>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, margin: "32px 0 16px", color: "var(--aq-ink)" }}>Badges &amp; Tags</h3>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '18px',
+                fontWeight: 700,
+                margin: '32px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Badges &amp; Tags
+            </h3>
             <div className="comp-row">
               <span className="badge badge-blue">AI Studio</span>
               <span className="badge badge-purple">Fashion Tech</span>
               <span className="badge badge-gradient">Early Access</span>
               <span className="badge badge-blue">SaaS · Classe 42</span>
-              <span className="badge" style={{ background: "#ECFDF5", color: "#065F46" }}>Active</span>
-              <span className="badge" style={{ background: "#FEF2F2", color: "#991B1B" }}>Beta</span>
+              <span
+                className="badge"
+                style={{ background: '#ECFDF5', color: '#065F46' }}
+              >
+                Active
+              </span>
+              <span
+                className="badge"
+                style={{ background: '#FEF2F2', color: '#991B1B' }}
+              >
+                Beta
+              </span>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, margin: "32px 0 16px", color: "var(--aq-ink)" }}>Form Inputs</h3>
-            <div style={{ display: "flex", gap: "32px", flexWrap: "wrap", alignItems: "flex-start" }}>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '18px',
+                fontWeight: 700,
+                margin: '32px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Form Inputs
+            </h3>
+            <div
+              style={{
+                display: 'flex',
+                gap: '32px',
+                flexWrap: 'wrap',
+                alignItems: 'flex-start',
+              }}
+            >
               <div className="input-demo">
                 <div className="input-label">Email Address</div>
-                <input className="input-field" type="email" placeholder="your@email.com" />
+                <input
+                  className="input-field"
+                  type="email"
+                  placeholder="your@email.com"
+                />
                 <div className="input-label">Brand Name</div>
-                <input className="input-field" type="text" placeholder="Your Fashion Brand" />
-                <a className="btn btn-primary" style={{ justifyContent: "center" }}>Request Access</a>
+                <input
+                  className="input-field"
+                  type="text"
+                  placeholder="Your Fashion Brand"
+                />
+                <a
+                  className="btn btn-primary"
+                  style={{ justifyContent: 'center' }}
+                >
+                  Request Access
+                </a>
               </div>
               <div className="card-demo">
                 <div className="card-top">
                   <div className="card-top-label">AI Lookbook</div>
                 </div>
                 <div className="card-body">
-                  <p>Generate editorial-quality lookbooks in minutes using Anaqio's AI virtual studio.</p>
+                  <p>
+                    Generate editorial-quality lookbooks in minutes using
+                    Anaqio's AI virtual studio.
+                  </p>
                   <a className="btn btn-primary btn-sm">Generate Now</a>
                 </div>
               </div>
             </div>
 
-            <h3 style={{ fontFamily: "var(--font-display)", fontSize: "18px", fontWeight: 700, margin: "40px 0 16px", color: "var(--aq-ink)" }}>Gradient Text Usage</h3>
-            <div style={{ background: "var(--aq-surface)", border: "1px solid var(--aq-border)", borderRadius: "var(--r-xl)", padding: "40px" }}>
-              <div style={{ fontFamily: "var(--font-display)", fontSize: "48px", fontWeight: 800, background: "var(--aq-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text", lineHeight: 1.1, marginBottom: "12px" }}>Virtual Studio.<br />Real Commerce.</div>
-              <div style={{ fontSize: "16px", color: "var(--aq-slate)", maxWidth: "400px" }}>Anaqio's gradient text is reserved for <strong style={{ color: "var(--aq-ink)" }}>hero headings, brand moments, and key CTAs</strong>. Use sparingly — maximum one gradient text element per screen.</div>
+            <h3
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: '18px',
+                fontWeight: 700,
+                margin: '40px 0 16px',
+                color: 'var(--aq-ink)',
+              }}
+            >
+              Gradient Text Usage
+            </h3>
+            <div
+              style={{
+                background: 'var(--aq-surface)',
+                border: '1px solid var(--aq-border)',
+                borderRadius: 'var(--r-xl)',
+                padding: '40px',
+              }}
+            >
+              <div
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontSize: '48px',
+                  fontWeight: 800,
+                  background: 'var(--aq-gradient)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  lineHeight: 1.1,
+                  marginBottom: '12px',
+                }}
+              >
+                Virtual Studio.
+                <br />
+                Real Commerce.
+              </div>
+              <div
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--aq-slate)',
+                  maxWidth: '400px',
+                }}
+              >
+                Anaqio's gradient text is reserved for{' '}
+                <strong style={{ color: 'var(--aq-ink)' }}>
+                  hero headings, brand moments, and key CTAs
+                </strong>
+                . Use sparingly — maximum one gradient text element per screen.
+              </div>
             </div>
           </section>
 
           <section className="brand-section" id="tokens">
             <div className="section-label">07 · Design Tokens</div>
             <h2 className="section-title">CSS Token Reference</h2>
-            <p className="section-desc">Copy these CSS variables into your project's root stylesheet. All components and styles in Anaqio's system are built from these tokens.</p>
+            <p className="section-desc">
+              Copy these CSS variables into your project's root stylesheet. All
+              components and styles in Anaqio's system are built from these
+              tokens.
+            </p>
 
             <table className="token-table">
               <thead>
-                <tr><th>Token</th><th>Value</th><th>Usage</th></tr>
+                <tr>
+                  <th>Token</th>
+                  <th>Value</th>
+                  <th>Usage</th>
+                </tr>
               </thead>
               <tbody>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-blue</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#2563EB" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#2563EB</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Primary actions, links, focus states</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-purple</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#7C3AED" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#7C3AED</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Gradient endpoint, accents, highlights</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-white</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#F8FAFC", border: "1px solid #E2E8F0" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#F8FAFC</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Page background, text on dark</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-ink</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#0F172A" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#0F172A</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Primary text, dark backgrounds</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-slate</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#334155" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#334155</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Secondary text, body copy</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-muted</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#94A3B8" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#94A3B8</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Placeholders, labels, metadata</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-border</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#E2E8F0" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#E2E8F0</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Card borders, dividers, separators</td></tr>
-                <tr><td><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>--aq-surface</code></td><td><div className="token-chip"><div className="token-dot" style={{ background: "#F1F5F9", border: "1px solid #E2E8F0" }}></div><code style={{ fontFamily: "var(--font-mono)", fontSize: "12px" }}>#F1F5F9</code></div></td><td style={{ fontSize: "13px", color: "var(--aq-slate)" }}>Card backgrounds, input fills</td></tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-blue
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#2563EB' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #2563EB
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Primary actions, links, focus states
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-purple
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#7C3AED' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #7C3AED
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Gradient endpoint, accents, highlights
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-white
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{
+                          background: '#F8FAFC',
+                          border: '1px solid #E2E8F0',
+                        }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #F8FAFC
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Page background, text on dark
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-ink
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#0F172A' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #0F172A
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Primary text, dark backgrounds
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-slate
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#334155' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #334155
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Secondary text, body copy
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-muted
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#94A3B8' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #94A3B8
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Placeholders, labels, metadata
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-border
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{ background: '#E2E8F0' }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #E2E8F0
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Card borders, dividers, separators
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <code
+                      style={{
+                        fontFamily: 'var(--font-mono)',
+                        fontSize: '12px',
+                      }}
+                    >
+                      --aq-surface
+                    </code>
+                  </td>
+                  <td>
+                    <div className="token-chip">
+                      <div
+                        className="token-dot"
+                        style={{
+                          background: '#F1F5F9',
+                          border: '1px solid #E2E8F0',
+                        }}
+                      />
+                      <code
+                        style={{
+                          fontFamily: 'var(--font-mono)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        #F1F5F9
+                      </code>
+                    </div>
+                  </td>
+                  <td style={{ fontSize: '13px', color: 'var(--aq-slate)' }}>
+                    Card backgrounds, input fills
+                  </td>
+                </tr>
               </tbody>
             </table>
           </section>
@@ -1304,38 +2775,175 @@ export function BrandIdentityContent() {
           <section className="brand-section" id="trademark">
             <div className="section-label">08 · Trademark &amp; Legal</div>
             <h2 className="section-title">Trademark Status</h2>
-            <p className="section-desc">The Anaqio name and mark are filed with OMPIC under Moroccan trademark law. The following details must appear in all legal documents referencing the brand.</p>
+            <p className="section-desc">
+              The Anaqio name and mark are filed with OMPIC under Moroccan
+              trademark law. The following details must appear in all legal
+              documents referencing the brand.
+            </p>
 
             <div className="trademark-notice">
               <div className="tm-icon">™</div>
               <div>
                 <div className="tm-title">OMPIC Trademark Filing — ANAQIO</div>
                 <div className="tm-details">
-                  <div className="tm-row"><span className="tm-key">Filing Ref.</span><span className="tm-val">PR-237456</span></div>
-                  <div className="tm-row"><span className="tm-key">Procedure</span><span className="tm-val">Récapitulatif de Démarche</span></div>
-                  <div className="tm-row"><span className="tm-key">Mark Type</span><span className="tm-val">Mixte (verbal + figurative)</span></div>
-                  <div className="tm-row"><span className="tm-key">Verbal Element</span><span className="tm-val">ANAQIO</span></div>
-                  <div className="tm-row"><span className="tm-key">Nice Class</span><span className="tm-val">42 — Logiciel-service [SaaS]</span></div>
-                  <div className="tm-row"><span className="tm-key">Filed</span><span className="tm-val">17 February 2026</span></div>
-                  <div className="tm-row"><span className="tm-key">Owner</span><span className="tm-val">Amal Ait Oukharaz (physique, CIN KB152795)</span></div>
-                  <div className="tm-row"><span className="tm-key">Country</span><span className="tm-val">Morocco (MAROC)</span></div>
-                  <div className="tm-row"><span className="tm-key">Filing Fee</span><span className="tm-val">1 250 DH TTC</span></div>
-                  <div className="tm-row"><span className="tm-key">Reg. Colors</span><span className="tm-val">#2563EB · #7C3AED · #F8FAFC</span></div>
+                  <div className="tm-row">
+                    <span className="tm-key">Filing Ref.</span>
+                    <span className="tm-val">PR-237456</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Procedure</span>
+                    <span className="tm-val">Récapitulatif de Démarche</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Mark Type</span>
+                    <span className="tm-val">Mixte (verbal + figurative)</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Verbal Element</span>
+                    <span className="tm-val">ANAQIO</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Nice Class</span>
+                    <span className="tm-val">42 — Logiciel-service [SaaS]</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Filed</span>
+                    <span className="tm-val">17 February 2026</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Owner</span>
+                    <span className="tm-val">
+                      Amal Ait Oukharaz (physique, CIN KB152795)
+                    </span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Country</span>
+                    <span className="tm-val">Morocco (MAROC)</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Filing Fee</span>
+                    <span className="tm-val">1 250 DH TTC</span>
+                  </div>
+                  <div className="tm-row">
+                    <span className="tm-key">Reg. Colors</span>
+                    <span className="tm-val">#2563EB · #7C3AED · #F8FAFC</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div style={{ marginTop: "24px", background: "rgba(37,99,235,0.04)", border: "1px solid var(--aq-border)", borderRadius: "var(--r-lg)", padding: "24px 28px" }}>
-              <div style={{ fontSize: "13px", fontWeight: 600, color: "var(--aq-ink)", marginBottom: "10px" }}>Usage of ™ symbol</div>
-              <p style={{ fontSize: "13px", color: "var(--aq-slate)", lineHeight: 1.7 }}>While the trademark application is pending with OMPIC, use <strong style={{ color: "var(--aq-ink)" }}>™</strong> after the wordmark. Once registration is confirmed, upgrade to <strong style={{ color: "var(--aq-ink)" }}>®</strong>. The ™ symbol should appear in superscript at 60% opacity in brand contexts, at full size in legal and footer contexts.</p>
-              <div style={{ marginTop: "16px", display: "flex", gap: "32px", flexWrap: "wrap" }}>
+            <div
+              style={{
+                marginTop: '24px',
+                background: 'rgba(37,99,235,0.04)',
+                border: '1px solid var(--aq-border)',
+                borderRadius: 'var(--r-lg)',
+                padding: '24px 28px',
+              }}
+            >
+              <div
+                style={{
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: 'var(--aq-ink)',
+                  marginBottom: '10px',
+                }}
+              >
+                Usage of ™ symbol
+              </div>
+              <p
+                style={{
+                  fontSize: '13px',
+                  color: 'var(--aq-slate)',
+                  lineHeight: 1.7,
+                }}
+              >
+                While the trademark application is pending with OMPIC, use{' '}
+                <strong style={{ color: 'var(--aq-ink)' }}>™</strong> after the
+                wordmark. Once registration is confirmed, upgrade to{' '}
+                <strong style={{ color: 'var(--aq-ink)' }}>®</strong>. The ™
+                symbol should appear in superscript at 60% opacity in brand
+                contexts, at full size in legal and footer contexts.
+              </p>
+              <div
+                style={{
+                  marginTop: '16px',
+                  display: 'flex',
+                  gap: '32px',
+                  flexWrap: 'wrap',
+                }}
+              >
                 <div>
-                  <div style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--aq-muted)", marginBottom: "8px" }}>Pending registration</div>
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 800, background: "var(--aq-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ANAQIO<sup style={{ WebkitTextFillColor: "var(--aq-muted)", fontSize: "14px", background: "none", WebkitBackgroundClip: "unset" }}>™</sup></div>
+                  <div
+                    style={{
+                      fontSize: '11px',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      color: 'var(--aq-muted)',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    Pending registration
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '28px',
+                      fontWeight: 800,
+                      background: 'var(--aq-gradient)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    ANAQIO
+                    <sup
+                      style={{
+                        WebkitTextFillColor: 'var(--aq-muted)',
+                        fontSize: '14px',
+                        background: 'none',
+                        WebkitBackgroundClip: 'unset',
+                      }}
+                    >
+                      ™
+                    </sup>
+                  </div>
                 </div>
                 <div>
-                  <div style={{ fontSize: "11px", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--aq-muted)", marginBottom: "8px" }}>After registration</div>
-                  <div style={{ fontFamily: "var(--font-display)", fontSize: "28px", fontWeight: 800, background: "var(--aq-gradient)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>ANAQIO<sup style={{ WebkitTextFillColor: "var(--aq-muted)", fontSize: "14px", background: "none", WebkitBackgroundClip: "unset" }}>®</sup></div>
+                  <div
+                    style={{
+                      fontSize: '11px',
+                      letterSpacing: '0.12em',
+                      textTransform: 'uppercase',
+                      color: 'var(--aq-muted)',
+                      marginBottom: '8px',
+                    }}
+                  >
+                    After registration
+                  </div>
+                  <div
+                    style={{
+                      fontFamily: 'var(--font-display)',
+                      fontSize: '28px',
+                      fontWeight: 800,
+                      background: 'var(--aq-gradient)',
+                      WebkitBackgroundClip: 'text',
+                      WebkitTextFillColor: 'transparent',
+                      backgroundClip: 'text',
+                    }}
+                  >
+                    ANAQIO
+                    <sup
+                      style={{
+                        WebkitTextFillColor: 'var(--aq-muted)',
+                        fontSize: '14px',
+                        background: 'none',
+                        WebkitBackgroundClip: 'unset',
+                      }}
+                    >
+                      ®
+                    </sup>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1344,7 +2952,12 @@ export function BrandIdentityContent() {
 
         <div className="brand-footer">
           <div className="brand-footer-logo">ANAQIO™</div>
-          <div className="brand-footer-copy">Visual Brand Identity Guidelines v1.0 · 2026 · Confidential<br />Trademark filed with OMPIC — PR-237456 · Class 42 SaaS · Casablanca, Morocco</div>
+          <div className="brand-footer-copy">
+            Visual Brand Identity Guidelines v1.0 · 2026 · Confidential
+            <br />
+            Trademark filed with OMPIC — PR-237456 · Class 42 SaaS · Casablanca,
+            Morocco
+          </div>
         </div>
       </div>
     </>

@@ -1,6 +1,8 @@
-import { useState, useCallback } from "react";
-import type { FormStep } from "@/lib/types/waitlist-form";
-import { validateStep } from "@/lib/utils/form-validation";
+import { useState, useCallback } from 'react';
+
+import type { FormStep } from '@/lib/types/waitlist-form';
+
+import { validateStep } from '@/lib/utils/form-validation';
 
 export interface MultiStepFormReturn {
   currentStep: number;
@@ -30,7 +32,7 @@ export function useMultiStepForm(
 ): MultiStepFormReturn {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<Record<string, string>>(
-    initialData || {}
+    initialData ?? {}
   );
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});

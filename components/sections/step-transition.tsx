@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import { AnimatePresence, motion } from "framer-motion";
-import { ReactNode } from "react";
+import { AnimatePresence, motion } from 'framer-motion';
+import { type ReactNode } from 'react';
 
 interface StepTransitionProps {
   currentStep: number;
-  direction: "forward" | "backward";
+  direction: 'forward' | 'backward';
   children: ReactNode;
 }
 
@@ -17,7 +17,7 @@ export function StepTransition({
   // Animation variants based on direction
   const variants = {
     enter: {
-      x: direction === "forward" ? "100%" : "-100%",
+      x: direction === 'forward' ? '100%' : '-100%',
       opacity: 0,
     },
     center: {
@@ -25,7 +25,7 @@ export function StepTransition({
       opacity: 1,
     },
     exit: {
-      x: direction === "forward" ? "-100%" : "100%",
+      x: direction === 'forward' ? '-100%' : '100%',
       opacity: 0,
     },
   };
@@ -33,7 +33,7 @@ export function StepTransition({
   // Cubic bezier easing for smooth transitions
   const transition = {
     duration: 0.4,
-    ease: [0.22, 1, 0.36, 1],
+    ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
   };
 
   return (

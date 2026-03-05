@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from 'framer-motion';
 
 interface GraphicLogoProps {
   className?: string;
@@ -8,26 +8,57 @@ interface GraphicLogoProps {
   isOpening?: boolean;
 }
 
-export function GraphicLogo({ className = "", animate = true, isOpening = false }: GraphicLogoProps): any {
-  const pathVariants: any = {
+export function GraphicLogo({
+  className = '',
+  animate = true,
+  isOpening = false,
+}: GraphicLogoProps) {
+  const pathVariants: Variants = {
     hidden: { pathLength: 0, opacity: 0 },
     visible: (i: number) => ({
       pathLength: 1,
       opacity: 1,
       transition: {
-        pathLength: { delay: i * 0.1, type: "spring", duration: 1.5, bounce: 0 },
+        pathLength: {
+          delay: i * 0.1,
+          type: 'spring',
+          duration: 1.5,
+          bounce: 0,
+        },
         opacity: { delay: i * 0.1, duration: 0.2 },
       },
     }),
   };
 
-  const parallaxVariants: any = {
+  const parallaxVariants: Variants = {
     closed: { x: 0, y: 0 },
-    openLeftTop: { x: -150, y: -150, opacity: 0, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as any } },
-    openRightBottom: { x: 150, y: 150, opacity: 0, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as any } },
-    openLeftScreen: { x: -250, opacity: 0, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as any } },
-    openRightScreen: { x: 250, opacity: 0, transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] as any } },
-    openCenter: { opacity: 0, scale: 0.9, transition: { duration: 0.8, ease: "easeOut" } },
+    openLeftTop: {
+      x: -150,
+      y: -150,
+      opacity: 0,
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+    },
+    openRightBottom: {
+      x: 150,
+      y: 150,
+      opacity: 0,
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+    },
+    openLeftScreen: {
+      x: -250,
+      opacity: 0,
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+    },
+    openRightScreen: {
+      x: 250,
+      opacity: 0,
+      transition: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
+    },
+    openCenter: {
+      opacity: 0,
+      scale: 0.9,
+      transition: { duration: 0.8, ease: 'easeOut' },
+    },
   };
 
   return (
@@ -40,31 +71,71 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       xmlns="http://www.w3.org/2000/svg"
     >
       <defs>
-        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(387.24006,0,0,387.24006,-2e-5,170.25139)">
+        <linearGradient
+          id="g1"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(387.24006,0,0,387.24006,-2e-5,170.25139)"
+        >
           <stop stopColor="#3f57af" offset="0" />
           <stop stopColor="#484da9" offset="0.31" />
           <stop stopColor="#6049a8" offset="0.66" />
           <stop stopColor="#6f47a7" offset="1" />
         </linearGradient>
-        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(387.24006,0,0,387.24006,325.81571,497.40248)">
+        <linearGradient
+          id="g2"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(387.24006,0,0,387.24006,325.81571,497.40248)"
+        >
           <stop stopColor="#3f57af" offset="0" />
           <stop stopColor="#484da9" offset="0.31" />
           <stop stopColor="#6049a8" offset="0.66" />
           <stop stopColor="#6f47a7" offset="1" />
         </linearGradient>
-        <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(120.65098,0,0,120.65098,757.5648,393.86081)">
+        <linearGradient
+          id="g3"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(120.65098,0,0,120.65098,757.5648,393.86081)"
+        >
           <stop stopColor="#3f57af" offset="0" />
           <stop stopColor="#484da9" offset="0.31" />
           <stop stopColor="#6049a8" offset="0.66" />
           <stop stopColor="#6f47a7" offset="1" />
         </linearGradient>
-        <linearGradient id="g4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(146.8854,0,0,146.8854,638.6,402.24765)">
+        <linearGradient
+          id="g4"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(146.8854,0,0,146.8854,638.6,402.24765)"
+        >
           <stop stopColor="#3f57af" offset="0" />
           <stop stopColor="#484da9" offset="0.31" />
           <stop stopColor="#6049a8" offset="0.66" />
           <stop stopColor="#6f47a7" offset="1" />
         </linearGradient>
-        <linearGradient id="g5" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(319.70045,0,0,319.70045,50.36361,316.24239)">
+        <linearGradient
+          id="g5"
+          x1="0"
+          y1="0"
+          x2="1"
+          y2="0"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="matrix(319.70045,0,0,319.70045,50.36361,316.24239)"
+        >
           <stop stopColor="#3f57af" offset="0" />
           <stop stopColor="#484da9" offset="0.31" />
           <stop stopColor="#6049a8" offset="0.66" />
@@ -76,7 +147,7 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       <motion.g
         variants={parallaxVariants}
         initial="closed"
-        animate={isOpening ? "openLeftTop" : "closed"}
+        animate={isOpening ? 'openLeftTop' : 'closed'}
       >
         <motion.path
           id="LeftTopFrameCorner"
@@ -91,7 +162,7 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       <motion.g
         variants={parallaxVariants}
         initial="closed"
-        animate={isOpening ? "openRightBottom" : "closed"}
+        animate={isOpening ? 'openRightBottom' : 'closed'}
       >
         <motion.path
           id="RightBottomFrameCorner"
@@ -108,7 +179,7 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       <motion.g
         variants={parallaxVariants}
         initial="closed"
-        animate={isOpening ? "openRightScreen" : "closed"}
+        animate={isOpening ? 'openRightScreen' : 'closed'}
       >
         <motion.path
           id="RightScreen"
@@ -125,12 +196,24 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       <motion.g
         variants={parallaxVariants}
         initial="closed"
-        animate={isOpening ? "openLeftScreen" : "closed"}
+        animate={isOpening ? 'openLeftScreen' : 'closed'}
       >
         <motion.path
           id="LeftScreen"
           d="M 399.05451,504.07306 H 38.92781 c -10.4373,0 -18.8986,-8.46133 -18.8986,-18.89733 V 122.37707 c 0,-10.436 8.4613,-18.89733 18.8986,-18.89733 h 360.1267 c 10.4373,0 18.8973,8.46133 18.8973,18.89733 v 362.79866 c 0,10.436 -8.46,18.89733 -18.8973,18.89733"
-          style={{ display: "inline", fill: "#ffffff", fillOpacity: 1, fillRule: "nonzero", stroke: "#6f47a7", strokeWidth: 1.33333, strokeLinecap: "butt", strokeLinejoin: "miter", strokeMiterlimit: 10, strokeDasharray: "none", strokeOpacity: 1 }}
+          style={{
+            display: 'inline',
+            fill: '#ffffff',
+            fillOpacity: 1,
+            fillRule: 'nonzero',
+            stroke: '#6f47a7',
+            strokeWidth: 1.33333,
+            strokeLinecap: 'butt',
+            strokeLinejoin: 'miter',
+            strokeMiterlimit: 10,
+            strokeDasharray: 'none',
+            strokeOpacity: 1,
+          }}
           variants={animate ? pathVariants : {}}
           initial="hidden"
           animate="visible"
@@ -141,7 +224,7 @@ export function GraphicLogo({ className = "", animate = true, isOpening = false 
       <motion.g
         variants={parallaxVariants}
         initial="closed"
-        animate={isOpening ? "openCenter" : "closed"}
+        animate={isOpening ? 'openCenter' : 'closed'}
       >
         <motion.path
           id="ScreenBase"
