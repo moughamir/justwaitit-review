@@ -190,6 +190,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${bodoniModa.variable} antialiased`}
+        suppressHydrationWarning
       >
         <a
           href="#main-content"

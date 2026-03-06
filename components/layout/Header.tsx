@@ -1,13 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { Button } from '@/components/ui/button';
-import { StaticTypoLogo } from '@/components/ui/StaticTypoLogo';
+import { cn } from '@/lib/utils';
 
 export function Header() {
   const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hoverKey, setHoverKey] = useState(0);
   const lastScrollYRef = useRef(0);
   const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
@@ -18,6 +22,7 @@ export function Header() {
       const isScrollingDown = current > prev && current > 80;
 
       setIsHidden(isScrollingDown);
+      setIsScrolled(current > 40);
       lastScrollYRef.current = current;
 
       if (scrollTimeoutRef.current) {
@@ -41,28 +46,59 @@ export function Header() {
     };
   }, []);
 
+  const handleMouseEnter = useCallback(() => {
+    setIsHovered(true);
+    setHoverKey((k) => k + 1);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setIsHovered(false);
+  }, []);
+
   return (
     <header
-      className={`pointer-events-none fixed left-0 right-0 top-0 z-50 px-4 py-4 transition-all duration-300 ease-in-out ${
+      className={cn(
+        'ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none fixed left-0 right-0 top-0 z-50 px-4 transition-all duration-500',
+        'animate-in fade-in slide-in-from-top-full fill-mode-both',
         isHidden
           ? '-translate-y-[120px] opacity-0'
-          : 'translate-y-0 opacity-100'
-      } animate-in fade-in slide-in-from-top-full fill-mode-both`}
+          : 'translate-y-0 opacity-100',
+        isScrolled ? 'py-2' : 'py-4'
+      )}
     >
       <nav
         aria-label="Main Navigation"
-        className="glass-strong pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl bg-neutral-100/25 px-4 py-3 backdrop-blur-sm sm:px-6"
+        className={cn(
+          'ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl bg-white/25 backdrop-blur-2xl transition-all duration-500',
+          isScrolled ? 'px-3 py-2 sm:px-5' : 'px-4 py-3 sm:px-6'
+        )}
         style={{ touchAction: 'manipulation' }}
       >
-        <Link href="/" className="flex items-center" aria-label="Anaqio Home">
-          <StaticTypoLogo className="h-5 w-auto sm:h-6" theme="light" />
+        <Link
+          href="/"
+          className="flex items-center"
+          aria-label="Anaqio Home"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <AnaqioTypographyLogo
+            key={hoverKey}
+            className={cn(
+              'ease-[cubic-bezier(0.22,1,0.36,1)] transition-all duration-500',
+              isScrolled ? 'w-24' : 'w-56'
+            )}
+            variant={isHovered ? 'outline-fill' : 'none'}
+          />
           <span className="sr-only">anaqio</span>
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-8">
           <Button
             variant="ghost"
-            className="backdrop-blur-xl"
+            className={cn(
+              'backdrop-blur-xl transition-all duration-500',
+              isScrolled ? 'text-xs' : 'text-sm'
+            )}
             onClick={() =>
               document
                 .getElementById('waitlist')

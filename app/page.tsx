@@ -10,10 +10,10 @@ const AbstractBackground = dynamic(
   }
 );
 
-const ProblemSection = dynamic(
+const LookbookSection = dynamic(
   () =>
-    import('@/components/sections/ProblemSection').then(
-      (mod) => mod.ProblemSection
+    import('@/components/sections/LookbookSection').then(
+      (mod) => mod.LookbookSection
     ),
   {
     ssr: true,
@@ -39,12 +39,12 @@ export default function Home() {
   return (
     <main
       id="main-content"
-      className="relative scroll-smooth bg-background/30 text-foreground selection:bg-aq-blue/20"
+      className="relative scroll-smooth bg-background text-foreground selection:bg-aq-blue/20"
     >
       <AbstractBackground />
       <Header />
       <HeroSection />
-      <ProblemSection />
+      <LookbookSection />
       <WaitlistSection />
       <Footer />
     </main>

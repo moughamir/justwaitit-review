@@ -1,138 +1,111 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { ArrowDownRight } from 'lucide-react';
+import Image from 'next/image';
 import { useRef } from 'react';
 
 import { Button } from '../ui/button';
 
-// Refined, slower cinematic animations
-// const containerVariants = { // Removed as per instruction
-//   hidden: {},
-//   visible: {
-//     transition: {
-//       staggerChildren: 0.25,
-//       delayChildren: 0.2, // Reduced delay to speed up LCP
-//     },
-//   },
-// };
-
-// const fadeUpVariants = { // Removed as per instruction
-//   hidden: { opacity: 0, y: 30 }, // Removed heavy blur filter, reduced y travel
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-//   },
-// };
-
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   return (
     <section
       ref={containerRef}
-      className="relative z-40 flex min-h-screen flex-col justify-center overflow-hidden bg-background/60 px-6 py-24 sm:px-12 lg:px-20"
-      style={{ transform: 'translateZ(0)' }} // GPU Acceleration
+      className="relative z-40 flex min-h-screen flex-col overflow-hidden bg-background pb-16 pt-32 sm:px-12 lg:px-20"
     >
-      {/* Immersive background effects */}
-      <div className="pointer-events-none absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/50" />
-        {/* Reduced blur radius for performance */}
-        <div className="absolute right-0 top-0 h-[80vh] w-[80vw] rounded-full bg-aq-blue/5 opacity-50 mix-blend-screen blur-3xl" />
-        <div className="absolute bottom-0 left-0 h-[50vh] w-[50vw] rounded-full bg-purple-500/5 opacity-30 mix-blend-screen blur-3xl" />
+      {/* Background Glows */}
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute right-0 top-0 h-[60vh] w-[60vw] rounded-full bg-aq-blue/5 opacity-50 mix-blend-multiply blur-3xl" />
+        <div className="absolute bottom-10 left-10 h-[50vh] w-[50vw] rounded-full bg-purple-500/5 opacity-30 mix-blend-multiply blur-3xl" />
       </div>
 
-      {/* Main Content Container - Golden Grid Layout */}
-      <div
-        ref={contentRef}
-        className="relative z-20 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-16 lg:grid-cols-[1.618fr_1fr] lg:gap-24"
-      >
-        {/* Primary Fraction (1.618) - Core Messaging */}
-        <div className="flex flex-col items-start gap-12 lg:gap-16">
-          <div className="flex w-full flex-col gap-8">
-            <h1
-              className="text-balance font-display text-4xl font-bold leading-[0.95] tracking-tighter sm:text-6xl md:text-7xl lg:text-[5.5rem]"
-              style={{ textWrap: 'balance' }}
-            >
+      <div className="relative z-20 mx-auto flex w-full max-w-[1400px] flex-col-reverse items-center justify-between gap-12 lg:flex-row lg:items-end">
+        {/* Left Column: Typography & CTA */}
+        <div className="flex w-full flex-col items-start gap-10 lg:w-1/2 lg:pb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-6"
+          >
+            <h1 className="font-display text-5xl font-bold leading-[1.1] tracking-tighter sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]">
               Skip the Studio. <br />
-              <span className="bg-gradient-to-r from-aq-blue to-purple-400 bg-clip-text font-serif font-light italic tracking-normal text-transparent">
+              <span className="font-serif font-light italic text-aq-blue">
                 Ship the Collection.
               </span>
             </h1>
 
-            <p className="max-w-xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl">
-              Stop paying 5,000–20,000 MAD for unpredictable photoshoots.
-              Anaqio's AI replaces expensive sets and models so you can style
-              and launch your next campaign today.
+            <p className="max-w-md text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl">
+              Stop paying 5K–20K MAD for photoshoots. Anaqio's AI replaces
+              expensive sets and models so you can launch your campaign today.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col items-start gap-6 pt-4 sm:flex-row sm:items-center sm:gap-10">
-            <div className="group cursor-pointer">
-              <Button
-                variant={'brand'}
-                onClick={() =>
-                  document
-                    .getElementById('waitlist')
-                    ?.scrollIntoView({ behavior: 'smooth' })
-                }
-                aria-label="Get Early Access to Anaqio"
-                className="group flex items-center gap-4 rounded-bl-3xl rounded-tr-3xl py-8 text-sm font-bold uppercase tracking-[0.2em] text-background transition-all duration-700 hover:bg-aq-blue hover:text-white"
-              >
-                <span>Secure Beta Access</span>
-                <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-background/10 transition-colors group-hover:bg-white/20">
-                  <div className="transform transition-transform duration-500 ease-in-out group-hover:translate-x-1 group-hover:animate-bounce">
-                    <ArrowDownRight className="h-4 w-4" />
-                  </div>
-                </div>
-              </Button>
-            </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:gap-8"
+          >
+            <Button
+              variant="brand"
+              onClick={() =>
+                document
+                  .getElementById('waitlist')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+              className="group flex h-14 items-center gap-4 rounded-xl px-8 text-sm font-bold uppercase tracking-[0.2em] transition-all duration-300"
+            >
+              <span>Get Early Access</span>
+              <div className="relative flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-white/20 transition-colors group-hover:bg-white/30">
+                <ArrowDownRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1" />
+              </div>
+            </Button>
 
-            <div className="flex flex-col gap-2">
-              <span className="text-xs font-bold uppercase tracking-[0.3em] text-aq-blue">
-                Only 200 Spots
+            <div className="flex flex-col gap-1">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-aq-blue">
+                Limited to 200 Brands
               </span>
               <span className="font-serif text-sm italic text-muted-foreground">
-                Takes 30 seconds
+                Join in 30 seconds
               </span>
             </div>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Golden Fraction (1) - Structured Negative Space / Interactive Element */}
-        <div className="relative hidden h-full flex-col items-end justify-center delay-500 duration-1000 animate-in fade-in slide-in-from-bottom-8 fill-mode-both lg:flex">
-          {/* Typographic Art & Negative Space */}
+        {/* Right Column: Editorial Image */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="relative w-full overflow-hidden rounded-2xl lg:w-1/2 lg:max-w-[600px]"
+        >
+          {/* Aspect ratio container */}
           <div
-            id="main-content"
-            className="glass-strong group relative flex aspect-[3/4] w-full max-w-[400px] flex-col justify-between overflow-hidden rounded-[3rem] border border-white/5 p-12 shadow-2xl"
+            className="relative w-full"
+            style={{ paddingBottom: '125%' /* 4:5 aspect ratio */ }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-aq-blue/10 to-transparent opacity-0 transition-opacity duration-1000 group-hover:opacity-100" />
-
-            <div className="z-10 flex w-full items-start justify-between">
-              <span className="font-mono text-xs text-muted-foreground">
-                SYS.01
-              </span>
-              <span className="font-mono text-xs text-muted-foreground">
-                AQ-CORE
-              </span>
-            </div>
-
-            <div className="z-10 space-y-4">
-              <h3 className="font-serif text-5xl italic leading-none text-white/90">
-                Fluid
-                <br />
-                <span className="bg-gradient-to-r from-white to-white/50 bg-clip-text font-display text-4xl font-bold uppercase not-italic tracking-tighter text-transparent">
-                  Reality
-                </span>
-              </h3>
-              <div className="h-[1px] w-12 bg-aq-blue shadow-[0_0_10px_rgba(37,99,235,0.5)]" />
-              <p className="max-w-[200px] text-sm font-light tracking-wide text-muted-foreground">
-                Physics-based lighting and structural fabric AI simulations.
-              </p>
-            </div>
+            <Image
+              src="/images/hero-model.png"
+              alt="Editorial fashion photography generated by Anaqio AI, featuring a model in a purple checkered suit"
+              fill
+              className="object-cover object-center"
+              priority
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+            {/* Elegant overlay to blend the image into the light theme */}
+            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
           </div>
-        </div>
+
+          {/* Decorative Elements */}
+          <div className="absolute left-6 top-6 z-10 flex items-center justify-between mix-blend-difference">
+            <span className="font-mono text-xs tracking-widest text-white/70">
+              AQ-AI-V1.0
+            </span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
