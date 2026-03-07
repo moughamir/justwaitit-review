@@ -3,6 +3,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+import lookbookImage1 from '@/public/images/lookbook-1.png';
+import lookbookImage2 from '@/public/images/lookbook-2.png';
+import lookbookImage3 from '@/public/images/lookbook-3.png';
+
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -14,7 +18,10 @@ const fadeUpVariants = {
 
 export function LookbookSection() {
   return (
-    <section className="relative flex w-full flex-col items-center justify-center bg-background px-4 py-24 sm:px-8 lg:px-12">
+    <section
+      className="relative flex w-full flex-col items-center justify-center bg-background px-4 py-24 sm:px-8 lg:px-12"
+      style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 1200px' }}
+    >
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-24 lg:gap-32">
         {/* Section Header */}
         <motion.div
@@ -57,10 +64,12 @@ export function LookbookSection() {
           >
             <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-[21/9]">
               <Image
-                src="/images/lookbook-1.png"
+                src={lookbookImage1}
                 alt="Cinematic editorial shot of fashion models walking in a minimalist concrete space"
                 fill
                 className="object-cover object-center"
+                placeholder="blur"
+                quality={80}
                 sizes="100vw"
               />
             </div>
@@ -86,10 +95,12 @@ export function LookbookSection() {
             >
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-neutral-100 sm:aspect-square lg:aspect-[4/5]">
                 <Image
-                  src="/images/lookbook-2.png"
+                  src={lookbookImage2}
                   alt="Close up of luxury fashion fabric texture and metallic accessory"
                   fill
                   className="object-cover object-center"
+                  placeholder="blur"
+                  quality={80}
                   sizes="(max-width: 1024px) 100vw, 40vw"
                 />
               </div>
@@ -114,10 +125,12 @@ export function LookbookSection() {
             >
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-neutral-100 lg:aspect-[2/3]">
                 <Image
-                  src="/images/lookbook-3.png"
+                  src={lookbookImage3}
                   alt="Vertical fashion portrait of a stylish model"
                   fill
                   className="object-cover object-center"
+                  placeholder="blur"
+                  quality={80}
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
