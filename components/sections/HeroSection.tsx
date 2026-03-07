@@ -8,6 +8,23 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '../ui/button';
 
+const content = {
+  headline: {
+    pre: 'Visual Infrastructure',
+    pro: 'for Fashion Commerce.',
+  },
+  subheadline: {
+    lineA:
+      'Transform garments into photorealistic compaign visuals in minutes  — not weeks.',
+    libeB: 'Anaqio optmizes fashion art for scalable commerce.',
+  },
+  supportLine:
+    'Built for designers, brands, and agencies who need consistent, brannd-safe visuals at scale.',
+  cta: {
+    act: 'Start Creating',
+    learn: 'See How it Works',
+  },
+};
 export function HeroSection() {
   const containerRef = useRef<HTMLElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
@@ -70,14 +87,14 @@ export function HeroSection() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const primaryCta = variant === 'A' ? 'Get Early Access' : 'Join the Beta';
-  const secondaryCta = variant === 'A' ? 'View Lookbook' : 'See Examples';
+  const primaryCta = variant === 'A' ? content.cta.act : 'Join the Beta';
+  const secondaryCta = variant === 'A' ? content.cta.learn : 'See Examples';
   const headlineA = (
     <>
-      Skip the Studio.
+      {content.headline.pre}
       <br />
       <span className="bg-gradient-to-r from-aq-blue via-purple-500 to-aq-blue bg-clip-text font-serif font-light italic text-transparent">
-        Ship the Collection.
+        {content.headline.pro}
       </span>
     </>
   );

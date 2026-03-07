@@ -366,6 +366,11 @@
 
 /* Scroll Snap */
 @layer utilities {
+  /* Easing helpers to avoid ambiguous arbitrary classes */
+  .ease-smooth {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   /* 60-30-10 helpers */
   .bg-dominant {
     @apply bg-background;
