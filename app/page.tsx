@@ -2,6 +2,13 @@ import dynamic from 'next/dynamic';
 
 import { Header } from '@/components/layout/Header';
 import { HeroSection } from '@/components/sections/HeroSection';
+import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
+import { PhilosophySection } from '@/components/sections/PhilosophySection';
+import { ProblemSection } from '@/components/sections/ProblemSection';
+import { SolutionSection } from '@/components/sections/SolutionSection';
+import { VisionSection } from '@/components/sections/VisionSection';
+import { WhoItsForSection } from '@/components/sections/WhoItsForSection';
+import { WhyAnaqioSection } from '@/components/sections/WhyAnaqioSection';
 
 const AbstractBackground = dynamic(
   () => import('@/components/ui/AbstractBackground').then((mod) => mod.default),
@@ -10,15 +17,6 @@ const AbstractBackground = dynamic(
   }
 );
 
-const LookbookSection = dynamic(
-  () =>
-    import('@/components/sections/LookbookSection').then(
-      (mod) => mod.LookbookSection
-    ),
-  {
-    ssr: true,
-  }
-);
 const WaitlistSection = dynamic(
   () =>
     import('@/components/sections/WaitlistSection').then(
@@ -44,7 +42,13 @@ export default function Home() {
       <AbstractBackground />
       <Header />
       <HeroSection />
-      <LookbookSection />
+      <ProblemSection />
+      <SolutionSection />
+      <HowItWorksSection />
+      <WhyAnaqioSection />
+      <WhoItsForSection />
+      <PhilosophySection />
+      <VisionSection />
       <WaitlistSection />
       <Footer />
     </main>

@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import { ArrowDownRight, PiggyBank, Sparkles, Timer } from 'lucide-react';
 import Image from 'next/image';
-import { useSearchParams } from 'next/navigation';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { Button } from '../ui/button';
@@ -11,18 +10,18 @@ import { Button } from '../ui/button';
 const content = {
   headline: {
     pre: 'Visual Infrastructure',
-    pro: 'for Fashion Commerce.',
+    pro: 'for Fashion Commerce',
   },
   subheadline: {
     lineA:
-      'Transform garments into photorealistic compaign visuals in minutes  — not weeks.',
-    libeB: 'Anaqio optmizes fashion art for scalable commerce.',
+      'Transform garments into photorealistic campaign visuals in minutes — not weeks.',
+    libeB: 'Anaqio optimizes fashion art for scalable commerce.',
   },
   supportLine:
-    'Built for designers, brands, and agencies who need consistent, brannd-safe visuals at scale.',
+    'Built for designers, brands, and agencies who need consistent, brand-safe visuals at scale.',
   cta: {
     act: 'Start Creating',
-    learn: 'See How it Works',
+    learn: 'See How It Works',
   },
 };
 export function HeroSection() {
@@ -30,43 +29,12 @@ export function HeroSection() {
   const mediaRef = useRef<HTMLDivElement>(null);
   const [parallax, setParallax] = useState(0);
   const [videoError, setVideoError] = useState(false);
-  // Variant is derived from URL/localStorage to avoid setState in effects
-  const searchParams = useSearchParams();
-
   const prefersReducedMotion = useMemo(
     () =>
       typeof window !== 'undefined' &&
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
     []
   );
-
-  const variant: 'A' | 'B' = useMemo(() => {
-    if (typeof window === 'undefined') return 'A';
-    try {
-      const urlExp = searchParams.get('expHero') ?? searchParams.get('exp');
-      const upper = urlExp?.toUpperCase();
-      const stored = localStorage.getItem('exp_hero_v1');
-      if (upper === 'A' || upper === 'B') return upper;
-      if (stored === 'A' || stored === 'B') return stored;
-      // Default deterministically to 'A' on first render; effect will persist a random choice for future visits
-      return 'A';
-    } catch {
-      return 'A';
-    }
-  }, [searchParams]);
-
-  // Persist a random variant once for future visits, without triggering state
-  useEffect(() => {
-    try {
-      const urlExp = searchParams.get('expHero') ?? searchParams.get('exp');
-      const upper = urlExp?.toUpperCase();
-      const stored = localStorage.getItem('exp_hero_v1');
-      if (!stored && !(upper === 'A' || upper === 'B')) {
-        const decide = Math.random() < 0.5 ? 'A' : 'B';
-        localStorage.setItem('exp_hero_v1', decide);
-      }
-    } catch {}
-  }, [searchParams]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -87,26 +55,18 @@ export function HeroSection() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const primaryCta = variant === 'A' ? content.cta.act : 'Join the Beta';
-  const secondaryCta = variant === 'A' ? content.cta.learn : 'See Examples';
+  const primaryCta = content.cta.act;
+  const secondaryCta = content.cta.learn;
   const headlineA = (
     <>
       {content.headline.pre}
       <br />
-      <span className="bg-gradient-to-r from-aq-blue via-purple-500 to-aq-blue bg-clip-text font-serif font-light italic text-transparent">
-        {content.headline.pro}
+      <span className="text-brand-gradient animate-gradient font-serif font-light italic">
+        {content.headline.pro}.
       </span>
     </>
   );
-  const headlineB = (
-    <>
-      Studio-Quality Imagery.
-      <br />
-      <span className="bg-gradient-to-r from-aq-blue via-purple-500 to-aq-blue bg-clip-text font-serif font-light italic text-transparent">
-        Launch 10× Faster.
-      </span>
-    </>
-  );
+  // Single headline path (A/B testing removed)
 
   return (
     <section
@@ -136,12 +96,12 @@ export function HeroSection() {
               suppressHydrationWarning
               className="font-display text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]"
             >
-              {variant === 'A' ? headlineA : headlineB}
+              {headlineA}
             </h1>
 
-            <p className="max-w-md text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl">
-              Stop paying 5K–20K MAD for photoshoots. Anaqio's AI replaces
-              expensive sets and models so you can launch your campaign today.
+            <p className="max-w-xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl">
+              {content.subheadline.lineA}
+              <br className="hidden sm:block" /> {content.subheadline.libeB}
             </p>
           </motion.div>
 
@@ -181,10 +141,7 @@ export function HeroSection() {
 
             <div className="flex flex-col gap-1">
               <span className="text-xs font-bold uppercase tracking-[0.2em] text-aq-blue">
-                Limited to 200 Brands
-              </span>
-              <span className="font-serif text-sm italic text-muted-foreground">
-                Join in 30 seconds
+                {content.supportLine}
               </span>
             </div>
           </motion.div>
