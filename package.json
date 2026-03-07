@@ -40,11 +40,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^3.3.0",
-    "vercel": "^50.25.4",
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.0",
     "@next/eslint-plugin-next": "^16.1.6",
     "@playwright/test": "^1.58.2",
     "@types/node": "^20",
@@ -70,7 +69,8 @@
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5",
-    "typescript-eslint": "^8.56.1"
+    "typescript-eslint": "^8.56.1",
+    "vercel": "^50.25.4"
   },
   "trustedDependencies": [
     "unrs-resolver"
