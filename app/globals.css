@@ -33,6 +33,15 @@
     --font-label: var(--font-inter);
     --font-editorial: var(--font-instrument-serif);
     --font-wordmark: var(--font-bodoni-moda), Georgia, serif;
+
+    /* 60-30-10 tone mapping (dominant-secondary-accent) */
+    --tone-dominant: var(--background);
+    --tone-dominant-foreground: var(--foreground);
+    --tone-secondary: var(--secondary);
+    --tone-secondary-foreground: var(--secondary-foreground);
+    /* Use primary as accent by default; swap to --accent if preferred */
+    --tone-accent: var(--primary);
+    --tone-accent-foreground: var(--primary-foreground);
   }
 }
 
@@ -357,6 +366,28 @@
 
 /* Scroll Snap */
 @layer utilities {
+  /* 60-30-10 helpers */
+  .bg-dominant {
+    @apply bg-background;
+  }
+  .text-dominant {
+    @apply text-foreground;
+  }
+
+  .bg-secondary-surface {
+    @apply bg-secondary;
+  }
+  .text-secondary-surface {
+    @apply text-secondary-foreground;
+  }
+
+  .bg-accent-surface {
+    @apply bg-primary;
+  }
+  .text-accent-surface {
+    @apply text-primary-foreground;
+  }
+
   .snap-container {
     @apply min-h-screen snap-y snap-mandatory overflow-y-auto scroll-smooth;
   }

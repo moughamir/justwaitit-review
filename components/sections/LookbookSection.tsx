@@ -16,7 +16,7 @@ export function LookbookSection() {
   return (
     <section
       id="lookbook"
-      className="relative flex w-full flex-col items-center justify-center bg-background px-4 py-24 sm:px-8 lg:px-12"
+      className="relative flex w-full flex-col items-center justify-center bg-secondary px-4 py-24 sm:px-8 lg:px-12"
     >
       <div className="mx-auto flex w-full max-w-[1400px] flex-col gap-24 lg:gap-32">
         {/* Section Header */}
