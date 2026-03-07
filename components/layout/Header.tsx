@@ -58,7 +58,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-none fixed left-0 right-0 top-0 z-50 px-4 transition-all duration-500',
+        'ease-[cubic-bezier(0.22\,1\,0.36\,1)] pointer-events-none fixed left-0 right-0 top-0 z-50 px-4 transition-all duration-500',
         'animate-in fade-in slide-in-from-top-full fill-mode-both',
         isHidden
           ? '-translate-y-[120px] opacity-0'
@@ -69,7 +69,7 @@ export function Header() {
       <nav
         aria-label="Main Navigation"
         className={cn(
-          'ease-[cubic-bezier(0.22,1,0.36,1)] pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl bg-white/25 backdrop-blur-2xl transition-all duration-500',
+          'ease-[cubic-bezier(0.22\,1\,0.36\,1)] pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl bg-white/25 backdrop-blur-sm transition-all duration-500',
           isScrolled ? 'px-3 py-2 sm:px-5' : 'px-4 py-3 sm:px-6'
         )}
         style={{ touchAction: 'manipulation' }}
@@ -84,7 +84,7 @@ export function Header() {
           <AnaqioTypographyLogo
             key={hoverKey}
             className={cn(
-              'ease-[cubic-bezier(0.22,1,0.36,1)] transition-all duration-500',
+              'ease-[cubic-bezier(0.22\,1\,0.36\,1)] transition-all duration-500',
               isScrolled ? 'w-24' : 'w-56'
             )}
             variant={isHovered ? 'outline-fill' : 'none'}
