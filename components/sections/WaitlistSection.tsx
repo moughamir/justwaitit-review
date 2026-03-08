@@ -1,5 +1,7 @@
-import Link from 'next/link';
+'use client';
+
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
 const WaitlistForm = dynamic(
   () => import('./waitlist-form').then((mod) => mod.WaitlistForm),

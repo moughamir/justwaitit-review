@@ -11,6 +11,13 @@ const ProblemSection = dynamic(
     ),
   { ssr: true }
 );
+const LookbookSection = dynamic(
+  () =>
+    import('@/components/sections/LookbookSection').then(
+      (mod) => mod.LookbookSection
+    ),
+  { ssr: true }
+);
 const SolutionSection = dynamic(
   () =>
     import('@/components/sections/SolutionSection').then(
@@ -53,14 +60,10 @@ const VisionSection = dynamic(
     ),
   { ssr: true }
 );
-const CodepenInspirationSection = dynamic(
-  () =>
-    import('@/components/sections/CodepenInspirationSection').then(
-      (mod) => mod.CodepenInspirationSection
-    ),
-  {
-    ssr: true,
-  }
+
+const FinalCTA = dynamic(
+  () => import('@/components/sections/FinalCTA').then((mod) => mod.default),
+  { ssr: true }
 );
 
 const WaitlistSection = dynamic(
@@ -81,7 +84,6 @@ export default function Home() {
       <Header />
       <HeroSection />
       <LookbookSection />
-      <CodepenInspirationSection />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
@@ -89,6 +91,7 @@ export default function Home() {
       <WhoItsForSection />
       <PhilosophySection />
       <VisionSection />
+      <FinalCTA />
       <WaitlistSection />
       <Footer />
       {/* <AbstractBackground /> */}

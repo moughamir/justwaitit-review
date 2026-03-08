@@ -5,10 +5,10 @@ import { ArrowDownRight } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import heroModelImage from '@/public/images/hero-model.png';
-
 import { Button } from '../ui/button';
 import PerspectiveGrid from '../ui/PerspectiveGrid';
+
+import heroModelImage from '@/public/images/model-t.png';
 
 const content = {
   headline: {
@@ -77,32 +77,30 @@ export function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex max-h-screen min-h-screen flex-col justify-center overflow-hidden pb-16 pt-28 sm:px-12 lg:px-20"
+      className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-16 pt-32 sm:px-12 lg:px-20"
     >
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-10%,rgba(37,99,235,0.12)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(148,163,184,0.15),transparent_20%)]" />
+        {/* Darkened base to allow text to pop */}
+        <div className="absolute inset-0 bg-background/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-10%,rgba(37,99,235,0.15)_0%,transparent_60%)]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),transparent_40%)]" />
       </div>
       <div className="relative z-20 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 flex w-full flex-col items-start gap-10 lg:order-1 lg:pb-24">
-          {/**
-          <span className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-white/50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.3em] text-slate-600 backdrop-blur-sm">
-            <Sparkles className="h-3 w-3 text-aq-blue" /> Early Access Open
-          </span>
-           */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col gap-6"
           >
             <h1
               suppressHydrationWarning
-              className="leading font-display text-5xl font-bold tracking-tight sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]"
+              className="leading font-display text-5xl font-bold tracking-tight text-white drop-shadow-md sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]"
             >
               {headlineA}
             </h1>
 
-            <p className="max-w-xl text-lg font-light leading-relaxed text-muted-foreground sm:text-xl md:text-2xl">
+            <p className="max-w-xl text-lg font-light leading-relaxed text-slate-300 drop-shadow sm:text-xl md:text-2xl">
               {content.subheadline.lineA}
               <br />
               {content.subheadline.libeB}

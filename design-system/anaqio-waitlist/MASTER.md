@@ -201,6 +201,78 @@ Three sizes: `.btn-sm` (7px 16px), default (10px 22px), `.btn-lg` (14px 32px). A
 }
 ```
 
+### Section Heading
+
+Standard heading pattern used across all content sections. Consistent structure: eyebrow label → headline with gradient accent.
+
+```tsx
+<motion.h2
+  initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-100px' }}
+  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+  className="font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+>
+  <span className="block w-full text-center text-sm uppercase tracking-[0.2em] text-muted-foreground">
+    {eyebrow}
+  </span>
+  {headlineText}{' '}
+  <span className="text-brand-gradient font-bold italic">{accentText}</span>
+</motion.h2>
+```
+
+- Eyebrow: `text-sm uppercase tracking-[0.2em] text-muted-foreground`
+- Accent words: Always use `text-brand-gradient font-bold italic` — never raw color like `text-purple-900`
+
+### Section Card
+
+Standard card used across content sections (HowItWorks, WhyAnaqio, WhoItsFor, Solution).
+
+```css
+/* Section card — light-mode glassmorphism */
+.section-card {
+  border-radius: 12px;
+  border: 1px solid rgba(228, 231, 236, 0.6); /* border-border/60 */
+  background: rgba(255, 255, 255, 0.5); /* bg-white/50 */
+  backdrop-filter: blur(4px);
+  padding: 24px;
+  cursor: pointer;
+  transition: all 300ms ease;
+}
+
+.section-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(37, 99, 235, 0.25); /* border-aq-blue/25 */
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.1);
+}
+```
+
+- **Icon container**: `h-10 w-10 rounded-lg bg-aq-blue/10 text-aq-blue` with hover `bg-aq-blue/15`
+- **Title**: `font-semibold text-foreground`
+- **Body**: `text-sm leading-relaxed text-muted-foreground`
+- **Must include**: `cursor-pointer`, hover transition, icon (Lucide SVG)
+
+### Staggered Grid Animation
+
+All card grids must use staggered reveal via Framer Motion:
+
+```tsx
+<motion.div
+  initial={prefersReducedMotion ? false : { opacity: 0, y: 24 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: '-80px' }}
+  transition={{
+    duration: 0.5,
+    delay: index * 0.1,  // 100ms stagger per card
+    ease: [0.16, 1, 0.3, 1],
+  }}
+>
+```
+
+- **Required**: `useReducedMotion()` from `framer-motion` to disable animations for accessibility
+- When `prefersReducedMotion` is true, pass `false` to `initial` to skip animation entirely
+- Stagger delay: `0.1s` per card (max ~0.5s total for a 5-card grid)
+
 ### Inputs
 
 ```css
@@ -354,6 +426,13 @@ All view transitions are disabled when `prefers-reduced-motion: reduce`.
 - ❌ **Low contrast text** — Maintain 4.5:1 minimum contrast ratio
 - ❌ **Instant state changes** — Always use transitions (150-300ms)
 - ❌ **Invisible focus states** — Focus states must be visible for a11y
+- ❌ **Raw color accents** — Never use `text-purple-900` or ad-hoc colors; always use `text-brand-gradient` for accent text
+- ❌ **Static card grids** — All card grids must use staggered `whileInView` entry animations
+- ❌ **Missing `useReducedMotion()`** — All Framer Motion sections must respect `prefers-reduced-motion`
+- ❌ **Cards without hover states** — Every section card must have lift + border-glow hover
+- ❌ **Cards without icons** — Feature/benefit cards should include a Lucide SVG icon to reinforce meaning
+- ❌ **Plain bullet lists** — Replace `<ul>` bullets with icon-list or styled cards for visual weight
+- ❌ **Missing section IDs** — Every section must have an `id` attribute for anchor navigation
 
 ---
 
