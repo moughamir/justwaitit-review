@@ -53,6 +53,16 @@ const VisionSection = dynamic(
     ),
   { ssr: true }
 );
+const CodepenInspirationSection = dynamic(
+  () =>
+    import('@/components/sections/CodepenInspirationSection').then(
+      (mod) => mod.CodepenInspirationSection
+    ),
+  {
+    ssr: true,
+  }
+);
+
 const WaitlistSection = dynamic(
   () =>
     import('@/components/sections/WaitlistSection').then(
@@ -70,6 +80,8 @@ export default function Home() {
     <main id="main-content" className="relative">
       <Header />
       <HeroSection />
+      <LookbookSection />
+      <CodepenInspirationSection />
       <ProblemSection />
       <SolutionSection />
       <HowItWorksSection />
