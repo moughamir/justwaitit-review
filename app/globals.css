@@ -32,7 +32,7 @@
     --font-body: var(--font-inter);
     --font-label: var(--font-inter);
     --font-editorial: var(--font-instrument-serif);
-    --font-wordmark: var(--font-bodoni-moda), Georgia, serif;
+    --font-wordmark: Georgia, serif;
 
     /* 60-30-10 tone mapping (dominant-secondary-accent) */
     --tone-dominant: var(--background);

@@ -1,11 +1,5 @@
 import { GoogleAnalytics } from '@next/third-parties/google';
-import {
-  Space_Grotesk,
-  Inter,
-  Instrument_Serif,
-  JetBrains_Mono,
-  Bodoni_Moda,
-} from 'next/font/google';
+import { Space_Grotesk, Inter, Instrument_Serif } from 'next/font/google';
 
 import type { Metadata } from 'next';
 import './globals.css';
@@ -104,22 +98,6 @@ const instrumentSerif = Instrument_Serif({
   variable: '--font-instrument-serif',
   subsets: ['latin'],
   weight: ['400'],
-  style: ['normal', 'italic'],
-  display: 'swap',
-  preload: false,
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: '--font-mono',
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  display: 'swap',
-  preload: false,
-});
-
-const bodoniModa = Bodoni_Moda({
-  variable: '--font-bodoni-moda',
-  subsets: ['latin'],
   style: ['normal', 'italic'],
   display: 'swap',
   preload: false,
@@ -235,7 +213,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${spaceGrotesk.variable} ${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable} ${bodoniModa.variable} antialiased`}
+        className={`${spaceGrotesk.variable} ${inter.variable} ${instrumentSerif.variable} antialiased`}
         suppressHydrationWarning
       >
         <a

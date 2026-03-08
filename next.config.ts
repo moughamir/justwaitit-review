@@ -1,6 +1,15 @@
 import type { NextConfig } from 'next';
 
-const nextConfig: NextConfig = {
+const nextConfig = {
+  poweredByHeader: false,
+  productionBrowserSourceMaps: false,
+
+  // Strip console.log in production
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  reactCompiler: true,
+
   // Image optimization for external domains
   images: {
     remotePatterns: [
@@ -56,6 +65,11 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-};
+
+  experimental: {
+    cssChunking: true,
+    inlineCss: true,
+  },
+} satisfies NextConfig;
 
 export default nextConfig;

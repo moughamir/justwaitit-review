@@ -2,35 +2,67 @@ import dynamic from 'next/dynamic';
 
 import { Header } from '@/components/layout/Header';
 import { HeroSection } from '@/components/sections/HeroSection';
-import { HowItWorksSection } from '@/components/sections/HowItWorksSection';
-import { PhilosophySection } from '@/components/sections/PhilosophySection';
-import { ProblemSection } from '@/components/sections/ProblemSection';
-import { SolutionSection } from '@/components/sections/SolutionSection';
-import { VisionSection } from '@/components/sections/VisionSection';
-import { WhoItsForSection } from '@/components/sections/WhoItsForSection';
-import { WhyAnaqioSection } from '@/components/sections/WhyAnaqioSection';
 
-const AbstractBackground = dynamic(
-  () => import('@/components/ui/AbstractBackground').then((mod) => mod.default),
-  {
-    ssr: true,
-  }
+// Below-fold sections: dynamic imports for code-splitting (ssr: true for SEO)
+const ProblemSection = dynamic(
+  () =>
+    import('@/components/sections/ProblemSection').then(
+      (mod) => mod.ProblemSection
+    ),
+  { ssr: true }
 );
-
+const SolutionSection = dynamic(
+  () =>
+    import('@/components/sections/SolutionSection').then(
+      (mod) => mod.SolutionSection
+    ),
+  { ssr: true }
+);
+const HowItWorksSection = dynamic(
+  () =>
+    import('@/components/sections/HowItWorksSection').then(
+      (mod) => mod.HowItWorksSection
+    ),
+  { ssr: true }
+);
+const WhyAnaqioSection = dynamic(
+  () =>
+    import('@/components/sections/WhyAnaqioSection').then(
+      (mod) => mod.WhyAnaqioSection
+    ),
+  { ssr: true }
+);
+const WhoItsForSection = dynamic(
+  () =>
+    import('@/components/sections/WhoItsForSection').then(
+      (mod) => mod.WhoItsForSection
+    ),
+  { ssr: true }
+);
+const PhilosophySection = dynamic(
+  () =>
+    import('@/components/sections/PhilosophySection').then(
+      (mod) => mod.PhilosophySection
+    ),
+  { ssr: true }
+);
+const VisionSection = dynamic(
+  () =>
+    import('@/components/sections/VisionSection').then(
+      (mod) => mod.VisionSection
+    ),
+  { ssr: true }
+);
 const WaitlistSection = dynamic(
   () =>
     import('@/components/sections/WaitlistSection').then(
       (mod) => mod.WaitlistSection
     ),
-  {
-    ssr: true,
-  }
+  { ssr: true }
 );
 const Footer = dynamic(
   () => import('@/components/layout/Footer').then((mod) => mod.Footer),
-  {
-    ssr: true,
-  }
+  { ssr: true }
 );
 
 export default function Home() {

@@ -75,9 +75,9 @@ export default {
         body: ['var(--font-inter)', 'sans-serif'],
         label: ['var(--font-inter)', 'system-ui', 'sans-serif'],
         editorial: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
-        wordmark: ['Bodoni Moda', 'Georgia', 'serif'],
+        wordmark: ['Georgia', 'serif'],
         sans: ['var(--font-inter)', 'sans-serif'],
-        mono: ['var(--font-mono)', 'monospace'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'monospace'],
         serif: ['var(--font-instrument-serif)', 'serif'],
       },
       letterSpacing: {
