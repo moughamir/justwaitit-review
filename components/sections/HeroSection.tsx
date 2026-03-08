@@ -80,10 +80,10 @@ export function HeroSection() {
       className="relative flex min-h-screen flex-col justify-center overflow-hidden pb-16 pt-32 sm:px-12 lg:px-20"
     >
       <div className="pointer-events-none absolute inset-0 z-10 overflow-hidden">
-        {/* Darkened base to allow text to pop */}
+        {/* Light overlay base to allow text to pop */}
         <div className="absolute inset-0 bg-background/80" />
         <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_-10%,rgba(37,99,235,0.15)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.8),transparent_40%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 to-transparent" />
       </div>
       <div className="relative z-20 mx-auto grid w-full max-w-[1400px] grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 flex w-full flex-col items-start gap-10 lg:order-1 lg:pb-24">
@@ -95,12 +95,12 @@ export function HeroSection() {
           >
             <h1
               suppressHydrationWarning
-              className="leading font-display text-5xl font-bold tracking-tight text-foreground drop-shadow-md sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]"
+              className="leading font-display text-5xl font-bold tracking-tight text-foreground drop-shadow-sm sm:text-6xl md:text-7xl lg:text-[5rem] xl:text-[6rem]"
             >
               {headlineA}
             </h1>
 
-            <p className="max-w-xl text-lg font-light leading-relaxed text-muted-foreground drop-shadow sm:text-xl md:text-2xl">
+            <p className="max-w-xl text-lg font-medium leading-relaxed text-muted-foreground drop-shadow-sm sm:text-xl md:text-2xl">
               {content.subheadline.lineA}
               <br />
               {content.subheadline.libeB}
@@ -142,7 +142,7 @@ export function HeroSection() {
 
           <div className="max-w-[85vw] text-justify text-xs font-bold leading-relaxed tracking-[0.2em] text-muted-foreground sm:max-w-2xl sm:text-xs">
             Built for{' '}
-            <span className="relative inline-flex justify-center text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+            <span className="relative inline-flex justify-center text-foreground drop-shadow-sm">
               <span className="invisible">designers</span>
               <AnimatePresence mode="popLayout">
                 <motion.span
@@ -151,7 +151,7 @@ export function HeroSection() {
                   animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
                   exit={{ y: -15, opacity: 0, filter: 'blur(2px)' }}
                   transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                  className="absolute left-0 top-0 w-full text-center"
+                  className="text-brand-gradient absolute left-0 top-0 w-full text-center italic"
                 >
                   {content.supportLine.words[currentWordIndex]}
                 </motion.span>
@@ -159,35 +159,6 @@ export function HeroSection() {
             </span>{' '}
             who need consistent, brand-safe visuals at scale.
           </div>
-          {/**
-          <div className="gap-4 grid grid-cols-1 sm:grid-cols-3 mt-4 w-full">
-            <div className="bg-white/40 backdrop-blur-sm p-4 border border-border/60 rounded-xl">
-              <div className="flex items-center gap-2 font-semibold text-sm">
-                <Timer className="w-4 h-4 text-aq-blue" /> 30-min Turnarounds
-              </div>
-              <p className="mt-1 text-muted-foreground text-xs">
-                Idea to lookbook before coffee cools.
-              </p>
-            </div>
-            <div className="bg-white/40 backdrop-blur-sm p-4 border border-border/60 rounded-xl">
-              <div className="flex items-center gap-2 font-semibold text-sm">
-                <PiggyBank className="w-4 h-4 text-aq-blue" /> 15,000+ MAD Saved
-              </div>
-              <p className="mt-1 text-muted-foreground text-xs">
-                Cut studio, models, and set costs.
-              </p>
-            </div>
-            <div className="bg-white/40 backdrop-blur-sm p-4 border border-border/60 rounded-xl">
-              <div className="flex items-center gap-2 font-semibold text-sm">
-                <Sparkles className="w-4 h-4 text-aq-blue" /> Casablanca Private
-                Beta
-              </div>
-              <p className="mt-1 text-muted-foreground text-xs">
-                Limited to 200 early brands.
-              </p>
-            </div>
-          </div>
-           */}
         </div>
 
         <motion.div
@@ -200,7 +171,7 @@ export function HeroSection() {
         >
           {/* Aspect ratio container */}
           <div
-            className="relative w-full"
+            className="relative w-full overflow-hidden rounded-xl shadow-xl"
             style={{ paddingBottom: '125%' /* 4:5 aspect ratio */ }}
           >
             <Image
@@ -214,11 +185,11 @@ export function HeroSection() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
             {/* Elegant overlay to blend the image into the light theme */}
-            <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/20 to-transparent" />
           </div>
 
           <div className="absolute left-4 top-4 z-10 flex items-center justify-between mix-blend-difference">
-            <span className="font-mono text-xs tracking-widest text-white/70 shadow-sm">
+            <span className="font-mono text-xs tracking-widest text-white shadow-sm">
               AQ-AI-V1.0
             </span>
           </div>

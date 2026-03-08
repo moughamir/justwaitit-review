@@ -55,7 +55,7 @@ export function ComingSoonSection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.2 + i * 0.1 }}
                   key={f.title}
-                  className="group flex items-start gap-6 rounded-3xl border border-white/5 bg-secondary/5 p-6 transition-all duration-500 hover:bg-secondary/10"
+                  className="group flex items-start gap-6 rounded-3xl border border-border/40 bg-secondary/5 p-6 transition-all duration-500 hover:bg-secondary/10"
                 >
                   <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-aq-blue/5 transition-all duration-500 group-hover:scale-110 group-hover:bg-aq-blue/10">
                     <f.icon className="h-6 w-6 text-aq-blue/80" />
@@ -100,7 +100,7 @@ export function ComingSoonSection() {
             transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
             className="relative order-1 mx-auto w-full max-w-md lg:order-2 lg:max-w-none"
           >
-            <div className="glass-strong group relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden rounded-[3rem] border-white/5 p-8 text-center shadow-2xl sm:rounded-[4rem] sm:p-12">
+            <div className="glass-strong group relative flex aspect-[4/5] flex-col items-center justify-center overflow-hidden rounded-[3rem] border-border/40 p-8 text-center shadow-2xl sm:rounded-[4rem] sm:p-12">
               {/* Subtle background glow */}
               <div className="absolute inset-0 bg-gradient-to-br from-aq-blue/5 to-transparent opacity-50 transition-opacity duration-1000 group-hover:opacity-100" />
 
@@ -111,7 +111,7 @@ export function ComingSoonSection() {
                 transition={{ duration: 1, delay: 0.3 }}
                 className="relative z-10 mt-12 space-y-8"
               >
-                <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-[2rem] border border-white/10 bg-gradient-to-br from-aq-blue/20 to-aq-blue/5 shadow-inner transition-transform duration-700 group-hover:scale-105 sm:h-24 sm:w-24">
+                <div className="mx-auto mb-8 flex h-20 w-20 items-center justify-center rounded-[2rem] border border-border/40 bg-gradient-to-br from-aq-blue/20 to-aq-blue/5 shadow-inner transition-transform duration-700 group-hover:scale-105 sm:h-24 sm:w-24">
                   <Sparkles
                     className="h-10 w-10 text-aq-blue sm:h-12 sm:w-12"
                     strokeWidth={1.5}
@@ -119,7 +119,7 @@ export function ComingSoonSection() {
                 </div>
 
                 <div className="space-y-4">
-                  <h4 className="font-display text-3xl font-light italic tracking-tight text-white/90 sm:text-4xl">
+                  <h4 className="font-display text-3xl font-light italic tracking-tight text-foreground sm:text-4xl">
                     Phase Three
                   </h4>
                   <h5 className="bg-brand-gradient bg-clip-text font-display text-xl font-bold tracking-tight text-transparent sm:text-2xl">
@@ -127,7 +127,7 @@ export function ComingSoonSection() {
                   </h5>
                 </div>
 
-                <p className="mx-auto max-w-[280px] text-sm font-light leading-relaxed text-muted-foreground/60 sm:text-base">
+                <p className="mx-auto max-w-[280px] text-sm font-light leading-relaxed text-muted-foreground sm:text-base">
                   A revolutionary workspace designed exclusively for high-end
                   fashion commerce.
                 </p>
@@ -138,14 +138,14 @@ export function ComingSoonSection() {
                 className="pointer-events-none absolute inset-0 z-0 opacity-[0.03]"
                 style={{
                   backgroundImage:
-                    'radial-gradient(circle at 2px 2px, white 1px, transparent 0)',
+                    'radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)',
                   backgroundSize: '32px 32px',
                 }}
               />
 
               {/* Timeline Indicator - Redesigned for elegance */}
               <div className="absolute bottom-12 left-0 right-0 z-10 px-12">
-                <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-white/5">
+                <div className="relative h-[2px] w-full overflow-hidden rounded-full bg-border">
                   <motion.div
                     initial={{ width: '0%' }}
                     whileInView={{ width: '66%' }}

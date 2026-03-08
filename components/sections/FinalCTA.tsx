@@ -19,7 +19,7 @@ const FinalCTA = () => {
             transition={{ duration: 0.6 }}
             className="space-y-10"
           >
-            <h2 className="text-4xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
+            <h2 className="text-4xl font-bold leading-tight text-secondary-foreground md:text-5xl lg:text-6xl">
               Join the Evolution of
               <br />
               <span className="text-brand-gradient">Fashion Production</span>
@@ -50,20 +50,6 @@ const FinalCTA = () => {
               </Button>
             </div>
           </motion.div>
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div className="container mx-auto mt-32 px-6">
-        <div className="flex flex-col items-center justify-between gap-4 border-t border-border/30 pt-8 md:flex-row">
-          <img
-            src="/brand/anaqio-typography-logo.svg"
-            alt="ANAQIO"
-            className="h-8 w-auto opacity-50 invert"
-          />
-          <p className="text-sm text-muted-foreground/50">
-            © {new Date().getFullYear()} ANAQIO. All rights reserved.
-          </p>
         </div>
       </div>
     </section>

@@ -119,7 +119,7 @@ export function InteractivePreview() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-aq-ink/60 backdrop-blur-sm"
+              className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-background/60 backdrop-blur-sm"
             >
               <div className="relative">
                 <motion.div
@@ -132,7 +132,7 @@ export function InteractivePreview() {
               <motion.p
                 initial={{ y: 10, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="mt-6 text-sm font-bold uppercase tracking-[0.3em] text-aq-blue"
+                className="mt-6 text-sm font-bold uppercase tracking-[0.3em] text-aq-blue drop-shadow-sm"
               >
                 AI Relighting...
               </motion.p>
@@ -150,7 +150,7 @@ export function InteractivePreview() {
           >
             <div className="flex items-center gap-2">
               <MapPin className="h-3 w-3 text-aq-blue" />
-              <span className="text-[10px] font-bold uppercase tracking-widest">
+              <span className="text-[10px] font-bold uppercase tracking-widest text-white drop-shadow-sm">
                 {selectedVibe.location}
               </span>
             </div>
@@ -159,9 +159,9 @@ export function InteractivePreview() {
 
         {/* Studio Badge */}
         <div className="absolute right-6 top-6 z-10">
-          <div className="glass-strong flex items-center gap-2 rounded-full border-white/10 px-3 py-1.5">
+          <div className="glass-strong flex items-center gap-2 rounded-full border-white/10 px-3 py-1.5 shadow-sm">
             <div className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
-            <span className="text-[8px] font-bold uppercase tracking-tighter">
+            <span className="text-[8px] font-bold uppercase tracking-tighter text-white drop-shadow-sm">
               Visual Engine v1.0
             </span>
           </div>

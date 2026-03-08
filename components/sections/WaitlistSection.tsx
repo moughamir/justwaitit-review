@@ -72,7 +72,7 @@ export function WaitlistSection() {
           </div>
 
           {/* Form Card */}
-          <div className="glass-strong noise-overlay mx-auto w-full max-w-md space-y-8 rounded-[2rem] border-white/5 p-6 text-left sm:p-10 lg:col-span-3 lg:max-w-none">
+          <div className="glass-strong noise-overlay mx-auto w-full max-w-md space-y-8 rounded-[2rem] border-border/40 p-6 text-left sm:p-10 lg:col-span-3 lg:max-w-none">
             <div className="relative z-10 space-y-2 text-center sm:text-left">
               <h3 className="font-display text-2xl font-bold tracking-tight">
                 Request an invitation to the atelier.

@@ -69,7 +69,7 @@ export function WhyAnaqioSection() {
                   delay: i * 0.1,
                   ease: [0.16, 1, 0.3, 1],
                 }}
-                className="group cursor-pointer rounded-xl border border-white/[0.08] bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-aq-blue/25 hover:shadow-[0_8px_30px_rgba(37,99,235,0.1)]"
+                className="group cursor-pointer rounded-xl border border-border/60 bg-white/50 p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-aq-blue/25 hover:shadow-[0_8px_30px_rgba(37,99,235,0.1)]"
               >
                 <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-aq-blue/10 text-aq-blue transition-colors duration-300 group-hover:bg-aq-blue/15">
                   <Icon className="h-5 w-5" aria-hidden="true" />

@@ -187,7 +187,7 @@ export function WaitlistForm({
           placeholder="professional@email.com"
           required
           disabled={isPending}
-          className="h-14 rounded-xl border-white/10 bg-background/50 px-6"
+          className="h-14 rounded-xl border-border/40 bg-background/50 px-6"
         />
         <Button
           variant="brand"

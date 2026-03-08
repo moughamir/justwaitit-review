@@ -27,7 +27,7 @@ export function DemoSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="glass-card group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-3xl border-white/5 bg-black/40 shadow-2xl"
+          className="glass-card group relative flex aspect-video w-full items-center justify-center overflow-hidden rounded-3xl border-border/40 bg-black/40 shadow-2xl"
         >
           {/* Placeholder for Demo GIF */}
           <div className="space-y-4 p-6 text-center sm:space-y-6 sm:p-12">
