@@ -67,10 +67,7 @@ const Footer = dynamic(
 
 export default function Home() {
   return (
-    <main
-      id="main-content"
-      className="relative scroll-smooth text-foreground selection:bg-aq-blue/20"
-    >
+    <main id="main-content" className="relative">
       <Header />
       <HeroSection />
       <ProblemSection />

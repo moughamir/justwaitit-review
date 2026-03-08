@@ -8,7 +8,7 @@ import { WaitlistForm } from '@/components/sections/waitlist-form';
 
 export function EarlyAccessContent() {
   return (
-    <div className="min-h-screen bg-background font-body text-foreground selection:bg-aq-blue/20">
+    <div className="min-h-screen">
       <Header />
 
       <main className="noise-overlay">
@@ -30,7 +30,7 @@ export function EarlyAccessContent() {
                 <span className="font-normal italic">powered by AI.</span>
               </h1>
 
-              <p className="max-w-md font-body text-lg leading-relaxed text-muted-foreground">
+              <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
                 Anaqio provides a professional AI-driven workspace to create,
                 stage, and sell fashion — without traditional production
                 overhead.

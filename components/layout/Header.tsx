@@ -58,7 +58,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        'ease-smooth pointer-events-none fixed left-0 right-0 top-0 z-50 p-8 transition-all duration-500',
+        'ease-smooth pointer-events-none fixed left-0 right-0 top-0 z-50 p-2 transition-all duration-500',
         'animate-in fade-in slide-in-from-top-full fill-mode-both',
         isHidden
           ? '-translate-y-[120px] opacity-0'
@@ -70,7 +70,7 @@ export function Header() {
       <nav
         aria-label="Main Navigation"
         className={cn(
-          'ease-smooth pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-white/20 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,.4),0_10px_30px_rgba(2,6,23,.08)] backdrop-blur-xl transition-all duration-500',
+          'ease-smooth pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-2xl border border-white/20 bg-white/30 shadow-[inset_0_1px_0_rgba(255,255,255,.4),0_10px_30px_rgba(2,6,23,.08)] backdrop-blur-sm transition-all duration-500',
           isScrolled ? 'px-3 py-2 sm:px-5' : 'px-4 py-3 sm:px-6'
         )}
         style={{ touchAction: 'manipulation' }}
@@ -87,16 +87,36 @@ export function Header() {
             key={hoverKey}
             className={cn(
               'ease-smooth transition-all duration-500',
-              isScrolled ? 'w-24' : 'w-56'
+              isScrolled ? 'w-24' : 'w-32'
             )}
             variant={isHovered ? 'outline-fill' : 'none'}
           />
           <span className="sr-only">anaqio</span>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-8">
+        <div className="flex items-center gap-3 sm:gap-6">
+          <div className="hidden items-center gap-4 text-sm font-medium text-slate-800 md:flex">
+            <Link
+              href="/about"
+              className={cn(
+                'transition-all duration-500 hover:text-aq-blue',
+                isScrolled ? 'text-xs' : 'text-sm'
+              )}
+            >
+              About
+            </Link>
+            <Link
+              href="/terms"
+              className={cn(
+                'transition-all duration-500 hover:text-aq-blue',
+                isScrolled ? 'text-xs' : 'text-sm'
+              )}
+            >
+              Terms
+            </Link>
+          </div>
           <Button
-            variant="ghost"
+            variant="brand"
             className={cn(
               'backdrop-blur-xl transition-all duration-500',
               isScrolled ? 'text-xs' : 'text-sm'

@@ -74,7 +74,7 @@ export default function ProtectedPage() {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="font-body text-sm leading-relaxed text-muted-foreground">
+              <p className="text-sm leading-relaxed text-muted-foreground">
                 You are currently viewing the{' '}
                 <span className="font-semibold text-foreground">
                   Anaqio Studio Alpha

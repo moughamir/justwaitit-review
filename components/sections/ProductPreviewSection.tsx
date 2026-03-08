@@ -16,7 +16,7 @@ export function ProductPreviewSection() {
   return (
     <section
       id="product-preview"
-      className="relative flex min-h-screen snap-start items-center justify-center overflow-hidden px-4 py-20"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-20"
     >
       {/* Background glow */}
       <div className="max-h-4xl pointer-events-none absolute left-1/2 top-1/2 h-full w-full max-w-4xl -translate-x-1/2 -translate-y-1/2 rounded-full bg-aq-blue/5 blur-[120px]" />

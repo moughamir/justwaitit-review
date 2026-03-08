@@ -4,16 +4,21 @@ import { motion } from 'framer-motion';
 
 export function ProblemSection() {
   return (
-    <section className="bg-secondary-surface text-secondary-surface w-full px-4 py-24 sm:px-8 lg:px-12">
+    <section className="bg-secondary-surface text-secondary-surface flex min-h-screen w-full flex-col justify-center px-4 py-24 sm:px-8 lg:px-12">
       <div className="mx-auto w-full max-w-[1200px]">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+          className="text-center font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
         >
-          Fashion Moves Fast. Visual Production Doesn’t.
+          <span className="block w-full text-center text-sm uppercase text-aq-ink">
+            The Challenge
+          </span>
+          Fashion Content Demand.
+          <br /> Is{' '}
+          <span className="font-bold italic text-purple-900">Exploding</span>.
         </motion.h2>
 
         <div className="mt-8 grid gap-6 text-muted-foreground sm:grid-cols-2">

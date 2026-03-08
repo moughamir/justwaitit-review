@@ -9,7 +9,7 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="noise-overlay flex min-h-screen flex-col bg-background font-body text-foreground selection:bg-aq-blue/20">
+    <div className="noise-overlay flex min-h-screen flex-col">
       <nav className="sticky top-0 z-50 border-b border-border/50 bg-background/50 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
           <Link

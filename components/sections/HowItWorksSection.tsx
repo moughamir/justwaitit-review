@@ -23,7 +23,7 @@ export function HowItWorksSection() {
   ];
 
   return (
-    <section className="w-full bg-background px-4 py-24 sm:px-8 lg:px-12">
+    <section className="flex min-h-screen w-full flex-col justify-center bg-background px-4 py-24 sm:px-8 lg:px-12">
       <div className="mx-auto w-full max-w-[1200px]">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -32,7 +32,14 @@ export function HowItWorksSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           className="font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
         >
-          From Garment to Campaign Visuals
+          <span className="block w-full text-center text-sm uppercase text-aq-ink">
+            How It Works
+          </span>
+          Four Steps to{' '}
+          <span className="text-brand-gradient font-bold italic">
+            Campaign-Ready
+          </span>{' '}
+          Visuals
         </motion.h2>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
