@@ -15,7 +15,7 @@ const buttonVariants = cva(
         destructive: 'bg-destructive hover:bg-destructive/90',
 
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        hero: 'bg-brand-diag text-white hover:opacity-90 shadow-[0_0_40px_rgba(124,58,237,0.25)] font-semibold tracking-wide',
+        hero: 'bg-brand-diag hover:opacity-90 shadow-[0_0_40px_rgba(124,58,237,0.25)] font-semibold tracking-wide',
         heroOutline: 'border bg-transparent hover:bg-primary/10 tracking-wide',
         link: 'text-primary underline-offset-4 hover:underline',
 
