@@ -11,10 +11,6 @@ const ProblemSection = dynamic(
     ),
   { ssr: true }
 );
-const AbstractBackground = dynamic(
-  () => import('@/components/ui/AbstractBackground').then((mod) => mod.default),
-  { ssr: true }
-);
 const SolutionSection = dynamic(
   () =>
     import('@/components/sections/SolutionSection').then(
@@ -57,12 +53,10 @@ const VisionSection = dynamic(
     ),
   { ssr: true }
 );
-
 const FinalCTA = dynamic(
-  () => import('@/components/sections/FinalCTA').then((mod) => mod.default),
+  () => import('@/components/sections/FinalCTA').then((mod) => mod.FinalCTA),
   { ssr: true }
 );
-
 const WaitlistSection = dynamic(
   () =>
     import('@/components/sections/WaitlistSection').then(

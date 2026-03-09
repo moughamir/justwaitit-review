@@ -1,35 +1,27 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Camera, Share2, ShoppingBag, LayoutList } from 'lucide-react';
 
 import { Section, SectionContainer } from '@/components/ui/section';
 import { GradientText, SectionHeader } from '@/components/ui/section-header';
+import { ProblemSectionText } from '@/lib/content/problem';
 import { fadeUp, fadeUpCard } from '@/lib/motion';
-
-const painPoints = [
-  { text: 'Product launches.', icon: Camera },
-  { text: 'Social media campaigns.', icon: Share2 },
-  { text: 'E-commerce catalogs.', icon: ShoppingBag },
-  { text: 'Marketplace listings.', icon: LayoutList },
-];
 
 export function ProblemSection() {
   const reduced = useReducedMotion();
+  const { eyebrow, headline, intro, painPoints } = ProblemSectionText;
 
   return (
     <Section id="problem">
       <SectionContainer>
-        <SectionHeader eyebrow="The Challenge" className="text-center">
-          Fashion Content Demand.
-          <br /> Is <GradientText>Exploding</GradientText>.
+        <SectionHeader eyebrow={eyebrow} className="text-center">
+          {headline.pre}
+          <br /> Is <GradientText>{headline.gradient}</GradientText>.
         </SectionHeader>
 
         <div className="mt-8 grid gap-8 text-muted-foreground sm:grid-cols-2">
           <motion.div {...fadeUp(reduced)} className="space-y-4">
-            <p className="text-lg leading-relaxed">
-              Fashion brands today need an enormous volume of visuals.
-            </p>
+            <p className="text-lg leading-relaxed">{intro.a}</p>
             <div className="grid grid-cols-2 gap-3">
               {painPoints.map((item, i) => {
                 const Icon = item.icon;
@@ -53,17 +45,10 @@ export function ProblemSection() {
           </motion.div>
 
           <motion.div {...fadeUp(reduced, 0.15)} className="space-y-4">
-            <p className="text-lg leading-relaxed">
-              But traditional production wasn&apos;t built for this speed.
-            </p>
-            <p className="text-sm leading-7">
-              Photoshoots require studios, models, logistics, and
-              post-production — making them expensive, slow, and difficult to
-              scale. For emerging designers and growing brands, this creates a
-              bottleneck between creative vision and commercial growth.
-            </p>
+            <p className="text-lg leading-relaxed">{intro.b}</p>
+            <p className="text-sm leading-7">{intro.detail}</p>
             <p className="border-l-2 border-aq-blue/25 pl-4 font-serif text-sm italic">
-              Fashion is art. Commerce requires optimization.
+              {intro.quote}
             </p>
           </motion.div>
         </div>

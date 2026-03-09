@@ -3,11 +3,13 @@
 import { motion } from 'framer-motion';
 
 import { Button } from '@/components/ui/button';
+import { FinalCTAText } from '@/lib/content/final-cta';
 
-const FinalCTA = () => {
+export function FinalCTA() {
+  const { headline, cta } = FinalCTAText;
+
   return (
     <section className="relative overflow-hidden py-32">
-      {/* Background glow */}
       <div className="absolute left-1/2 top-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-aq-blue/10 blur-[100px]" />
 
       <div className="container relative z-10 mx-auto px-6">
@@ -20,9 +22,9 @@ const FinalCTA = () => {
             className="space-y-10"
           >
             <h2 className="text-4xl font-bold leading-tight text-secondary-foreground md:text-5xl lg:text-6xl">
-              Join the Evolution of
+              {headline.pre}
               <br />
-              <span className="text-brand-gradient">Fashion Production</span>
+              <span className="text-brand-gradient">{headline.gradient}</span>
             </h2>
 
             <div className="flex flex-col justify-center gap-4 sm:flex-row">
@@ -35,7 +37,7 @@ const FinalCTA = () => {
                     ?.scrollIntoView({ behavior: 'smooth' })
                 }
               >
-                Join the Waitlist
+                {cta.primary}
               </Button>
               <Button
                 variant="heroOutline"
@@ -46,7 +48,7 @@ const FinalCTA = () => {
                     ?.scrollIntoView({ behavior: 'smooth' })
                 }
               >
-                See How It Works
+                {cta.secondary}
               </Button>
             </div>
           </motion.div>
@@ -54,6 +56,6 @@ const FinalCTA = () => {
       </div>
     </section>
   );
-};
+}
 
 export default FinalCTA;

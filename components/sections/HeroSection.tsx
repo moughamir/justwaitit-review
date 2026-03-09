@@ -10,28 +10,9 @@ import { ArrowDownRight } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
-import { Button } from '../ui/button';
-
+import { Button } from '@/components/ui/button';
+import { HeroSectionText } from '@/lib/content/hero';
 import heroModelImage from '@/public/images/model-t.png';
-
-const content = {
-  eyebrow: 'Visual AI for Fashion',
-  headline: {
-    pre: 'Visual Infrastructure',
-    pro: 'for Fashion Commerce',
-  },
-  subheadline: {
-    a: 'Transform garments into photorealistic campaign visuals in minutes — not weeks.',
-    b: 'Anaqio optimizes fashion art for scalable commerce.',
-  },
-  supportLine: {
-    words: ['designers', 'brands', 'agencies'],
-  },
-  cta: {
-    act: 'Start Creating',
-    learn: 'See How It Works',
-  },
-};
 
 export function HeroSection() {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -48,7 +29,7 @@ export function HeroSection() {
   useEffect(() => {
     const wordInterval = setInterval(() => {
       setCurrentWordIndex(
-        (prev) => (prev + 1) % content.supportLine.words.length
+        (prev) => (prev + 1) % HeroSectionText.supportLine.words.length
       );
     }, 2500);
     return () => clearInterval(wordInterval);
@@ -59,11 +40,9 @@ export function HeroSection() {
       ref={sectionRef}
       className="relative flex h-screen flex-col overflow-hidden bg-background"
     >
-      {/* ── Atmospheric background ── */}
       <div className="hero-gradient pointer-events-none absolute inset-0 z-0" />
       <div className="animated-grid pointer-events-none absolute inset-0 z-0 opacity-25" />
 
-      {/* ── Model — absolute background layer, behind text ── */}
       <motion.div
         style={{ y: imageY }}
         className="pointer-events-none absolute inset-y-0 bottom-0 right-0 z-0 w-[57%] select-none"
@@ -79,21 +58,13 @@ export function HeroSection() {
             src={heroModelImage}
             alt=""
             fill
-            className="object-contain object-right-bottom"
+            className="object-contain"
             draggable={false}
-            priority
-            placeholder="blur"
-            quality={75}
             sizes="57vw"
           />
-          {/* Left-edge fade — model blends into text area */}
-          <div className="absolute inset-y-0 left-0 w-[65%] bg-gradient-to-r from-background via-background/70 to-transparent" />
-          {/* Bottom fade into grid band */}
-          <div className="absolute inset-x-0 bottom-0 h-[30%] bg-gradient-to-t from-background/30 to-transparent" />
         </motion.div>
       </motion.div>
 
-      {/* ── Left editorial accent line (desktop only) ── */}
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
@@ -102,10 +73,8 @@ export function HeroSection() {
         className="absolute left-6 top-[18%] z-10 hidden h-[40%] w-px bg-gradient-to-b from-transparent via-border to-transparent sm:left-12 lg:block"
       />
 
-      {/* ── Text content — in front of image ── */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-6 pt-24 sm:px-12 lg:pl-24 lg:pr-16">
         <div className="flex max-w-[620px] flex-col gap-6">
-          {/* Eyebrow — editorial line + label */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
@@ -114,11 +83,10 @@ export function HeroSection() {
           >
             <div className="h-px w-10 bg-muted-foreground/40" />
             <span className="text-[0.6rem] font-medium uppercase tracking-[0.3em] text-muted-foreground">
-              {content.eyebrow}
+              {HeroSectionText.eyebrow}
             </span>
           </motion.div>
 
-          {/* Headline */}
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -129,13 +97,12 @@ export function HeroSection() {
               style={{ fontSize: 'clamp(2.9rem, 5.2vw, 5.8rem)' }}
             >
               <span className="block whitespace-nowrap font-semibold">
-                {content.headline.pre}
+                {HeroSectionText.headline.pre}
               </span>
               <span className="text-brand-gradient animate-gradient block whitespace-nowrap font-serif font-light italic">
-                {content.headline.pro}.
+                {HeroSectionText.headline.pro}.
               </span>
             </h1>
-            {/* Decorative rule under headline */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={{ scaleX: 1 }}
@@ -149,20 +116,18 @@ export function HeroSection() {
             />
           </motion.div>
 
-          {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-[370px] text-sm leading-[1.8] text-muted-foreground sm:text-[0.93rem]"
           >
-            {content.subheadline.a}
+            {HeroSectionText.subheadline.a}
             <span className="mt-1 block opacity-75">
-              {content.subheadline.b}
+              {HeroSectionText.subheadline.b}
             </span>
           </motion.p>
 
-          {/* CTA row */}
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -178,10 +143,11 @@ export function HeroSection() {
               }
               className="group flex h-11 items-center gap-2.5 rounded-full px-7 text-[0.68rem] font-bold uppercase tracking-[0.2em]"
             >
-              <span>{content.cta.act}</span>
+              <span>{HeroSectionText.cta.act}</span>
               <ArrowDownRight className="h-3 w-3 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
             </Button>
-            <button
+            <Button
+              variant={'ghost'}
               onClick={() =>
                 document
                   .getElementById('lookbook')
@@ -190,12 +156,11 @@ export function HeroSection() {
               className="group flex h-11 items-center text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-muted-foreground transition-colors hover:text-foreground"
             >
               <span className="border-b border-current pb-px transition-colors">
-                {content.cta.learn}
+                {HeroSectionText.cta.learn}
               </span>
-            </button>
+            </Button>
           </motion.div>
 
-          {/* Animated tagline */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -216,7 +181,7 @@ export function HeroSection() {
                   transition={{ duration: 0.22, ease: 'easeInOut' }}
                   className="text-brand-gradient absolute left-0 top-0 w-full text-center italic"
                 >
-                  {content.supportLine.words[currentWordIndex]}
+                  {HeroSectionText.supportLine.words[currentWordIndex]}
                 </motion.span>
               </AnimatePresence>
             </span>{' '}
@@ -225,7 +190,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* ── Bottom: brand gradient + perspective grid ── */}
       <aside className="relative z-20 h-40 w-full overflow-hidden sm:h-48">
         <div className="absolute inset-0 bg-gradient-to-r from-aq-grad-start via-aq-grad-mid2 to-aq-grad-end" />
         <div className="absolute inset-0 overflow-hidden">

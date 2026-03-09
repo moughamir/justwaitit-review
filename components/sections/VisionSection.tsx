@@ -1,26 +1,21 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
-import { Rocket, RefreshCw, Globe } from 'lucide-react';
 
 import { Section, SectionContainer } from '@/components/ui/section';
 import { GradientText, SectionHeader } from '@/components/ui/section-header';
-import { fadeUp, fadeIn, slideInLeft } from '@/lib/motion';
-
-const visionPoints = [
-  { text: 'Collections launch faster.', icon: Rocket },
-  { text: 'Content cycles move quicker.', icon: RefreshCw },
-  { text: 'Brands reach global audiences instantly.', icon: Globe },
-];
+import { VisionSectionText } from '@/lib/content/vision';
+import { fadeIn, fadeUp, slideInLeft } from '@/lib/motion';
 
 export function VisionSection() {
   const reduced = useReducedMotion();
+  const { eyebrow, headline, intro, quote, points } = VisionSectionText;
 
   return (
     <Section id="vision" className="bg-background">
       <SectionContainer>
-        <SectionHeader eyebrow="Our Vision">
-          The Future of <GradientText>Fashion Production</GradientText>
+        <SectionHeader eyebrow={eyebrow}>
+          {headline.pre} <GradientText>{headline.gradient}</GradientText>
         </SectionHeader>
 
         <div className="mt-8 max-w-3xl">
@@ -28,12 +23,11 @@ export function VisionSection() {
             {...fadeUp(reduced)}
             className="text-lg leading-relaxed text-muted-foreground"
           >
-            The fashion industry is entering a new era where visual production
-            must keep pace with digital commerce.
+            {intro}
           </motion.p>
 
           <div className="mt-6 space-y-3">
-            {visionPoints.map((point, i) => {
+            {points.map((point, i) => {
               const Icon = point.icon;
               return (
                 <motion.div
@@ -56,9 +50,7 @@ export function VisionSection() {
             {...fadeIn(reduced, 0.3)}
             className="mt-6 border-l-2 border-aq-blue/30 pl-4 font-serif text-base italic leading-relaxed text-muted-foreground"
           >
-            Anaqio&apos;s vision is to become the visual infrastructure layer of
-            the global fashion industry, transforming visual production from a
-            bottleneck into a growth engine.
+            {quote}
           </motion.p>
         </div>
       </SectionContainer>

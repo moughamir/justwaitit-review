@@ -3,6 +3,8 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
+import { WaitlistSectionText } from '@/lib/content/waitlist';
+
 const WaitlistForm = dynamic(
   () => import('./waitlist-form').then((mod) => mod.WaitlistForm),
   {
@@ -18,6 +20,9 @@ const WaitlistForm = dynamic(
 );
 
 export function WaitlistSection() {
+  const { headline, socialProof, formHeadline, formSubline, incentives } =
+    WaitlistSectionText;
+
   return (
     <section
       id="waitlist"
@@ -31,29 +36,16 @@ export function WaitlistSection() {
           <div className="space-y-8 text-center lg:col-span-2 lg:text-left">
             <div className="space-y-4">
               <h2 className="font-display text-3xl font-bold tracking-tight sm:text-4xl">
-                Why Join <br />
-                <span className="text-brand-gradient">Early?</span>
+                {headline.pre} <br />
+                <span className="text-brand-gradient">{headline.gradient}</span>
               </h2>
               <p className="mx-auto max-w-md font-body text-sm text-muted-foreground sm:text-base lg:mx-0">
-                Join 200+ Moroccan brands upgrading their visual commerce.
+                {socialProof}
               </p>
             </div>
 
             <div className="mx-auto max-w-sm space-y-6 text-left lg:mx-0">
-              {[
-                {
-                  title: '30-Minute Turnarounds',
-                  desc: 'Go from raw garment imagery to a 4K editorial lookbook before your morning espresso cools.',
-                },
-                {
-                  title: 'Save 15,000+ MAD Per Campaign',
-                  desc: 'Eliminate model fees, location scouting, and lighting rentals with 100% AI-generated sets.',
-                },
-                {
-                  title: "Casablanca's Private Beta",
-                  desc: 'Limited to 200 early-access brands locking in pioneer DH pricing before our public launch.',
-                },
-              ].map((item) => (
+              {incentives.map((item) => (
                 <div key={item.title} className="flex gap-4">
                   <div className="mt-1 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-aq-blue/20">
                     <div className="h-2 w-2 rounded-full bg-aq-blue" />
@@ -75,10 +67,10 @@ export function WaitlistSection() {
           <div className="glass-strong noise-overlay mx-auto w-full max-w-md space-y-8 rounded-[2rem] border-border/40 p-6 text-left sm:p-10 lg:col-span-3 lg:max-w-none">
             <div className="relative z-10 space-y-2 text-center sm:text-left">
               <h3 className="font-display text-2xl font-bold tracking-tight">
-                Request an invitation to the atelier.
+                {formHeadline}
               </h3>
               <p className="font-body text-sm text-muted-foreground">
-                Only 200 early-access spots available. Takes 30 seconds.
+                {formSubline}
               </p>
             </div>
 
