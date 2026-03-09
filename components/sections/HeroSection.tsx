@@ -104,7 +104,7 @@ export function HeroSection() {
 
       {/* ── Text content — in front of image ── */}
       <div className="relative z-10 mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-center px-6 pt-24 sm:px-12 lg:pl-24 lg:pr-16">
-        <div className="flex max-w-[620px] flex-col gap-9">
+        <div className="flex max-w-[620px] flex-col gap-6">
           {/* Eyebrow — editorial line + label */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
@@ -145,7 +145,7 @@ export function HeroSection() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               style={{ originX: 0 }}
-              className="mt-6 h-px w-20 bg-gradient-to-r from-border to-transparent"
+              className="mt-4 h-px w-20 bg-gradient-to-r from-border to-transparent"
             />
           </motion.div>
 
@@ -226,7 +226,7 @@ export function HeroSection() {
       </div>
 
       {/* ── Bottom: brand gradient + perspective grid ── */}
-      <aside className="relative z-20 h-52 w-full overflow-hidden sm:h-60">
+      <aside className="relative z-20 h-40 w-full overflow-hidden sm:h-48">
         <div className="absolute inset-0 bg-gradient-to-r from-aq-grad-start via-aq-grad-mid2 to-aq-grad-end" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="perspective-grid mx-auto h-[160%] w-[120%]" />
