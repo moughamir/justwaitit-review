@@ -11,11 +11,8 @@ const ProblemSection = dynamic(
     ),
   { ssr: true }
 );
-const LookbookSection = dynamic(
-  () =>
-    import('@/components/sections/LookbookSection').then(
-      (mod) => mod.LookbookSection
-    ),
+const AbstractBackground = dynamic(
+  () => import('@/components/ui/AbstractBackground').then((mod) => mod.default),
   { ssr: true }
 );
 const SolutionSection = dynamic(
