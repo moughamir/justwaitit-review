@@ -3,6 +3,10 @@
 import { motion, useReducedMotion } from 'framer-motion';
 import { Camera, Share2, ShoppingBag, LayoutList } from 'lucide-react';
 
+import { Section, SectionContainer } from '@/components/ui/section';
+import { GradientText, SectionHeader } from '@/components/ui/section-header';
+import { fadeUp, fadeUpCard } from '@/lib/motion';
+
 const painPoints = [
   { text: 'Product launches.', icon: Camera },
   { text: 'Social media campaigns.', icon: Share2 },
@@ -11,40 +15,18 @@ const painPoints = [
 ];
 
 export function ProblemSection() {
-  const prefersReducedMotion = useReducedMotion();
+  const reduced = useReducedMotion();
 
   return (
-    <section
-      id="problem"
-      className="flex min-h-screen w-full flex-col justify-center px-4 py-24 sm:px-8 lg:px-12"
-    >
-      <div className="mx-auto w-full max-w-[1200px]">
-        <motion.h2
-          initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center font-display text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
-        >
-          <span className="block w-full text-center text-sm uppercase tracking-[0.2em] text-muted-foreground">
-            The Challenge
-          </span>
+    <Section id="problem">
+      <SectionContainer>
+        <SectionHeader eyebrow="The Challenge" className="text-center">
           Fashion Content Demand.
-          <br /> Is{' '}
-          <span className="text-brand-gradient font-bold italic">
-            Exploding
-          </span>
-          .
-        </motion.h2>
+          <br /> Is <GradientText>Exploding</GradientText>.
+        </SectionHeader>
 
         <div className="mt-8 grid gap-8 text-muted-foreground sm:grid-cols-2">
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="space-y-4"
-          >
+          <motion.div {...fadeUp(reduced)} className="space-y-4">
             <p className="text-lg leading-relaxed">
               Fashion brands today need an enormous volume of visuals.
             </p>
@@ -54,16 +36,7 @@ export function ProblemSection() {
                 return (
                   <motion.div
                     key={item.text}
-                    initial={
-                      prefersReducedMotion ? false : { opacity: 0, y: 12 }
-                    }
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{
-                      duration: 0.4,
-                      delay: i * 0.08,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
+                    {...fadeUpCard(reduced, i)}
                     className="flex items-center gap-3 rounded-lg border border-white/[0.08] bg-white/[0.04] px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:border-aq-blue/20 hover:bg-white/[0.07]"
                   >
                     <Icon
@@ -79,17 +52,7 @@ export function ProblemSection() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={prefersReducedMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{
-              duration: 0.6,
-              delay: 0.15,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="space-y-4"
-          >
+          <motion.div {...fadeUp(reduced, 0.15)} className="space-y-4">
             <p className="text-lg leading-relaxed">
               But traditional production wasn&apos;t built for this speed.
             </p>
@@ -104,7 +67,7 @@ export function ProblemSection() {
             </p>
           </motion.div>
         </div>
-      </div>
-    </section>
+      </SectionContainer>
+    </Section>
   );
 }
