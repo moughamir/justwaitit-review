@@ -1,6 +1,6 @@
 name: Chore / Task
 description: Non-feature, non-bug work (refactor, CI, deps, docs).
-title: "chore: <short description>"
+title: 'chore: <short description>'
 labels: [chore]
 body:
   - type: textarea
@@ -28,4 +28,3 @@ body:
     attributes:
       label: Testing plan
       placeholder: Commands (bun run lint/test) and manual steps.
-

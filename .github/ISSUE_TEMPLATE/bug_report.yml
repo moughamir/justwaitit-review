@@ -1,6 +1,6 @@
 name: Bug report
 description: File a bug report. Help us reproduce and fix it.
-title: "fix: <short description>"
+title: 'fix: <short description>'
 labels: [bug]
 body:
   - type: checkboxes
@@ -41,9 +41,8 @@ body:
     attributes:
       label: Environment
       description: OS, Browser, Node, Bun, commit SHA.
-      placeholder: "macOS 14, Chrome 122, Node 20.x, Bun 1.x, SHA abc123"
+      placeholder: 'macOS 14, Chrome 122, Node 20.x, Bun 1.x, SHA abc123'
   - type: textarea
     attributes:
       label: Screenshots
       description: Drag-and-drop images that illustrate the issue.
-

@@ -1,6 +1,6 @@
 name: Feature request
 description: Suggest an idea or improvement.
-title: "feat: <short description>"
+title: 'feat: <short description>'
 labels: [enhancement]
 body:
   - type: textarea
@@ -36,4 +36,3 @@ body:
     attributes:
       label: Mockups / References
       description: Links, screenshots, or specs.
-
