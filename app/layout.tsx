@@ -1,8 +1,21 @@
-import { GoogleAnalytics } from '@next/third-parties/google';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/next';
+import dynamic from 'next/dynamic';
 
 import type { Metadata, Viewport } from 'next';
+
+const Analytics = dynamic(
+  () => import('@vercel/analytics/react').then((mod) => mod.Analytics),
+  { ssr: false }
+);
+
+const SpeedInsights = dynamic(
+  () => import('@vercel/speed-insights/next').then((mod) => mod.SpeedInsights),
+  { ssr: false }
+);
+
+const GoogleAnalytics = dynamic(
+  () => import('@next/third-parties/google').then((mod) => mod.GoogleAnalytics),
+  { ssr: false }
+);
 
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import './globals.css';
