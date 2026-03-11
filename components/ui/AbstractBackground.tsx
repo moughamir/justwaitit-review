@@ -3,7 +3,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AbstractBlobs } from './AbstractBlobs';
-import { GlassBubbles } from './GlassBubbles';
 import { NoisyBackground } from './NoisyBackground';
 
 /**

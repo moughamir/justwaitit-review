@@ -79,8 +79,8 @@ export function ComingSoonPage() {
             >
               <AnaqioTypographyLogo variant="none" aria-label="ANAQIO" />
             </motion.div>
-            <div className="pointer-events-none inset-0 z-0 flex h-1/6 items-center justify-center">
-              <span className="bg-brand-gradient animate-shimmer select-none whitespace-nowrap bg-clip-text font-display text-5xl font-light text-transparent mix-blend-plus-lighter [text-shadow:0_20px_80px_rgba(37,99,235,0.4)]">
+            <div className="pointer-events-none inset-0 z-0 flex h-auto items-center justify-center">
+              <span className="bg-brand-gradient animate-shimmer leading select-none whitespace-nowrap bg-clip-text font-display text-5xl font-light text-transparent mix-blend-plus-lighter [text-shadow:0_20px_80px_rgba(37,99,235,0.4)]">
                 Coming Soon
               </span>
             </div>
@@ -158,6 +158,12 @@ export function ComingSoonPage() {
                     &copy; 2026
                   </p>
                   <span className="sm:hidden">&middot;</span>
+                  <Link
+                    href={'/about'}
+                    className="transition-colors hover:text-foreground"
+                  >
+                    About
+                  </Link>
                   <Link
                     href={'/terms'}
                     className="transition-colors hover:text-foreground"

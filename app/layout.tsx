@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 
 import { AnaqioAnalytica } from '@/components/brand/Analytica';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
+import { NavigationProgress } from '@/components/ui/NavigationProgress';
 import './globals.css';
 import {
   appMeta,
@@ -103,6 +104,7 @@ export default function RootLayout({
           </div>
         </div>
 
+        <NavigationProgress />
         {children}
         <GrainOverlay />
       </body>

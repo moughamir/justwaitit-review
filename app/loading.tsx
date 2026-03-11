@@ -5,8 +5,15 @@ import { useEffect, useRef, useState } from 'react';
 
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { resolveStage } from '@/lib/loading-stages';
+import {
+  getConnectionTier,
+  getBytesDecoded,
+  getBytesTransferred,
+  getSafetyTimeout,
+  resolveStage,
+} from '@/lib/loading-stages';
 import { ease } from '@/lib/motion';
+import { cn } from '@/lib/utils';
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Loading() {
@@ -15,13 +22,20 @@ export default function Loading() {
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
-  const raf = useRef<number>(0);
+  const rafRef = useRef<number>(0);
   const current = useRef(0);
 
   useEffect(() => {
-    // Smooth easing toward a target value
+    const conn = getConnectionTier();
+    const safetyMs = getSafetyTimeout(tier, conn);
+
+    // lerp speed: faster connections feel snappier
+    const lerpSpeed =
+      conn === 'fast' ? 0.09 : conn === 'moderate' ? 0.07 : 0.05;
+
+    // ── Smooth eased animation toward target ──────────────────────────────
     const animateTo = (to: number, onDone?: () => void) => {
-      cancelAnimationFrame(raf.current);
+      cancelAnimationFrame(rafRef.current);
       if (!animated) {
         current.current = to;
         setProgress(to);
@@ -31,77 +45,99 @@ export default function Loading() {
       const tick = () => {
         const gap = to - current.current;
         if (Math.abs(gap) > 0.15) {
-          current.current += gap * 0.07;
+          current.current += gap * lerpSpeed;
           setProgress(Math.round(current.current));
-          raf.current = requestAnimationFrame(tick);
+          rafRef.current = requestAnimationFrame(tick);
         } else {
           current.current = to;
           setProgress(to);
           onDone?.();
         }
       };
-      raf.current = requestAnimationFrame(tick);
+      rafRef.current = requestAnimationFrame(tick);
     };
 
     const complete = () =>
       animateTo(100, () => setTimeout(() => setVisible(false), 350));
 
-    // Initial jump to feel immediately responsive
-    animateTo(20);
+    // ── Initial jump — faster for faster connections ───────────────────────
+    const initialJump = conn === 'fast' ? 28 : conn === 'moderate' ? 18 : 10;
+    animateTo(initialJump);
 
-    // Track real loading metrics via PerformanceObserver
-    const baselineResources = 15; // Heuristic baseline
+    // ── Real-time resource tracking via bytes ─────────────────────────────
+    // We track decoded bytes (actual render weight) as a ratio of the
+    // expected total. The expected total grows as more resources arrive.
+    let expectedTotalBytes = 0;
+
+    const updateFromResources = () => {
+      const transferred = getBytesTransferred();
+      const decoded = getBytesDecoded();
+
+      // Keep a high-water mark of expected total
+      expectedTotalBytes = Math.max(expectedTotalBytes, decoded, transferred);
+
+      if (expectedTotalBytes > 0 && transferred > 0) {
+        // Byte-ratio progress, capped at 85 to leave room for render work
+        const ratio = Math.min(0.85, transferred / expectedTotalBytes);
+        const byteProgress = Math.round(
+          initialJump + ratio * (85 - initialJump)
+        );
+        if (byteProgress > current.current) animateTo(byteProgress);
+      } else {
+        // Fallback: count-based with connection-tuned baseline
+        const baseline = conn === 'fast' ? 18 : conn === 'moderate' ? 12 : 8;
+        const entries = performance.getEntriesByType('resource').length;
+        const countProgress = Math.min(
+          85,
+          current.current + (entries / baseline) * 25
+        );
+        if (countProgress > current.current) animateTo(countProgress);
+      }
+    };
+
     let po: PerformanceObserver | null = null;
     try {
-      po = new PerformanceObserver((list) => {
-        const entries = list.getEntries();
-        const resourceProgress = Math.min(
-          85,
-          current.current + (entries.length / baselineResources) * 30
-        );
-        if (current.current < resourceProgress) {
-          animateTo(resourceProgress);
-        }
-      });
+      po = new PerformanceObserver(() => updateFromResources());
       po.observe({ type: 'resource', buffered: true });
     } catch {
-      // Fallback if not supported
+      // PerformanceObserver not supported
     }
 
-    // DOM interactive (HTML parsed, sub-resources not yet loaded)
+    // ── DOM lifecycle milestones ──────────────────────────────────────────
     const onReadyState = () => {
-      if (document.readyState === 'interactive') animateTo(40);
+      if (document.readyState === 'interactive' && current.current < 40)
+        animateTo(40);
       if (document.readyState === 'complete') animateTo(90);
     };
     document.addEventListener('readystatechange', onReadyState);
     onReadyState();
 
-    // Web fonts resolved
+    // ── Web fonts resolved (blocks first paint) ───────────────────────────
     document.fonts?.ready.then(() => {
       if (current.current < 85) animateTo(85);
     });
 
-    // All resources (images, scripts, styles) loaded
+    // ── window.onload (all sub-resources including images) ────────────────
     if (document.readyState === 'complete') {
       complete();
     } else {
       window.addEventListener('load', complete, { once: true });
     }
 
-    // Safety net — never hang longer than 6 s
-    const safety = setTimeout(complete, 6000);
+    // ── Adaptive safety net ───────────────────────────────────────────────
+    const safety = setTimeout(complete, safetyMs);
 
     return () => {
-      cancelAnimationFrame(raf.current);
+      cancelAnimationFrame(rafRef.current);
       document.removeEventListener('readystatechange', onReadyState);
       clearTimeout(safety);
       po?.disconnect();
     };
-    // TODO: Remove this eslint-disable and update the dependencies
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const stage = resolveStage(progress);
+  const connTier = getConnectionTier();
 
   return (
     <AnimatePresence>
@@ -191,7 +227,7 @@ export default function Loading() {
               />
             </div>
 
-            {/* Stage label + percentage */}
+            {/* Stage label + connection dot + percentage */}
             <div className="flex w-full items-center justify-between">
               <AnimatePresence mode="wait">
                 <motion.span
@@ -207,12 +243,29 @@ export default function Loading() {
                 </motion.span>
               </AnimatePresence>
 
-              <span
-                data-atom
-                className="font-label text-[0.58rem] tabular-nums tracking-label text-muted-foreground/35"
-              >
-                {progress}%
-              </span>
+              <div className="flex items-center gap-1.5">
+                {/* Connection quality dot — hidden on low-tier to save paint */}
+                {tier !== 'low' && (
+                  <span
+                    aria-label={`Connection: ${connTier}`}
+                    title={connTier}
+                    className={cn(
+                      'inline-block h-1 w-1 rounded-full transition-colors',
+                      connTier === 'fast'
+                        ? 'bg-emerald-500/60'
+                        : connTier === 'moderate'
+                          ? 'bg-amber-500/60'
+                          : 'bg-red-500/60'
+                    )}
+                  />
+                )}
+                <span
+                  data-atom
+                  className="font-label text-[0.58rem] tabular-nums tracking-label text-muted-foreground/35"
+                >
+                  {progress}%
+                </span>
+              </div>
             </div>
           </motion.div>
         </motion.div>
