@@ -13,15 +13,15 @@ Next.js 16 requires a `cacheLife` profile as the second argument to `revalidateT
 
 ```typescript
 // app/actions.ts
-'use server'
+'use server';
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from 'next/cache';
 
 export async function updateProduct(id: string, data: FormData) {
-  await db.products.update({ where: { id }, data })
+  await db.products.update({ where: { id }, data });
 
   // Old API - no longer works in Next.js 16
-  revalidateTag('products')
+  revalidateTag('products');
 }
 ```
 
@@ -29,15 +29,15 @@ export async function updateProduct(id: string, data: FormData) {
 
 ```typescript
 // app/actions.ts
-'use server'
+'use server';
 
-import { revalidateTag } from 'next/cache'
+import { revalidateTag } from 'next/cache';
 
 export async function updateProduct(id: string, data: FormData) {
-  await db.products.update({ where: { id }, data })
+  await db.products.update({ where: { id }, data });
 
   // New API with cacheLife profile
-  revalidateTag('products', 'hours')
+  revalidateTag('products', 'hours');
 }
 
 // Cache profiles: 'max', 'hours', 'days', 'weeks'
@@ -49,14 +49,14 @@ export async function updateProduct(id: string, data: FormData) {
 
 ```typescript
 // lib/data.ts
-'use cache'
+'use cache';
 
-import { cacheTag } from 'next/cache'
+import { cacheTag } from 'next/cache';
 
 export async function getProducts() {
-  cacheTag('products')
-  const res = await fetch('https://api.store.com/products')
-  return res.json()
+  cacheTag('products');
+  const res = await fetch('https://api.store.com/products');
+  return res.json();
 }
 ```
 

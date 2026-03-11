@@ -20,21 +20,21 @@ Use `robots.ts` and per-page robots metadata to control which pages search engin
 
 ```typescript
 // app/robots.ts
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
   return {
     rules: [
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/admin/', '/api/', '/dashboard/']
-      }
+        disallow: ['/admin/', '/api/', '/dashboard/'],
+      },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`
-  }
+    sitemap: `${baseUrl}/sitemap.xml`,
+  };
 }
 ```
 
@@ -42,7 +42,7 @@ export default function robots(): MetadataRoute.Robots {
 
 ```typescript
 // app/dashboard/page.tsx
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   robots: {
@@ -51,10 +51,10 @@ export const metadata: Metadata = {
     nocache: true,
     googleBot: {
       index: false,
-      follow: false
-    }
-  }
-}
+      follow: false,
+    },
+  },
+};
 
 export default function DashboardPage() {
   // Private dashboard content
@@ -62,6 +62,7 @@ export default function DashboardPage() {
 ```
 
 **Common patterns:**
+
 - `index: false` - Don't show in search results
 - `follow: false` - Don't follow links on this page
 - `nocache` - Don't cache this page

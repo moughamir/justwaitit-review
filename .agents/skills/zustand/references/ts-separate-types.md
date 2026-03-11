@@ -14,16 +14,16 @@ Define separate interfaces for state properties and actions. This improves reada
 ```typescript
 // Hard to separate what's state vs actions
 interface BearStore {
-  bears: number
-  fish: number
-  honey: number
-  isHibernating: boolean
-  addBear: () => void
-  removeBear: () => void
-  eatFish: () => void
-  eatHoney: (amount: number) => void
-  startHibernation: () => void
-  endHibernation: () => void
+  bears: number;
+  fish: number;
+  honey: number;
+  isHibernating: boolean;
+  addBear: () => void;
+  removeBear: () => void;
+  eatFish: () => void;
+  eatHoney: (amount: number) => void;
+  startHibernation: () => void;
+  endHibernation: () => void;
 }
 
 // Can't easily partialize just state
@@ -33,7 +33,7 @@ persist(storeCreator, {
     fish: state.fish,
     // Must list each property manually
   }),
-})
+});
 ```
 
 **Correct (separated interfaces):**
@@ -41,24 +41,24 @@ persist(storeCreator, {
 ```typescript
 // State properties
 interface BearState {
-  bears: number
-  fish: number
-  honey: number
-  isHibernating: boolean
+  bears: number;
+  fish: number;
+  honey: number;
+  isHibernating: boolean;
 }
 
 // Actions
 interface BearActions {
-  addBear: () => void
-  removeBear: () => void
-  eatFish: () => void
-  eatHoney: (amount: number) => void
-  startHibernation: () => void
-  endHibernation: () => void
+  addBear: () => void;
+  removeBear: () => void;
+  eatFish: () => void;
+  eatHoney: (amount: number) => void;
+  startHibernation: () => void;
+  endHibernation: () => void;
 }
 
 // Combined store type
-type BearStore = BearState & BearActions
+type BearStore = BearState & BearActions;
 
 // Now partialize is simple
 persist(storeCreator, {
@@ -68,23 +68,23 @@ persist(storeCreator, {
     honey: state.honey,
     isHibernating: state.isHibernating,
   }),
-})
+});
 ```
 
 **Alternative (with utility type for actions exclusion):**
 
 ```typescript
 interface BearState {
-  bears: number
-  fish: number
+  bears: number;
+  fish: number;
 }
 
 interface BearActions {
-  addBear: () => void
-  eatFish: () => void
+  addBear: () => void;
+  eatFish: () => void;
 }
 
-type BearStore = BearState & { actions: BearActions }
+type BearStore = BearState & { actions: BearActions };
 
 // Actions in namespace, easy to partialize
 const useBearStore = create<BearStore>()(
@@ -103,7 +103,7 @@ const useBearStore = create<BearStore>()(
       partialize: ({ actions, ...state }) => state,
     }
   )
-)
+);
 ```
 
 Reference: [Zustand Documentation](https://zustand.docs.pmnd.rs/)

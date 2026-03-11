@@ -46,6 +46,7 @@ public List<RecordedGrip> retrieveSection(String sectionName) throws StorageExce
 ```
 
 **Benefits:**
+
 - Forces you to consider error cases first
 - Establishes clear transaction boundaries
 - The finally block ensures cleanup happens

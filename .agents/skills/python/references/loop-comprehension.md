@@ -40,6 +40,7 @@ active_emails = [
 ```
 
 **When NOT to use comprehensions:**
+
 - Side effects needed (logging, database writes)
 - Complex multi-step logic requiring intermediate variables
 - Readability suffers with deeply nested conditions

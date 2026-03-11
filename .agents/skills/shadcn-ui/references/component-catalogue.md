@@ -68,7 +68,9 @@ pnpm dlx shadcn@latest add dialog
 
 ```tsx
 <Dialog open={open} onOpenChange={setOpen}>
-  <DialogTrigger asChild><Button>Open</Button></DialogTrigger>
+  <DialogTrigger asChild>
+    <Button>Open</Button>
+  </DialogTrigger>
   <DialogContent className="sm:max-w-md">
     <DialogHeader>
       <DialogTitle>Title</DialogTitle>
@@ -94,9 +96,15 @@ Side panel — commonly used for mobile navigation.
 
 ```tsx
 <Sheet>
-  <SheetTrigger asChild><Button variant="ghost" size="icon"><Menu /></Button></SheetTrigger>
+  <SheetTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <Menu />
+    </Button>
+  </SheetTrigger>
   <SheetContent side="left">
-    <SheetHeader><SheetTitle>Navigation</SheetTitle></SheetHeader>
+    <SheetHeader>
+      <SheetTitle>Navigation</SheetTitle>
+    </SheetHeader>
     {/* nav links */}
   </SheetContent>
 </Sheet>
@@ -115,10 +123,13 @@ Static table. For sortable/filterable data tables, also install `@tanstack/react
 ```tsx
 <Table>
   <TableHeader>
-    <TableRow><TableHead>Name</TableHead><TableHead>Email</TableHead></TableRow>
+    <TableRow>
+      <TableHead>Name</TableHead>
+      <TableHead>Email</TableHead>
+    </TableRow>
   </TableHeader>
   <TableBody>
-    {users.map(u => (
+    {users.map((u) => (
       <TableRow key={u.id}>
         <TableCell>{u.name}</TableCell>
         <TableCell>{u.email}</TableCell>
@@ -136,7 +147,9 @@ pnpm dlx shadcn@latest add select
 
 ```tsx
 <Select value={value} onValueChange={setValue}>
-  <SelectTrigger><SelectValue placeholder="Choose..." /></SelectTrigger>
+  <SelectTrigger>
+    <SelectValue placeholder="Choose..." />
+  </SelectTrigger>
   <SelectContent>
     <SelectItem value="option1">Option 1</SelectItem>
     <SelectItem value="option2">Option 2</SelectItem>
@@ -156,15 +169,15 @@ pnpm add sonner
 Add `<Toaster />` to your root layout, then:
 
 ```tsx
-import { toast } from 'sonner'
+import { toast } from 'sonner';
 
-toast.success('Saved successfully')
-toast.error('Something went wrong')
+toast.success('Saved successfully');
+toast.error('Something went wrong');
 toast.promise(saveData(), {
   loading: 'Saving...',
   success: 'Saved!',
   error: 'Failed to save',
-})
+});
 ```
 
 ## Tabs
@@ -192,11 +205,17 @@ pnpm dlx shadcn@latest add dropdown-menu
 
 ```tsx
 <DropdownMenu>
-  <DropdownMenuTrigger asChild><Button variant="ghost" size="icon"><MoreHorizontal /></Button></DropdownMenuTrigger>
+  <DropdownMenuTrigger asChild>
+    <Button variant="ghost" size="icon">
+      <MoreHorizontal />
+    </Button>
+  </DropdownMenuTrigger>
   <DropdownMenuContent align="end">
     <DropdownMenuItem onClick={handleEdit}>Edit</DropdownMenuItem>
     <DropdownMenuSeparator />
-    <DropdownMenuItem className="text-destructive" onClick={handleDelete}>Delete</DropdownMenuItem>
+    <DropdownMenuItem className="text-destructive" onClick={handleDelete}>
+      Delete
+    </DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
 ```

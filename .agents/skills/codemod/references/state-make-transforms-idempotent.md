@@ -13,12 +13,10 @@ Transforms should produce the same result when run multiple times. This allows s
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const imports = root.findAll({ rule: { kind: "import_statement" } });
+  const imports = root.findAll({ rule: { kind: 'import_statement' } });
 
   // Adds comment on every run
-  const edits = imports.map(imp =>
-    imp.replace(`// Migrated\n${imp.text()}`)
-  );
+  const edits = imports.map((imp) => imp.replace(`// Migrated\n${imp.text()}`));
 
   // Run twice:
   // Before:      import x from 'y';
@@ -36,15 +34,15 @@ const transform: Transform<TSX> = (root) => {
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const imports = root.findAll({ rule: { kind: "import_statement" } });
+  const imports = root.findAll({ rule: { kind: 'import_statement' } });
 
-  const edits = imports.flatMap(imp => {
+  const edits = imports.flatMap((imp) => {
     const text = imp.text();
 
     // Check if already migrated
     const prev = imp.prev();
-    if (prev?.text().includes("// Migrated")) {
-      return [];  // Skip already-processed imports
+    if (prev?.text().includes('// Migrated')) {
+      return []; // Skip already-processed imports
     }
 
     return [imp.replace(`// Migrated\n${text}`)];
@@ -61,6 +59,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Idempotency patterns:**
+
 - Check for transformation markers before applying
 - Use `not` in patterns to exclude already-transformed code
 - Track processed files in workflow state

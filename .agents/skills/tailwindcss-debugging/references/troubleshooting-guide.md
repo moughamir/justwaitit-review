@@ -27,19 +27,21 @@ v4 auto-detects files, but may miss custom locations:
 
 ```css
 /* Add explicit source paths */
-@import "tailwindcss";
-@source "../custom-components/**/*.tsx";
-@source "../../shared-ui/**/*.jsx";
+@import 'tailwindcss';
+@source '../custom-components/**/*.tsx';
+@source '../../shared-ui/**/*.jsx';
 ```
 
 **3. CSS Specificity Conflict**
 
 Check browser DevTools for overridden styles:
+
 - Look for crossed-out declarations
 - Check for `!important` rules
 - Look for more specific selectors (IDs, inline styles)
 
 Fix: Use `!important` modifier or restructure CSS:
+
 ```html
 <div class="!mt-0">Forces margin-top: 0</div>
 ```
@@ -71,15 +73,18 @@ grep "bg-blue-500" dist/output.css
 
 ```css
 /* globals.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 ```
 
 **2. `dark` class not on html/body**
 
 ```html
-<html class="dark">  <!-- Required for selector strategy -->
-  <body>...</body>
+<html class="dark">
+  <!-- Required for selector strategy -->
+  <body>
+    ...
+  </body>
 </html>
 ```
 
@@ -102,11 +107,11 @@ grep "bg-blue-500" dist/output.css
 Remember breakpoints are mobile-first (min-width):
 
 | Prefix | Min-width |
-|--------|-----------|
-| `sm:` | 640px |
-| `md:` | 768px |
-| `lg:` | 1024px |
-| `xl:` | 1280px |
+| ------ | --------- |
+| `sm:`  | 640px     |
+| `md:`  | 768px     |
+| `lg:`  | 1024px    |
+| `xl:`  | 1280px    |
 
 **2. Parent container constraining width**
 
@@ -132,8 +137,8 @@ Missing PostCSS configuration:
 export default {
   plugins: {
     '@tailwindcss/postcss': {},
-  }
-}
+  },
+};
 ```
 
 ### "Cannot find module 'tailwindcss'"
@@ -146,11 +151,11 @@ npm install -D tailwindcss @tailwindcss/postcss
 
 ```javascript
 // vite.config.js
-import tailwindcss from '@tailwindcss/vite'
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [tailwindcss()],  // Must be in plugins
-})
+  plugins: [tailwindcss()], // Must be in plugins
+});
 ```
 
 ## IntelliSense Not Working
@@ -158,6 +163,7 @@ export default defineConfig({
 ### VS Code autocomplete missing
 
 **1. Install extension**
+
 ```bash
 code --install-extension bradlc.vscode-tailwindcss
 ```
@@ -180,6 +186,7 @@ code --install-extension bradlc.vscode-tailwindcss
 ```
 
 **3. Restart extension**
+
 - Cmd/Ctrl + Shift + P
 - "Tailwind CSS: Reload Extension"
 
@@ -191,17 +198,18 @@ code --install-extension bradlc.vscode-tailwindcss
 
 ```css
 /* Be specific with @source */
-@source "./src/**/*.{tsx,jsx}";
-@source not "./src/**/*.test.tsx";
-@source not "./node_modules/**";
+@source './src/**/*.{tsx,jsx}';
+@source not './src/**/*.test.tsx';
+@source not './node_modules/**';
 ```
 
 **2. Large safelist**
 
 Minimize or remove safelist:
+
 ```css
 /* Avoid large safelists */
-@source inline("bg-red-500 bg-blue-500");  /* Only when necessary */
+@source inline('bg-red-500 bg-blue-500'); /* Only when necessary */
 ```
 
 ### Large CSS output
@@ -272,7 +280,7 @@ grep -o '\.[a-zA-Z]' dist/output.css | wc -l
 Add this test element to any page:
 
 ```html
-<div class="bg-red-500 p-4 text-white fixed top-0 right-0 z-50">
+<div class="fixed right-0 top-0 z-50 bg-red-500 p-4 text-white">
   Tailwind Working
 </div>
 ```

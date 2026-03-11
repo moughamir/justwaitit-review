@@ -12,19 +12,19 @@ By default, Tailwind v4 uses `prefers-color-scheme`. For user-controlled theme s
 **Incorrect (only system preference):**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 /* Default: dark: responds only to OS setting */
 ```
 
 ```html
 <!-- No way for users to manually toggle theme -->
-<div class="bg-white dark:bg-gray-900">
+<div class="bg-white dark:bg-gray-900"></div>
 ```
 
 **Correct (class-based control):**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @variant dark (&:where(.dark, .dark *));
 ```
@@ -42,17 +42,20 @@ By default, Tailwind v4 uses `prefers-color-scheme`. For user-controlled theme s
 
 ```typescript
 function toggleDarkMode() {
-  document.documentElement.classList.toggle("dark");
+  document.documentElement.classList.toggle('dark');
   localStorage.setItem(
-    "theme",
-    document.documentElement.classList.contains("dark") ? "dark" : "light"
+    'theme',
+    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
   );
 }
 
 // On page load
-if (localStorage.theme === "dark" ||
-    (!localStorage.theme && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-  document.documentElement.classList.add("dark");
+if (
+  localStorage.theme === 'dark' ||
+  (!localStorage.theme &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches)
+) {
+  document.documentElement.classList.add('dark');
 }
 ```
 

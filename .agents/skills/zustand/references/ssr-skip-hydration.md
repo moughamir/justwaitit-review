@@ -12,7 +12,7 @@ In SSR environments like Next.js, persisted stores can cause hydration mismatche
 **Incorrect (automatic hydration causes mismatch):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 const useThemeStore = create<ThemeState>()(
   persist(
@@ -22,7 +22,7 @@ const useThemeStore = create<ThemeState>()(
     }),
     { name: 'theme-storage' }
   )
-)
+);
 
 // Server renders: theme='light'
 // Client hydrates with localStorage: theme='dark'
@@ -32,7 +32,7 @@ const useThemeStore = create<ThemeState>()(
 **Correct (skip automatic hydration):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 const useThemeStore = create<ThemeState>()(
   persist(
@@ -45,18 +45,20 @@ const useThemeStore = create<ThemeState>()(
       skipHydration: true, // Disable automatic hydration
     }
   )
-)
+);
 
 // Manually trigger hydration after client mount
 // See ssr-manual-rehydrate rule
 ```
 
 **When to use:**
+
 - Any persisted store in Next.js/Remix/SSR apps
 - Stores that affect server-rendered content
 - Stores where initial state differs from persisted state
 
 **When NOT needed:**
+
 - Client-only apps (CRA, Vite without SSR)
 - Stores that don't use persist middleware
 - Persisted values not rendered on initial page load

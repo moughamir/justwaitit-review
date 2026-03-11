@@ -14,38 +14,39 @@ tags: effect, useEffectEvent, non-reactive, events
 ```typescript
 function ChatRoom({ roomId, theme }) {
   useEffect(() => {
-    const connection = createConnection(roomId)
+    const connection = createConnection(roomId);
     connection.on('message', (msg) => {
       // theme is needed but shouldn't reconnect when it changes
-      showNotification(msg, theme)
-    })
-    connection.connect()
-    return () => connection.disconnect()
-  }, [roomId, theme])  // Reconnects when theme changes!
+      showNotification(msg, theme);
+    });
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId, theme]); // Reconnects when theme changes!
 }
 ```
 
 **Correct (useEffectEvent for non-reactive logic):**
 
 ```typescript
-import { useEffect, useEffectEvent } from 'react'
+import { useEffect, useEffectEvent } from 'react';
 
 function ChatRoom({ roomId, theme }) {
   // Non-reactive: doesn't cause effect to re-run
   const onMessage = useEffectEvent((msg: Message) => {
-    showNotification(msg, theme)  // Always reads latest theme
-  })
+    showNotification(msg, theme); // Always reads latest theme
+  });
 
   useEffect(() => {
-    const connection = createConnection(roomId)
-    connection.on('message', onMessage)
-    connection.connect()
-    return () => connection.disconnect()
-  }, [roomId])  // Only reconnects when roomId changes
+    const connection = createConnection(roomId);
+    connection.on('message', onMessage);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId]); // Only reconnects when roomId changes
 }
 ```
 
 **When to use useEffectEvent:**
+
 - Reading latest props/state in effect callbacks
 - Logging/analytics that shouldn't re-trigger effects
 - Side effects that depend on current values but aren't "about" those values

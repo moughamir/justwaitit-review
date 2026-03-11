@@ -20,7 +20,10 @@ function App() {
     <div>
       <Navbar />
       <Sidebar />
-      <ShippingForm address={shippingAddress} onAddressChange={setShippingAddress} />
+      <ShippingForm
+        address={shippingAddress}
+        onAddressChange={setShippingAddress}
+      />
       <RecommendedProducts />
     </div>
   );
@@ -33,7 +36,9 @@ function App() {
 // Step 1: state lives in the only consumer
 function ShippingForm() {
   const [shippingAddress, setShippingAddress] = useState<Address | null>(null);
-  return <AddressFields address={shippingAddress} onChange={setShippingAddress} />;
+  return (
+    <AddressFields address={shippingAddress} onChange={setShippingAddress} />
+  );
 }
 
 // Step 2: when OrderSummary also needs the address, lift to shared parent
@@ -43,7 +48,10 @@ function CheckoutPage() {
   // Both children read shippingAddress — lifting is justified
   return (
     <div>
-      <ShippingForm address={shippingAddress} onAddressChange={setShippingAddress} />
+      <ShippingForm
+        address={shippingAddress}
+        onAddressChange={setShippingAddress}
+      />
       <OrderSummary shippingAddress={shippingAddress} />
     </div>
   );

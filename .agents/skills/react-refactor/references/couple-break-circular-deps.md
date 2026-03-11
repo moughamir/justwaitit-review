@@ -13,7 +13,7 @@ When module A imports from B and B imports from A, one of them receives `undefin
 
 ```tsx
 // order.ts
-import { OrderItem } from "./orderItem"; // orderItem.ts hasn't finished loading
+import { OrderItem } from './orderItem'; // orderItem.ts hasn't finished loading
 
 export interface Order {
   id: string;
@@ -26,7 +26,7 @@ export function calculateOrderTotal(order: Order): number {
 }
 
 // orderItem.ts
-import { calculateOrderTotal } from "./order"; // circular: order -> orderItem -> order
+import { calculateOrderTotal } from './order'; // circular: order -> orderItem -> order
 
 export interface OrderItem {
   id: string;
@@ -35,9 +35,12 @@ export interface OrderItem {
   quantity: number;
 }
 
-export function formatItemWithOrderTotal(item: OrderItem, order: Order): string {
+export function formatItemWithOrderTotal(
+  item: OrderItem,
+  order: Order
+): string {
   const total = calculateOrderTotal(order);
-  return `${item.productName} (${((item.price * item.quantity) / total * 100).toFixed(1)}% of order)`;
+  return `${item.productName} (${(((item.price * item.quantity) / total) * 100).toFixed(1)}% of order)`;
 }
 ```
 
@@ -59,19 +62,22 @@ export interface OrderItem {
 }
 
 // order.ts — depends on types only
-import type { Order } from "./order.types";
+import type { Order } from './order.types';
 
 export function calculateOrderTotal(order: Order): number {
   return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
 // orderItem.ts — depends on types and order, no cycle
-import type { Order, OrderItem } from "./order.types";
-import { calculateOrderTotal } from "./order";
+import type { Order, OrderItem } from './order.types';
+import { calculateOrderTotal } from './order';
 
-export function formatItemWithOrderTotal(item: OrderItem, order: Order): string {
+export function formatItemWithOrderTotal(
+  item: OrderItem,
+  order: Order
+): string {
   const total = calculateOrderTotal(order);
-  return `${item.productName} (${((item.price * item.quantity) / total * 100).toFixed(1)}% of order)`;
+  return `${item.productName} (${(((item.price * item.quantity) / total) * 100).toFixed(1)}% of order)`;
 }
 ```
 

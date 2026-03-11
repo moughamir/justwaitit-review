@@ -28,10 +28,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   // Use reporter to track which tests needed retries
-  reporter: [
-    ['html', { open: 'never' }],
-    ['list'],
-  ],
+  reporter: [['html', { open: 'never' }], ['list']],
 });
 ```
 

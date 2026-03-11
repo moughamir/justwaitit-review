@@ -13,20 +13,20 @@ Use `next()`, `prev()`, `nextAll()`, and `prevAll()` for sibling navigation inst
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const statements = root.findAll({ rule: { kind: "expression_statement" } });
+  const statements = root.findAll({ rule: { kind: 'expression_statement' } });
 
-  const edits = statements.flatMap(stmt => {
+  const edits = statements.flatMap((stmt) => {
     // Re-traverse parent to find siblings
     const parent = stmt.parent();
     if (!parent) return [];
 
     const siblings = parent.children();
-    const index = siblings.findIndex(s => s.id() === stmt.id());
+    const index = siblings.findIndex((s) => s.id() === stmt.id());
     const nextSibling = siblings[index + 1];
 
     // O(n) per statement = O(n²) total
-    if (nextSibling?.kind() === "comment") {
-      return [stmt.replace(stmt.text() + " // has comment")];
+    if (nextSibling?.kind() === 'comment') {
+      return [stmt.replace(stmt.text() + ' // has comment')];
     }
     return [];
   });
@@ -39,14 +39,14 @@ const transform: Transform<TSX> = (root) => {
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const statements = root.findAll({ rule: { kind: "expression_statement" } });
+  const statements = root.findAll({ rule: { kind: 'expression_statement' } });
 
-  const edits = statements.flatMap(stmt => {
+  const edits = statements.flatMap((stmt) => {
     // O(1) sibling access
     const nextSibling = stmt.next();
 
-    if (nextSibling?.kind() === "comment") {
-      return [stmt.replace(stmt.text() + " // has comment")];
+    if (nextSibling?.kind() === 'comment') {
+      return [stmt.replace(stmt.text() + ' // has comment')];
     }
     return [];
   });
@@ -56,6 +56,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Sibling navigation methods:**
+
 - `next()` - immediately following sibling
 - `prev()` - immediately preceding sibling
 - `nextAll()` - all following siblings

@@ -25,7 +25,7 @@ Developer: "Sure, shouldn't be too hard"
 
 **Correct (formal change request process):**
 
-```markdown
+````markdown
 ## Change Request Process
 
 ### Change Request Form
@@ -57,6 +57,7 @@ Add Excel (.xlsx) export option alongside CSV.
 - [ ] Formulas preserved where applicable
 - [ ] Same data as CSV export
 ```
+````
 
 ### Impact Assessment (Completed by Team)
 
@@ -131,11 +132,12 @@ APPROVE with v2.1 deferral (no deadline impact)
 
 ### Decision Record
 
-| CR ID | Description | Decision | Date | Decider | Impact |
-|-------|-------------|----------|------|---------|--------|
-| CR-041 | Add dark mode | Rejected | 3/10 | PM | Out of scope |
-| CR-042 | Excel export | Approved (v2.1) | 3/16 | PM | Deferred |
-| CR-043 | Mobile support | Approved | 3/18 | Director | +2 weeks |
+| CR ID  | Description    | Decision        | Date | Decider  | Impact       |
+| ------ | -------------- | --------------- | ---- | -------- | ------------ |
+| CR-041 | Add dark mode  | Rejected        | 3/10 | PM       | Out of scope |
+| CR-042 | Excel export   | Approved (v2.1) | 3/16 | PM       | Deferred     |
+| CR-043 | Mobile support | Approved        | 3/18 | Director | +2 weeks     |
+
 ```
 
 **Change request criteria:**
@@ -146,3 +148,4 @@ APPROVE with v2.1 deferral (no deadline impact)
 - Stakeholders notified of timeline changes
 
 Reference: [PMI - Integrated Change Control](https://www.pmi.org/learning/library/integrated-change-control-process-9549)
+```

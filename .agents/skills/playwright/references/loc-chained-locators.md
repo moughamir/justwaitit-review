@@ -17,7 +17,11 @@ test('add featured product to cart', async ({ page }) => {
   await page.goto('/products');
 
   // Brittle: depends on exact DOM structure
-  await page.locator('section.featured-products div.product-card:first-child button.add-to-cart').click();
+  await page
+    .locator(
+      'section.featured-products div.product-card:first-child button.add-to-cart'
+    )
+    .click();
 
   // Ambiguous: might match wrong element
   await page.getByRole('button', { name: 'Add to Cart' }).click();
@@ -32,7 +36,9 @@ test('add featured product to cart', async ({ page }) => {
   await page.goto('/products');
 
   // Chain from container to specific element
-  const featuredSection = page.getByRole('region', { name: 'Featured Products' });
+  const featuredSection = page.getByRole('region', {
+    name: 'Featured Products',
+  });
   const firstProduct = featuredSection.getByTestId('product-card').first();
   await firstProduct.getByRole('button', { name: 'Add to Cart' }).click();
 });
@@ -69,6 +75,7 @@ await availableDeals.first().click();
 ```
 
 **Benefits:**
+
 - Each step is readable and debuggable
 - Survives partial DOM changes
 - Self-documenting test intent

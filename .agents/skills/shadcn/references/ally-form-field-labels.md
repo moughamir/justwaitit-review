@@ -12,7 +12,7 @@ Every form input must have an associated label using the `htmlFor` attribute or 
 **Incorrect (placeholder without label):**
 
 ```tsx
-import { Input } from "@/components/ui/input"
+import { Input } from '@/components/ui/input';
 
 function SearchForm() {
   return (
@@ -21,15 +21,15 @@ function SearchForm() {
       {/* Screen reader: "Edit text" - no context */}
       {/* Placeholder disappears when typing */}
     </form>
-  )
+  );
 }
 ```
 
 **Correct (Field component with label):**
 
 ```tsx
-import { Field, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
+import { Field, FieldLabel } from '@/components/ui/field';
+import { Input } from '@/components/ui/input';
 
 function SearchForm() {
   return (
@@ -39,7 +39,7 @@ function SearchForm() {
         <Input id="email" type="email" placeholder="you@example.com" />
       </Field>
     </form>
-  )
+  );
   // Screen reader: "Email Address, edit text"
 }
 ```
@@ -47,8 +47,8 @@ function SearchForm() {
 **Alternative (Label component):**
 
 ```tsx
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 
 function SearchForm() {
   return (
@@ -58,7 +58,7 @@ function SearchForm() {
         <Input id="email" type="email" />
       </div>
     </form>
-  )
+  );
 }
 ```
 

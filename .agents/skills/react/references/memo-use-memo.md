@@ -41,11 +41,13 @@ function AnalyticsChart({ data, filter }: { data: DataPoint[]; filter: Filter })
 ```
 
 **When to use useMemo:**
+
 - Large array transformations (filter, map, reduce)
 - Complex object computations
 - Expensive algorithms (sorting, searching)
 
 **When NOT to use useMemo:**
+
 - Simple calculations (addition, string concatenation)
 - When the component rarely re-renders
 - When dependencies change on every render

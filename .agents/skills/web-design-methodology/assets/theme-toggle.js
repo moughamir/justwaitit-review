@@ -1,7 +1,7 @@
 // Three-state dark mode toggle: light → dark → system → light
 // Only include if dark mode is requested.
 // Requires: <button id="theme-toggle"> with .sun-icon and .moon-icon child SVGs
-(function() {
+(function () {
   const toggle = document.getElementById('theme-toggle');
   const html = document.documentElement;
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

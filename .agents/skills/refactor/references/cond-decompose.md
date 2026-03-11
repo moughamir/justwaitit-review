@@ -15,10 +15,10 @@ Extract complex boolean expressions into well-named functions. The function name
 function calculateDiscount(customer: Customer, order: Order): number {
   if (
     (customer.membershipYears >= 5 && customer.totalPurchases > 10000) ||
-    (customer.tier === 'platinum') ||
+    customer.tier === 'platinum' ||
     (order.items.length >= 10 && order.subtotal > 500 && !order.hasPromotion)
   ) {
-    return order.subtotal * 0.2
+    return order.subtotal * 0.2;
   }
 
   if (
@@ -26,10 +26,10 @@ function calculateDiscount(customer: Customer, order: Order): number {
     customer.totalPurchases > 5000 &&
     order.subtotal > 200
   ) {
-    return order.subtotal * 0.1
+    return order.subtotal * 0.1;
   }
 
-  return 0
+  return 0;
 }
 ```
 
@@ -38,42 +38,55 @@ function calculateDiscount(customer: Customer, order: Order): number {
 ```typescript
 function calculateDiscount(customer: Customer, order: Order): number {
   if (isEligibleForPremiumDiscount(customer, order)) {
-    return order.subtotal * 0.2
+    return order.subtotal * 0.2;
   }
 
   if (isEligibleForStandardDiscount(customer, order)) {
-    return order.subtotal * 0.1
+    return order.subtotal * 0.1;
   }
 
-  return 0
+  return 0;
 }
 
-function isEligibleForPremiumDiscount(customer: Customer, order: Order): boolean {
-  return isLoyalHighValueCustomer(customer) ||
-         isPlatinumMember(customer) ||
-         isBulkOrderWithoutPromotion(order)
+function isEligibleForPremiumDiscount(
+  customer: Customer,
+  order: Order
+): boolean {
+  return (
+    isLoyalHighValueCustomer(customer) ||
+    isPlatinumMember(customer) ||
+    isBulkOrderWithoutPromotion(order)
+  );
 }
 
 function isLoyalHighValueCustomer(customer: Customer): boolean {
-  return customer.membershipYears >= 5 && customer.totalPurchases > 10000
+  return customer.membershipYears >= 5 && customer.totalPurchases > 10000;
 }
 
 function isPlatinumMember(customer: Customer): boolean {
-  return customer.tier === 'platinum'
+  return customer.tier === 'platinum';
 }
 
 function isBulkOrderWithoutPromotion(order: Order): boolean {
-  return order.items.length >= 10 && order.subtotal > 500 && !order.hasPromotion
+  return (
+    order.items.length >= 10 && order.subtotal > 500 && !order.hasPromotion
+  );
 }
 
-function isEligibleForStandardDiscount(customer: Customer, order: Order): boolean {
-  return customer.membershipYears >= 2 &&
-         customer.totalPurchases > 5000 &&
-         order.subtotal > 200
+function isEligibleForStandardDiscount(
+  customer: Customer,
+  order: Order
+): boolean {
+  return (
+    customer.membershipYears >= 2 &&
+    customer.totalPurchases > 5000 &&
+    order.subtotal > 200
+  );
 }
 ```
 
 **Benefits:**
+
 - Business rules are named and documented
 - Each predicate can be tested independently
 - Changes to eligibility rules are localized

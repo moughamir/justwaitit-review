@@ -17,11 +17,13 @@ render(
     <button role="button" onClick={handleClick}>
       Submit
     </button>
-    <a href="/home" role="link">Home</a>
+    <a href="/home" role="link">
+      Home
+    </a>
   </nav>
-)
+);
 
-screen.getByRole('button', { name: /submit/i })
+screen.getByRole('button', { name: /submit/i });
 // Works, but role="button" is redundant
 ```
 
@@ -33,9 +35,9 @@ render(
     <button onClick={handleClick}>Submit</button>
     <a href="/home">Home</a>
   </nav>
-)
+);
 
-screen.getByRole('button', { name: /submit/i })
+screen.getByRole('button', { name: /submit/i });
 // Works with implicit role from semantic HTML
 ```
 
@@ -51,6 +53,7 @@ screen.getByRole('button', { name: /submit/i })
 | `<input type="checkbox">` | checkbox |
 
 **When explicit roles ARE needed:**
+
 - `<div>` acting as a button (but prefer `<button>`)
 - Custom components without semantic elements
 

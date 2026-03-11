@@ -55,6 +55,7 @@ asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 ```
 
 **When NOT to use this pattern:**
+
 - On Windows (uvloop is Unix-only)
 - When debugging with asyncio debug mode
 

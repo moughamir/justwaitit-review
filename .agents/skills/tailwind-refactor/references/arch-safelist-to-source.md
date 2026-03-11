@@ -15,12 +15,12 @@ The v3 `safelist` configuration in `tailwind.config.js` has been replaced by `@s
 // tailwind.config.js — v3 safelist
 module.exports = {
   safelist: ['bg-red-500', 'bg-blue-500', /^text-/],
-}
+};
 ```
 
 **Correct (what's right):**
 
 ```css
 /* In your main CSS file — v4 @source inline() */
-@source inline("bg-red-500 bg-blue-500 text-{red,blue,green}-{100,500,900}");
+@source inline('bg-red-500 bg-blue-500 text-{red,blue,green}-{100,500,900}');
 ```

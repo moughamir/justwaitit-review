@@ -59,6 +59,7 @@ src/features/checkout/
 ```
 
 **Litmus test for shared/:**
+
 - Would this be useful in a completely different project?
 - Does it contain zero business domain knowledge?
 - Is it used by 3+ features?

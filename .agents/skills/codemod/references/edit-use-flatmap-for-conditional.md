@@ -14,11 +14,11 @@ Use `flatMap` instead of `map` + `filter` when some nodes don't produce edits. R
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const calls = root.findAll({
-    rule: { pattern: "api.$METHOD($$$ARGS)" }
+    rule: { pattern: 'api.$METHOD($$$ARGS)' },
   });
 
-  const edits = calls.map(call => {
-    const method = call.getMatch("METHOD");
+  const edits = calls.map((call) => {
+    const method = call.getMatch('METHOD');
     if (!method) return null;
 
     const methodName = method.text();
@@ -41,16 +41,16 @@ const transform: Transform<TSX> = (root) => {
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const calls = root.findAll({
-    rule: { pattern: "api.$METHOD($$$ARGS)" }
+    rule: { pattern: 'api.$METHOD($$$ARGS)' },
   });
 
-  const edits = calls.flatMap(call => {
-    const method = call.getMatch("METHOD");
-    if (!method) return [];  // Skip gracefully
+  const edits = calls.flatMap((call) => {
+    const method = call.getMatch('METHOD');
+    if (!method) return []; // Skip gracefully
 
     const methodName = method.text();
     if (!deprecatedMethods.includes(methodName)) {
-      return [];  // Not deprecated, skip
+      return []; // Not deprecated, skip
     }
 
     // Return array with single edit
@@ -63,14 +63,16 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Benefits of flatMap:**
+
 - No null/undefined handling
 - Proper TypeScript types without assertions
 - Can return multiple edits per node if needed
 - Cleaner functional style
 
 **Pattern:**
+
 ```typescript
-nodes.flatMap(node => {
+nodes.flatMap((node) => {
   if (shouldSkip(node)) return [];
   if (needsMultipleEdits(node)) return [edit1, edit2];
   return [singleEdit];

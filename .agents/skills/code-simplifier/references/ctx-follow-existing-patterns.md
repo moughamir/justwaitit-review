@@ -14,7 +14,7 @@ Every codebase develops its own idioms and patterns over time. Simplifications t
 ```javascript
 // Existing file uses function declarations throughout
 function validateEmail(email) {
-  return email.includes("@");
+  return email.includes('@');
 }
 
 function validatePhone(phone) {
@@ -32,7 +32,7 @@ const validateAge = (age) => age >= 0 && age <= 150;
 ```javascript
 // Existing file uses function declarations throughout
 function validateEmail(email) {
-  return email.includes("@");
+  return email.includes('@');
 }
 
 function validatePhone(phone) {

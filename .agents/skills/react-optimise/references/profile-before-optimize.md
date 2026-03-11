@@ -13,7 +13,11 @@ Most components render in under 1ms and gain nothing from memoization. Optimizin
 
 ```tsx
 // Developer assumes ProductCard is slow and wraps everything in memo
-const ProductCard = memo(function ProductCard({ product }: { product: Product }) {
+const ProductCard = memo(function ProductCard({
+  product,
+}: {
+  product: Product;
+}) {
   return (
     <div className="product-card">
       <h3>{product.name}</h3>
@@ -22,8 +26,8 @@ const ProductCard = memo(function ProductCard({ product }: { product: Product })
         {product.availability}
       </span>
     </div>
-  )
-})
+  );
+});
 
 // Meanwhile, the actual bottleneck is an unvirtualized search results list
 // rendering 2000 items that takes 400ms per render — never profiled
@@ -34,7 +38,7 @@ function SearchResults({ results }: { results: Product[] }) {
         <ProductCard key={product.id} product={product} />
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -46,30 +50,35 @@ function SearchResults({ results }: { results: Product[] }) {
 // Found: ProductCard renders in 0.3ms each — not the issue
 
 // Step 2: Fix the actual bottleneck — virtualize the long list
-import { useVirtualizer } from "@tanstack/react-virtual"
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 function SearchResults({ results }: { results: Product[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null);
   const virtualizer = useVirtualizer({
     count: results.length,
     getScrollElement: () => scrollRef.current,
     estimateSize: () => 96,
-  })
+  });
 
   return (
-    <div ref={scrollRef} style={{ height: 600, overflow: "auto" }}>
-      <div style={{ height: virtualizer.getTotalSize(), position: "relative" }}>
+    <div ref={scrollRef} style={{ height: 600, overflow: 'auto' }}>
+      <div style={{ height: virtualizer.getTotalSize(), position: 'relative' }}>
         {virtualizer.getVirtualItems().map((row) => (
           <div
             key={results[row.index].id}
-            style={{ position: "absolute", top: row.start, height: row.size, width: "100%" }}
+            style={{
+              position: 'absolute',
+              top: row.start,
+              height: row.size,
+              width: '100%',
+            }}
           >
             <ProductCard product={results[row.index]} />
           </div>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 // No memo needed — ProductCard was never the bottleneck
@@ -82,7 +91,7 @@ function ProductCard({ product }: { product: Product }) {
         {product.availability}
       </span>
     </div>
-  )
+  );
 }
 ```
 

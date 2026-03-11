@@ -12,9 +12,9 @@ Manual useEffect + useState fetch patterns require hand-rolled loading states, e
 **Incorrect (manual fetch — no caching, no retry, duplicated per endpoint):**
 
 ```tsx
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export function useWarehouseInventory(warehouseId: string) {
   const [inventory, setInventory] = useState<InventoryItem[]>([]);
@@ -40,7 +40,9 @@ export function useWarehouseInventory(warehouseId: string) {
         if (!cancelled) setIsLoading(false);
       });
 
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [warehouseId]);
 
   // No caching — remounting refetches, no deduplication across components
@@ -51,11 +53,13 @@ export function useWarehouseInventory(warehouseId: string) {
 **Correct (TanStack Query — caching, retry, deduplication built in):**
 
 ```tsx
-"use client";
+'use client';
 
-import { useQuery } from "@tanstack/react-query";
+import { useQuery } from '@tanstack/react-query';
 
-async function fetchWarehouseInventory(warehouseId: string): Promise<InventoryItem[]> {
+async function fetchWarehouseInventory(
+  warehouseId: string
+): Promise<InventoryItem[]> {
   const res = await fetch(`/api/warehouses/${warehouseId}/inventory`);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
@@ -63,7 +67,7 @@ async function fetchWarehouseInventory(warehouseId: string): Promise<InventoryIt
 
 export function useWarehouseInventory(warehouseId: string) {
   return useQuery({
-    queryKey: ["warehouse", warehouseId, "inventory"],
+    queryKey: ['warehouse', warehouseId, 'inventory'],
     queryFn: () => fetchWarehouseInventory(warehouseId),
     staleTime: 30_000, // serves cached data for 30s without refetch
     gcTime: 5 * 60_000,

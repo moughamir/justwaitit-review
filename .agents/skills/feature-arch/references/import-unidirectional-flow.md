@@ -13,7 +13,7 @@ Imports must flow in one direction: `shared → features → app`. Features can 
 
 ```typescript
 // src/shared/utils/analytics.ts
-import { useAuth } from '@/features/auth/hooks/useAuth';  // WRONG: shared → features
+import { useAuth } from '@/features/auth/hooks/useAuth'; // WRONG: shared → features
 
 export function trackEvent(event: string) {
   const { user } = useAuth();

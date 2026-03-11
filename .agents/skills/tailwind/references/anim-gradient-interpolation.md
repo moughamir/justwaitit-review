@@ -29,16 +29,19 @@ Use the `/oklch` modifier for gradient interpolation to produce more vivid color
 
 ```html
 <!-- sRGB: Colors can look desaturated in the middle -->
-<div class="h-10 bg-linear-to-r/srgb from-red-500 to-blue-500"></div>
+<div class="bg-linear-to-r/srgb h-10 from-red-500 to-blue-500"></div>
 
 <!-- OKLCH: Maintains vibrance throughout -->
-<div class="h-10 bg-linear-to-r/oklch from-red-500 to-blue-500"></div>
+<div class="bg-linear-to-r/oklch h-10 from-red-500 to-blue-500"></div>
 
 <!-- Longer hue path for rainbow effect -->
-<div class="h-10 bg-linear-to-r/[in_oklch_longer_hue] from-red-500 to-red-500"></div>
+<div
+  class="bg-linear-to-r/[in_oklch_longer_hue] h-10 from-red-500 to-red-500"
+></div>
 ```
 
 **When to use OKLCH:**
+
 - Gradients between complementary colors
 - Brand gradients requiring specific midpoints
 - Any gradient where sRGB looks "muddy"

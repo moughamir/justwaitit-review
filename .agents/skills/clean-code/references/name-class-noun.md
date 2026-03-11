@@ -48,6 +48,7 @@ class AccountRepository {}   // Stores accounts
 **When NOT to use this pattern:**
 
 Manager-style names are acceptable when the class genuinely manages a resource lifecycle:
+
 - `ConnectionPool` - manages connection lifecycle
 - `ThreadPoolExecutor` - manages thread lifecycle
 

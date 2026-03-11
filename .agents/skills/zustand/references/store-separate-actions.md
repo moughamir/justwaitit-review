@@ -19,11 +19,11 @@ const useBearStore = create<BearState>((set, get) => ({
   decreasePopulation: () => set((s) => ({ bears: s.bears - 1 })),
   eatHoney: () => set((s) => ({ honey: s.honey - 10 })),
   removeAllBears: () => set({ bears: 0 }),
-}))
+}));
 
 // Components must pick each action individually
-const increase = useBearStore((s) => s.increasePopulation)
-const decrease = useBearStore((s) => s.decreasePopulation)
+const increase = useBearStore((s) => s.increasePopulation);
+const decrease = useBearStore((s) => s.decreasePopulation);
 ```
 
 **Correct (actions in dedicated namespace):**
@@ -38,16 +38,17 @@ const useBearStore = create<BearState>((set, get) => ({
     eatHoney: () => set((s) => ({ honey: s.honey - 10 })),
     removeAllBears: () => set({ bears: 0 }),
   },
-}))
+}));
 
 // Single hook for all actions, never causes re-renders
-const useBearActions = () => useBearStore((s) => s.actions)
+const useBearActions = () => useBearStore((s) => s.actions);
 
 // Usage
-const { increasePopulation, eatHoney } = useBearActions()
+const { increasePopulation, eatHoney } = useBearActions();
 ```
 
 **Benefits:**
+
 - Actions object is stable, never triggers re-renders
 - Cleaner API with single actions hook
 - Business logic stays in store, not components

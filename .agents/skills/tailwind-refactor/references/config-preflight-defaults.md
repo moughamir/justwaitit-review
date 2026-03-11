@@ -35,21 +35,24 @@ In v3, Preflight set `cursor: pointer` on all buttons. In v4, buttons use the br
 
 ```html
 <!-- Assumes buttons have pointer cursor from Preflight -->
-<button class="bg-blue-500 text-white px-4 py-2 rounded">Submit</button>
+<button class="rounded bg-blue-500 px-4 py-2 text-white">Submit</button>
 ```
 
 **Correct (what's right):**
 
 ```html
 <!-- Explicitly add cursor-pointer to buttons -->
-<button class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Submit</button>
+<button class="cursor-pointer rounded bg-blue-500 px-4 py-2 text-white">
+  Submit
+</button>
 ```
 
 Or apply globally in your CSS:
 
 ```css
 @layer base {
-  button, [role="button"] {
+  button,
+  [role='button'] {
     cursor: pointer;
   }
 }

@@ -13,7 +13,7 @@ The `motion` component includes all animation features by default, adding 34kb t
 
 ```tsx
 // components/ProductCard.tsx
-import { motion } from "framer-motion"; // 34kb+ included in bundle
+import { motion } from 'framer-motion'; // 34kb+ included in bundle
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
@@ -34,7 +34,7 @@ export function ProductCard({ product }: ProductCardProps) {
 
 ```tsx
 // components/ProductCard.tsx
-import { m } from "framer-motion"; // Only 2.5kb, features loaded separately
+import { m } from 'framer-motion'; // Only 2.5kb, features loaded separately
 
 export function ProductCard({ product }: ProductCardProps) {
   return (
@@ -51,14 +51,14 @@ export function ProductCard({ product }: ProductCardProps) {
 }
 
 // app/layout.tsx (or _app.tsx)
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation } from 'framer-motion';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={domAnimation}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
 }
 ```
 

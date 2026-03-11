@@ -13,7 +13,7 @@ Code that changes for different business reasons should live in different compon
 
 ```tsx
 function AppHeader() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigation = useNavigation();
@@ -32,12 +32,17 @@ function AppHeader() {
       <nav>
         {/* Changes when routes change */}
         {navigation.routes.map((route) => (
-          <a key={route.path} href={route.path}>{route.label}</a>
+          <a key={route.path} href={route.path}>
+            {route.label}
+          </a>
         ))}
       </nav>
       <div>
         {/* Changes when search algorithm changes */}
-        <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+        <input
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         {searchResults.map((result) => (
           <SearchResultCard key={result.id} result={result} />
         ))}
@@ -45,9 +50,11 @@ function AppHeader() {
       <div>
         {/* Changes when auth/profile features change */}
         <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {currentUser.avatarUrl
-            ? <img src={currentUser.avatarUrl} alt={currentUser.name} />
-            : <span>{currentUser.initials}</span>}
+          {currentUser.avatarUrl ? (
+            <img src={currentUser.avatarUrl} alt={currentUser.name} />
+          ) : (
+            <span>{currentUser.initials}</span>
+          )}
         </button>
         {isMenuOpen && <UserMenuDropdown user={currentUser} />}
       </div>
@@ -76,7 +83,9 @@ function MainNavigation() {
   return (
     <nav>
       {navigation.routes.map((route) => (
-        <a key={route.path} href={route.path}>{route.label}</a>
+        <a key={route.path} href={route.path}>
+          {route.label}
+        </a>
       ))}
     </nav>
   );
@@ -84,12 +93,15 @@ function MainNavigation() {
 
 function ProductSearch() {
   // Changes only when search features change
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const searchResults = useProductSearch(searchQuery);
 
   return (
     <div>
-      <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+      <input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       {searchResults.map((result) => (
         <SearchResultCard key={result.id} result={result} />
       ))}
@@ -105,9 +117,11 @@ function UserMenu() {
   return (
     <div>
       <button onClick={() => setIsMenuOpen(!isMenuOpen)}>
-        {currentUser.avatarUrl
-          ? <img src={currentUser.avatarUrl} alt={currentUser.name} />
-          : <span>{currentUser.initials}</span>}
+        {currentUser.avatarUrl ? (
+          <img src={currentUser.avatarUrl} alt={currentUser.name} />
+        ) : (
+          <span>{currentUser.initials}</span>
+        )}
       </button>
       {isMenuOpen && <UserMenuDropdown user={currentUser} />}
     </div>

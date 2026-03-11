@@ -14,7 +14,7 @@ A wrong abstraction resists change more than duplicated code. When a shared comp
 ```tsx
 interface NotificationCardProps {
   notification: Notification;
-  variant: "banner" | "toast" | "inline";
+  variant: 'banner' | 'toast' | 'inline';
   showAvatar?: boolean;
   showTimestamp?: boolean;
   showDismiss?: boolean;
@@ -22,32 +22,49 @@ interface NotificationCardProps {
   onDismiss?: () => void;
   onActionClick?: (action: string) => void;
   autoHideDuration?: number;
-  position?: "top" | "bottom";
+  position?: 'top' | 'bottom';
   compact?: boolean;
 }
 
 function NotificationCard({
-  notification, variant, showAvatar, showTimestamp,
-  showDismiss, showActions, onDismiss, onActionClick,
-  autoHideDuration, position, compact,
+  notification,
+  variant,
+  showAvatar,
+  showTimestamp,
+  showDismiss,
+  showActions,
+  onDismiss,
+  onActionClick,
+  autoHideDuration,
+  position,
+  compact,
 }: NotificationCardProps) {
   // Every variant adds branches, none can evolve independently
-  const className = variant === "banner"
-    ? `banner ${position}`
-    : variant === "toast"
-      ? `toast ${position} ${compact ? "compact" : ""}`
-      : "inline";
+  const className =
+    variant === 'banner'
+      ? `banner ${position}`
+      : variant === 'toast'
+        ? `toast ${position} ${compact ? 'compact' : ''}`
+        : 'inline';
 
   return (
     <div className={className}>
-      {showAvatar && variant !== "toast" && <Avatar user={notification.sender} />}
+      {showAvatar && variant !== 'toast' && (
+        <Avatar user={notification.sender} />
+      )}
       <p>{notification.message}</p>
-      {showTimestamp && variant !== "banner" && <time>{notification.createdAt}</time>}
+      {showTimestamp && variant !== 'banner' && (
+        <time>{notification.createdAt}</time>
+      )}
       {showDismiss && <button onClick={onDismiss}>Dismiss</button>}
-      {showActions && variant === "inline" && (
-        <div>{notification.actions?.map((a) => (
-          <button key={a} onClick={() => onActionClick?.(a)}>{a}</button>
-        ))}</div>
+      {showActions && variant === 'inline' && (
+        <div>
+          {notification.actions?.map((a) => (
+            <button key={a} onClick={() => onActionClick?.(a)}>
+              {a}
+            </button>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -58,7 +75,11 @@ function NotificationCard({
 
 ```tsx
 // Step 1: Each variant is its own component — free to evolve independently
-function BannerNotification({ notification, position, onDismiss }: BannerProps) {
+function BannerNotification({
+  notification,
+  position,
+  onDismiss,
+}: BannerProps) {
   return (
     <div className={`banner ${position}`}>
       <Avatar user={notification.sender} />
@@ -70,7 +91,7 @@ function BannerNotification({ notification, position, onDismiss }: BannerProps) 
 
 function ToastNotification({ notification, compact, onDismiss }: ToastProps) {
   return (
-    <div className={`toast ${compact ? "compact" : ""}`}>
+    <div className={`toast ${compact ? 'compact' : ''}`}>
       <p>{notification.message}</p>
       <button onClick={onDismiss}>Dismiss</button>
     </div>

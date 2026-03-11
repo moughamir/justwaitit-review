@@ -15,6 +15,7 @@ Separate the Minimum Viable Product (MVP) from the complete feature vision. This
 ## Feature: Notification System
 
 ### Requirements
+
 - Email notifications
 - Push notifications (iOS, Android, Web)
 - SMS notifications
@@ -25,6 +26,7 @@ Separate the Minimum Viable Product (MVP) from the complete feature vision. This
 - Analytics and delivery tracking
 
 ### Timeline
+
 6 sprints to deliver complete system
 ```
 
@@ -34,6 +36,7 @@ Separate the Minimum Viable Product (MVP) from the complete feature vision. This
 ## Feature: Notification System
 
 ### MVP (Sprints 1-2)
+
 **Goal:** Users receive critical notifications via email
 
 - Email notifications for key events only:
@@ -48,15 +51,18 @@ Separate the Minimum Viable Product (MVP) from the complete feature vision. This
 ---
 
 ### Phase 2 (Sprints 3-4)
+
 - In-app notification center
 - Read/unread status tracking
 - Notification preferences UI
 
 ### Phase 3 (Sprints 5-6)
+
 - Push notifications (mobile + web)
 - Digest/batching options
 
 ### Future Backlog
+
 - SMS notifications
 - Template management system
 - Analytics dashboard
@@ -64,12 +70,14 @@ Separate the Minimum Viable Product (MVP) from the complete feature vision. This
 ---
 
 ### Why This Ordering
+
 1. Email covers 80% of notification use cases
 2. In-app center reduces email volume
 3. Push is additive, not blocking
 ```
 
 **MVP definition checklist:**
+
 - [ ] Delivers core value to users
 - [ ] Can be shipped independently
 - [ ] Enables learning before over-investing

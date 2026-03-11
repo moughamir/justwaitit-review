@@ -17,9 +17,9 @@ render(
     <input aria-describedby="hint" />
     <span id="hint">Must be at least 8 characters</span>
   </div>
-)
+);
 
-expect(screen.getByText('Must be at least 8 characters')).toBeInTheDocument()
+expect(screen.getByText('Must be at least 8 characters')).toBeInTheDocument();
 // Doesn't verify the association with input
 ```
 
@@ -32,26 +32,27 @@ render(
     <input id="password" aria-describedby="hint" />
     <span id="hint">Must be at least 8 characters</span>
   </div>
-)
+);
 
 expect(screen.getByLabelText('Password')).toHaveAccessibleDescription(
   'Must be at least 8 characters'
-)
+);
 // Verifies screen readers will announce this description
 ```
 
 **For error messages:**
 
 ```tsx
-render(<Input label="Email" error="Invalid email format" />)
+render(<Input label="Email" error="Invalid email format" />);
 
 expect(screen.getByLabelText('Email')).toHaveAccessibleDescription(
   'Invalid email format'
-)
-expect(screen.getByLabelText('Email')).toBeInvalid()
+);
+expect(screen.getByLabelText('Email')).toBeInvalid();
 ```
 
 **Related matchers:**
+
 - `toHaveAccessibleName()` - verifies accessible name (label)
 - `toHaveErrorMessage()` - verifies `aria-errormessage` association
 

@@ -87,9 +87,9 @@ Always use Python's `json.dumps()` for serialisation, or write the prompt to a f
 
 ## Model IDs
 
-| Use case | Model | Cost |
-|----------|-------|------|
-| Drafts | `gemini-2.5-flash-image` | Free (~500/day) |
-| Final assets | `gemini-3-pro-image-preview` | ~$0.04/image |
+| Use case     | Model                        | Cost            |
+| ------------ | ---------------------------- | --------------- |
+| Drafts       | `gemini-2.5-flash-image`     | Free (~500/day) |
+| Final assets | `gemini-3-pro-image-preview` | ~$0.04/image    |
 
 Verify model IDs if errors occur — they change frequently.

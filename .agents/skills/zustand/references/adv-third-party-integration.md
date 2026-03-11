@@ -19,18 +19,18 @@ const useUserStore = create<UserState>((set) => ({
   error: null,
 
   fetchUsers: async () => {
-    set({ isLoading: true })
+    set({ isLoading: true });
     try {
-      const users = await api.getUsers()
-      set({ users, isLoading: false })
+      const users = await api.getUsers();
+      set({ users, isLoading: false });
     } catch (error) {
-      set({ error, isLoading: false })
+      set({ error, isLoading: false });
     }
   },
 
   // Manual cache invalidation, no background refresh
   // No deduplication, no retry logic
-}))
+}));
 ```
 
 **Correct (Zustand for client state, React Query for server state):**
@@ -93,6 +93,7 @@ function UserList() {
 ```
 
 **Benefits:**
+
 - React Query handles caching, deduplication, background refresh
 - Zustand handles UI state that doesn't belong in URL or server
 - Clear separation of concerns

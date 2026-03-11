@@ -27,7 +27,7 @@ module.exports = {
 // postcss.config.js
 module.exports = {
   plugins: {
-    "@tailwindcss/postcss": {},
+    '@tailwindcss/postcss': {},
   },
 };
 ```
@@ -36,7 +36,7 @@ For Vite projects, use the dedicated Vite plugin instead of PostCSS for better p
 
 ```js
 // vite.config.js
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite';
 
 export default {
   plugins: [tailwindcss()],

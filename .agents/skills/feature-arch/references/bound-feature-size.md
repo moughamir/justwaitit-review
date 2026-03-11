@@ -61,12 +61,14 @@ src/features/
 ```
 
 **Sizing guidelines:**
+
 - 5-15 components per feature is typical
 - If a feature has 20+ files, consider splitting
 - If a feature has only 1-2 files, consider merging
 - Features should map to business domains, not UI components
 
 **Signs a feature is too large:**
+
 - Multiple developers frequently conflict in the same feature
 - Parts of the feature change at different rates
 - Some parts are used independently of others

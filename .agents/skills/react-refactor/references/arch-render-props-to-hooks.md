@@ -27,7 +27,7 @@ function UserDashboard() {
                       theme={theme}
                       userName={auth.userName}
                       unreadCount={notifications.unreadCount}
-                      showBetaBanner={flags.isEnabled("beta-banner")}
+                      showBetaBanner={flags.isEnabled('beta-banner')}
                     />
                   )}
                 </NotificationProvider>
@@ -56,7 +56,7 @@ function UserDashboard() {
       theme={theme}
       userName={auth.userName}
       unreadCount={notifications.unreadCount}
-      showBetaBanner={flags.isEnabled("beta-banner")}
+      showBetaBanner={flags.isEnabled('beta-banner')}
     />
   );
 }

@@ -44,23 +44,23 @@ my-codemod/
 
 **Directory purposes:**
 
-| Directory | Purpose |
-|-----------|---------|
+| Directory  | Purpose                                 |
+| ---------- | --------------------------------------- |
 | `scripts/` | TypeScript/JavaScript transforms (JSSG) |
-| `rules/` | Declarative YAML ast-grep rules |
-| `tests/` | Input/expected fixture pairs |
-| Root | Metadata and documentation |
+| `rules/`   | Declarative YAML ast-grep rules         |
+| `tests/`   | Input/expected fixture pairs            |
+| Root       | Metadata and documentation              |
 
 **Workflow referencing:**
 
 ```yaml
 # workflow.yaml
-version: "1"
+version: '1'
 nodes:
   - id: transform
     steps:
       - type: js-ast-grep
-        codemod: ./scripts/main.ts  # Relative to package root
+        codemod: ./scripts/main.ts # Relative to package root
 
       - type: ast-grep
         rule: ./rules/deprecated-api.yaml

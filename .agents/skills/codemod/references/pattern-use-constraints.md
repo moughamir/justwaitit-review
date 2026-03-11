@@ -16,18 +16,22 @@ const transform: Transform<TSX> = (root) => {
   // Same string type check repeated everywhere
   const stringConcats = root.findAll({
     rule: {
-      pattern: "$LEFT + $RIGHT",
+      pattern: '$LEFT + $RIGHT',
       all: [
-        { has: { pattern: "$LEFT", any: [
-          { kind: "string" },
-          { kind: "template_string" }
-        ]}},
-        { has: { pattern: "$RIGHT", any: [
-          { kind: "string" },
-          { kind: "template_string" }
-        ]}}
-      ]
-    }
+        {
+          has: {
+            pattern: '$LEFT',
+            any: [{ kind: 'string' }, { kind: 'template_string' }],
+          },
+        },
+        {
+          has: {
+            pattern: '$RIGHT',
+            any: [{ kind: 'string' }, { kind: 'template_string' }],
+          },
+        },
+      ],
+    },
   });
   // Repeated in 10 other rules...
   return null;
@@ -40,21 +44,21 @@ const transform: Transform<TSX> = (root) => {
 const transform: Transform<TSX> = (root) => {
   const stringConcats = root.findAll({
     rule: {
-      pattern: "$LEFT + $RIGHT"
+      pattern: '$LEFT + $RIGHT',
     },
     constraints: {
-      LEFT: { matches: "STRING_LIKE" },
-      RIGHT: { matches: "STRING_LIKE" }
+      LEFT: { matches: 'STRING_LIKE' },
+      RIGHT: { matches: 'STRING_LIKE' },
     },
     utils: {
       STRING_LIKE: {
         any: [
-          { kind: "string" },
-          { kind: "template_string" },
-          { kind: "string_fragment" }
-        ]
-      }
-    }
+          { kind: 'string' },
+          { kind: 'template_string' },
+          { kind: 'string_fragment' },
+        ],
+      },
+    },
   });
   // Reuse STRING_LIKE in other rules
   return null;
@@ -62,6 +66,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Constraint patterns:**
+
 - Define common type checks in `utils`
 - Reference with `matches: "UTIL_NAME"`
 - Use in `constraints` to bind meta variables

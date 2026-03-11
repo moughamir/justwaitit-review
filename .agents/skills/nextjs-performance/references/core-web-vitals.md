@@ -4,17 +4,18 @@
 
 Core Web Vitals (CWV) sono le metriche di performance critiche per l'esperienza utente e il SEO.
 
-| Metrica | Target | Ottimizzazione Principale |
-|---------|--------|---------------------------|
-| **LCP** (Largest Contentful Paint) | < 2.5s | Ottimizzare l'elemento più grande visibile |
-| **INP** (Interaction to Next Paint) | < 200ms | Minimizzare JS sul thread principale |
-| **CLS** (Cumulative Layout Shift) | < 0.1 | Riservare spazio per elementi dinamici |
+| Metrica                             | Target  | Ottimizzazione Principale                  |
+| ----------------------------------- | ------- | ------------------------------------------ |
+| **LCP** (Largest Contentful Paint)  | < 2.5s  | Ottimizzare l'elemento più grande visibile |
+| **INP** (Interaction to Next Paint) | < 200ms | Minimizzare JS sul thread principale       |
+| **CLS** (Cumulative Layout Shift)   | < 0.1   | Riservare spazio per elementi dinamici     |
 
 ---
 
 ## LCP Optimization
 
 ### Elementi che contribuiscono a LCP
+
 1. `<img>` elementi
 2. `<image>` dentro SVG
 3. Video poster
@@ -212,14 +213,14 @@ export default function RootLayout({ children }) {
 
 ```typescript
 // app/_components/web-vitals.tsx
-'use client'
+'use client';
 
-import { useReportWebVitals } from 'next/web-vitals'
+import { useReportWebVitals } from 'next/web-vitals';
 
 export function WebVitals() {
   useReportWebVitals((metric) => {
     // Invia a analytics
-    console.log(metric)
+    console.log(metric);
 
     // Esempio: invio a Google Analytics
     if (window.gtag) {
@@ -228,11 +229,11 @@ export function WebVitals() {
         event_category: 'Web Vitals',
         event_label: metric.id,
         non_interaction: true,
-      })
+      });
     }
-  })
+  });
 
-  return null
+  return null;
 }
 ```
 

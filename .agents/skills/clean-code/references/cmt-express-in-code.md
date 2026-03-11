@@ -44,13 +44,15 @@ boolean result = containsOnlyDigits(str);
 ```
 
 **Benefits:**
+
 - Function names are searchable
 - Functions can be tested
 - Code documents itself
 - No risk of comment becoming stale
 
 **When comments are still valuable:**
-- **Why, not what:** Comments explaining *why* a decision was made (business rules, regulatory requirements, algorithm choices) cannot be replaced by code.
+
+- **Why, not what:** Comments explaining _why_ a decision was made (business rules, regulatory requirements, algorithm choices) cannot be replaced by code.
 - **Warnings:** Thread-safety, performance implications, or non-obvious side effects deserve explicit comments.
 - **Legal/license comments:** Required by policy and cannot be expressed as code.
 - **Public API documentation:** Javadoc/docstrings for public APIs are expected and useful.

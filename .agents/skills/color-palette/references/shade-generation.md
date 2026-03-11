@@ -29,9 +29,7 @@ function hexToHSL(hex) {
   // Calculate saturation
   let s = 0;
   if (diff !== 0) {
-    s = l > 0.5
-      ? diff / (2 - max - min)
-      : diff / (max + min);
+    s = l > 0.5 ? diff / (2 - max - min) : diff / (max + min);
   }
 
   // Calculate hue
@@ -49,19 +47,19 @@ function hexToHSL(hex) {
   return {
     h: Math.round(h * 360),
     s: Math.round(s * 100),
-    l: Math.round(l * 100)
+    l: Math.round(l * 100),
   };
 }
 ```
 
 ### Examples
 
-| Hex | HSL |
-|-----|-----|
-| `#0D9488` (Teal) | `hsl(174, 84%, 29%)` |
+| Hex                | HSL                  |
+| ------------------ | -------------------- |
+| `#0D9488` (Teal)   | `hsl(174, 84%, 29%)` |
 | `#7C3AED` (Purple) | `hsl(262, 83%, 58%)` |
-| `#EF4444` (Red) | `hsl(0, 84%, 60%)` |
-| `#3B82F6` (Blue) | `hsl(217, 91%, 60%)` |
+| `#EF4444` (Red)    | `hsl(0, 84%, 60%)`   |
+| `#3B82F6` (Blue)   | `hsl(217, 91%, 60%)` |
 
 ---
 
@@ -69,19 +67,19 @@ function hexToHSL(hex) {
 
 Standard lightness percentages for each shade:
 
-| Shade | Lightness | Notes |
-|-------|-----------|-------|
-| **50** | 97% | Subtle backgrounds, very light |
-| **100** | 94% | Hover states on light backgrounds |
-| **200** | 87% | Borders, dividers, disabled backgrounds |
-| **300** | 75% | Disabled text, placeholder text (light mode) |
-| **400** | 62% | Muted text, secondary content |
-| **500** | 48% | **Brand color baseline** |
-| **600** | 40% | Primary buttons, links (often the brand color) |
-| **700** | 33% | Hover states on primary actions |
-| **800** | 27% | Active states, pressed buttons |
-| **900** | 20% | Text on light backgrounds, high contrast |
-| **950** | 10% | Darkest accents, dark mode backgrounds |
+| Shade   | Lightness | Notes                                          |
+| ------- | --------- | ---------------------------------------------- |
+| **50**  | 97%       | Subtle backgrounds, very light                 |
+| **100** | 94%       | Hover states on light backgrounds              |
+| **200** | 87%       | Borders, dividers, disabled backgrounds        |
+| **300** | 75%       | Disabled text, placeholder text (light mode)   |
+| **400** | 62%       | Muted text, secondary content                  |
+| **500** | 48%       | **Brand color baseline**                       |
+| **600** | 40%       | Primary buttons, links (often the brand color) |
+| **700** | 33%       | Hover states on primary actions                |
+| **800** | 27%       | Active states, pressed buttons                 |
+| **900** | 20%       | Text on light backgrounds, high contrast       |
+| **950** | 10%       | Darkest accents, dark mode backgrounds         |
 
 **Key principle**: Shade 600 is typically the brand color. Shade 500 is slightly brighter for use as a base.
 
@@ -91,12 +89,12 @@ Standard lightness percentages for each shade:
 
 Adjust saturation for natural-looking shades:
 
-| Shade Range | Adjustment | Reason |
-|-------------|------------|--------|
-| **50-200** | Reduce by 10-20% | Prevents overly vibrant pastels |
-| **300-400** | Reduce by 5-10% | More natural mid-tones |
-| **500-600** | Keep full saturation | Brand color identity |
-| **700-950** | Keep full saturation | Rich, deep colors |
+| Shade Range | Adjustment           | Reason                          |
+| ----------- | -------------------- | ------------------------------- |
+| **50-200**  | Reduce by 10-20%     | Prevents overly vibrant pastels |
+| **300-400** | Reduce by 5-10%      | More natural mid-tones          |
+| **500-600** | Keep full saturation | Brand color identity            |
+| **700-950** | Keep full saturation | Rich, deep colors               |
 
 ### Formula
 
@@ -133,7 +131,7 @@ function generateShadeScale(brandHex) {
     700: { l: 33, sMultiplier: 1.0 },
     800: { l: 27, sMultiplier: 1.0 },
     900: { l: 20, sMultiplier: 1.0 },
-    950: { l: 10, sMultiplier: 1.0 }
+    950: { l: 10, sMultiplier: 1.0 },
   };
 
   const result = {};
@@ -150,6 +148,7 @@ function generateShadeScale(brandHex) {
 ### Example Output
 
 Input: `#0D9488`
+
 ```javascript
 {
   50:  "hsl(174, 67%, 97%)",  // #F0FDFA
@@ -178,23 +177,37 @@ function hslToHex(h, s, l) {
   l = l / 100;
 
   const c = (1 - Math.abs(2 * l - 1)) * s;
-  const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+  const x = c * (1 - Math.abs(((h / 60) % 2) - 1));
   const m = l - c / 2;
 
-  let r = 0, g = 0, b = 0;
+  let r = 0,
+    g = 0,
+    b = 0;
 
   if (h >= 0 && h < 60) {
-    r = c; g = x; b = 0;
+    r = c;
+    g = x;
+    b = 0;
   } else if (h >= 60 && h < 120) {
-    r = x; g = c; b = 0;
+    r = x;
+    g = c;
+    b = 0;
   } else if (h >= 120 && h < 180) {
-    r = 0; g = c; b = x;
+    r = 0;
+    g = c;
+    b = x;
   } else if (h >= 180 && h < 240) {
-    r = 0; g = x; b = c;
+    r = 0;
+    g = x;
+    b = c;
   } else if (h >= 240 && h < 300) {
-    r = x; g = 0; b = c;
+    r = x;
+    g = 0;
+    b = c;
   } else if (h >= 300 && h < 360) {
-    r = c; g = 0; b = x;
+    r = c;
+    g = 0;
+    b = x;
   }
 
   r = Math.round((r + m) * 255);
@@ -218,6 +231,7 @@ If you don't have access to code:
 5. **Convert back to hex** using online tool
 
 **Example**: Brand color `#7C3AED` → `hsl(262, 83%, 58%)`
+
 - Shade 50: `hsl(262, 66%, 97%)` → `#FAF5FF`
 - Shade 500: `hsl(262, 83%, 48%)` → `#A855F7`
 - Shade 950: `hsl(262, 83%, 10%)` → `#3B0764`
@@ -227,6 +241,7 @@ If you don't have access to code:
 ## Verification
 
 Check your generated shades:
+
 - ✅ Shades should look like same color family
 - ✅ Progression should be smooth (no jumps)
 - ✅ Light shades (50-300) should be usable for backgrounds
@@ -234,6 +249,7 @@ Check your generated shades:
 - ✅ Brand color should be recognizable in shades 500-700
 
 **Tools for verification**:
+
 - https://coolors.co (paste hex colors to view palette)
 - https://paletton.com (visualize color relationships)
 - Figma/design tool (create swatches to preview)

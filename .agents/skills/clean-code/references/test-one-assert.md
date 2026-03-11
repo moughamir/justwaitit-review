@@ -59,6 +59,7 @@ public void registerShouldPersistUser() {
 The first test has three assertions — that's fine because they all verify a single concept: "the returned user object is correctly constructed." Each test can be understood from its name alone.
 
 **When NOT to split tests:**
+
 - When multiple assertions verify the same behavior from different angles (like checking all fields of a returned object), keep them together — splitting creates duplicate setup and slower test suites.
 - When the operation under test has side effects (API calls, DB writes), avoid calling it multiple times just to isolate assertions.
 

@@ -3,6 +3,7 @@
 ## Overview
 
 `next/font` ottimizza automaticamente i font:
+
 - Elimina layout shift (CLS)
 - Automatic subsetting
 - Preload dei font critici
@@ -42,7 +43,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 ### Local Font
 
 ```typescript
-import localFont from 'next/font/local'
+import localFont from 'next/font/local';
 
 const myFont = localFont({
   src: [
@@ -64,7 +65,7 @@ const myFont = localFont({
   ],
   variable: '--font-custom',
   display: 'swap',
-})
+});
 ```
 
 ---
@@ -125,7 +126,7 @@ export default config
 
 ```css
 /* app/globals.css con Tailwind v4 */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui;
@@ -155,7 +156,7 @@ const inter = Inter({
 ### Font Ottimizzati per Performance
 
 ```typescript
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -163,14 +164,14 @@ const inter = Inter({
   variable: '--font-inter',
   // Aggiungi preconnect per velocizzare il download
   adjustFontFallback: true, // Font fallback ottimizzato
-})
+});
 
 // Preconnect in layout
 export const metadata = {
   other: {
     preconnect: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
   },
-}
+};
 ```
 
 ---
@@ -265,32 +266,32 @@ export default function RootLayout({
 
 ```typescript
 // ❌ NON: Importare il CSS dei font manualmente
-import 'google-fonts/inter.css'
+import 'google-fonts/inter.css';
 
 // ✅ SÌ: Usare sempre next/font
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 
 // ❌ NON: Dimenticare subsets (aumenta dimensione)
-const inter = Inter({}) // Carica tutti i caratteri
+const inter = Inter({}); // Carica tutti i caratteri
 
 // ✅ SÌ: Specificare subsets
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ['latin'] });
 
 // ❌ NON: Usare display: block (no text visibile durante il load)
-const inter = Inter({ display: 'block' })
+const inter = Inter({ display: 'block' });
 
 // ✅ SÌ: Usare swap per immediate text render
-const inter = Inter({ display: 'swap' })
+const inter = Inter({ display: 'swap' });
 
 // ❌ NON: Importare font in ogni componente
 // components/Button.tsx
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] }) // ❌ Doppio caricamento
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] }); // ❌ Doppio caricamento
 
 // ✅ SÌ: Importare una sola volta in layout
 // app/layout.tsx
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] })
+import { Inter } from 'next/font/google';
+const inter = Inter({ subsets: ['latin'] });
 ```
 
 ---

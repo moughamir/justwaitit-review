@@ -28,13 +28,13 @@ function UserRow({ user }: { user: User }) {
         {/* Cannot open this dialog from parent table component */}
       </TableCell>
     </TableRow>
-  )
+  );
 }
 
 function UsersTable() {
   const handleBulkEdit = () => {
     // No way to programmatically open edit dialog for selected users
-  }
+  };
 }
 ```
 
@@ -46,9 +46,9 @@ function UserRow({
   editOpen,
   onEditOpenChange,
 }: {
-  user: User
-  editOpen: boolean
-  onEditOpenChange: (open: boolean) => void
+  user: User;
+  editOpen: boolean;
+  onEditOpenChange: (open: boolean) => void;
 }) {
   return (
     <TableRow>
@@ -59,20 +59,23 @@ function UserRow({
         </Button>
         <Dialog open={editOpen} onOpenChange={onEditOpenChange}>
           <DialogContent>
-            <EditUserForm user={user} onSuccess={() => onEditOpenChange(false)} />
+            <EditUserForm
+              user={user}
+              onSuccess={() => onEditOpenChange(false)}
+            />
           </DialogContent>
         </Dialog>
       </TableCell>
     </TableRow>
-  )
+  );
 }
 
 function UsersTable({ users }: { users: User[] }) {
-  const [editingUserId, setEditingUserId] = useState<string | null>(null)
+  const [editingUserId, setEditingUserId] = useState<string | null>(null);
 
   const handleBulkEdit = (userId: string) => {
-    setEditingUserId(userId) // Programmatically open dialog
-  }
+    setEditingUserId(userId); // Programmatically open dialog
+  };
 
   return (
     <Table>
@@ -87,7 +90,7 @@ function UsersTable({ users }: { users: User[] }) {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
 ```
 
@@ -95,7 +98,7 @@ function UsersTable({ users }: { users: User[] }) {
 
 ```tsx
 function UsersTable({ users }: { users: User[] }) {
-  const [editingUser, setEditingUser] = useState<User | null>(null)
+  const [editingUser, setEditingUser] = useState<User | null>(null);
 
   return (
     <>
@@ -114,13 +117,16 @@ function UsersTable({ users }: { users: User[] }) {
         </TableBody>
       </Table>
 
-      <Dialog open={!!editingUser} onOpenChange={(open) => !open && setEditingUser(null)}>
+      <Dialog
+        open={!!editingUser}
+        onOpenChange={(open) => !open && setEditingUser(null)}
+      >
         <DialogContent>
           {editingUser && <EditUserForm user={editingUser} />}
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }
 ```
 

@@ -17,16 +17,16 @@ import React from 'react';
 
 // User interface
 interface User {
-  id: string;      // The user's ID
-  name: string;    // The user's name
-  email: string;   // The user's email
-  age: number;     // The user's age
+  id: string; // The user's ID
+  name: string; // The user's name
+  email: string; // The user's email
+  age: number; // The user's age
 }
 
 // Function to get user by ID
 function getUserById(id: string): User | null {
   // Find the user in the array
-  const user = users.find(u => u.id === id);
+  const user = users.find((u) => u.id === id);
 
   // If user is not found, return null
   if (!user) {
@@ -63,7 +63,7 @@ interface User {
 }
 
 function getUserById(id: string): User | null {
-  return users.find(u => u.id === id) ?? null;
+  return users.find((u) => u.id === id) ?? null;
 }
 
 counter++;

@@ -10,19 +10,19 @@ Dark mode inverts lightness while preserving hue and saturation.
 
 ### Shade Mapping
 
-| Light Mode Shade | Dark Mode Shade | Lightness Swap |
-|------------------|-----------------|----------------|
-| 50 (97% L) | 950 (10% L) | Backgrounds |
-| 100 (94% L) | 900 (20% L) | Subtle backgrounds |
-| 200 (87% L) | 800 (27% L) | Borders |
-| 300 (75% L) | 700 (33% L) | Disabled states |
-| 400 (62% L) | 600 (40% L) | Muted text |
-| 500 (48% L) | **500 (slightly brighter)** | Brand color baseline |
-| 600 (40% L) | 400 (62% L) | Primary actions |
-| 700 (33% L) | 300 (75% L) | Rarely used |
-| 800 (27% L) | 200 (87% L) | Rarely used |
-| 900 (20% L) | 100 (94% L) | Card backgrounds |
-| 950 (10% L) | 50 (97% L) | Text color |
+| Light Mode Shade | Dark Mode Shade             | Lightness Swap       |
+| ---------------- | --------------------------- | -------------------- |
+| 50 (97% L)       | 950 (10% L)                 | Backgrounds          |
+| 100 (94% L)      | 900 (20% L)                 | Subtle backgrounds   |
+| 200 (87% L)      | 800 (27% L)                 | Borders              |
+| 300 (75% L)      | 700 (33% L)                 | Disabled states      |
+| 400 (62% L)      | 600 (40% L)                 | Muted text           |
+| 500 (48% L)      | **500 (slightly brighter)** | Brand color baseline |
+| 600 (40% L)      | 400 (62% L)                 | Primary actions      |
+| 700 (33% L)      | 300 (75% L)                 | Rarely used          |
+| 800 (27% L)      | 200 (87% L)                 | Rarely used          |
+| 900 (20% L)      | 100 (94% L)                 | Card backgrounds     |
+| 950 (10% L)      | 50 (97% L)                  | Text color           |
 
 **Key principle**: Swap extremes (50↔950), preserve middle (500 stays near 500).
 
@@ -35,9 +35,9 @@ Dark mode inverts lightness while preserving hue and saturation.
 ```css
 @theme {
   /* Light mode (default) */
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-foreground: var(--color-primary-950);
-  --color-card: #FFFFFF;
+  --color-card: #ffffff;
   --color-card-foreground: var(--color-primary-900);
   --color-primary: var(--color-primary-600);
   --color-border: var(--color-primary-200);
@@ -61,12 +61,12 @@ Dark mode inverts lightness while preserving hue and saturation.
 ```css
 @theme {
   /* Light mode shades */
-  --color-primary-50-light: #F0FDFA;
-  --color-primary-950-light: #042F2E;
+  --color-primary-50-light: #f0fdfa;
+  --color-primary-950-light: #042f2e;
 
   /* Dark mode shades (inverted) */
-  --color-primary-50-dark: #042F2E;
-  --color-primary-950-dark: #F0FDFA;
+  --color-primary-50-dark: #042f2e;
+  --color-primary-950-dark: #f0fdfa;
 
   /* Active colors (default: light) */
   --color-background: var(--color-primary-50-light);
@@ -92,6 +92,7 @@ Dark mode inverts lightness while preserving hue and saturation.
 **Symptom**: Brand color (primary) loses vibrancy in dark mode.
 
 **Causes**:
+
 - Using same shade as light mode (too dark against dark background)
 - Over-brightening (shade 300-400 looks neon)
 
@@ -99,11 +100,15 @@ Dark mode inverts lightness while preserving hue and saturation.
 
 ```css
 /* Light mode */
---color-primary: var(--color-primary-600); /* #0D9488 - darker for contrast on white */
+--color-primary: var(
+  --color-primary-600
+); /* #0D9488 - darker for contrast on white */
 
 /* Dark mode */
 .dark {
-  --color-primary: var(--color-primary-500); /* #14B8A6 - brighter for visibility */
+  --color-primary: var(
+    --color-primary-500
+  ); /* #14B8A6 - brighter for visibility */
 }
 ```
 
@@ -136,6 +141,7 @@ Dark mode inverts lightness while preserving hue and saturation.
 **Symptom**: Foreground text on dark background strains eyes.
 
 **Causes**:
+
 - Pure white text (`#FFFFFF`) - too harsh
 - Wrong shade (900 instead of 50)
 
@@ -144,7 +150,7 @@ Dark mode inverts lightness while preserving hue and saturation.
 ```css
 .dark {
   /* Too harsh - pure white */
-  --color-foreground: #FFFFFF;
+  --color-foreground: #ffffff;
 
   /* Better - off-white, easier on eyes */
   --color-foreground: var(--color-primary-50); /* #F0FDFA */
@@ -152,6 +158,7 @@ Dark mode inverts lightness while preserving hue and saturation.
 ```
 
 **Tip**: Reduce text opacity further for secondary text:
+
 ```tsx
 <p className="text-foreground/80">Secondary text</p>
 ```
@@ -163,12 +170,14 @@ Dark mode inverts lightness while preserving hue and saturation.
 Lighter colors = higher elevation (opposite of light mode).
 
 ### Light Mode Elevation
+
 ```
 Shadows = darkness
 Lower layers darker than higher layers
 ```
 
 ### Dark Mode Elevation
+
 ```
 No shadows (or subtle)
 Higher layers LIGHTER than lower layers
@@ -198,11 +207,13 @@ Higher layers LIGHTER than lower layers
 Borders need higher contrast in dark mode.
 
 ### Light Mode
+
 ```css
 --color-border: var(--color-primary-200); /* 87% lightness - subtle */
 ```
 
 ### Dark Mode
+
 ```css
 .dark {
   --color-border: var(--color-primary-800); /* 27% lightness - visible */
@@ -212,6 +223,7 @@ Borders need higher contrast in dark mode.
 **Guideline**: Dark mode borders should be ~10-15% lighter than background.
 
 **Example**:
+
 - Background: 950 (10% L)
 - Border: 800 (27% L)
 - Difference: 17% ✓
@@ -221,15 +233,17 @@ Borders need higher contrast in dark mode.
 ## Muted/Secondary Content
 
 ### Light Mode
+
 ```css
---color-muted: var(--color-primary-50);       /* Very light background */
+--color-muted: var(--color-primary-50); /* Very light background */
 --color-muted-foreground: var(--color-primary-600); /* Darker text */
 ```
 
 ### Dark Mode
+
 ```css
 .dark {
-  --color-muted: var(--color-primary-800);    /* Darker background (elevated) */
+  --color-muted: var(--color-primary-800); /* Darker background (elevated) */
   --color-muted-foreground: var(--color-primary-400); /* Brighter text */
 }
 ```
@@ -241,6 +255,7 @@ Borders need higher contrast in dark mode.
 ## Testing Dark Mode
 
 ### Visual Checklist
+
 - [ ] Brand color recognizable
 - [ ] Text readable without eye strain
 - [ ] Borders visible but not harsh
@@ -250,6 +265,7 @@ Borders need higher contrast in dark mode.
 - [ ] No pure black or pure white (use shades)
 
 ### Automated Tests
+
 ```javascript
 // Check contrast ratios
 const backgroundL = 10; // shade 950
@@ -266,6 +282,7 @@ if (foreground === '#FFFFFF') console.warn('Pure white used');
 ## Common Dark Mode Mistakes
 
 ### 1. Direct Inversion (Wrong)
+
 ```css
 /* ❌ This breaks contrast */
 .dark {
@@ -277,6 +294,7 @@ if (foreground === '#FFFFFF') console.warn('Pure white used');
 **Fix**: Invert semantic mapping, not variable names.
 
 ### 2. Same Primary Shade
+
 ```css
 /* ❌ Primary-600 too dark on dark background */
 .dark {
@@ -287,6 +305,7 @@ if (foreground === '#FFFFFF') console.warn('Pure white used');
 **Fix**: Use brighter shade (500) in dark mode.
 
 ### 3. Forgetting Pairs
+
 ```css
 /* ❌ Changed background but not foreground */
 .dark {
@@ -298,6 +317,7 @@ if (foreground === '#FFFFFF') console.warn('Pure white used');
 **Fix**: Always update foreground when changing background.
 
 ### 4. Pure Black Backgrounds
+
 ```css
 /* ❌ Pure black shows OLED smearing, no elevation */
 .dark {
@@ -331,17 +351,17 @@ For AMOLED/OLED screens, pure black saves battery.
 ```css
 @theme {
   /* Shade scale (same in both modes) */
-  --color-primary-50: #F0FDFA;
-  --color-primary-500: #14B8A6;
-  --color-primary-600: #0D9488;
-  --color-primary-800: #115E59;
-  --color-primary-900: #134E4A;
-  --color-primary-950: #042F2E;
+  --color-primary-50: #f0fdfa;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
 
   /* Light mode */
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-foreground: var(--color-primary-950);
-  --color-card: #FFFFFF;
+  --color-card: #ffffff;
   --color-card-foreground: var(--color-primary-900);
   --color-primary: var(--color-primary-600);
   --color-border: var(--color-primary-200);

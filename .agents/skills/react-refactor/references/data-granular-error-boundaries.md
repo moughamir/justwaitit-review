@@ -12,17 +12,17 @@ A single error boundary at the application root kills the entire page when any c
 **Incorrect (single root boundary — one failure kills everything):**
 
 ```tsx
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary } from 'react-error-boundary';
 
 export default function DashboardPage() {
   return (
     <ErrorBoundary fallback={<FullPageError />}>
       <Suspense fallback={<PageSkeleton />}>
         <DashboardHeader />
-        <RevenueChart />     {/* if this throws... */}
-        <RecentOrders />     {/* ...user loses this too */}
-        <TeamActivity />     {/* ...and this */}
-        <SystemAlerts />     {/* ...and this */}
+        <RevenueChart /> {/* if this throws... */}
+        <RecentOrders /> {/* ...user loses this too */}
+        <TeamActivity /> {/* ...and this */}
+        <SystemAlerts /> {/* ...and this */}
       </Suspense>
     </ErrorBoundary>
   );
@@ -34,7 +34,7 @@ export default function DashboardPage() {
 **Correct (per-section boundaries — failures stay contained):**
 
 ```tsx
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary } from 'react-error-boundary';
 
 function SectionError({ error, resetErrorBoundary }: FallbackProps) {
   return (

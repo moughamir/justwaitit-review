@@ -44,6 +44,6 @@
 ## Security & Configuration Tips
 
 - Copy `.env.example` → `.env.local` and set Supabase vars:
-  - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`.
+  - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEYAULT_KEY`.
 - Never commit secrets; rely on Vercel/Supabase environment config.
 - Husky + lint-staged enforce formatting on commit; run fixes before PR.

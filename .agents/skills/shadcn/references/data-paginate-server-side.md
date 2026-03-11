@@ -13,21 +13,24 @@ For datasets over 100 items, implement server-side pagination. Client-side pagin
 
 ```tsx
 function ProductTable() {
-  const { data: products } = useQuery(["products"], () =>
-    fetch("/api/products").then((r) => r.json())
-  )
+  const { data: products } = useQuery(['products'], () =>
+    fetch('/api/products').then((r) => r.json())
+  );
   // Fetches ALL 10,000 products on mount
 
-  const [page, setPage] = useState(0)
-  const pageSize = 10
-  const paginatedProducts = products?.slice(page * pageSize, (page + 1) * pageSize)
+  const [page, setPage] = useState(0);
+  const pageSize = 10;
+  const paginatedProducts = products?.slice(
+    page * pageSize,
+    (page + 1) * pageSize
+  );
 
   return (
     <>
       <Table>{/* render paginatedProducts */}</Table>
       <Pagination>{/* ... */}</Pagination>
     </>
-  )
+  );
 }
 ```
 
@@ -35,16 +38,16 @@ function ProductTable() {
 
 ```tsx
 function ProductTable() {
-  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 })
+  const [pagination, setPagination] = useState({ pageIndex: 0, pageSize: 10 });
 
   const { data, isLoading } = useQuery(
-    ["products", pagination],
+    ['products', pagination],
     () =>
       fetch(
         `/api/products?page=${pagination.pageIndex}&limit=${pagination.pageSize}`
       ).then((r) => r.json()),
     { keepPreviousData: true } // Smooth transitions between pages
-  )
+  );
   // Fetches only 10 products per page
 
   const table = useReactTable({
@@ -55,7 +58,7 @@ function ProductTable() {
     onPaginationChange: setPagination,
     manualPagination: true, // Tell TanStack Table pagination is server-side
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
     <>
@@ -96,7 +99,7 @@ function ProductTable() {
         </div>
       </div>
     </>
-  )
+  );
 }
 ```
 

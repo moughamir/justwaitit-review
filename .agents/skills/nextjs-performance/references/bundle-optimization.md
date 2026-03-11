@@ -68,16 +68,16 @@ const DynamicComponent = dynamic(
 
 ```typescript
 // ✅ SÌ: Named exports per tree shaking
-export { Button, Input, Select }
+export { Button, Input, Select };
 
 // ❌ NON: Tutto in un oggetto
-export default { Button, Input, Select }
+export default { Button, Input, Select };
 
 // ❌ NON: Re-export wildcards
-export * from 'lodash' // Importa tutto lodash
+export * from 'lodash'; // Importa tutto lodash
 
 // ✅ SÌ: Import specifici
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash-es';
 ```
 
 ### Package.json Side Effects
@@ -109,11 +109,11 @@ npm install --save-dev @next/bundle-analyzer
 // next.config.js
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 module.exports = withBundleAnalyzer({
   // config
-})
+});
 ```
 
 ```bash
@@ -140,24 +140,24 @@ module.exports = {
       transform: 'lodash/{{member}}',
     },
   },
-}
+};
 ```
 
 ### ESM over CommonJS
 
 ```typescript
 // ❌ NON: CommonJS
-const lodash = require('lodash')
+const lodash = require('lodash');
 
 // ✅ SÌ: ESM
-import { debounce } from 'lodash-es'
+import { debounce } from 'lodash-es';
 
 // next.config.js per preferire ESM
 module.exports = {
   experimental: {
     esmExternals: true,
   },
-}
+};
 ```
 
 ---
@@ -197,9 +197,9 @@ const nextConfig = {
           minChunks: 2,
         },
       },
-    }
+    };
 
-    return config
+    return config;
   },
 
   // Ottimizzazioni build
@@ -207,9 +207,9 @@ const nextConfig = {
 
   // Compressione
   compress: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 ```
 
 ---

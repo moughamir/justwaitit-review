@@ -3,6 +3,7 @@
 ## Overview
 
 Next.js offre multiple strategie di caching:
+
 - **Request Memoization**: Deduplica fetch nello stesso render
 - **Data Cache**: Cache persistente tra request
 - **Full Route Cache**: Cache delle pagine statiche
@@ -16,11 +17,11 @@ Next.js offre multiple strategie di caching:
 
 ```typescript
 // BEFORE (Next.js 14) - Cache di default
-fetch('https://api.example.com/data') // cached
+fetch('https://api.example.com/data'); // cached
 
 // AFTER (Next.js 15) - No cache di default
-fetch('https://api.example.com/data') // no-store
-fetch('https://api.example.com/data', { cache: 'force-cache' }) // cached
+fetch('https://api.example.com/data'); // no-store
+fetch('https://api.example.com/data', { cache: 'force-cache' }); // cached
 ```
 
 ### Cache Time-based (ISR)
@@ -33,8 +34,8 @@ async function getData() {
       revalidate: 60, // secondi
       tags: ['products'],
     },
-  })
-  return res.json()
+  });
+  return res.json();
 }
 ```
 
@@ -42,26 +43,26 @@ async function getData() {
 
 ```typescript
 // app/api/revalidate/route.ts
-import { revalidateTag, revalidatePath } from 'next/cache'
-import { NextRequest } from 'next/server'
+import { revalidateTag, revalidatePath } from 'next/cache';
+import { NextRequest } from 'next/server';
 
 export async function POST(request: NextRequest) {
-  const { tag, path } = await request.json()
+  const { tag, path } = await request.json();
 
   try {
     if (tag) {
-      revalidateTag(tag)
-      return Response.json({ revalidated: true, tag })
+      revalidateTag(tag);
+      return Response.json({ revalidated: true, tag });
     }
 
     if (path) {
-      revalidatePath(path)
-      return Response.json({ revalidated: true, path })
+      revalidatePath(path);
+      return Response.json({ revalidated: true, path });
     }
 
-    return Response.json({ error: 'Missing tag or path' }, { status: 400 })
+    return Response.json({ error: 'Missing tag or path' }, { status: 400 });
   } catch (error) {
-    return Response.json({ error: 'Revalidation failed' }, { status: 500 })
+    return Response.json({ error: 'Revalidation failed' }, { status: 500 });
   }
 }
 
@@ -69,7 +70,7 @@ export async function POST(request: NextRequest) {
 await fetch('/api/revalidate', {
   method: 'POST',
   body: JSON.stringify({ tag: 'products' }),
-})
+});
 ```
 
 ---
@@ -110,14 +111,14 @@ export default async function ProductPage() {
 ```typescript
 const getCachedProduct = unstable_cache(
   async (id: string) => {
-    return db.product.findUnique({ where: { id } })
+    return db.product.findUnique({ where: { id } });
   },
   ['product'], // Key base
   { tags: ['products'] }
-)
+);
 
 // Cache key finale: ['product', '123']
-const product = await getCachedProduct('123')
+const product = await getCachedProduct('123');
 ```
 
 ---
@@ -130,31 +131,31 @@ const product = await getCachedProduct('123')
 // app/page.tsx
 
 // Static (default se no dynamic data)
-export const dynamic = 'auto'
+export const dynamic = 'auto';
 
 // Forza statico
-export const dynamic = 'force-static'
+export const dynamic = 'force-static';
 
 // Forza dinamico (no cache)
-export const dynamic = 'force-dynamic'
+export const dynamic = 'force-dynamic';
 
 // Error se usa dynamic data
-export const dynamic = 'error'
+export const dynamic = 'error';
 
 // Revalidation
-export const revalidate = 3600 // 1 ora
-export const revalidate = false // Mai (default static)
-export const revalidate = 0 // Ogni richiesta (dynamic)
+export const revalidate = 3600; // 1 ora
+export const revalidate = false; // Mai (default static)
+export const revalidate = 0; // Ogni richiesta (dynamic)
 ```
 
 ### Runtime
 
 ```typescript
 // Edge runtime (più veloce, meno features)
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 // Node.js runtime (default, più compatibile)
-export const runtime = 'nodejs'
+export const runtime = 'nodejs';
 ```
 
 ---
@@ -163,30 +164,30 @@ export const runtime = 'nodejs'
 
 ```typescript
 // app/actions.ts
-'use server'
+'use server';
 
-import { revalidatePath, revalidateTag } from 'next/cache'
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function createProduct(formData: FormData) {
-  const data = Object.fromEntries(formData)
+  const data = Object.fromEntries(formData);
 
-  await db.product.create({ data })
+  await db.product.create({ data });
 
   // Revalidate specifiche route
-  revalidatePath('/products')
-  revalidatePath('/admin/products')
-  revalidateTag('products')
+  revalidatePath('/products');
+  revalidatePath('/admin/products');
+  revalidateTag('products');
 
-  return { success: true }
+  return { success: true };
 }
 
 export async function updateProduct(id: string, data: FormData) {
-  await db.product.update({ where: { id }, data: Object.fromEntries(data) })
+  await db.product.update({ where: { id }, data: Object.fromEntries(data) });
 
   // Revalidate specifico
-  revalidatePath(`/products/${id}`)
-  revalidateTag(`product-${id}`)
-  revalidateTag('products')
+  revalidatePath(`/products/${id}`);
+  revalidateTag(`product-${id}`);
+  revalidateTag('products');
 }
 ```
 
@@ -198,12 +199,12 @@ export async function updateProduct(id: string, data: FormData) {
 // app/api/products/route.ts
 
 // Static route con revalidation
-export const dynamic = 'force-static'
-export const revalidate = 60
+export const dynamic = 'force-static';
+export const revalidate = 60;
 
 export async function GET() {
-  const products = await db.product.findMany()
-  return Response.json(products)
+  const products = await db.product.findMany();
+  return Response.json(products);
 }
 ```
 
@@ -212,30 +213,30 @@ export async function GET() {
 ```typescript
 // app/api/products/[id]/route.ts
 
-export const dynamic = 'force-static'
-export const revalidate = 3600
+export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export async function GET(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = await params
+  const { id } = await params;
 
   const product = await db.product.findUnique({
     where: { id },
-  })
+  });
 
   if (!product) {
-    return Response.json({ error: 'Not found' }, { status: 404 })
+    return Response.json({ error: 'Not found' }, { status: 404 });
   }
 
-  return Response.json(product)
+  return Response.json(product);
 }
 
 // Genera static params per build
 export async function generateStaticParams() {
-  const products = await db.product.findMany({ select: { id: true } })
-  return products.map((p) => ({ id: p.id }))
+  const products = await db.product.findMany({ select: { id: true } });
+  return products.map((p) => ({ id: p.id }));
 }
 ```
 
@@ -246,7 +247,7 @@ export async function generateStaticParams() {
 ### Stale-While-Revalidate Pattern
 
 ```typescript
-import { unstable_cache } from 'next/cache'
+import { unstable_cache } from 'next/cache';
 
 const getData = unstable_cache(
   async () => fetchExpensiveData(),
@@ -254,7 +255,7 @@ const getData = unstable_cache(
   {
     revalidate: 3600, // 1 ora
   }
-)
+);
 
 // Con fetch diretto
 async function getFreshData() {
@@ -262,8 +263,8 @@ async function getFreshData() {
     next: {
       revalidate: 3600,
     },
-  })
-  return res.json()
+  });
+  return res.json();
 }
 ```
 
@@ -275,19 +276,19 @@ const getUser = unstable_cache(
   async (id: string) => db.user.findById(id),
   ['user'],
   { tags: (id) => [`user-${id}`, 'users'] }
-)
+);
 
 const getUserOrders = unstable_cache(
   async (userId: string) => db.order.findByUser(userId),
   ['user-orders'],
   { tags: (userId) => [`user-${userId}-orders`, 'orders'] }
-)
+);
 
 // Invalidazione selettiva
-revalidateTag('user-123')      // Solo user
-revalidateTag('user-123-orders') // Solo orders di user-123
-revalidateTag('orders')         // Tutti gli orders
-revalidateTag('users')          // Tutti gli users
+revalidateTag('user-123'); // Solo user
+revalidateTag('user-123-orders'); // Solo orders di user-123
+revalidateTag('orders'); // Tutti gli orders
+revalidateTag('users'); // Tutti gli users
 ```
 
 ### Cache con Headers Condizionali
@@ -295,14 +296,17 @@ revalidateTag('users')          // Tutti gli users
 ```typescript
 // Route handler con ETag
 export async function GET() {
-  const data = await getData()
-  const etag = generateETag(data)
+  const data = await getData();
+  const etag = generateETag(data);
 
-  const headers = new Headers()
-  headers.set('ETag', etag)
-  headers.set('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400')
+  const headers = new Headers();
+  headers.set('ETag', etag);
+  headers.set(
+    'Cache-Control',
+    'public, max-age=3600, stale-while-revalidate=86400'
+  );
 
-  return new Response(JSON.stringify(data), { headers })
+  return new Response(JSON.stringify(data), { headers });
 }
 ```
 
@@ -315,21 +319,21 @@ export async function GET() {
 const getData = unstable_cache(fetchData, ['key'], {
   revalidate: 3600,
   tags: ['entity-type', 'entity-id'],
-})
+});
 
 // ✅ SÌ: Revalidate selettivo
-revalidateTag('user-123') // Non tutto 'users'
+revalidateTag('user-123'); // Non tutto 'users'
 
 // ✅ SÌ: Differenti TTL per differenti dati
 // Dati raramente modificati: lungo TTL
 const getCategories = unstable_cache(fetchCategories, ['categories'], {
   revalidate: 86400, // 24 ore
-})
+});
 
 // Dati frequentemente modificati: breve TTL
 const getComments = unstableCache(fetchComments, ['comments'], {
   revalidate: 60, // 1 minuto
-})
+});
 
 // ❌ NON: Cache di tutto con stesso TTL
 // ❌ NON: Dimenticare di revalidate dopo mutation

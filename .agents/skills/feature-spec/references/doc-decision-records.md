@@ -26,16 +26,19 @@ Record significant decisions with their context, options considered, and rationa
 
 **Correct (Architecture Decision Records):**
 
-```markdown
+````markdown
 ## ADR-005: Database Selection for User Dashboard
 
 ### Status
+
 **Accepted** - 2024-02-15
 
 ### Context
+
 We need to select a database for the new User Dashboard feature. The
 dashboard displays aggregated analytics data with the following
 characteristics:
+
 - Read-heavy workload (95% reads, 5% writes)
 - Complex aggregation queries (time series, grouping)
 - 10M+ rows expected within 1 year
@@ -43,6 +46,7 @@ characteristics:
 - Team expertise primarily in relational databases
 
 ### Decision Drivers
+
 1. Query complexity (aggregations, joins)
 2. Team expertise and hiring pool
 3. Operational complexity
@@ -52,7 +56,9 @@ characteristics:
 ### Options Considered
 
 #### Option A: PostgreSQL
+
 **Pros:**
+
 - Excellent aggregation support (window functions, CTEs)
 - Strong ACID compliance
 - Team has 5+ years experience
@@ -60,36 +66,45 @@ characteristics:
 - Active community, well-documented
 
 **Cons:**
+
 - Scaling requires more planning than NoSQL
 - Connection pooling needed at scale
 
 #### Option B: MongoDB
+
 **Pros:**
+
 - Flexible schema for evolving requirements
 - Built-in sharding
 - Good for document-oriented data
 
 **Cons:**
+
 - Aggregation pipeline less intuitive than SQL
 - Team would need training
 - ACID only at document level
 - Joins require application-level handling
 
 #### Option C: TimescaleDB (PostgreSQL extension)
+
 **Pros:**
+
 - Optimized for time-series data
 - Compatible with PostgreSQL
 - Automatic partitioning
 
 **Cons:**
+
 - Additional operational complexity
 - May be premature optimization
 - Smaller community than vanilla PostgreSQL
 
 ### Decision
+
 **Selected: Option A - PostgreSQL**
 
 ### Rationale
+
 1. **Query needs:** Our analytics require complex joins and aggregations
    that PostgreSQL handles natively with excellent performance.
 
@@ -109,20 +124,24 @@ characteristics:
 ### Consequences
 
 **Positive:**
+
 - Team can start immediately without training
 - Leverage existing monitoring and backup infrastructure
 - Straightforward aggregation query development
 
 **Negative:**
+
 - Must plan connection pooling for high concurrency
 - May need to revisit for time-series optimization later
 - Schema migrations require more care than schemaless DB
 
 ### Related Decisions
+
 - ADR-003: Caching Strategy (impacts read patterns)
 - ADR-007: Data Retention Policy (impacts table size)
 
 ### Review Date
+
 Re-evaluate in 12 months or when data exceeds 50M rows.
 
 ---
@@ -133,32 +152,43 @@ Re-evaluate in 12 months or when data exceeds 50M rows.
 ## ADR-[NUMBER]: [TITLE]
 
 ### Status
+
 [Proposed | Accepted | Deprecated | Superseded by ADR-XXX]
 
 ### Context
+
 [What is the situation? What forces are at play?]
 
 ### Decision Drivers
+
 [What criteria matter most?]
 
 ### Options Considered
+
 [List options with pros/cons]
 
 ### Decision
+
 [What was decided?]
 
 ### Rationale
+
 [Why this option over others?]
 
 ### Consequences
+
 [What are the positive and negative results?]
 
 ### Related Decisions
+
 [Links to related ADRs]
 
 ### Review Date
+
 [When to revisit this decision]
 ```
+````
+
 ```
 
 **Decision record requirements:**
@@ -169,3 +199,4 @@ Re-evaluate in 12 months or when data exceeds 50M rows.
 - Note consequences and review timeline
 
 Reference: [ADR GitHub - Architecture Decision Records](https://adr.github.io/)
+```

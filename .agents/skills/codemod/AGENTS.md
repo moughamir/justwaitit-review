@@ -71,13 +71,16 @@ Comprehensive best practices guide for Codemod (JSSG, ast-grep, workflows), desi
    - 9.2 [Make Transforms Idempotent for Safe Reruns](references/state-make-transforms-idempotent.md) — MEDIUM (prevents infinite loops and double-transformation)
    - 9.3 [Use State for Resumable Migrations](references/state-use-for-resumability.md) — MEDIUM (enables restart from failure point in long migrations)
 10. [Security and Capabilities](references/_sections.md#10-security-and-capabilities) — **LOW-MEDIUM**
-   - 10.1 [Minimize Requested Capabilities](references/security-minimize-capabilities.md) — LOW-MEDIUM (reduces attack surface for untrusted codemods)
-   - 10.2 [Review Third-Party Codemods Before Running](references/security-review-before-running-third-party.md) — LOW-MEDIUM (prevents malicious code execution from untrusted sources)
-   - 10.3 [Validate External Inputs Before Use](references/security-validate-external-inputs.md) — LOW-MEDIUM (prevents injection attacks from malicious input)
+
+- 10.1 [Minimize Requested Capabilities](references/security-minimize-capabilities.md) — LOW-MEDIUM (reduces attack surface for untrusted codemods)
+- 10.2 [Review Third-Party Codemods Before Running](references/security-review-before-running-third-party.md) — LOW-MEDIUM (prevents malicious code execution from untrusted sources)
+- 10.3 [Validate External Inputs Before Use](references/security-validate-external-inputs.md) — LOW-MEDIUM (prevents injection attacks from malicious input)
+
 11. [Package Structure](references/_sections.md#11-package-structure) — **LOW**
-   - 11.1 [Organize Package by Convention](references/pkg-organize-by-convention.md) — LOW (enables tooling support and contributor onboarding)
-   - 11.2 [Use Semantic Versioning for Packages](references/pkg-use-semantic-versioning.md) — LOW (enables safe dependency management and updates)
-   - 11.3 [Write Descriptive Package Metadata](references/pkg-write-descriptive-metadata.md) — LOW (3-5x better search ranking in registry)
+
+- 11.1 [Organize Package by Convention](references/pkg-organize-by-convention.md) — LOW (enables tooling support and contributor onboarding)
+- 11.2 [Use Semantic Versioning for Packages](references/pkg-use-semantic-versioning.md) — LOW (enables safe dependency management and updates)
+- 11.3 [Write Descriptive Package Metadata](references/pkg-write-descriptive-metadata.md) — LOW (3-5x better search ranking in registry)
 
 ---
 
@@ -96,9 +99,9 @@ Comprehensive best practices guide for Codemod (JSSG, ast-grep, workflows), desi
 
 This document was compiled from individual reference files. For detailed editing or extension:
 
-| File | Description |
-|------|-------------|
-| [references/_sections.md](references/_sections.md) | Category definitions and impact ordering |
-| [assets/templates/_template.md](assets/templates/_template.md) | Template for creating new rules |
-| [SKILL.md](SKILL.md) | Quick reference entry point |
-| [metadata.json](metadata.json) | Version and reference URLs |
+| File                                                            | Description                              |
+| --------------------------------------------------------------- | ---------------------------------------- |
+| [references/\_sections.md](references/_sections.md)             | Category definitions and impact ordering |
+| [assets/templates/\_template.md](assets/templates/_template.md) | Template for creating new rules          |
+| [SKILL.md](SKILL.md)                                            | Quick reference entry point              |
+| [metadata.json](metadata.json)                                  | Version and reference URLs               |

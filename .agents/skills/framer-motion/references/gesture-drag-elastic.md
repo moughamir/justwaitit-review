@@ -20,7 +20,7 @@ function SwipeableItem({ item, onDismiss }: SwipeableItemProps) {
       <motion.div
         drag="x"
         dragConstraints={containerRef}
-        dragElastic={0}  // Hard stop - feels rigid and unnatural
+        dragElastic={0} // Hard stop - feels rigid and unnatural
         onDragEnd={(_, info) => {
           if (Math.abs(info.offset.x) > 100) {
             onDismiss(item.id);
@@ -46,7 +46,7 @@ function SwipeableItem({ item, onDismiss }: SwipeableItemProps) {
       <motion.div
         drag="x"
         dragConstraints={containerRef}
-        dragElastic={0.2}  // Allows 20% overshoot - natural momentum feel
+        dragElastic={0.2} // Allows 20% overshoot - natural momentum feel
         onDragEnd={(_, info) => {
           if (Math.abs(info.offset.x) > 100) {
             onDismiss(item.id);
@@ -62,6 +62,7 @@ function SwipeableItem({ item, onDismiss }: SwipeableItemProps) {
 ```
 
 **Recommended values:**
+
 - `0` - Hard stop (avoid unless intentional)
 - `0.1-0.2` - Subtle overshoot, professional feel
 - `0.3-0.5` - Noticeable elasticity, playful feel

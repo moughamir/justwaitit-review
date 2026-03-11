@@ -17,13 +17,21 @@ test('edit user in table', async ({ page }) => {
   await page.goto('/admin/users');
 
   // Slow: full DOM traversal
-  await page.locator('//table//tr[contains(.,"john@example.com")]//button[text()="Edit"]').click();
+  await page
+    .locator(
+      '//table//tr[contains(.,"john@example.com")]//button[text()="Edit"]'
+    )
+    .click();
 
   // Brittle: breaks if table structure changes
-  await page.locator('//div[@class="container"]/div[2]/table/tbody/tr[3]/td[4]/button').click();
+  await page
+    .locator('//div[@class="container"]/div[2]/table/tbody/tr[3]/td[4]/button')
+    .click();
 
   // Hard to read and maintain
-  await page.locator('//button[ancestor::tr[descendant::td[text()="Active"]]]').click();
+  await page
+    .locator('//button[ancestor::tr[descendant::td[text()="Active"]]]')
+    .click();
 });
 ```
 
@@ -39,7 +47,10 @@ test('edit user in table', async ({ page }) => {
   await userRow.getByRole('button', { name: 'Edit' }).click();
 
   // Or use data-testid for complex tables
-  await page.getByTestId('user-row-john').getByRole('button', { name: 'Edit' }).click();
+  await page
+    .getByTestId('user-row-john')
+    .getByRole('button', { name: 'Edit' })
+    .click();
 });
 ```
 
@@ -64,10 +75,10 @@ await page
 **Performance comparison:**
 
 | Selector Type | Relative Speed |
-|--------------|----------------|
-| getByRole | 1× (fastest) |
-| getByTestId | 1.1× |
-| CSS | 1.2× |
-| XPath | 3-5× (slowest) |
+| ------------- | -------------- |
+| getByRole     | 1× (fastest)   |
+| getByTestId   | 1.1×           |
+| CSS           | 1.2×           |
+| XPath         | 3-5× (slowest) |
 
 Reference: [Playwright Locator Best Practices](https://playwright.dev/docs/best-practices#use-locators)

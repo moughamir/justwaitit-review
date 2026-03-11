@@ -138,11 +138,11 @@ def get_font(size):
 
 If Pillow is not available:
 
-| Alternative | Platform | Install | Best for |
-|-------------|----------|---------|----------|
-| `sips` | macOS (built-in) | None | Resize, convert (no trim/OG) |
-| `sharp` | Node.js | `npm install sharp` | Full feature set, high performance |
-| `ffmpeg` | Cross-platform | `brew install ffmpeg` | Resize, convert |
+| Alternative | Platform         | Install               | Best for                           |
+| ----------- | ---------------- | --------------------- | ---------------------------------- |
+| `sips`      | macOS (built-in) | None                  | Resize, convert (no trim/OG)       |
+| `sharp`     | Node.js          | `npm install sharp`   | Full feature set, high performance |
+| `ffmpeg`    | Cross-platform   | `brew install ffmpeg` | Resize, convert                    |
 
 ```bash
 # macOS sips examples

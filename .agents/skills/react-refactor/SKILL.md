@@ -18,25 +18,27 @@ Architectural refactoring guide for React applications. Contains 40 rules across
 
 ## Rule Categories
 
-| Category | Impact | Rules | Key Topics |
-|----------|--------|-------|------------|
-| Component Architecture | CRITICAL | 8 | Compound components, headless pattern, composition over props, client boundaries |
-| State Architecture | CRITICAL | 7 | Colocation, state machines, URL state, derived values |
-| Hook Patterns | HIGH | 6 | Single responsibility, naming, dependency stability, composition |
-| Component Decomposition | HIGH | 6 | Scroll test, extraction by change reason, view/logic separation |
-| Coupling & Cohesion | MEDIUM | 4 | Dependency injection, circular deps, stable imports, barrel-free |
-| Data & Side Effects | MEDIUM | 4 | Server-first fetch, TanStack Query, error boundaries |
-| Refactoring Safety | LOW-MEDIUM | 5 | Characterization tests, behavior testing, integration tests |
+| Category                | Impact     | Rules | Key Topics                                                                       |
+| ----------------------- | ---------- | ----- | -------------------------------------------------------------------------------- |
+| Component Architecture  | CRITICAL   | 8     | Compound components, headless pattern, composition over props, client boundaries |
+| State Architecture      | CRITICAL   | 7     | Colocation, state machines, URL state, derived values                            |
+| Hook Patterns           | HIGH       | 6     | Single responsibility, naming, dependency stability, composition                 |
+| Component Decomposition | HIGH       | 6     | Scroll test, extraction by change reason, view/logic separation                  |
+| Coupling & Cohesion     | MEDIUM     | 4     | Dependency injection, circular deps, stable imports, barrel-free                 |
+| Data & Side Effects     | MEDIUM     | 4     | Server-first fetch, TanStack Query, error boundaries                             |
+| Refactoring Safety      | LOW-MEDIUM | 5     | Characterization tests, behavior testing, integration tests                      |
 
 ## Quick Reference
 
 **Critical patterns** — get these right first:
+
 - Use compound components instead of props explosion
 - Colocate state with the components that use it
 - Use state machines for complex UI workflows
 - Separate container logic from presentational components
 
 **Common mistakes** — avoid these anti-patterns:
+
 - Lifting state to App when only one component reads it
 - Using context for rapidly-changing values
 - Monolithic hooks that fetch + transform + cache

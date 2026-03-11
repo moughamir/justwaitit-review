@@ -6,14 +6,17 @@ warnings are advisory.
 ## Required Checks (errors)
 
 ### 1. Server file exists
+
 Verify the main server file exists at the expected path.
 
 ### 2. Python syntax valid
+
 ```bash
 python3 -m py_compile server.py
 ```
 
 ### 3. Module-level server object
+
 The server instance must be at module level (not inside a function):
 
 ```python
@@ -29,9 +32,11 @@ def create_server():
 Check: `grep -q "^mcp = FastMCP\|^server = FastMCP\|^app = FastMCP" server.py`
 
 ### 4. requirements.txt exists
+
 Must exist and contain only PyPI packages (no `git+`, `-e`, `.whl`, `.tar.gz`).
 
 ### 5. No hardcoded secrets
+
 Check for `api_key = "..."` or `password = "..."` patterns (excluding `os.getenv`/`os.environ`):
 
 ```bash
@@ -44,18 +49,23 @@ Use `os.getenv()` for all secrets.
 ## Advisory Checks (warnings)
 
 ### 6. fastmcp in requirements.txt
+
 Should be listed as a dependency.
 
 ### 7. .gitignore includes .env
+
 Prevent accidental secret commits.
 
 ### 8. No circular imports
+
 Check for `from __init__ import` or `from . import.*get_` patterns.
 
 ### 9. Git repository initialised
+
 Should have a remote configured for Cloud deployment.
 
 ### 10. Server can load
+
 ```bash
 timeout 5 python3 server.py --help
 # or

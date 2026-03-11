@@ -12,25 +12,25 @@ By default, useScroll tracks the page scroll. To track scroll progress within a 
 **Incorrect (tracks page scroll instead of container):**
 
 ```tsx
-import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { useRef } from 'react';
+import { motion, useScroll } from 'framer-motion';
 
 function ScrollableGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollXProgress } = useScroll();  // Tracks page scroll, not container
+  const { scrollXProgress } = useScroll(); // Tracks page scroll, not container
 
   return (
     <div
       ref={containerRef}
       className="gallery"
-      style={{ overflowX: "auto", display: "flex" }}
+      style={{ overflowX: 'auto', display: 'flex' }}
     >
       {images.map((src, i) => (
         <img key={i} src={src} alt="" />
       ))}
       <motion.div
         className="scroll-indicator"
-        style={{ scaleX: scrollXProgress }}  // Doesn't respond to gallery scroll
+        style={{ scaleX: scrollXProgress }} // Doesn't respond to gallery scroll
       />
     </div>
   );
@@ -40,27 +40,27 @@ function ScrollableGallery() {
 **Correct (container ref tracks nested scroll):**
 
 ```tsx
-import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { useRef } from 'react';
+import { motion, useScroll } from 'framer-motion';
 
 function ScrollableGallery() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollXProgress } = useScroll({
-    container: containerRef  // Tracks this container's horizontal scroll
+    container: containerRef, // Tracks this container's horizontal scroll
   });
 
   return (
     <div
       ref={containerRef}
       className="gallery"
-      style={{ overflowX: "auto", display: "flex" }}
+      style={{ overflowX: 'auto', display: 'flex' }}
     >
       {images.map((src, i) => (
         <img key={i} src={src} alt="" />
       ))}
       <motion.div
         className="scroll-indicator"
-        style={{ scaleX: scrollXProgress }}  // Responds to gallery scroll
+        style={{ scaleX: scrollXProgress }} // Responds to gallery scroll
       />
     </div>
   );
@@ -71,9 +71,9 @@ function ScrollableGallery() {
 
 ```tsx
 const { scrollYProgress } = useScroll({
-  container: scrollContainerRef,  // Track scroll of this container
-  target: elementRef,             // Track this element's position within container
-  offset: ["start end", "end start"]
+  container: scrollContainerRef, // Track scroll of this container
+  target: elementRef, // Track this element's position within container
+  offset: ['start end', 'end start'],
 });
 ```
 

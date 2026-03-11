@@ -20,7 +20,11 @@ React development mode includes StrictMode double-rendering, prop validation, an
 //   Total frame: 340ms ← not representative of production
 
 // Developer concludes ContactCard is slow and wraps every instance in memo
-const ContactCard = memo(function ContactCard({ contact }: { contact: Contact }) {
+const ContactCard = memo(function ContactCard({
+  contact,
+}: {
+  contact: Contact;
+}) {
   return (
     <div className="contact-card">
       <img src={contact.avatarUrl} alt={contact.name} />
@@ -28,8 +32,8 @@ const ContactCard = memo(function ContactCard({ contact }: { contact: Contact })
       <p>{contact.email}</p>
       <span className="department">{contact.department}</span>
     </div>
-  )
-})
+  );
+});
 
 // In production, ContactCard renders in 0.4ms — memo overhead is wasted
 ```
@@ -52,7 +56,7 @@ npx react-scripts build --profile
 // Production data reveals the real bottleneck: ContactSearch filtering
 // 10,000 contacts filtered with .includes() on every keystroke = 85ms
 function ContactSearch({ contacts }: { contacts: Contact[] }) {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
 
   const filteredContacts = useDeferredValue(
     contacts.filter(
@@ -60,14 +64,14 @@ function ContactSearch({ contacts }: { contacts: Contact[] }) {
         contact.name.toLowerCase().includes(query.toLowerCase()) ||
         contact.email.toLowerCase().includes(query.toLowerCase())
     )
-  )
+  );
 
   return (
     <div>
       <input value={query} onChange={(e) => setQuery(e.target.value)} />
       <ContactList contacts={filteredContacts} />
     </div>
-  )
+  );
 }
 ```
 

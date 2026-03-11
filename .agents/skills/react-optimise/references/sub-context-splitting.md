@@ -13,50 +13,50 @@ A single context holding mixed fast-changing and slow-changing values forces eve
 
 ```tsx
 interface AppContextValue {
-  theme: "light" | "dark"
-  currentUser: User
-  notifications: Notification[]
-  unreadCount: number
+  theme: 'light' | 'dark';
+  currentUser: User;
+  notifications: Notification[];
+  unreadCount: number;
 }
 
-const AppContext = createContext<AppContextValue>(null!)
+const AppContext = createContext<AppContextValue>(null!);
 
 function AppProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
-  const [currentUser, setCurrentUser] = useState<User>(initialUser)
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [currentUser, setCurrentUser] = useState<User>(initialUser);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   const value = {
     theme,
     currentUser,
     notifications,
     unreadCount: notifications.filter((n) => !n.read).length,
-  }
+  };
 
-  return <AppContext.Provider value={value}>{children}</AppContext.Provider>
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
 // Re-renders every time notifications change, even though it only reads theme
 function PageHeader() {
-  const { theme } = useContext(AppContext)
-  return <header className={theme}>My App</header>
+  const { theme } = useContext(AppContext);
+  return <header className={theme}>My App</header>;
 }
 ```
 
 **Correct (consumers only re-render when their specific context changes):**
 
 ```tsx
-const ThemeContext = createContext<{ theme: "light" | "dark" }>(null!)
-const UserContext = createContext<{ currentUser: User }>(null!)
+const ThemeContext = createContext<{ theme: 'light' | 'dark' }>(null!);
+const UserContext = createContext<{ currentUser: User }>(null!);
 const NotificationContext = createContext<{
-  notifications: Notification[]
-  unreadCount: number
-}>(null!)
+  notifications: Notification[];
+  unreadCount: number;
+}>(null!);
 
 function AppProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light")
-  const [currentUser, setCurrentUser] = useState<User>(initialUser)
-  const [notifications, setNotifications] = useState<Notification[]>([])
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [currentUser, setCurrentUser] = useState<User>(initialUser);
+  const [notifications, setNotifications] = useState<Notification[]>([]);
 
   return (
     <ThemeContext.Provider value={{ theme }}>
@@ -71,13 +71,13 @@ function AppProvider({ children }: { children: ReactNode }) {
         </NotificationContext.Provider>
       </UserContext.Provider>
     </ThemeContext.Provider>
-  )
+  );
 }
 
 // Only re-renders when theme changes
 function PageHeader() {
-  const { theme } = useContext(ThemeContext)
-  return <header className={theme}>My App</header>
+  const { theme } = useContext(ThemeContext);
+  return <header className={theme}>My App</header>;
 }
 ```
 

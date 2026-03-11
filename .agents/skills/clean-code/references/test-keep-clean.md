@@ -68,6 +68,7 @@ public void activatingUserShouldSendWelcomeEmail() {
 ```
 
 **Qualities of clean tests:**
+
 - Readable: Clear setup, action, assertion
 - One concept per test
 - Descriptive names explaining what is being tested

@@ -27,17 +27,17 @@ Week 6: Launch
 
 **Correct (defined freeze periods):**
 
-```markdown
+````markdown
 ## Scope Freeze Policy
 
 ### Freeze Levels
 
-| Level | Allowed Changes | Approval Required |
-|-------|-----------------|-------------------|
-| **Green** (Normal) | Any approved changes | Standard process |
-| **Yellow** (Soft Freeze) | Bug fixes, critical issues only | Engineering Lead |
-| **Red** (Hard Freeze) | Blocking bugs only | VP Engineering |
-| **Black** (Code Freeze) | Emergency hotfixes only | CTO |
+| Level                    | Allowed Changes                 | Approval Required |
+| ------------------------ | ------------------------------- | ----------------- |
+| **Green** (Normal)       | Any approved changes            | Standard process  |
+| **Yellow** (Soft Freeze) | Bug fixes, critical issues only | Engineering Lead  |
+| **Red** (Hard Freeze)    | Blocking bugs only              | VP Engineering    |
+| **Black** (Code Freeze)  | Emergency hotfixes only         | CTO               |
 
 ### Project Timeline with Freeze Periods
 
@@ -51,16 +51,19 @@ Week 6    ██████░░░░░░░░░░ Final Testing    [BLA
 Week 6.5  ░░░░░░██████████ Launch           [BLACK]
 Week 7    ████████████████ Post-launch      [Return to GREEN]
 ```
+````
 
 ### Freeze Entry Criteria
 
 **Yellow (Soft Freeze) - 2 weeks before launch:**
+
 - [ ] All planned features code complete
 - [ ] No open P1 bugs
 - [ ] All integrations working
 - [ ] Performance targets met
 
 **Red (Hard Freeze) - 1 week before launch:**
+
 - [ ] All features tested and approved
 - [ ] No open P1 or P2 bugs
 - [ ] Load testing passed
@@ -68,6 +71,7 @@ Week 7    ████████████████ Post-launch      [Ret
 - [ ] Documentation complete
 
 **Black (Code Freeze) - 3 days before launch:**
+
 - [ ] Release candidate tagged
 - [ ] Staging environment matches production
 - [ ] Rollback plan tested
@@ -76,6 +80,7 @@ Week 7    ████████████████ Post-launch      [Ret
 ### Change Approval During Freeze
 
 **Yellow Freeze - Change Request:**
+
 ```yaml
 request_type: soft_freeze_change
 requestor: Developer Name
@@ -99,6 +104,7 @@ approval: Engineering Lead
 ```
 
 **Red Freeze - Blocking Bug Only:**
+
 ```yaml
 request_type: hard_freeze_change
 requestor: Developer Name
@@ -168,7 +174,7 @@ Even during Black Freeze, some changes may be necessary:
 ```yaml
 # Freeze Announcement Template
 to: all-engineering, stakeholders
-subject: "[Dashboard] Entering YELLOW FREEZE"
+subject: '[Dashboard] Entering YELLOW FREEZE'
 body: |
   Effective: Monday, March 18
 
@@ -184,6 +190,7 @@ body: |
 
   Next milestone: RED FREEZE on March 25
 ```
+
 ```
 
 **Scope freeze requirements:**
@@ -194,3 +201,4 @@ body: |
 - Post-mortem any freeze violations
 
 Reference: [Atlassian - Release Management Best Practices](https://www.atlassian.com/software/jira/guides/release-management)
+```

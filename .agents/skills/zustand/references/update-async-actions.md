@@ -17,12 +17,12 @@ const useUserStore = create<UserState>((set) => ({
 
   fetchUser: async (id: string) => {
     // No loading state, UI doesn't know fetch is in progress
-    const response = await fetch(`/api/users/${id}`)
-    const user = await response.json()
-    set({ user })
+    const response = await fetch(`/api/users/${id}`);
+    const user = await response.json();
+    set({ user });
     // Errors silently fail
   },
-}))
+}));
 ```
 
 **Correct (proper loading and error states):**
@@ -87,24 +87,24 @@ const useUserStore = create<UserState>((set, get) => ({
 
   fetchUser: async (id: string) => {
     // Abort any in-flight request
-    get().abortController?.abort()
+    get().abortController?.abort();
 
-    const abortController = new AbortController()
-    set({ isLoading: true, abortController })
+    const abortController = new AbortController();
+    set({ isLoading: true, abortController });
 
     try {
       const response = await fetch(`/api/users/${id}`, {
         signal: abortController.signal,
-      })
-      const user = await response.json()
-      set({ user, isLoading: false })
+      });
+      const user = await response.json();
+      set({ user, isLoading: false });
     } catch (error) {
       if (error.name !== 'AbortError') {
-        set({ isLoading: false })
+        set({ isLoading: false });
       }
     }
   },
-}))
+}));
 ```
 
 Reference: [Zustand Documentation](https://zustand.docs.pmnd.rs/)

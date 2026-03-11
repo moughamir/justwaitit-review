@@ -75,6 +75,7 @@ function ProductPage({ productId }: { productId: string }) {
 ```
 
 **When to use:**
+
 - Tab interfaces where users switch back and forth
 - Pre-rendering likely next pages for instant navigation
 - Preserving form state during multi-step workflows

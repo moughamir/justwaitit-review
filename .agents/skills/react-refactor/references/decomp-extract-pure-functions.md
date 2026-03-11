@@ -28,9 +28,9 @@ function ShippingEstimate({ cart, destination }: ShippingEstimateProps) {
   }
 
   function getShippingTier(weightKg: number): ShippingTier {
-    if (weightKg < 1) return { tier: "light", baseCost: 4.99, perKg: 0 };
-    if (weightKg < 10) return { tier: "standard", baseCost: 7.99, perKg: 1.5 };
-    return { tier: "heavy", baseCost: 14.99, perKg: 2.5 };
+    if (weightKg < 1) return { tier: 'light', baseCost: 4.99, perKg: 0 };
+    if (weightKg < 10) return { tier: 'standard', baseCost: 7.99, perKg: 1.5 };
+    return { tier: 'heavy', baseCost: 14.99, perKg: 2.5 };
   }
 
   const totalWeight = calculateWeight(cart.items);
@@ -40,7 +40,9 @@ function ShippingEstimate({ cart, destination }: ShippingEstimateProps) {
 
   return (
     <div>
-      <span>{tier.tier} shipping: {formatCurrency(cost)}</span>
+      <span>
+        {tier.tier} shipping: {formatCurrency(cost)}
+      </span>
       <span>Estimated delivery: {deliveryWindow}</span>
     </div>
   );
@@ -59,9 +61,9 @@ export function calculateWeight(items: CartItem[]): number {
 }
 
 export function getShippingTier(weightKg: number): ShippingTier {
-  if (weightKg < 1) return { tier: "light", baseCost: 4.99, perKg: 0 };
-  if (weightKg < 10) return { tier: "standard", baseCost: 7.99, perKg: 1.5 };
-  return { tier: "heavy", baseCost: 14.99, perKg: 2.5 };
+  if (weightKg < 1) return { tier: 'light', baseCost: 4.99, perKg: 0 };
+  if (weightKg < 10) return { tier: 'standard', baseCost: 7.99, perKg: 1.5 };
+  return { tier: 'heavy', baseCost: 14.99, perKg: 2.5 };
 }
 
 export function formatDeliveryWindow(minDays: number, maxDays: number): string {
@@ -78,7 +80,9 @@ function ShippingEstimate({ cart, destination }: ShippingEstimateProps) {
 
   return (
     <div>
-      <span>{tier.tier} shipping: {formatCurrency(cost)}</span>
+      <span>
+        {tier.tier} shipping: {formatCurrency(cost)}
+      </span>
       <span>Estimated delivery: {deliveryWindow}</span>
     </div>
   );

@@ -28,11 +28,13 @@ async def fetch_data(endpoint: str) -> dict:
 ```
 
 **Pros:**
+
 - Full control over requests
 - Easy to customize
 - Simple to understand
 
 **Cons:**
+
 - Manual tool creation for each endpoint
 - More boilerplate code
 
@@ -81,11 +83,13 @@ mcp = FastMCP.from_openapi(
 ```
 
 **Pros:**
+
 - Instant integration (minutes not hours)
 - Auto-updates with spec changes
 - No manual endpoint mapping
 
 **Cons:**
+
 - Requires OpenAPI/Swagger spec
 - Less control over individual endpoints
 - May include unwanted endpoints
@@ -115,11 +119,13 @@ mcp = FastMCP.from_fastapi(
 ```
 
 **Pros:**
+
 - Reuse existing FastAPI code
 - Minimal changes needed
 - Familiar FastAPI patterns
 
 **Cons:**
+
 - FastAPI must be running separately
 - Extra HTTP hop (slower)
 
@@ -438,15 +444,15 @@ mcp = FastMCP.from_fastapi(app)
 
 ## When to Use Each Pattern
 
-| Pattern | Use When | Avoid When |
-|---------|----------|------------|
-| Manual Integration | Simple API, custom logic needed | API has 50+ endpoints |
-| OpenAPI Auto-gen | Well-documented API, many endpoints | No OpenAPI spec available |
-| FastAPI Conversion | Existing FastAPI app | Starting from scratch |
-| Custom Route Maps | Need precise control | Simple use case |
-| Connection Pooling | High-frequency requests | Single request needed |
-| Caching | Expensive API calls, data rarely changes | Real-time data required |
-| Rate Limiting | API has rate limits | No limits or internal API |
+| Pattern            | Use When                                 | Avoid When                |
+| ------------------ | ---------------------------------------- | ------------------------- |
+| Manual Integration | Simple API, custom logic needed          | API has 50+ endpoints     |
+| OpenAPI Auto-gen   | Well-documented API, many endpoints      | No OpenAPI spec available |
+| FastAPI Conversion | Existing FastAPI app                     | Starting from scratch     |
+| Custom Route Maps  | Need precise control                     | Simple use case           |
+| Connection Pooling | High-frequency requests                  | Single request needed     |
+| Caching            | Expensive API calls, data rarely changes | Real-time data required   |
+| Rate Limiting      | API has rate limits                      | No limits or internal API |
 
 ## Resources
 

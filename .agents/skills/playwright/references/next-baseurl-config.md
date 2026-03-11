@@ -69,13 +69,14 @@ export default defineConfig({
   },
 
   // Only start local server when testing locally
-  webServer: process.env.TEST_ENV === 'local' || !process.env.TEST_ENV
-    ? {
-        command: 'npm run build && npm run start',
-        url: 'http://localhost:3000',
-        reuseExistingServer: !process.env.CI,
-      }
-    : undefined,
+  webServer:
+    process.env.TEST_ENV === 'local' || !process.env.TEST_ENV
+      ? {
+          command: 'npm run build && npm run start',
+          url: 'http://localhost:3000',
+          reuseExistingServer: !process.env.CI,
+        }
+      : undefined,
 });
 
 // Run against different environments:

@@ -12,9 +12,9 @@ Middleware order matters. Each middleware wraps the next, so the outermost middl
 **Incorrect (wrong order breaks devtools):**
 
 ```typescript
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import { immer } from 'zustand/middleware/immer'
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
 const useStore = create<State>()(
   // Wrong: persist outside devtools won't show persisted state in DevTools
@@ -22,20 +22,23 @@ const useStore = create<State>()(
     devtools(
       immer((set) => ({
         count: 0,
-        increment: () => set((s) => { s.count++ }),
+        increment: () =>
+          set((s) => {
+            s.count++;
+          }),
       }))
     ),
     { name: 'store' }
   )
-)
+);
 ```
 
 **Correct (proper middleware order):**
 
 ```typescript
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
-import { immer } from 'zustand/middleware/immer'
+import { create } from 'zustand';
+import { devtools, persist } from 'zustand/middleware';
+import { immer } from 'zustand/middleware/immer';
 
 const useStore = create<State>()(
   // Correct order: devtools → persist → immer
@@ -43,13 +46,16 @@ const useStore = create<State>()(
     persist(
       immer((set) => ({
         count: 0,
-        increment: () => set((s) => { s.count++ }),
+        increment: () =>
+          set((s) => {
+            s.count++;
+          }),
       })),
       { name: 'store' }
     ),
     { name: 'store', enabled: process.env.NODE_ENV === 'development' }
   )
-)
+);
 ```
 
 **Recommended middleware order:**
@@ -62,6 +68,7 @@ const useStore = create<State>()(
 ```
 
 **Why this order:**
+
 - `devtools` should see final state changes, so it wraps everything
 - `persist` should save the immer-processed state, not raw mutations
 - `immer` is innermost because it transforms how `set` works

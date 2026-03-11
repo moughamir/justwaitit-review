@@ -8,13 +8,13 @@ Default model varies by plan: Opus 4.6 for Pro/Max/Team, Sonnet 4.5 for Free. Se
 
 ## Plans
 
-| Tier | Key Limits |
-|------|-----------|
-| Free | File creation, connectors, skills, longer conversations (expanded Jan 2026) |
-| Pro | Higher usage limits, all features |
-| Max | Highest limits, Cowork access |
-| Team | Collaboration features, admin controls |
-| Enterprise | SSO, audit logs, custom retention |
+| Tier       | Key Limits                                                                  |
+| ---------- | --------------------------------------------------------------------------- |
+| Free       | File creation, connectors, skills, longer conversations (expanded Jan 2026) |
+| Pro        | Higher usage limits, all features                                           |
+| Max        | Highest limits, Cowork access                                               |
+| Team       | Collaboration features, admin controls                                      |
+| Enterprise | SSO, audit logs, custom retention                                           |
 
 ## Skills
 
@@ -36,14 +36,14 @@ These deliver interactive UI within the Claude conversation. Different from MCP 
 
 Render inline in conversation:
 
-| Type | Description |
-|------|-------------|
-| HTML | Full web pages with CSS/JS |
-| React/JSX | Interactive components |
-| Mermaid | Diagrams and charts |
-| SVG | Vector graphics |
-| Markdown | Formatted documents |
-| Code | Syntax-highlighted, copyable |
+| Type      | Description                  |
+| --------- | ---------------------------- |
+| HTML      | Full web pages with CSS/JS   |
+| React/JSX | Interactive components       |
+| Mermaid   | Diagrams and charts          |
+| SVG       | Vector graphics              |
+| Markdown  | Formatted documents          |
+| Code      | Syntax-highlighted, copyable |
 
 ## File Creation
 

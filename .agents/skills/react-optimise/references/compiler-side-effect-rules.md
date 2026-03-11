@@ -13,14 +13,14 @@ React Compiler assumes the render phase is pure and caches its output. Side effe
 
 ```tsx
 function ProductPage({ product }: { product: Product }) {
-  analytics.track("product_viewed", { productId: product.id }) // skipped on cached renders
+  analytics.track('product_viewed', { productId: product.id }); // skipped on cached renders
 
-  console.log(`Rendering product: ${product.name}`) // fires unpredictably
+  console.log(`Rendering product: ${product.name}`); // fires unpredictably
 
-  document.title = `${product.name} | Store` // DOM mutation in render
+  document.title = `${product.name} | Store`; // DOM mutation in render
 
-  const [quantity, setQuantity] = useState(1)
-  const subtotal = product.price * quantity
+  const [quantity, setQuantity] = useState(1);
+  const subtotal = product.price * quantity;
 
   return (
     <div>
@@ -28,7 +28,7 @@ function ProductPage({ product }: { product: Product }) {
       <span>${subtotal.toFixed(2)}</span>
       <button onClick={() => setQuantity((q) => q + 1)}>Add</button>
     </div>
-  )
+  );
 }
 ```
 
@@ -36,13 +36,13 @@ function ProductPage({ product }: { product: Product }) {
 
 ```tsx
 function ProductPage({ product }: { product: Product }) {
-  const [quantity, setQuantity] = useState(1)
-  const subtotal = product.price * quantity
+  const [quantity, setQuantity] = useState(1);
+  const subtotal = product.price * quantity;
 
   useEffect(() => {
-    analytics.track("product_viewed", { productId: product.id })
-    document.title = `${product.name} | Store`
-  }, [product.id, product.name])
+    analytics.track('product_viewed', { productId: product.id });
+    document.title = `${product.name} | Store`;
+  }, [product.id, product.name]);
 
   return (
     <div>
@@ -50,7 +50,7 @@ function ProductPage({ product }: { product: Product }) {
       <span>${subtotal.toFixed(2)}</span>
       <button onClick={() => setQuantity((q) => q + 1)}>Add</button>
     </div>
-  )
+  );
 }
 ```
 

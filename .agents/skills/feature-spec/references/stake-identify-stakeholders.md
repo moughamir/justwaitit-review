@@ -30,40 +30,46 @@ Map all stakeholders before requirements gathering begins. Overlooked stakeholde
 ## Stakeholder Map - Payment Feature
 
 ### Decision Makers (Approve scope and budget)
-| Role | Name | Interest | Engagement |
-|------|------|----------|------------|
-| Product Director | Alice Chen | Feature success | Final approval |
-| Engineering Manager | Bob Smith | Technical feasibility | Architecture approval |
+
+| Role                | Name       | Interest              | Engagement            |
+| ------------------- | ---------- | --------------------- | --------------------- |
+| Product Director    | Alice Chen | Feature success       | Final approval        |
+| Engineering Manager | Bob Smith  | Technical feasibility | Architecture approval |
 
 ### Builders (Design and implement)
-| Role | Name | Interest | Engagement |
-|------|------|----------|------------|
-| Product Manager | Carol Davis | User value | Requirements, prioritization |
-| Tech Lead | Dan Wilson | Code quality | Technical design |
-| UX Designer | Emma Brown | User experience | Design specs |
-| QA Lead | Frank Lee | Quality | Test planning |
+
+| Role            | Name        | Interest        | Engagement                   |
+| --------------- | ----------- | --------------- | ---------------------------- |
+| Product Manager | Carol Davis | User value      | Requirements, prioritization |
+| Tech Lead       | Dan Wilson  | Code quality    | Technical design             |
+| UX Designer     | Emma Brown  | User experience | Design specs                 |
+| QA Lead         | Frank Lee   | Quality         | Test planning                |
 
 ### Supporters (Enable and maintain)
-| Role | Name | Interest | Engagement |
-|------|------|----------|------------|
-| DevOps | Grace Kim | Reliability | Infrastructure review |
+
+| Role         | Name       | Interest       | Engagement              |
+| ------------ | ---------- | -------------- | ----------------------- |
+| DevOps       | Grace Kim  | Reliability    | Infrastructure review   |
 | Support Lead | Henry Park | Supportability | Training, documentation |
 
 ### Influencers (Affect or are affected)
-| Role | Name | Interest | Engagement |
-|------|------|----------|------------|
-| Legal | Irene Wu | Compliance | Policy review |
-| Security | Jack Torres | Data protection | Security review |
-| Finance | Karen Adams | Revenue impact | Pricing approval |
-| Marketing | Leo Martinez | Positioning | Launch messaging |
+
+| Role      | Name         | Interest        | Engagement       |
+| --------- | ------------ | --------------- | ---------------- |
+| Legal     | Irene Wu     | Compliance      | Policy review    |
+| Security  | Jack Torres  | Data protection | Security review  |
+| Finance   | Karen Adams  | Revenue impact  | Pricing approval |
+| Marketing | Leo Martinez | Positioning     | Launch messaging |
 
 ### Users (End consumers)
+
 - Free tier users: Basic payment flow
 - Premium users: Advanced payment options
 - Enterprise admins: Bulk payment management
 ```
 
 **RACI for key decisions:**
+
 - **R**esponsible: Carol (PM)
 - **A**ccountable: Alice (Director)
 - **C**onsulted: Legal, Security, Finance

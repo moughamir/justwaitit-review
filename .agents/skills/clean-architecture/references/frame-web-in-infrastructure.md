@@ -13,27 +13,27 @@ HTTP-specific code (requests, responses, headers, cookies, sessions) belongs in 
 
 ```typescript
 // application/usecases/LoginUseCase.ts
-import { Request, Response } from 'express'
-import { sign } from 'jsonwebtoken'
+import { Request, Response } from 'express';
+import { sign } from 'jsonwebtoken';
 
 export class LoginUseCase {
   async execute(req: Request, res: Response) {
-    const { email, password } = req.body
+    const { email, password } = req.body;
 
-    const user = await this.users.findByEmail(email)
+    const user = await this.users.findByEmail(email);
     if (!user || !user.verifyPassword(password)) {
-      return res.status(401).json({ error: 'Invalid credentials' })
+      return res.status(401).json({ error: 'Invalid credentials' });
     }
 
     // Set HTTP-only cookie
-    const token = sign({ userId: user.id }, process.env.JWT_SECRET)
+    const token = sign({ userId: user.id }, process.env.JWT_SECRET);
     res.cookie('auth_token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
-    })
+      sameSite: 'strict',
+    });
 
-    return res.json({ user: { id: user.id, email: user.email } })
+    return res.json({ user: { id: user.id, email: user.email } });
   }
 }
 
@@ -45,14 +45,14 @@ export class LoginUseCase {
 ```typescript
 // application/usecases/LoginUseCase.ts
 export interface LoginCommand {
-  email: string
-  password: string
+  email: string;
+  password: string;
 }
 
 export interface LoginResult {
-  userId: string
-  email: string
-  authToken: string
+  userId: string;
+  email: string;
+  authToken: string;
 }
 
 export class LoginUseCase {
@@ -62,28 +62,28 @@ export class LoginUseCase {
   ) {}
 
   async execute(command: LoginCommand): Promise<LoginResult> {
-    const user = await this.users.findByEmail(command.email)
+    const user = await this.users.findByEmail(command.email);
 
     if (!user) {
-      throw new InvalidCredentialsError()
+      throw new InvalidCredentialsError();
     }
 
     if (!user.verifyPassword(command.password)) {
-      throw new InvalidCredentialsError()
+      throw new InvalidCredentialsError();
     }
 
-    const token = this.tokenService.generate({ userId: user.id.value })
+    const token = this.tokenService.generate({ userId: user.id.value });
 
     return {
       userId: user.id.value,
       email: user.email.value,
-      authToken: token
-    }
+      authToken: token,
+    };
   }
 }
 
 // interface/http/AuthController.ts
-import { Request, Response } from 'express'
+import { Request, Response } from 'express';
 
 export class AuthController {
   constructor(private loginUseCase: LoginUseCase) {}
@@ -92,24 +92,24 @@ export class AuthController {
     try {
       const result = await this.loginUseCase.execute({
         email: req.body.email,
-        password: req.body.password
-      })
+        password: req.body.password,
+      });
 
       // HTTP concerns in controller
       res.cookie('auth_token', result.authToken, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict'
-      })
+        sameSite: 'strict',
+      });
 
       return res.json({
-        user: { id: result.userId, email: result.email }
-      })
+        user: { id: result.userId, email: result.email },
+      });
     } catch (error) {
       if (error instanceof InvalidCredentialsError) {
-        return res.status(401).json({ error: 'Invalid credentials' })
+        return res.status(401).json({ error: 'Invalid credentials' });
       }
-      throw error
+      throw error;
     }
   }
 }
@@ -117,14 +117,15 @@ export class AuthController {
 // interface/cli/AuthCli.ts - Same use case, different delivery
 export class AuthCli {
   async login(email: string, password: string) {
-    const result = await this.loginUseCase.execute({ email, password })
-    console.log(`Logged in as ${result.email}`)
-    fs.writeFileSync('.auth_token', result.authToken)
+    const result = await this.loginUseCase.execute({ email, password });
+    console.log(`Logged in as ${result.email}`);
+    fs.writeFileSync('.auth_token', result.authToken);
   }
 }
 ```
 
 **Benefits:**
+
 - Same use case for HTTP, CLI, WebSocket, queue consumers
 - Easy to test without HTTP mocking
 - Web framework upgrades isolated to interface layer

@@ -1,6 +1,6 @@
 ---
 name: git-master
-description: "Complete Git expertise system for ALL git operations. PROACTIVELY activate for: (1) ANY Git task (basic/advanced/dangerous), (2) Repository management, (3) Branch strategies and workflows, (4) Conflict resolution, (5) History rewriting/recovery, (6) Platform-specific operations (GitHub/Azure DevOps/Bitbucket), (7) Advanced commands (rebase/cherry-pick/filter-repo). Provides: complete Git command reference, safety guardrails for destructive operations, platform best practices, workflow strategies, reflog recovery techniques, and expert guidance for even the most risky operations. Always asks user preference for automatic commits vs manual control."
+description: 'Complete Git expertise system for ALL git operations. PROACTIVELY activate for: (1) ANY Git task (basic/advanced/dangerous), (2) Repository management, (3) Branch strategies and workflows, (4) Conflict resolution, (5) History rewriting/recovery, (6) Platform-specific operations (GitHub/Azure DevOps/Bitbucket), (7) Advanced commands (rebase/cherry-pick/filter-repo). Provides: complete Git command reference, safety guardrails for destructive operations, platform best practices, workflow strategies, reflog recovery techniques, and expert guidance for even the most risky operations. Always asks user preference for automatic commits vs manual control.'
 ---
 
 # Git Mastery - Complete Git Expertise
@@ -14,10 +14,12 @@ description: "Complete Git expertise system for ALL git operations. PROACTIVELY 
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
 
 **Examples:**
+
 - ❌ WRONG: `D:/repos/project/file.tsx`
 - ✅ CORRECT: `D:\repos\project\file.tsx`
 
 This applies to:
+
 - Edit tool file_path parameter
 - Write tool file_path parameter
 - All file operations on Windows systems
@@ -31,8 +33,6 @@ This applies to:
 - **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
 - **User preference**: Only create additional .md files when user specifically asks for documentation
 
-
-
 ---
 
 Comprehensive guide for ALL Git operations from basic to advanced, including dangerous operations with safety guardrails.
@@ -42,6 +42,7 @@ Comprehensive guide for ALL Git operations from basic to advanced, including dan
 ## TL;DR QUICK REFERENCE
 
 **Safety First - Before ANY Destructive Operation:**
+
 ```bash
 # ALWAYS check status first
 git status
@@ -55,6 +56,7 @@ git reflog
 ```
 
 **User Preference Check:**
+
 - **ALWAYS ASK:** "Would you like me to create commits automatically, or would you prefer to handle commits manually?"
 - Respect user's choice throughout the session
 
@@ -65,6 +67,7 @@ git reflog
 This skill provides COMPLETE Git expertise for ANY Git operation, no matter how advanced, niche, or risky. It covers:
 
 **MUST use this skill for:**
+
 - ✅ ANY Git command or operation
 - ✅ Repository initialization, cloning, configuration
 - ✅ Branch management and strategies
@@ -116,6 +119,7 @@ fi
 
 **ALWAYS ASK at the start of ANY Git task:**
 "Would you like me to:
+
 1. Create commits automatically with appropriate messages
 2. Stage changes only (you handle commits manually)
 3. Just provide guidance (no automatic operations)"
@@ -127,16 +131,19 @@ Respect this choice throughout the session.
 Git behavior and workflows differ across platforms and hosting providers:
 
 **Windows (Git Bash/PowerShell):**
+
 - Line ending handling (core.autocrlf)
 - Path separators and case sensitivity
 - Credential management (Windows Credential Manager)
 
 **Linux/macOS:**
+
 - Case-sensitive filesystems
 - SSH key management
 - Permission handling
 
 **Hosting Platforms:**
+
 - GitHub: Pull requests, GitHub Actions, GitHub CLI
 - Azure DevOps: Pull requests, Azure Pipelines, policies
 - Bitbucket: Pull requests, Bitbucket Pipelines, Jira integration
@@ -303,6 +310,7 @@ git branch -u origin/<branch>
 ### Branch Strategies
 
 **Git Flow:**
+
 - `main/master`: Production-ready code
 - `develop`: Integration branch for features
 - `feature/*`: New features
@@ -310,16 +318,19 @@ git branch -u origin/<branch>
 - `hotfix/*`: Production fixes
 
 **GitHub Flow:**
+
 - `main`: Always deployable
 - `feature/*`: Short-lived feature branches
 - Create PR, review, merge
 
 **Trunk-Based Development:**
+
 - `main`: Single branch
 - Short-lived feature branches (< 1 day)
 - Feature flags for incomplete features
 
 **GitLab Flow:**
+
 - Environment branches: `production`, `staging`, `main`
 - Feature branches merge to `main`
 - Deploy from environment branches
@@ -397,7 +408,7 @@ git diff --name-only --diff-filter=U
 
 ### Rebase Operations
 
-**⚠️  WARNING: Rebase rewrites history. Never rebase commits that have been pushed to shared branches!**
+**⚠️ WARNING: Rebase rewrites history. Never rebase commits that have been pushed to shared branches!**
 
 ```bash
 # Basic rebase
@@ -645,7 +656,7 @@ git stash import < my-stash.patch
 
 ### Reset
 
-**⚠️  WARNING: reset can permanently delete changes!**
+**⚠️ WARNING: reset can permanently delete changes!**
 
 ```bash
 # Soft reset (keep changes staged)
@@ -761,7 +772,7 @@ git bisect skip
 
 ### Clean
 
-**⚠️  WARNING: clean permanently deletes untracked files!**
+**⚠️ WARNING: clean permanently deletes untracked files!**
 
 ```bash
 # Show what would be deleted (dry run - ALWAYS do this first!)
@@ -834,7 +845,7 @@ rm -rf .git/modules/<path>
 
 ### Filter-Repo (History Rewriting)
 
-**⚠️  EXTREMELY DANGEROUS: Rewrites entire repository history!**
+**⚠️ EXTREMELY DANGEROUS: Rewrites entire repository history!**
 
 ```bash
 # Install git-filter-repo (not built-in)
@@ -883,7 +894,7 @@ fi
 
 ### Amend Pushed Commits
 
-**⚠️  DANGER: Changing pushed commits requires force push!**
+**⚠️ DANGER: Changing pushed commits requires force push!**
 
 ```bash
 # Amend last commit
@@ -901,7 +912,7 @@ git push --force-with-lease
 
 ### Rewrite Multiple Commits
 
-**⚠️  DANGER: Interactive rebase on pushed commits!**
+**⚠️ DANGER: Interactive rebase on pushed commits!**
 
 ```bash
 # Interactive rebase
@@ -925,6 +936,7 @@ git push --force-with-lease
 ### GitHub
 
 **Pull Requests:**
+
 ```bash
 # Install GitHub CLI
 # https://cli.github.com/
@@ -961,6 +973,7 @@ gh pr close <number>
 ```
 
 **GitHub Actions:**
+
 ```yaml
 # .github/workflows/ci.yml
 name: CI
@@ -977,6 +990,7 @@ jobs:
 ### Azure DevOps
 
 **Pull Requests:**
+
 ```bash
 # Install Azure DevOps CLI
 # https://docs.microsoft.com/en-us/cli/azure/install-azure-cli
@@ -1000,6 +1014,7 @@ az repos policy create --config policy.json
 ```
 
 **Azure Pipelines:**
+
 ```yaml
 # azure-pipelines.yml
 trigger:
@@ -1014,6 +1029,7 @@ steps:
 ### Bitbucket
 
 **Pull Requests:**
+
 ```bash
 # Create PR (via web or Bitbucket CLI)
 bb pr create
@@ -1027,6 +1043,7 @@ bb pr merge <id>
 ```
 
 **Bitbucket Pipelines:**
+
 ```yaml
 # bitbucket-pipelines.yml
 pipelines:
@@ -1039,6 +1056,7 @@ pipelines:
 ### GitLab
 
 **Merge Requests:**
+
 ```bash
 # Install GitLab CLI (glab)
 # https://gitlab.com/gitlab-org/cli
@@ -1061,6 +1079,7 @@ glab mr close <id>
 ```
 
 **GitLab CI:**
+
 ```yaml
 # .gitlab-ci.yml
 stages:
@@ -1245,6 +1264,7 @@ done
 ### Common Problems
 
 **Detached HEAD:**
+
 ```bash
 # You're in detached HEAD state
 git branch temp  # Create branch at current commit
@@ -1254,6 +1274,7 @@ git branch -d temp
 ```
 
 **Merge conflicts:**
+
 ```bash
 # During merge/rebase
 git status  # See conflicted files
@@ -1267,6 +1288,7 @@ git rebase --abort
 ```
 
 **Accidentally deleted branch:**
+
 ```bash
 # Find branch in reflog
 git reflog
@@ -1275,6 +1297,7 @@ git branch <branch-name> <commit-hash>
 ```
 
 **Committed to wrong branch:**
+
 ```bash
 # Move commit to correct branch
 git switch correct-branch
@@ -1284,6 +1307,7 @@ git reset --hard HEAD~1  # Remove from wrong branch
 ```
 
 **Pushed sensitive data:**
+
 ```bash
 # ⚠️ URGENT: Remove from history immediately
 git filter-repo --path <sensitive-file> --invert-paths
@@ -1292,6 +1316,7 @@ git push --force --all
 ```
 
 **Large commit by mistake:**
+
 ```bash
 # Before pushing
 git reset --soft HEAD~1
@@ -1304,18 +1329,21 @@ git commit -m "message"
 ### Recovery Scenarios
 
 **Recover after hard reset:**
+
 ```bash
 git reflog
 git reset --hard <commit-before-reset>
 ```
 
 **Recover deleted file:**
+
 ```bash
 git log --all --full-history -- <file>
 git checkout <commit>^ -- <file>
 ```
 
 **Recover deleted commits:**
+
 ```bash
 git reflog  # Find commit hash
 git cherry-pick <commit>
@@ -1326,6 +1354,7 @@ git reset --hard <commit>
 ```
 
 **Recover from corrupted repository:**
+
 ```bash
 # Verify corruption
 git fsck --full
@@ -1343,6 +1372,7 @@ git gc --aggressive
 ### Commit Messages
 
 **Conventional Commits format:**
+
 ```
 <type>(<scope>): <subject>
 
@@ -1352,6 +1382,7 @@ git gc --aggressive
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation
@@ -1361,6 +1392,7 @@ git gc --aggressive
 - `chore`: Maintenance
 
 **Example:**
+
 ```
 feat(auth): add OAuth2 authentication
 
@@ -1560,6 +1592,7 @@ git add src/components/Header.jsx
 Git Bash (MINGW/MSYS2) automatically converts Unix-style paths to Windows paths for native executables, which can cause issues with Git operations.
 
 **Path Conversion Behavior:**
+
 ```bash
 # Automatic conversions that occur:
 /foo          → C:/Program Files/Git/usr/foo
@@ -1724,6 +1757,7 @@ git checkout <commit>^ -- <file>
 ## When to Use This Skill
 
 **Always activate for:**
+
 - Any Git command or operation
 - Repository management questions
 - Branch strategy decisions
@@ -1734,6 +1768,7 @@ git checkout <commit>^ -- <file>
 - Dangerous operations (with appropriate warnings)
 
 **Key indicators:**
+
 - User mentions Git, GitHub, GitLab, Bitbucket, Azure DevOps
 - Version control questions
 - Commit, push, pull, merge, rebase operations

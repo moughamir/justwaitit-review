@@ -24,9 +24,9 @@ version: "2024.01.15"  # Date-based, no compatibility info
 
 ```yaml
 # codemod.yaml - semver
-schema_version: "1.0"
+schema_version: '1.0'
 name: react-migration
-version: "1.2.3"
+version: '1.2.3'
 # 1 = Major (breaking changes to transform behavior)
 # 2 = Minor (new features, backward compatible)
 # 3 = Patch (bug fixes, no behavior change)
@@ -34,12 +34,12 @@ version: "1.2.3"
 
 **Version bump guidelines:**
 
-| Change Type | Version Bump | Example |
-|-------------|--------------|---------|
-| Fix bug in existing pattern | Patch: 1.2.3 → 1.2.4 | Fix edge case handling |
+| Change Type                 | Version Bump         | Example                 |
+| --------------------------- | -------------------- | ----------------------- |
+| Fix bug in existing pattern | Patch: 1.2.3 → 1.2.4 | Fix edge case handling  |
 | Add new transformation rule | Minor: 1.2.3 → 1.3.0 | Support new API pattern |
-| Change output format | Major: 1.2.3 → 2.0.0 | Different code style |
-| Remove pattern support | Major: 1.2.3 → 2.0.0 | Drop legacy format |
+| Change output format        | Major: 1.2.3 → 2.0.0 | Different code style    |
+| Remove pattern support      | Major: 1.2.3 → 2.0.0 | Drop legacy format      |
 
 **Pre-release versions:**
 

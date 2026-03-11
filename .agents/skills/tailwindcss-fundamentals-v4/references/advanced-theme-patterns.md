@@ -89,8 +89,16 @@ Define complex values as theme tokens:
   --shadow-elevation-3: 0 10px 20px oklch(0.25 0.02 260 / 0.2);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--color-primary-400), var(--color-primary-600));
-  --gradient-surface: linear-gradient(180deg, var(--color-surface), var(--color-surface-alt));
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary-400),
+    var(--color-primary-600)
+  );
+  --gradient-surface: linear-gradient(
+    180deg,
+    var(--color-surface),
+    var(--color-surface-alt)
+  );
 }
 ```
 
@@ -101,28 +109,28 @@ Define a complete type scale with matching line heights:
 ```css
 @theme {
   /* Modular scale (1.25 ratio) */
-  --text-xs: 0.64rem;      /* 10.24px */
+  --text-xs: 0.64rem; /* 10.24px */
   --text-xs--line-height: 1rem;
 
-  --text-sm: 0.8rem;       /* 12.8px */
+  --text-sm: 0.8rem; /* 12.8px */
   --text-sm--line-height: 1.25rem;
 
-  --text-base: 1rem;       /* 16px */
+  --text-base: 1rem; /* 16px */
   --text-base--line-height: 1.5rem;
 
-  --text-lg: 1.25rem;      /* 20px */
+  --text-lg: 1.25rem; /* 20px */
   --text-lg--line-height: 1.75rem;
 
-  --text-xl: 1.563rem;     /* 25px */
+  --text-xl: 1.563rem; /* 25px */
   --text-xl--line-height: 2rem;
 
-  --text-2xl: 1.953rem;    /* 31.25px */
+  --text-2xl: 1.953rem; /* 31.25px */
   --text-2xl--line-height: 2.25rem;
 
-  --text-3xl: 2.441rem;    /* 39px */
+  --text-3xl: 2.441rem; /* 39px */
   --text-3xl--line-height: 2.5rem;
 
-  --text-4xl: 3.052rem;    /* 48.8px */
+  --text-4xl: 3.052rem; /* 48.8px */
   --text-4xl--line-height: 1;
 }
 ```
@@ -132,7 +140,7 @@ Define a complete type scale with matching line heights:
 Use prefixes to avoid conflicts in multi-tenant systems:
 
 ```css
-@import "tailwindcss" prefix(app);
+@import 'tailwindcss' prefix(app);
 
 @theme {
   --color-brand: oklch(0.6 0.2 250);
@@ -141,9 +149,7 @@ Use prefixes to avoid conflicts in multi-tenant systems:
 
 ```html
 <!-- All utilities prefixed -->
-<div class="app:flex app:bg-brand app:p-4">
-  Content
-</div>
+<div class="app:flex app:bg-brand app:p-4">Content</div>
 ```
 
 ## Theme Inheritance Patterns
@@ -161,13 +167,13 @@ Create theme variants that extend a base:
 /* Brand variant - override in a separate file */
 /* brand-theme.css */
 @layer theme {
-  :root[data-brand="acme"] {
+  :root[data-brand='acme'] {
     --color-primary-50: oklch(0.97 0.03 150);
     --color-primary-500: oklch(0.55 0.2 150);
     --color-primary-900: oklch(0.2 0.12 150);
   }
 
-  :root[data-brand="beta"] {
+  :root[data-brand='beta'] {
     --color-primary-50: oklch(0.97 0.02 30);
     --color-primary-500: oklch(0.6 0.18 30);
     --color-primary-900: oklch(0.25 0.1 30);
@@ -199,17 +205,31 @@ Create theme variants that extend a base:
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slide-up {
-  from { transform: translateY(10px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes scale {
-  from { transform: scale(0.95); }
-  to { transform: scale(1); }
+  from {
+    transform: scale(0.95);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 ```

@@ -20,7 +20,7 @@ user = create_user("alice", True, False, True)  # Which bool is which?
 user = create_user("bob", False, True, False)  # Confusing
 ```
 
-**Correct (keyword-only after *):**
+**Correct (keyword-only after \*):**
 
 ```python
 def create_user(

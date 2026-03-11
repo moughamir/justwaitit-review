@@ -13,31 +13,35 @@ Error codes mix error handling with normal flow and can be silently ignored. Exc
 
 ```typescript
 interface Result<T> {
-  success: boolean
-  data?: T
-  errorCode?: number
-  errorMessage?: string
+  success: boolean;
+  data?: T;
+  errorCode?: number;
+  errorMessage?: string;
 }
 
 function processPayment(amount: number): Result<Payment> {
   if (amount <= 0) {
-    return { success: false, errorCode: 1001, errorMessage: 'Invalid amount' }
+    return { success: false, errorCode: 1001, errorMessage: 'Invalid amount' };
   }
 
-  const balance = getBalance()
+  const balance = getBalance();
   if (balance < amount) {
-    return { success: false, errorCode: 1002, errorMessage: 'Insufficient funds' }
+    return {
+      success: false,
+      errorCode: 1002,
+      errorMessage: 'Insufficient funds',
+    };
   }
 
-  const payment = createPayment(amount)
-  return { success: true, data: payment }
+  const payment = createPayment(amount);
+  return { success: true, data: payment };
 }
 
 // Caller can easily forget to check error
 function checkout(cart: Cart): void {
-  const result = processPayment(cart.total)
+  const result = processPayment(cart.total);
   // Oops, forgot to check result.success
-  sendConfirmation(result.data!)  // Crashes if payment failed
+  sendConfirmation(result.data!); // Crashes if payment failed
 }
 ```
 
@@ -45,53 +49,60 @@ function checkout(cart: Cart): void {
 
 ```typescript
 class PaymentError extends Error {
-  constructor(message: string, public readonly code: string) {
-    super(message)
-    this.name = 'PaymentError'
+  constructor(
+    message: string,
+    public readonly code: string
+  ) {
+    super(message);
+    this.name = 'PaymentError';
   }
 }
 
 class InsufficientFundsError extends PaymentError {
   constructor(available: number, required: number) {
-    super(`Insufficient funds: have ${available}, need ${required}`, 'INSUFFICIENT_FUNDS')
+    super(
+      `Insufficient funds: have ${available}, need ${required}`,
+      'INSUFFICIENT_FUNDS'
+    );
   }
 }
 
 class InvalidAmountError extends PaymentError {
   constructor(amount: number) {
-    super(`Invalid amount: ${amount}`, 'INVALID_AMOUNT')
+    super(`Invalid amount: ${amount}`, 'INVALID_AMOUNT');
   }
 }
 
 function processPayment(amount: number): Payment {
   if (amount <= 0) {
-    throw new InvalidAmountError(amount)
+    throw new InvalidAmountError(amount);
   }
 
-  const balance = getBalance()
+  const balance = getBalance();
   if (balance < amount) {
-    throw new InsufficientFundsError(balance, amount)
+    throw new InsufficientFundsError(balance, amount);
   }
 
-  return createPayment(amount)
+  return createPayment(amount);
 }
 
 // Caller must handle the exception or let it propagate
 function checkout(cart: Cart): void {
   try {
-    const payment = processPayment(cart.total)
-    sendConfirmation(payment)  // Only runs if payment succeeded
+    const payment = processPayment(cart.total);
+    sendConfirmation(payment); // Only runs if payment succeeded
   } catch (error) {
     if (error instanceof InsufficientFundsError) {
-      showFundsNeededMessage(error.message)
+      showFundsNeededMessage(error.message);
     } else {
-      throw error  // Rethrow unexpected errors
+      throw error; // Rethrow unexpected errors
     }
   }
 }
 ```
 
 **When error codes are appropriate:**
+
 - Performance-critical code where exceptions are too expensive
 - Interoperating with languages/systems that use error codes
 - Expected failure cases that aren't exceptional (e.g., user input validation)

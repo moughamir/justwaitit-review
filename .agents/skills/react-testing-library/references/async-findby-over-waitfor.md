@@ -12,25 +12,26 @@ tags: async, findBy, waitFor, best-practice
 **Incorrect (verbose and error-prone):**
 
 ```tsx
-render(<UserList />)
+render(<UserList />);
 
 await waitFor(() => {
-  expect(screen.getByRole('listitem')).toBeInTheDocument()
-})
+  expect(screen.getByRole('listitem')).toBeInTheDocument();
+});
 // Verbose, and assertion inside waitFor is discouraged
 ```
 
 **Correct (cleaner async query):**
 
 ```tsx
-render(<UserList />)
+render(<UserList />);
 
-const listItem = await screen.findByRole('listitem')
-expect(listItem).toBeInTheDocument()
+const listItem = await screen.findByRole('listitem');
+expect(listItem).toBeInTheDocument();
 // Single call handles waiting, clear error if not found
 ```
 
 **When to use waitFor:**
+
 - Waiting for elements to disappear
 - Asserting non-DOM conditions (state, mock calls)
 - Multiple conditions that must be true together
@@ -38,8 +39,8 @@ expect(listItem).toBeInTheDocument()
 ```tsx
 // Good use of waitFor - non-element assertion
 await waitFor(() => {
-  expect(mockFn).toHaveBeenCalledTimes(2)
-})
+  expect(mockFn).toHaveBeenCalledTimes(2);
+});
 ```
 
 Reference: [Common Mistakes - Using waitFor to wait for elements](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library#using-waitfor-to-wait-for-elements-that-can-be-queried-with-find)

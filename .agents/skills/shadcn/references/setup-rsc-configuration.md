@@ -55,11 +55,11 @@ export function Button() { ... }
 export function Button() { ... }
 ```
 
-| Framework | RSC Setting |
-|-----------|-------------|
-| Next.js App Router | `true` |
-| Next.js Pages Router | `false` |
-| Vite | `false` |
-| Remix | `false` |
+| Framework            | RSC Setting |
+| -------------------- | ----------- |
+| Next.js App Router   | `true`      |
+| Next.js Pages Router | `false`     |
+| Vite                 | `false`     |
+| Remix                | `false`     |
 
 Reference: [shadcn/ui components.json](https://ui.shadcn.com/docs/components-json)

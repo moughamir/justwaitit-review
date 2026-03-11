@@ -12,25 +12,25 @@ Always call `userEvent.setup()` before `render()` to ensure proper initializatio
 **Incorrect (setup after render or direct API):**
 
 ```tsx
-render(<Modal />)
+render(<Modal />);
 
-const user = userEvent.setup()
-await user.click(screen.getByRole('button'))
+const user = userEvent.setup();
+await user.click(screen.getByRole('button'));
 // May miss events that fire during render
 
 // Or using direct API (deprecated pattern):
-await userEvent.click(screen.getByRole('button'))
+await userEvent.click(screen.getByRole('button'));
 // Less control over timing and options
 ```
 
 **Correct (setup before render):**
 
 ```tsx
-const user = userEvent.setup()
-render(<Modal />)
+const user = userEvent.setup();
+render(<Modal />);
 
-await user.click(screen.getByRole('button', { name: /open/i }))
-expect(screen.getByRole('dialog')).toBeInTheDocument()
+await user.click(screen.getByRole('button', { name: /open/i }));
+expect(screen.getByRole('dialog')).toBeInTheDocument();
 // Properly configured event simulation
 ```
 
@@ -40,7 +40,7 @@ expect(screen.getByRole('dialog')).toBeInTheDocument()
 const user = userEvent.setup({
   delay: null, // Speed up tests by removing typing delay
   advanceTimers: jest.advanceTimersByTime, // For fake timers
-})
+});
 ```
 
 Reference: [userEvent - Setup](https://testing-library.com/docs/user-event/setup)

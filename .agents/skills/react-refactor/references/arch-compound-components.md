@@ -17,14 +17,23 @@ interface TabsProps {
   onTabChange: (tab: string) => void;
   tabs: Array<{ id: string; label: string; content: React.ReactNode }>;
   renderTab?: (tab: { id: string; label: string }) => React.ReactNode;
-  renderPanel?: (tab: { id: string; content: React.ReactNode }) => React.ReactNode;
+  renderPanel?: (tab: {
+    id: string;
+    content: React.ReactNode;
+  }) => React.ReactNode;
   tabClassName?: string;
   panelClassName?: string;
-  orientation?: "horizontal" | "vertical";
+  orientation?: 'horizontal' | 'vertical';
 }
 
 // 8 props and growing — every new feature adds another prop
-function Tabs({ activeTab, onTabChange, tabs, renderTab, renderPanel }: TabsProps) {
+function Tabs({
+  activeTab,
+  onTabChange,
+  tabs,
+  renderTab,
+  renderPanel,
+}: TabsProps) {
   return (
     <div>
       <div role="tablist">
@@ -57,7 +66,13 @@ const TabsContext = createContext<{
   onTabChange: (tab: string) => void;
 } | null>(null);
 
-function Tabs({ children, defaultTab }: { children: React.ReactNode; defaultTab: string }) {
+function Tabs({
+  children,
+  defaultTab,
+}: {
+  children: React.ReactNode;
+  defaultTab: string;
+}) {
   const [activeTab, setActiveTab] = useState(defaultTab);
   return (
     <TabsContext.Provider value={{ activeTab, onTabChange: setActiveTab }}>
@@ -69,7 +84,11 @@ function Tabs({ children, defaultTab }: { children: React.ReactNode; defaultTab:
 function Tab({ id, children }: { id: string; children: React.ReactNode }) {
   const { activeTab, onTabChange } = useContext(TabsContext)!;
   return (
-    <button role="tab" aria-selected={activeTab === id} onClick={() => onTabChange(id)}>
+    <button
+      role="tab"
+      aria-selected={activeTab === id}
+      onClick={() => onTabChange(id)}
+    >
       {children}
     </button>
   );
@@ -77,16 +96,24 @@ function Tab({ id, children }: { id: string; children: React.ReactNode }) {
 
 function TabPanel({ id, children }: { id: string; children: React.ReactNode }) {
   const { activeTab } = useContext(TabsContext)!;
-  return <div role="tabpanel" hidden={activeTab !== id}>{children}</div>;
+  return (
+    <div role="tabpanel" hidden={activeTab !== id}>
+      {children}
+    </div>
+  );
 }
 
 // Usage — flat API, each child independently composable
 <Tabs defaultTab="settings">
   <Tab id="settings">Settings</Tab>
   <Tab id="billing">Billing</Tab>
-  <TabPanel id="settings"><SettingsForm /></TabPanel>
-  <TabPanel id="billing"><BillingForm /></TabPanel>
-</Tabs>
+  <TabPanel id="settings">
+    <SettingsForm />
+  </TabPanel>
+  <TabPanel id="billing">
+    <BillingForm />
+  </TabPanel>
+</Tabs>;
 ```
 
 Reference: [React Docs - Passing Data Deeply with Context](https://react.dev/learn/passing-data-deeply-with-context)

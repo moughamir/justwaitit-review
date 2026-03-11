@@ -16,16 +16,26 @@ interface UserCardProps {
   userId: string;
   userName: string;
   avatarUrl: string;
-  email?: string;            // Only used in admin view
-  lastLoginAt?: Date;        // Only used in admin view
-  onFollow?: () => void;     // Only used in social view
-  followerCount?: number;    // Only used in social view
-  isOnline?: boolean;        // Only used in chat view
-  lastMessage?: string;      // Only used in chat view
+  email?: string; // Only used in admin view
+  lastLoginAt?: Date; // Only used in admin view
+  onFollow?: () => void; // Only used in social view
+  followerCount?: number; // Only used in social view
+  isOnline?: boolean; // Only used in chat view
+  lastMessage?: string; // Only used in chat view
 }
 
 // Admin page passes social/chat props as undefined — still triggers re-renders
-function UserCard({ userId, userName, avatarUrl, email, lastLoginAt, onFollow, followerCount, isOnline, lastMessage }: UserCardProps) {
+function UserCard({
+  userId,
+  userName,
+  avatarUrl,
+  email,
+  lastLoginAt,
+  onFollow,
+  followerCount,
+  isOnline,
+  lastMessage,
+}: UserCardProps) {
   return (
     <div className="user-card">
       <img src={avatarUrl} alt={userName} />
@@ -33,7 +43,9 @@ function UserCard({ userId, userName, avatarUrl, email, lastLoginAt, onFollow, f
       {email && <p>{email}</p>}
       {lastLoginAt && <p>Last login: {lastLoginAt.toLocaleDateString()}</p>}
       {onFollow && <button onClick={onFollow}>Follow ({followerCount})</button>}
-      {isOnline !== undefined && <span className={isOnline ? "online" : "offline"} />}
+      {isOnline !== undefined && (
+        <span className={isOnline ? 'online' : 'offline'} />
+      )}
       {lastMessage && <p>{lastMessage}</p>}
     </div>
   );
@@ -60,7 +72,13 @@ interface SocialUserCardProps extends UserCardBaseProps {
 }
 
 // Each component only re-renders for props it uses
-function AdminUserCard({ userId, userName, avatarUrl, email, lastLoginAt }: AdminUserCardProps) {
+function AdminUserCard({
+  userId,
+  userName,
+  avatarUrl,
+  email,
+  lastLoginAt,
+}: AdminUserCardProps) {
   return (
     <div className="user-card">
       <img src={avatarUrl} alt={userName} />
@@ -71,7 +89,13 @@ function AdminUserCard({ userId, userName, avatarUrl, email, lastLoginAt }: Admi
   );
 }
 
-function SocialUserCard({ userId, userName, avatarUrl, onFollow, followerCount }: SocialUserCardProps) {
+function SocialUserCard({
+  userId,
+  userName,
+  avatarUrl,
+  onFollow,
+  followerCount,
+}: SocialUserCardProps) {
   return (
     <div className="user-card">
       <img src={avatarUrl} alt={userName} />

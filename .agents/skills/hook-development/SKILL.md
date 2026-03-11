@@ -15,22 +15,23 @@ description: |
 Hooks are event-driven automation that execute in response to Claude Code events. Use hooks to validate operations, enforce policies, load context, and integrate external tools.
 
 **Two hook types:**
+
 - **Prompt-based** (recommended): LLM-driven, context-aware decisions
 - **Command-based**: Shell commands for fast, deterministic checks
 
 ## Hook Events Reference
 
-| Event | When | Common Use |
-|-------|------|------------|
-| PreToolUse | Before tool executes | Validate, approve/deny, modify input |
-| PostToolUse | After tool completes | Test, lint, log, provide feedback |
-| Stop | Main agent stopping | Verify task completeness |
-| SubagentStop | Subagent stopping | Validate subagent work |
-| UserPromptSubmit | User sends prompt | Add context, validate, preprocess |
-| SessionStart | Session begins | Load context, set environment |
-| SessionEnd | Session ends | Cleanup, logging |
-| PreCompact | Before context compaction | Preserve critical information |
-| Notification | Notification shown | Custom alert reactions |
+| Event            | When                      | Common Use                           |
+| ---------------- | ------------------------- | ------------------------------------ |
+| PreToolUse       | Before tool executes      | Validate, approve/deny, modify input |
+| PostToolUse      | After tool completes      | Test, lint, log, provide feedback    |
+| Stop             | Main agent stopping       | Verify task completeness             |
+| SubagentStop     | Subagent stopping         | Validate subagent work               |
+| UserPromptSubmit | User sends prompt         | Add context, validate, preprocess    |
+| SessionStart     | Session begins            | Load context, set environment        |
+| SessionEnd       | Session ends              | Cleanup, logging                     |
+| PreCompact       | Before context compaction | Preserve critical information        |
+| Notification     | Notification shown        | Custom alert reactions               |
 
 ## Configuration Formats
 
@@ -107,11 +108,11 @@ Execute shell commands for deterministic checks:
 
 ### Exit Codes
 
-| Code | Meaning |
-|------|---------|
-| 0 | Success (stdout shown in transcript) |
-| 2 | Blocking error (stderr fed back to Claude) |
-| Other | Non-blocking error |
+| Code  | Meaning                                    |
+| ----- | ------------------------------------------ |
+| 0     | Success (stdout shown in transcript)       |
+| 2     | Blocking error (stderr fed back to Claude) |
+| Other | Non-blocking error                         |
 
 ## Matchers
 
@@ -148,6 +149,7 @@ Access in prompts: `$TOOL_INPUT`, `$TOOL_RESULT`, `$USER_PROMPT`
 ### Output
 
 **Standard (all hooks):**
+
 ```json
 {
   "continue": true,
@@ -157,6 +159,7 @@ Access in prompts: `$TOOL_INPUT`, `$TOOL_RESULT`, `$USER_PROMPT`
 ```
 
 **PreToolUse decisions:**
+
 ```json
 {
   "hookSpecificOutput": {
@@ -167,6 +170,7 @@ Access in prompts: `$TOOL_INPUT`, `$TOOL_RESULT`, `$USER_PROMPT`
 ```
 
 **Stop/SubagentStop decisions:**
+
 ```json
 {
   "decision": "approve|block",
@@ -176,13 +180,14 @@ Access in prompts: `$TOOL_INPUT`, `$TOOL_RESULT`, `$USER_PROMPT`
 
 ## Environment Variables
 
-| Variable | Available | Purpose |
-|----------|-----------|---------|
-| `$CLAUDE_PLUGIN_ROOT` | All hooks | Plugin directory (portable paths) |
-| `$CLAUDE_PROJECT_DIR` | All hooks | Project root path |
-| `$CLAUDE_ENV_FILE` | SessionStart only | Persist env vars for session |
+| Variable              | Available         | Purpose                           |
+| --------------------- | ----------------- | --------------------------------- |
+| `$CLAUDE_PLUGIN_ROOT` | All hooks         | Plugin directory (portable paths) |
+| `$CLAUDE_PROJECT_DIR` | All hooks         | Project root path                 |
+| `$CLAUDE_ENV_FILE`    | SessionStart only | Persist env vars for session      |
 
 **SessionStart can persist variables:**
+
 ```bash
 echo "export PROJECT_TYPE=nodejs" >> "$CLAUDE_ENV_FILE"
 ```
@@ -193,13 +198,17 @@ echo "export PROJECT_TYPE=nodejs" >> "$CLAUDE_ENV_FILE"
 
 ```json
 {
-  "PreToolUse": [{
-    "matcher": "Write|Edit",
-    "hooks": [{
-      "type": "prompt",
-      "prompt": "Check if this file write is safe. Deny writes to: .env, credentials, system paths, or files with path traversal (..). Return 'approve' or 'deny' with reason."
-    }]
-  }]
+  "PreToolUse": [
+    {
+      "matcher": "Write|Edit",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Check if this file write is safe. Deny writes to: .env, credentials, system paths, or files with path traversal (..). Return 'approve' or 'deny' with reason."
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -207,14 +216,18 @@ echo "export PROJECT_TYPE=nodejs" >> "$CLAUDE_ENV_FILE"
 
 ```json
 {
-  "PostToolUse": [{
-    "matcher": "Write|Edit",
-    "hooks": [{
-      "type": "command",
-      "command": "npm test -- --bail",
-      "timeout": 60
-    }]
-  }]
+  "PostToolUse": [
+    {
+      "matcher": "Write|Edit",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "npm test -- --bail",
+          "timeout": 60
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -222,13 +235,17 @@ echo "export PROJECT_TYPE=nodejs" >> "$CLAUDE_ENV_FILE"
 
 ```json
 {
-  "Stop": [{
-    "matcher": "*",
-    "hooks": [{
-      "type": "prompt",
-      "prompt": "Verify: tests run, build succeeded, all questions answered. Return 'approve' to stop or 'block' with reason to continue."
-    }]
-  }]
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "prompt",
+          "prompt": "Verify: tests run, build succeeded, all questions answered. Return 'approve' to stop or 'block' with reason to continue."
+        }
+      ]
+    }
+  ]
 }
 ```
 
@@ -236,14 +253,18 @@ echo "export PROJECT_TYPE=nodejs" >> "$CLAUDE_ENV_FILE"
 
 ```json
 {
-  "SessionStart": [{
-    "matcher": "*",
-    "hooks": [{
-      "type": "command",
-      "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/load-context.sh",
-      "timeout": 10
-    }]
-  }]
+  "SessionStart": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "bash ${CLAUDE_PLUGIN_ROOT}/scripts/load-context.sh",
+          "timeout": 10
+        }
+      ]
+    }
+  ]
 }
 ```
 

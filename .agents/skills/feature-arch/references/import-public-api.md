@@ -39,7 +39,7 @@ import type { User } from '@/features/user';
 ```typescript
 // src/features/user/components/UserProfile.tsx
 import { useUser } from '../hooks/useUser';
-import { formatUserName } from '../utils/formatters';  // Internal util
+import { formatUserName } from '../utils/formatters'; // Internal util
 import type { User } from '../types';
 ```
 
@@ -60,6 +60,7 @@ rules: {
 ```
 
 **Benefits:**
+
 - Refactor internal structure without breaking external imports
 - Clear contract of what a feature provides
 - Smaller, focused public surface area

@@ -14,23 +14,21 @@ Enabling the React Compiler across an entire codebase at once risks regressions 
 ```tsx
 // babel.config.js — compiler applies to every file at once
 module.exports = {
-  plugins: [
-    ["babel-plugin-react-compiler", {}],
-  ],
-}
+  plugins: [['babel-plugin-react-compiler', {}]],
+};
 
 // components/LegacyOrderForm.tsx — relies on mutation patterns
 function LegacyOrderForm({ order }: { order: Order }) {
-  const fields = order.fields
-  fields.push({ name: "total", value: order.computeTotal() }) // mutation breaks compiler
+  const fields = order.fields;
+  fields.push({ name: 'total', value: order.computeTotal() }); // mutation breaks compiler
 
-  return <FormRenderer fields={fields} />
+  return <FormRenderer fields={fields} />;
 }
 
 // components/Dashboard.tsx — safe, but no way to enable separately
 function Dashboard({ metrics }: { metrics: Metric[] }) {
-  const sorted = [...metrics].sort((a, b) => b.value - a.value)
-  return <MetricGrid metrics={sorted} />
+  const sorted = [...metrics].sort((a, b) => b.value - a.value);
+  return <MetricGrid metrics={sorted} />;
 }
 ```
 
@@ -40,28 +38,31 @@ function Dashboard({ metrics }: { metrics: Metric[] }) {
 // babel.config.js — compiler runs but respects directives
 module.exports = {
   plugins: [
-    ["babel-plugin-react-compiler", {
-      compilationMode: "annotation", // only compile files that opt in
-    }],
+    [
+      'babel-plugin-react-compiler',
+      {
+        compilationMode: 'annotation', // only compile files that opt in
+      },
+    ],
   ],
-}
+};
 
 // components/Dashboard.tsx — opted in, fully compiler-safe
-"use memo"
+('use memo');
 
 function Dashboard({ metrics }: { metrics: Metric[] }) {
-  const sorted = [...metrics].sort((a, b) => b.value - a.value)
-  return <MetricGrid metrics={sorted} />
+  const sorted = [...metrics].sort((a, b) => b.value - a.value);
+  return <MetricGrid metrics={sorted} />;
 }
 
 // components/LegacyOrderForm.tsx — explicitly opted out until refactored
-"use no memo"
+('use no memo');
 
 function LegacyOrderForm({ order }: { order: Order }) {
-  const fields = order.fields
-  fields.push({ name: "total", value: order.computeTotal() })
+  const fields = order.fields;
+  fields.push({ name: 'total', value: order.computeTotal() });
 
-  return <FormRenderer fields={fields} />
+  return <FormRenderer fields={fields} />;
 }
 ```
 

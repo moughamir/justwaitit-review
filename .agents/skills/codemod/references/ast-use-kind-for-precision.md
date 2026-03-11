@@ -15,7 +15,7 @@ Combine pattern matching with `kind` constraints to eliminate false positives. P
 const transform: Transform<TSX> = (root) => {
   // Pattern matches too broadly
   const matches = root.findAll({
-    rule: { pattern: "console.log($ARG)" }
+    rule: { pattern: 'console.log($ARG)' },
   });
   // Also matches: const console = { log: fn }; console.log(x)
   // And: "console.log(test)" in strings
@@ -31,9 +31,9 @@ const transform: Transform<TSX> = (root) => {
   // Constrain to actual call expressions only
   const matches = root.findAll({
     rule: {
-      kind: "call_expression",
-      pattern: "console.log($ARG)"
-    }
+      kind: 'call_expression',
+      pattern: 'console.log($ARG)',
+    },
   });
   // Only matches real console.log() calls
   // Ignores strings, comments, and shadowed variables
@@ -42,6 +42,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Common kind values:**
+
 - `call_expression` - function calls
 - `member_expression` - property access (a.b)
 - `arrow_function` - arrow functions

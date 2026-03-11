@@ -13,15 +13,15 @@ Barrel files (`index.ts` that re-export everything from a directory) force bundl
 
 ```tsx
 // components/index.ts — barrel file
-export { UserAvatar } from "./UserAvatar"
-export { UserBadge } from "./UserBadge"
-export { UserCard } from "./UserCard"
-export { UserProfileHeader } from "./UserProfileHeader"
-export { UserActivityFeed } from "./UserActivityFeed"
-export { UserSettingsForm } from "./UserSettingsForm" // 45KB, only used in settings page
+export { UserAvatar } from './UserAvatar';
+export { UserBadge } from './UserBadge';
+export { UserCard } from './UserCard';
+export { UserProfileHeader } from './UserProfileHeader';
+export { UserActivityFeed } from './UserActivityFeed';
+export { UserSettingsForm } from './UserSettingsForm'; // 45KB, only used in settings page
 
 // pages/Dashboard.tsx — only needs UserAvatar
-import { UserAvatar } from "@/components" // loads all 6 components into the chunk
+import { UserAvatar } from '@/components'; // loads all 6 components into the chunk
 ```
 
 **Correct (direct imports enable precise tree shaking):**

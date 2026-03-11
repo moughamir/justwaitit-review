@@ -10,7 +10,7 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
 ### Complete Design Token System
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* ===== COLOR SYSTEM ===== */
@@ -61,9 +61,9 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
 
   --font-*: initial;
 
-  --font-display: "Cal Sans", "Inter", system-ui, sans-serif;
-  --font-body: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-display: 'Cal Sans', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Type scale (Major Third - 1.25) */
   --text-xs: 0.64rem;
@@ -138,10 +138,14 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
   --shadow-*: initial;
 
   --shadow-xs: 0 1px 2px 0 oklch(0 0 0 / 0.05);
-  --shadow-sm: 0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
-  --shadow-md: 0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px oklch(0 0 0 / 0.1), 0 4px 6px -4px oklch(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px oklch(0 0 0 / 0.1), 0 8px 10px -6px oklch(0 0 0 / 0.1);
+  --shadow-sm:
+    0 1px 3px 0 oklch(0 0 0 / 0.1), 0 1px 2px -1px oklch(0 0 0 / 0.1);
+  --shadow-md:
+    0 4px 6px -1px oklch(0 0 0 / 0.1), 0 2px 4px -2px oklch(0 0 0 / 0.1);
+  --shadow-lg:
+    0 10px 15px -3px oklch(0 0 0 / 0.1), 0 4px 6px -4px oklch(0 0 0 / 0.1);
+  --shadow-xl:
+    0 20px 25px -5px oklch(0 0 0 / 0.1), 0 8px 10px -6px oklch(0 0 0 / 0.1);
   --shadow-2xl: 0 25px 50px -12px oklch(0 0 0 / 0.25);
   --shadow-inner: inset 0 2px 4px 0 oklch(0 0 0 / 0.05);
 
@@ -220,7 +224,7 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
 ### Automatic Dark Mode with CSS Variables
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Light mode tokens (default) */
@@ -293,7 +297,7 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
 ### Theme Switching with Data Attributes
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant theme-ocean (&:where([data-theme="ocean"], [data-theme="ocean"] *));
 @custom-variant theme-forest (&:where([data-theme="forest"], [data-theme="forest"] *));
@@ -306,19 +310,19 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
   --color-accent: oklch(0.75 0.18 30);
 }
 
-[data-theme="ocean"] {
+[data-theme='ocean'] {
   --color-primary: oklch(0.55 0.2 220);
   --color-secondary: oklch(0.65 0.15 200);
   --color-accent: oklch(0.7 0.18 180);
 }
 
-[data-theme="forest"] {
+[data-theme='forest'] {
   --color-primary: oklch(0.5 0.18 145);
   --color-secondary: oklch(0.6 0.12 120);
   --color-accent: oklch(0.75 0.15 85);
 }
 
-[data-theme="sunset"] {
+[data-theme='sunset'] {
   --color-primary: oklch(0.6 0.22 25);
   --color-secondary: oklch(0.7 0.2 45);
   --color-accent: oklch(0.8 0.18 65);
@@ -328,7 +332,7 @@ description: Tailwind CSS advanced design systems with design tokens and @theme 
 ```html
 <html data-theme="ocean">
   <body>
-    <button class="bg-primary theme-forest:bg-primary">
+    <button class="theme-forest:bg-primary bg-primary">
       Uses ocean primary, unless explicitly overridden
     </button>
   </body>
@@ -358,7 +362,7 @@ function initTheme() {
 function ThemePicker() {
   return `
     <select onchange="setTheme(this.value)">
-      ${themes.map(t => `<option value="${t}">${t}</option>`).join('')}
+      ${themes.map((t) => `<option value="${t}">${t}</option>`).join('')}
     </select>
   `;
 }
@@ -448,14 +452,30 @@ initTheme();
   --text-fluid-4xl: clamp(3rem, 2rem + 4vw, 5rem);
 }
 
-@utility text-fluid-xs { font-size: var(--text-fluid-xs); }
-@utility text-fluid-sm { font-size: var(--text-fluid-sm); }
-@utility text-fluid-base { font-size: var(--text-fluid-base); }
-@utility text-fluid-lg { font-size: var(--text-fluid-lg); }
-@utility text-fluid-xl { font-size: var(--text-fluid-xl); }
-@utility text-fluid-2xl { font-size: var(--text-fluid-2xl); }
-@utility text-fluid-3xl { font-size: var(--text-fluid-3xl); }
-@utility text-fluid-4xl { font-size: var(--text-fluid-4xl); }
+@utility text-fluid-xs {
+  font-size: var(--text-fluid-xs);
+}
+@utility text-fluid-sm {
+  font-size: var(--text-fluid-sm);
+}
+@utility text-fluid-base {
+  font-size: var(--text-fluid-base);
+}
+@utility text-fluid-lg {
+  font-size: var(--text-fluid-lg);
+}
+@utility text-fluid-xl {
+  font-size: var(--text-fluid-xl);
+}
+@utility text-fluid-2xl {
+  font-size: var(--text-fluid-2xl);
+}
+@utility text-fluid-3xl {
+  font-size: var(--text-fluid-3xl);
+}
+@utility text-fluid-4xl {
+  font-size: var(--text-fluid-4xl);
+}
 ```
 
 ### Fluid Spacing
@@ -471,16 +491,34 @@ initTheme();
   --space-fluid-2xl: clamp(6rem, 4rem + 6vw, 12rem);
 }
 
-@utility p-fluid-xs { padding: var(--space-fluid-xs); }
-@utility p-fluid-sm { padding: var(--space-fluid-sm); }
-@utility p-fluid-md { padding: var(--space-fluid-md); }
-@utility p-fluid-lg { padding: var(--space-fluid-lg); }
-@utility p-fluid-xl { padding: var(--space-fluid-xl); }
+@utility p-fluid-xs {
+  padding: var(--space-fluid-xs);
+}
+@utility p-fluid-sm {
+  padding: var(--space-fluid-sm);
+}
+@utility p-fluid-md {
+  padding: var(--space-fluid-md);
+}
+@utility p-fluid-lg {
+  padding: var(--space-fluid-lg);
+}
+@utility p-fluid-xl {
+  padding: var(--space-fluid-xl);
+}
 
-@utility gap-fluid-xs { gap: var(--space-fluid-xs); }
-@utility gap-fluid-sm { gap: var(--space-fluid-sm); }
-@utility gap-fluid-md { gap: var(--space-fluid-md); }
-@utility gap-fluid-lg { gap: var(--space-fluid-lg); }
+@utility gap-fluid-xs {
+  gap: var(--space-fluid-xs);
+}
+@utility gap-fluid-sm {
+  gap: var(--space-fluid-sm);
+}
+@utility gap-fluid-md {
+  gap: var(--space-fluid-md);
+}
+@utility gap-fluid-lg {
+  gap: var(--space-fluid-lg);
+}
 ```
 
 ## Brand Color Generation
@@ -494,17 +532,35 @@ initTheme();
   --brand-chroma: 0.2;
 
   /* Generate full scale */
-  --color-brand-50: oklch(0.97 calc(var(--brand-chroma) * 0.1) var(--brand-hue));
-  --color-brand-100: oklch(0.93 calc(var(--brand-chroma) * 0.2) var(--brand-hue));
-  --color-brand-200: oklch(0.87 calc(var(--brand-chroma) * 0.4) var(--brand-hue));
-  --color-brand-300: oklch(0.78 calc(var(--brand-chroma) * 0.6) var(--brand-hue));
-  --color-brand-400: oklch(0.68 calc(var(--brand-chroma) * 0.8) var(--brand-hue));
+  --color-brand-50: oklch(
+    0.97 calc(var(--brand-chroma) * 0.1) var(--brand-hue)
+  );
+  --color-brand-100: oklch(
+    0.93 calc(var(--brand-chroma) * 0.2) var(--brand-hue)
+  );
+  --color-brand-200: oklch(
+    0.87 calc(var(--brand-chroma) * 0.4) var(--brand-hue)
+  );
+  --color-brand-300: oklch(
+    0.78 calc(var(--brand-chroma) * 0.6) var(--brand-hue)
+  );
+  --color-brand-400: oklch(
+    0.68 calc(var(--brand-chroma) * 0.8) var(--brand-hue)
+  );
   --color-brand-500: oklch(0.58 var(--brand-chroma) var(--brand-hue));
   --color-brand-600: oklch(0.5 var(--brand-chroma) var(--brand-hue));
-  --color-brand-700: oklch(0.42 calc(var(--brand-chroma) * 0.9) var(--brand-hue));
-  --color-brand-800: oklch(0.35 calc(var(--brand-chroma) * 0.75) var(--brand-hue));
-  --color-brand-900: oklch(0.28 calc(var(--brand-chroma) * 0.6) var(--brand-hue));
-  --color-brand-950: oklch(0.2 calc(var(--brand-chroma) * 0.4) var(--brand-hue));
+  --color-brand-700: oklch(
+    0.42 calc(var(--brand-chroma) * 0.9) var(--brand-hue)
+  );
+  --color-brand-800: oklch(
+    0.35 calc(var(--brand-chroma) * 0.75) var(--brand-hue)
+  );
+  --color-brand-900: oklch(
+    0.28 calc(var(--brand-chroma) * 0.6) var(--brand-hue)
+  );
+  --color-brand-950: oklch(
+    0.2 calc(var(--brand-chroma) * 0.4) var(--brand-hue)
+  );
 }
 ```
 
@@ -526,6 +582,7 @@ apps/
 ```
 
 **packages/design-tokens/tokens.css:**
+
 ```css
 /* Exportable design tokens */
 @theme {
@@ -536,6 +593,7 @@ apps/
 ```
 
 **packages/design-tokens/package.json:**
+
 ```json
 {
   "name": "@mycompany/design-tokens",
@@ -547,9 +605,10 @@ apps/
 ```
 
 **apps/web/app.css:**
+
 ```css
-@import "tailwindcss";
-@import "@mycompany/design-tokens";
+@import 'tailwindcss';
+@import '@mycompany/design-tokens';
 ```
 
 ## Best Practices

@@ -12,75 +12,75 @@ Inline objects in JSX create a new reference on every render. When passed as pro
 **Incorrect (new object reference created every render):**
 
 ```tsx
-import { memo } from "react"
+import { memo } from 'react';
 
 interface ChartConfig {
-  color: string
-  strokeWidth: number
-  animated: boolean
+  color: string;
+  strokeWidth: number;
+  animated: boolean;
 }
 
 const RevenueChart = memo(function RevenueChart({
   config,
   revenues,
 }: {
-  config: ChartConfig
-  revenues: number[]
+  config: ChartConfig;
+  revenues: number[];
 }) {
-  return <canvas data-config={JSON.stringify(config)} />
-})
+  return <canvas data-config={JSON.stringify(config)} />;
+});
 
 function Dashboard({ revenues }: { revenues: number[] }) {
-  const [selectedTab, setSelectedTab] = useState("overview")
+  const [selectedTab, setSelectedTab] = useState('overview');
 
   return (
     <div>
       <TabBar selected={selectedTab} onSelect={setSelectedTab} />
       <RevenueChart
         revenues={revenues}
-        config={{ color: "#4f46e5", strokeWidth: 2, animated: true }} // new object every render
+        config={{ color: '#4f46e5', strokeWidth: 2, animated: true }} // new object every render
       />
     </div>
-  )
+  );
 }
 ```
 
 **Correct (stable reference preserved across renders):**
 
 ```tsx
-import { memo } from "react"
+import { memo } from 'react';
 
 interface ChartConfig {
-  color: string
-  strokeWidth: number
-  animated: boolean
+  color: string;
+  strokeWidth: number;
+  animated: boolean;
 }
 
 const REVENUE_CHART_CONFIG: ChartConfig = {
-  color: "#4f46e5",
+  color: '#4f46e5',
   strokeWidth: 2,
   animated: true,
-}
+};
 
 const RevenueChart = memo(function RevenueChart({
   config,
   revenues,
 }: {
-  config: ChartConfig
-  revenues: number[]
+  config: ChartConfig;
+  revenues: number[];
 }) {
-  return <canvas data-config={JSON.stringify(config)} />
-})
+  return <canvas data-config={JSON.stringify(config)} />;
+});
 
 function Dashboard({ revenues }: { revenues: number[] }) {
-  const [selectedTab, setSelectedTab] = useState("overview")
+  const [selectedTab, setSelectedTab] = useState('overview');
 
   return (
     <div>
       <TabBar selected={selectedTab} onSelect={setSelectedTab} />
       <RevenueChart revenues={revenues} config={REVENUE_CHART_CONFIG} />
     </div>
-  )
+  );
 }
 ```
 

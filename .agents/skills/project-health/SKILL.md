@@ -12,14 +12,14 @@ One skill for everything about your project's Claude Code configuration. Run it 
 
 ## When to Use
 
-| You say... | What happens |
-|-----------|-------------|
-| "project health" / "check project" | Full audit: permissions + context + docs |
-| "setup project" / "kickoff" / "bootstrap" | New project setup from scratch |
-| "tidy permissions" / "clean settings" | Fix permissions file only |
-| "capture learnings" / "update CLAUDE.md" | Save session discoveries |
-| "add python" / "add docker permissions" | Add a preset to existing settings |
-| "audit context" / "audit memory" | Context-focused audit only |
+| You say...                                | What happens                             |
+| ----------------------------------------- | ---------------------------------------- |
+| "project health" / "check project"        | Full audit: permissions + context + docs |
+| "setup project" / "kickoff" / "bootstrap" | New project setup from scratch           |
+| "tidy permissions" / "clean settings"     | Fix permissions file only                |
+| "capture learnings" / "update CLAUDE.md"  | Save session discoveries                 |
+| "add python" / "add docker permissions"   | Add a preset to existing settings        |
+| "audit context" / "audit memory"          | Context-focused audit only               |
 
 ## Architecture: Sub-Agents
 
@@ -149,19 +149,19 @@ Both return summaries. The main agent combines them into one report and proposes
 
 1. **Detect project type** from files present:
 
-   | Indicator | Type |
-   |-----------|------|
-   | `wrangler.jsonc` or `wrangler.toml` | cloudflare-worker |
-   | `vercel.json` or `next.config.*` | vercel-app |
-   | `package.json` (no deploy target) | javascript-typescript |
-   | `pyproject.toml` or `setup.py` or `requirements.txt` | python |
-   | `Cargo.toml` | rust |
-   | `go.mod` | go |
-   | `Gemfile` or `Rakefile` | ruby |
-   | `composer.json` or `wp-config.php` | php |
-   | `Dockerfile` or `docker-compose.yml` | docker |
-   | `.claude/agents/` or operational scripts | ops-admin |
-   | Empty directory | Ask the user |
+   | Indicator                                            | Type                  |
+   | ---------------------------------------------------- | --------------------- |
+   | `wrangler.jsonc` or `wrangler.toml`                  | cloudflare-worker     |
+   | `vercel.json` or `next.config.*`                     | vercel-app            |
+   | `package.json` (no deploy target)                    | javascript-typescript |
+   | `pyproject.toml` or `setup.py` or `requirements.txt` | python                |
+   | `Cargo.toml`                                         | rust                  |
+   | `go.mod`                                             | go                    |
+   | `Gemfile` or `Rakefile`                              | ruby                  |
+   | `composer.json` or `wp-config.php`                   | php                   |
+   | `Dockerfile` or `docker-compose.yml`                 | docker                |
+   | `.claude/agents/` or operational scripts             | ops-admin             |
+   | Empty directory                                      | Ask the user          |
 
    Types stack (e.g. cloudflare-worker + javascript-typescript).
 
@@ -242,28 +242,28 @@ This runs in the **main context** (not a sub-agent) because it needs access to t
 
 ### Size Targets
 
-| File | Target | Maximum |
-|------|--------|---------|
-| Root CLAUDE.md | 50-150 lines | 200 |
-| Sub-directory CLAUDE.md | 15-50 lines | 80 |
-| Rules topic file | 20-80 lines | 120 |
+| File                    | Target       | Maximum |
+| ----------------------- | ------------ | ------- |
+| Root CLAUDE.md          | 50-150 lines | 200     |
+| Sub-directory CLAUDE.md | 15-50 lines  | 80      |
+| Rules topic file        | 20-80 lines  | 120     |
 
 ## Permission Syntax Quick Reference
 
-| Pattern | Meaning |
-|---------|---------|
-| `Bash(git *)` | Preferred — space before `*` = word boundary |
-| `Bash(nvidia-smi)` | Exact match, no arguments |
-| `WebFetch` | Blanket web fetch |
-| `WebSearch` | Blanket web search |
-| `mcp__servername__*` | All tools on one MCP server |
+| Pattern              | Meaning                                      |
+| -------------------- | -------------------------------------------- |
+| `Bash(git *)`        | Preferred — space before `*` = word boundary |
+| `Bash(nvidia-smi)`   | Exact match, no arguments                    |
+| `WebFetch`           | Blanket web fetch                            |
+| `WebSearch`          | Blanket web search                           |
+| `mcp__servername__*` | All tools on one MCP server                  |
 
 ### What Does NOT Work
 
-| Pattern | Why |
-|---------|-----|
-| `mcp__*` | Wildcard doesn't cross `__` boundary |
-| `mcp__*__*` | Still doesn't work |
+| Pattern       | Why                                              |
+| ------------- | ------------------------------------------------ |
+| `mcp__*`      | Wildcard doesn't cross `__` boundary             |
+| `mcp__*__*`   | Still doesn't work                               |
 | `Bash(git:*)` | Deprecated colon syntax (works but prefer space) |
 
 ### Important Behaviours
@@ -281,10 +281,10 @@ This runs in the **main context** (not a sub-agent) because it needs access to t
 
 ## Reference Files
 
-| When | Read |
-|------|------|
-| Building permission presets | [references/permission-presets.md](references/permission-presets.md) |
-| Generating CLAUDE.md, .gitignore | [references/templates.md](references/templates.md) |
-| Scoring CLAUDE.md quality | [references/quality-criteria.md](references/quality-criteria.md) |
-| Detecting project type + expected docs | [references/project-types.md](references/project-types.md) |
-| Setting up commit capture hook | [references/commit-hook.md](references/commit-hook.md) |
+| When                                   | Read                                                                 |
+| -------------------------------------- | -------------------------------------------------------------------- |
+| Building permission presets            | [references/permission-presets.md](references/permission-presets.md) |
+| Generating CLAUDE.md, .gitignore       | [references/templates.md](references/templates.md)                   |
+| Scoring CLAUDE.md quality              | [references/quality-criteria.md](references/quality-criteria.md)     |
+| Detecting project type + expected docs | [references/project-types.md](references/project-types.md)           |
+| Setting up commit capture hook         | [references/commit-hook.md](references/commit-hook.md)               |

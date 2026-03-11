@@ -19,7 +19,7 @@ function InteractiveCard({ item, onSelect }: InteractiveCardProps) {
     <motion.div
       className="interactive-card"
       onTapStart={() => {
-        setIsPressing(true);  // State set on tap start
+        setIsPressing(true); // State set on tap start
         playHapticFeedback();
       }}
       onTap={() => {
@@ -53,7 +53,7 @@ function InteractiveCard({ item, onSelect }: InteractiveCardProps) {
         onSelect(item.id);
       }}
       onTapCancel={() => {
-        setIsPressing(false);  // Cleanup when tap is interrupted
+        setIsPressing(false); // Cleanup when tap is interrupted
       }}
       animate={{ scale: isPressing ? 0.97 : 1 }}
     >
@@ -64,6 +64,7 @@ function InteractiveCard({ item, onSelect }: InteractiveCardProps) {
 ```
 
 **When onTapCancel fires:**
+
 - Pointer leaves the element bounds
 - Gesture transitions to a drag
 - Another touch point is detected (multi-touch)

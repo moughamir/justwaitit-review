@@ -13,14 +13,14 @@ Static imports of motion features block hydration even when animations are not i
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion, domMax } from "framer-motion"; // domMax loaded synchronously
+import { LazyMotion, domMax } from 'framer-motion'; // domMax loaded synchronously
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={domMax}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={domMax}>{children}</LazyMotion>;
 }
 ```
 
@@ -28,17 +28,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion } from "framer-motion";
+import { LazyMotion } from 'framer-motion';
 
-const loadFeatures = () =>
-  import("framer-motion").then((mod) => mod.domMax); // Loaded after hydration
+const loadFeatures = () => import('framer-motion').then((mod) => mod.domMax); // Loaded after hydration
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={loadFeatures}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={loadFeatures}>{children}</LazyMotion>;
 }
 ```
 
@@ -46,21 +45,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
 ```tsx
 // lib/motion-features.ts
-import { domAnimation } from "framer-motion";
+import { domAnimation } from 'framer-motion';
 export default domAnimation;
 
 // app/layout.tsx
-import { LazyMotion } from "framer-motion";
+import { LazyMotion } from 'framer-motion';
 
 const loadFeatures = () =>
-  import("@/lib/motion-features").then((mod) => mod.default);
+  import('@/lib/motion-features').then((mod) => mod.default);
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={loadFeatures}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={loadFeatures}>{children}</LazyMotion>;
 }
 ```
 

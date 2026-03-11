@@ -12,9 +12,9 @@ Snapshot tests serialize the entire rendered output, so any change to class name
 **Incorrect (snapshot test — fails on every structural change):**
 
 ```tsx
-import { render } from "@testing-library/react";
+import { render } from '@testing-library/react';
 
-test("PaymentStatus renders correctly", () => {
+test('PaymentStatus renders correctly', () => {
   const { container } = render(
     <PaymentStatus
       status="completed"
@@ -37,9 +37,9 @@ test("PaymentStatus renders correctly", () => {
 **Correct (explicit assertions — only fail when behavior regresses):**
 
 ```tsx
-import { render, screen } from "@testing-library/react";
+import { render, screen } from '@testing-library/react';
 
-test("PaymentStatus displays completed transaction details", () => {
+test('PaymentStatus displays completed transaction details', () => {
   render(
     <PaymentStatus
       status="completed"
@@ -48,17 +48,19 @@ test("PaymentStatus displays completed transaction details", () => {
     />
   );
 
-  expect(screen.getByText("Payment Complete")).toBeInTheDocument();
-  expect(screen.getByText("$149.99")).toBeInTheDocument();
-  expect(screen.getByText("txn_abc123")).toBeInTheDocument();
-  expect(screen.getByRole("status")).toHaveAttribute("aria-live", "polite");
+  expect(screen.getByText('Payment Complete')).toBeInTheDocument();
+  expect(screen.getByText('$149.99')).toBeInTheDocument();
+  expect(screen.getByText('txn_abc123')).toBeInTheDocument();
+  expect(screen.getByRole('status')).toHaveAttribute('aria-live', 'polite');
 });
 
-test("PaymentStatus displays failed state with retry", () => {
-  render(<PaymentStatus status="failed" amount={149.99} transactionId="txn_abc123" />);
+test('PaymentStatus displays failed state with retry', () => {
+  render(
+    <PaymentStatus status="failed" amount={149.99} transactionId="txn_abc123" />
+  );
 
-  expect(screen.getByText("Payment Failed")).toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "Retry Payment" })).toBeEnabled();
+  expect(screen.getByText('Payment Failed')).toBeInTheDocument();
+  expect(screen.getByRole('button', { name: 'Retry Payment' })).toBeEnabled();
 });
 // Renaming CSS classes, restructuring markup, adding wrappers — tests still pass
 ```

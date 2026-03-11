@@ -16,7 +16,9 @@ test('complex dashboard', async ({ page }) => {
   // Tedious: manually mock every endpoint
   await page.route('/api/user', (route) => route.fulfill({ body: '...' }));
   await page.route('/api/stats', (route) => route.fulfill({ body: '...' }));
-  await page.route('/api/notifications', (route) => route.fulfill({ body: '...' }));
+  await page.route('/api/notifications', (route) =>
+    route.fulfill({ body: '...' })
+  );
   await page.route('/api/activity', (route) => route.fulfill({ body: '...' }));
   await page.route('/api/settings', (route) => route.fulfill({ body: '...' }));
   // ... 10 more endpoints
@@ -92,6 +94,7 @@ test('mixed real and mocked APIs', async ({ page }) => {
 ```
 
 **Best practices for HAR files:**
+
 - Store in `tests/fixtures/` directory
 - Include in git (sanitize sensitive data first)
 - Update periodically when APIs change

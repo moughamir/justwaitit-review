@@ -39,5 +39,6 @@ This hook uses the [hookify](https://github.com/jezweb/claude-skills) plugin for
 
 ```markdown
 ## Workflow
+
 - Before committing: check if any discoveries should be captured to CLAUDE.md or .claude/rules/
 ```

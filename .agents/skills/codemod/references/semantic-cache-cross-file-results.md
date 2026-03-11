@@ -14,21 +14,23 @@ Semantic analysis operations are expensive. Cache results when analyzing multipl
 ```typescript
 const transform: Transform<TSX> = async (root) => {
   const apiCalls = root.findAll({
-    rule: { pattern: "$API.$METHOD($$$ARGS)" }
+    rule: { pattern: '$API.$METHOD($$$ARGS)' },
   });
 
-  const edits = await Promise.all(apiCalls.map(async call => {
-    const apiId = call.getMatch("API");
-    if (!apiId) return null;
+  const edits = await Promise.all(
+    apiCalls.map(async (call) => {
+      const apiId = call.getMatch('API');
+      if (!apiId) return null;
 
-    // Each call re-resolves the same API symbol
-    const def = apiId.definition();  // Expensive!
+      // Each call re-resolves the same API symbol
+      const def = apiId.definition(); // Expensive!
 
-    // Each call re-finds all references
-    const refs = apiId.references();  // Very expensive!
+      // Each call re-finds all references
+      const refs = apiId.references(); // Very expensive!
 
-    return call.replace(`newApi.${call.getMatch("METHOD")?.text()}()`);
-  }));
+      return call.replace(`newApi.${call.getMatch('METHOD')?.text()}()`);
+    })
+  );
 
   return root.commitEdits(edits.filter(Boolean) as Edit[]);
 };
@@ -45,36 +47,39 @@ const transform: Transform<TSX> = async (root) => {
   const refCache = new Map<string, FileReference[]>();
 
   const apiCalls = root.findAll({
-    rule: { pattern: "$API.$METHOD($$$ARGS)" }
+    rule: { pattern: '$API.$METHOD($$$ARGS)' },
   });
 
-  const edits = await Promise.all(apiCalls.map(async call => {
-    const apiId = call.getMatch("API");
-    if (!apiId) return null;
+  const edits = await Promise.all(
+    apiCalls.map(async (call) => {
+      const apiId = call.getMatch('API');
+      if (!apiId) return null;
 
-    const apiName = apiId.text();
+      const apiName = apiId.text();
 
-    // Check cache before expensive operation
-    if (!defCache.has(apiName)) {
-      defCache.set(apiName, apiId.definition());
-    }
-    const def = defCache.get(apiName);
-
-    if (def) {
-      const defKey = `${def.root.filename()}:${def.node.range().start}`;
-      if (!refCache.has(defKey)) {
-        refCache.set(defKey, def.node.references() || []);
+      // Check cache before expensive operation
+      if (!defCache.has(apiName)) {
+        defCache.set(apiName, apiId.definition());
       }
-    }
+      const def = defCache.get(apiName);
 
-    return call.replace(`newApi.${call.getMatch("METHOD")?.text()}()`);
-  }));
+      if (def) {
+        const defKey = `${def.root.filename()}:${def.node.range().start}`;
+        if (!refCache.has(defKey)) {
+          refCache.set(defKey, def.node.references() || []);
+        }
+      }
+
+      return call.replace(`newApi.${call.getMatch('METHOD')?.text()}()`);
+    })
+  );
 
   return root.commitEdits(edits.filter(Boolean) as Edit[]);
 };
 ```
 
 **What to cache:**
+
 - `definition()` results by symbol name
 - `references()` results by definition location
 - Cross-file root objects for repeated writes

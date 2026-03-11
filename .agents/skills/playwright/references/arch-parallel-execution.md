@@ -53,6 +53,7 @@ test('loads settings', async ({ page }) => {
 ```
 
 **When NOT to use parallel execution:**
+
 - Tests that modify shared database state
 - Tests that use the same external service account
 - Tests with intentional sequential dependencies

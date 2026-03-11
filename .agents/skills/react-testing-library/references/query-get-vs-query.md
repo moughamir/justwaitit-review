@@ -12,27 +12,27 @@ tags: query, getBy, queryBy, assertions
 **Incorrect (queryBy for expected element):**
 
 ```tsx
-render(<Alert message="Success!" />)
+render(<Alert message="Success!" />);
 
-expect(screen.queryByRole('alert')).toBeInTheDocument()
+expect(screen.queryByRole('alert')).toBeInTheDocument();
 // If element missing, assertion passes with null - confusing!
 ```
 
 **Correct (getBy for expected element):**
 
 ```tsx
-render(<Alert message="Success!" />)
+render(<Alert message="Success!" />);
 
-expect(screen.getByRole('alert')).toBeInTheDocument()
+expect(screen.getByRole('alert')).toBeInTheDocument();
 // Throws immediately if element not found - clear failure
 ```
 
 **For asserting absence, use queryBy:**
 
 ```tsx
-render(<Dashboard showAlert={false} />)
+render(<Dashboard showAlert={false} />);
 
-expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+expect(screen.queryByRole('alert')).not.toBeInTheDocument();
 // Returns null when absent, assertion passes correctly
 ```
 
@@ -43,4 +43,4 @@ expect(screen.queryByRole('alert')).not.toBeInTheDocument()
 | queryBy | null | Element should NOT exist |
 | findBy | throws (async) | Element will appear |
 
-Reference: [Common Mistakes - Using query* Variants](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library#using-query-variants-for-anything-except-checking-for-non-existence)
+Reference: [Common Mistakes - Using query\* Variants](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library#using-query-variants-for-anything-except-checking-for-non-existence)

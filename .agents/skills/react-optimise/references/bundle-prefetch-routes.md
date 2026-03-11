@@ -12,11 +12,11 @@ Code-split routes introduce a network round-trip when the user navigates. Prefet
 **Incorrect (chunk loads after click, user sees loading state):**
 
 ```tsx
-import { lazy, Suspense } from "react"
-import { Link, Routes, Route } from "react-router-dom"
+import { lazy, Suspense } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
 
-const ProductCatalog = lazy(() => import("./pages/ProductCatalog"))
-const OrderHistory = lazy(() => import("./pages/OrderHistory"))
+const ProductCatalog = lazy(() => import('./pages/ProductCatalog'));
+const OrderHistory = lazy(() => import('./pages/OrderHistory'));
 
 function Navigation() {
   return (
@@ -24,7 +24,7 @@ function Navigation() {
       <Link to="/products">Products</Link>
       <Link to="/orders">Orders</Link>
     </nav>
-  )
+  );
 }
 
 function App() {
@@ -36,38 +36,40 @@ function App() {
         <Route path="/orders" element={<OrderHistory />} />
       </Routes>
     </Suspense>
-  )
+  );
 }
 ```
 
 **Correct (prefetch on hover loads chunk before navigation):**
 
 ```tsx
-import { lazy, Suspense } from "react"
-import { Link, Routes, Route } from "react-router-dom"
+import { lazy, Suspense } from 'react';
+import { Link, Routes, Route } from 'react-router-dom';
 
-const productCatalogImport = () => import("./pages/ProductCatalog")
-const orderHistoryImport = () => import("./pages/OrderHistory")
+const productCatalogImport = () => import('./pages/ProductCatalog');
+const orderHistoryImport = () => import('./pages/OrderHistory');
 
-const ProductCatalog = lazy(productCatalogImport)
-const OrderHistory = lazy(orderHistoryImport)
+const ProductCatalog = lazy(productCatalogImport);
+const OrderHistory = lazy(orderHistoryImport);
 
 function PrefetchLink({
   to,
   prefetch,
   children,
 }: {
-  to: string
-  prefetch: () => Promise<unknown>
-  children: React.ReactNode
+  to: string;
+  prefetch: () => Promise<unknown>;
+  children: React.ReactNode;
 }) {
-  const handlePrefetch = () => { prefetch() } // fires on hover, loads chunk
+  const handlePrefetch = () => {
+    prefetch();
+  }; // fires on hover, loads chunk
 
   return (
     <Link to={to} onMouseEnter={handlePrefetch} onFocus={handlePrefetch}>
       {children}
     </Link>
-  )
+  );
 }
 
 function Navigation() {
@@ -80,7 +82,7 @@ function Navigation() {
         Orders
       </PrefetchLink>
     </nav>
-  )
+  );
 }
 
 function App() {
@@ -92,7 +94,7 @@ function App() {
         <Route path="/orders" element={<OrderHistory />} />
       </Routes>
     </Suspense>
-  )
+  );
 }
 ```
 

@@ -41,7 +41,7 @@ function processTransactions(accounts: Account[]) {
 
 ```typescript
 function processTransactions(accounts: Account[]) {
-  const activeAccounts = accounts.filter(a => a.isActive);
+  const activeAccounts = accounts.filter((a) => a.isActive);
 
   for (const account of activeAccounts) {
     processPendingTransactions(account);
@@ -50,7 +50,7 @@ function processTransactions(accounts: Account[]) {
 
 function processPendingTransactions(account: Account) {
   const pendingTransactions = account.transactions.filter(
-    t => t.status === 'pending' && t.amount > 0
+    (t) => t.status === 'pending' && t.amount > 0
   );
 
   for (const transaction of pendingTransactions) {

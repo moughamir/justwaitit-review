@@ -12,9 +12,9 @@ Client-side fetching with useEffect creates a waterfall: download JS, parse, ren
 **Incorrect (client-side fetch — waterfall and spinner):**
 
 ```tsx
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 export function ProjectList() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -23,7 +23,7 @@ export function ProjectList() {
 
   // Fetch starts AFTER component mounts in the browser
   useEffect(() => {
-    fetch("/api/projects")
+    fetch('/api/projects')
       .then((res) => res.json())
       .then(setProjects)
       .catch((err) => setError(err.message))
@@ -36,7 +36,9 @@ export function ProjectList() {
   return (
     <ul>
       {projects.map((project) => (
-        <li key={project.id}>{project.name} — {project.status}</li>
+        <li key={project.id}>
+          {project.name} — {project.status}
+        </li>
       ))}
     </ul>
   );
@@ -47,24 +49,26 @@ export function ProjectList() {
 
 ```tsx
 // Server component — no "use client", no useState, no useEffect
-import { db } from "@/lib/db";
+import { db } from '@/lib/db';
 
 export async function ProjectList() {
   const projects = await db.project.findMany({
-    orderBy: { updatedAt: "desc" },
+    orderBy: { updatedAt: 'desc' },
   });
 
   return (
     <ul>
       {projects.map((project) => (
-        <li key={project.id}>{project.name} — {project.status}</li>
+        <li key={project.id}>
+          {project.name} — {project.status}
+        </li>
       ))}
     </ul>
   );
 }
 
 // Layout wraps with Suspense for streaming
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
 export default function DashboardPage() {
   return (

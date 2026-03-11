@@ -12,20 +12,23 @@ Don't embed type information in variable names. Modern IDEs show types on hover,
 **Incorrect (type encodings in names):**
 
 ```typescript
-interface IUserService {  // 'I' prefix for interface
-  getUser(userId: string): User
+interface IUserService {
+  // 'I' prefix for interface
+  getUser(userId: string): User;
 }
 
-class UserServiceImpl implements IUserService {  // 'Impl' suffix
-  private strUserName: string  // Hungarian notation
-  private arrUserIds: string[]  // Type in name
-  private nUserCount: number  // 'n' for number
-  private bIsActive: boolean  // 'b' for boolean
-  private oUserConfig: UserConfig  // 'o' for object
-  private lstUsers: User[]  // 'lst' for list
+class UserServiceImpl implements IUserService {
+  // 'Impl' suffix
+  private strUserName: string; // Hungarian notation
+  private arrUserIds: string[]; // Type in name
+  private nUserCount: number; // 'n' for number
+  private bIsActive: boolean; // 'b' for boolean
+  private oUserConfig: UserConfig; // 'o' for object
+  private lstUsers: User[]; // 'lst' for list
 
-  getUserByIdString(userIdStr: string): User {  // Redundant 'String'
-    return this.userMapObject.get(userIdStr)
+  getUserByIdString(userIdStr: string): User {
+    // Redundant 'String'
+    return this.userMapObject.get(userIdStr);
   }
 }
 ```
@@ -33,30 +36,34 @@ class UserServiceImpl implements IUserService {  // 'Impl' suffix
 **Correct (clean names without encodings):**
 
 ```typescript
-interface UserService {  // No 'I' prefix needed
-  getUser(userId: string): User
+interface UserService {
+  // No 'I' prefix needed
+  getUser(userId: string): User;
 }
 
-class DefaultUserService implements UserService {  // Descriptive, not 'Impl'
-  private userName: string
-  private userIds: string[]
-  private userCount: number
-  private isActive: boolean
-  private userConfig: UserConfig
-  private users: User[]
+class DefaultUserService implements UserService {
+  // Descriptive, not 'Impl'
+  private userName: string;
+  private userIds: string[];
+  private userCount: number;
+  private isActive: boolean;
+  private userConfig: UserConfig;
+  private users: User[];
 
   getUser(userId: string): User {
-    return this.userMap.get(userId)
+    return this.userMap.get(userId);
   }
 }
 ```
 
 **Modern alternatives to prefixes:**
+
 - Instead of `IUserService`: Just `UserService` for interface, `HttpUserService` for implementation
 - Instead of `Impl` suffix: Use descriptive names like `CachedUserService`, `MockUserService`
 - Instead of Hungarian notation: Let the type system and IDE show types
 
 **When encodings are acceptable:**
+
 - Language conventions require them (C# interfaces commonly use `I`)
 - Distinguishing otherwise identical names (`abstract class User` vs `class UserEntity`)
 

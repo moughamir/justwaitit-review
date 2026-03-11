@@ -51,26 +51,27 @@ function AnimatedCounter() {
 **Alternative (subscribeWithSelector middleware):**
 
 ```typescript
-import { subscribeWithSelector } from 'zustand/middleware'
+import { subscribeWithSelector } from 'zustand/middleware';
 
 const useProgressStore = create<ProgressState>()(
   subscribeWithSelector((set) => ({
     progress: 0,
     setProgress: (progress) => set({ progress }),
   }))
-)
+);
 
 // Subscribe with fireImmediately option
 useProgressStore.subscribe(
   (state) => state.progress,
   (progress, previousProgress) => {
-    console.log('Progress changed from', previousProgress, 'to', progress)
+    console.log('Progress changed from', previousProgress, 'to', progress);
   },
   { fireImmediately: true }
-)
+);
 ```
 
 **When to use:**
+
 - High-frequency updates (animations, real-time data)
 - Canvas or WebGL rendering
 - Third-party library integration

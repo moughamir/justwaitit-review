@@ -13,19 +13,19 @@ Names should reveal why something exists, what it does, and how it is used. A re
 
 ```typescript
 function proc(lst: number[]): number {
-  let t = 0
+  let t = 0;
   for (const x of lst) {
     if (x > 0) {
-      t += x
+      t += x;
     }
   }
-  return t
+  return t;
 }
 
-const d = getD()
-const flag = checkFlag(d)
+const d = getD();
+const flag = checkFlag(d);
 if (flag) {
-  proc(d.n)
+  proc(d.n);
 }
 ```
 
@@ -33,23 +33,24 @@ if (flag) {
 
 ```typescript
 function sumPositiveValues(values: number[]): number {
-  let total = 0
+  let total = 0;
   for (const value of values) {
     if (value > 0) {
-      total += value
+      total += value;
     }
   }
-  return total
+  return total;
 }
 
-const transaction = getTransaction()
-const isApproved = isTransactionApproved(transaction)
+const transaction = getTransaction();
+const isApproved = isTransactionApproved(transaction);
 if (isApproved) {
-  sumPositiveValues(transaction.amounts)
+  sumPositiveValues(transaction.amounts);
 }
 ```
 
 **Naming guidelines:**
+
 - Variables: Describe what they hold (`customerEmail`, not `str` or `data`)
 - Functions: Describe what they do (`calculateShippingCost`, not `calc`)
 - Booleans: Use `is`, `has`, `can`, `should` prefixes (`isValid`, `hasPermission`)

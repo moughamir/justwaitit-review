@@ -13,56 +13,58 @@ A large monolithic store triggers re-renders in every subscriber when any single
 
 ```tsx
 interface DashboardState {
-  sidebarCollapsed: boolean
-  activeChartRange: "1d" | "7d" | "30d"
-  selectedMetric: string
-  alertThreshold: number
-  refreshInterval: number
+  sidebarCollapsed: boolean;
+  activeChartRange: '1d' | '7d' | '30d';
+  selectedMetric: string;
+  alertThreshold: number;
+  refreshInterval: number;
 }
 
 const DashboardContext = createContext<{
-  state: DashboardState
-  dispatch: Dispatch<DashboardAction>
-}>(null!)
+  state: DashboardState;
+  dispatch: Dispatch<DashboardAction>;
+}>(null!);
 
 function MetricSelector() {
-  const { state, dispatch } = useContext(DashboardContext)
+  const { state, dispatch } = useContext(DashboardContext);
   // Re-renders when sidebarCollapsed, alertThreshold, or refreshInterval change
   return (
     <select
       value={state.selectedMetric}
-      onChange={(e) => dispatch({ type: "SET_METRIC", payload: e.target.value })}
+      onChange={(e) =>
+        dispatch({ type: 'SET_METRIC', payload: e.target.value })
+      }
     >
       <option value="revenue">Revenue</option>
       <option value="signups">Signups</option>
     </select>
-  )
+  );
 }
 
 function SidebarToggle() {
-  const { state, dispatch } = useContext(DashboardContext)
+  const { state, dispatch } = useContext(DashboardContext);
   // Re-renders when selectedMetric, alertThreshold, or refreshInterval change
   return (
-    <button onClick={() => dispatch({ type: "TOGGLE_SIDEBAR" })}>
-      {state.sidebarCollapsed ? "Expand" : "Collapse"}
+    <button onClick={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}>
+      {state.sidebarCollapsed ? 'Expand' : 'Collapse'}
     </button>
-  )
+  );
 }
 ```
 
 **Correct (each atom triggers re-renders only in its subscribers):**
 
 ```tsx
-import { atom, useAtom } from "jotai"
+import { atom, useAtom } from 'jotai';
 
-const sidebarCollapsedAtom = atom(false)
-const activeChartRangeAtom = atom<"1d" | "7d" | "30d">("7d")
-const selectedMetricAtom = atom("revenue")
-const alertThresholdAtom = atom(90)
-const refreshIntervalAtom = atom(30_000)
+const sidebarCollapsedAtom = atom(false);
+const activeChartRangeAtom = atom<'1d' | '7d' | '30d'>('7d');
+const selectedMetricAtom = atom('revenue');
+const alertThresholdAtom = atom(90);
+const refreshIntervalAtom = atom(30_000);
 
 function MetricSelector() {
-  const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom)
+  const [selectedMetric, setSelectedMetric] = useAtom(selectedMetricAtom);
 
   return (
     <select
@@ -72,17 +74,17 @@ function MetricSelector() {
       <option value="revenue">Revenue</option>
       <option value="signups">Signups</option>
     </select>
-  )
+  );
 }
 
 function SidebarToggle() {
-  const [sidebarCollapsed, setSidebarCollapsed] = useAtom(sidebarCollapsedAtom)
+  const [sidebarCollapsed, setSidebarCollapsed] = useAtom(sidebarCollapsedAtom);
 
   return (
     <button onClick={() => setSidebarCollapsed((prev) => !prev)}>
-      {sidebarCollapsed ? "Expand" : "Collapse"}
+      {sidebarCollapsed ? 'Expand' : 'Collapse'}
     </button>
-  )
+  );
 }
 ```
 

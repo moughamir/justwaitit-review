@@ -12,13 +12,13 @@ Dynamic `import()` creates separate chunks that load on demand. Use them for lar
 **Incorrect (static import, always loaded):**
 
 ```typescript
-import { PDFGenerator } from 'pdfkit'  // 500KB
-import { ExcelExporter } from 'exceljs'  // 800KB
-import { ChartLibrary } from 'chart.js'  // 300KB
+import { PDFGenerator } from 'pdfkit'; // 500KB
+import { ExcelExporter } from 'exceljs'; // 800KB
+import { ChartLibrary } from 'chart.js'; // 300KB
 
 export async function exportReport(format: 'pdf' | 'excel' | 'chart') {
   if (format === 'pdf') {
-    return new PDFGenerator().generate()
+    return new PDFGenerator().generate();
   }
   // All 1.6MB loaded even if user never exports
 }
@@ -29,17 +29,17 @@ export async function exportReport(format: 'pdf' | 'excel' | 'chart') {
 ```typescript
 export async function exportReport(format: 'pdf' | 'excel' | 'chart') {
   if (format === 'pdf') {
-    const { PDFGenerator } = await import('pdfkit')
-    return new PDFGenerator().generate()
+    const { PDFGenerator } = await import('pdfkit');
+    return new PDFGenerator().generate();
   }
 
   if (format === 'excel') {
-    const { ExcelExporter } = await import('exceljs')
-    return new ExcelExporter().export()
+    const { ExcelExporter } = await import('exceljs');
+    return new ExcelExporter().export();
   }
 
-  const { ChartLibrary } = await import('chart.js')
-  return new ChartLibrary().render()
+  const { ChartLibrary } = await import('chart.js');
+  return new ChartLibrary().render();
 }
 // Only loads the module needed for the specific format
 ```
@@ -48,15 +48,15 @@ export async function exportReport(format: 'pdf' | 'excel' | 'chart') {
 
 ```typescript
 async function loadPdfGenerator(): Promise<typeof import('pdfkit')> {
-  return import('pdfkit')
+  return import('pdfkit');
 }
 
 // Or with type-only import for the interface
-import type { PDFDocument } from 'pdfkit'
+import type { PDFDocument } from 'pdfkit';
 
 async function generatePdf(): Promise<PDFDocument> {
-  const { default: PDFDocument } = await import('pdfkit')
-  return new PDFDocument()
+  const { default: PDFDocument } = await import('pdfkit');
+  return new PDFDocument();
 }
 ```
 

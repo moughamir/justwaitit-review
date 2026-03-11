@@ -11,17 +11,17 @@ Tailwind CSS v4.0 was released January 22, 2025, featuring a complete rewrite wi
 
 ### Key Changes from v3
 
-| Feature | v3 | v4 |
-|---------|----|----|
-| Configuration | JavaScript (tailwind.config.js) | CSS-first (@theme directive) |
-| Engine | Node.js | Rust (10x faster) |
-| Color format | hex/rgb | OKLCH (perceptually uniform) |
-| Plugins | JS files | @plugin directive |
-| Custom utilities | JS config | @utility directive |
-| PostCSS imports | postcss-import | Built-in |
-| Autoprefixer | Required | Built-in |
-| CSS nesting | postcss-nested | Built-in |
-| Content detection | Explicit config | Automatic |
+| Feature           | v3                              | v4                           |
+| ----------------- | ------------------------------- | ---------------------------- |
+| Configuration     | JavaScript (tailwind.config.js) | CSS-first (@theme directive) |
+| Engine            | Node.js                         | Rust (10x faster)            |
+| Color format      | hex/rgb                         | OKLCH (perceptually uniform) |
+| Plugins           | JS files                        | @plugin directive            |
+| Custom utilities  | JS config                       | @utility directive           |
+| PostCSS imports   | postcss-import                  | Built-in                     |
+| Autoprefixer      | Required                        | Built-in                     |
+| CSS nesting       | postcss-nested                  | Built-in                     |
+| Content detection | Explicit config                 | Automatic                    |
 
 ## Installation
 
@@ -33,12 +33,12 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // vite.config.js
-import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [tailwindcss()]
-})
+  plugins: [tailwindcss()],
+});
 ```
 
 ### PostCSS Projects
@@ -51,16 +51,16 @@ npm install -D tailwindcss @tailwindcss/postcss
 // postcss.config.mjs
 export default {
   plugins: {
-    '@tailwindcss/postcss': {}
-  }
-}
+    '@tailwindcss/postcss': {},
+  },
+};
 ```
 
 ### CSS Entry Point
 
 ```css
 /* app.css - The only required CSS file */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ## CSS-First Configuration
@@ -70,7 +70,7 @@ export default {
 Replace tailwind.config.js with CSS-based configuration:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Colors using modern oklch */
@@ -79,8 +79,8 @@ Replace tailwind.config.js with CSS-based configuration:
   --color-accent: oklch(0.8 0.2 30);
 
   /* Typography */
-  --font-display: "Satoshi", sans-serif;
-  --font-body: "Inter", sans-serif;
+  --font-display: 'Satoshi', sans-serif;
+  --font-body: 'Inter', sans-serif;
 
   /* Custom spacing */
   --spacing-xs: 0.25rem;
@@ -97,16 +97,16 @@ Replace tailwind.config.js with CSS-based configuration:
 
 ### Theme Variables Reference
 
-| Category | Variable Pattern | Example |
-|----------|-----------------|---------|
-| Colors | `--color-*` | `--color-brand-500` |
-| Fonts | `--font-*` | `--font-heading` |
-| Spacing | `--spacing-*` | `--spacing-4` |
-| Breakpoints | `--breakpoint-*` | `--breakpoint-3xl` |
-| Radius | `--radius-*` | `--radius-lg` |
-| Shadows | `--shadow-*` | `--shadow-xl` |
-| Animations | `--animate-*` | `--animate-fade-in` |
-| Easing | `--ease-*` | `--ease-bounce` |
+| Category    | Variable Pattern | Example             |
+| ----------- | ---------------- | ------------------- |
+| Colors      | `--color-*`      | `--color-brand-500` |
+| Fonts       | `--font-*`       | `--font-heading`    |
+| Spacing     | `--spacing-*`    | `--spacing-4`       |
+| Breakpoints | `--breakpoint-*` | `--breakpoint-3xl`  |
+| Radius      | `--radius-*`     | `--radius-lg`       |
+| Shadows     | `--shadow-*`     | `--shadow-xl`       |
+| Animations  | `--animate-*`    | `--animate-fade-in` |
+| Easing      | `--ease-*`       | `--ease-bounce`     |
 
 ### Disabling Defaults
 
@@ -148,6 +148,7 @@ Replace tailwind.config.js with CSS-based configuration:
 ```
 
 Usage:
+
 ```html
 <div class="content-auto scrollbar-hide">
   <h1 class="text-balance">Long headline that should balance nicely</h1>
@@ -173,6 +174,7 @@ Usage:
 ```
 
 Usage:
+
 ```html
 <pre class="tab-4">Code with 4-space tabs</pre>
 <h1 class="text-shadow-[2px]">Glowing text</h1>
@@ -201,6 +203,7 @@ Usage:
 ```
 
 Usage:
+
 ```html
 <button class="hocus:bg-blue-600">Hover or focus</button>
 <div class="data-loading:opacity-50" data-loading="true">Loading...</div>
@@ -215,25 +218,25 @@ Usage:
 ### The @plugin Directive
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 /* Load official plugins */
-@plugin "@tailwindcss/typography";
-@plugin "@tailwindcss/forms";
-@plugin "@tailwindcss/container-queries";
+@plugin '@tailwindcss/typography';
+@plugin '@tailwindcss/forms';
+@plugin '@tailwindcss/container-queries';
 
 /* Load local plugin */
-@plugin "./my-plugin.js";
+@plugin './my-plugin.js';
 ```
 
 ### Plugin with Options
 
 ```css
-@plugin "@tailwindcss/typography" {
-  className: wysiwyg;
+@plugin '@tailwindcss/typography' {
+  classname: wysiwyg;
 }
 
-@plugin "@tailwindcss/forms" {
+@plugin '@tailwindcss/forms' {
   strategy: class;
 }
 ```
@@ -241,25 +244,24 @@ Usage:
 ## Using Prefixes
 
 ```css
-@import "tailwindcss" prefix(tw);
+@import 'tailwindcss' prefix(tw);
 
 @theme {
   /* Define without prefix */
-  --font-display: "Satoshi", sans-serif;
+  --font-display: 'Satoshi', sans-serif;
 }
 ```
 
 ```html
 <!-- Use with prefix -->
-<div class="tw:flex tw:bg-red-500 tw:hover:bg-red-600">
-  Content
-</div>
+<div class="tw:flex tw:bg-red-500 tw:hover:bg-red-600">Content</div>
 ```
 
 Generated CSS variables include prefix:
+
 ```css
 :root {
-  --tw-font-display: "Satoshi", sans-serif;
+  --tw-font-display: 'Satoshi', sans-serif;
 }
 ```
 
@@ -290,13 +292,13 @@ Generated CSS variables include prefix:
 
 ```html
 <!-- Flexbox -->
-<div class="flex flex-col md:flex-row items-center justify-between gap-4">
-
-<!-- Grid -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-<!-- Container -->
-<div class="container mx-auto px-4">
+<div class="flex flex-col items-center justify-between gap-4 md:flex-row">
+  <!-- Grid -->
+  <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    <!-- Container -->
+    <div class="container mx-auto px-4"></div>
+  </div>
+</div>
 ```
 
 ### Spacing
@@ -304,12 +306,12 @@ Generated CSS variables include prefix:
 ```html
 <!-- Padding -->
 <div class="p-4 px-6 py-2">
-
-<!-- Margin -->
-<div class="m-4 mx-auto my-8">
-
-<!-- Gap -->
-<div class="gap-4 gap-x-6 gap-y-2">
+  <!-- Margin -->
+  <div class="m-4 mx-auto my-8">
+    <!-- Gap -->
+    <div class="gap-4 gap-x-6 gap-y-2"></div>
+  </div>
+</div>
 ```
 
 ### Typography
@@ -317,15 +319,17 @@ Generated CSS variables include prefix:
 ```html
 <!-- Font size -->
 <p class="text-sm md:text-base lg:text-lg">
+  <!-- Font weight -->
+</p>
 
-<!-- Font weight -->
 <h1 class="font-bold">
+  <!-- Text color -->
+  <p class="text-gray-600 dark:text-gray-300">
+    <!-- Line height -->
+  </p>
 
-<!-- Text color -->
-<p class="text-gray-600 dark:text-gray-300">
-
-<!-- Line height -->
-<p class="leading-relaxed">
+  <p class="leading-relaxed"></p>
+</h1>
 ```
 
 ### Colors
@@ -333,15 +337,16 @@ Generated CSS variables include prefix:
 ```html
 <!-- Background -->
 <div class="bg-white dark:bg-gray-900">
+  <!-- Text -->
+  <p class="text-blue-600">
+    <!-- Border -->
+  </p>
 
-<!-- Text -->
-<p class="text-blue-600">
-
-<!-- Border -->
-<div class="border border-gray-200">
-
-<!-- Ring -->
-<button class="focus:ring-2 focus:ring-blue-500">
+  <div class="border border-gray-200">
+    <!-- Ring -->
+    <button class="focus:ring-2 focus:ring-blue-500"></button>
+  </div>
+</div>
 ```
 
 ### Sizing
@@ -349,25 +354,25 @@ Generated CSS variables include prefix:
 ```html
 <!-- Width -->
 <div class="w-full md:w-1/2 lg:w-1/3">
-
-<!-- Height -->
-<div class="h-screen min-h-[500px]">
-
-<!-- Max width -->
-<div class="max-w-xl mx-auto">
+  <!-- Height -->
+  <div class="h-screen min-h-[500px]">
+    <!-- Max width -->
+    <div class="mx-auto max-w-xl"></div>
+  </div>
+</div>
 ```
 
 ## Arbitrary Values
 
 ```html
 <!-- Use any CSS value -->
-<div class="top-[117px] left-[calc(50%-4rem)]">
-
-<!-- With CSS variables -->
-<div class="bg-[var(--my-color)]">
-
-<!-- Complex values -->
-<div class="grid-cols-[1fr_500px_2fr]">
+<div class="left-[calc(50%-4rem)] top-[117px]">
+  <!-- With CSS variables -->
+  <div class="bg-[var(--my-color)]">
+    <!-- Complex values -->
+    <div class="grid-cols-[1fr_500px_2fr]"></div>
+  </div>
+</div>
 ```
 
 ## Important Modifier
@@ -375,18 +380,18 @@ Generated CSS variables include prefix:
 ```html
 <!-- Force important -->
 <div class="!mt-0">
-
-<!-- With variants -->
-<div class="hover:!bg-red-500">
+  <!-- With variants -->
+  <div class="hover:!bg-red-500"></div>
+</div>
 ```
 
 ## Built-in Features (No Config Needed)
 
-| Feature | v3 Requirement | v4 |
-|---------|---------------|-----|
-| @import handling | postcss-import | Built-in |
-| Vendor prefixing | autoprefixer | Built-in |
-| CSS nesting | postcss-nested | Built-in |
+| Feature           | v3 Requirement | v4        |
+| ----------------- | -------------- | --------- |
+| @import handling  | postcss-import | Built-in  |
+| Vendor prefixing  | autoprefixer   | Built-in  |
+| CSS nesting       | postcss-nested | Built-in  |
 | Content detection | content config | Automatic |
 
 ## Layers
@@ -401,7 +406,7 @@ Generated CSS variables include prefix:
 
 @layer components {
   .btn {
-    @apply px-4 py-2 rounded font-medium;
+    @apply rounded px-4 py-2 font-medium;
   }
 }
 
@@ -424,7 +429,7 @@ OKLCH provides perceptually uniform colors, better gradients, and wide gamut sup
   /* Primary palette - adjust L for shades */
   --color-primary-50: oklch(0.97 0.02 250);
   --color-primary-100: oklch(0.93 0.04 250);
-  --color-primary-500: oklch(0.55 0.2 250);  /* Base */
+  --color-primary-500: oklch(0.55 0.2 250); /* Base */
   --color-primary-600: oklch(0.48 0.2 250);
   --color-primary-900: oklch(0.27 0.12 250);
 
@@ -546,11 +551,9 @@ Always structure responsive classes progressively:
 
 ```html
 <!-- Base (mobile) -> sm -> md -> lg -> xl -> 2xl -->
-<div class="
-  text-sm md:text-base lg:text-lg
-  p-4 md:p-6 lg:p-8
-  grid-cols-1 md:grid-cols-2 lg:grid-cols-3
-">
+<div
+  class="grid-cols-1 p-4 text-sm md:grid-cols-2 md:p-6 md:text-base lg:grid-cols-3 lg:p-8 lg:text-lg"
+>
   Content
 </div>
 ```
@@ -559,13 +562,9 @@ Always structure responsive classes progressively:
 
 ```html
 <!-- Touch-friendly button (44px minimum - WCAG 2.2) -->
-<button class="
-  min-h-11 min-w-11 px-4 py-2.5
-  bg-primary-600 hover:bg-primary-700 text-white
-  rounded-lg font-medium
-  focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2
-  transition-colors motion-reduce:transition-none
-">
+<button
+  class="bg-primary-600 hover:bg-primary-700 focus-visible:ring-primary-500 min-h-11 min-w-11 rounded-lg px-4 py-2.5 font-medium text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 motion-reduce:transition-none"
+>
   Button Text
 </button>
 ```

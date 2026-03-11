@@ -1,6 +1,6 @@
 ---
 name: web-design-patterns
-description: "Design patterns for website sections — heroes, cards, CTAs, trust signals, testimonials. Principle-based patterns that avoid AI-generated aesthetics. Pair with web-design-methodology for implementation."
+description: 'Design patterns for website sections — heroes, cards, CTAs, trust signals, testimonials. Principle-based patterns that avoid AI-generated aesthetics. Pair with web-design-methodology for implementation.'
 ---
 
 # Web Design Patterns
@@ -13,13 +13,13 @@ Well-designed website sections: heroes, card layouts, CTAs, trust signals, and t
 
 ## When to Read Which Reference
 
-| Building this... | Read this reference |
-|------------------|-------------------|
-| Homepage hero, page headers, landing pages | `references/hero-patterns.md` |
-| Service cards, team grids, pricing tiers, portfolios | `references/card-patterns.md` |
-| Conversion sections, buttons, banner CTAs | `references/cta-patterns.md` |
-| Credibility: badges, licences, reviews, guarantees | `references/trust-signals.md` |
-| Customer reviews, social proof, quote sections | `references/testimonial-patterns.md` |
+| Building this...                                     | Read this reference                  |
+| ---------------------------------------------------- | ------------------------------------ |
+| Homepage hero, page headers, landing pages           | `references/hero-patterns.md`        |
+| Service cards, team grids, pricing tiers, portfolios | `references/card-patterns.md`        |
+| Conversion sections, buttons, banner CTAs            | `references/cta-patterns.md`         |
+| Credibility: badges, licences, reviews, guarantees   | `references/trust-signals.md`        |
+| Customer reviews, social proof, quote sections       | `references/testimonial-patterns.md` |
 
 **Load on demand** — don't read all five for every project. Read the one(s) relevant to the current section.
 
@@ -52,6 +52,7 @@ The "AI skeleton" that signals template-generated design:
 Non-negotiable across all patterns:
 
 **On lead-gen sites (no real business data), NEVER fabricate:**
+
 - Star ratings or review counts
 - Specific years in business
 - Licence or ABN numbers
@@ -59,6 +60,7 @@ Non-negotiable across all patterns:
 - Exact customer counts
 
 **Safe alternatives for lead-gen:**
+
 - "Experienced Team" (not "25 Years Experience")
 - "Highly Rated" (not "4.9 Stars (127 Reviews)")
 - "Licensed & Insured" (not "QBCC License #1234567")
@@ -67,29 +69,32 @@ Non-negotiable across all patterns:
 
 The same section type looks completely different for different businesses:
 
-| Business type | Design feel |
-|---------------|-------------|
-| Emergency services | Direct, immediate, phone-first |
-| Luxury/hospitality | Spacious, refined, atmospheric |
-| Trades/local services | Trustworthy, capable, genuine |
-| Professional/corporate | Confident, clean, structured |
-| Creative/agency | Distinctive, bold, personality-driven |
+| Business type          | Design feel                           |
+| ---------------------- | ------------------------------------- |
+| Emergency services     | Direct, immediate, phone-first        |
+| Luxury/hospitality     | Spacious, refined, atmospheric        |
+| Trades/local services  | Trustworthy, capable, genuine         |
+| Professional/corporate | Confident, clean, structured          |
+| Creative/agency        | Distinctive, bold, personality-driven |
 
 ## Quick Pattern Examples
 
 ### Hero Approaches
 
 **Image-dominant** (strong photography available):
+
 - Let the image do the work, minimal text
 - One clear focal point
 - Text placement within image composition, not slapped on top
 
 **Typography-dominant** (no strong imagery):
+
 - Font choice, size, weight, spacing IS the design
 - Generous whitespace as active design element
 - Colour blocking or subtle texture instead of stock photos
 
 **Split/balanced** (strong copy + strong imagery):
+
 - One side dominates slightly — true 50/50 feels indecisive
 - On mobile, order matters — which element first in vertical stack?
 
@@ -103,6 +108,7 @@ The same section type looks completely different for different businesses:
 ### CTA Hierarchy
 
 Match CTA urgency to business context:
+
 - **Emergency services**: Phone number IS the CTA. Huge, high-contrast, tappable.
 - **Professional services**: Lower commitment first. "Book a consultation."
 - **Creative/agency**: Relationship-building. "View our work."
@@ -111,22 +117,22 @@ Match CTA urgency to business context:
 
 ### Trust Signal Hierarchy
 
-| Tier | Type | Example |
-|------|------|---------|
-| 1 (Strongest) | Specific, verifiable | "QBCC License #1234567" |
-| 2 | Third-party validation | "4.8 stars (127 Google Reviews)" + link |
-| 3 | Self-claimed | "Fully licensed and insured" |
-| 4 (Weakest) | Generic assurances | "Quality guaranteed" |
+| Tier          | Type                   | Example                                 |
+| ------------- | ---------------------- | --------------------------------------- |
+| 1 (Strongest) | Specific, verifiable   | "QBCC License #1234567"                 |
+| 2             | Third-party validation | "4.8 stars (127 Google Reviews)" + link |
+| 3             | Self-claimed           | "Fully licensed and insured"            |
+| 4 (Weakest)   | Generic assurances     | "Quality guaranteed"                    |
 
 One Tier 1 signal beats three Tier 4 signals. Distribute trust throughout the page — don't isolate in one section.
 
 ### Testimonial Approach
 
-| Situation | Approach |
-|-----------|----------|
-| One powerful testimonial | Single featured quote, make it big |
-| 3-6 good testimonials | Grid with variety, one featured |
-| No real testimonials | Service promises, guarantees, process descriptions |
+| Situation                | Approach                                           |
+| ------------------------ | -------------------------------------------------- |
+| One powerful testimonial | Single featured quote, make it big                 |
+| 3-6 good testimonials    | Grid with variety, one featured                    |
+| No real testimonials     | Service promises, guarantees, process descriptions |
 
 **Never use carousels** — users see 1 of 5 testimonials, <1% click controls. Show all or curate the best 3.
 
@@ -134,10 +140,10 @@ One Tier 1 signal beats three Tier 4 signals. Distribute trust throughout the pa
 
 Each reference is a deep-dive (300-470 lines) with full principles, anti-patterns, implementation patterns, and business-specific guidance.
 
-| File | Lines | Covers |
-|------|-------|--------|
-| `hero-patterns.md` | ~470 | Approach selection, constraint-based creativity, overlay techniques, responsive behaviour, page-specific heroes |
-| `card-patterns.md` | ~550 | Layout decision framework, anti-sameness strategies, grid math, orphan handling, CSS patterns, business context |
-| `cta-patterns.md` | ~420 | Action hierarchy, placement strategy, copy principles, visual design, mobile considerations, context-specific CTAs |
-| `trust-signals.md` | ~490 | Trust psychology, trust hierarchy, context-sensitive trust, lead-gen vs client, placement strategy, anti-patterns |
-| `testimonial-patterns.md` | ~350 | Social proof psychology, lead-gen ethics, design approach selection, content principles, placement, alternatives |
+| File                      | Lines | Covers                                                                                                             |
+| ------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------ |
+| `hero-patterns.md`        | ~470  | Approach selection, constraint-based creativity, overlay techniques, responsive behaviour, page-specific heroes    |
+| `card-patterns.md`        | ~550  | Layout decision framework, anti-sameness strategies, grid math, orphan handling, CSS patterns, business context    |
+| `cta-patterns.md`         | ~420  | Action hierarchy, placement strategy, copy principles, visual design, mobile considerations, context-specific CTAs |
+| `trust-signals.md`        | ~490  | Trust psychology, trust hierarchy, context-sensitive trust, lead-gen vs client, placement strategy, anti-patterns  |
+| `testimonial-patterns.md` | ~350  | Social proof psychology, lead-gen ethics, design approach selection, content principles, placement, alternatives   |

@@ -5,7 +5,7 @@ impactDescription: 20-50% memory reduction per instance
 tags: mem, slots, classes, optimization
 ---
 
-## Use __slots__ for Memory-Efficient Classes
+## Use **slots** for Memory-Efficient Classes
 
 By default, Python stores instance attributes in a `__dict__` dictionary. `__slots__` replaces this with a fixed-size array, reducing memory and speeding up attribute access.
 
@@ -40,11 +40,13 @@ points = [Point(i, i, i) for i in range(100_000)]
 ```
 
 **Benefits:**
+
 - 20-50% memory reduction per instance
 - 10-20% faster attribute access
 - Prevents accidental attribute creation
 
-**When NOT to use __slots__:**
+**When NOT to use **slots**:**
+
 - When you need dynamic attribute creation
 - When subclasses need their own `__dict__`
 - For classes with few instances

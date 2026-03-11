@@ -15,28 +15,28 @@ Long functions are the most common source of code complexity. Extract cohesive b
 function processOrder(order: Order): ProcessedOrder {
   // Validate order
   if (!order.items || order.items.length === 0) {
-    throw new Error('Order must have items')
+    throw new Error('Order must have items');
   }
   if (!order.customer.email) {
-    throw new Error('Customer email required')
+    throw new Error('Customer email required');
   }
 
   // Calculate totals
-  let subtotal = 0
+  let subtotal = 0;
   for (const item of order.items) {
-    subtotal += item.price * item.quantity
+    subtotal += item.price * item.quantity;
   }
-  const tax = subtotal * 0.1
-  const shipping = subtotal > 100 ? 0 : 10
-  const total = subtotal + tax + shipping
+  const tax = subtotal * 0.1;
+  const shipping = subtotal > 100 ? 0 : 10;
+  const total = subtotal + tax + shipping;
 
   // Format for display
-  const formattedItems = order.items.map(item => ({
+  const formattedItems = order.items.map((item) => ({
     name: item.name,
-    display: `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
-  }))
+    display: `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`,
+  }));
 
-  return { ...order, subtotal, tax, shipping, total, formattedItems }
+  return { ...order, subtotal, tax, shipping, total, formattedItems };
 }
 ```
 
@@ -44,38 +44,42 @@ function processOrder(order: Order): ProcessedOrder {
 
 ```typescript
 function processOrder(order: Order): ProcessedOrder {
-  validateOrder(order)
-  const totals = calculateTotals(order.items)
-  const formattedItems = formatOrderItems(order.items)
+  validateOrder(order);
+  const totals = calculateTotals(order.items);
+  const formattedItems = formatOrderItems(order.items);
 
-  return { ...order, ...totals, formattedItems }
+  return { ...order, ...totals, formattedItems };
 }
 
 function validateOrder(order: Order): void {
   if (!order.items || order.items.length === 0) {
-    throw new Error('Order must have items')
+    throw new Error('Order must have items');
   }
   if (!order.customer.email) {
-    throw new Error('Customer email required')
+    throw new Error('Customer email required');
   }
 }
 
 function calculateTotals(items: OrderItem[]): OrderTotals {
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const tax = subtotal * 0.1
-  const shipping = subtotal > 100 ? 0 : 10
-  return { subtotal, tax, shipping, total: subtotal + tax + shipping }
+  const subtotal = items.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+  const tax = subtotal * 0.1;
+  const shipping = subtotal > 100 ? 0 : 10;
+  return { subtotal, tax, shipping, total: subtotal + tax + shipping };
 }
 
 function formatOrderItems(items: OrderItem[]): FormattedItem[] {
-  return items.map(item => ({
+  return items.map((item) => ({
     name: item.name,
-    display: `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`
-  }))
+    display: `${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}`,
+  }));
 }
 ```
 
 **When to extract:**
+
 - Code block has a clear single purpose
 - Block is reusable in other contexts
 - Block requires its own documentation/testing

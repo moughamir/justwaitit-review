@@ -13,14 +13,14 @@ Rendering 1000+ items creates 1000+ DOM nodes that consume memory, slow initial 
 
 ```tsx
 interface Product {
-  id: string
-  name: string
-  price: number
+  id: string;
+  name: string;
+  price: number;
 }
 
 function ProductCatalog({ products }: { products: Product[] }) {
   return (
-    <div className="product-list" style={{ height: 600, overflow: "auto" }}>
+    <div className="product-list" style={{ height: 600, overflow: 'auto' }}>
       {products.map((product) => (
         <div key={product.id} className="product-row" style={{ height: 48 }}>
           <span>{product.name}</span>
@@ -29,55 +29,55 @@ function ProductCatalog({ products }: { products: Product[] }) {
       ))}
       {/* 5000 products = 5000 DOM nodes mounted simultaneously */}
     </div>
-  )
+  );
 }
 ```
 
 **Correct (renders only visible DOM nodes):**
 
 ```tsx
-import { useVirtualizer } from "@tanstack/react-virtual"
-import { useRef } from "react"
+import { useVirtualizer } from '@tanstack/react-virtual';
+import { useRef } from 'react';
 
 interface Product {
-  id: string
-  name: string
-  price: number
+  id: string;
+  name: string;
+  price: number;
 }
 
 function ProductCatalog({ products }: { products: Product[] }) {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
     count: products.length,
     getScrollElement: () => scrollContainerRef.current,
     estimateSize: () => 48, // estimated row height in pixels
-  })
+  });
 
   return (
-    <div ref={scrollContainerRef} style={{ height: 600, overflow: "auto" }}>
-      <div style={{ height: virtualizer.getTotalSize(), position: "relative" }}>
+    <div ref={scrollContainerRef} style={{ height: 600, overflow: 'auto' }}>
+      <div style={{ height: virtualizer.getTotalSize(), position: 'relative' }}>
         {virtualizer.getVirtualItems().map((virtualRow) => {
-          const product = products[virtualRow.index]
+          const product = products[virtualRow.index];
           return (
             <div
               key={product.id}
               className="product-row"
               style={{
-                position: "absolute",
+                position: 'absolute',
                 top: virtualRow.start,
                 height: virtualRow.size,
-                width: "100%",
+                width: '100%',
               }}
             >
               <span>{product.name}</span>
               <span>${product.price.toFixed(2)}</span>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 ```
 

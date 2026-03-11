@@ -18,7 +18,7 @@ const useEntitiesStore = create((set) => ({
   products: [],
   orders: [],
   // Hard to find what belongs where
-}))
+}));
 
 // stores/ui.ts - all UI state together
 const useUIStore = create((set) => ({
@@ -26,7 +26,7 @@ const useUIStore = create((set) => ({
   productFilterVisible: false,
   checkoutStep: 0,
   // Unrelated concerns mixed
-}))
+}));
 ```
 
 **Correct (organized by feature domain):**
@@ -36,9 +36,11 @@ const useUIStore = create((set) => ({
 const useAuthStore = create<AuthState>((set) => ({
   user: null,
   isAuthenticated: false,
-  login: (credentials) => { /* ... */ },
+  login: (credentials) => {
+    /* ... */
+  },
   logout: () => set({ user: null, isAuthenticated: false }),
-}))
+}));
 
 // features/catalog/store.ts
 const useCatalogStore = create<CatalogState>((set) => ({
@@ -47,7 +49,7 @@ const useCatalogStore = create<CatalogState>((set) => ({
   filterVisible: false,
   setFilters: (filters) => set({ filters }),
   toggleFilterVisible: () => set((s) => ({ filterVisible: !s.filterVisible })),
-}))
+}));
 
 // features/checkout/store.ts
 const useCheckoutStore = create<CheckoutState>((set) => ({
@@ -55,10 +57,11 @@ const useCheckoutStore = create<CheckoutState>((set) => ({
   shippingAddress: null,
   paymentMethod: null,
   nextStep: () => set((s) => ({ step: s.step + 1 })),
-}))
+}));
 ```
 
 **Benefits:**
+
 - Feature teams own their stores
 - Easy to code-split by feature
 - Related state and actions colocated

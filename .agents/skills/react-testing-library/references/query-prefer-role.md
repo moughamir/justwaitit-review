@@ -12,22 +12,23 @@ tags: query, getByRole, accessibility, best-practice
 **Incorrect (tests implementation details):**
 
 ```tsx
-render(<button className="submit-btn">Submit</button>)
+render(<button className="submit-btn">Submit</button>);
 
-const button = screen.getByTestId('submit-button')
+const button = screen.getByTestId('submit-button');
 // Tests internal attribute, not user-visible behavior
 ```
 
 **Correct (tests accessible behavior):**
 
 ```tsx
-render(<button className="submit-btn">Submit</button>)
+render(<button className="submit-btn">Submit</button>);
 
-const button = screen.getByRole('button', { name: /submit/i })
+const button = screen.getByRole('button', { name: /submit/i });
 // Tests what users actually see and interact with
 ```
 
 **Benefits:**
+
 - Catches accessibility issues during testing
 - More resilient to implementation changes
 - Reflects how real users find elements

@@ -52,6 +52,7 @@ public void setContext(FitNesseContext context) {
 ```
 
 **Why avoid alignment?**
+
 - Adding a longer variable name requires reformatting all lines
 - Eyes are drawn to the wrong thing (the alignment, not the names)
 - Most formatters don't preserve it anyway

@@ -15,16 +15,16 @@ After successful form submission, reset the form state to prevent stale data, du
 function ContactForm() {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
-  })
+  });
 
   const onSubmit = async (data: ContactFormValues) => {
-    await submitContact(data)
-    toast.success("Message sent!")
+    await submitContact(data);
+    toast.success('Message sent!');
     // Form still shows old data
     // User might accidentally resubmit
-  }
+  };
 
-  return <Form {...form}>{/* ... */}</Form>
+  return <Form {...form}>{/* ... */}</Form>;
 }
 ```
 
@@ -35,37 +35,38 @@ function ContactForm() {
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactSchema),
     defaultValues: {
-      name: "",
-      email: "",
-      message: "",
+      name: '',
+      email: '',
+      message: '',
     },
-  })
+  });
 
   const onSubmit = async (data: ContactFormValues) => {
     try {
-      await submitContact(data)
-      toast.success("Message sent!")
-      form.reset() // Resets to defaultValues and clears errors
+      await submitContact(data);
+      toast.success('Message sent!');
+      form.reset(); // Resets to defaultValues and clears errors
     } catch (error) {
-      toast.error("Failed to send message")
+      toast.error('Failed to send message');
       // Keep form data so user can retry
     }
-  }
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         {/* Form fields */}
         <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting ? "Sending..." : "Send Message"}
+          {form.formState.isSubmitting ? 'Sending...' : 'Send Message'}
         </Button>
       </form>
     </Form>
-  )
+  );
 }
 ```
 
 **Reset patterns:**
+
 - `form.reset()` - Reset to defaultValues
 - `form.reset(newValues)` - Reset to specific values
 - `form.resetField("email")` - Reset single field
@@ -74,17 +75,17 @@ function ContactForm() {
 **For edit forms (reset to fetched data):**
 
 ```tsx
-const { data: user } = useQuery(["user", userId], fetchUser)
+const { data: user } = useQuery(['user', userId], fetchUser);
 
 const form = useForm<UserFormValues>({
   resolver: zodResolver(userSchema),
-})
+});
 
 useEffect(() => {
   if (user) {
-    form.reset(user) // Reset to fetched data when available
+    form.reset(user); // Reset to fetched data when available
   }
-}, [user, form])
+}, [user, form]);
 ```
 
 Reference: [React Hook Form reset](https://react-hook-form.com/docs/useform/reset)

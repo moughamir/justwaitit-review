@@ -13,22 +13,22 @@ React Compiler silently skips optimization when it encounters patterns it cannot
 
 ```tsx
 function ProductDetail({ productId }: { productId: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Bailout: try/catch in render path
-  let product: Product
+  let product: Product;
   try {
-    product = parseProductData(productId)
+    product = parseProductData(productId);
   } catch {
-    product = FALLBACK_PRODUCT
+    product = FALLBACK_PRODUCT;
   }
 
   // Bailout: optional chaining on ref during render
-  const containerWidth = containerRef.current?.offsetWidth ?? 0
+  const containerWidth = containerRef.current?.offsetWidth ?? 0;
 
   // Bailout: mutating an object during render
-  const config = { theme: "light" }
-  config.theme = getUserTheme(productId) // mutation breaks compiler tracking
+  const config = { theme: 'light' };
+  config.theme = getUserTheme(productId); // mutation breaks compiler tracking
 
   return (
     <div ref={containerRef}>
@@ -39,7 +39,7 @@ function ProductDetail({ productId }: { productId: string }) {
         theme={config.theme}
       />
     </div>
-  )
+  );
 }
 ```
 
@@ -47,18 +47,18 @@ function ProductDetail({ productId }: { productId: string }) {
 
 ```tsx
 function ProductDetail({ productId }: { productId: string }) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [containerWidth, setContainerWidth] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
 
   useEffect(() => {
     if (containerRef.current) {
-      setContainerWidth(containerRef.current.offsetWidth)
+      setContainerWidth(containerRef.current.offsetWidth);
     }
-  }, [])
+  }, []);
 
-  const product = parseProductData(productId) ?? FALLBACK_PRODUCT
+  const product = parseProductData(productId) ?? FALLBACK_PRODUCT;
 
-  const theme = getUserTheme(productId) // compute directly, no mutation
+  const theme = getUserTheme(productId); // compute directly, no mutation
 
   return (
     <div ref={containerRef}>
@@ -69,7 +69,7 @@ function ProductDetail({ productId }: { productId: string }) {
         theme={theme}
       />
     </div>
-  )
+  );
 }
 ```
 

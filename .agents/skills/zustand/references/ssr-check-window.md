@@ -17,10 +17,10 @@ const useThemeStore = create<ThemeState>((set) => ({
   theme: localStorage.getItem('theme') || 'light',
 
   setTheme: (theme) => {
-    localStorage.setItem('theme', theme)
-    set({ theme })
+    localStorage.setItem('theme', theme);
+    set({ theme });
   },
-}))
+}));
 ```
 
 **Correct (guarded browser API access):**
@@ -28,27 +28,27 @@ const useThemeStore = create<ThemeState>((set) => ({
 ```typescript
 const getInitialTheme = (): Theme => {
   if (typeof window === 'undefined') {
-    return 'light' // SSR default
+    return 'light'; // SSR default
   }
-  return (localStorage.getItem('theme') as Theme) || 'light'
-}
+  return (localStorage.getItem('theme') as Theme) || 'light';
+};
 
 const useThemeStore = create<ThemeState>((set) => ({
   theme: getInitialTheme(),
 
   setTheme: (theme) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('theme', theme)
+      localStorage.setItem('theme', theme);
     }
-    set({ theme })
+    set({ theme });
   },
-}))
+}));
 ```
 
 **Alternative (use persist middleware which handles this):**
 
 ```typescript
-import { persist, createJSONStorage } from 'zustand/middleware'
+import { persist, createJSONStorage } from 'zustand/middleware';
 
 const useThemeStore = create<ThemeState>()(
   persist(
@@ -63,10 +63,11 @@ const useThemeStore = create<ThemeState>()(
       skipHydration: true,
     }
   )
-)
+);
 ```
 
 **Common browser APIs to guard:**
+
 - `localStorage` / `sessionStorage`
 - `window.matchMedia()`
 - `document.cookie`

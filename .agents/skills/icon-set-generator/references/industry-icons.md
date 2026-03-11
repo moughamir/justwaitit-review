@@ -20,6 +20,7 @@ These icons appear on nearly every business website regardless of industry:
 ## Industry-Specific Suggestions
 
 ### Trades & Home Services
+
 Plumber, electrician, HVAC, builder, landscaper, painter, locksmith, pest control.
 
 **Services**: wrench, hammer, droplet (water), flame (gas/heating), bolt (electrical), pipe, thermometer, fan (HVAC), paintbrush, leaf (landscaping), shield-check (licensed/insured), hard-hat, tape-measure
@@ -31,6 +32,7 @@ Plumber, electrician, HVAC, builder, landscaper, painter, locksmith, pest contro
 **Typical set size**: 18-25 icons
 
 ### Professional Services
+
 Accountant, lawyer, financial advisor, consultant, architect.
 
 **Services**: briefcase, document, scale (legal), calculator, chart-bar, chart-line, clipboard, pen, handshake, building, gavel (legal), percent (financial)
@@ -42,6 +44,7 @@ Accountant, lawyer, financial advisor, consultant, architect.
 **Typical set size**: 15-22 icons
 
 ### Health & Medical
+
 Physio, dentist, GP, chiropractor, optometrist, veterinary, pharmacy.
 
 **Services**: heart, stethoscope, tooth (dental), eye (optometry), bone (chiro/physio), paw (vet), pill (pharmacy), bandage, clipboard-medical, first-aid
@@ -53,6 +56,7 @@ Physio, dentist, GP, chiropractor, optometrist, veterinary, pharmacy.
 **Typical set size**: 18-24 icons
 
 ### Hospitality & Food
+
 Restaurant, café, bar, catering, bakery, food truck.
 
 **Food/Drink**: utensils, wine-glass, coffee, chef-hat, cake (bakery), pizza, plate
@@ -64,6 +68,7 @@ Restaurant, café, bar, catering, bakery, food truck.
 **Typical set size**: 15-22 icons
 
 ### Retail & E-Commerce
+
 Online store, boutique, general retail.
 
 **Shopping**: cart, bag, tag/label, credit-card, receipt, barcode, gift
@@ -77,6 +82,7 @@ Online store, boutique, general retail.
 **Typical set size**: 20-30 icons
 
 ### Real Estate
+
 Agent, property management, development.
 
 **Property**: home, building, key, door, window, fence, pool
@@ -88,6 +94,7 @@ Agent, property management, development.
 **Typical set size**: 20-28 icons
 
 ### Education & Training
+
 School, tutoring, online courses, coaching.
 
 **Learning**: book, graduation-cap, pencil, lightbulb, brain, puzzle, target
@@ -99,6 +106,7 @@ School, tutoring, online courses, coaching.
 **Typical set size**: 18-24 icons
 
 ### Technology & SaaS
+
 Software company, IT services, tech startup.
 
 **Product**: code, terminal, cloud, server, database, api-bracket, smartphone, laptop
@@ -110,6 +118,7 @@ Software company, IT services, tech startup.
 **Typical set size**: 20-30 icons
 
 ### Creative & Design
+
 Design studio, photographer, videographer, marketing agency.
 
 **Creative**: camera, video, palette, pen-tool, layers, crop, image
@@ -121,6 +130,7 @@ Design studio, photographer, videographer, marketing agency.
 **Typical set size**: 15-22 icons
 
 ### Non-Profit & Community
+
 Charity, community org, church, sports club.
 
 **Mission**: heart, hands (helping), globe, leaf (environment), people-group
@@ -132,6 +142,7 @@ Charity, community org, church, sports club.
 **Typical set size**: 15-20 icons
 
 ### Automotive
+
 Mechanic, car dealer, detailing, towing.
 
 **Vehicle**: car, truck, engine, wrench, oil-drop, tire, gauge, battery

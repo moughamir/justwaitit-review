@@ -13,31 +13,32 @@ Use `screen.logTestingPlaygroundURL()` or the Testing Playground browser extensi
 
 ```tsx
 test('submits contact form', () => {
-  render(<ContactForm />)
+  render(<ContactForm />);
 
   // Trying different queries until one works
-  screen.getByTestId('submit-btn')     // Works but anti-pattern
-  screen.getByText('Submit')           // Too fragile
-  screen.querySelector('.btn-primary') // Implementation detail
-})
+  screen.getByTestId('submit-btn'); // Works but anti-pattern
+  screen.getByText('Submit'); // Too fragile
+  screen.querySelector('.btn-primary'); // Implementation detail
+});
 ```
 
 **Correct (use Testing Playground):**
 
 ```tsx
 test('submits contact form', () => {
-  render(<ContactForm />)
+  render(<ContactForm />);
 
-  screen.logTestingPlaygroundURL()
+  screen.logTestingPlaygroundURL();
   // Opens: https://testing-playground.com/#markup=...
   // Hover over submit button, playground suggests:
   // screen.getByRole('button', { name: /submit/i })
 
-  screen.getByRole('button', { name: /submit/i })
-})
+  screen.getByRole('button', { name: /submit/i });
+});
 ```
 
 **Benefits over manual inspection:**
+
 - Suggests best query type (role, label, text)
 - Shows accessible name for getByRole
 - Warns about anti-pattern queries

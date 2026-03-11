@@ -28,7 +28,7 @@ Store documentation where the team can find it. Inaccessible docs are useless do
 
 **Correct (centralized and searchable):**
 
-```markdown
+````markdown
 ## Documentation Accessibility Standards
 
 ### Central Hub
@@ -63,16 +63,19 @@ All project documentation accessible from one entry point:
 └── 📁 Archive
     └── Superseded documents
 ```
+````
 
 ### Searchability Requirements
 
 **Text-based formats:**
+
 - Use Markdown, not PDFs
 - Plain text over images of text
 - Headings for structure (enables TOC)
 - Keywords in document body
 
 **Naming conventions:**
+
 ```yaml
 # Good - searchable, sortable
 2024-03-15-prd-user-dashboard-v3.md
@@ -86,6 +89,7 @@ notes.txt
 ```
 
 **Tagging and metadata:**
+
 ```yaml
 ---
 title: User Dashboard PRD
@@ -104,49 +108,54 @@ tags:
 
 ### Access Control
 
-| Document Type | Access Level | Reason |
-|---------------|--------------|--------|
-| PRD | All employees | Transparency |
+| Document Type  | Access Level          | Reason           |
+| -------------- | --------------------- | ---------------- |
+| PRD            | All employees         | Transparency     |
 | Technical Spec | Engineering + Product | Technical detail |
-| Salary data | HR + Exec | Confidential |
-| Security audit | Security team | Sensitive |
+| Salary data    | HR + Exec             | Confidential     |
+| Security audit | Security team         | Sensitive        |
 
 **Default:** Public within organization unless specifically restricted.
 
 ### Discoverability Aids
 
 **README in every folder:**
+
 ```markdown
 # Technical Documentation
 
 This folder contains technical specifications for Project Dashboard.
 
 ## Quick Links
+
 - [Architecture Overview](./architecture.md) - System design
 - [API Reference](./api/) - Endpoint documentation
 - [ADRs](./adrs/) - Why we made key decisions
 
 ## Can't Find Something?
+
 - Search the wiki for keywords
 - Ask in #proj-dashboard Slack
 - Check the Archive folder
 ```
 
 **Glossary for project-specific terms:**
+
 ```markdown
 ## Glossary
 
-| Term | Definition |
-|------|------------|
-| Dashboard | The analytics display feature |
-| Widget | Individual component on dashboard |
-| KPI | Key Performance Indicator |
-| DAU | Daily Active Users |
+| Term      | Definition                        |
+| --------- | --------------------------------- |
+| Dashboard | The analytics display feature     |
+| Widget    | Individual component on dashboard |
+| KPI       | Key Performance Indicator         |
+| DAU       | Daily Active Users                |
 ```
 
 ### Maintenance
 
 **Monthly documentation review:**
+
 - [ ] Update broken links
 - [ ] Archive obsolete docs
 - [ ] Verify access permissions
@@ -154,10 +163,12 @@ This folder contains technical specifications for Project Dashboard.
 - [ ] Update README quick links
 
 **Documentation owner responsibilities:**
+
 - Keep assigned docs current
 - Respond to questions within 24h
 - Mark deprecated docs clearly
 - Redirect to current versions
+
 ```
 
 **Accessibility requirements:**
@@ -168,3 +179,4 @@ This folder contains technical specifications for Project Dashboard.
 - Regular maintenance schedule
 
 Reference: [Write the Docs - Documentation Principles](https://www.writethedocs.org/guide/)
+```

@@ -12,28 +12,32 @@ TypeScript widens literal types for `let` variables because they can be reassign
 **Incorrect (let widens literal to base type):**
 
 ```typescript
-let status = "active"
+let status = 'active';
 // Type: string — widened from "active"
 
-function setStatus(s: "active" | "inactive") { /* ... */ }
-setStatus(status) // Error: string not assignable to "active" | "inactive"
+function setStatus(s: 'active' | 'inactive') {
+  /* ... */
+}
+setStatus(status); // Error: string not assignable to "active" | "inactive"
 ```
 
 **Correct (preserve literal type):**
 
 ```typescript
 // Option 1: const (when no reassignment needed)
-const status = "active"
+const status = 'active';
 // Type: "active"
 
 // Option 2: explicit annotation (when reassignment needed)
-let status: "active" | "inactive" = "active"
+let status: 'active' | 'inactive' = 'active';
 // Type: "active" | "inactive"
 
 // Option 3: as const (for complex expressions)
-let config = { status: "active" as const }
+let config = { status: 'active' as const };
 // config.status type: "active"
 
-function setStatus(s: "active" | "inactive") { /* ... */ }
-setStatus(status) // OK with all three options
+function setStatus(s: 'active' | 'inactive') {
+  /* ... */
+}
+setStatus(status); // OK with all three options
 ```

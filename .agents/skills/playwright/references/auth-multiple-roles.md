@@ -24,7 +24,10 @@ test('admin can delete users', async ({ page }) => {
   await page.getByRole('button', { name: 'Sign in' }).click();
 
   await page.goto('/admin/users');
-  await page.getByTestId('user-row-1').getByRole('button', { name: 'Delete' }).click();
+  await page
+    .getByTestId('user-row-1')
+    .getByRole('button', { name: 'Delete' })
+    .click();
 });
 ```
 

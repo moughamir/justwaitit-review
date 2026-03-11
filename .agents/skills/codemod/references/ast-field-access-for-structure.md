@@ -13,11 +13,11 @@ Tree-sitter nodes have named fields that provide semantic access to children. Us
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const functions = root.findAll({ rule: { kind: "function_declaration" } });
+  const functions = root.findAll({ rule: { kind: 'function_declaration' } });
 
   for (const fn of functions) {
     // Index-based access is fragile
-    const name = fn.children()[0];  // Might be 'async' keyword
+    const name = fn.children()[0]; // Might be 'async' keyword
     const params = fn.children()[1]; // Might be name if no async
     // Breaks with async functions, generators, type annotations
   }
@@ -29,16 +29,18 @@ const transform: Transform<TSX> = (root) => {
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const functions = root.findAll({ rule: { kind: "function_declaration" } });
+  const functions = root.findAll({ rule: { kind: 'function_declaration' } });
 
   for (const fn of functions) {
     // Field access is semantic and stable
-    const name = fn.field("name");      // Always the function name
-    const params = fn.field("parameters"); // Always the params list
-    const body = fn.field("body");      // Always the function body
+    const name = fn.field('name'); // Always the function name
+    const params = fn.field('parameters'); // Always the params list
+    const body = fn.field('body'); // Always the function body
 
     if (name && params) {
-      console.log(`Function ${name.text()} has ${params.children().length} params`);
+      console.log(
+        `Function ${name.text()} has ${params.children().length} params`
+      );
     }
   }
   return null;
@@ -46,6 +48,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Common field names:**
+
 - Functions: `name`, `parameters`, `body`, `return_type`
 - Variables: `name`, `value`, `type`
 - Calls: `function`, `arguments`

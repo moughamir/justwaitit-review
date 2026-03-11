@@ -12,23 +12,23 @@ When data fetching starts inside a component's useEffect, the browser must downl
 **Incorrect (fetch starts after component mounts — wasted render cycle):**
 
 ```tsx
-import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function PropertyListing() {
-  const { propertyId } = useParams<{ propertyId: string }>()
-  const [property, setProperty] = useState<Property | null>(null)
-  const [loading, setLoading] = useState(true)
+  const { propertyId } = useParams<{ propertyId: string }>();
+  const [property, setProperty] = useState<Property | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // fetch starts AFTER mount — user sees spinner during network round trip
     fetchProperty(propertyId!).then((data) => {
-      setProperty(data)
-      setLoading(false)
-    })
-  }, [propertyId])
+      setProperty(data);
+      setLoading(false);
+    });
+  }, [propertyId]);
 
-  if (loading) return <ListingSkeleton />
+  if (loading) return <ListingSkeleton />;
 
   return (
     <div>
@@ -36,21 +36,21 @@ function PropertyListing() {
       <PropertyGallery images={property!.images} />
       <PropertyDetails property={property!} />
     </div>
-  )
+  );
 }
 ```
 
 **Correct (fetch starts at route match — overlaps with code loading):**
 
 ```tsx
-import { useLoaderData, type LoaderFunctionArgs } from "react-router-dom"
+import { useLoaderData, type LoaderFunctionArgs } from 'react-router-dom';
 
 export async function propertyLoader({ params }: LoaderFunctionArgs) {
-  return fetchProperty(params.propertyId!) // starts immediately on navigation
+  return fetchProperty(params.propertyId!); // starts immediately on navigation
 }
 
 function PropertyListing() {
-  const property = useLoaderData() as Property
+  const property = useLoaderData() as Property;
 
   return (
     <div>
@@ -58,17 +58,17 @@ function PropertyListing() {
       <PropertyGallery images={property.images} />
       <PropertyDetails property={property} />
     </div>
-  )
+  );
 }
 
 // Route configuration
 const routes = [
   {
-    path: "/properties/:propertyId",
+    path: '/properties/:propertyId',
     element: <PropertyListing />,
     loader: propertyLoader,
   },
-]
+];
 ```
 
 Reference: [React Router — Data Loading](https://reactrouter.com/en/main/route/loader)

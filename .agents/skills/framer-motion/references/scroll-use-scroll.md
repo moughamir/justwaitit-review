@@ -12,8 +12,8 @@ The useScroll hook returns motion values that update via the browser's native Sc
 **Incorrect (manual scroll event listener blocks main thread):**
 
 ```tsx
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 
 function ProgressBar() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -21,18 +21,19 @@ function ProgressBar() {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setScrollProgress(scrollTop / docHeight);  // Re-renders on every scroll event
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(scrollTop / docHeight); // Re-renders on every scroll event
     };
 
-    window.addEventListener("scroll", handleScroll);  // Blocks main thread
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll); // Blocks main thread
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <motion.div
       className="progress-bar"
-      style={{ scaleX: scrollProgress, transformOrigin: "left" }}
+      style={{ scaleX: scrollProgress, transformOrigin: 'left' }}
     />
   );
 }
@@ -41,15 +42,15 @@ function ProgressBar() {
 **Correct (useScroll with hardware acceleration):**
 
 ```tsx
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll } from 'framer-motion';
 
 function ProgressBar() {
-  const { scrollYProgress } = useScroll();  // Hardware-accelerated, no re-renders
+  const { scrollYProgress } = useScroll(); // Hardware-accelerated, no re-renders
 
   return (
     <motion.div
       className="progress-bar"
-      style={{ scaleX: scrollYProgress, transformOrigin: "left" }}
+      style={{ scaleX: scrollYProgress, transformOrigin: 'left' }}
     />
   );
 }

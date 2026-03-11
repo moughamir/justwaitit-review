@@ -51,16 +51,16 @@ pnpm validate
 
 ### Prefix Reference
 
-| Prefix | Category | Impact |
-|--------|----------|--------|
-| `compiler-` | React Compiler Mastery | CRITICAL |
-| `bundle-` | Bundle & Loading | CRITICAL |
-| `render-` | Rendering Optimization | HIGH |
-| `fetch-` | Data Fetching Performance | HIGH |
-| `cwv-` | Core Web Vitals | MEDIUM-HIGH |
-| `sub-` | State & Subscription Performance | MEDIUM-HIGH |
-| `profile-` | Profiling & Measurement | MEDIUM |
-| `mem-` | Memory Management | LOW-MEDIUM |
+| Prefix      | Category                         | Impact      |
+| ----------- | -------------------------------- | ----------- |
+| `compiler-` | React Compiler Mastery           | CRITICAL    |
+| `bundle-`   | Bundle & Loading                 | CRITICAL    |
+| `render-`   | Rendering Optimization           | HIGH        |
+| `fetch-`    | Data Fetching Performance        | HIGH        |
+| `cwv-`      | Core Web Vitals                  | MEDIUM-HIGH |
+| `sub-`      | State & Subscription Performance | MEDIUM-HIGH |
+| `profile-`  | Profiling & Measurement          | MEDIUM      |
+| `mem-`      | Memory Management                | LOW-MEDIUM  |
 
 ## Rule File Structure
 
@@ -98,25 +98,26 @@ Reference: [Link](https://example.com)
 Rule files follow the pattern: `{prefix}-{description}.md`
 
 Examples:
+
 - `compiler-friendly-code.md` — React Compiler, about compiler-friendly patterns
 - `bundle-route-splitting.md` — Bundle optimization, about route-level code splitting
 - `cwv-inp-optimization.md` — Core Web Vitals, about Interaction to Next Paint
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| CRITICAL | Must-do optimization; directly affects load time, TTI, or compiler adoption |
-| HIGH | Strong impact on rendering performance and user experience |
-| MEDIUM-HIGH | Measurable improvement for medium-to-large applications |
-| MEDIUM | Important for ongoing performance maintenance and debugging |
-| LOW-MEDIUM | Relevant for long-lived SPAs and complex resource management |
+| Level       | Description                                                                 |
+| ----------- | --------------------------------------------------------------------------- |
+| CRITICAL    | Must-do optimization; directly affects load time, TTI, or compiler adoption |
+| HIGH        | Strong impact on rendering performance and user experience                  |
+| MEDIUM-HIGH | Measurable improvement for medium-to-large applications                     |
+| MEDIUM      | Important for ongoing performance maintenance and debugging                 |
+| LOW-MEDIUM  | Relevant for long-lived SPAs and complex resource management                |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Compiles rules into AGENTS.md |
+| Command         | Description                         |
+| --------------- | ----------------------------------- |
+| `pnpm build`    | Compiles rules into AGENTS.md       |
 | `pnpm validate` | Validates skill structure and rules |
 
 ## Contributing
@@ -131,6 +132,7 @@ Examples:
 ## Acknowledgments
 
 This skill draws from:
+
 - [React Documentation](https://react.dev)
 - [React Compiler Blog Post](https://react.dev/blog/2025/10/07/react-compiler-1)
 - [Web.dev Core Web Vitals](https://web.dev/articles/vitals)

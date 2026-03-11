@@ -16,16 +16,16 @@ function FeatureCard({ title, description, icon }: FeatureCardProps) {
   return (
     <motion.div
       className="card"
-      whileHover={{ scale: 1.02 }}  // Gesture defined here
+      whileHover={{ scale: 1.02 }} // Gesture defined here
     >
       <motion.div
         className="icon-wrapper"
-        whileHover={{ rotate: 10 }}  // Must manually add whileHover again
+        whileHover={{ rotate: 10 }} // Must manually add whileHover again
       >
         {icon}
       </motion.div>
       <motion.h3
-        whileHover={{ color: "#3b82f6" }}  // Must manually add whileHover again
+        whileHover={{ color: '#3b82f6' }} // Must manually add whileHover again
       >
         {title}
       </motion.h3>
@@ -45,12 +45,12 @@ const cardVariants = {
 
 const iconVariants = {
   rest: { rotate: 0 },
-  hover: { rotate: 10 },  // Triggers when parent enters "hover"
+  hover: { rotate: 10 }, // Triggers when parent enters "hover"
 };
 
 const titleVariants = {
-  rest: { color: "#1f2937" },
-  hover: { color: "#3b82f6" },  // Triggers when parent enters "hover"
+  rest: { color: '#1f2937' },
+  hover: { color: '#3b82f6' }, // Triggers when parent enters "hover"
 };
 
 function FeatureCard({ title, description, icon }: FeatureCardProps) {
@@ -59,14 +59,12 @@ function FeatureCard({ title, description, icon }: FeatureCardProps) {
       className="card"
       variants={cardVariants}
       initial="rest"
-      whileHover="hover"  // Children inherit this state automatically
+      whileHover="hover" // Children inherit this state automatically
     >
       <motion.div className="icon-wrapper" variants={iconVariants}>
         {icon}
       </motion.div>
-      <motion.h3 variants={titleVariants}>
-        {title}
-      </motion.h3>
+      <motion.h3 variants={titleVariants}>{title}</motion.h3>
       <p>{description}</p>
     </motion.div>
   );

@@ -21,17 +21,21 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Default focus ring -->
-<button class="focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+<button
+  class="focus:ring-brand-500 focus:outline-none focus:ring-2 focus:ring-offset-2"
+>
   Button
 </button>
 
 <!-- Focus-visible for keyboard users only -->
-<button class="focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500">
+<button
+  class="focus-visible:ring-brand-500 focus:outline-none focus-visible:ring-2"
+>
   Only shows ring for keyboard focus
 </button>
 
 <!-- Focus-within for parent containers -->
-<div class="focus-within:ring-2 focus-within:ring-brand-500 rounded-lg p-1">
+<div class="focus-within:ring-brand-500 rounded-lg p-1 focus-within:ring-2">
   <input type="text" class="border-none focus:outline-none" />
 </div>
 
@@ -41,11 +45,11 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 ```css
 @layer components {
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+    @apply focus-visible:ring-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
   }
 
   .focus-ring-inset {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-inset;
+    @apply focus-visible:ring-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset;
   }
 }
 ```
@@ -56,20 +60,13 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 <!-- Skip to main content -->
 <a
   href="#main-content"
-  class="
-    sr-only focus:not-sr-only
-    focus:absolute focus:top-4 focus:left-4 focus:z-50
-    focus:bg-white focus:px-4 focus:py-2 focus:rounded-md focus:shadow-lg
-    focus:ring-2 focus:ring-brand-500
-  "
+  class="focus:ring-brand-500 sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-white focus:px-4 focus:py-2 focus:shadow-lg focus:ring-2"
 >
   Skip to main content
 </a>
 
 <header>Navigation...</header>
-<main id="main-content" tabindex="-1">
-  Main content
-</main>
+<main id="main-content" tabindex="-1">Main content</main>
 ```
 
 ### Focus Trap Pattern
@@ -83,10 +80,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
   class="fixed inset-0 z-50 flex items-center justify-center"
 >
   <div class="fixed inset-0 bg-black/50" aria-hidden="true"></div>
-  <div
-    class="relative bg-white rounded-xl p-6 max-w-md w-full"
-    role="document"
-  >
+  <div class="relative w-full max-w-md rounded-xl bg-white p-6" role="document">
     <h2 id="modal-title" class="text-lg font-semibold">Modal Title</h2>
     <p>Modal content</p>
     <button class="focus-ring">Close</button>
@@ -122,12 +116,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Live region for announcements -->
-<div
-  role="status"
-  aria-live="polite"
-  aria-atomic="true"
-  class="sr-only"
->
+<div role="status" aria-live="polite" aria-atomic="true" class="sr-only">
   <!-- Dynamic content announced to screen readers -->
   3 items added to cart
 </div>
@@ -136,7 +125,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 <div
   role="alert"
   aria-live="assertive"
-  class="bg-red-100 text-red-800 p-4 rounded-lg"
+  class="rounded-lg bg-red-100 p-4 text-red-800"
 >
   Error: Please correct the form
 </div>
@@ -148,18 +137,18 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Ensure sufficient contrast -->
-<p class="text-gray-700 bg-white">4.5:1 contrast ratio</p>
-<p class="text-gray-500 bg-white">May not meet WCAG AA (3:1 min for large text)</p>
+<p class="bg-white text-gray-700">4.5:1 contrast ratio</p>
+<p class="bg-white text-gray-500">
+  May not meet WCAG AA (3:1 min for large text)
+</p>
 
 <!-- Large text (18pt+) needs 3:1 -->
-<h1 class="text-4xl text-gray-600 bg-white">Large text - 3:1 ratio OK</h1>
+<h1 class="bg-white text-4xl text-gray-600">Large text - 3:1 ratio OK</h1>
 
 <!-- Interactive elements need 3:1 against adjacent colors -->
-<button class="
-  bg-brand-500 text-white
-  border-2 border-brand-500
-  focus:ring-2 focus:ring-brand-500 focus:ring-offset-2
-">
+<button
+  class="bg-brand-500 border-brand-500 focus:ring-brand-500 border-2 text-white focus:ring-2 focus:ring-offset-2"
+>
   Accessible Button
 </button>
 ```
@@ -168,9 +157,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Maintain contrast in both modes -->
-<p class="text-gray-900 dark:text-gray-100">
-  High contrast text
-</p>
+<p class="text-gray-900 dark:text-gray-100">High contrast text</p>
 
 <p class="text-gray-600 dark:text-gray-400">
   Secondary text with adequate contrast
@@ -193,13 +180,9 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 ```
 
 ```html
-<button class="
-  focus:outline-none
-  focus-visible:ring-2
-  focus-visible:ring-[var(--color-focus)]
-  focus-visible:ring-offset-2
-  focus-visible:ring-offset-[var(--color-focus-offset)]
-">
+<button
+  class="focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-focus)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-focus-offset)]"
+>
   High contrast focus
 </button>
 ```
@@ -210,27 +193,19 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Respect user's motion preferences -->
-<div class="
-  animate-bounce
-  motion-reduce:animate-none
-">
+<div class="animate-bounce motion-reduce:animate-none">
   Bouncing element (static for motion-sensitive users)
 </div>
 
 <!-- Safer alternative animations -->
-<div class="
-  transition-opacity duration-300
-  motion-reduce:transition-none
-">
+<div class="transition-opacity duration-300 motion-reduce:transition-none">
   Fades in (instant for motion-sensitive)
 </div>
 
 <!-- Use opacity instead of movement -->
-<div class="
-  transition-all
-  hover:scale-105 hover:shadow-lg
-  motion-reduce:hover:scale-100 motion-reduce:hover:shadow-md
-">
+<div
+  class="transition-all hover:scale-105 hover:shadow-lg motion-reduce:hover:scale-100 motion-reduce:hover:shadow-md"
+>
   Scales on hover (shadow only for motion-sensitive)
 </div>
 ```
@@ -241,13 +216,13 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 @layer components {
   /* Animations that respect reduced motion */
   .animate-fade-in {
-    @apply animate-in fade-in duration-300;
+    @apply duration-300 animate-in fade-in;
     @apply motion-reduce:animate-none motion-reduce:opacity-100;
   }
 
   .animate-slide-up {
-    @apply animate-in slide-in-from-bottom-4 duration-300;
-    @apply motion-reduce:animate-none motion-reduce:translate-y-0;
+    @apply duration-300 animate-in slide-in-from-bottom-4;
+    @apply motion-reduce:translate-y-0 motion-reduce:animate-none;
   }
 }
 ```
@@ -256,11 +231,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <!-- Allow users to pause animations -->
-<div class="
-  animate-spin
-  hover:animate-pause
-  motion-reduce:animate-none
-">
+<div class="hover:animate-pause animate-spin motion-reduce:animate-none">
   Loading spinner
 </div>
 ```
@@ -284,16 +255,12 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
       required
       aria-required="true"
       aria-describedby="email-hint email-error"
-      class="
-        mt-1 block w-full rounded-md border-gray-300
-        focus:border-brand-500 focus:ring-brand-500
-        aria-invalid:border-red-500 aria-invalid:ring-red-500
-      "
+      class="focus:border-brand-500 focus:ring-brand-500 aria-invalid:border-red-500 aria-invalid:ring-red-500 mt-1 block w-full rounded-md border-gray-300"
     />
     <p id="email-hint" class="mt-1 text-sm text-gray-500">
       We'll never share your email
     </p>
-    <p id="email-error" class="mt-1 text-sm text-red-600 hidden" role="alert">
+    <p id="email-error" class="mt-1 hidden text-sm text-red-600" role="alert">
       Please enter a valid email
     </p>
   </div>
@@ -304,10 +271,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
       type="checkbox"
       id="terms"
       name="terms"
-      class="
-        h-4 w-4 rounded border-gray-300 text-brand-500
-        focus:ring-brand-500
-      "
+      class="text-brand-500 focus:ring-brand-500 h-4 w-4 rounded border-gray-300"
     />
     <label for="terms" class="text-sm text-gray-700">
       I agree to the
@@ -317,14 +281,28 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
   <!-- Radio group -->
   <fieldset>
-    <legend class="text-sm font-medium text-gray-700">Notification preference</legend>
+    <legend class="text-sm font-medium text-gray-700">
+      Notification preference
+    </legend>
     <div class="mt-2 space-y-2">
       <div class="flex items-center gap-3">
-        <input type="radio" id="email-pref" name="notification" value="email" class="h-4 w-4" />
+        <input
+          type="radio"
+          id="email-pref"
+          name="notification"
+          value="email"
+          class="h-4 w-4"
+        />
         <label for="email-pref">Email</label>
       </div>
       <div class="flex items-center gap-3">
-        <input type="radio" id="sms-pref" name="notification" value="sms" class="h-4 w-4" />
+        <input
+          type="radio"
+          id="sms-pref"
+          name="notification"
+          value="sms"
+          class="h-4 w-4"
+        />
         <label for="sms-pref">SMS</label>
       </div>
     </div>
@@ -345,11 +323,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
     id="password"
     aria-invalid="true"
     aria-describedby="password-error"
-    class="
-      mt-1 block w-full rounded-md
-      border-red-500 text-red-900
-      focus:border-red-500 focus:ring-red-500
-    "
+    class="mt-1 block w-full rounded-md border-red-500 text-red-900 focus:border-red-500 focus:ring-red-500"
   />
   <p id="password-error" class="mt-1 text-sm text-red-600" role="alert">
     <span class="sr-only">Error:</span>
@@ -367,12 +341,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ```html
 <input
-  class="
-    border-gray-300
-    aria-invalid:border-red-500
-    aria-invalid:text-red-900
-    aria-invalid:focus:ring-red-500
-  "
+  class="aria-invalid:border-red-500 aria-invalid:text-red-900 aria-invalid:focus:ring-red-500 border-gray-300"
   aria-invalid="true"
 />
 ```
@@ -387,15 +356,13 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
   type="submit"
   aria-busy="true"
   aria-disabled="true"
-  class="
-    relative
-    aria-busy:cursor-wait
-    aria-disabled:opacity-50 aria-disabled:cursor-not-allowed
-  "
+  class="relative aria-busy:cursor-wait aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
 >
   <span class="aria-busy:invisible">Submit</span>
-  <span class="absolute inset-0 flex items-center justify-center aria-busy:visible invisible">
-    <svg class="animate-spin h-5 w-5" aria-hidden="true">...</svg>
+  <span
+    class="invisible absolute inset-0 flex items-center justify-center aria-busy:visible"
+  >
+    <svg class="h-5 w-5 animate-spin" aria-hidden="true">...</svg>
     <span class="sr-only">Loading...</span>
   </span>
 </button>
@@ -404,7 +371,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 <button
   type="button"
   aria-label="Close dialog"
-  class="rounded-full p-2 hover:bg-gray-100 focus-ring"
+  class="focus-ring rounded-full p-2 hover:bg-gray-100"
 >
   <svg aria-hidden="true" class="h-5 w-5">...</svg>
 </button>
@@ -413,10 +380,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 <button
   type="button"
   aria-pressed="false"
-  class="
-    px-4 py-2 rounded-lg border
-    aria-pressed:bg-brand-500 aria-pressed:text-white aria-pressed:border-brand-500
-  "
+  class="aria-pressed:bg-brand-500 aria-pressed:border-brand-500 rounded-lg border px-4 py-2 aria-pressed:text-white"
 >
   <span class="sr-only">Toggle feature</span>
   Feature
@@ -432,7 +396,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
     aria-haspopup="menu"
     aria-expanded="false"
     aria-controls="dropdown-menu"
-    class="flex items-center gap-2 px-4 py-2 rounded-lg border focus-ring"
+    class="focus-ring flex items-center gap-2 rounded-lg border px-4 py-2"
   >
     Options
     <svg aria-hidden="true" class="h-4 w-4">...</svg>
@@ -442,10 +406,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
     id="dropdown-menu"
     role="menu"
     aria-labelledby="dropdown-button"
-    class="
-      absolute top-full mt-1 w-48 rounded-lg bg-white shadow-lg border
-      hidden aria-expanded:block
-    "
+    class="absolute top-full mt-1 hidden w-48 rounded-lg border bg-white shadow-lg aria-expanded:block"
   >
     <li role="none">
       <a
@@ -481,12 +442,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
       aria-selected="true"
       aria-controls="panel-1"
       id="tab-1"
-      class="
-        px-4 py-2 border-b-2
-        aria-selected:border-brand-500 aria-selected:text-brand-500
-        hover:text-gray-700
-        focus-visible:ring-2 focus-visible:ring-inset
-      "
+      class="aria-selected:border-brand-500 aria-selected:text-brand-500 border-b-2 px-4 py-2 hover:text-gray-700 focus-visible:ring-2 focus-visible:ring-inset"
     >
       Profile
     </button>
@@ -496,7 +452,7 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
       aria-controls="panel-2"
       id="tab-2"
       tabindex="-1"
-      class="px-4 py-2 border-b-2 border-transparent"
+      class="border-b-2 border-transparent px-4 py-2"
     >
       Settings
     </button>
@@ -529,14 +485,15 @@ WCAG 2.2 was released October 2023 and is the current W3C standard. Key addition
 
 ### WCAG 2.2 Target Size Requirements
 
-| Level | Requirement | Tailwind Class |
-|-------|-------------|----------------|
-| **AA (2.5.8)** | 24x24 CSS pixels minimum | `min-h-6 min-w-6` |
-| **Recommended** | 44x44 CSS pixels | `min-h-11 min-w-11` |
-| **AAA (2.5.5)** | 44x44 CSS pixels | `min-h-11 min-w-11` |
-| **Optimal** | 48x48 CSS pixels | `min-h-12 min-w-12` |
+| Level           | Requirement              | Tailwind Class      |
+| --------------- | ------------------------ | ------------------- |
+| **AA (2.5.8)**  | 24x24 CSS pixels minimum | `min-h-6 min-w-6`   |
+| **Recommended** | 44x44 CSS pixels         | `min-h-11 min-w-11` |
+| **AAA (2.5.5)** | 44x44 CSS pixels         | `min-h-11 min-w-11` |
+| **Optimal**     | 48x48 CSS pixels         | `min-h-12 min-w-12` |
 
 Platform guidelines comparison:
+
 - **Apple iOS**: 44x44 points minimum
 - **Google Android**: 48x48 dp minimum
 - **Microsoft Fluent**: 44x44 pixels minimum
@@ -571,13 +528,13 @@ Platform guidelines comparison:
 </a>
 
 <!-- Icon button with extended target -->
-<button class="relative p-2 -m-2 rounded-lg hover:bg-gray-100">
+<button class="relative -m-2 rounded-lg p-2 hover:bg-gray-100">
   <svg class="h-5 w-5" aria-hidden="true">...</svg>
   <span class="sr-only">Close menu</span>
 </button>
 
 <!-- Card with full-surface tap target -->
-<article class="relative p-4 rounded-lg border hover:shadow-md">
+<article class="relative rounded-lg border p-4 hover:shadow-md">
   <h3>Card Title</h3>
   <p>Description text</p>
   <a href="/details" class="after:absolute after:inset-0">
@@ -599,21 +556,24 @@ WCAG 2.2 requires 24px spacing OR targets must be 24px minimum:
 
 <!-- Stacked links with adequate height and spacing -->
 <nav class="flex flex-col">
-  <a href="#" class="py-3 px-4 min-h-11 border-b border-gray-100">Link 1</a>
-  <a href="#" class="py-3 px-4 min-h-11 border-b border-gray-100">Link 2</a>
-  <a href="#" class="py-3 px-4 min-h-11">Link 3</a>
+  <a href="#" class="min-h-11 border-b border-gray-100 px-4 py-3">Link 1</a>
+  <a href="#" class="min-h-11 border-b border-gray-100 px-4 py-3">Link 2</a>
+  <a href="#" class="min-h-11 px-4 py-3">Link 3</a>
 </nav>
 
 <!-- Button group with safe spacing -->
 <div class="flex flex-wrap gap-3">
-  <button class="min-h-11 px-4 py-2 border rounded-lg">Cancel</button>
-  <button class="min-h-11 px-4 py-2 bg-blue-600 text-white rounded-lg">Confirm</button>
+  <button class="min-h-11 rounded-lg border px-4 py-2">Cancel</button>
+  <button class="min-h-11 rounded-lg bg-blue-600 px-4 py-2 text-white">
+    Confirm
+  </button>
 </div>
 ```
 
 ### Touch Target Exceptions (WCAG 2.2)
 
 Targets can be smaller than 24x24 if:
+
 - Inline text links within sentences
 - Browser-provided controls (scrollbars)
 - Size is essential to information
@@ -625,9 +585,7 @@ Targets can be smaller than 24x24 if:
 
 ```html
 <!-- Adequate line height for body text -->
-<p class="leading-relaxed">
-  Long form content with comfortable line height
-</p>
+<p class="leading-relaxed">Long form content with comfortable line height</p>
 
 <!-- Limit line length for readability -->
 <article class="max-w-prose">
@@ -653,9 +611,7 @@ Targets can be smaller than 24x24 if:
 <p class="text-[14px]">⚠️ Won't scale with browser zoom</p>
 
 <!-- Container that doesn't break on text zoom -->
-<div class="min-h-[auto]">
-  Content height adjusts with text size
-</div>
+<div class="min-h-[auto]">Content height adjusts with text size</div>
 ```
 
 ## Semantic HTML with Tailwind
@@ -663,8 +619,8 @@ Targets can be smaller than 24x24 if:
 ### Landmark Regions
 
 ```html
-<body class="min-h-screen flex flex-col">
-  <header class="sticky top-0 bg-white shadow z-50">
+<body class="flex min-h-screen flex-col">
+  <header class="sticky top-0 z-50 bg-white shadow">
     <nav aria-label="Main navigation">...</nav>
   </header>
 
@@ -731,18 +687,18 @@ test('component is accessible', async () => {
 
 ## Best Practices Summary (WCAG 2.2 - 2025/2026)
 
-| Pattern | Implementation | WCAG Level |
-|---------|---------------|------------|
-| Focus visible | `focus-visible:ring-2 focus-visible:ring-offset-2` | 2.4.7 (AA) |
-| Screen reader only | `sr-only` | 1.3.1 (A) |
-| Skip links | `sr-only focus:not-sr-only focus:absolute` | 2.4.1 (A) |
-| Reduced motion | `motion-reduce:animate-none motion-reduce:transition-none` | 2.3.3 (AAA) |
-| Touch targets (min) | `min-h-6 min-w-6` (24px) | 2.5.8 (AA) |
-| Touch targets (rec) | `min-h-11 min-w-11` (44px) | 2.5.5 (AAA) |
-| Touch spacing | `gap-3` (12px minimum between targets) | 2.5.8 (AA) |
-| Text contrast | 4.5:1 for normal, 3:1 for large text | 1.4.3 (AA) |
-| Form errors | `aria-invalid="true"` + `role="alert"` | 3.3.1 (A) |
-| Focus not obscured | Avoid `z-index` covering focused elements | 2.4.11 (AA) |
+| Pattern             | Implementation                                             | WCAG Level  |
+| ------------------- | ---------------------------------------------------------- | ----------- |
+| Focus visible       | `focus-visible:ring-2 focus-visible:ring-offset-2`         | 2.4.7 (AA)  |
+| Screen reader only  | `sr-only`                                                  | 1.3.1 (A)   |
+| Skip links          | `sr-only focus:not-sr-only focus:absolute`                 | 2.4.1 (A)   |
+| Reduced motion      | `motion-reduce:animate-none motion-reduce:transition-none` | 2.3.3 (AAA) |
+| Touch targets (min) | `min-h-6 min-w-6` (24px)                                   | 2.5.8 (AA)  |
+| Touch targets (rec) | `min-h-11 min-w-11` (44px)                                 | 2.5.5 (AAA) |
+| Touch spacing       | `gap-3` (12px minimum between targets)                     | 2.5.8 (AA)  |
+| Text contrast       | 4.5:1 for normal, 3:1 for large text                       | 1.4.3 (AA)  |
+| Form errors         | `aria-invalid="true"` + `role="alert"`                     | 3.3.1 (A)   |
+| Focus not obscured  | Avoid `z-index` covering focused elements                  | 2.4.11 (AA) |
 
 ### Quick Reference: Touch-Friendly Component
 
@@ -750,30 +706,7 @@ test('component is accessible', async () => {
 <!-- Accessible, touch-friendly button component -->
 <button
   type="button"
-  class="
-    /* Touch target size (44px minimum) */
-    min-h-11 min-w-11 px-4 py-2.5
-
-    /* Typography */
-    text-sm md:text-base font-medium
-
-    /* Colors with sufficient contrast */
-    bg-blue-600 text-white
-    hover:bg-blue-700
-
-    /* Focus indicator (visible, not obscured) */
-    focus:outline-none
-    focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-
-    /* Shape */
-    rounded-lg
-
-    /* Disabled state */
-    disabled:opacity-50 disabled:cursor-not-allowed
-
-    /* Respect motion preferences */
-    transition-colors motion-reduce:transition-none
-  "
+  class="/* Touch target size (44px minimum) */ /* Typography */ /* Colors with sufficient contrast */ /* Focus indicator (visible, not obscured) */ /* Shape */ /* Disabled state */ /* Respect motion preferences */ min-h-11 min-w-11 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 motion-reduce:transition-none md:text-base"
 >
   Button Text
 </button>

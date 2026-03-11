@@ -12,39 +12,40 @@ Testing Library automatically calls `cleanup` after each test when using modern 
 **Incorrect (manual cleanup):**
 
 ```tsx
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup } from '@testing-library/react';
 
 afterEach(() => {
-  cleanup()
-})
+  cleanup();
+});
 
 test('renders dashboard', () => {
-  render(<Dashboard />)
+  render(<Dashboard />);
   // ...
-})
+});
 // cleanup() is called twice - once manually, once automatically
 ```
 
 **Correct (rely on automatic cleanup):**
 
 ```tsx
-import { render } from '@testing-library/react'
+import { render } from '@testing-library/react';
 
 test('renders dashboard', () => {
-  render(<Dashboard />)
+  render(<Dashboard />);
   // ...
-})
+});
 // cleanup() runs automatically after test
 ```
 
 **When manual cleanup IS needed:**
+
 - Using a test framework without global `afterEach` (like AVA)
 - Custom test runners without RTL integration
 
 ```tsx
 // Only for frameworks without automatic cleanup
-import { cleanup } from '@testing-library/react'
-test.afterEach(cleanup)
+import { cleanup } from '@testing-library/react';
+test.afterEach(cleanup);
 ```
 
 Reference: [Testing Library - Cleanup](https://testing-library.com/docs/react-testing-library/api#cleanup)

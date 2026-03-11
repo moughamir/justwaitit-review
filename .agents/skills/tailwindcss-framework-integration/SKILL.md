@@ -22,32 +22,32 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()]
-})
+  plugins: [react(), tailwindcss()],
+});
 ```
 
 ```css
 /* src/index.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```tsx
 // src/main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <App />
   </React.StrictMode>
-)
+);
 ```
 
 ### Component Example
@@ -55,46 +55,38 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ```tsx
 // src/components/Button.tsx
 interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'outline'
-  size?: 'sm' | 'md' | 'lg'
-  children: React.ReactNode
-  onClick?: () => void
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  onClick?: () => void;
 }
 
 const variants = {
   primary: 'bg-blue-600 text-white hover:bg-blue-700',
   secondary: 'bg-gray-200 text-gray-900 hover:bg-gray-300',
-  outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50'
-}
+  outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-50',
+};
 
 const sizes = {
   sm: 'px-3 py-1.5 text-sm',
   md: 'px-4 py-2 text-base',
-  lg: 'px-6 py-3 text-lg'
-}
+  lg: 'px-6 py-3 text-lg',
+};
 
 export function Button({
   variant = 'primary',
   size = 'md',
   children,
-  onClick
+  onClick,
 }: ButtonProps) {
   return (
     <button
       onClick={onClick}
-      className={`
-        inline-flex items-center justify-center
-        font-medium rounded-lg
-        transition-colors duration-200
-        focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-        disabled:opacity-50 disabled:cursor-not-allowed
-        ${variants[variant]}
-        ${sizes[size]}
-      `}
+      className={`inline-flex items-center justify-center rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 ${variants[variant]} ${sizes[size]} `}
     >
       {children}
     </button>
-  )
+  );
 }
 ```
 
@@ -120,14 +112,14 @@ npm install -D tailwindcss @tailwindcss/postcss
 // postcss.config.mjs
 export default {
   plugins: {
-    '@tailwindcss/postcss': {}
-  }
-}
+    '@tailwindcss/postcss': {},
+  },
+};
 ```
 
 ```css
 /* app/globals.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: oklch(0.6 0.2 250);
@@ -136,18 +128,18 @@ export default {
 
 ```tsx
 // app/layout.tsx
-import './globals.css'
+import './globals.css';
 
 export default function RootLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body className="bg-white dark:bg-gray-900">{children}</body>
     </html>
-  )
+  );
 }
 ```
 
@@ -167,7 +159,7 @@ export default function Home() {
         Server-rendered with Tailwind
       </p>
     </main>
-  )
+  );
 }
 ```
 
@@ -179,28 +171,28 @@ npm install next-themes
 
 ```tsx
 // app/providers.tsx
-'use client'
+'use client';
 
-import { ThemeProvider } from 'next-themes'
+import { ThemeProvider } from 'next-themes';
 
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       {children}
     </ThemeProvider>
-  )
+  );
 }
 ```
 
 ```tsx
 // app/layout.tsx
-import { Providers } from './providers'
-import './globals.css'
+import { Providers } from './providers';
+import './globals.css';
 
 export default function RootLayout({
-  children
+  children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
@@ -208,13 +200,13 @@ export default function RootLayout({
         <Providers>{children}</Providers>
       </body>
     </html>
-  )
+  );
 }
 ```
 
 ```css
 /* globals.css - Add dark mode variant */
-@import "tailwindcss";
+@import 'tailwindcss';
 @custom-variant dark (&:where(.dark, .dark *));
 ```
 
@@ -233,27 +225,27 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [vue(), tailwindcss()]
-})
+  plugins: [vue(), tailwindcss()],
+});
 ```
 
 ```css
 /* src/assets/main.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```typescript
 // src/main.ts
-import { createApp } from 'vue'
-import App from './App.vue'
-import './assets/main.css'
+import { createApp } from 'vue';
+import App from './App.vue';
+import './assets/main.css';
 
-createApp(App).mount('#app')
+createApp(App).mount('#app');
 ```
 
 ### Component Example
@@ -262,16 +254,16 @@ createApp(App).mount('#app')
 <!-- src/components/Button.vue -->
 <script setup lang="ts">
 defineProps<{
-  variant?: 'primary' | 'secondary'
-}>()
+  variant?: 'primary' | 'secondary';
+}>();
 </script>
 
 <template>
   <button
-    class="px-4 py-2 rounded-lg font-medium transition-colors"
+    class="rounded-lg px-4 py-2 font-medium transition-colors"
     :class="{
       'bg-blue-600 text-white hover:bg-blue-700': variant === 'primary',
-      'bg-gray-200 text-gray-900 hover:bg-gray-300': variant === 'secondary'
+      'bg-gray-200 text-gray-900 hover:bg-gray-300': variant === 'secondary',
     }"
   >
     <slot />
@@ -330,21 +322,21 @@ npm install -D tailwindcss @tailwindcss/postcss
 // postcss.config.mjs
 export default {
   plugins: {
-    '@tailwindcss/postcss': {}
-  }
-}
+    '@tailwindcss/postcss': {},
+  },
+};
 ```
 
 ```css
 /* assets/css/main.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```typescript
 // nuxt.config.ts
 export default defineNuxtConfig({
-  css: ['~/assets/css/main.css']
-})
+  css: ['~/assets/css/main.css'],
+});
 ```
 
 ## Svelte / SvelteKit
@@ -362,18 +354,18 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // vite.config.js
-import { sveltekit } from '@sveltejs/kit/vite'
-import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vite'
+import { sveltekit } from '@sveltejs/kit/vite';
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
-  plugins: [sveltekit(), tailwindcss()]
-})
+  plugins: [sveltekit(), tailwindcss()],
+});
 ```
 
 ```css
 /* src/app.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```svelte
@@ -421,19 +413,19 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // astro.config.mjs
-import { defineConfig } from 'astro/config'
-import tailwindcss from '@tailwindcss/vite'
+import { defineConfig } from 'astro/config';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()]
-  }
-})
+    plugins: [tailwindcss()],
+  },
+});
 ```
 
 ```css
 /* src/styles/global.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```astro
@@ -467,28 +459,26 @@ npm install -D tailwindcss @tailwindcss/vite
 
 ```javascript
 // vite.config.ts
-import { vitePlugin as remix } from '@remix-run/dev'
-import { defineConfig } from 'vite'
-import tailwindcss from '@tailwindcss/vite'
+import { vitePlugin as remix } from '@remix-run/dev';
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  plugins: [remix(), tailwindcss()]
-})
+  plugins: [remix(), tailwindcss()],
+});
 ```
 
 ```css
 /* app/tailwind.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ```tsx
 // app/root.tsx
-import stylesheet from './tailwind.css?url'
-import { Links } from '@remix-run/react'
+import stylesheet from './tailwind.css?url';
+import { Links } from '@remix-run/react';
 
-export const links = () => [
-  { rel: 'stylesheet', href: stylesheet }
-]
+export const links = () => [{ rel: 'stylesheet', href: stylesheet }];
 
 export default function App() {
   return (
@@ -500,7 +490,7 @@ export default function App() {
         <Outlet />
       </body>
     </html>
-  )
+  );
 }
 ```
 
@@ -544,19 +534,21 @@ npm install clsx tailwind-merge
 ```
 
 ```tsx
-import { clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 // Usage
-<div className={cn(
-  "base-class",
-  isActive && "active-class",
-  disabled && "opacity-50"
-)} />
+<div
+  className={cn(
+    'base-class',
+    isActive && 'active-class',
+    disabled && 'opacity-50'
+  )}
+/>;
 ```
 
 ### 5. Configure Path Aliases
@@ -574,5 +566,5 @@ function cn(...inputs: ClassValue[]) {
 ```
 
 ```tsx
-import { Button } from '@/components/Button'
+import { Button } from '@/components/Button';
 ```

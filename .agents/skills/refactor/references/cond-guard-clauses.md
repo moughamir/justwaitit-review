@@ -19,23 +19,23 @@ function processPayment(order: Order, user: User): PaymentResult {
         if (user.paymentMethod !== null) {
           if (order.total <= user.creditLimit) {
             // Finally, the actual business logic
-            const payment = chargePayment(user.paymentMethod, order.total)
-            order.status = 'paid'
-            return { success: true, transactionId: payment.id }
+            const payment = chargePayment(user.paymentMethod, order.total);
+            order.status = 'paid';
+            return { success: true, transactionId: payment.id };
           } else {
-            return { success: false, error: 'Credit limit exceeded' }
+            return { success: false, error: 'Credit limit exceeded' };
           }
         } else {
-          return { success: false, error: 'No payment method' }
+          return { success: false, error: 'No payment method' };
         }
       } else {
-        return { success: false, error: 'User required' }
+        return { success: false, error: 'User required' };
       }
     } else {
-      return { success: false, error: 'Empty order' }
+      return { success: false, error: 'Empty order' };
     }
   } else {
-    return { success: false, error: 'Order required' }
+    return { success: false, error: 'Order required' };
   }
 }
 ```
@@ -45,29 +45,30 @@ function processPayment(order: Order, user: User): PaymentResult {
 ```typescript
 function processPayment(order: Order, user: User): PaymentResult {
   if (!order) {
-    return { success: false, error: 'Order required' }
+    return { success: false, error: 'Order required' };
   }
   if (order.items.length === 0) {
-    return { success: false, error: 'Empty order' }
+    return { success: false, error: 'Empty order' };
   }
   if (!user) {
-    return { success: false, error: 'User required' }
+    return { success: false, error: 'User required' };
   }
   if (!user.paymentMethod) {
-    return { success: false, error: 'No payment method' }
+    return { success: false, error: 'No payment method' };
   }
   if (order.total > user.creditLimit) {
-    return { success: false, error: 'Credit limit exceeded' }
+    return { success: false, error: 'Credit limit exceeded' };
   }
 
   // Main logic is now at the top level, easy to read
-  const payment = chargePayment(user.paymentMethod, order.total)
-  order.status = 'paid'
-  return { success: true, transactionId: payment.id }
+  const payment = chargePayment(user.paymentMethod, order.total);
+  order.status = 'paid';
+  return { success: true, transactionId: payment.id };
 }
 ```
 
 **Benefits:**
+
 - Validation logic is clearly separated from business logic
 - Maximum nesting depth is 1 instead of 5+
 - Easy to add new validations without restructuring

@@ -12,13 +12,13 @@ Tree shaking removes unused exports at build time, but only works when dependenc
 **Incorrect (CJS imports defeat tree shaking):**
 
 ```tsx
-import _ from "lodash" // CJS — entire 72KB library included
-import moment from "moment" // CJS — 67KB with all locales
-import * as Icons from "react-icons/fa" // barrel import — all 1600 icons
+import _ from 'lodash'; // CJS — entire 72KB library included
+import moment from 'moment'; // CJS — 67KB with all locales
+import * as Icons from 'react-icons/fa'; // barrel import — all 1600 icons
 
 function OrderConfirmation({ order }: { order: Order }) {
-  const formattedDate = moment(order.createdAt).format("DD MMM YYYY")
-  const total = _.sumBy(order.items, "price")
+  const formattedDate = moment(order.createdAt).format('DD MMM YYYY');
+  const total = _.sumBy(order.items, 'price');
 
   return (
     <div>
@@ -26,7 +26,7 @@ function OrderConfirmation({ order }: { order: Order }) {
       <p>Order placed on {formattedDate}</p>
       <p>Total: ${total.toFixed(2)}</p>
     </div>
-  )
+  );
 }
 ```
 

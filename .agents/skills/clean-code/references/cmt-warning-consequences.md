@@ -58,6 +58,7 @@ public void testWithRealDatabase() {
 ```
 
 **Good warnings include:**
+
 - Thread-safety concerns
 - Performance implications
 - External dependencies or side effects

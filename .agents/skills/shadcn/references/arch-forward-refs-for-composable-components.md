@@ -13,30 +13,30 @@ Custom components wrapping shadcn/ui primitives must forward refs to enable form
 
 ```tsx
 interface SearchInputProps {
-  onSearch: (query: string) => void
+  onSearch: (query: string) => void;
 }
 
 function SearchInput({ onSearch }: SearchInputProps) {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
 
   return (
     <Input
       value={query}
       onChange={(e) => setQuery(e.target.value)}
-      onKeyDown={(e) => e.key === "Enter" && onSearch(query)}
+      onKeyDown={(e) => e.key === 'Enter' && onSearch(query)}
     />
-  )
+  );
 }
 
 // Parent cannot focus the input
 function SearchForm() {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputRef.current?.focus() // null - ref not forwarded
-  }, [])
+    inputRef.current?.focus(); // null - ref not forwarded
+  }, []);
 
-  return <SearchInput ref={inputRef} onSearch={handleSearch} />
+  return <SearchInput ref={inputRef} onSearch={handleSearch} />;
 }
 ```
 
@@ -44,38 +44,39 @@ function SearchForm() {
 
 ```tsx
 interface SearchInputProps {
-  onSearch: (query: string) => void
+  onSearch: (query: string) => void;
 }
 
 const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
   ({ onSearch }, ref) => {
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useState('');
 
     return (
       <Input
         ref={ref}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && onSearch(query)}
+        onKeyDown={(e) => e.key === 'Enter' && onSearch(query)}
       />
-    )
+    );
   }
-)
-SearchInput.displayName = "SearchInput"
+);
+SearchInput.displayName = 'SearchInput';
 
 // Parent can now focus the input
 function SearchForm() {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputRef.current?.focus() // Works - ref forwarded to Input
-  }, [])
+    inputRef.current?.focus(); // Works - ref forwarded to Input
+  }, []);
 
-  return <SearchInput ref={inputRef} onSearch={handleSearch} />
+  return <SearchInput ref={inputRef} onSearch={handleSearch} />;
 }
 ```
 
 **Always forward refs when:**
+
 - Wrapping form inputs (Input, Select, Textarea)
 - Creating trigger components for modals/popovers
 - Building components used with React Hook Form

@@ -42,7 +42,7 @@ function parseUserPayload(data: unknown): string[] {
   if (!isUserPayload(data)) {
     throw new Error('Invalid user payload structure');
   }
-  return data.items.map(item => item.name.toUpperCase());
+  return data.items.map((item) => item.name.toUpperCase());
 }
 
 interface ApiResponse {

@@ -15,13 +15,13 @@ Some code snippets are syntactically ambiguous without context. Use the pattern 
 const transform: Transform<TSX> = (root) => {
   // Is '{a, b}' an object or destructuring?
   const matches = root.findAll({
-    rule: { pattern: "{ $A, $B }" }
+    rule: { pattern: '{ $A, $B }' },
   });
   // Parser guesses wrong, matches fail silently
 
   // Is '() => x' a return or function body?
   const arrows = root.findAll({
-    rule: { pattern: "() => $EXPR" }
+    rule: { pattern: '() => $EXPR' },
   });
   // Ambiguous without statement context
   return null;
@@ -36,30 +36,30 @@ const transform: Transform<TSX> = (root) => {
   const destructuring = root.findAll({
     rule: {
       pattern: {
-        context: "const { $A, $B } = obj",
-        selector: "object_pattern"
-      }
-    }
+        context: 'const { $A, $B } = obj',
+        selector: 'object_pattern',
+      },
+    },
   });
 
   // Explicit: match object literal in expression position
   const objectLiterals = root.findAll({
     rule: {
       pattern: {
-        context: "const x = { $A, $B }",
-        selector: "object"
-      }
-    }
+        context: 'const x = { $A, $B }',
+        selector: 'object',
+      },
+    },
   });
 
   // Explicit: arrow function with implicit return
   const arrows = root.findAll({
     rule: {
       pattern: {
-        context: "const fn = () => $EXPR",
-        selector: "arrow_function"
-      }
-    }
+        context: 'const fn = () => $EXPR',
+        selector: 'arrow_function',
+      },
+    },
   });
 
   return null;
@@ -67,6 +67,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **When to use pattern object:**
+
 - Destructuring patterns (`{ a, b }` vs `{ a: 1 }`)
 - Arrow functions (implicit vs block body)
 - JSX fragments vs comparison operators

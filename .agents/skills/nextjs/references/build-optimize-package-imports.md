@@ -15,10 +15,10 @@ Icon libraries like `lucide-react` export hundreds of modules. Without optimizat
 // next.config.ts
 const nextConfig = {
   // No optimization configured
-}
+};
 
 // components/Header.tsx
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X, Search } from 'lucide-react';
 // Loads 1,583 modules, adds ~2.8s to dev startup
 ```
 
@@ -28,12 +28,16 @@ import { Menu, X, Search } from 'lucide-react'
 // next.config.ts
 const nextConfig = {
   experimental: {
-    optimizePackageImports: ['lucide-react', '@heroicons/react', '@mui/icons-material']
-  }
-}
+    optimizePackageImports: [
+      'lucide-react',
+      '@heroicons/react',
+      '@mui/icons-material',
+    ],
+  },
+};
 
 // components/Header.tsx
-import { Menu, X, Search } from 'lucide-react'
+import { Menu, X, Search } from 'lucide-react';
 // Loads only 3 modules (~2KB vs ~1MB)
 ```
 

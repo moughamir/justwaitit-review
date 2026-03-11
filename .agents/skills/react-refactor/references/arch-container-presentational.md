@@ -14,7 +14,7 @@ Components that mix data fetching, state management, and rendering are hard to t
 ```tsx
 function InvoiceList() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [sortField, setSortField] = useState<"date" | "amount">("date");
+  const [sortField, setSortField] = useState<'date' | 'amount'>('date');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -31,8 +31,8 @@ function InvoiceList() {
     <table>
       <thead>
         <tr>
-          <th onClick={() => setSortField("date")}>Date</th>
-          <th onClick={() => setSortField("amount")}>Amount</th>
+          <th onClick={() => setSortField('date')}>Date</th>
+          <th onClick={() => setSortField('amount')}>Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -53,7 +53,7 @@ function InvoiceList() {
 ```tsx
 function useInvoiceList() {
   const [invoices, setInvoices] = useState<Invoice[]>([]);
-  const [sortField, setSortField] = useState<"date" | "amount">("date");
+  const [sortField, setSortField] = useState<'date' | 'amount'>('date');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -67,13 +67,17 @@ function useInvoiceList() {
 }
 
 // Pure presentational — testable with plain props, no mocks needed
-function InvoiceTable({ invoices, sortField, onSortChange }: InvoiceTableProps) {
+function InvoiceTable({
+  invoices,
+  sortField,
+  onSortChange,
+}: InvoiceTableProps) {
   return (
     <table>
       <thead>
         <tr>
-          <th onClick={() => onSortChange("date")}>Date</th>
-          <th onClick={() => onSortChange("amount")}>Amount</th>
+          <th onClick={() => onSortChange('date')}>Date</th>
+          <th onClick={() => onSortChange('amount')}>Amount</th>
         </tr>
       </thead>
       <tbody>
@@ -91,7 +95,13 @@ function InvoiceTable({ invoices, sortField, onSortChange }: InvoiceTableProps) 
 function InvoiceList() {
   const { invoices, sortField, setSortField, isLoading } = useInvoiceList();
   if (isLoading) return <Skeleton rows={5} />;
-  return <InvoiceTable invoices={invoices} sortField={sortField} onSortChange={setSortField} />;
+  return (
+    <InvoiceTable
+      invoices={invoices}
+      sortField={sortField}
+      onSortChange={setSortField}
+    />
+  );
 }
 ```
 

@@ -15,6 +15,7 @@ Functional requirements describe what the system does. Non-functional requiremen
 ## Feature: File Upload
 
 ### Requirements
+
 - User can upload files
 - Files are stored in the system
 - User can download uploaded files
@@ -30,6 +31,7 @@ Functional requirements describe what the system does. Non-functional requiremen
 ## Feature: File Upload
 
 ### Functional Requirements
+
 - User can upload single or multiple files
 - User can view list of uploaded files with metadata
 - User can download files individually or as ZIP
@@ -39,29 +41,34 @@ Functional requirements describe what the system does. Non-functional requiremen
 ### Non-Functional Requirements
 
 #### Performance
+
 - Upload speed: Minimum 1MB/s on broadband
 - Maximum file size: 100MB per file
 - Concurrent uploads: Up to 5 files simultaneously
 - Storage quota: 10GB per user (configurable)
 
 #### Security
+
 - Files scanned for malware before storage
 - Direct URL access requires authentication token
 - Files encrypted at rest (AES-256)
 - Audit log of all file operations
 
 #### Availability
+
 - File service uptime: 99.9%
 - Graceful degradation if storage is unavailable
 - Upload resume capability for files >10MB
 
 #### Accessibility
+
 - Upload progress announced to screen readers
 - Keyboard-accessible file picker
 - Error messages include remediation steps
 ```
 
 **Common NFR categories:**
+
 - Performance (speed, throughput, latency)
 - Security (authentication, encryption, audit)
 - Scalability (users, data volume, growth)

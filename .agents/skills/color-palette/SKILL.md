@@ -22,25 +22,26 @@ Ask for the primary brand colour. A single hex like `#0D9488` is enough.
 
 Convert hex to HSL, then generate shades by varying lightness while keeping hue constant:
 
-| Shade | Lightness | Use Case |
-|-------|-----------|----------|
-| 50 | 97% | Subtle backgrounds |
-| 100 | 94% | Hover states |
-| 200 | 87% | Borders, dividers |
-| 300 | 75% | Disabled states |
-| 400 | 62% | Placeholder text |
-| 500 | 48% | **Brand colour** |
-| 600 | 40% | Primary actions |
-| 700 | 33% | Hover on primary |
-| 800 | 27% | Active states |
-| 900 | 20% | Text on light bg |
-| 950 | 10% | Darkest accents |
+| Shade | Lightness | Use Case           |
+| ----- | --------- | ------------------ |
+| 50    | 97%       | Subtle backgrounds |
+| 100   | 94%       | Hover states       |
+| 200   | 87%       | Borders, dividers  |
+| 300   | 75%       | Disabled states    |
+| 400   | 62%       | Placeholder text   |
+| 500   | 48%       | **Brand colour**   |
+| 600   | 40%       | Primary actions    |
+| 700   | 33%       | Hover on primary   |
+| 800   | 27%       | Active states      |
+| 900   | 20%       | Text on light bg   |
+| 950   | 10%       | Darkest accents    |
 
 See `references/shade-generation.md` for the conversion formula.
 
 ### Step 3: Map Semantic Tokens
 
 **Light mode:**
+
 ```css
 --background: white;
 --foreground: primary-950;
@@ -54,6 +55,7 @@ See `references/shade-generation.md` for the conversion formula.
 ```
 
 **Dark mode** — invert lightness while preserving relationships:
+
 ```css
 --background: primary-950;
 --foreground: primary-50;
@@ -69,6 +71,7 @@ See `references/shade-generation.md` for the conversion formula.
 ### Step 4: Check Contrast
 
 WCAG minimum ratios:
+
 - **Text (AA)**: 4.5:1 normal, 3:1 large (18px+)
 - **UI Elements**: 3:1
 
@@ -78,15 +81,15 @@ Quick check: `primary-600` on `white` and `white` on `primary-600`. See `referen
 
 ```css
 @theme {
-  --color-primary-50: #F0FDFA;
-  --color-primary-100: #CCFBF1;
-  --color-primary-500: #14B8A6;
-  --color-primary-950: #042F2E;
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-500: #14b8a6;
+  --color-primary-950: #042f2e;
 
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-foreground: var(--color-primary-950);
   --color-primary: var(--color-primary-600);
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-foreground: #ffffff;
 }
 
 .dark {
@@ -109,10 +112,10 @@ Copy `assets/tailwind-colors.css` as a starting template.
 
 ## Reference Files
 
-| File | Purpose |
-|------|---------|
-| `references/shade-generation.md` | Hex to HSL conversion, lightness values |
-| `references/semantic-mapping.md` | Token mapping for light/dark modes |
-| `references/dark-mode-palette.md` | Inversion patterns |
-| `references/contrast-checking.md` | WCAG formulas, quick check table |
-| `assets/tailwind-colors.css` | Complete CSS output template |
+| File                              | Purpose                                 |
+| --------------------------------- | --------------------------------------- |
+| `references/shade-generation.md`  | Hex to HSL conversion, lightness values |
+| `references/semantic-mapping.md`  | Token mapping for light/dark modes      |
+| `references/dark-mode-palette.md` | Inversion patterns                      |
+| `references/contrast-checking.md` | WCAG formulas, quick check table        |
+| `assets/tailwind-colors.css`      | Complete CSS output template            |

@@ -81,6 +81,7 @@ export function CheckoutPage() {
 ```
 
 **Benefits:**
+
 - Order feature can be tested with mock dependencies
 - Cart, user, and payment can change without breaking orders
 - Clear contract between features

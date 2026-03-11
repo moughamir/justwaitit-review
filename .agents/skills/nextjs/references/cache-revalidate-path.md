@@ -12,13 +12,13 @@ Use `revalidatePath` to invalidate all cached data associated with a specific ro
 **Incorrect (forgetting to revalidate after mutation):**
 
 ```typescript
-'use server'
+'use server';
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title') as string
-  const content = formData.get('content') as string
+  const title = formData.get('title') as string;
+  const content = formData.get('content') as string;
 
-  await db.posts.create({ data: { title, content } })
+  await db.posts.create({ data: { title, content } });
 
   // User doesn't see new post until cache expires!
 }
@@ -27,19 +27,19 @@ export async function createPost(formData: FormData) {
 **Correct (revalidating after mutation):**
 
 ```typescript
-'use server'
+'use server';
 
-import { revalidatePath } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function createPost(formData: FormData) {
-  const title = formData.get('title') as string
-  const content = formData.get('content') as string
+  const title = formData.get('title') as string;
+  const content = formData.get('content') as string;
 
-  const post = await db.posts.create({ data: { title, content } })
+  const post = await db.posts.create({ data: { title, content } });
 
-  revalidatePath('/posts')  // Invalidate posts list
-  redirect(`/posts/${post.id}`)  // Navigate to new post
+  revalidatePath('/posts'); // Invalidate posts list
+  redirect(`/posts/${post.id}`); // Navigate to new post
 }
 ```
 
@@ -47,16 +47,16 @@ export async function createPost(formData: FormData) {
 
 ```typescript
 // Specific route
-revalidatePath('/posts')
+revalidatePath('/posts');
 
 // Dynamic route
-revalidatePath('/posts/[slug]', 'page')
+revalidatePath('/posts/[slug]', 'page');
 
 // Layout and all child routes
-revalidatePath('/dashboard', 'layout')
+revalidatePath('/dashboard', 'layout');
 
 // Entire app (use sparingly)
-revalidatePath('/', 'layout')
+revalidatePath('/', 'layout');
 ```
 
 **Note:** `redirect` must be called after `revalidatePath` as it throws internally.

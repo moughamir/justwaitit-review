@@ -27,7 +27,7 @@ function UserMenu() {
         <DropdownMenuItem>Settings</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 ```
 
@@ -49,11 +49,12 @@ function UserMenu() {
         <DropdownMenuItem>Settings</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
 ```
 
 **When to use asChild:**
+
 - Trigger components (DialogTrigger, PopoverTrigger, DropdownMenuTrigger)
 - When your custom component already renders a focusable element
 - When you need to preserve your component's styling and props

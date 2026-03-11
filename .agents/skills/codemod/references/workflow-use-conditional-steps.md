@@ -13,7 +13,7 @@ Use `if` expressions to conditionally execute steps based on state, parameters, 
 
 ```yaml
 # workflow.yaml - runs everything regardless
-version: "1"
+version: '1'
 nodes:
   - id: migrate
     steps:
@@ -33,12 +33,12 @@ nodes:
 
 ```yaml
 # workflow.yaml - smart step execution
-version: "1"
+version: '1'
 
 params:
   react_version:
     type: string
-    default: "19"
+    default: '19'
   skip_typecheck:
     type: boolean
     default: false
@@ -62,7 +62,7 @@ nodes:
 **Conditional based on state:**
 
 ```yaml
-version: "1"
+version: '1'
 
 state:
   has_typescript: false
@@ -83,6 +83,7 @@ nodes:
 ```
 
 **Conditional expressions:**
+
 - `${{ params.x == "value" }}`
 - `${{ state.flag == true }}`
 - `${{ !params.skip }}`

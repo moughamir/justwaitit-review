@@ -18,11 +18,11 @@ pip install Pillow
 
 If Pillow is unavailable, adapt using alternatives:
 
-| Alternative | Platform | Install | Capabilities |
-|-------------|----------|---------|-------------|
-| `sips` | macOS (built-in) | None | Resize, convert (no trim/OG) |
-| `sharp` | Node.js | `npm install sharp` | Full feature set |
-| `ffmpeg` | Cross-platform | `brew install ffmpeg` | Resize, convert |
+| Alternative | Platform         | Install               | Capabilities                 |
+| ----------- | ---------------- | --------------------- | ---------------------------- |
+| `sips`      | macOS (built-in) | None                  | Resize, convert (no trim/OG) |
+| `sharp`     | Node.js          | `npm install sharp`   | Full feature set             |
+| `ffmpeg`    | Cross-platform   | `brew install ffmpeg` | Resize, convert              |
 
 ## Capabilities
 
@@ -78,16 +78,16 @@ Generate images with the gemini-image-gen skill, then process them:
 
 ## Output Format Guide
 
-| Use case | Format | Why |
-|----------|--------|-----|
-| Photos, hero images | WebP | Best compression, wide browser support |
-| Logos, icons (need transparency) | PNG | Lossless, supports alpha |
-| Fallback for older browsers | JPG | Universal support |
-| Thumbnails | WebP or JPG | Small file size priority |
-| OG cards | PNG | Social platforms handle PNG best |
+| Use case                         | Format      | Why                                    |
+| -------------------------------- | ----------- | -------------------------------------- |
+| Photos, hero images              | WebP        | Best compression, wide browser support |
+| Logos, icons (need transparency) | PNG         | Lossless, supports alpha               |
+| Fallback for older browsers      | JPG         | Universal support                      |
+| Thumbnails                       | WebP or JPG | Small file size priority               |
+| OG cards                         | PNG         | Social platforms handle PNG best       |
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                              | Read                                                           |
+| --------------------------------- | -------------------------------------------------------------- |
 | Implementing any Pillow operation | [references/pillow-patterns.md](references/pillow-patterns.md) |

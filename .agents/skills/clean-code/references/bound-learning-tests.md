@@ -51,6 +51,7 @@ public void gsonShouldIgnoreUnknownFields() {
 ```
 
 **Benefits:**
+
 - Free education on the API's behavior
 - When you upgrade the library, these tests break first — before your production code does
 - Documents exactly which behaviors your code relies on

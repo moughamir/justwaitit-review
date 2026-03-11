@@ -56,6 +56,7 @@ public class UserRecord {
 ```
 
 **Use DTOs when:**
+
 - Transferring data across system boundaries (API, database, message queue)
 - Hiding internal structure from external consumers
 - Transforming data format between layers

@@ -7,6 +7,7 @@ This guide explains how to organize multiple PRDs and related artifacts in your 
 ## Overview
 
 The PRD folder structure is designed to:
+
 - Keep all product documentation organized and discoverable
 - Maintain clear separation between different features/initiatives
 - Support easy navigation and cross-referencing
@@ -55,6 +56,7 @@ prds/
 ## File Naming Conventions
 
 ### PRD Folders
+
 - Format: `prd-NNN-kebab-case-name/`
 - Sequential numbering: `001`, `002`, `003`, etc.
 - Descriptive names: Clearly indicate the feature
@@ -65,6 +67,7 @@ prds/
   - ❌ `PRD_001_ai_review/` (wrong case/separator)
 
 ### Core Files
+
 - `prd.md` - Main PRD document (always required)
 - `research.md` - User research (optional but recommended)
 - `technical-specs.md` - Technical details (optional but recommended)
@@ -82,13 +85,14 @@ The `prds/README.md` serves as the index for all PRDs. Keep it updated:
 
 ## Active PRDs
 
-| ID | Feature | Owner | Status | Created | Updated |
-|----|---------|-------|--------|---------|---------|
-| [PRD-001](./prd-001-ai-code-review/prd.md) | AI Code Review | Jane | 🟢 Approved | 2024-12-01 | 2024-12-15 |
-| [PRD-002](./prd-002-vector-search/prd.md) | Vector Search | Bob | 🔵 In Review | 2024-12-10 | 2024-12-18 |
-| [PRD-003](./prd-003-user-auth/prd.md) | User Auth | Alice | 🟡 Draft | 2024-12-20 | 2024-12-22 |
+| ID                                         | Feature        | Owner | Status       | Created    | Updated    |
+| ------------------------------------------ | -------------- | ----- | ------------ | ---------- | ---------- |
+| [PRD-001](./prd-001-ai-code-review/prd.md) | AI Code Review | Jane  | 🟢 Approved  | 2024-12-01 | 2024-12-15 |
+| [PRD-002](./prd-002-vector-search/prd.md)  | Vector Search  | Bob   | 🔵 In Review | 2024-12-10 | 2024-12-18 |
+| [PRD-003](./prd-003-user-auth/prd.md)      | User Auth      | Alice | 🟡 Draft     | 2024-12-20 | 2024-12-22 |
 
 ## Status Legend
+
 - 🟡 **Draft** - Work in progress
 - 🔵 **In Review** - Awaiting stakeholder approval
 - 🟢 **Approved** - Ready for implementation
@@ -98,13 +102,16 @@ The `prds/README.md` serves as the index for all PRDs. Keep it updated:
 ## By Category
 
 ### AI & Agents
+
 - PRD-001: AI Code Review
 - PRD-002: Vector Search
 
 ### Infrastructure
+
 - PRD-003: User Authentication
 
 ## Quick Links
+
 - [Templates](./templates/)
 - [Archive](./archive/)
 ```
@@ -175,11 +182,13 @@ archive/
 ```
 
 **When to Archive**:
+
 - Feature is fully implemented and stable (3+ months)
 - PRD is superseded by a new version
 - Feature is deprecated or removed
 
 **Archive Process**:
+
 1. Add "Archived" status to PRD
 2. Move entire folder to appropriate year
 3. Update main README.md
@@ -195,6 +204,7 @@ Use relative links to reference related PRDs:
 
 ```markdown
 ## Related PRDs
+
 - [PRD-001: AI Code Review](../prd-001-ai-code-review/prd.md)
 - [PRD-005: Test Automation](../prd-005-test-automation/prd.md)
 ```
@@ -205,6 +215,7 @@ Link PRDs to actual implementation:
 
 ```markdown
 ## Implementation
+
 - **Code**: [src/features/code-review](../../src/features/code-review)
 - **Tests**: [tests/code-review](../../tests/code-review)
 - **Docs**: [docs/code-review.md](../../docs/code-review.md)
@@ -217,6 +228,7 @@ Link PRDs to actual implementation:
 ### Git Workflow
 
 1. **New PRDs**: Create on feature branch
+
    ```bash
    git checkout -b prd/001-ai-code-review
    mkdir prds/prd-001-ai-code-review
@@ -227,6 +239,7 @@ Link PRDs to actual implementation:
    ```
 
 2. **Updates**: Use pull requests for changes
+
    ```bash
    git checkout -b prd/001-update-scope
    # Update PRD files
@@ -242,6 +255,7 @@ Link PRDs to actual implementation:
 ### Commit Messages
 
 Follow conventional commits for PRD changes:
+
 - `prd: Add PRD-042: Payment Integration`
 - `prd: Update PRD-001 success metrics`
 - `prd: Archive PRD-007: Legacy feature`
@@ -253,12 +267,14 @@ Follow conventional commits for PRD changes:
 ### Scripts to Create
 
 1. **Create New PRD**
+
    ```bash
    ./scripts/create-prd.sh "AI Code Review"
    # Creates folder, copies template, assigns next ID
    ```
 
 2. **Update Index**
+
    ```bash
    ./scripts/update-prd-index.sh
    # Scans all PRDs, regenerates README.md
@@ -284,12 +300,14 @@ Follow conventional commits for PRD changes:
 ### Regular Reviews
 
 **Monthly**:
+
 - [ ] Update PRD statuses in README.md
 - [ ] Archive completed PRDs (3+ months old)
 - [ ] Review and close open questions
 - [ ] Update metrics for active features
 
 **Quarterly**:
+
 - [ ] Clean up orphaned files
 - [ ] Update templates based on learnings
 - [ ] Review and improve structure
@@ -300,6 +318,7 @@ Follow conventional commits for PRD changes:
 ## Example Folder Structures
 
 ### Simple Project (1-10 PRDs)
+
 ```
 prds/
 ├── README.md
@@ -310,6 +329,7 @@ prds/
 ```
 
 ### Medium Project (10-50 PRDs)
+
 ```
 prds/
 ├── README.md
@@ -323,6 +343,7 @@ prds/
 ```
 
 ### Large Project (50+ PRDs)
+
 ```
 prds/
 ├── README.md
@@ -373,4 +394,4 @@ Starting a new PRD repository:
 
 ---
 
-*This folder structure guide is part of the PRD Mastery skill*
+_This folder structure guide is part of the PRD Mastery skill_

@@ -27,6 +27,7 @@ Requirements should describe what the system must do, not how to implement it. P
 ## Requirements
 
 ### Session Management
+
 - Sessions must persist across page refreshes
 - Sessions must expire after 24 hours of inactivity
 - Session data must be accessible from any server instance
@@ -34,6 +35,7 @@ Requirements should describe what the system must do, not how to implement it. P
 _Implementation note: Team to decide caching solution (Redis, Memcached, database-backed)_
 
 ### Confirmation UX
+
 - User must confirm before destructive actions (delete, cancel)
 - Confirmation must clearly state the consequence
 - User must be able to cancel without data loss
@@ -41,6 +43,7 @@ _Implementation note: Team to decide caching solution (Redis, Memcached, databas
 _Implementation note: Modal, inline confirmation, or separate page—team decides based on context_
 
 ### File Storage
+
 - Uploaded files must be accessible for 7 days minimum
 - Files must be retrievable via unique URL
 - Maximum file size: 50MB
@@ -48,6 +51,7 @@ _Implementation note: Modal, inline confirmation, or separate page—team decide
 _Implementation note: Storage provider selection is a technical decision_
 
 ### Real-time Updates
+
 - Users must see new messages within 5 seconds
 - No manual refresh required for updates
 - Updates must work on mobile networks
@@ -56,6 +60,7 @@ _Implementation note: Websockets, SSE, or polling—based on infrastructure cons
 ```
 
 **When to specify implementation:**
+
 - Regulatory/compliance requirements mandate specific technology
 - Existing infrastructure constrains options
 - Team has explicitly requested guidance

@@ -12,23 +12,23 @@ tags: user, userEvent, fireEvent, interactions
 **Incorrect (single event, incomplete simulation):**
 
 ```tsx
-render(<LoginForm />)
+render(<LoginForm />);
 
 fireEvent.change(screen.getByLabelText('Email'), {
-  target: { value: 'user@example.com' }
-})
-fireEvent.click(screen.getByRole('button', { name: /submit/i }))
+  target: { value: 'user@example.com' },
+});
+fireEvent.click(screen.getByRole('button', { name: /submit/i }));
 // Missing focus, keydown, keyup events a real user triggers
 ```
 
 **Correct (realistic user interaction):**
 
 ```tsx
-render(<LoginForm />)
+render(<LoginForm />);
 
-const user = userEvent.setup()
-await user.type(screen.getByLabelText('Email'), 'user@example.com')
-await user.click(screen.getByRole('button', { name: /submit/i }))
+const user = userEvent.setup();
+await user.type(screen.getByLabelText('Email'), 'user@example.com');
+await user.click(screen.getByRole('button', { name: /submit/i }));
 // Fires focus, keydown, keypress, input, keyup events
 ```
 

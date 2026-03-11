@@ -27,7 +27,7 @@ bun run test -- __tests__/performance/landing-page-performance.test.ts
 Copy `.env.example` → `.env.local` and set:
 
 - `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+- `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY`
 
 ## Architecture
 

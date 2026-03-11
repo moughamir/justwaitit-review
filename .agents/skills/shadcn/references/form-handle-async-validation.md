@@ -13,62 +13,65 @@ When validating against an API (username availability, email uniqueness), deboun
 
 ```tsx
 const schema = z.object({
-  username: z.string().min(3).refine(
-    async (username) => {
-      // Called on EVERY keystroke - floods server
-      const response = await fetch(`/api/check-username?u=${username}`)
-      return response.ok
-    },
-    { message: "Username already taken" }
-  ),
-})
+  username: z
+    .string()
+    .min(3)
+    .refine(
+      async (username) => {
+        // Called on EVERY keystroke - floods server
+        const response = await fetch(`/api/check-username?u=${username}`);
+        return response.ok;
+      },
+      { message: 'Username already taken' }
+    ),
+});
 
 function UsernameForm() {
   const form = useForm({
     resolver: zodResolver(schema),
-    mode: "onChange", // Triggers validation constantly
-  })
+    mode: 'onChange', // Triggers validation constantly
+  });
 
-  return <Form {...form}>{/* ... */}</Form>
+  return <Form {...form}>{/* ... */}</Form>;
 }
 ```
 
 **Correct (debounced async validation):**
 
 ```tsx
-import { useDebouncedCallback } from "use-debounce"
+import { useDebouncedCallback } from 'use-debounce';
 
 const baseSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-})
+  username: z.string().min(3, 'Username must be at least 3 characters'),
+});
 
-type FormValues = z.infer<typeof baseSchema>
+type FormValues = z.infer<typeof baseSchema>;
 
 function UsernameForm() {
-  const [usernameError, setUsernameError] = useState<string | null>(null)
-  const [isChecking, setIsChecking] = useState(false)
+  const [usernameError, setUsernameError] = useState<string | null>(null);
+  const [isChecking, setIsChecking] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(baseSchema),
-    mode: "onBlur",
-  })
+    mode: 'onBlur',
+  });
 
   const checkUsername = useDebouncedCallback(async (username: string) => {
-    if (username.length < 3) return
+    if (username.length < 3) return;
 
-    setIsChecking(true)
+    setIsChecking(true);
     try {
-      const response = await fetch(`/api/check-username?u=${username}`)
+      const response = await fetch(`/api/check-username?u=${username}`);
       if (!response.ok) {
-        setUsernameError("Username already taken")
-        form.setError("username", { message: "Username already taken" })
+        setUsernameError('Username already taken');
+        form.setError('username', { message: 'Username already taken' });
       } else {
-        setUsernameError(null)
+        setUsernameError(null);
       }
     } finally {
-      setIsChecking(false)
+      setIsChecking(false);
     }
-  }, 500) // 500ms debounce
+  }, 500); // 500ms debounce
 
   return (
     <Form {...form}>
@@ -83,8 +86,8 @@ function UsernameForm() {
                 <Input
                   {...field}
                   onChange={(e) => {
-                    field.onChange(e)
-                    checkUsername(e.target.value)
+                    field.onChange(e);
+                    checkUsername(e.target.value);
                   }}
                 />
                 {isChecking && (
@@ -97,7 +100,7 @@ function UsernameForm() {
         )}
       />
     </Form>
-  )
+  );
 }
 ```
 

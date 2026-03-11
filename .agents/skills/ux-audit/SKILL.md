@@ -43,6 +43,7 @@ This is the highest-value mode. Instead of mechanically clicking buttons, walk t
 7. Write report to `docs/ux-audit-YYYY-MM-DD.md` using the template from [references/report-template.md](references/report-template.md)
 
 **Severity levels**:
+
 - **Critical** — blocks the user from completing their task
 - **High** — causes confusion or significant friction
 - **Medium** — suboptimal but the user can work around it
@@ -72,10 +73,10 @@ Systematic mechanical testing of all pages and features.
    - Notifications: display and can be dismissed
 5. Produce a **QA sweep summary table**:
 
-   | Page | Status | Issues |
-   |------|--------|--------|
-   | /patients | Pass | — |
-   | /patients/new | Fail | Form validation missing on email |
+   | Page          | Status | Issues                           |
+   | ------------- | ------ | -------------------------------- |
+   | /patients     | Pass   | —                                |
+   | /patients/new | Fail   | Form validation missing on email |
 
 6. Write report to `docs/qa-sweep-YYYY-MM-DD.md`
 
@@ -91,13 +92,13 @@ Focused testing of a specific area.
 
 ## When to Use
 
-| Scenario | Mode |
-|----------|------|
-| After building a feature, before showing users | UX Walkthrough |
-| Before a release, verify nothing is broken | QA Sweep |
-| Quick check on a specific page after changes | Targeted Check |
-| Periodic UX health check | UX Walkthrough |
-| Client demo prep | QA Sweep + UX Walkthrough |
+| Scenario                                       | Mode                      |
+| ---------------------------------------------- | ------------------------- |
+| After building a feature, before showing users | UX Walkthrough            |
+| Before a release, verify nothing is broken     | QA Sweep                  |
+| Quick check on a specific page after changes   | Targeted Check            |
+| Periodic UX health check                       | UX Walkthrough            |
+| Client demo prep                               | QA Sweep + UX Walkthrough |
 
 **Skip this skill for**: API-only services, CLI tools, unit/integration tests (use test frameworks), performance testing.
 
@@ -116,8 +117,8 @@ Focused testing of a specific area.
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                                      | Read                                                                       |
+| ----------------------------------------- | -------------------------------------------------------------------------- |
 | Evaluating each screen during walkthrough | [references/walkthrough-checklist.md](references/walkthrough-checklist.md) |
-| Writing the audit report | [references/report-template.md](references/report-template.md) |
-| Browser tool commands and selection | [references/browser-tools.md](references/browser-tools.md) |
+| Writing the audit report                  | [references/report-template.md](references/report-template.md)             |
+| Browser tool commands and selection       | [references/browser-tools.md](references/browser-tools.md)                 |

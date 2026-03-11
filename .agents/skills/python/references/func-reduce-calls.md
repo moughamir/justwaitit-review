@@ -43,6 +43,7 @@ for item in items:
 ```
 
 **When NOT to inline:**
+
 - When it hurts readability significantly
 - When the function is complex
 - When profiling shows the call overhead is negligible

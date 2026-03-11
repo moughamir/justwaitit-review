@@ -1,6 +1,6 @@
 ---
 name: seo-local-business
-description: "Generate complete SEO setup for local business websites — HTML head tags, JSON-LD LocalBusiness schema, robots.txt, sitemap.xml. Australian-optimised with +61 phone, ABN, suburb patterns."
+description: 'Generate complete SEO setup for local business websites — HTML head tags, JSON-LD LocalBusiness schema, robots.txt, sitemap.xml. Australian-optimised with +61 phone, ABN, suburb patterns.'
 ---
 
 # SEO Local Business
@@ -20,14 +20,14 @@ Generate a complete SEO package for local business websites. Produces meta tags,
 
 Ask for (or extract from existing site):
 
-| Required | Optional |
-|----------|----------|
-| Business name | ABN |
-| Primary service | Opening hours |
-| Location (city/suburb) | Social media URLs |
-| Phone number | Price range |
-| Website URL | Service areas (suburbs) |
-| Business description | GPS coordinates |
+| Required               | Optional                |
+| ---------------------- | ----------------------- |
+| Business name          | ABN                     |
+| Primary service        | Opening hours           |
+| Location (city/suburb) | Social media URLs       |
+| Phone number           | Price range             |
+| Website URL            | Service areas (suburbs) |
+| Business description   | GPS coordinates         |
 
 ### Step 2: Generate Head Tags
 
@@ -35,21 +35,21 @@ Use `assets/head-template.html` as your base. Fill in all placeholders.
 
 **Title tag patterns** (50-60 chars max):
 
-| Page | Pattern | Example |
-|------|---------|---------|
-| Homepage | `Brand - Tagline` | `Newcastle Plumbing - 24/7 Emergency Service` |
-| Service | `Service in Location \| Brand` | `Hot Water Repairs Newcastle \| ABC Plumbing` |
-| About | `About Us \| Brand` | `About Us \| ABC Plumbing Newcastle` |
-| Contact | `Contact \| Brand` | `Contact Us \| ABC Plumbing Newcastle` |
+| Page     | Pattern                        | Example                                       |
+| -------- | ------------------------------ | --------------------------------------------- |
+| Homepage | `Brand - Tagline`              | `Newcastle Plumbing - 24/7 Emergency Service` |
+| Service  | `Service in Location \| Brand` | `Hot Water Repairs Newcastle \| ABC Plumbing` |
+| About    | `About Us \| Brand`            | `About Us \| ABC Plumbing Newcastle`          |
+| Contact  | `Contact \| Brand`             | `Contact Us \| ABC Plumbing Newcastle`        |
 
 **Meta description patterns** (150-160 chars):
 
-| Page | Pattern |
-|------|---------|
-| Homepage | `[USP]. [Service] in [Location]. [CTA]. Call [phone].` |
-| Service | `Professional [service] in [location]. [Benefit]. [Trust signal]. Get a free quote today.` |
-| About | `[X] years serving [location]. [Team info]. [Credentials]. Learn about [brand].` |
-| Contact | `Contact [brand] for [service] in [location]. [Hours]. Call [phone] or request a quote online.` |
+| Page     | Pattern                                                                                         |
+| -------- | ----------------------------------------------------------------------------------------------- |
+| Homepage | `[USP]. [Service] in [Location]. [CTA]. Call [phone].`                                          |
+| Service  | `Professional [service] in [location]. [Benefit]. [Trust signal]. Get a free quote today.`      |
+| About    | `[X] years serving [location]. [Team info]. [Credentials]. Learn about [brand].`                |
+| Contact  | `Contact [brand] for [service] in [location]. [Hours]. Call [phone] or request a quote online.` |
 
 ### Step 3: Generate Structured Data
 
@@ -157,10 +157,10 @@ Test structured data at: https://validator.schema.org/
 Schema telephone: `"+61-2-4900-1234"`
 
 | Prefix | International |
-|--------|---------------|
-| 02 | +612 |
-| 04 | +614 |
-| 1300 | Keep as-is |
+| ------ | ------------- |
+| 02     | +612          |
+| 04     | +614          |
+| 1300   | Keep as-is    |
 
 ### ABN
 
@@ -187,10 +187,10 @@ Use Australian city and suburb names:
 Include state-specific geo meta tags:
 
 ```html
-<meta name="geo.region" content="AU-NSW">
-<meta name="geo.placename" content="Newcastle">
-<meta name="geo.position" content="-32.9283;151.7817">
-<meta name="ICBM" content="-32.9283, 151.7817">
+<meta name="geo.region" content="AU-NSW" />
+<meta name="geo.placename" content="Newcastle" />
+<meta name="geo.position" content="-32.9283;151.7817" />
+<meta name="ICBM" content="-32.9283, 151.7817" />
 ```
 
 See `references/schema-properties.md` for the full list of LocalBusiness and Service schema properties.

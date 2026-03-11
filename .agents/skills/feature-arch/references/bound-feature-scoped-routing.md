@@ -17,10 +17,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 export function UserProfile() {
   const navigate = useNavigate();
-  const { userId } = useParams();  // Feature assumes route structure
+  const { userId } = useParams(); // Feature assumes route structure
 
   const goToSettings = () => {
-    navigate(`/users/${userId}/settings`);  // Hardcoded route
+    navigate(`/users/${userId}/settings`); // Hardcoded route
   };
 }
 ```
@@ -69,6 +69,7 @@ export const routes = [
 ```
 
 **Benefits:**
+
 - Route paths are centralized per feature
 - Refactoring routes only requires changes in one place
 - Type-safe route parameters

@@ -13,16 +13,16 @@ For components with multiple content areas (header, footer, actions), use named 
 
 ```tsx
 interface NotificationProps {
-  title: string
-  message: string
-  showIcon?: boolean
-  icon?: React.ReactNode
-  showDismiss?: boolean
-  onDismiss?: () => void
-  showAction?: boolean
-  actionLabel?: string
-  onAction?: () => void
-  renderFooter?: () => React.ReactNode
+  title: string;
+  message: string;
+  showIcon?: boolean;
+  icon?: React.ReactNode;
+  showDismiss?: boolean;
+  onDismiss?: () => void;
+  showAction?: boolean;
+  actionLabel?: string;
+  onAction?: () => void;
+  renderFooter?: () => React.ReactNode;
 }
 
 function Notification({
@@ -49,7 +49,7 @@ function Notification({
       {showAction && <button onClick={onAction}>{actionLabel}</button>}
       {renderFooter?.()}
     </div>
-  )
+  );
 }
 ```
 
@@ -57,45 +57,48 @@ function Notification({
 
 ```tsx
 interface NotificationProps {
-  children: React.ReactNode
-  className?: string
+  children: React.ReactNode;
+  className?: string;
 }
 
 function Notification({ children, className }: NotificationProps) {
   return (
-    <div className={cn("rounded-lg border p-4", className)}>
-      {children}
-    </div>
-  )
+    <div className={cn('rounded-lg border p-4', className)}>{children}</div>
+  );
 }
 
 function NotificationIcon({ children }: { children: React.ReactNode }) {
-  return <div className="flex-shrink-0">{children}</div>
+  return <div className="flex-shrink-0">{children}</div>;
 }
 
 function NotificationContent({ children }: { children: React.ReactNode }) {
-  return <div className="flex-1 ml-3">{children}</div>
+  return <div className="ml-3 flex-1">{children}</div>;
 }
 
 function NotificationTitle({ children }: { children: React.ReactNode }) {
-  return <h4 className="font-medium">{children}</h4>
+  return <h4 className="font-medium">{children}</h4>;
 }
 
 function NotificationDescription({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm text-muted-foreground mt-1">{children}</p>
+  return <p className="mt-1 text-sm text-muted-foreground">{children}</p>;
 }
 
 function NotificationActions({ children }: { children: React.ReactNode }) {
-  return <div className="flex gap-2 mt-3">{children}</div>
+  return <div className="mt-3 flex gap-2">{children}</div>;
 }
 
 function NotificationDismiss({ onDismiss }: { onDismiss: () => void }) {
   return (
-    <Button variant="ghost" size="icon" onClick={onDismiss} className="absolute top-2 right-2">
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={onDismiss}
+      className="absolute right-2 top-2"
+    >
       <X className="h-4 w-4" />
       <span className="sr-only">Dismiss</span>
     </Button>
-  )
+  );
 }
 
 // Usage - compose exactly what you need
@@ -105,14 +108,18 @@ function NotificationDismiss({ onDismiss }: { onDismiss: () => void }) {
   </NotificationIcon>
   <NotificationContent>
     <NotificationTitle>Success!</NotificationTitle>
-    <NotificationDescription>Your changes have been saved.</NotificationDescription>
+    <NotificationDescription>
+      Your changes have been saved.
+    </NotificationDescription>
     <NotificationActions>
       <Button size="sm">View</Button>
-      <Button size="sm" variant="outline">Undo</Button>
+      <Button size="sm" variant="outline">
+        Undo
+      </Button>
     </NotificationActions>
   </NotificationContent>
   <NotificationDismiss onDismiss={() => setVisible(false)} />
-</Notification>
+</Notification>;
 ```
 
 Reference: [Composition vs Inheritance](https://react.dev/learn/passing-props-to-a-component)

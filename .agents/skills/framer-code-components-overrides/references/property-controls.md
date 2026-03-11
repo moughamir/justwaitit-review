@@ -3,6 +3,7 @@
 ## Control Types
 
 ### String
+
 ```typescript
 text: {
     type: ControlType.String,
@@ -17,6 +18,7 @@ text: {
 Use `preventLocalization: true` for technical content that shouldn't be translated (API keys, code snippets, etc.).
 
 ### Number
+
 ```typescript
 value: {
     type: ControlType.Number,
@@ -31,6 +33,7 @@ value: {
 ```
 
 ### Boolean
+
 ```typescript
 enabled: {
     type: ControlType.Boolean,
@@ -42,6 +45,7 @@ enabled: {
 ```
 
 ### Color
+
 ```typescript
 color: {
     type: ControlType.Color,
@@ -51,6 +55,7 @@ color: {
 ```
 
 ### Enum (Dropdown or Segmented)
+
 ```typescript
 mode: {
     type: ControlType.Enum,
@@ -63,6 +68,7 @@ mode: {
 ```
 
 ### Image
+
 ```typescript
 image: {
     type: ControlType.Image,
@@ -103,6 +109,7 @@ addPropertyControls(MyComponent, {
 ```
 
 Same pattern applies to `ControlType.File`:
+
 ```typescript
 function MyComponent(props) {
     const {
@@ -114,6 +121,7 @@ function MyComponent(props) {
 ```
 
 ### File
+
 ```typescript
 video: {
     type: ControlType.File,
@@ -123,6 +131,7 @@ video: {
 ```
 
 ### Font (Extended)
+
 ```typescript
 font: {
     type: ControlType.Font,
@@ -143,30 +152,31 @@ font: {
 
 Framer uses `variant` names that map to CSS `font-weight` and `font-style`:
 
-| Variant | font-weight | font-style |
-|---------|-------------|------------|
-| Thin | 100 | normal |
-| Extra Light | 200 | normal |
-| Light | 300 | normal |
-| Regular | 400 | normal |
-| Medium | 500 | normal |
-| Semibold | 600 | normal |
-| Bold | 700 | normal |
-| Extra Bold | 800 | normal |
-| Black | 900 | normal |
-| Thin Italic | 100 | italic |
-| Extra Light Italic | 200 | italic |
-| Light Italic | 300 | italic |
-| Italic / Regular Italic | 400 | italic |
-| Medium Italic | 500 | italic |
-| Semibold Italic | 600 | italic |
-| Bold Italic | 700 | italic |
-| Extra Bold Italic | 800 | italic |
-| Black Italic | 900 | italic |
+| Variant                 | font-weight | font-style |
+| ----------------------- | ----------- | ---------- |
+| Thin                    | 100         | normal     |
+| Extra Light             | 200         | normal     |
+| Light                   | 300         | normal     |
+| Regular                 | 400         | normal     |
+| Medium                  | 500         | normal     |
+| Semibold                | 600         | normal     |
+| Bold                    | 700         | normal     |
+| Extra Bold              | 800         | normal     |
+| Black                   | 900         | normal     |
+| Thin Italic             | 100         | italic     |
+| Extra Light Italic      | 200         | italic     |
+| Light Italic            | 300         | italic     |
+| Italic / Regular Italic | 400         | italic     |
+| Medium Italic           | 500         | italic     |
+| Semibold Italic         | 600         | italic     |
+| Bold Italic             | 700         | italic     |
+| Extra Bold Italic       | 800         | italic     |
+| Black Italic            | 900         | italic     |
 
 Use these variant names in `defaultValue.variant` when setting up Font controls.
 
 ### Transition
+
 ```typescript
 transition: {
     type: ControlType.Transition,
@@ -176,6 +186,7 @@ transition: {
 ```
 
 ### ComponentInstance
+
 ```typescript
 icon: {
     type: ControlType.ComponentInstance,
@@ -186,6 +197,7 @@ icon: {
 Accepts a component from the canvas.
 
 ### Array
+
 ```typescript
 items: {
     type: ControlType.Array,
@@ -198,6 +210,7 @@ items: {
 ```
 
 ### Array with Image Preview
+
 ```typescript
 images: {
     type: ControlType.Array,
@@ -214,6 +227,7 @@ images: {
 ```
 
 ### Object (Grouped Controls)
+
 ```typescript
 settings: {
     type: ControlType.Object,
@@ -255,45 +269,48 @@ setting: {
 ## Default Props Requirement
 
 Property Controls only affect canvas. Always define `defaultProps` for:
+
 - Preventing runtime errors
 - Components instantiated from code
 - Initial render before controls apply
 
 ```typescript
 MyComponent.defaultProps = {
-    text: "Default",
-    color: "#000",
-    font: {
-        fontFamily: "Inter",
-        fontWeight: 500,
-        fontSize: 16,
-    },
-}
+  text: 'Default',
+  color: '#000',
+  font: {
+    fontFamily: 'Inter',
+    fontWeight: 500,
+    fontSize: 16,
+  },
+};
 ```
 
 ## Common Patterns
 
 ### Mode-Dependent Controls
+
 ```typescript
 addPropertyControls(Component, {
-    mode: {
-        type: ControlType.Enum,
-        options: ["image", "video"],
-        defaultValue: "image",
-    },
-    image: {
-        type: ControlType.Image,
-        hidden: (props) => props.mode !== "image",
-    },
-    video: {
-        type: ControlType.File,
-        allowedFileTypes: ["mp4"],
-        hidden: (props) => props.mode !== "video",
-    },
-})
+  mode: {
+    type: ControlType.Enum,
+    options: ['image', 'video'],
+    defaultValue: 'image',
+  },
+  image: {
+    type: ControlType.Image,
+    hidden: (props) => props.mode !== 'image',
+  },
+  video: {
+    type: ControlType.File,
+    allowedFileTypes: ['mp4'],
+    hidden: (props) => props.mode !== 'video',
+  },
+});
 ```
 
 ### Nested Object with Conditional
+
 ```typescript
 progressOptions: {
     type: ControlType.Object,

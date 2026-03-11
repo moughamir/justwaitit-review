@@ -4,15 +4,15 @@
 
 ### Large Language Models
 
-| Model ID | Parameters | Context | Best For | Notes |
-|----------|-----------|---------|----------|-------|
-| @cf/meta/llama-3.3-70b-instruct-fp8-fast | 70B | 128K | General, reasoning | Latest Llama |
-| @cf/meta/llama-3.1-70b-instruct | 70B | 128K | General purpose | Stable |
-| @cf/meta/llama-3.1-8b-instruct | 8B | 128K | Fast inference | Good quality |
-| @cf/mistral/mistral-7b-instruct-v0.2 | 7B | 32K | Fast, efficient | Low latency |
-| @cf/qwen/qwen2.5-72b-instruct | 72B | 128K | Multilingual | Excellent Chinese |
-| @cf/deepseek/deepseek-r1-distill-llama-70b | 70B | 64K | Complex reasoning | Chain-of-thought |
-| @cf/google/gemma-7b-it | 7B | 8K | Lightweight | Google model |
+| Model ID                                   | Parameters | Context | Best For           | Notes             |
+| ------------------------------------------ | ---------- | ------- | ------------------ | ----------------- |
+| @cf/meta/llama-3.3-70b-instruct-fp8-fast   | 70B        | 128K    | General, reasoning | Latest Llama      |
+| @cf/meta/llama-3.1-70b-instruct            | 70B        | 128K    | General purpose    | Stable            |
+| @cf/meta/llama-3.1-8b-instruct             | 8B         | 128K    | Fast inference     | Good quality      |
+| @cf/mistral/mistral-7b-instruct-v0.2       | 7B         | 32K     | Fast, efficient    | Low latency       |
+| @cf/qwen/qwen2.5-72b-instruct              | 72B        | 128K    | Multilingual       | Excellent Chinese |
+| @cf/deepseek/deepseek-r1-distill-llama-70b | 70B        | 64K     | Complex reasoning  | Chain-of-thought  |
+| @cf/google/gemma-7b-it                     | 7B         | 8K      | Lightweight        | Google model      |
 
 ### Usage
 
@@ -22,10 +22,10 @@ interface Env {
 }
 
 // Basic generation
-const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
+const response = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
   messages: [
-    { role: "system", content: "You are a helpful assistant." },
-    { role: "user", content: "Explain serverless computing." },
+    { role: 'system', content: 'You are a helpful assistant.' },
+    { role: 'user', content: 'Explain serverless computing.' },
   ],
   max_tokens: 1024,
   temperature: 0.7,
@@ -35,67 +35,71 @@ const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
 console.log(response.response);
 
 // Streaming
-const stream = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
-  messages: [
-    { role: "user", content: "Write a poem about the edge." },
-  ],
+const stream = await env.AI.run('@cf/meta/llama-3.3-70b-instruct-fp8-fast', {
+  messages: [{ role: 'user', content: 'Write a poem about the edge.' }],
   stream: true,
 });
 
 return new Response(stream, {
   headers: {
-    "Content-Type": "text/event-stream",
-    "Cache-Control": "no-cache",
-    "Connection": "keep-alive",
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    Connection: 'keep-alive',
   },
 });
 
 // JSON mode
-const structured = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
-  messages: [
-    { role: "system", content: "Respond with valid JSON only." },
-    { role: "user", content: "List 3 programming languages with their use cases." },
-  ],
-  response_format: { type: "json_object" },
-});
+const structured = await env.AI.run(
+  '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+  {
+    messages: [
+      { role: 'system', content: 'Respond with valid JSON only.' },
+      {
+        role: 'user',
+        content: 'List 3 programming languages with their use cases.',
+      },
+    ],
+    response_format: { type: 'json_object' },
+  }
+);
 ```
 
 ---
 
 ## Text-to-Speech (TTS) Models
 
-| Model ID | Languages | Quality | Latency | Notes |
-|----------|-----------|---------|---------|-------|
-| @deepgram/aura-2-en | English | Excellent | Medium | Context-aware, natural |
-| @deepgram/aura-1 | English | Good | Fast | Reliable |
-| @cf/myshell-ai/melotts | en, fr, es, zh, ja, ko | Good | Fast | Multi-lingual |
+| Model ID               | Languages              | Quality   | Latency | Notes                  |
+| ---------------------- | ---------------------- | --------- | ------- | ---------------------- |
+| @deepgram/aura-2-en    | English                | Excellent | Medium  | Context-aware, natural |
+| @deepgram/aura-1       | English                | Good      | Fast    | Reliable               |
+| @cf/myshell-ai/melotts | en, fr, es, zh, ja, ko | Good      | Fast    | Multi-lingual          |
 
 ### Usage
 
 ```typescript
 // Aura-2 (Best quality English TTS)
-const audio = await env.AI.run("@deepgram/aura-2-en", {
-  text: "Hello! This is a demonstration of Cloudflare Workers AI text-to-speech capabilities.",
+const audio = await env.AI.run('@deepgram/aura-2-en', {
+  text: 'Hello! This is a demonstration of Cloudflare Workers AI text-to-speech capabilities.',
 });
 
 // Returns ArrayBuffer containing audio/wav
 return new Response(audio, {
   headers: {
-    "Content-Type": "audio/wav",
-    "Content-Disposition": "attachment; filename='speech.wav'",
+    'Content-Type': 'audio/wav',
+    'Content-Disposition': "attachment; filename='speech.wav'",
   },
 });
 
 // MeloTTS (Multi-lingual)
-const frenchAudio = await env.AI.run("@cf/myshell-ai/melotts", {
+const frenchAudio = await env.AI.run('@cf/myshell-ai/melotts', {
   text: "Bonjour! Comment allez-vous aujourd'hui?",
-  language: "fr",
+  language: 'fr',
 });
 
 // Supported languages: en, fr, es, zh, ja, ko
-const japaneseAudio = await env.AI.run("@cf/myshell-ai/melotts", {
-  text: "こんにちは、世界！",
-  language: "ja",
+const japaneseAudio = await env.AI.run('@cf/myshell-ai/melotts', {
+  text: 'こんにちは、世界！',
+  language: 'ja',
 });
 ```
 
@@ -107,18 +111,18 @@ export class VoiceAgent {
   state: DurableObjectState;
 
   async fetch(request: Request) {
-    if (request.headers.get("Upgrade") === "websocket") {
+    if (request.headers.get('Upgrade') === 'websocket') {
       const pair = new WebSocketPair();
       const [client, server] = Object.values(pair);
       this.state.acceptWebSocket(server);
       return new Response(null, { status: 101, webSocket: client });
     }
-    return new Response("Expected WebSocket", { status: 400 });
+    return new Response('Expected WebSocket', { status: 400 });
   }
 
   async webSocketMessage(ws: WebSocket, message: string) {
     // Generate speech from text message
-    const audio = await this.env.AI.run("@deepgram/aura-2-en", {
+    const audio = await this.env.AI.run('@deepgram/aura-2-en', {
       text: message,
     });
 
@@ -132,10 +136,10 @@ export class VoiceAgent {
 
 ## Speech-to-Text (STT) Models
 
-| Model ID | Languages | Speed | Quality | Notes |
-|----------|-----------|-------|---------|-------|
-| @cf/openai/whisper-large-v3-turbo | 100+ | Fast | Excellent | Recommended |
-| @cf/openai/whisper | 100+ | Slower | Excellent | Original |
+| Model ID                          | Languages | Speed  | Quality   | Notes       |
+| --------------------------------- | --------- | ------ | --------- | ----------- |
+| @cf/openai/whisper-large-v3-turbo | 100+      | Fast   | Excellent | Recommended |
+| @cf/openai/whisper                | 100+      | Slower | Excellent | Original    |
 
 ### Usage
 
@@ -143,39 +147,39 @@ export class VoiceAgent {
 // Basic transcription
 export default {
   async fetch(request: Request, env: Env) {
-    if (request.method !== "POST") {
-      return new Response("POST audio data to transcribe", { status: 405 });
+    if (request.method !== 'POST') {
+      return new Response('POST audio data to transcribe', { status: 405 });
     }
 
     const audioData = await request.arrayBuffer();
 
-    const result = await env.AI.run("@cf/openai/whisper-large-v3-turbo", {
+    const result = await env.AI.run('@cf/openai/whisper-large-v3-turbo', {
       audio: audioData,
     });
 
     return Response.json({
       text: result.text,
-      segments: result.segments,  // Timestamped segments
+      segments: result.segments, // Timestamped segments
     });
   },
 };
 
 // With language hint
-const result = await env.AI.run("@cf/openai/whisper-large-v3-turbo", {
+const result = await env.AI.run('@cf/openai/whisper-large-v3-turbo', {
   audio: audioData,
-  source_lang: "es",  // Spanish
+  source_lang: 'es', // Spanish
 });
 
 // Process audio from R2
-const object = await env.MY_BUCKET.get("recordings/meeting.mp3");
+const object = await env.MY_BUCKET.get('recordings/meeting.mp3');
 if (object) {
   const audioData = await object.arrayBuffer();
-  const transcript = await env.AI.run("@cf/openai/whisper-large-v3-turbo", {
+  const transcript = await env.AI.run('@cf/openai/whisper-large-v3-turbo', {
     audio: audioData,
   });
 
   // Store transcript
-  await env.MY_BUCKET.put("transcripts/meeting.txt", transcript.text);
+  await env.MY_BUCKET.put('transcripts/meeting.txt', transcript.text);
 }
 ```
 
@@ -183,11 +187,11 @@ if (object) {
 
 ```typescript
 interface WhisperResponse {
-  text: string;  // Full transcript
+  text: string; // Full transcript
   segments: Array<{
-    start: number;   // Start time in seconds
-    end: number;     // End time in seconds
-    text: string;    // Segment text
+    start: number; // Start time in seconds
+    end: number; // End time in seconds
+    text: string; // Segment text
   }>;
 }
 ```
@@ -196,79 +200,86 @@ interface WhisperResponse {
 
 ## Image Generation Models
 
-| Model ID | Max Resolution | Steps | Notes |
-|----------|---------------|-------|-------|
-| @cf/black-forest-labs/flux-1-schnell | 1024x1024 | 4 | Fast, good quality |
-| @cf/stabilityai/stable-diffusion-xl-base-1.0 | 1024x1024 | 20+ | Detailed |
+| Model ID                                     | Max Resolution | Steps | Notes              |
+| -------------------------------------------- | -------------- | ----- | ------------------ |
+| @cf/black-forest-labs/flux-1-schnell         | 1024x1024      | 4     | Fast, good quality |
+| @cf/stabilityai/stable-diffusion-xl-base-1.0 | 1024x1024      | 20+   | Detailed           |
 
 ### Usage
 
 ```typescript
 // FLUX.1 Schnell (Fast)
-const image = await env.AI.run("@cf/black-forest-labs/flux-1-schnell", {
-  prompt: "A majestic mountain landscape at sunset, photorealistic, 8k",
-  num_steps: 4,  // 1-8
+const image = await env.AI.run('@cf/black-forest-labs/flux-1-schnell', {
+  prompt: 'A majestic mountain landscape at sunset, photorealistic, 8k',
+  num_steps: 4, // 1-8
 });
 
 return new Response(image, {
-  headers: { "Content-Type": "image/png" },
+  headers: { 'Content-Type': 'image/png' },
 });
 
 // Stable Diffusion XL
-const sdImage = await env.AI.run("@cf/stabilityai/stable-diffusion-xl-base-1.0", {
-  prompt: "A cyberpunk cityscape with neon lights, digital art style",
-  negative_prompt: "blurry, low quality, distorted",
-  num_steps: 20,
-  guidance: 7.5,
-  width: 1024,
-  height: 1024,
-});
+const sdImage = await env.AI.run(
+  '@cf/stabilityai/stable-diffusion-xl-base-1.0',
+  {
+    prompt: 'A cyberpunk cityscape with neon lights, digital art style',
+    negative_prompt: 'blurry, low quality, distorted',
+    num_steps: 20,
+    guidance: 7.5,
+    width: 1024,
+    height: 1024,
+  }
+);
 
 // Image-to-Image
-const modifiedImage = await env.AI.run("@cf/stabilityai/stable-diffusion-xl-base-1.0", {
-  prompt: "Convert to watercolor painting style",
-  image: originalImageArrayBuffer,
-  strength: 0.75,  // 0-1, higher = more change
-});
+const modifiedImage = await env.AI.run(
+  '@cf/stabilityai/stable-diffusion-xl-base-1.0',
+  {
+    prompt: 'Convert to watercolor painting style',
+    image: originalImageArrayBuffer,
+    strength: 0.75, // 0-1, higher = more change
+  }
+);
 ```
 
 ---
 
 ## Vision/Captioning Models
 
-| Model ID | Capabilities | Notes |
-|----------|--------------|-------|
+| Model ID                               | Capabilities                         | Notes       |
+| -------------------------------------- | ------------------------------------ | ----------- |
 | @cf/meta/llama-3.2-11b-vision-instruct | Image understanding, Q&A, captioning | Recommended |
-| @cf/llava-hf/llava-1.5-7b-hf | Visual Q&A | Lighter |
+| @cf/llava-hf/llava-1.5-7b-hf           | Visual Q&A                           | Lighter     |
 
 ### Usage
 
 ```typescript
 // Image captioning
-const caption = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
+const caption = await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
   image: imageArrayBuffer,
-  prompt: "Describe this image in detail.",
+  prompt: 'Describe this image in detail.',
 });
 
 // Visual Q&A
-const answer = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
+const answer = await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
   image: imageArrayBuffer,
-  prompt: "What objects are visible in this image? List them.",
+  prompt: 'What objects are visible in this image? List them.',
 });
 
 // Image analysis for accessibility
-const altText = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
+const altText = await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
   image: imageArrayBuffer,
-  prompt: "Generate a concise alt text for this image suitable for screen readers.",
+  prompt:
+    'Generate a concise alt text for this image suitable for screen readers.',
 });
 
 // Multi-image comparison (with base64)
-const image1 = await env.MY_BUCKET.get("img1.jpg");
-const image2 = await env.MY_BUCKET.get("img2.jpg");
+const image1 = await env.MY_BUCKET.get('img1.jpg');
+const image2 = await env.MY_BUCKET.get('img2.jpg');
 
-const comparison = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
+const comparison = await env.AI.run('@cf/meta/llama-3.2-11b-vision-instruct', {
   image: [await image1?.arrayBuffer(), await image2?.arrayBuffer()],
-  prompt: "Compare these two images and describe the differences.",
+  prompt: 'Compare these two images and describe the differences.',
 });
 ```
 
@@ -276,29 +287,25 @@ const comparison = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
 
 ## Embedding Models
 
-| Model ID | Dimensions | Best For | Notes |
-|----------|------------|----------|-------|
-| @cf/baai/bge-large-en-v1.5 | 1024 | Best quality | Recommended |
-| @cf/baai/bge-base-en-v1.5 | 768 | Balanced | Good quality |
-| @cf/baai/bge-small-en-v1.5 | 384 | Fast | Lightweight |
-| @cf/sentence-transformers/all-minilm-l6-v2 | 384 | General | Fast |
+| Model ID                                   | Dimensions | Best For     | Notes        |
+| ------------------------------------------ | ---------- | ------------ | ------------ |
+| @cf/baai/bge-large-en-v1.5                 | 1024       | Best quality | Recommended  |
+| @cf/baai/bge-base-en-v1.5                  | 768        | Balanced     | Good quality |
+| @cf/baai/bge-small-en-v1.5                 | 384        | Fast         | Lightweight  |
+| @cf/sentence-transformers/all-minilm-l6-v2 | 384        | General      | Fast         |
 
 ### Usage
 
 ```typescript
 // Single text
-const embedding = await env.AI.run("@cf/baai/bge-large-en-v1.5", {
-  text: "Cloudflare Workers enables serverless computing at the edge.",
+const embedding = await env.AI.run('@cf/baai/bge-large-en-v1.5', {
+  text: 'Cloudflare Workers enables serverless computing at the edge.',
 });
 // Returns { data: [{ embedding: [0.1, 0.2, ...] }] }
 
 // Batch embeddings
-const embeddings = await env.AI.run("@cf/baai/bge-large-en-v1.5", {
-  text: [
-    "First document text",
-    "Second document text",
-    "Third document text",
-  ],
+const embeddings = await env.AI.run('@cf/baai/bge-large-en-v1.5', {
+  text: ['First document text', 'Second document text', 'Third document text'],
 });
 // Returns { data: [{ embedding: [...] }, { embedding: [...] }, { embedding: [...] }] }
 
@@ -312,8 +319,8 @@ for (let i = 0; i < texts.length; i++) {
 }
 
 // Query Vectorize
-const queryEmbedding = await env.AI.run("@cf/baai/bge-large-en-v1.5", {
-  text: "What is serverless?",
+const queryEmbedding = await env.AI.run('@cf/baai/bge-large-en-v1.5', {
+  text: 'What is serverless?',
 });
 
 const results = await env.MY_VECTORS.query(queryEmbedding.data[0].embedding, {
@@ -337,7 +344,7 @@ export default {
     const { query } = await request.json();
 
     // 1. Embed the query
-    const queryEmbedding = await env.AI.run("@cf/baai/bge-large-en-v1.5", {
+    const queryEmbedding = await env.AI.run('@cf/baai/bge-large-en-v1.5', {
       text: query,
     });
 
@@ -348,20 +355,21 @@ export default {
     });
 
     // 3. Build context from matches
-    const context = matches.matches
-      .map((m) => m.metadata?.text)
-      .join("\n\n");
+    const context = matches.matches.map((m) => m.metadata?.text).join('\n\n');
 
     // 4. Generate response with context
-    const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
-      messages: [
-        {
-          role: "system",
-          content: `Answer the question based on the following context:\n\n${context}`,
-        },
-        { role: "user", content: query },
-      ],
-    });
+    const response = await env.AI.run(
+      '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      {
+        messages: [
+          {
+            role: 'system',
+            content: `Answer the question based on the following context:\n\n${context}`,
+          },
+          { role: 'user', content: query },
+        ],
+      }
+    );
 
     return Response.json({
       answer: response.response,
@@ -380,6 +388,7 @@ export default {
 ### When Cloudflare AI Workers SAVES Money
 
 #### Scenario 1: High-Volume English TTS
+
 ```
 Use Case: 1M characters/day English TTS for automated phone system
 
@@ -398,6 +407,7 @@ SAVINGS: 83-94% by using Cloudflare AI Workers
 ```
 
 #### Scenario 2: Multilingual TTS (Supported Languages)
+
 ```
 Use Case: 100K chars/day in French, Spanish, Chinese, Japanese, Korean
 
@@ -411,6 +421,7 @@ SAVINGS: 99.8% by using Cloudflare AI Workers
 ```
 
 #### Scenario 3: LLM Inference for RAG
+
 ```
 Use Case: Customer support bot, 10M tokens/month input + 2M output
 
@@ -431,6 +442,7 @@ For quality comparable to GPT-4o, Llama 3.3 70B offers massive savings.
 ```
 
 #### Scenario 4: Speech-to-Text Transcription
+
 ```
 Use Case: Transcribe 500 hours of audio/month
 
@@ -447,6 +459,7 @@ SAVINGS: 13-20% by using Cloudflare AI Workers
 ```
 
 #### Scenario 5: Embeddings at Scale
+
 ```
 Use Case: Embed 100M tokens for search index
 
@@ -468,6 +481,7 @@ SAVINGS: 50-92% by using Cloudflare AI Workers
 ### When Third-Party is WORTH the Extra Cost
 
 #### Scenario 1: Premium Voice Quality Requirements
+
 ```
 Use Case: Audiobook narration, premium customer experience
 
@@ -486,6 +500,7 @@ When to pay premium:
 ```
 
 #### Scenario 2: Real-Time Voice Agents
+
 ```
 Use Case: Live conversational AI with <100ms latency
 
@@ -503,6 +518,7 @@ Use Cloudflare for batch processing, ElevenLabs for live.
 ```
 
 #### Scenario 3: Languages Not Supported by Cloudflare
+
 ```
 Use Case: TTS in Portuguese, Italian, Hindi, Arabic
 
@@ -518,6 +534,7 @@ Cost-Effective Path:
 ```
 
 #### Scenario 4: Cutting-Edge Reasoning Models
+
 ```
 Use Case: Complex mathematical reasoning, code generation
 
@@ -535,20 +552,20 @@ Average cost: ~$0.50/1M vs $2.50/1M (80% savings)
 
 ### Cost Decision Matrix
 
-| Requirement | Cloudflare AI Workers | Third-Party |
-|-------------|----------------------|-------------|
-| English TTS, high volume | ✅ Aura-2 (82% savings) | ❌ Overkill |
-| Premium voice quality | ⚠️ Good, not premium | ✅ ElevenLabs |
-| Voice cloning | ❌ Not available | ✅ ElevenLabs/F5-TTS |
-| Real-time voice (<100ms) | ❌ Too slow | ✅ ElevenLabs Turbo |
-| Multilingual TTS (6 langs) | ✅ MeloTTS (99% savings) | ❌ Overkill |
-| TTS in Portuguese/Arabic | ❌ Not supported | ✅ ElevenLabs |
-| STT transcription | ✅ Whisper (15% savings) | ⚠️ Similar price |
-| LLM (most tasks) | ✅ Llama 3.3 (10-20x savings) | ❌ Overkill |
-| LLM (cutting-edge) | ⚠️ May need hybrid | ✅ GPT-4o/Claude |
-| Embeddings | ✅ BGE (50-90% savings) | ❌ Overkill |
-| Image generation | ✅ FLUX.1 (3x savings) | ❌ DALL-E 3 costly |
-| Vision/captioning | ✅ Llama 3.2 Vision | ⚠️ GPT-4V for complex |
+| Requirement                | Cloudflare AI Workers         | Third-Party           |
+| -------------------------- | ----------------------------- | --------------------- |
+| English TTS, high volume   | ✅ Aura-2 (82% savings)       | ❌ Overkill           |
+| Premium voice quality      | ⚠️ Good, not premium          | ✅ ElevenLabs         |
+| Voice cloning              | ❌ Not available              | ✅ ElevenLabs/F5-TTS  |
+| Real-time voice (<100ms)   | ❌ Too slow                   | ✅ ElevenLabs Turbo   |
+| Multilingual TTS (6 langs) | ✅ MeloTTS (99% savings)      | ❌ Overkill           |
+| TTS in Portuguese/Arabic   | ❌ Not supported              | ✅ ElevenLabs         |
+| STT transcription          | ✅ Whisper (15% savings)      | ⚠️ Similar price      |
+| LLM (most tasks)           | ✅ Llama 3.3 (10-20x savings) | ❌ Overkill           |
+| LLM (cutting-edge)         | ⚠️ May need hybrid            | ✅ GPT-4o/Claude      |
+| Embeddings                 | ✅ BGE (50-90% savings)       | ❌ Overkill           |
+| Image generation           | ✅ FLUX.1 (3x savings)        | ❌ DALL-E 3 costly    |
+| Vision/captioning          | ✅ Llama 3.2 Vision           | ⚠️ GPT-4V for complex |
 
 ---
 
@@ -566,19 +583,22 @@ interface Env {
   AI_GATEWAY_ID: string;
 }
 
-type TTSProvider = "cloudflare" | "elevenlabs";
+type TTSProvider = 'cloudflare' | 'elevenlabs';
 
 interface TTSRequest {
   text: string;
   language?: string;
-  voice_quality?: "standard" | "premium";
-  voice_id?: string;  // For ElevenLabs custom voice
+  voice_quality?: 'standard' | 'premium';
+  voice_id?: string; // For ElevenLabs custom voice
 }
 
-async function generateTTS(request: TTSRequest, env: Env): Promise<ArrayBuffer> {
+async function generateTTS(
+  request: TTSRequest,
+  env: Env
+): Promise<ArrayBuffer> {
   const provider = selectProvider(request);
 
-  if (provider === "cloudflare") {
+  if (provider === 'cloudflare') {
     return await cloudflareNativeTTS(request, env);
   } else {
     return await elevenLabsViaTGateway(request, env);
@@ -587,48 +607,55 @@ async function generateTTS(request: TTSRequest, env: Env): Promise<ArrayBuffer> 
 
 function selectProvider(request: TTSRequest): TTSProvider {
   // Premium quality or custom voice = ElevenLabs
-  if (request.voice_quality === "premium" || request.voice_id) {
-    return "elevenlabs";
+  if (request.voice_quality === 'premium' || request.voice_id) {
+    return 'elevenlabs';
   }
 
   // Unsupported language = ElevenLabs
-  const cloudflareLanguages = ["en", "fr", "es", "zh", "ja", "ko"];
+  const cloudflareLanguages = ['en', 'fr', 'es', 'zh', 'ja', 'ko'];
   if (request.language && !cloudflareLanguages.includes(request.language)) {
-    return "elevenlabs";
+    return 'elevenlabs';
   }
 
   // Default to Cloudflare for cost savings
-  return "cloudflare";
+  return 'cloudflare';
 }
 
-async function cloudflareNativeTTS(request: TTSRequest, env: Env): Promise<ArrayBuffer> {
-  if (request.language === "en") {
+async function cloudflareNativeTTS(
+  request: TTSRequest,
+  env: Env
+): Promise<ArrayBuffer> {
+  if (request.language === 'en') {
     // Use Aura-2 for English (best quality)
-    return await env.AI.run("@deepgram/aura-2-en", { text: request.text });
+    return await env.AI.run('@deepgram/aura-2-en', { text: request.text });
   } else {
     // Use MeloTTS for other supported languages
-    return await env.AI.run("@cf/myshell-ai/melotts", {
+    return await env.AI.run('@cf/myshell-ai/melotts', {
       text: request.text,
-      language: request.language || "en",
+      language: request.language || 'en',
     });
   }
 }
 
-async function elevenLabsViaGateway(request: TTSRequest, env: Env): Promise<ArrayBuffer> {
-  const voiceId = request.voice_id || "JBFqnCBsd6RMkjVDRZzb";  // Default voice
+async function elevenLabsViaGateway(
+  request: TTSRequest,
+  env: Env
+): Promise<ArrayBuffer> {
+  const voiceId = request.voice_id || 'JBFqnCBsd6RMkjVDRZzb'; // Default voice
   const gatewayUrl = `https://gateway.ai.cloudflare.com/v1/${env.CF_ACCOUNT_ID}/${env.AI_GATEWAY_ID}/elevenlabs/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`;
 
   const response = await fetch(gatewayUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "xi-api-key": env.ELEVENLABS_API_KEY,
+      'Content-Type': 'application/json',
+      'xi-api-key': env.ELEVENLABS_API_KEY,
     },
     body: JSON.stringify({
       text: request.text,
-      model_id: request.voice_quality === "premium"
-        ? "eleven_multilingual_v2"
-        : "eleven_turbo_v2_5",
+      model_id:
+        request.voice_quality === 'premium'
+          ? 'eleven_multilingual_v2'
+          : 'eleven_turbo_v2_5',
     }),
   });
 
@@ -649,12 +676,12 @@ interface Env {
 async function getCachedTTS(text: string, env: Env): Promise<ArrayBuffer> {
   // Create deterministic cache key
   const hash = await crypto.subtle.digest(
-    "SHA-256",
+    'SHA-256',
     new TextEncoder().encode(text)
   );
   const cacheKey = `tts/${Array.from(new Uint8Array(hash.slice(0, 8)))
-    .map(b => b.toString(16).padStart(2, "0"))
-    .join("")}.wav`;
+    .map((b) => b.toString(16).padStart(2, '0'))
+    .join('')}.wav`;
 
   // Check R2 cache first
   const cached = await env.AUDIO_CACHE.get(cacheKey);
@@ -665,11 +692,11 @@ async function getCachedTTS(text: string, env: Env): Promise<ArrayBuffer> {
 
   // Generate new audio
   console.log(`Cache MISS: ${cacheKey}`);
-  const audio = await env.AI.run("@deepgram/aura-2-en", { text });
+  const audio = await env.AI.run('@deepgram/aura-2-en', { text });
 
   // Store in cache (fire-and-forget)
   env.AUDIO_CACHE.put(cacheKey, audio, {
-    httpMetadata: { contentType: "audio/wav" },
+    httpMetadata: { contentType: 'audio/wav' },
   });
 
   return audio;
@@ -690,22 +717,23 @@ Cloudflare charges $0.011 per 1,000 Neurons. Understanding neuron consumption he
 
 ### Neuron Consumption by Model Type
 
-| Model Category | Neurons per Unit | Cost Equivalent |
-|----------------|------------------|-----------------|
-| **Llama 3.3 70B** | ~24,545 per 1M tokens | $0.27/1M tokens |
-| **Llama 3.1 8B** | ~4,545 per 1M tokens | $0.05/1M tokens |
-| **Qwen 2.5 72B** | ~31,818 per 1M tokens | $0.35/1M tokens |
+| Model Category          | Neurons per Unit      | Cost Equivalent |
+| ----------------------- | --------------------- | --------------- |
+| **Llama 3.3 70B**       | ~24,545 per 1M tokens | $0.27/1M tokens |
+| **Llama 3.1 8B**        | ~4,545 per 1M tokens  | $0.05/1M tokens |
+| **Qwen 2.5 72B**        | ~31,818 per 1M tokens | $0.35/1M tokens |
 | **DeepSeek-R1-Distill** | ~12,727 per 1M tokens | $0.14/1M tokens |
-| **Whisper STT** | ~472 per minute | $0.0052/min |
-| **Aura-2 TTS** | ~2,727 per 1K chars | $0.030/1K chars |
-| **BGE Embeddings** | ~909 per 1M tokens | $0.01/1M tokens |
-| **FLUX.1 Image** | ~1,818 per image | $0.02/image |
+| **Whisper STT**         | ~472 per minute       | $0.0052/min     |
+| **Aura-2 TTS**          | ~2,727 per 1K chars   | $0.030/1K chars |
+| **BGE Embeddings**      | ~909 per 1M tokens    | $0.01/1M tokens |
+| **FLUX.1 Image**        | ~1,818 per image      | $0.02/image     |
 
 ### Free Tier Utilization
 
 Workers AI includes **10,000 free neurons per day**.
 
 Daily free allocation examples:
+
 - ~400K tokens of Llama 3.1 8B inference
 - ~21 minutes of Whisper transcription
 - ~3,600 characters of Aura-2 TTS
@@ -728,6 +756,7 @@ Example: 5M neurons/month
 ## Pricing Notes
 
 AI Workers pricing varies by model (via neuron consumption):
+
 - Text generation: $0.05-0.35 per 1M tokens (model dependent)
 - TTS Aura-2: $0.030 per 1K characters
 - TTS Aura-1: $0.015 per 1K characters

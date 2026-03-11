@@ -73,6 +73,7 @@ test('successful login', async ({ page }) => {
 ```
 
 **Benefits:**
+
 - Single source of truth for selectors
 - Readable, domain-specific test code
 - Easy to update when UI changes

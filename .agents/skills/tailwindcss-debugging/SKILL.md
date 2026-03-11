@@ -15,8 +15,8 @@ v4 automatically detects content, but if styles are missing:
 
 ```css
 /* Explicitly specify sources */
-@import "tailwindcss";
-@source "./src/**/*.{html,js,jsx,ts,tsx,vue,svelte}";
+@import 'tailwindcss';
+@source './src/**/*.{html,js,jsx,ts,tsx,vue,svelte}';
 ```
 
 #### Verify Class Names
@@ -65,7 +65,7 @@ export default {
 
 ```css
 /* v4 - Configure in CSS, not JS */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-primary: oklch(0.6 0.2 250);
@@ -93,17 +93,17 @@ export default {
 ```html
 <!-- Use !important (last resort) -->
 <div class="!mt-0">
-
-<!-- Or increase specificity with variants -->
-<div class="[&]:mt-0">
+  <!-- Or increase specificity with variants -->
+  <div class="[&]:mt-0"></div>
+</div>
 ```
 
 #### Check Import Order
 
 ```css
 /* Your custom CSS should come after Tailwind */
-@import "tailwindcss";
-@import "./custom.css";  /* After Tailwind */
+@import 'tailwindcss';
+@import './custom.css'; /* After Tailwind */
 ```
 
 ### 4. Typography Plugin Issues
@@ -112,7 +112,7 @@ export default {
 
 ```css
 /* Ensure plugin is loaded */
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 ```
 
 #### Utilities Overridden by Prose
@@ -120,12 +120,12 @@ export default {
 ```html
 <!-- Use element modifiers -->
 <article class="prose prose-h1:text-4xl prose-a:text-blue-600">
-
-<!-- Or escape prose entirely -->
-<article class="prose">
-  <div class="not-prose">
-    <CustomComponent />
-  </div>
+  <!-- Or escape prose entirely -->
+  <article class="prose">
+    <div class="not-prose">
+      <CustomComponent />
+    </div>
+  </article>
 </article>
 ```
 
@@ -135,14 +135,16 @@ export default {
 
 ```html
 <!-- Forms plugin only styles inputs with type attribute -->
-<input type="text" />  <!-- ✓ Styled -->
-<input />              <!-- ✗ Not styled -->
+<input type="text" />
+<!-- ✓ Styled -->
+<input />
+<!-- ✗ Not styled -->
 ```
 
 #### Using Class Strategy
 
 ```css
-@plugin "@tailwindcss/forms" {
+@plugin '@tailwindcss/forms' {
   strategy: class;
 }
 ```
@@ -162,6 +164,7 @@ code --install-extension bradlc.vscode-tailwindcss
 ```
 
 Features:
+
 - Autocomplete for class names
 - Hover previews showing CSS
 - Linting for errors
@@ -174,12 +177,12 @@ npm install -D @tailwindcss/debug-screens
 ```
 
 ```css
-@plugin "@tailwindcss/debug-screens";
+@plugin '@tailwindcss/debug-screens';
 ```
 
 ```html
 <!-- Shows current breakpoint in corner -->
-<body class="debug-screens">
+<body class="debug-screens"></body>
 ```
 
 ### Browser DevTools
@@ -222,11 +225,11 @@ npm run build 2>&1 | grep -i plugin
 
 ```css
 /* Add explicit sources if auto-detection fails */
-@source "./src/**/*.tsx";
-@source "./components/**/*.tsx";
+@source './src/**/*.tsx';
+@source './components/**/*.tsx';
 
 /* Exclude paths */
-@source not "./src/generated/**";
+@source not './src/generated/**';
 ```
 
 ## Common Error Messages
@@ -251,14 +254,14 @@ Dynamic class generation issue:
 
 ```javascript
 // BAD
-const classes = `bg-${dynamic}-500`
+const classes = `bg-${dynamic}-500`;
 
 // GOOD
 const colorMap = {
   primary: 'bg-blue-500',
-  danger: 'bg-red-500'
-}
-const classes = colorMap[dynamic]
+  danger: 'bg-red-500',
+};
+const classes = colorMap[dynamic];
 ```
 
 ### "Styles not updating in development"

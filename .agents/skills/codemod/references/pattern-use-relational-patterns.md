@@ -15,14 +15,14 @@ Relational patterns (`inside`, `has`, `precedes`, `follows`) match nodes based o
 const transform: Transform<TSX> = (root) => {
   // Find all setState calls
   const setStateCalls = root.findAll({
-    rule: { pattern: "this.setState($$$ARGS)" }
+    rule: { pattern: 'this.setState($$$ARGS)' },
   });
 
   // Manually filter to those inside useEffect
-  const inUseEffect = setStateCalls.filter(call => {
+  const inUseEffect = setStateCalls.filter((call) => {
     let parent = call.parent();
     while (parent) {
-      if (parent.text().includes("useEffect")) return true;
+      if (parent.text().includes('useEffect')) return true;
       parent = parent.parent();
     }
     return false;
@@ -39,12 +39,12 @@ const transform: Transform<TSX> = (root) => {
   // Single query with context requirement
   const setStateInEffect = root.findAll({
     rule: {
-      pattern: "this.setState($$$ARGS)",
+      pattern: 'this.setState($$$ARGS)',
       inside: {
-        kind: "call_expression",
-        pattern: "useEffect($$$)"
-      }
-    }
+        kind: 'call_expression',
+        pattern: 'useEffect($$$)',
+      },
+    },
   });
   // Correct, fast, handles all nesting levels
   return null;
@@ -52,6 +52,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Relational operators:**
+
 - `inside: rule` - node is descendant of matching ancestor
 - `has: rule` - node has matching descendant
 - `precedes: rule` - node appears before sibling

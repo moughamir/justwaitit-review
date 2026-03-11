@@ -86,12 +86,14 @@ setup('authenticate via API', async ({ request, browser }) => {
 ```
 
 **Benefits:**
+
 - 5-10× faster auth setup
 - No UI rendering overhead
 - More reliable (no form interaction)
 - Tests auth API endpoint as side effect
 
 **When to still use UI login:**
+
 - Testing the login flow itself
 - Auth flow has complex multi-step UI
 - Third-party OAuth that can't be bypassed

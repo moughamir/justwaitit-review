@@ -14,17 +14,18 @@ If you must scroll to read a component from top to bottom, it contains multiple 
 ```tsx
 function OrderDashboard() {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortField, setSortField] = useState<keyof Order>("createdAt");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortField, setSortField] = useState<keyof Order>('createdAt');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
   const [isExporting, setIsExporting] = useState(false);
 
-  const filteredOrders = orders.filter(
-    (order) => order.customerName.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredOrders = orders.filter((order) =>
+    order.customerName.toLowerCase().includes(searchQuery.toLowerCase())
   );
   const paginatedOrders = filteredOrders.slice(
-    (currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE
+    (currentPage - 1) * PAGE_SIZE,
+    currentPage * PAGE_SIZE
   );
 
   async function handleExport() {
@@ -38,14 +39,23 @@ function OrderDashboard() {
     <div>
       <header>
         <h1>Orders</h1>
-        <button onClick={handleExport} disabled={isExporting}>Export CSV</button>
+        <button onClick={handleExport} disabled={isExporting}>
+          Export CSV
+        </button>
       </header>
-      <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
+      <input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
       <table>
         <thead>
-          <tr>{COLUMNS.map((col) => (
-            <th key={col} onClick={() => setSortField(col)}>{col}</th>
-          ))}</tr>
+          <tr>
+            {COLUMNS.map((col) => (
+              <th key={col} onClick={() => setSortField(col)}>
+                {col}
+              </th>
+            ))}
+          </tr>
         </thead>
         <tbody>
           {paginatedOrders.map((order) => (
@@ -57,7 +67,11 @@ function OrderDashboard() {
           ))}
         </tbody>
       </table>
-      <Pagination current={currentPage} total={filteredOrders.length} onChange={setCurrentPage} />
+      <Pagination
+        current={currentPage}
+        total={filteredOrders.length}
+        onChange={setCurrentPage}
+      />
     </div>
   );
 }
@@ -68,9 +82,9 @@ function OrderDashboard() {
 ```tsx
 function OrderDashboard() {
   const [orders] = useState<Order[]>([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sortField, setSortField] = useState<keyof Order>("createdAt");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortField, setSortField] = useState<keyof Order>('createdAt');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
   const [currentPage, setCurrentPage] = useState(1);
 
   const filteredOrders = filterOrders(orders, searchQuery);
@@ -109,7 +123,7 @@ function OrderDashboardHeader({ orders }: { orders: Order[] }) {
     <header>
       <h1>Orders</h1>
       <button onClick={handleExport} disabled={isExporting}>
-        {isExporting ? "Exporting..." : "Export CSV"}
+        {isExporting ? 'Exporting...' : 'Export CSV'}
       </button>
     </header>
   );

@@ -12,14 +12,14 @@ Opacity and filter are composite-only properties that run on the GPU compositor 
 **Incorrect (paint-triggering properties):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function HoverButton() {
   return (
     <motion.button
       className="btn"
-      initial={{ backgroundColor: "#3b82f6" }}
-      whileHover={{ backgroundColor: "#1d4ed8" }}  // Triggers repaint every frame
+      initial={{ backgroundColor: '#3b82f6' }}
+      whileHover={{ backgroundColor: '#1d4ed8' }} // Triggers repaint every frame
       transition={{ duration: 0.2 }}
     >
       Click me
@@ -31,8 +31,8 @@ function FadeCard() {
   return (
     <motion.div
       className="card"
-      initial={{ boxShadow: "0 0 0 rgba(0,0,0,0)" }}
-      animate={{ boxShadow: "0 10px 40px rgba(0,0,0,0.3)" }}  // Expensive shadow paint
+      initial={{ boxShadow: '0 0 0 rgba(0,0,0,0)' }}
+      animate={{ boxShadow: '0 10px 40px rgba(0,0,0,0.3)' }} // Expensive shadow paint
       transition={{ duration: 0.3 }}
     >
       <p>Card content</p>
@@ -44,14 +44,14 @@ function FadeCard() {
 **Correct (composite-only properties):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function HoverButton() {
   return (
     <motion.button
       className="btn btn-blue"
       initial={{ opacity: 1 }}
-      whileHover={{ opacity: 0.8 }}  // GPU-accelerated, no repaint
+      whileHover={{ opacity: 0.8 }} // GPU-accelerated, no repaint
       transition={{ duration: 0.2 }}
     >
       Click me
@@ -63,8 +63,8 @@ function FadeCard() {
   return (
     <motion.div
       className="card card-with-shadow"
-      initial={{ opacity: 0, filter: "blur(4px)" }}
-      animate={{ opacity: 1, filter: "blur(0px)" }}  // Both GPU-accelerated
+      initial={{ opacity: 0, filter: 'blur(4px)' }}
+      animate={{ opacity: 1, filter: 'blur(0px)' }} // Both GPU-accelerated
       transition={{ duration: 0.3 }}
     >
       <p>Card content</p>
@@ -74,11 +74,13 @@ function FadeCard() {
 ```
 
 **GPU-accelerated properties:**
+
 - `opacity` - visibility transitions
 - `filter` - blur, brightness, contrast, grayscale, saturate
 - `transform` (x, y, scale, rotate)
 
 **Paint-triggering properties to avoid animating:**
+
 - `backgroundColor`, `color`
 - `boxShadow`, `textShadow`
 - `border`, `borderRadius`

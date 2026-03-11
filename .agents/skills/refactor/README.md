@@ -48,16 +48,16 @@ pnpm validate
 
 ### Prefix Reference
 
-| Category | Prefix | Impact |
-|----------|--------|--------|
-| Structure & Decomposition | `struct-` | CRITICAL |
-| Coupling & Dependencies | `couple-` | CRITICAL |
-| Naming & Clarity | `name-` | HIGH |
-| Conditional Logic | `cond-` | HIGH |
-| Abstraction & Patterns | `pattern-` | MEDIUM-HIGH |
-| Data Organization | `data-` | MEDIUM |
-| Error Handling | `error-` | MEDIUM |
-| Micro-Refactoring | `micro-` | LOW |
+| Category                  | Prefix     | Impact      |
+| ------------------------- | ---------- | ----------- |
+| Structure & Decomposition | `struct-`  | CRITICAL    |
+| Coupling & Dependencies   | `couple-`  | CRITICAL    |
+| Naming & Clarity          | `name-`    | HIGH        |
+| Conditional Logic         | `cond-`    | HIGH        |
+| Abstraction & Patterns    | `pattern-` | MEDIUM-HIGH |
+| Data Organization         | `data-`    | MEDIUM      |
+| Error Handling            | `error-`   | MEDIUM      |
+| Micro-Refactoring         | `micro-`   | LOW         |
 
 ## Rule File Structure
 
@@ -88,6 +88,7 @@ Brief explanation of WHY this matters (1-3 sentences).
 \`\`\`
 
 **When NOT to use:**
+
 - Exception 1
 - Exception 2
 
@@ -102,28 +103,29 @@ Rule files follow the pattern: `{prefix}-{descriptive-slug}.md`
 - **slug**: Kebab-case description of the rule
 
 Examples:
+
 - `struct-extract-method.md`
 - `cond-guard-clauses.md`
 - `pattern-strategy.md`
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| CRITICAL | Foundational improvements with cascade effects |
-| HIGH | Significant improvements to readability or maintainability |
-| MEDIUM-HIGH | Important patterns that enable extensibility |
-| MEDIUM | Valuable improvements with localized impact |
-| LOW-MEDIUM | Minor improvements with cumulative benefits |
-| LOW | Small improvements, apply incrementally |
+| Level       | Description                                                |
+| ----------- | ---------------------------------------------------------- |
+| CRITICAL    | Foundational improvements with cascade effects             |
+| HIGH        | Significant improvements to readability or maintainability |
+| MEDIUM-HIGH | Important patterns that enable extensibility               |
+| MEDIUM      | Valuable improvements with localized impact                |
+| LOW-MEDIUM  | Minor improvements with cumulative benefits                |
+| LOW         | Small improvements, apply incrementally                    |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Compile rules into AGENTS.md |
+| Command         | Description                              |
+| --------------- | ---------------------------------------- |
+| `pnpm build`    | Compile rules into AGENTS.md             |
 | `pnpm validate` | Validate skill against quality checklist |
-| `pnpm lint` | Check markdown formatting |
+| `pnpm lint`     | Check markdown formatting                |
 
 ## Contributing
 
@@ -137,6 +139,7 @@ Examples:
 ## Acknowledgments
 
 This skill is based on:
+
 - [Refactoring: Improving the Design of Existing Code](https://martinfowler.com/books/refactoring.html) by Martin Fowler
 - [Clean Code](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) by Robert C. Martin
 - [Refactoring Catalog](https://refactoring.com/catalog/)

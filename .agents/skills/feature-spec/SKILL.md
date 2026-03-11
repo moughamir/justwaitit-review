@@ -10,6 +10,7 @@ Comprehensive feature specification and planning guide for software engineers, p
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing PRDs or feature specifications
 - Defining requirements or user stories
 - Managing scope and preventing scope creep
@@ -19,16 +20,16 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Scope Definition | CRITICAL | `scope-` |
-| 2 | Requirements Clarity | CRITICAL | `req-` |
-| 3 | Prioritization Frameworks | HIGH | `prio-` |
-| 4 | Acceptance Criteria | HIGH | `accept-` |
-| 5 | Stakeholder Alignment | MEDIUM-HIGH | `stake-` |
-| 6 | Technical Specification | MEDIUM | `tech-` |
-| 7 | Change Management | MEDIUM | `change-` |
-| 8 | Documentation Standards | LOW | `doc-` |
+| Priority | Category                  | Impact      | Prefix    |
+| -------- | ------------------------- | ----------- | --------- |
+| 1        | Scope Definition          | CRITICAL    | `scope-`  |
+| 2        | Requirements Clarity      | CRITICAL    | `req-`    |
+| 3        | Prioritization Frameworks | HIGH        | `prio-`   |
+| 4        | Acceptance Criteria       | HIGH        | `accept-` |
+| 5        | Stakeholder Alignment     | MEDIUM-HIGH | `stake-`  |
+| 6        | Technical Specification   | MEDIUM      | `tech-`   |
+| 7        | Change Management         | MEDIUM      | `change-` |
+| 8        | Documentation Standards   | LOW         | `doc-`    |
 
 ## Quick Reference
 

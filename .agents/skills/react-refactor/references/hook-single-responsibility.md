@@ -37,9 +37,16 @@ function useUserDashboard(userId: string) {
 
   // Testing notification logic requires mocking fetch + WebSocket
   const unreadCount = notifications.filter((n) => !n.read).length;
-  const displayName = profile ? `${profile.firstName} ${profile.lastName}` : "";
+  const displayName = profile ? `${profile.firstName} ${profile.lastName}` : '';
 
-  return { profile, preferences, notifications, unreadCount, displayName, isLoading };
+  return {
+    profile,
+    preferences,
+    notifications,
+    unreadCount,
+    displayName,
+    isLoading,
+  };
 }
 ```
 
@@ -52,10 +59,12 @@ function useUserProfile(userId: string) {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchProfile(userId).then(setProfile).finally(() => setIsLoading(false));
+    fetchProfile(userId)
+      .then(setProfile)
+      .finally(() => setIsLoading(false));
   }, [userId]);
 
-  const displayName = profile ? `${profile.firstName} ${profile.lastName}` : "";
+  const displayName = profile ? `${profile.firstName} ${profile.lastName}` : '';
   return { profile, displayName, isLoading };
 }
 

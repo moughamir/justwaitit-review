@@ -81,6 +81,7 @@ vi.mock('@/features/cart', () => ({
 ```
 
 **Benefits:**
+
 - Fast tests (no unnecessary dependencies)
 - Clear failure attribution
 - Tests document the feature's interface

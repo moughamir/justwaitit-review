@@ -12,14 +12,15 @@ description: Git security best practices for 2025 including signed commits, zero
 When using Edit or Write tools on Windows, you MUST use backslashes (`\`) in file paths, NOT forward slashes (`/`).
 
 **Examples:**
+
 - ❌ WRONG: `D:/repos/project/file.tsx`
 - ✅ CORRECT: `D:\repos\project\file.tsx`
 
 This applies to:
+
 - Edit tool file_path parameter
 - Write tool file_path parameter
 - All file operations on Windows systems
-
 
 ### Documentation Guidelines
 
@@ -30,7 +31,6 @@ This applies to:
 - **Style**: Documentation should be concise, direct, and professional - avoid AI-generated tone
 - **User preference**: Only create additional .md files when user specifically asks for documentation
 
-
 ---
 
 # Git Security Best Practices 2025
@@ -40,6 +40,7 @@ This applies to:
 **What:** Every developer identity must be authenticated and authorized explicitly. All Git operations are logged, signed, and continuously monitored.
 
 **Core Principles:**
+
 1. **Never trust, always verify** - Every commit verified
 2. **Least privilege access** - Minimal permissions required
 3. **Continuous monitoring** - All operations logged and audited
@@ -48,6 +49,7 @@ This applies to:
 ### Implementing Zero-Trust for Git
 
 **1. Mandatory Signed Commits:**
+
 ```bash
 # Global requirement
 git config --global commit.gpgsign true
@@ -58,6 +60,7 @@ git config --global tag.gpgsign true
 ```
 
 **2. Identity Verification:**
+
 ```bash
 # Every commit must verify identity
 git log --show-signature -10
@@ -75,6 +78,7 @@ git log --show-signature -10
 ```
 
 **3. Continuous Audit Logging:**
+
 ```bash
 # Enable Git audit trail
 git config --global alias.audit 'log --all --pretty="%H|%an|%ae|%ad|%s|%GK" --date=iso'
@@ -87,6 +91,7 @@ git log --author="*" --since="24 hours ago" --pretty=format:"%an %ae %s"
 ```
 
 **4. Least Privilege Access:**
+
 ```yaml
 # GitHub branch protection (zero-trust model)
 branches:
@@ -99,11 +104,12 @@ branches:
       require_signed_commits: true
       enforce_admins: true
       restrictions:
-        users: []  # No direct push
-        teams: ["security-team"]
+        users: [] # No direct push
+        teams: ['security-team']
 ```
 
 **5. Continuous Monitoring:**
+
 ```bash
 # Monitor all repository changes
 # .github/workflows/security-monitor.yml
@@ -234,10 +240,12 @@ git verify-commit HEAD
 ### GitHub Secret Scanning (Push Protection)
 
 **Enable in repository:**
+
 - Settings → Code security → Secret scanning → Enable
 - Enable push protection (blocks secrets at push time)
 
 **AI-powered detection (2025):**
+
 - AWS credentials
 - Azure service principals
 - Google Cloud keys
@@ -538,6 +546,7 @@ git config --global credential.helper 'cache --timeout=3600'
 ### Personal Access Tokens (PAT)
 
 **GitHub:**
+
 - Settings → Developer settings → Personal access tokens → Fine-grained tokens
 - Set expiration (max 1 year)
 - Minimum scopes needed
@@ -561,15 +570,15 @@ gh auth login  # GitHub CLI method
 **.github/workflows/codeql.yml:**
 
 ```yaml
-name: "CodeQL Security Scan"
+name: 'CodeQL Security Scan'
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '0 0 * * 1'  # Weekly scan
+    - cron: '0 0 * * 1' # Weekly scan
 
 jobs:
   analyze:
@@ -582,28 +591,29 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'javascript', 'python', 'java' ]
+        language: ['javascript', 'python', 'java']
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Initialize CodeQL
-      uses: github/codeql-action/init@v3
-      with:
-        languages: ${{ matrix.language }}
-        queries: security-and-quality
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-and-quality
 
-    - name: Autobuild
-      uses: github/codeql-action/autobuild@v3
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
 
-    - name: Perform CodeQL Analysis
-      uses: github/codeql-action/analyze@v3
-      with:
-        category: "/language:${{ matrix.language }}"
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: '/language:${{ matrix.language }}'
 ```
 
 **Detects:**
+
 - SQL injection
 - XSS vulnerabilities
 - Path traversal
@@ -633,6 +643,7 @@ git log --show-signature main..HEAD
 ## Security Checklist
 
 **Repository Setup:**
+
 - ☑ Enable branch protection
 - ☑ Require signed commits
 - ☑ Enable secret scanning with push protection
@@ -641,6 +652,7 @@ git log --show-signature main..HEAD
 - ☑ Require 2FA for all contributors
 
 **Developer Workstation:**
+
 - ☑ Use GPG or SSH commit signing
 - ☑ Configure credential manager (never plaintext)
 - ☑ Install and configure gitleaks
@@ -649,6 +661,7 @@ git log --show-signature main..HEAD
 - ☑ Use SSH keys with passphrase
 
 **Workflow:**
+
 - ☑ Never commit secrets
 - ☑ Review changes before commit
 - ☑ Verify signatures on pull/merge

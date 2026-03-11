@@ -34,6 +34,7 @@ Categorize requirements into Must have, Should have, Could have, and Won't have.
 ## Feature Requirements - MoSCoW Prioritization
 
 ### Must Have (Required for launch)
+
 - User login with email/password
 - User registration
 - Password reset via email
@@ -42,6 +43,7 @@ Categorize requirements into Must have, Should have, Could have, and Won't have.
 _Rationale: Core authentication required for any user access_
 
 ### Should Have (Important, not critical)
+
 - Remember me functionality
 - Account lockout after failed attempts
 - Login activity notifications
@@ -49,6 +51,7 @@ _Rationale: Core authentication required for any user access_
 _Rationale: Security and convenience features expected by users_
 
 ### Could Have (Nice to have if time permits)
+
 - Social login (Google, GitHub)
 - Two-factor authentication
 - Login location tracking
@@ -56,6 +59,7 @@ _Rationale: Security and convenience features expected by users_
 _Rationale: Valuable but not blocking; can be added post-launch_
 
 ### Won't Have (This release)
+
 - Biometric login (mobile-only feature)
 - Single sign-on (enterprise tier)
 - Passwordless email links
@@ -64,6 +68,7 @@ _Rationale: Requires additional infrastructure; scheduled for Q3_
 ```
 
 **MoSCoW decision criteria:**
+
 - **Must**: System doesn't work without it
 - **Should**: Significant value but workarounds exist
 - **Could**: Nice to have; users won't complain if missing

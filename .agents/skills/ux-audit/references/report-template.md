@@ -21,20 +21,20 @@ Use this template when writing audit reports to `docs/`.
 ### Critical (blocks user task)
 
 - **[Short title]**: [What happened, what was expected]
-  - *Where*: [page/component]
-  - *Screenshot*: [filename if captured]
-  - *Fix*: [concrete recommendation]
+  - _Where_: [page/component]
+  - _Screenshot_: [filename if captured]
+  - _Fix_: [concrete recommendation]
 
 ### High (causes confusion or friction)
 
 - **[Short title]**: [description]
-  - *Where*: [page/component]
-  - *Fix*: [recommendation]
+  - _Where_: [page/component]
+  - _Fix_: [recommendation]
 
 ### Medium (suboptimal but workable)
 
 - **[Short title]**: [description]
-  - *Fix*: [recommendation]
+  - _Fix_: [recommendation]
 
 ### Low (polish)
 
@@ -66,8 +66,8 @@ Use this template when writing audit reports to `docs/`.
 
 ## Results
 
-| Area | Status | Issues |
-|------|--------|--------|
+| Area           | Status      | Issues              |
+| -------------- | ----------- | ------------------- |
 | [Page/Feature] | Pass / Fail | [brief note or "—"] |
 
 ## Failed Areas — Detail
@@ -81,13 +81,13 @@ Use this template when writing audit reports to `docs/`.
 
 ## Cross-Cutting
 
-| Check | Status | Notes |
-|-------|--------|-------|
-| Dark mode | Pass/Fail | |
-| Mobile (375px) | Pass/Fail | |
-| Search & filters | Pass/Fail | |
-| Notifications | Pass/Fail | |
-| Empty states | Pass/Fail | |
+| Check            | Status    | Notes |
+| ---------------- | --------- | ----- |
+| Dark mode        | Pass/Fail |       |
+| Mobile (375px)   | Pass/Fail |       |
+| Search & filters | Pass/Fail |       |
+| Notifications    | Pass/Fail |       |
+| Empty states     | Pass/Fail |       |
 ```
 
 ## Guidelines

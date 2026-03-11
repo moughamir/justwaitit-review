@@ -70,13 +70,17 @@ import { eventBus } from '@/shared/events/eventBus';
 export function useOrderNotifications() {
   useEffect(() => {
     return eventBus.on('order:completed', ({ orderId }) => {
-      showNotification({ type: 'success', message: `Order ${orderId} placed!` });
+      showNotification({
+        type: 'success',
+        message: `Order ${orderId} placed!`,
+      });
     });
   }, []);
 }
 ```
 
 **Benefits:**
+
 - Order feature doesn't know about cart, notifications, or analytics
 - New features can subscribe to events without modifying order
 - Easy to test each feature in isolation

@@ -13,8 +13,8 @@ Organize tests as paired input/expected files. The test runner compares actual o
 
 ```typescript
 // Manual testing in console
-const result = transform(parse("tsx", "const x = 1"));
-console.log(result);  // "Looks right..."
+const result = transform(parse('tsx', 'const x = 1'));
+console.log(result); // "Looks right..."
 // No persistent record, not reproducible
 ```
 
@@ -44,10 +44,7 @@ const posts = await fetchPosts();
 
 ```typescript
 // tests/basic-transform/expected.tsx
-const [user, posts] = await Promise.all([
-  fetchUser(),
-  fetchPosts()
-]);
+const [user, posts] = await Promise.all([fetchUser(), fetchPosts()]);
 ```
 
 **Run tests:**
@@ -64,6 +61,7 @@ npx codemod jssg test ./transform.ts --language tsx
 ```
 
 **Test naming conventions:**
+
 - Describe the scenario: `handles-nested-callbacks`
 - Describe expected behavior: `converts-require-to-import`
 - Describe edge cases: `preserves-dynamic-imports`

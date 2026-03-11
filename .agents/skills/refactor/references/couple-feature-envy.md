@@ -13,26 +13,26 @@ When a method uses more features of another class than its own, move it to that 
 
 ```typescript
 class Order {
-  customer: Customer
-  items: OrderItem[]
+  customer: Customer;
+  items: OrderItem[];
 }
 
 class Customer {
-  name: string
-  loyaltyPoints: number
-  memberSince: Date
-  tier: 'bronze' | 'silver' | 'gold'
+  name: string;
+  loyaltyPoints: number;
+  memberSince: Date;
+  tier: 'bronze' | 'silver' | 'gold';
 }
 
 class OrderPrinter {
   formatOrderSummary(order: Order): string {
-    const customer = order.customer
+    const customer = order.customer;
     // Uses 4 Customer fields but no OrderPrinter fields
-    const tierLabel = customer.tier.toUpperCase()
-    const years = new Date().getFullYear() - customer.memberSince.getFullYear()
-    const pointsDisplay = `${customer.loyaltyPoints.toLocaleString()} pts`
+    const tierLabel = customer.tier.toUpperCase();
+    const years = new Date().getFullYear() - customer.memberSince.getFullYear();
+    const pointsDisplay = `${customer.loyaltyPoints.toLocaleString()} pts`;
 
-    return `${tierLabel} Member: ${customer.name} (${years}yr, ${pointsDisplay})`
+    return `${tierLabel} Member: ${customer.name} (${years}yr, ${pointsDisplay})`;
   }
 }
 ```
@@ -41,32 +41,33 @@ class OrderPrinter {
 
 ```typescript
 class Customer {
-  name: string
-  loyaltyPoints: number
-  memberSince: Date
-  tier: 'bronze' | 'silver' | 'gold'
+  name: string;
+  loyaltyPoints: number;
+  memberSince: Date;
+  tier: 'bronze' | 'silver' | 'gold';
 
   formatSummary(): string {
-    const tierLabel = this.tier.toUpperCase()
-    const years = this.getMemberYears()
-    const pointsDisplay = `${this.loyaltyPoints.toLocaleString()} pts`
+    const tierLabel = this.tier.toUpperCase();
+    const years = this.getMemberYears();
+    const pointsDisplay = `${this.loyaltyPoints.toLocaleString()} pts`;
 
-    return `${tierLabel} Member: ${this.name} (${years}yr, ${pointsDisplay})`
+    return `${tierLabel} Member: ${this.name} (${years}yr, ${pointsDisplay})`;
   }
 
   getMemberYears(): number {
-    return new Date().getFullYear() - this.memberSince.getFullYear()
+    return new Date().getFullYear() - this.memberSince.getFullYear();
   }
 }
 
 class OrderPrinter {
   formatOrderSummary(order: Order): string {
-    return order.customer.formatSummary()  // Delegates to where data lives
+    return order.customer.formatSummary(); // Delegates to where data lives
   }
 }
 ```
 
 **Signs of feature envy:**
+
 - Method takes another object and accesses multiple fields
 - Method chains into another object repeatedly
 - Adding a new field to the envied class requires changing the envying class

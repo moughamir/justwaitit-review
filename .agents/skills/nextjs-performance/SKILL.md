@@ -76,98 +76,112 @@ Use this skill when working on Next.js applications and need to:
 ### Example 1: Convert Client Component to Server Component
 
 **BEFORE (Client Component with useEffect):**
+
 ```tsx
-'use client'
-import { useEffect, useState } from 'react'
+'use client';
+import { useEffect, useState } from 'react';
 
 export default function ProductList() {
-  const [products, setProducts] = useState([])
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('/api/products').then(r => r.json()).then(setProducts)
-  }, [])
+    fetch('/api/products')
+      .then((r) => r.json())
+      .then(setProducts);
+  }, []);
 
-  return <ul>{products.map(p => <li key={p.id}>{p.name}</li>)}</ul>
+  return (
+    <ul>
+      {products.map((p) => (
+        <li key={p.id}>{p.name}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
 **AFTER (Server Component with direct data access):**
+
 ```tsx
-import { db } from '@/lib/db'
+import { db } from '@/lib/db';
 
 export default async function ProductList() {
-  const products = await db.product.findMany()
-  return <ul>{products.map(p => <li key={p.id}>{p.name}</li>)}</ul>
+  const products = await db.product.findMany();
+  return (
+    <ul>
+      {products.map((p) => (
+        <li key={p.id}>{p.name}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
 ### Example 2: Optimize Images for LCP
 
 ```tsx
-import Image from 'next/image'
+import Image from 'next/image';
 
 export function Hero() {
   return (
-    <div className="relative w-full h-[600px]">
+    <div className="relative h-[600px] w-full">
       <Image
         src="/hero.jpg"
         alt="Hero"
         fill
-        priority          // Disable lazy loading for LCP
+        priority // Disable lazy loading for LCP
         sizes="100vw"
         className="object-cover"
       />
     </div>
-  )
+  );
 }
 ```
 
 ### Example 3: Implement Caching Strategy
 
 ```tsx
-import { unstable_cache, revalidateTag } from 'next/cache'
+import { unstable_cache, revalidateTag } from 'next/cache';
 
 // Cached data function
 const getProducts = unstable_cache(
   async () => db.product.findMany(),
   ['products'],
   { revalidate: 3600, tags: ['products'] }
-)
+);
 
 // Revalidate on mutation
 export async function createProduct(data: FormData) {
-  'use server'
-  await db.product.create({ data })
-  revalidateTag('products')
+  'use server';
+  await db.product.create({ data });
+  revalidateTag('products');
 }
 ```
 
 ### Example 4: Setup Optimized Fonts
 
 ```tsx
-import { Inter } from 'next/font/google'
+import { Inter } from 'next/font/google';
 
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-inter',
-})
+});
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.variable}>
-      <body className={`${inter.className} antialiased`}>
-        {children}
-      </body>
+      <body className={`${inter.className} antialiased`}>{children}</body>
     </html>
-  )
+  );
 }
 ```
 
 ### Example 5: Implement Suspense Streaming
 
 ```tsx
-import { Suspense } from 'react'
+import { Suspense } from 'react';
 
 export default function Page() {
   return (
@@ -175,14 +189,14 @@ export default function Page() {
       <header>Static content (immediate)</header>
 
       <Suspense fallback={<ProductSkeleton />}>
-        <ProductList />  {/* Streamed when ready */}
+        <ProductList /> {/* Streamed when ready */}
       </Suspense>
 
       <Suspense fallback={<ReviewsSkeleton />}>
-        <Reviews />      {/* Independent streaming */}
+        <Reviews /> {/* Independent streaming */}
       </Suspense>
     </>
-  )
+  );
 }
 ```
 
@@ -190,33 +204,34 @@ export default function Page() {
 
 Load these references when working on specific areas:
 
-| Topic | Reference File |
-|-------|----------------|
-| Core Web Vitals | `references/core-web-vitals.md` |
-| Image Optimization | `references/image-optimization.md` |
-| Font Optimization | `references/font-optimization.md` |
-| Caching Strategies | `references/caching-strategies.md` |
-| Server Components | `references/server-components.md` |
-| Streaming/Suspense | `references/streaming-suspense.md` |
+| Topic               | Reference File                      |
+| ------------------- | ----------------------------------- |
+| Core Web Vitals     | `references/core-web-vitals.md`     |
+| Image Optimization  | `references/image-optimization.md`  |
+| Font Optimization   | `references/font-optimization.md`   |
+| Caching Strategies  | `references/caching-strategies.md`  |
+| Server Components   | `references/server-components.md`   |
+| Streaming/Suspense  | `references/streaming-suspense.md`  |
 | Bundle Optimization | `references/bundle-optimization.md` |
-| Metadata/SEO | `references/metadata-seo.md` |
-| API Routes | `references/api-routes.md` |
-| Next.js 16 Patterns | `references/nextjs-16-patterns.md` |
+| Metadata/SEO        | `references/metadata-seo.md`        |
+| API Routes          | `references/api-routes.md`          |
+| Next.js 16 Patterns | `references/nextjs-16-patterns.md`  |
 
 ## Common Conversions
 
-| From | To | Benefit |
-|------|-----|---------|
-| `useEffect` + fetch | Direct async in Server Component | -70% JS, faster TTFB |
-| `useState` for data | Server Component with direct DB access | Simpler code, no hydration |
-| Client-side fetch | `unstable_cache` or ISR | Faster repeated loads |
-| `img` tag | `next/image` | Optimized formats, lazy loading |
-| CSS font import | `next/font` | Zero CLS, automatic optimization |
-| Static import of heavy component | `dynamic()` | Reduced initial bundle |
+| From                             | To                                     | Benefit                          |
+| -------------------------------- | -------------------------------------- | -------------------------------- |
+| `useEffect` + fetch              | Direct async in Server Component       | -70% JS, faster TTFB             |
+| `useState` for data              | Server Component with direct DB access | Simpler code, no hydration       |
+| Client-side fetch                | `unstable_cache` or ISR                | Faster repeated loads            |
+| `img` tag                        | `next/image`                           | Optimized formats, lazy loading  |
+| CSS font import                  | `next/font`                            | Zero CLS, automatic optimization |
+| Static import of heavy component | `dynamic()`                            | Reduced initial bundle           |
 
 ## Best Practices
 
 ### Images
+
 - Use `next/image` for all images
 - Add `priority` to LCP images only
 - Provide `width` and `height` or `fill` with sizes
@@ -224,6 +239,7 @@ Load these references when working on specific areas:
 - Configure remotePatterns in next.config.js
 
 ### Fonts
+
 - Use `next/font` instead of CSS imports
 - Specify `subsets` to reduce size
 - Use `display: 'swap'` for immediate text render
@@ -231,6 +247,7 @@ Load these references when working on specific areas:
 - Configure Tailwind to use CSS variables
 
 ### Caching
+
 - Cache expensive queries with `unstable_cache`
 - Use meaningful cache tags for granular control
 - Implement on-demand revalidation for dynamic content
@@ -238,6 +255,7 @@ Load these references when working on specific areas:
 - Use revalidatePath for route-level invalidation
 
 ### Components
+
 - Convert Client Components to Server Components where possible
 - Keep Client Components at the leaf level
 - Use Suspense boundaries for progressive loading
@@ -245,6 +263,7 @@ Load these references when working on specific areas:
 - Use dynamic() for heavy components below the fold
 
 ### Bundle
+
 - Lazy load heavy components with `dynamic()`
 - Use named exports for better tree shaking
 - Analyze bundle regularly with @next/bundle-analyzer
@@ -254,24 +273,28 @@ Load these references when working on specific areas:
 ## Constraints and Warnings
 
 ### Server Components Limitations
+
 - Cannot use browser APIs (window, localStorage, document)
 - Cannot use React hooks (useState, useEffect, useContext)
 - Cannot use event handlers (onClick, onSubmit)
 - Cannot use dynamic imports with ssr: false
 
 ### Image Optimization Constraints
+
 - `priority` should only be used for above-the-fold images
 - External images require configuration in next.config.js
 - `width` and `height` are required unless using `fill`
 - Animated GIFs are not optimized by default
 
 ### Caching Considerations
+
 - Cache tags must be manually invalidated
 - Data cache is per-request in development
 - Edge runtime has different caching behavior
 - Be careful caching user-specific data
 
 ### Bundle Size Warnings
+
 - Dynamic imports can impact SEO if critical content
 - Tree shaking requires proper ES module usage
 - Some libraries cannot be tree shaken (avoid barrel exports)
@@ -286,50 +309,58 @@ Load these references when working on specific areas:
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  const post = await fetchPost(slug)
-  return <article>{post.content}</article>
+  const { slug } = await params;
+  const post = await fetchPost(slug);
+  return <article>{post.content}</article>;
 }
 ```
 
 ### use() Hook for Promises
 
 ```tsx
-'use client'
-import { use, Suspense } from 'react'
+'use client';
+import { use, Suspense } from 'react';
 
 function Comments({ promise }: { promise: Promise<Comment[]> }) {
-  const comments = use(promise)  // Suspend until resolved
-  return <ul>{comments.map(c => <li key={c.id}>{c.text}</li>)}</ul>
+  const comments = use(promise); // Suspend until resolved
+  return (
+    <ul>
+      {comments.map((c) => (
+        <li key={c.id}>{c.text}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
 ### useOptimistic for UI Updates
 
 ```tsx
-'use client'
-import { useOptimistic } from 'react'
+'use client';
+import { useOptimistic } from 'react';
 
 export function TodoList({ todos }: { todos: Todo[] }) {
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(
     todos,
     (state, newTodo: Todo) => [...state, newTodo]
-  )
+  );
 
   async function addTodo(formData: FormData) {
-    const text = formData.get('text') as string
-    addOptimisticTodo({ id: crypto.randomUUID(), text, completed: false })
-    await createTodo(text)
+    const text = formData.get('text') as string;
+    addOptimisticTodo({ id: crypto.randomUUID(), text, completed: false });
+    await createTodo(text);
   }
 
   return (
     <form action={addTodo}>
       <input name="text" />
-      {optimisticTodos.map(todo => <div key={todo.id}>{todo.text}</div>)}
+      {optimisticTodos.map((todo) => (
+        <div key={todo.id}>{todo.text}</div>
+      ))}
     </form>
-  )
+  );
 }
 ```
 
@@ -347,13 +378,13 @@ ANALYZE=true npm run build
 // next.config.js
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
-})
+});
 
 module.exports = withBundleAnalyzer({
   modularizeImports: {
-    'lodash': { transform: 'lodash/{{member}}' },
+    lodash: { transform: 'lodash/{{member}}' },
   },
-})
+});
 ```
 
 ## Performance Checklist

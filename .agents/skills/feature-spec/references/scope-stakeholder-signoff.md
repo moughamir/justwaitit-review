@@ -17,6 +17,7 @@ Require explicit stakeholder approval of scope before development begins. Verbal
 Status: Discussed in meeting, ready to start
 
 Meeting notes:
+
 - Bob wants sales reports
 - Sarah mentioned export functionality
 - Everyone seemed aligned
@@ -38,12 +39,14 @@ Meeting notes:
 **Date:** 2024-03-15
 
 #### Included in This Release
+
 - Sales report with date filtering
 - Revenue breakdown by product category
 - CSV export functionality
 - Weekly email digest option
 
 #### Explicitly Excluded
+
 - Predictive analytics (Phase 2)
 - PDF export (requires design work)
 - Real-time updates (polling every 5 min instead)
@@ -51,20 +54,23 @@ Meeting notes:
 
 #### Sign-off
 
-| Stakeholder | Role | Date | Signature |
-|-------------|------|------|-----------|
-| Bob Smith | Sales Director | 2024-03-15 | ✓ Approved |
+| Stakeholder | Role            | Date       | Signature  |
+| ----------- | --------------- | ---------- | ---------- |
+| Bob Smith   | Sales Director  | 2024-03-15 | ✓ Approved |
 | Sarah Jones | Product Manager | 2024-03-15 | ✓ Approved |
-| Dev Lead | Engineering | 2024-03-15 | ✓ Feasible |
+| Dev Lead    | Engineering     | 2024-03-15 | ✓ Feasible |
 
 #### Change Process
+
 Any scope changes after sign-off require:
+
 1. Written change request
 2. Impact analysis (timeline, cost)
 3. Re-approval from all signatories
 ```
 
 **Sign-off process:**
+
 1. Document scope in writing
 2. Review with all stakeholders
 3. Address questions and concerns

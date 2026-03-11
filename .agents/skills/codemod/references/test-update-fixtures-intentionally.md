@@ -48,6 +48,7 @@ git add tests/ && git commit -m "Update fixtures for new format"
 ```
 
 **Fixture review checklist:**
+
 - [ ] New output is semantically correct
 - [ ] Formatting matches project style
 - [ ] No unintended side effects

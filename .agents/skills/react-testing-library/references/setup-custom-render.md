@@ -20,8 +20,8 @@ test('displays user', () => {
         <UserProfile />
       </AuthProvider>
     </QueryClientProvider>
-  )
-})
+  );
+});
 
 // settings.test.tsx - same providers repeated
 test('shows settings', () => {
@@ -31,47 +31,45 @@ test('shows settings', () => {
         <Settings />
       </AuthProvider>
     </QueryClientProvider>
-  )
-})
+  );
+});
 ```
 
 **Correct (custom render in test-utils):**
 
 ```tsx
 // test-utils.tsx
-import { render } from '@testing-library/react'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { AuthProvider } from './auth'
+import { render } from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { AuthProvider } from './auth';
 
 const createWrapper = () => {
   const queryClient = new QueryClient({
-    defaultOptions: { queries: { retry: false } }
-  })
+    defaultOptions: { queries: { retry: false } },
+  });
 
   return ({ children }) => (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        {children}
-      </AuthProvider>
+      <AuthProvider>{children}</AuthProvider>
     </QueryClientProvider>
-  )
-}
+  );
+};
 
 const customRender = (ui, options) =>
-  render(ui, { wrapper: createWrapper(), ...options })
+  render(ui, { wrapper: createWrapper(), ...options });
 
-export * from '@testing-library/react'
-export { customRender as render }
+export * from '@testing-library/react';
+export { customRender as render };
 ```
 
 ```tsx
 // user.test.tsx
-import { render, screen } from './test-utils'
+import { render, screen } from './test-utils';
 
 test('displays user', () => {
-  render(<UserProfile />)
+  render(<UserProfile />);
   // Providers automatically included
-})
+});
 ```
 
 Reference: [Testing Library - Custom Render](https://testing-library.com/docs/react-testing-library/setup#custom-render)

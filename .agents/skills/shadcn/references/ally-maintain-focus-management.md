@@ -17,15 +17,15 @@ function CustomModal({
   onClose,
   children,
 }: {
-  open: boolean
-  onClose: () => void
-  children: React.ReactNode
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
 }) {
-  if (!open) return null
+  if (!open) return null;
 
   return (
     <div className="fixed inset-0 bg-black/50" onClick={onClose}>
-      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg">
+      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white p-6">
         <button onClick={onClose}>Close</button>
         {children}
         {/* Tab key can focus elements behind modal */}
@@ -33,7 +33,7 @@ function CustomModal({
         {/* Focus not moved to modal on open */}
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -46,7 +46,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogClose,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 
 function CustomModal({
   open,
@@ -54,10 +54,10 @@ function CustomModal({
   title,
   children,
 }: {
-  open: boolean
-  onOpenChange: (open: boolean) => void
-  title: string
-  children: React.ReactNode
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  title: string;
+  children: React.ReactNode;
 }) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -71,11 +71,12 @@ function CustomModal({
         {/* Focus returns to trigger on close */}
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 ```
 
 **Focus management behaviors:**
+
 - Focus moves to first focusable element on open
 - Tab cycles through modal content only
 - Shift+Tab cycles backwards

@@ -18,11 +18,11 @@ function Dashboard() {
   return (
     <div className="dashboard">
       {/* These animate independently, causing visual jank */}
-      <Sidebar expanded={expanded === "sidebar"} />
+      <Sidebar expanded={expanded === 'sidebar'} />
       <motion.main layout className="content">
         <WidgetGrid />
       </motion.main>
-      <NotificationPanel expanded={expanded === "notifications"} />
+      <NotificationPanel expanded={expanded === 'notifications'} />
     </div>
   );
 }
@@ -39,7 +39,7 @@ function Sidebar({ expanded }: { expanded: boolean }) {
 **Correct (grouped animations coordinate measurements):**
 
 ```tsx
-import { LayoutGroup } from "framer-motion";
+import { LayoutGroup } from 'framer-motion';
 
 function Dashboard() {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -48,11 +48,11 @@ function Dashboard() {
     <LayoutGroup>
       <div className="dashboard">
         {/* All layout animations now coordinate together */}
-        <Sidebar expanded={expanded === "sidebar"} />
+        <Sidebar expanded={expanded === 'sidebar'} />
         <motion.main layout className="content">
           <WidgetGrid />
         </motion.main>
-        <NotificationPanel expanded={expanded === "notifications"} />
+        <NotificationPanel expanded={expanded === 'notifications'} />
       </div>
     </LayoutGroup>
   );
@@ -68,6 +68,7 @@ function Sidebar({ expanded }: { expanded: boolean }) {
 ```
 
 **Use cases for LayoutGroup:**
+
 - Dashboard layouts where expanding one panel affects others
 - List items that reorder across multiple parent components
 - Multi-column layouts with coordinated animations

@@ -58,6 +58,7 @@ export async function PostPage({ postId }: { postId: string }) {
 ```
 
 **Benefits:**
+
 - Linear growth: N relations = N query functions
 - Each query is independently cacheable
 - Parallel fetching via Promise.all()

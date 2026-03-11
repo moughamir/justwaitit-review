@@ -75,11 +75,11 @@ function ProductList({ selectedTab }: { selectedTab: string }) {
 
 **Decision guide:**
 
-| Situation | Where to put state |
-|-----------|-------------------|
-| Single component uses it | In that component |
-| Sibling components share it | In parent |
-| Distant components share it | Context or store |
-| Server data | Query library |
+| Situation                   | Where to put state |
+| --------------------------- | ------------------ |
+| Single component uses it    | In that component  |
+| Sibling components share it | In parent          |
+| Distant components share it | Context or store   |
+| Server data                 | Query library      |
 
 Reference: [React Docs - Sharing State](https://react.dev/learn/sharing-state-between-components)

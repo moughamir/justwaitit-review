@@ -2,9 +2,9 @@
 
 /**
  * Helper script to create a new PRD
- * 
+ *
  * Usage: node create_prd.js "Feature Name"
- * 
+ *
  * This script:
  * 1. Determines the next PRD number
  * 2. Creates the PRD folder structure
@@ -33,7 +33,7 @@ function getNextPrdNumber() {
   }
 
   const entries = fs.readdirSync(PRDS_DIR);
-  const prdFolders = entries.filter(entry => {
+  const prdFolders = entries.filter((entry) => {
     const match = entry.match(/^prd-(\d+)/);
     return match && fs.statSync(path.join(PRDS_DIR, entry)).isDirectory();
   });
@@ -42,7 +42,7 @@ function getNextPrdNumber() {
     return 1;
   }
 
-  const numbers = prdFolders.map(folder => {
+  const numbers = prdFolders.map((folder) => {
     const match = folder.match(/^prd-(\d+)/);
     return parseInt(match[1], 10);
   });
@@ -75,20 +75,20 @@ function createPrdFolder(featureName) {
   // Copy template
   if (fs.existsSync(TEMPLATE_PATH)) {
     let template = fs.readFileSync(TEMPLATE_PATH, 'utf-8');
-    
+
     // Replace placeholders
     const today = new Date().toISOString().split('T')[0];
     template = template.replace(/\[Feature Name\]/g, featureName);
     template = template.replace(/PRD-XXX/g, `PRD-${prdId}`);
     template = template.replace(/YYYY-MM-DD/g, today);
-    
+
     const prdPath = path.join(folderPath, 'prd.md');
     fs.writeFileSync(prdPath, template, 'utf-8');
     console.log(`✅ Created prd.md from template`);
   } else {
     console.warn(`⚠️  Template not found at ${TEMPLATE_PATH}`);
     console.warn(`   Creating basic prd.md...`);
-    
+
     const basicPrd = `# ${featureName} - PRD
 
 **ID**: PRD-${prdId}  
@@ -127,7 +127,7 @@ function createPrdFolder(featureName) {
 
 *Fill out the rest of the PRD using the template guidelines*
 `;
-    
+
     const prdPath = path.join(folderPath, 'prd.md');
     fs.writeFileSync(prdPath, basicPrd, 'utf-8');
     console.log(`✅ Created basic prd.md`);
@@ -160,7 +160,9 @@ function printNextSteps(info) {
   console.log(`3. Add design mockups to:`);
   console.log(`   ${path.join(info.folderPath, 'mockups/')}`);
   console.log('');
-  console.log(`4. Update ${path.join(PRDS_DIR, 'README.md')} to include PRD-${info.prdId}`);
+  console.log(
+    `4. Update ${path.join(PRDS_DIR, 'README.md')} to include PRD-${info.prdId}`
+  );
   console.log('');
   console.log(`5. Commit your changes:`);
   console.log(`   git add prds/${info.folderName}/`);
@@ -170,7 +172,7 @@ function printNextSteps(info) {
 
 function main() {
   const args = process.argv.slice(2);
-  
+
   if (args.length === 0 || args[0] === '--help' || args[0] === '-h') {
     console.log('Usage: node create_prd.js "Feature Name"');
     console.log('');
@@ -181,14 +183,14 @@ function main() {
   }
 
   const featureName = args[0];
-  
+
   console.log(`\n🚀 Creating new PRD for: ${featureName}\n`);
-  
+
   const info = createPrdFolder(featureName);
-  
+
   console.log(`\n✅ PRD ${info.prdId} created successfully!\n`);
   console.log(`📁 Location: ${info.folderPath}`);
-  
+
   printNextSteps(info);
 }
 

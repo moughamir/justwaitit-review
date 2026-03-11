@@ -10,6 +10,7 @@ Comprehensive architecture guide for organizing React applications by features, 
 ## When to Apply
 
 Reference these guidelines when:
+
 - Creating new features or modules
 - Organizing project directory structure
 - Setting up import rules and boundaries
@@ -19,16 +20,16 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Directory Structure | CRITICAL | `struct-` |
-| 2 | Import & Dependencies | CRITICAL | `import-` |
-| 3 | Module Boundaries | HIGH | `bound-` |
-| 4 | Data Fetching | HIGH | `fquery-` |
-| 5 | Component Organization | MEDIUM-HIGH | `fcomp-` |
-| 6 | State Management | MEDIUM | `fstate-` |
-| 7 | Testing Strategy | MEDIUM | `test-` |
-| 8 | Naming Conventions | LOW | `name-` |
+| Priority | Category               | Impact      | Prefix    |
+| -------- | ---------------------- | ----------- | --------- |
+| 1        | Directory Structure    | CRITICAL    | `struct-` |
+| 2        | Import & Dependencies  | CRITICAL    | `import-` |
+| 3        | Module Boundaries      | HIGH        | `bound-`  |
+| 4        | Data Fetching          | HIGH        | `fquery-` |
+| 5        | Component Organization | MEDIUM-HIGH | `fcomp-`  |
+| 6        | State Management       | MEDIUM      | `fstate-` |
+| 7        | Testing Strategy       | MEDIUM      | `test-`   |
+| 8        | Naming Conventions     | LOW         | `name-`   |
 
 ## Quick Reference
 

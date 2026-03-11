@@ -28,20 +28,20 @@ export default function Page() {
 
 ```typescript
 // app/blog/[slug]/page.tsx
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params
-  const post = await fetchPost(slug)
+  const { slug } = await params;
+  const post = await fetchPost(slug);
 
   return {
     title: post.title,
     description: post.excerpt,
-  }
+  };
 }
 ```
 
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     description: 'Page description',
     images: ['https://mysite.com/twitter-image.jpg'],
   },
-}
+};
 ```
 
 ---
@@ -90,7 +90,7 @@ export const metadata: Metadata = {
 ### robots.ts
 
 ```typescript
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -103,24 +103,24 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: 'https://mysite.com/sitemap.xml',
     host: 'https://mysite.com',
-  }
+  };
 }
 ```
 
 ### sitemap.ts
 
 ```typescript
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await fetchPosts()
+  const posts = await fetchPosts();
 
   const postEntries = posts.map((post) => ({
     url: `https://mysite.com/blog/${post.slug}`,
     lastModified: post.updatedAt,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
-  }))
+  }));
 
   return [
     {
@@ -130,7 +130,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1,
     },
     ...postEntries,
-  ]
+  ];
 }
 ```
 
@@ -171,10 +171,10 @@ export default function Page() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params
-  const post = await fetchPost(slug)
+  const { slug } = await params;
+  const post = await fetchPost(slug);
 
   return {
     title: post.title,
@@ -189,7 +189,7 @@ export async function generateMetadata({
       authors: [post.author.name],
       images: [post.coverImage],
     },
-  }
+  };
 }
 ```
 
@@ -199,7 +199,7 @@ export async function generateMetadata({
 
 ```typescript
 // app/layout.tsx
-import type { Metadata } from 'next'
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://mysite.com'),
@@ -232,4 +232,5 @@ export const metadata: Metadata = {
   },
 
   manifest: '/site.webmanifest',
-}
+};
+```

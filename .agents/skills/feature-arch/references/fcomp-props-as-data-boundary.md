@@ -81,6 +81,7 @@ function CheckoutPage() {
 ```
 
 **Benefits:**
+
 - CheckoutSummary doesn't import from cart feature
 - Cart can restructure without breaking checkout
 - CheckoutSummary is easily testable with mock props

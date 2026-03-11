@@ -24,7 +24,7 @@ function App() {
         <Route path="/account" element={<AccountPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 // "Lighthouse says 95 — ship it"
@@ -34,7 +34,7 @@ function App() {
 **Correct (RUM captures real CWV scores per route):**
 
 ```tsx
-import { onCLS, onINP, onLCP, onFCP, onTTFB, type Metric } from "web-vitals"
+import { onCLS, onINP, onLCP, onFCP, onTTFB, type Metric } from 'web-vitals';
 
 function reportWebVital(metric: Metric) {
   const payload = {
@@ -45,22 +45,22 @@ function reportWebVital(metric: Metric) {
     id: metric.id,
     navigationType: metric.navigationType,
     route: window.location.pathname,
-  }
-  navigator.sendBeacon("/api/analytics/vitals", JSON.stringify(payload))
+  };
+  navigator.sendBeacon('/api/analytics/vitals', JSON.stringify(payload));
 }
 
 function initWebVitals() {
-  onCLS(reportWebVital)
-  onINP(reportWebVital)
-  onLCP(reportWebVital)
-  onFCP(reportWebVital)
-  onTTFB(reportWebVital)
+  onCLS(reportWebVital);
+  onINP(reportWebVital);
+  onLCP(reportWebVital);
+  onFCP(reportWebVital);
+  onTTFB(reportWebVital);
 }
 
 function App() {
   useEffect(() => {
-    initWebVitals()
-  }, [])
+    initWebVitals();
+  }, []);
 
   return (
     <Router>
@@ -70,7 +70,7 @@ function App() {
         <Route path="/account" element={<AccountPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
 ```
 

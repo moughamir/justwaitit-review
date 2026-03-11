@@ -25,7 +25,7 @@ We need to track user subscriptions with different tiers.
 
 **Correct (explicit data model specification):**
 
-```markdown
+````markdown
 ## Data Model: Subscription Management
 
 ### Entity Relationship Diagram
@@ -56,10 +56,12 @@ We need to track user subscriptions with different tiers.
 │ updated_at          │
 └─────────────────────┘
 ```
+````
 
 ### Schema Definitions
 
 **Table: subscription_plans**
+
 ```sql
 CREATE TABLE subscription_plans (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -78,6 +80,7 @@ CREATE INDEX idx_subscription_plans_active ON subscription_plans(is_active) WHER
 ```
 
 **Table: subscriptions**
+
 ```sql
 CREATE TABLE subscriptions (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -103,6 +106,7 @@ CREATE INDEX idx_subscriptions_period_end ON subscriptions(current_period_end);
 ### Migration Strategy
 
 **Phase 1: Add tables (non-breaking)**
+
 ```sql
 -- Migration: 20240315_001_create_subscription_tables.sql
 -- Safe to run: Yes (additive only)
@@ -114,6 +118,7 @@ COMMIT;
 ```
 
 **Phase 2: Seed initial plans**
+
 ```sql
 -- Migration: 20240315_002_seed_subscription_plans.sql
 INSERT INTO subscription_plans (name, slug, price_cents, billing_period, features)
@@ -124,6 +129,7 @@ VALUES
 ```
 
 **Phase 3: Migrate existing users**
+
 ```sql
 -- Migration: 20240315_003_migrate_existing_users.sql
 -- Creates subscriptions for existing users based on current tier
@@ -142,12 +148,13 @@ AND NOT EXISTS (SELECT 1 FROM subscriptions s WHERE s.user_id = u.id);
 
 ### Data Constraints
 
-| Constraint | Rule | Enforcement |
-|------------|------|-------------|
-| One active subscription | User can have only one active/trialing subscription | DB constraint |
-| Valid status transitions | active → canceled, trialing → active/canceled | Application code |
-| Price non-negative | price_cents >= 0 | DB CHECK constraint |
-| Period integrity | period_end > period_start | Application validation |
+| Constraint               | Rule                                                | Enforcement            |
+| ------------------------ | --------------------------------------------------- | ---------------------- |
+| One active subscription  | User can have only one active/trialing subscription | DB constraint          |
+| Valid status transitions | active → canceled, trialing → active/canceled       | Application code       |
+| Price non-negative       | price_cents >= 0                                    | DB CHECK constraint    |
+| Period integrity         | period_end > period_start                           | Application validation |
+
 ```
 
 **Data model checklist:**
@@ -158,3 +165,4 @@ AND NOT EXISTS (SELECT 1 FROM subscriptions s WHERE s.user_id = u.id);
 - Data integrity rules documented
 
 Reference: [Prisma Schema Best Practices](https://www.prisma.io/docs/orm/prisma-schema)
+```

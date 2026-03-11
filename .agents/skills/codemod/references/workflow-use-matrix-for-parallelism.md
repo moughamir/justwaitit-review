@@ -13,7 +13,7 @@ Use matrix strategies to parallelize transforms across teams, directories, or co
 
 ```yaml
 # workflow.yaml - processes teams one by one
-version: "1"
+version: '1'
 nodes:
   - id: migrate-team-a
     steps:
@@ -22,7 +22,7 @@ nodes:
         target: ./packages/team-a
 
   - id: migrate-team-b
-    depends_on: [migrate-team-a]  # Unnecessary wait
+    depends_on: [migrate-team-a] # Unnecessary wait
     steps:
       - type: js-ast-grep
         codemod: ./scripts/migrate.ts
@@ -41,7 +41,7 @@ nodes:
 
 ```yaml
 # workflow.yaml - parallel team processing
-version: "1"
+version: '1'
 
 state:
   teams:
@@ -58,7 +58,7 @@ nodes:
       - type: js-ast-grep
         codemod: ./scripts/migrate.ts
         target: ./packages/${{ matrix.value }}
-# Total time: max(A, B, C)
+  # Total time: max(A, B, C)
 
   - id: run-tests
     depends_on: [migrate-teams]
@@ -74,7 +74,7 @@ const transform: Transform<TSX> = (root, options) => {
   const team = options.matrixValues?.value;
 
   // Apply team-specific rules
-  if (team === "team-a") {
+  if (team === 'team-a') {
     // Special handling for team-a
   }
 
@@ -83,6 +83,7 @@ const transform: Transform<TSX> = (root, options) => {
 ```
 
 **Matrix use cases:**
+
 - Team/directory sharding
 - Multi-variant transforms (different configs)
 - Language-specific processing

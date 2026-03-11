@@ -14,17 +14,17 @@ Don't call `render()` in `beforeEach`. Each test should explicitly render with i
 ```tsx
 describe('Button', () => {
   beforeEach(() => {
-    render(<Button onClick={mockClick}>Click me</Button>)
-  })
+    render(<Button onClick={mockClick}>Click me</Button>);
+  });
 
   test('renders button text', () => {
-    expect(screen.getByRole('button')).toHaveTextContent('Click me')
-  })
+    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+  });
 
   test('handles disabled state', () => {
     // Can't test disabled - already rendered without disabled prop!
-  })
-})
+  });
+});
 ```
 
 **Correct (explicit render per test):**
@@ -32,32 +32,36 @@ describe('Button', () => {
 ```tsx
 describe('Button', () => {
   test('renders button text', () => {
-    render(<Button onClick={mockClick}>Click me</Button>)
-    expect(screen.getByRole('button')).toHaveTextContent('Click me')
-  })
+    render(<Button onClick={mockClick}>Click me</Button>);
+    expect(screen.getByRole('button')).toHaveTextContent('Click me');
+  });
 
   test('is disabled when disabled prop is true', () => {
-    render(<Button onClick={mockClick} disabled>Click me</Button>)
-    expect(screen.getByRole('button')).toBeDisabled()
-  })
+    render(
+      <Button onClick={mockClick} disabled>
+        Click me
+      </Button>
+    );
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
 
   test('calls onClick when clicked', async () => {
-    const handleClick = jest.fn()
-    const user = userEvent.setup()
-    render(<Button onClick={handleClick}>Click me</Button>)
+    const handleClick = jest.fn();
+    const user = userEvent.setup();
+    render(<Button onClick={handleClick}>Click me</Button>);
 
-    await user.click(screen.getByRole('button'))
+    await user.click(screen.getByRole('button'));
 
-    expect(handleClick).toHaveBeenCalledTimes(1)
-  })
-})
+    expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
 ```
 
 **Use beforeEach for non-render setup:**
 
 ```tsx
 beforeEach(() => {
-  jest.clearAllMocks()
+  jest.clearAllMocks();
   // Setup mocks, not component renders
-})
+});
 ```

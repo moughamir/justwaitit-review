@@ -104,17 +104,17 @@ func processRequest(request *http.Request, writer http.ResponseWriter) {
 
 Some abbreviations are so universally understood they are acceptable:
 
-| Abbreviation | Meaning | Context |
-|--------------|---------|---------|
-| `id` | identifier | Universal |
-| `url` | uniform resource locator | Web development |
-| `api` | application programming interface | Programming |
-| `http` | hypertext transfer protocol | Web development |
-| `db` | database | When context is obvious |
-| `io` | input/output | Systems programming |
-| `i`, `j`, `k` | loop indices | Small loop scopes |
-| `e`, `err` | error | Go convention, catch blocks |
-| `ctx` | context | Go convention only |
+| Abbreviation  | Meaning                           | Context                     |
+| ------------- | --------------------------------- | --------------------------- |
+| `id`          | identifier                        | Universal                   |
+| `url`         | uniform resource locator          | Web development             |
+| `api`         | application programming interface | Programming                 |
+| `http`        | hypertext transfer protocol       | Web development             |
+| `db`          | database                          | When context is obvious     |
+| `io`          | input/output                      | Systems programming         |
+| `i`, `j`, `k` | loop indices                      | Small loop scopes           |
+| `e`, `err`    | error                             | Go convention, catch blocks |
+| `ctx`         | context                           | Go convention only          |
 
 ### When NOT to Apply
 

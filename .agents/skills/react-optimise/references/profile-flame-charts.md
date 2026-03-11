@@ -13,10 +13,14 @@ Flame charts visualize the call stack over time, making it immediately visible w
 
 ```tsx
 // Developer blindly memoizes the parent component
-const OrderHistory = memo(function OrderHistory({ orders }: { orders: Order[] }) {
+const OrderHistory = memo(function OrderHistory({
+  orders,
+}: {
+  orders: Order[];
+}) {
   const sortedOrders = [...orders].sort(
     (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-  )
+  );
 
   return (
     <div>
@@ -24,17 +28,17 @@ const OrderHistory = memo(function OrderHistory({ orders }: { orders: Order[] })
         <OrderRow key={order.id} order={order} />
       ))}
     </div>
-  )
-})
+  );
+});
 
 // The actual bottleneck is inside OrderRow's date formatting
 // called 500 times per render — never investigated
 function OrderRow({ order }: { order: Order }) {
-  const formattedDate = new Intl.DateTimeFormat("en-GB", {
-    dateStyle: "full",
-    timeStyle: "long",
+  const formattedDate = new Intl.DateTimeFormat('en-GB', {
+    dateStyle: 'full',
+    timeStyle: 'long',
     timeZone: order.customerTimezone, // creates new formatter per row
-  }).format(order.createdAt)
+  }).format(order.createdAt);
 
   return (
     <tr>
@@ -42,7 +46,7 @@ function OrderRow({ order }: { order: Order }) {
       <td>{formattedDate}</td>
       <td>${order.total.toFixed(2)}</td>
     </tr>
-  )
+  );
 }
 ```
 
@@ -52,25 +56,25 @@ function OrderRow({ order }: { order: Order }) {
 // Flame chart showed: Intl.DateTimeFormat constructor = 85% of render time
 // Fix: cache formatters by timezone to avoid repeated construction
 
-const formatterCache = new Map<string, Intl.DateTimeFormat>()
+const formatterCache = new Map<string, Intl.DateTimeFormat>();
 
 function getDateFormatter(timezone: string): Intl.DateTimeFormat {
-  let formatter = formatterCache.get(timezone)
+  let formatter = formatterCache.get(timezone);
   if (!formatter) {
-    formatter = new Intl.DateTimeFormat("en-GB", {
-      dateStyle: "full",
-      timeStyle: "long",
+    formatter = new Intl.DateTimeFormat('en-GB', {
+      dateStyle: 'full',
+      timeStyle: 'long',
       timeZone: timezone,
-    })
-    formatterCache.set(timezone, formatter)
+    });
+    formatterCache.set(timezone, formatter);
   }
-  return formatter
+  return formatter;
 }
 
 function OrderRow({ order }: { order: Order }) {
   const formattedDate = getDateFormatter(order.customerTimezone).format(
     order.createdAt
-  )
+  );
 
   return (
     <tr>
@@ -78,14 +82,14 @@ function OrderRow({ order }: { order: Order }) {
       <td>{formattedDate}</td>
       <td>${order.total.toFixed(2)}</td>
     </tr>
-  )
+  );
 }
 
 // No memo needed on OrderHistory — the hot path was inside OrderRow
 function OrderHistory({ orders }: { orders: Order[] }) {
   const sortedOrders = [...orders].sort(
     (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-  )
+  );
 
   return (
     <div>
@@ -93,7 +97,7 @@ function OrderHistory({ orders }: { orders: Order[] }) {
         <OrderRow key={order.id} order={order} />
       ))}
     </div>
-  )
+  );
 }
 ```
 

@@ -27,7 +27,7 @@ The search endpoint accepts a query and returns results.
 
 **Correct (complete API contract):**
 
-```markdown
+````markdown
 ## API Contract: Product Search
 
 ### Endpoint
@@ -35,8 +35,10 @@ The search endpoint accepts a query and returns results.
 ```http
 GET /api/v2/products/search
 ```
+````
 
 ### Authentication
+
 - Required: Yes
 - Type: Bearer token (JWT)
 - Scopes: `products:read`
@@ -55,6 +57,7 @@ GET /api/v2/products/search
 | per_page | integer | No | 20 | Results per page (1-100) |
 
 **Example Request:**
+
 ```bash
 curl -X GET "https://api.example.com/api/v2/products/search?q=laptop&category=electronics&sort=price_asc&page=1&per_page=20" \
   -H "Authorization: Bearer eyJhbGc..."
@@ -63,6 +66,7 @@ curl -X GET "https://api.example.com/api/v2/products/search?q=laptop&category=el
 ### Response
 
 **Success (200 OK):**
+
 ```json
 {
   "data": {
@@ -87,8 +91,8 @@ curl -X GET "https://api.example.com/api/v2/products/search?q=laptop&category=el
       "total_count": 287
     },
     "facets": {
-      "categories": [{"name": "electronics", "count": 150}],
-      "price_ranges": [{"min": 0, "max": 10000, "count": 45}]
+      "categories": [{ "name": "electronics", "count": 150 }],
+      "price_ranges": [{ "min": 0, "max": 10000, "count": 45 }]
     }
   },
   "meta": {
@@ -100,34 +104,38 @@ curl -X GET "https://api.example.com/api/v2/products/search?q=laptop&category=el
 
 ### Error Responses
 
-| Status | Code | Description | Resolution |
-|--------|------|-------------|------------|
-| 400 | INVALID_QUERY | Query too short/long | Provide 2-100 char query |
-| 400 | INVALID_PARAMETER | Parameter validation failed | Check parameter constraints |
-| 401 | UNAUTHORIZED | Missing/invalid token | Refresh authentication |
-| 429 | RATE_LIMITED | Too many requests | Wait and retry with backoff |
-| 500 | INTERNAL_ERROR | Server error | Retry or contact support |
+| Status | Code              | Description                 | Resolution                  |
+| ------ | ----------------- | --------------------------- | --------------------------- |
+| 400    | INVALID_QUERY     | Query too short/long        | Provide 2-100 char query    |
+| 400    | INVALID_PARAMETER | Parameter validation failed | Check parameter constraints |
+| 401    | UNAUTHORIZED      | Missing/invalid token       | Refresh authentication      |
+| 429    | RATE_LIMITED      | Too many requests           | Wait and retry with backoff |
+| 500    | INTERNAL_ERROR    | Server error                | Retry or contact support    |
 
 **Error Response Format:**
+
 ```json
 {
   "error": {
     "code": "INVALID_QUERY",
     "message": "Search query must be between 2 and 100 characters",
-    "details": {"provided_length": 1, "min_length": 2}
+    "details": { "provided_length": 1, "min_length": 2 }
   },
-  "meta": {"request_id": "req_xyz789"}
+  "meta": { "request_id": "req_xyz789" }
 }
 ```
 
 ### Rate Limits
+
 - Authenticated: 100 requests/minute
 - Headers: `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset`
 
 ### Versioning
+
 - Current: v2
 - Deprecation: v1 sunset 2025-06-01
 - Breaking changes require major version bump
+
 ```
 
 **API contract must include:**
@@ -138,3 +146,4 @@ curl -X GET "https://api.example.com/api/v2/products/search?q=laptop&category=el
 - All error codes with resolution steps
 
 Reference: [Microsoft API Guidelines](https://github.com/microsoft/api-guidelines)
+```

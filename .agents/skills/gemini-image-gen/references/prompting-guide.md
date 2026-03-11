@@ -5,6 +5,7 @@
 Build prompts using these five components in order:
 
 ### 1. Scene Setup
+
 What's in the image — subject, setting, composition.
 
 ```
@@ -14,33 +15,36 @@ What's in the image — subject, setting, composition.
 ```
 
 ### 2. Camera & Lens
+
 Concrete photography parameters control the look more reliably than adjectives.
 
-| Parameter | Effect | Example |
-|-----------|--------|---------|
-| Focal length | Compression/perspective | "85mm" (portrait), "24mm" (wide), "135mm" (compressed) |
-| Aperture | Depth of field | "f/1.8" (blurry bg), "f/8" (sharp throughout) |
-| Angle | Perspective | "eye level", "overhead flat lay", "low angle looking up" |
-| Distance | Framing | "close-up", "medium shot", "wide establishing shot" |
+| Parameter    | Effect                  | Example                                                  |
+| ------------ | ----------------------- | -------------------------------------------------------- |
+| Focal length | Compression/perspective | "85mm" (portrait), "24mm" (wide), "135mm" (compressed)   |
+| Aperture     | Depth of field          | "f/1.8" (blurry bg), "f/8" (sharp throughout)            |
+| Angle        | Perspective             | "eye level", "overhead flat lay", "low angle looking up" |
+| Distance     | Framing                 | "close-up", "medium shot", "wide establishing shot"      |
 
 ```
 "Shot at 85mm f/1.8, shallow depth of field, medium shot from eye level"
 ```
 
 ### 3. Lighting
+
 Describe the light source, quality, and colour temperature.
 
-| Instead of... | Use... |
-|---------------|--------|
-| "beautiful lighting" | "warm golden-hour light from the left, 4500K" |
-| "professional lighting" | "soft diffused window light, slight rim light from behind" |
-| "moody lighting" | "low-key dramatic side lighting, deep shadows, single source" |
+| Instead of...           | Use...                                                        |
+| ----------------------- | ------------------------------------------------------------- |
+| "beautiful lighting"    | "warm golden-hour light from the left, 4500K"                 |
+| "professional lighting" | "soft diffused window light, slight rim light from behind"    |
+| "moody lighting"        | "low-key dramatic side lighting, deep shadows, single source" |
 
 ```
 "Warm directional light from a large window on the right, soft shadows, 4000K colour temperature"
 ```
 
 ### 4. Colour Palette
+
 Anchor to specific colours from the project. Use hex codes or descriptive anchors.
 
 ```
@@ -52,6 +56,7 @@ Anchor to specific colours from the project. Use hex codes or descriptive anchor
 **Pull from the project**: check `input.css`, `tailwind.config`, or the colour-palette skill output for exact values.
 
 ### 5. Negative Constraints
+
 What to exclude. Always include these:
 
 ```
@@ -94,21 +99,21 @@ Maintain the same soft-focus background treatment and golden tones."
 
 ## Common Failure Modes
 
-| Issue | Fix |
-|-------|-----|
-| Text appears in image | Add "no text, no words, no letters" explicitly |
-| Hands look wrong | Add "no hands, no fingers" or crop hands out |
-| Too generic/stock-photo | Add specific camera specs and colour anchors |
+| Issue                              | Fix                                              |
+| ---------------------------------- | ------------------------------------------------ |
+| Text appears in image              | Add "no text, no words, no letters" explicitly   |
+| Hands look wrong                   | Add "no hands, no fingers" or crop hands out     |
+| Too generic/stock-photo            | Add specific camera specs and colour anchors     |
 | Inconsistent style across variants | Use `--reference` with the best variant as input |
-| Image has watermark-like patterns | Add "clean image, no watermarks, no artifacts" |
+| Image has watermark-like patterns  | Add "clean image, no watermarks, no artifacts"   |
 
 ## Web Asset Dimensions
 
-| Use case | Dimensions | Aspect Ratio |
-|----------|-----------|--------------|
-| Hero banner | 1920x1080 | 16:9 |
-| OG / social card | 1200x630 | ~1.9:1 |
-| Square thumbnail | 1024x1024 | 1:1 |
-| Blog header | 1200x675 | 16:9 |
-| Product photo | 1024x1024 | 1:1 |
-| Texture/pattern tile | 512x512 | 1:1 |
+| Use case             | Dimensions | Aspect Ratio |
+| -------------------- | ---------- | ------------ |
+| Hero banner          | 1920x1080  | 16:9         |
+| OG / social card     | 1200x630   | ~1.9:1       |
+| Square thumbnail     | 1024x1024  | 1:1          |
+| Blog header          | 1200x675   | 16:9         |
+| Product photo        | 1024x1024  | 1:1          |
+| Texture/pattern tile | 512x512    | 1:1          |

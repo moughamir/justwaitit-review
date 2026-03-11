@@ -13,28 +13,28 @@ When a plain data structure grows behavior or needs derived fields, convert it t
 
 ```typescript
 interface Order {
-  items: { productId: string; quantity: number; price: number }[]
-  taxRate: number
-  shippingCost: number
+  items: { productId: string; quantity: number; price: number }[];
+  taxRate: number;
+  shippingCost: number;
 }
 
 // Logic scattered across consumers
 function getSubtotal(order: Order): number {
-  return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 }
 
 function getTax(order: Order): number {
-  return getSubtotal(order) * order.taxRate
+  return getSubtotal(order) * order.taxRate;
 }
 
 function getTotal(order: Order): number {
-  return getSubtotal(order) + getTax(order) + order.shippingCost
+  return getSubtotal(order) + getTax(order) + order.shippingCost;
 }
 
 // Different module calculates subtotal differently (bug!)
 function printReceipt(order: Order): void {
-  const subtotal = order.items.reduce((sum, item) => sum + item.price, 0)  // Missing quantity!
-  console.log(`Subtotal: ${subtotal}`)
+  const subtotal = order.items.reduce((sum, item) => sum + item.price, 0); // Missing quantity!
+  console.log(`Subtotal: ${subtotal}`);
 }
 ```
 
@@ -42,7 +42,7 @@ function printReceipt(order: Order): void {
 
 ```typescript
 class Order {
-  private _items: OrderItem[] = []
+  private _items: OrderItem[] = [];
 
   constructor(
     private readonly taxRate: number,
@@ -50,27 +50,27 @@ class Order {
   ) {}
 
   addItem(productId: string, quantity: number, price: number): void {
-    this._items.push(new OrderItem(productId, quantity, price))
+    this._items.push(new OrderItem(productId, quantity, price));
   }
 
   get items(): readonly OrderItem[] {
-    return [...this._items]
+    return [...this._items];
   }
 
   get subtotal(): number {
-    return this._items.reduce((sum, item) => sum + item.total, 0)
+    return this._items.reduce((sum, item) => sum + item.total, 0);
   }
 
   get tax(): number {
-    return this.subtotal * this.taxRate
+    return this.subtotal * this.taxRate;
   }
 
   get total(): number {
-    return this.subtotal + this.tax + this.shippingCost
+    return this.subtotal + this.tax + this.shippingCost;
   }
 
   get itemCount(): number {
-    return this._items.reduce((sum, item) => sum + item.quantity, 0)
+    return this._items.reduce((sum, item) => sum + item.quantity, 0);
   }
 }
 
@@ -82,19 +82,20 @@ class OrderItem {
   ) {}
 
   get total(): number {
-    return this.price * this.quantity
+    return this.price * this.quantity;
   }
 }
 
 // All consumers use the same calculation
 function printReceipt(order: Order): void {
-  console.log(`Subtotal: ${order.subtotal}`)  // Guaranteed correct
-  console.log(`Tax: ${order.tax}`)
-  console.log(`Total: ${order.total}`)
+  console.log(`Subtotal: ${order.subtotal}`); // Guaranteed correct
+  console.log(`Tax: ${order.tax}`);
+  console.log(`Total: ${order.total}`);
 }
 ```
 
 **Benefits:**
+
 - Derived data calculated consistently
 - Changes to calculation logic happen in one place
 - Impossible to access stale or incorrect calculations

@@ -71,6 +71,7 @@ public void addingSameProductTwiceShouldDoubleTotal() {
 ```
 
 **Alias patterns:**
+
 - Build-Operate-Check (BOC)
 - Arrange-Act-Assert (AAA)
 - Given-When-Then (BDD)

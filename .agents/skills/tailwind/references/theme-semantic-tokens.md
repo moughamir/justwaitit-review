@@ -41,7 +41,7 @@ Name design tokens by their purpose, not their visual appearance. This enables t
 ```
 
 ```html
-<button class="bg-primary text-button-text">
+<button class="text-button-text bg-primary">
   <!-- Purpose is clear, easy to change -->
 </button>
 ```

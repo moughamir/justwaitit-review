@@ -14,19 +14,19 @@ While `@apply` extracts utility patterns into custom classes, overuse defeats th
 ```css
 /* Recreating traditional CSS with extra steps */
 @utility card {
-  @apply bg-white rounded-lg shadow-md p-6 border border-gray-200;
+  @apply rounded-lg border border-gray-200 bg-white p-6 shadow-md;
 }
 
 @utility card-header {
-  @apply text-xl font-bold text-gray-900 mb-4;
+  @apply mb-4 text-xl font-bold text-gray-900;
 }
 
 @utility card-body {
-  @apply text-gray-600 leading-relaxed;
+  @apply leading-relaxed text-gray-600;
 }
 
 @utility card-footer {
-  @apply mt-4 pt-4 border-t border-gray-200 flex justify-end gap-2;
+  @apply mt-4 flex justify-end gap-2 border-t border-gray-200 pt-4;
 }
 /* Now you have to manage class names AND jump between files */
 ```
@@ -37,7 +37,9 @@ While `@apply` extracts utility patterns into custom classes, overuse defeats th
 // Card.tsx - Component handles abstraction
 function Card({ children, className }) {
   return (
-    <div className={`bg-white rounded-lg shadow-md p-6 border border-gray-200 ${className}`}>
+    <div
+      className={`rounded-lg border border-gray-200 bg-white p-6 shadow-md ${className}`}
+    >
       {children}
     </div>
   );
@@ -45,12 +47,13 @@ function Card({ children, className }) {
 
 // Usage
 <Card className="hover:shadow-lg">
-  <h2 className="text-xl font-bold text-gray-900 mb-4">Title</h2>
-  <p className="text-gray-600 leading-relaxed">Content</p>
-</Card>
+  <h2 className="mb-4 text-xl font-bold text-gray-900">Title</h2>
+  <p className="leading-relaxed text-gray-600">Content</p>
+</Card>;
 ```
 
 **When @apply is appropriate:**
+
 - Tiny, repeated patterns (buttons, badges)
 - Third-party component styling you can't control
 - Base form element resets

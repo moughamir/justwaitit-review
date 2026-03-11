@@ -52,12 +52,14 @@ description: |
 ```
 
 **Description rules:**
+
 - Use **third person**: "This skill should be used when..." (NOT "Use this skill when...")
 - Include **specific trigger phrases** users would actually say
 - Be **concrete**: "create a hook", "add a PreToolUse hook" (NOT "helps with hooks")
 - List multiple trigger phrases to maximize activation
 
 **Good example:**
+
 ```yaml
 description: |
   This skill should be used when the user asks to "create a hook",
@@ -66,6 +68,7 @@ description: |
 ```
 
 **Bad examples:**
+
 ```yaml
 description: Use this skill when working with hooks.    # Wrong person, vague
 description: Provides hook guidance.                     # No trigger phrases
@@ -77,6 +80,7 @@ description: Load when user needs hook help.             # Not third person
 Write the entire skill body using **imperative/infinitive form** (verb-first instructions):
 
 **Correct (imperative):**
+
 ```
 To create a hook, define the event type.
 Configure the MCP server with authentication.
@@ -85,6 +89,7 @@ Start by reading the configuration file.
 ```
 
 **Incorrect (second person):**
+
 ```
 You should create a hook by defining the event type.
 You need to configure the MCP server.
@@ -97,29 +102,34 @@ You can use the grep tool to search.
 # Skill Title
 
 ## Overview
+
 [Purpose and when to use - 2-3 sentences]
 
 ## Quick Reference
+
 [Tables with key facts, common values, or patterns]
 
 ## Core Content
+
 [Essential procedures and workflows - the main value]
 
 ## Additional Resources
 
 ### Reference Files
+
 - **`references/patterns.md`** - Common patterns
 - **`references/advanced.md`** - Advanced techniques
 
 ### Example Files
+
 - **`examples/example.sh`** - Working example
 ```
 
 ### Body - Size Guidelines
 
-| Target | Words |
-|--------|-------|
-| Ideal | 1,500-2,000 |
+| Target  | Words                                               |
+| ------- | --------------------------------------------------- |
+| Ideal   | 1,500-2,000                                         |
 | Maximum | 3,000 (without references/) or 5,000 (absolute max) |
 
 **If SKILL.md exceeds 2,000 words**, move detailed content to `references/` files.
@@ -155,6 +165,7 @@ You can use the grep tool to search.
 ### Step 1: Understand Use Cases
 
 Identify concrete examples of how the skill will be used. Ask:
+
 - What functionality should this skill support?
 - What would a user say that should trigger this skill?
 - What tasks does this skill help with?
@@ -162,6 +173,7 @@ Identify concrete examples of how the skill will be used. Ask:
 ### Step 2: Plan Resources
 
 Analyze each use case to identify what reusable resources would help:
+
 - **Scripts**: Code that gets rewritten repeatedly → `scripts/`
 - **References**: Documentation Claude should consult → `references/`
 - **Assets**: Files used in output → `assets/`
@@ -199,6 +211,7 @@ Only create directories you actually need.
 ### Step 6: Iterate
 
 After using the skill on real tasks:
+
 1. Notice struggles or inefficiencies
 2. Strengthen trigger phrases in description
 3. Move long sections from SKILL.md to references/
@@ -207,18 +220,19 @@ After using the skill on real tasks:
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| Weak trigger description ("Provides guidance") | Add specific phrases: "create X", "configure Y" |
-| Everything in one SKILL.md (8,000 words) | Move details to references/, keep SKILL.md under 2,000 |
-| Second person ("You should...") | Imperative form ("Configure the server...") |
-| Missing resource references | Add "Additional Resources" section listing references/ and examples/ |
-| Duplicated content across files | Put info in SKILL.md OR references/, never both |
-| Wrong person in description | Third person: "This skill should be used when..." |
+| Mistake                                        | Fix                                                                  |
+| ---------------------------------------------- | -------------------------------------------------------------------- |
+| Weak trigger description ("Provides guidance") | Add specific phrases: "create X", "configure Y"                      |
+| Everything in one SKILL.md (8,000 words)       | Move details to references/, keep SKILL.md under 2,000               |
+| Second person ("You should...")                | Imperative form ("Configure the server...")                          |
+| Missing resource references                    | Add "Additional Resources" section listing references/ and examples/ |
+| Duplicated content across files                | Put info in SKILL.md OR references/, never both                      |
+| Wrong person in description                    | Third person: "This skill should be used when..."                    |
 
 ## Auto-Discovery
 
 Claude Code automatically discovers skills:
+
 1. Scans `skills/` directory for subdirectories containing `SKILL.md`
 2. Loads metadata (name + description) at startup
 3. Loads SKILL.md body when skill triggers based on description match

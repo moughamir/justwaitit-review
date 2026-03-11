@@ -99,6 +99,7 @@ git push -u origin main
 ### 3. Configure Environment Variables
 
 In FastMCP Cloud dashboard, add:
+
 - `API_KEY`
 - `DATABASE_URL`
 - `CACHE_TTL`
@@ -242,6 +243,7 @@ python server.py --transport http --port 8000
 ### Check Deployment Logs
 
 FastMCP Cloud provides:
+
 - Build logs
 - Runtime logs
 - Error logs

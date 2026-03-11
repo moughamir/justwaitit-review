@@ -4,19 +4,19 @@ Curated permission presets for `settings.local.json`. Each preset is a JSON arra
 
 ## Syntax Reference
 
-| Pattern | Meaning |
-|---------|---------|
-| `Bash(git *)` | Space before `*` = word boundary. Matches `git status` but not `gitk`. **Preferred syntax.** |
-| `Bash(git*)` | No space = prefix match. Matches `git status` AND `gitk`. |
-| `Bash(nvidia-smi)` | Exact match — no arguments. Use for bare commands. |
-| `WebFetch` | Blanket web fetch (all domains) |
-| `WebFetch(domain:example.com)` | Domain-scoped web fetch |
-| `WebSearch` | Blanket web search |
-| `mcp__servername__*` | All tools on one MCP server |
-| `mcp__servername__tool_name` | One specific MCP tool |
-| `Read(.claude/**)` | Read files in project's .claude/ (recursive) |
-| `Edit(~/Documents/**)` | Edit files under home Documents (recursive) |
-| `Read(//tmp/**)` | Read from absolute path (`//` = filesystem root) |
+| Pattern                        | Meaning                                                                                      |
+| ------------------------------ | -------------------------------------------------------------------------------------------- |
+| `Bash(git *)`                  | Space before `*` = word boundary. Matches `git status` but not `gitk`. **Preferred syntax.** |
+| `Bash(git*)`                   | No space = prefix match. Matches `git status` AND `gitk`.                                    |
+| `Bash(nvidia-smi)`             | Exact match — no arguments. Use for bare commands.                                           |
+| `WebFetch`                     | Blanket web fetch (all domains)                                                              |
+| `WebFetch(domain:example.com)` | Domain-scoped web fetch                                                                      |
+| `WebSearch`                    | Blanket web search                                                                           |
+| `mcp__servername__*`           | All tools on one MCP server                                                                  |
+| `mcp__servername__tool_name`   | One specific MCP tool                                                                        |
+| `Read(.claude/**)`             | Read files in project's .claude/ (recursive)                                                 |
+| `Edit(~/Documents/**)`         | Edit files under home Documents (recursive)                                                  |
+| `Read(//tmp/**)`               | Read from absolute path (`//` = filesystem root)                                             |
 
 ### Format Notes
 
@@ -173,6 +173,7 @@ Every project gets these. Version control, file operations, and basic tools need
 ```
 
 **File access patterns** use gitignore-style syntax:
+
 - `.claude/**` — project-relative (scripts, artifacts, screenshots)
 - `//tmp/**` — absolute path (`//` prefix = filesystem root)
 - `~/.claude/**` — home-relative (global rules, memory)
@@ -573,17 +574,17 @@ React Native, Expo, and mobile tooling. Add for mobile app projects.
 
 Presets stack. Examples:
 
-| Project Type | Presets to Combine |
-|-------------|-------------------|
-| Next.js on Vercel | Universal + JavaScript/TypeScript + Vercel |
-| Cloudflare Worker | Universal + JavaScript/TypeScript + Cloudflare Worker |
-| Django app | Universal + Python + Database + Docker |
-| WordPress plugin | Universal + PHP |
-| Rust CLI | Universal + Rust |
-| ML project | Universal + Python + AI/GPU |
-| React Native app | Universal + JavaScript/TypeScript + Mobile Development |
-| Linux server ops | Universal + Linux System + Docker |
-| Full-stack ops | Universal + JavaScript/TypeScript + Python + Docker + Database + MCP (blanket) |
+| Project Type      | Presets to Combine                                                             |
+| ----------------- | ------------------------------------------------------------------------------ |
+| Next.js on Vercel | Universal + JavaScript/TypeScript + Vercel                                     |
+| Cloudflare Worker | Universal + JavaScript/TypeScript + Cloudflare Worker                          |
+| Django app        | Universal + Python + Database + Docker                                         |
+| WordPress plugin  | Universal + PHP                                                                |
+| Rust CLI          | Universal + Rust                                                               |
+| ML project        | Universal + Python + AI/GPU                                                    |
+| React Native app  | Universal + JavaScript/TypeScript + Mobile Development                         |
+| Linux server ops  | Universal + Linux System + Docker                                              |
+| Full-stack ops    | Universal + JavaScript/TypeScript + Python + Docker + Database + MCP (blanket) |
 
 When merging, deduplicate and keep the grouped `//` comment structure. The final `settings.local.json` should look like:
 

@@ -15,13 +15,15 @@ Patterns should match only pre-transformation code, never post-transformation co
 const transform: Transform<TSX> = (root) => {
   // Pattern matches both old and new format
   const matches = root.findAll({
-    rule: { pattern: "logger($$$ARGS)" }
+    rule: { pattern: 'logger($$$ARGS)' },
   });
 
-  const edits = matches.map(match => {
-    const args = match.getMultipleMatches("ARGS");
+  const edits = matches.map((match) => {
+    const args = match.getMultipleMatches('ARGS');
     // Wraps logger() calls with timestamp
-    return match.replace(`logger(Date.now(), ${args.map(a => a.text()).join(", ")})`);
+    return match.replace(
+      `logger(Date.now(), ${args.map((a) => a.text()).join(', ')})`
+    );
   });
 
   // Running twice: logger(x) -> logger(Date.now(), x) -> logger(Date.now(), Date.now(), x)
@@ -36,23 +38,25 @@ const transform: Transform<TSX> = (root) => {
   // Pattern specifically excludes already-transformed code
   const matches = root.findAll({
     rule: {
-      pattern: "logger($$$ARGS)",
+      pattern: 'logger($$$ARGS)',
       not: {
         // Skip if first arg is Date.now()
         has: {
-          field: "arguments",
+          field: 'arguments',
           has: {
-            kind: "call_expression",
-            pattern: "Date.now()"
-          }
-        }
-      }
-    }
+            kind: 'call_expression',
+            pattern: 'Date.now()',
+          },
+        },
+      },
+    },
   });
 
-  const edits = matches.map(match => {
-    const args = match.getMultipleMatches("ARGS");
-    return match.replace(`logger(Date.now(), ${args.map(a => a.text()).join(", ")})`);
+  const edits = matches.map((match) => {
+    const args = match.getMultipleMatches('ARGS');
+    return match.replace(
+      `logger(Date.now(), ${args.map((a) => a.text()).join(', ')})`
+    );
   });
 
   // Running twice: logger(x) -> logger(Date.now(), x) -> no change
@@ -61,6 +65,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Idempotency strategies:**
+
 - Use `not` to exclude already-transformed patterns
 - Check for sentinel values or markers
 - Match specific old API signatures only

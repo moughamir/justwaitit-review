@@ -12,7 +12,7 @@ tags: exit, keys, animate-presence, list
 **Incorrect (missing or index-based keys):**
 
 ```tsx
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
 
 function TodoList({ todos }: TodoListProps) {
   return (
@@ -20,7 +20,7 @@ function TodoList({ todos }: TodoListProps) {
       <AnimatePresence>
         {todos.map((todo, index) => (
           <motion.li
-            key={index}  // Index keys cause wrong item to animate on removal
+            key={index} // Index keys cause wrong item to animate on removal
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
@@ -37,7 +37,7 @@ function TodoList({ todos }: TodoListProps) {
 **Correct (unique stable keys):**
 
 ```tsx
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
 
 function TodoList({ todos }: TodoListProps) {
   return (
@@ -45,7 +45,7 @@ function TodoList({ todos }: TodoListProps) {
       <AnimatePresence>
         {todos.map((todo) => (
           <motion.li
-            key={todo.id}  // Unique ID tracks correct element for exit animation
+            key={todo.id} // Unique ID tracks correct element for exit animation
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}

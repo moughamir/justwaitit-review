@@ -13,7 +13,7 @@ Add manual approval gates before destructive or irreversible operations. Gates p
 
 ```yaml
 # workflow.yaml - no human checkpoints
-version: "1"
+version: '1'
 nodes:
   - id: migrate-database
     steps:
@@ -33,7 +33,7 @@ nodes:
 
 ```yaml
 # workflow.yaml - human checkpoints
-version: "1"
+version: '1'
 nodes:
   - id: migrate-database
     steps:
@@ -42,7 +42,7 @@ nodes:
         # Dry run first
 
   - id: review-migration
-    type: manual  # Pauses for approval
+    type: manual # Pauses for approval
     depends_on: [migrate-database]
 
   - id: apply-migration
@@ -52,7 +52,7 @@ nodes:
         command: npm run db:migrate
 
   - id: review-deployment
-    type: manual  # Another checkpoint
+    type: manual # Another checkpoint
     depends_on: [apply-migration]
 
   - id: deploy-production
@@ -73,6 +73,7 @@ npx codemod workflow resume -w ./workflow.yaml
 ```
 
 **When to use manual gates:**
+
 - Before database migrations
 - Before production deployments
 - After large-scale transforms (review diffs)

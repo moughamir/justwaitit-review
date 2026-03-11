@@ -13,12 +13,12 @@ Semantic analysis methods return `null` when symbols cannot be resolved. Always 
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const identifiers = root.findAll({ rule: { kind: "identifier" } });
+  const identifiers = root.findAll({ rule: { kind: 'identifier' } });
 
-  const edits = identifiers.map(id => {
+  const edits = identifiers.map((id) => {
     // Crashes on unresolvable symbols
     const def = id.definition();
-    const defNode = def.node;  // TypeError: Cannot read property 'node' of null
+    const defNode = def.node; // TypeError: Cannot read property 'node' of null
 
     // External imports, globals, and dynamic code return null
     return id.replace(defNode.text().toUpperCase());
@@ -32,9 +32,9 @@ const transform: Transform<TSX> = (root) => {
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const identifiers = root.findAll({ rule: { kind: "identifier" } });
+  const identifiers = root.findAll({ rule: { kind: 'identifier' } });
 
-  const edits = identifiers.flatMap(id => {
+  const edits = identifiers.flatMap((id) => {
     const def = id.definition();
 
     // Handle unresolvable symbols
@@ -45,12 +45,12 @@ const transform: Transform<TSX> = (root) => {
     }
 
     // Check definition kind for appropriate handling
-    if (def.kind === "external") {
+    if (def.kind === 'external') {
       // Symbol defined in node_modules or external file
       return [];
     }
 
-    if (def.kind === "import") {
+    if (def.kind === 'import') {
       // Symbol imported from another file
       const importDef = def.node;
       // Handle import-specific logic
@@ -64,6 +64,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Definition kinds:**
+
 - `"local"` - defined in same file
 - `"import"` - imported from another file
 - `"external"` - from node_modules or outside project

@@ -15,7 +15,7 @@ Check file applicability before performing expensive traversals. Return early wh
 const transform: Transform<TSX> = (root) => {
   // Full AST traversal on every file
   const matches = root.findAll({
-    rule: { pattern: "React.Component" }
+    rule: { pattern: 'React.Component' },
   });
 
   if (matches.length === 0) {
@@ -35,14 +35,16 @@ const transform: Transform<TSX> = (root) => {
   const source = root.root().text();
 
   // Quick string checks before expensive traversal
-  if (!source.includes("React.Component") &&
-      !source.includes("extends Component")) {
+  if (
+    !source.includes('React.Component') &&
+    !source.includes('extends Component')
+  ) {
     return null; // Skip file entirely
   }
 
   // Only traverse files that might match
   const matches = root.findAll({
-    rule: { pattern: "React.Component" }
+    rule: { pattern: 'React.Component' },
   });
 
   // Transform logic...
@@ -57,11 +59,8 @@ const transform: Transform<TSX> = (root) => {
 // Pre-filter files at the engine level
 export const getSelector = {
   rule: {
-    any: [
-      { pattern: "React.Component" },
-      { pattern: "extends Component" }
-    ]
-  }
+    any: [{ pattern: 'React.Component' }, { pattern: 'extends Component' }],
+  },
 };
 
 const transform: Transform<TSX> = (root, options) => {
@@ -74,6 +73,7 @@ const transform: Transform<TSX> = (root, options) => {
 ```
 
 **Early return strategies:**
+
 - String `includes()` for keywords
 - `getSelector` export for engine-level filtering
 - Filename checks for path-specific transforms

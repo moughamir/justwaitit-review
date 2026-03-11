@@ -13,13 +13,13 @@ Type assertions (`as`) silence the compiler without runtime verification. Custom
 
 ```typescript
 interface ApiResponse {
-  status: number
-  payload: unknown
+  status: number;
+  payload: unknown;
 }
 
 function handleSuccess(response: ApiResponse) {
-  const users = response.payload as User[] // Unsafe — no runtime check
-  users.forEach(user => console.log(user.email))
+  const users = response.payload as User[]; // Unsafe — no runtime check
+  users.forEach((user) => console.log(user.email));
 }
 ```
 
@@ -27,19 +27,22 @@ function handleSuccess(response: ApiResponse) {
 
 ```typescript
 interface ApiResponse {
-  status: number
-  payload: unknown
+  status: number;
+  payload: unknown;
 }
 
 function isUserArray(value: unknown): value is User[] {
-  return Array.isArray(value) && value.every(
-    item => typeof item === "object" && item !== null && "email" in item
-  )
+  return (
+    Array.isArray(value) &&
+    value.every(
+      (item) => typeof item === 'object' && item !== null && 'email' in item
+    )
+  );
 }
 
 function handleSuccess(response: ApiResponse) {
-  if (!isUserArray(response.payload)) throw new Error("Invalid payload")
-  response.payload.forEach(user => console.log(user.email)) // Narrowed to User[]
+  if (!isUserArray(response.payload)) throw new Error('Invalid payload');
+  response.payload.forEach((user) => console.log(user.email)); // Narrowed to User[]
 }
 ```
 

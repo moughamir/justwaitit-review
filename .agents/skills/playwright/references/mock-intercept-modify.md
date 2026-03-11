@@ -52,7 +52,9 @@ test('handles zero inventory', async ({ page }) => {
   await page.goto('/product/1');
 
   await expect(page.getByText('Out of Stock')).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Add to Cart' })).toBeDisabled();
+  await expect(
+    page.getByRole('button', { name: 'Add to Cart' })
+  ).toBeDisabled();
 });
 ```
 

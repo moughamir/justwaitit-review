@@ -3,6 +3,7 @@
 ## Overview
 
 Server Components eseguono sul server:
+
 - Zero JavaScript bundle size
 - Accesso diretto a database/API
 - Riduzione del tempo di hydration
@@ -103,7 +104,7 @@ export function AddToCartButton({ productId }: { productId: string }) {
 ```typescript
 // BEFORE (Next.js 14)
 export default async function Page({ params }: { params: { slug: string } }) {
-  const post = await fetchPost(params.slug)
+  const post = await fetchPost(params.slug);
   // ...
 }
 
@@ -111,10 +112,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params
-  const post = await fetchPost(slug)
+  const { slug } = await params;
+  const post = await fetchPost(slug);
   // ...
 }
 ```
@@ -289,20 +290,20 @@ export function BackButton() {
 
 ```typescript
 // lib/db.ts
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@prisma/client';
 
-const globalForPrisma = global as unknown as { prisma: PrismaClient }
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-export const db = globalForPrisma.prisma || new PrismaClient()
+export const db = globalForPrisma.prisma || new PrismaClient();
 
-if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = db;
 
 // Uso nel componente
-import { db } from '@/lib/db'
+import { db } from '@/lib/db';
 
 export default async function Page() {
   // Query diretta - nessuna API route necessaria
-  const users = await db.user.findMany()
+  const users = await db.user.findMany();
   // ...
 }
 ```
@@ -327,12 +328,12 @@ export default async function Page() {
 // Server Components possono accedere a tutte le env vars
 export default async function Page() {
   // ✅ Accesso diretto alle variabili server
-  const apiKey = process.env.API_SECRET_KEY
-  const dbUrl = process.env.DATABASE_URL
+  const apiKey = process.env.API_SECRET_KEY;
+  const dbUrl = process.env.DATABASE_URL;
 
   const data = await fetch('https://api.example.com/data', {
     headers: { Authorization: `Bearer ${apiKey}` },
-  })
+  });
 
   // ...
 }

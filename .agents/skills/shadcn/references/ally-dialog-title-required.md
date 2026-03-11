@@ -12,7 +12,7 @@ Every Dialog must have a DialogTitle. This sets the `aria-labelledby` attribute 
 **Incorrect (missing DialogTitle):**
 
 ```tsx
-import { Dialog, DialogContent } from "@/components/ui/dialog"
+import { Dialog, DialogContent } from '@/components/ui/dialog';
 
 function ConfirmDialog({ open, onClose }) {
   return (
@@ -23,7 +23,7 @@ function ConfirmDialog({ open, onClose }) {
         <Button variant="destructive">Delete</Button>
       </DialogContent>
     </Dialog>
-  )
+  );
   // Screen reader: "Dialog" (no context about purpose)
 }
 ```
@@ -37,7 +37,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 
 function ConfirmDialog({ open, onClose }) {
   return (
@@ -45,16 +45,14 @@ function ConfirmDialog({ open, onClose }) {
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Delete Item</DialogTitle>
-          <DialogDescription>
-            This action cannot be undone.
-          </DialogDescription>
+          <DialogDescription>This action cannot be undone.</DialogDescription>
         </DialogHeader>
         <p>Are you sure you want to delete this item?</p>
         <Button onClick={onClose}>Cancel</Button>
         <Button variant="destructive">Delete</Button>
       </DialogContent>
     </Dialog>
-  )
+  );
   // Screen reader: "Delete Item dialog"
 }
 ```

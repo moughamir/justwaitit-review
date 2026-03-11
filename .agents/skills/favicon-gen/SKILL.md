@@ -29,6 +29,7 @@ Have a logo with an icon element?
 **Extracted icon** — copy icon paths from logo, centre in 32x32 viewBox, simplify for small sizes.
 
 **Monogram** — use a template from `assets/`:
+
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <circle cx="16" cy="16" r="16" fill="#0066cc"/>
@@ -62,6 +63,7 @@ convert favicon.svg -resize 512x512 icon-512.png
 ### Step 4: Create Web Manifest
 
 Copy and customise `assets/manifest.webmanifest`:
+
 ```json
 {
   "name": "Your Business Name",
@@ -79,11 +81,11 @@ Copy and customise `assets/manifest.webmanifest`:
 ### Step 5: Add HTML Tags
 
 ```html
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="theme-color" content="#0066cc">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta name="theme-color" content="#0066cc" />
 ```
 
 Place all files in site root (`/public/` in Vite/React).
@@ -100,13 +102,13 @@ Place all files in site root (`/public/` in Vite/React).
 
 ## Format Quick Reference
 
-| Format | Size | Transparency | Purpose |
-|--------|------|-------------|---------|
-| `favicon.svg` | Vector | Yes | Modern browsers |
-| `favicon.ico` | 16+32 | Yes | Legacy browsers |
-| `apple-touch-icon.png` | 180x180 | **No** | iOS home screen |
-| `icon-192.png` | 192x192 | Yes | Android |
-| `icon-512.png` | 512x512 | Yes | PWA |
+| Format                 | Size    | Transparency | Purpose         |
+| ---------------------- | ------- | ------------ | --------------- |
+| `favicon.svg`          | Vector  | Yes          | Modern browsers |
+| `favicon.ico`          | 16+32   | Yes          | Legacy browsers |
+| `apple-touch-icon.png` | 180x180 | **No**       | iOS home screen |
+| `icon-192.png`         | 192x192 | Yes          | Android         |
+| `icon-512.png`         | 512x512 | Yes          | PWA             |
 
 ## Asset Files
 

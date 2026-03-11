@@ -49,6 +49,7 @@ def compute_hashes_large(data_chunks: list[bytes]) -> list[str]:
 ```
 
 **When NOT to use multiprocessing:**
+
 - I/O-bound tasks (use asyncio instead)
 - Small datasets (process startup overhead dominates)
 - When sharing large state between workers

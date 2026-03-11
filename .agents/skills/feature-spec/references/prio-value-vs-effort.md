@@ -41,21 +41,23 @@ Plot features on a 2×2 matrix of value (user/business benefit) versus effort (d
     │ • Update footer   │   engine          │
     │ • Add PDF export  │ • Redesign        │
     │                   │   homepage        │
+
 LOW ├───────────────────┼───────────────────┤ HIGH
-EFFORT                  │                   EFFORT
-    │   FILL-INS        │   TIME SINKS      │
-    │   Do If Idle      │   Avoid/Defer     │
-    │                   │                   │
-    │ • Minor UI tweaks │ • A/B testing     │
-    │ • Doc updates     │   framework       │
-    │                   │ • Legacy system   │
-    │                   │   rewrite         │
-    │                   │                   │
-    └───────────────────┼───────────────────┘
-                        │
-                    LOW VALUE
+EFFORT │ EFFORT
+│ FILL-INS │ TIME SINKS │
+│ Do If Idle │ Avoid/Defer │
+│ │ │
+│ • Minor UI tweaks │ • A/B testing │
+│ • Doc updates │ framework │
+│ │ • Legacy system │
+│ │ rewrite │
+│ │ │
+└───────────────────┼───────────────────┘
+│
+LOW VALUE
 
 ## Prioritization Order
+
 1. **Quick Wins** - Immediate, high ROI
 2. **Big Bets** - Schedule with proper planning
 3. **Fill-ins** - Use for sprint padding
@@ -63,6 +65,7 @@ EFFORT                  │                   EFFORT
 ```
 
 **Estimation guidance:**
+
 - Value: User feedback, revenue impact, strategic alignment
 - Effort: T-shirt sizes (S/M/L/XL) or story points
 - Re-evaluate quarterly as circumstances change

@@ -30,8 +30,12 @@
 }
 
 @keyframes skeleton-shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 ```
 
@@ -70,6 +74,7 @@
 ```
 
 Usage:
+
 ```html
 <pre class="tab-4">Code</pre>
 <div class="columns-3">Multi-column text</div>
@@ -93,6 +98,7 @@ Usage:
 ```
 
 Usage:
+
 ```html
 <div class="inset-[10px]">Absolute positioning</div>
 <div class="blur-[4px]">Blurred element</div>
@@ -116,6 +122,7 @@ Usage:
 ```
 
 Usage:
+
 ```html
 <div class="gap-safe-4">Safe-area aware gap</div>
 <p class="text-color-primary-500">Themed text</p>
@@ -142,12 +149,12 @@ Custom utilities automatically work with all variants:
 ```html
 <!-- Responsive -->
 <div class="scrollbar-hide md:scrollbar-visible">
-
-<!-- State variants -->
-<div class="hover:glass focus:glass">
-
-<!-- Dark mode -->
-<div class="glass dark:glass-dark">
+  <!-- State variants -->
+  <div class="hover:glass focus:glass">
+    <!-- Dark mode -->
+    <div class="glass dark:glass-dark"></div>
+  </div>
+</div>
 ```
 
 ## Complex Utility Patterns
@@ -236,13 +243,13 @@ Custom utilities automatically work with all variants:
   padding: 1rem;
   background: white;
   border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 /* GOOD - Use component or @apply in CSS */
 @layer components {
   .card {
-    @apply flex flex-col p-4 bg-white rounded-lg shadow-sm;
+    @apply flex flex-col rounded-lg bg-white p-4 shadow-sm;
   }
 }
 ```
@@ -276,6 +283,7 @@ grep "scrollbar-hide" dist/output.css
 ```
 
 If not working:
+
 1. Verify `@utility` syntax is correct
 2. Check CSS file is imported after `@import "tailwindcss"`
 3. Ensure class name is used in template (content detection)

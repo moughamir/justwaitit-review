@@ -21,6 +21,7 @@ export GEMINI_API_KEY="your-key-here"
 ### Step 1: Understand What's Needed
 
 Gather from the user or project context:
+
 - **What**: hero background, product photo, texture, OG image, placeholder
 - **Style**: warm/cool/minimal/luxurious/bold — check project's colour palette (input.css, tailwind config)
 - **Dimensions**: hero (1920x1080), OG (1200x630), square (1024x1024), custom
@@ -31,6 +32,7 @@ Gather from the user or project context:
 Use concrete photography parameters, not abstract adjectives. Read [references/prompting-guide.md](references/prompting-guide.md) for the full framework.
 
 **Quick rules**:
+
 - Narrate like directing a photographer
 - Use camera specs: "85mm f/1.8", "wide angle 24mm"
 - Use colour anchors from the project palette: "warm terracotta (#C66A52) and cream (#F5F0EB) tones"
@@ -66,27 +68,27 @@ Show the generated images for review. Read the image files to display them inlin
 
 Starting prompts — enhance with project-specific context (colours, mood, subject):
 
-| Preset | Base Prompt |
-|--------|-------------|
-| `hero-background` | "Wide atmospheric background, soft-focus, [colour tones], [mood], landscape 1920x1080" |
-| `og-image` | "Clean branded card background, [brand colours], subtle gradient, 1200x630" |
-| `placeholder-photo` | "Professional stock-style photo of [subject], natural lighting, warm tones" |
-| `texture-pattern` | "Subtle repeating texture, [material], seamless tile, muted [colour]" |
-| `product-shot` | "Product photography, [item] on [surface], soft studio lighting, clean background" |
+| Preset              | Base Prompt                                                                            |
+| ------------------- | -------------------------------------------------------------------------------------- |
+| `hero-background`   | "Wide atmospheric background, soft-focus, [colour tones], [mood], landscape 1920x1080" |
+| `og-image`          | "Clean branded card background, [brand colours], subtle gradient, 1200x630"            |
+| `placeholder-photo` | "Professional stock-style photo of [subject], natural lighting, warm tones"            |
+| `texture-pattern`   | "Subtle repeating texture, [material], seamless tile, muted [colour]"                  |
+| `product-shot`      | "Product photography, [item] on [surface], soft studio lighting, clean background"     |
 
 ## Model Selection
 
-| Use case | Model | Cost |
-|----------|-------|------|
-| Drafts, quick placeholders | `gemini-2.5-flash-image` | Free (~500/day) |
-| Final client assets | `gemini-3-pro-image-preview` | ~$0.04/image |
-| Style-matched variants | `gemini-3-pro-image-preview` + reference image | ~$0.04/image |
+| Use case                   | Model                                          | Cost            |
+| -------------------------- | ---------------------------------------------- | --------------- |
+| Drafts, quick placeholders | `gemini-2.5-flash-image`                       | Free (~500/day) |
+| Final client assets        | `gemini-3-pro-image-preview`                   | ~$0.04/image    |
+| Style-matched variants     | `gemini-3-pro-image-preview` + reference image | ~$0.04/image    |
 
 Verify current model IDs if errors occur — they change frequently.
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                       | Read                                                           |
+| -------------------------- | -------------------------------------------------------------- |
 | Building effective prompts | [references/prompting-guide.md](references/prompting-guide.md) |
-| API implementation details | [references/api-pattern.md](references/api-pattern.md) |
+| API implementation details | [references/api-pattern.md](references/api-pattern.md)         |

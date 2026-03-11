@@ -12,30 +12,32 @@ Don't persist the entire store. Use `partialize` to select only the data that sh
 **Incorrect (persists everything):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
-      accessToken: null,     // Sensitive, shouldn't persist long-term
-      refreshToken: null,    // Sensitive
-      isLoading: false,      // Transient UI state
-      error: null,           // Transient
-      loginAttempts: 0,      // Temporary
+      accessToken: null, // Sensitive, shouldn't persist long-term
+      refreshToken: null, // Sensitive
+      isLoading: false, // Transient UI state
+      error: null, // Transient
+      loginAttempts: 0, // Temporary
 
-      login: (credentials) => { /* ... */ },
+      login: (credentials) => {
+        /* ... */
+      },
     }),
     { name: 'auth-storage' }
   )
-)
+);
 // Persists loading state, errors, and sensitive tokens
 ```
 
 **Correct (selective persistence):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 const useAuthStore = create<AuthState>()(
   persist(
@@ -47,7 +49,9 @@ const useAuthStore = create<AuthState>()(
       error: null,
       loginAttempts: 0,
 
-      login: (credentials) => { /* ... */ },
+      login: (credentials) => {
+        /* ... */
+      },
     }),
     {
       name: 'auth-storage',
@@ -57,13 +61,13 @@ const useAuthStore = create<AuthState>()(
       }),
     }
   )
-)
+);
 ```
 
 **Alternative (exclude specific fields):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 const useSettingsStore = create<SettingsState>()(
   persist(
@@ -71,22 +75,23 @@ const useSettingsStore = create<SettingsState>()(
       theme: 'dark',
       language: 'en',
       fontSize: 14,
-      sidebarOpen: true,    // Don't persist
-      modalOpen: false,     // Don't persist
+      sidebarOpen: true, // Don't persist
+      modalOpen: false, // Don't persist
     }),
     {
       name: 'settings-storage',
       partialize: (state) => {
         // Exclude transient UI state
-        const { sidebarOpen, modalOpen, ...persisted } = state
-        return persisted
+        const { sidebarOpen, modalOpen, ...persisted } = state;
+        return persisted;
       },
     }
   )
-)
+);
 ```
 
 **What NOT to persist:**
+
 - Loading/error states
 - Sensitive tokens (use secure storage instead)
 - Temporary UI state (modals, tooltips)

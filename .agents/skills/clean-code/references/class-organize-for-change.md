@@ -63,6 +63,7 @@ public class UpdateSql extends Sql { /* ... */ }
 ```
 
 **Benefits:**
+
 - Adding new SQL types = adding new classes
 - Existing classes remain untouched
 - Each class does one thing

@@ -13,7 +13,7 @@ Persist migration progress in workflow state. When migrations fail mid-way, you 
 
 ```yaml
 # workflow.yaml - no progress tracking
-version: "1"
+version: '1'
 nodes:
   - id: migrate-all
     steps:
@@ -28,7 +28,7 @@ nodes:
 
 ```yaml
 # workflow.yaml - resumable migration
-version: "1"
+version: '1'
 
 state:
   processed_files: []
@@ -68,6 +68,7 @@ npx codemod workflow resume -w ./workflow.yaml
 ```
 
 **State operations:**
+
 - `KEY=VALUE` - set value
 - `KEY@=VALUE` - append to array
 - `KEY.nested=VALUE` - set nested property

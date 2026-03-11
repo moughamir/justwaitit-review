@@ -16,10 +16,7 @@ function ArticlePage({ article }: { article: Article }) {
   return (
     <article>
       <h1>{article.headline}</h1>
-      <img
-        src={article.coverImageUrl}
-        alt={article.coverAlt}
-      />
+      <img src={article.coverImageUrl} alt={article.coverAlt} />
       {/* content below shifts 300px down when image loads */}
       <p>{article.body}</p>
 
@@ -30,7 +27,7 @@ function ArticlePage({ article }: { article: Article }) {
 
       <CommentSection articleId={article.id} />
     </article>
-  )
+  );
 }
 
 // article.css
@@ -51,7 +48,7 @@ function ArticlePage({ article }: { article: Article }) {
         alt={article.coverAlt}
         width={1200}
         height={630}
-        style={{ aspectRatio: "1200 / 630", width: "100%", height: "auto" }}
+        style={{ aspectRatio: '1200 / 630', width: '100%', height: 'auto' }}
       />
       <p>{article.body}</p>
 
@@ -61,7 +58,7 @@ function ArticlePage({ article }: { article: Article }) {
 
       <CommentSection articleId={article.id} />
     </article>
-  )
+  );
 }
 
 // article.css

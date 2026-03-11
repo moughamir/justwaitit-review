@@ -14,8 +14,8 @@ Show validation errors on blur or submit, not on every keystroke. Immediate vali
 ```tsx
 const form = useForm<FormValues>({
   resolver: zodResolver(schema),
-  mode: "onChange", // Validates on every keystroke
-})
+  mode: 'onChange', // Validates on every keystroke
+});
 
 // User types "t" - sees "Email must be valid" immediately
 // User types "te" - still sees error
@@ -28,9 +28,9 @@ const form = useForm<FormValues>({
 ```tsx
 const form = useForm<FormValues>({
   resolver: zodResolver(schema),
-  mode: "onBlur", // Validates when field loses focus
-  reValidateMode: "onChange", // Re-validates on change after first error
-})
+  mode: 'onBlur', // Validates when field loses focus
+  reValidateMode: 'onChange', // Re-validates on change after first error
+});
 
 // User types entire email without interruption
 // Error only shown when they leave the field
@@ -42,14 +42,15 @@ const form = useForm<FormValues>({
 ```tsx
 const form = useForm<FormValues>({
   resolver: zodResolver(schema),
-  mode: "onSubmit", // Only validates on form submission
-})
+  mode: 'onSubmit', // Only validates on form submission
+});
 
 // Good for short forms where user submits quickly
 // Shows all errors at once after submit attempt
 ```
 
 **Validation mode guidelines:**
+
 - `onBlur` - Recommended for most forms
 - `onChange` - Only for real-time feedback (passwords)
 - `onSubmit` - Short forms or wizards

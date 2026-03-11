@@ -15,7 +15,7 @@ Tree-sitter distinguishes between named nodes (semantic) and anonymous nodes (pu
 const transform: Transform<TSX> = (root) => {
   // Tries to match punctuation literally
   const matches = root.findAll({
-    rule: { pattern: "{ $KEY: $VALUE }" }
+    rule: { pattern: '{ $KEY: $VALUE }' },
   });
   // Fails because '{', ':', '}' are anonymous nodes
   // ast-grep skips them by default
@@ -30,21 +30,22 @@ const transform: Transform<TSX> = (root) => {
   // Match the named 'object' node with pair children
   const matches = root.findAll({
     rule: {
-      kind: "object",
+      kind: 'object',
       has: {
-        kind: "pair",
+        kind: 'pair',
         has: [
-          { field: "key", pattern: "$KEY" },
-          { field: "value", pattern: "$VALUE" }
-        ]
-      }
-    }
+          { field: 'key', pattern: '$KEY' },
+          { field: 'value', pattern: '$VALUE' },
+        ],
+      },
+    },
   });
   return null;
 };
 ```
 
 **Named vs Anonymous:**
+
 - **Named**: `function_declaration`, `identifier`, `string` (semantic meaning)
 - **Anonymous**: `{`, `}`, `:`, `;`, `const` (syntax punctuation)
 

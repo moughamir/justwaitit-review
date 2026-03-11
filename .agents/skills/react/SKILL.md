@@ -19,26 +19,28 @@ Comprehensive performance optimization guide for React 19/19.2 applications. Con
 
 ## Rule Categories
 
-| Category | Impact | Rules | Key Topics |
-|----------|--------|-------|------------|
-| Concurrent Rendering | CRITICAL | 6 | useTransition, useDeferredValue, Activity, batching |
-| Server Components | CRITICAL | 6 | RSC boundaries, data fetching, streaming |
-| Actions & Forms | HIGH | 5 | Form actions, useActionState, useOptimistic |
-| Data Fetching | HIGH | 5 | use() hook, cache(), Suspense, error boundaries |
-| State Management | MEDIUM-HIGH | 5 | Derived values, context optimization, useReducer |
-| Memoization & Performance | MEDIUM | 5 | React Compiler, useMemo, useCallback, React.memo |
-| Effects & Events | MEDIUM | 5 | useEffectEvent, cleanup, external stores |
-| Component Patterns | LOW-MEDIUM | 4 | Composition, controlled vs uncontrolled, key reset |
+| Category                  | Impact      | Rules | Key Topics                                          |
+| ------------------------- | ----------- | ----- | --------------------------------------------------- |
+| Concurrent Rendering      | CRITICAL    | 6     | useTransition, useDeferredValue, Activity, batching |
+| Server Components         | CRITICAL    | 6     | RSC boundaries, data fetching, streaming            |
+| Actions & Forms           | HIGH        | 5     | Form actions, useActionState, useOptimistic         |
+| Data Fetching             | HIGH        | 5     | use() hook, cache(), Suspense, error boundaries     |
+| State Management          | MEDIUM-HIGH | 5     | Derived values, context optimization, useReducer    |
+| Memoization & Performance | MEDIUM      | 5     | React Compiler, useMemo, useCallback, React.memo    |
+| Effects & Events          | MEDIUM      | 5     | useEffectEvent, cleanup, external stores            |
+| Component Patterns        | LOW-MEDIUM  | 4     | Composition, controlled vs uncontrolled, key reset  |
 
 ## Quick Reference
 
 **Critical patterns** — get these right first:
+
 - Fetch data in Server Components, not Client Components
 - Push `'use client'` boundaries as low as possible
 - Use `startTransition` for expensive non-blocking updates
 - Use `<Activity>` to preserve state across tab/page switches
 
 **Common mistakes** — avoid these anti-patterns:
+
 - Creating promises inside Client Components for `use()` (causes infinite loops)
 - Memoizing everything (use React Compiler v1.0+ instead)
 - Using effects for derived state or user event handling

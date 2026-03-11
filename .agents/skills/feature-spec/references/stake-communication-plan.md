@@ -26,28 +26,31 @@ Define how and when stakeholders will receive updates. Ad-hoc communication lead
 
 **Correct (defined communication plan):**
 
-```markdown
+````markdown
 ## Stakeholder Communication Plan
 
 ### Update Channels
 
-| Channel | Audience | Frequency | Content |
-|---------|----------|-----------|---------|
-| Slack #proj-payments | All stakeholders | Daily | Quick wins, blockers |
-| Weekly email digest | Exec sponsors | Weekly | Progress %, risks, decisions needed |
-| Sprint demo | Technical + Product | Bi-weekly | Working software |
-| Steering committee | Exec + leads | Monthly | Milestones, budget, timeline |
+| Channel              | Audience            | Frequency | Content                             |
+| -------------------- | ------------------- | --------- | ----------------------------------- |
+| Slack #proj-payments | All stakeholders    | Daily     | Quick wins, blockers                |
+| Weekly email digest  | Exec sponsors       | Weekly    | Progress %, risks, decisions needed |
+| Sprint demo          | Technical + Product | Bi-weekly | Working software                    |
+| Steering committee   | Exec + leads        | Monthly   | Milestones, budget, timeline        |
 
 ### Communication Templates
 
 **Daily Slack Update (async)**
+
 ```text
 🟢 Yesterday: Completed payment form validation
 🔵 Today: Starting Stripe integration
 🔴 Blocked: Waiting on API credentials from Finance
 ```
+````
 
 **Weekly Email Digest**
+
 ```text
 Subject: [Payments] Week 3 Update - On Track
 
@@ -67,11 +70,15 @@ Thursday 2pm - Payment flow end-to-end
 ```
 
 ### Escalation Triggers
+
 Stakeholders will be notified immediately if:
+
 - Timeline slips > 1 week
 - Budget exceeds 10%
 - Critical blocker emerges
 - Scope change requested
+
 ```
 
 Reference: [APU - Scope Creep Project Management Tips](https://www.apu.apus.edu/area-of-study/information-technology/resources/scope-screep-5-essential-project-management-tips/)
+```

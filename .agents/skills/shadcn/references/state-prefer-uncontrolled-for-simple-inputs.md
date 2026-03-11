@@ -13,12 +13,12 @@ For inputs that don't need real-time value access (search forms, quick filters),
 
 ```tsx
 function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    onSearch(query)
-  }
+    e.preventDefault();
+    onSearch(query);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -30,7 +30,7 @@ function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
       {/* Re-renders component on every keystroke */}
       <Button type="submit">Search</Button>
     </form>
-  )
+  );
 }
 ```
 
@@ -39,11 +39,11 @@ function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
 ```tsx
 function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    const formData = new FormData(e.currentTarget)
-    const query = formData.get("query") as string
-    onSearch(query)
-  }
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const query = formData.get('query') as string;
+    onSearch(query);
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -51,7 +51,7 @@ function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
       {/* No re-renders during typing */}
       <Button type="submit">Search</Button>
     </form>
-  )
+  );
 }
 ```
 
@@ -59,31 +59,29 @@ function SimpleSearch({ onSearch }: { onSearch: (query: string) => void }) {
 
 ```tsx
 function QuickFilter({ onFilter }: { onFilter: (value: string) => void }) {
-  const inputRef = useRef<HTMLInputElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      onFilter(inputRef.current?.value ?? "")
+    if (e.key === 'Enter') {
+      onFilter(inputRef.current?.value ?? '');
     }
-  }
+  };
 
   return (
-    <Input
-      ref={inputRef}
-      placeholder="Filter..."
-      onKeyDown={handleKeyDown}
-    />
-  )
+    <Input ref={inputRef} placeholder="Filter..." onKeyDown={handleKeyDown} />
+  );
 }
 ```
 
 **Use controlled state when:**
+
 - You need real-time validation feedback
 - The value is used elsewhere in the UI (character count, preview)
 - You need to programmatically change the value
 - Using React Hook Form (which handles this efficiently)
 
 **Use uncontrolled when:**
+
 - Value only needed on submit
 - Simple forms with no real-time requirements
 - Performance is critical in large forms

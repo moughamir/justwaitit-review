@@ -15,6 +15,7 @@ Structure acceptance criteria using Given-When-Then (Gherkin) format. This forma
 ## User Story: Password Reset
 
 ### Acceptance Criteria
+
 - User can reset password
 - Email is sent
 - Password is changed
@@ -23,12 +24,13 @@ Structure acceptance criteria using Given-When-Then (Gherkin) format. This forma
 
 **Correct (Given-When-Then format):**
 
-```markdown
+````markdown
 ## User Story: Password Reset
 
 ### Acceptance Criteria
 
 **Scenario 1: Successful password reset request**
+
 ```gherkin
 Given I am on the login page
   And I have a registered account with email "user@example.com"
@@ -39,8 +41,10 @@ Then I should see "Check your email for reset instructions"
   And an email should be sent to "user@example.com" within 1 minute
   And the email should contain a reset link valid for 24 hours
 ```
+````
 
 **Scenario 2: Password reset with invalid email**
+
 ```gherkin
 Given I am on the password reset page
 When I enter "notregistered@example.com"
@@ -51,6 +55,7 @@ Then I should see "Check your email for reset instructions"
 ```
 
 **Scenario 3: Using the reset link**
+
 ```gherkin
 Given I received a password reset email
   And the reset link is less than 24 hours old
@@ -64,6 +69,7 @@ Then my password should be changed
 ```
 
 **Scenario 4: Expired reset link**
+
 ```gherkin
 Given I received a password reset email
   And the reset link is more than 24 hours old
@@ -71,6 +77,7 @@ When I click the reset link
 Then I should see "This link has expired. Please request a new one."
   And I should see a link to request a new reset email
 ```
+
 ```
 
 **Benefits:**
@@ -79,3 +86,4 @@ Then I should see "This link has expired. Please request a new one."
 - Edge cases are explicit, not discovered later
 
 Reference: [AltexSoft - Acceptance Criteria Best Practices](https://www.altexsoft.com/blog/acceptance-criteria-purposes-formats-and-best-practices/)
+```

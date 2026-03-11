@@ -13,7 +13,7 @@ Tailwind v4 changed the arbitrary CSS variable syntax from square brackets to pa
 
 ```html
 <!-- v3 bracket syntax for CSS variables -->
-<div class="bg-[--brand-color] text-[--heading-color] border-[--border-color]">
+<div class="border-[--border-color] bg-[--brand-color] text-[--heading-color]">
   Old variable syntax
 </div>
 ```

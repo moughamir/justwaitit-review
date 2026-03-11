@@ -18,7 +18,7 @@ function DragIndicator() {
 
   useEffect(() => {
     const unsubscribe = x.on('change', (latest) => {
-      setIsDraggingRight(latest > 0);  // Re-renders on every frame
+      setIsDraggingRight(latest > 0); // Re-renders on every frame
     });
     return unsubscribe;
   }, [x]);
@@ -41,7 +41,8 @@ function DragIndicator() {
   useEffect(() => {
     const unsubscribe = x.on('change', (latest) => {
       if (indicatorRef.current) {
-        indicatorRef.current.textContent = latest > 0 ? 'Moving right' : 'Moving left';  // Direct DOM update
+        indicatorRef.current.textContent =
+          latest > 0 ? 'Moving right' : 'Moving left'; // Direct DOM update
       }
     });
     return unsubscribe;

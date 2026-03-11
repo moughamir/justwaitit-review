@@ -27,15 +27,15 @@ function CountrySelect({ value, onChange }: CountrySelectProps) {
         {/* 200+ countries with no way to search - poor UX */}
       </SelectContent>
     </Select>
-  )
+  );
 }
 ```
 
 **Correct (Command + Popover combobox):**
 
 ```tsx
-import { Check, ChevronsUpDown } from "lucide-react"
-import { cn } from "@/lib/utils"
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import {
   Command,
   CommandEmpty,
@@ -43,12 +43,16 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+} from '@/components/ui/command';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 function CountrySelect({ value, onChange }: CountrySelectProps) {
-  const [open, setOpen] = useState(false)
-  const selectedCountry = countries.find((c) => c.code === value)
+  const [open, setOpen] = useState(false);
+  const selectedCountry = countries.find((c) => c.code === value);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -59,7 +63,7 @@ function CountrySelect({ value, onChange }: CountrySelectProps) {
           aria-expanded={open}
           className="w-full justify-between"
         >
-          {selectedCountry?.name ?? "Select country..."}
+          {selectedCountry?.name ?? 'Select country...'}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
@@ -74,14 +78,14 @@ function CountrySelect({ value, onChange }: CountrySelectProps) {
                   key={country.code}
                   value={country.name}
                   onSelect={() => {
-                    onChange(country.code)
-                    setOpen(false)
+                    onChange(country.code);
+                    setOpen(false);
                   }}
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
-                      value === country.code ? "opacity-100" : "opacity-0"
+                      'mr-2 h-4 w-4',
+                      value === country.code ? 'opacity-100' : 'opacity-0'
                     )}
                   />
                   {country.name}
@@ -92,11 +96,12 @@ function CountrySelect({ value, onChange }: CountrySelectProps) {
         </Command>
       </PopoverContent>
     </Popover>
-  )
+  );
 }
 ```
 
 **Combobox features:**
+
 - Type to filter (CommandInput)
 - Arrow keys to navigate
 - Enter to select

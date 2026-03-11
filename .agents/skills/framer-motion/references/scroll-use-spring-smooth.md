@@ -12,7 +12,7 @@ Raw scroll progress values change abruptly with each scroll event, causing jitte
 **Incorrect (raw scrollYProgress causes jittery animations):**
 
 ```tsx
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll } from 'framer-motion';
 
 function ParallaxSection() {
   const { scrollYProgress } = useScroll();
@@ -20,7 +20,7 @@ function ParallaxSection() {
   return (
     <motion.div
       className="parallax-bg"
-      style={{ y: scrollYProgress }}  // Jittery, updates abruptly on each scroll tick
+      style={{ y: scrollYProgress }} // Jittery, updates abruptly on each scroll tick
     />
   );
 }
@@ -29,20 +29,20 @@ function ParallaxSection() {
 **Correct (useSpring smooths the animation):**
 
 ```tsx
-import { motion, useScroll, useSpring } from "framer-motion";
+import { motion, useScroll, useSpring } from 'framer-motion';
 
 function ParallaxSection() {
   const { scrollYProgress } = useScroll();
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
     <motion.div
       className="parallax-bg"
-      style={{ y: smoothProgress }}  // Smooth, physics-based interpolation
+      style={{ y: smoothProgress }} // Smooth, physics-based interpolation
     />
   );
 }

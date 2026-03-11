@@ -10,6 +10,7 @@ Comprehensive testing guide for React components using Testing Library, designed
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing new component tests with React Testing Library
 - Selecting queries (getByRole, getByLabelText, etc.)
 - Handling async operations in tests (findBy, waitFor)
@@ -18,17 +19,17 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Query Selection | CRITICAL | `query-` |
-| 2 | Async Handling | CRITICAL | `async-` |
-| 3 | Common Anti-Patterns | CRITICAL | `anti-` |
-| 4 | User Interaction | HIGH | `user-` |
-| 5 | Assertions | HIGH | `assert-` |
-| 6 | Component Setup | MEDIUM | `setup-` |
-| 7 | Test Structure | MEDIUM | `struct-` |
-| 8 | Debugging | LOW-MEDIUM | `debug-` |
-| 9 | Accessibility Testing | LOW | `a11y-` |
+| Priority | Category              | Impact     | Prefix    |
+| -------- | --------------------- | ---------- | --------- |
+| 1        | Query Selection       | CRITICAL   | `query-`  |
+| 2        | Async Handling        | CRITICAL   | `async-`  |
+| 3        | Common Anti-Patterns  | CRITICAL   | `anti-`   |
+| 4        | User Interaction      | HIGH       | `user-`   |
+| 5        | Assertions            | HIGH       | `assert-` |
+| 6        | Component Setup       | MEDIUM     | `setup-`  |
+| 7        | Test Structure        | MEDIUM     | `struct-` |
+| 8        | Debugging             | LOW-MEDIUM | `debug-`  |
+| 9        | Accessibility Testing | LOW        | `a11y-`   |
 
 ## Quick Reference
 
@@ -111,8 +112,8 @@ Read individual reference files for detailed explanations and code examples:
 
 ## Reference Files
 
-| File | Description |
-|------|-------------|
-| [references/_sections.md](references/_sections.md) | Category definitions and ordering |
-| [assets/templates/_template.md](assets/templates/_template.md) | Template for new rules |
-| [metadata.json](metadata.json) | Version and reference information |
+| File                                                            | Description                       |
+| --------------------------------------------------------------- | --------------------------------- |
+| [references/\_sections.md](references/_sections.md)             | Category definitions and ordering |
+| [assets/templates/\_template.md](assets/templates/_template.md) | Template for new rules            |
+| [metadata.json](metadata.json)                                  | Version and reference information |

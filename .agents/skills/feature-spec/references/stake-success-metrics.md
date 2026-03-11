@@ -45,27 +45,31 @@ Goal: Make search better
 | Support tickets (search-related) | 50/week | Should decrease |
 
 **Timeline for Measurement**
+
 - Week 1-2 post-launch: Monitor for regressions
 - Week 4: Initial success assessment
 - Week 8: Full success evaluation
 
 ### Success Criteria Agreement
 
-| Stakeholder | Primary Metric Focus | Sign-off |
-|-------------|---------------------|----------|
-| PM (Carol) | Search-to-click rate | ✓ |
-| Eng (Dan) | Latency p95 | ✓ |
-| Sales (Sarah) | Conversion rate | ✓ |
-| Exec (Alice) | All metrics balanced | ✓ |
+| Stakeholder   | Primary Metric Focus | Sign-off |
+| ------------- | -------------------- | -------- |
+| PM (Carol)    | Search-to-click rate | ✓        |
+| Eng (Dan)     | Latency p95          | ✓        |
+| Sales (Sarah) | Conversion rate      | ✓        |
+| Exec (Alice)  | All metrics balanced | ✓        |
 
 ### Definition of Success
+
 Feature is successful if:
+
 - ALL primary metrics hit target
 - NO secondary metric regresses significantly
 - Measured 8 weeks post-launch with statistical significance
 ```
 
 **Metric selection criteria:**
+
 - Measurable with existing tools
 - Attributable to this feature
 - Meaningful to business outcomes

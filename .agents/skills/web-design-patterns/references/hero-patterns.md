@@ -17,9 +17,11 @@ Before writing any code, understand the context:
 Choose your hero approach based on content and business type, not a template menu:
 
 ### Image-Dominant Heroes
+
 **Best when:** Strong photography available, business sells an experience or visual result (hospitality, real estate, restaurants, galleries)
 
 **Principles:**
+
 - Let the image do the work — text should be minimal and purposeful
 - One clear focal point in the image (don't split attention with busy compositions)
 - Text placement should feel like it belongs IN the composition, not slapped ON TOP of it
@@ -27,14 +29,17 @@ Choose your hero approach based on content and business type, not a template men
 - The image should communicate something specific about the business, not just be "nice looking"
 
 **What to avoid:**
+
 - Generic stock photos that could be for any business
 - Automatic dark overlays on every image (only use if truly needed for contrast)
 - Centering text over images by default — consider natural negative space in the photo
 
 ### Typography-Dominant Heroes
+
 **Best when:** No strong imagery available, brand voice is the differentiator, professional services, B2B
 
 **Principles:**
+
 - Typography IS the design — font choice, size, weight, spacing, and rhythm all matter more
 - Create visual interest through dramatic typographic hierarchy (massive headline contrasting with small, refined subtitle)
 - Use generous whitespace — the empty space IS the design element, not leftover area
@@ -42,14 +47,17 @@ Choose your hero approach based on content and business type, not a template men
 - The headline should be specific and opinionated, not generic marketing speak
 
 **What to avoid:**
+
 - Filling empty space with decorative elements "because it looks bare"
 - Using stock photos just because you think every hero needs an image
 - Safe, middle-of-the-road typography that doesn't make a statement
 
 ### Balanced Heroes (Split/Duo)
+
 **Best when:** Both strong copy and strong imagery exist, need to convey information + emotion simultaneously
 
 **Principles:**
+
 - One side should still dominate slightly — true 50/50 splits feel indecisive and lack direction
 - The image and text should relate to each other, not just coexist in proximity
 - Consider which side gets attention first (reading direction, visual weight, colour contrast)
@@ -57,6 +65,7 @@ Choose your hero approach based on content and business type, not a template men
 - The split doesn't have to be vertical — consider horizontal divisions or asymmetric layouts
 
 **What to avoid:**
+
 - Using this approach by default for every hero
 - Perfectly centered 50/50 splits with no visual hierarchy
 - Text and image that have no relationship to each other
@@ -68,6 +77,7 @@ Choose your hero approach based on content and business type, not a template men
 Think about what the business FEELS like, not just what industry it's in:
 
 **Emergency/urgent services** (plumbing, HVAC, locksmith, towing)
+
 - Bold, high-contrast typography
 - Phone number prominent and clickable
 - Minimal decoration or artistic elements
@@ -75,6 +85,7 @@ Think about what the business FEELS like, not just what industry it's in:
 - Trust signals visible (licensed, insured, years in business)
 
 **Luxury/hospitality** (high-end hotels, spas, fine dining, boutiques)
+
 - Generous whitespace as a design feature
 - Subtle, elegant typography
 - Atmospheric full-bleed imagery
@@ -82,6 +93,7 @@ Think about what the business FEELS like, not just what industry it's in:
 - Nothing shouty or urgent
 
 **Trades/local services** (contractors, landscaping, cleaning, electricians)
+
 - Real photos of actual work or team
 - Credentials and certifications visible
 - Service area/location prominent
@@ -89,6 +101,7 @@ Think about what the business FEELS like, not just what industry it's in:
 - Genuine, not overly polished
 
 **Professional/corporate** (legal, financial, consulting, B2B)
+
 - Clean, structured typography
 - Restrained colour usage
 - Professional but not stiff
@@ -96,6 +109,7 @@ Think about what the business FEELS like, not just what industry it's in:
 - Credibility indicators
 
 **Creative/agency** (design studios, marketing, production, artists)
+
 - Bold, unconventional choices
 - Unusual composition or layout
 - Personality-driven design
@@ -143,28 +157,33 @@ Think about what the business FEELS like, not just what industry it's in:
 ## Page-Specific Guidance
 
 ### Homepage Hero
+
 - Most impactful hero, sets the entire site's tone
 - Can be taller and more dramatic
 - Should communicate the core brand promise immediately
 - This is where you can take bigger design risks
 
 ### Interior Page Headers
+
 - Simpler and faster to parse than homepage hero
 - Don't repeat the homepage hero pattern
 - Focus on orientation (where am I?) more than persuasion
 - A strong headline and breadcrumb might be enough
 
 ### Service Pages
+
 - Hero should immediately signal "you're in the right place for [specific service]"
 - Be specific — not "Our Services" but "Commercial HVAC Installation & Maintenance"
 - Include relevant trust signals and service-specific CTA
 
 ### About/Team Pages
+
 - More personal, less sales-driven
 - Consider editorial/magazine approaches
 - Real photos matter more here than anywhere else
 
 ### Contact Pages
+
 - Simplest hero — just needs to frame the form and provide context
 - Include multiple contact methods visible immediately
 - Don't use this hero to sell — they're already ready to contact you
@@ -172,6 +191,7 @@ Think about what the business FEELS like, not just what industry it's in:
 ## Common Implementation Patterns
 
 ### Split Hero Structure
+
 ```html
 <section class="hero hero--split">
   <div class="container">
@@ -183,17 +203,18 @@ Think about what the business FEELS like, not just what industry it's in:
       </div>
     </div>
     <div class="hero__image">
-      <img src="[path]" alt="[Descriptive alt text]">
+      <img src="[path]" alt="[Descriptive alt text]" />
     </div>
   </div>
 </section>
 ```
 
 ### Full-Width Image Hero Structure
+
 ```html
 <section class="hero hero--full">
   <div class="hero__bg">
-    <img src="[path]" alt="">
+    <img src="[path]" alt="" />
   </div>
   <div class="hero__overlay"></div>
   <div class="container">
@@ -207,6 +228,7 @@ Think about what the business FEELS like, not just what industry it's in:
 ```
 
 ### Typography-Only Hero Structure
+
 ```html
 <section class="hero hero--minimal">
   <div class="container">
@@ -222,6 +244,7 @@ Think about what the business FEELS like, not just what industry it's in:
 ## Overlay Techniques for Text Readability
 
 ### Gradient Overlays (Directional)
+
 ```css
 .hero__overlay {
   position: absolute;
@@ -237,6 +260,7 @@ Think about what the business FEELS like, not just what industry it's in:
 ```
 
 ### Brand-Tinted Overlays
+
 ```css
 .hero__overlay {
   position: absolute;
@@ -247,6 +271,7 @@ Think about what the business FEELS like, not just what industry it's in:
 ```
 
 ### Text Shadow (Alternative to Overlay)
+
 ```css
 .hero__title {
   text-shadow:
@@ -287,8 +312,12 @@ Think about what the business FEELS like, not just what industry it's in:
 ## Dark Mode Considerations
 
 ```css
-.hero__title { color: var(--foreground); }
-.hero__subtitle { color: var(--muted-foreground); }
+.hero__title {
+  color: var(--foreground);
+}
+.hero__subtitle {
+  color: var(--muted-foreground);
+}
 
 .dark .hero__overlay {
   background: linear-gradient(

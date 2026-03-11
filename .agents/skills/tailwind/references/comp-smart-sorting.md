@@ -13,22 +13,20 @@ Tailwind CSS v4 automatically sorts utilities by property count, ensuring comple
 
 ```css
 @utility button {
-  @apply bg-black text-white px-4 py-2 rounded;
+  @apply rounded bg-black px-4 py-2 text-white;
 }
 ```
 
 ```html
 <!-- Expecting bg-indigo-500 to override, but unsure about specificity -->
-<button class="button bg-indigo-500">
-  Click me
-</button>
+<button class="button bg-indigo-500">Click me</button>
 ```
 
 **Correct (trust smart sorting):**
 
 ```css
 @utility button {
-  @apply bg-black text-white px-4 py-2 rounded;
+  @apply rounded bg-black px-4 py-2 text-white;
 }
 /* button has 5 properties, sorted BEFORE single-property utilities */
 ```
@@ -42,6 +40,7 @@ Tailwind CSS v4 automatically sorts utilities by property count, ensuring comple
 ```
 
 **How sorting works:**
+
 1. Multi-property utilities sorted first (e.g., `button`)
 2. Single-property utilities sorted after
 3. Within same property count, alphabetical

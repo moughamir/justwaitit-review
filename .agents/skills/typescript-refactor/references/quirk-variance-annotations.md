@@ -13,15 +13,15 @@ TypeScript 4.7+ supports `in` and `out` variance annotations on type parameters.
 
 ```typescript
 interface Producer<T> {
-  produce(): T
+  produce(): T;
 }
 
 interface Consumer<T> {
-  consume(item: T): void
+  consume(item: T): void;
 }
 
 interface Transformer<TInput, TOutput> {
-  transform(input: TInput): TOutput
+  transform(input: TInput): TOutput;
 }
 // Compiler must structurally verify variance on every comparison
 ```
@@ -30,15 +30,15 @@ interface Transformer<TInput, TOutput> {
 
 ```typescript
 interface Producer<out T> {
-  produce(): T
+  produce(): T;
 }
 
 interface Consumer<in T> {
-  consume(item: T): void
+  consume(item: T): void;
 }
 
 interface Transformer<in TInput, out TOutput> {
-  transform(input: TInput): TOutput
+  transform(input: TInput): TOutput;
 }
 // Compiler uses annotations instead of structural verification
 ```

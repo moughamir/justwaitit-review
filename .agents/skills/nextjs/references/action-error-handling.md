@@ -13,10 +13,10 @@ Return error states from Server Actions instead of throwing. Use `useActionState
 
 ```typescript
 async function createPost(formData: FormData) {
-  'use server'
+  'use server';
 
-  const title = formData.get('title') as string
-  await db.posts.create({ data: { title } })
+  const title = formData.get('title') as string;
+  await db.posts.create({ data: { title } });
   // If validation fails or DB errors, user sees nothing
 }
 ```

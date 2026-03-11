@@ -65,6 +65,7 @@ await expect(page.getByText(/Sign up/i)).toBeVisible();
 ```
 
 **When NOT to use getByText:**
+
 - Dynamic content that changes frequently
 - Numbers or dates that vary
 - User-generated content

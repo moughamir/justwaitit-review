@@ -13,7 +13,7 @@ shadcn/ui components are built on Radix primitives with specific parent-child re
 
 ```tsx
 function CustomDialog({ children }: { children: React.ReactNode }) {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -27,7 +27,7 @@ function CustomDialog({ children }: { children: React.ReactNode }) {
         </div>
       )}
     </>
-  )
+  );
 }
 ```
 
@@ -45,11 +45,12 @@ function CustomDialog({ children }: { children: React.ReactNode }) {
         {children}
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 ```
 
 **Required hierarchies for common components:**
+
 - `Dialog` → `DialogTrigger` + `DialogContent` → `DialogHeader/Footer`
 - `DropdownMenu` → `DropdownMenuTrigger` + `DropdownMenuContent` → `DropdownMenuItem`
 - `Tabs` → `TabsList` → `TabsTrigger` + `TabsContent`

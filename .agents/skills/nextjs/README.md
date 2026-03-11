@@ -41,16 +41,16 @@ pnpm validate
 
 ### Prefix Reference
 
-| Category | Prefix | Impact |
-|----------|--------|--------|
-| Build & Bundle Optimization | `build-` | CRITICAL |
-| Caching Strategy | `cache-` | CRITICAL |
-| Server Components & Data Fetching | `server-` | HIGH |
-| Routing & Navigation | `route-` | HIGH |
-| Server Actions & Mutations | `action-` | MEDIUM-HIGH |
-| Streaming & Loading States | `stream-` | MEDIUM |
-| Metadata & SEO | `meta-` | MEDIUM |
-| Client Components | `client-` | LOW-MEDIUM |
+| Category                          | Prefix    | Impact      |
+| --------------------------------- | --------- | ----------- |
+| Build & Bundle Optimization       | `build-`  | CRITICAL    |
+| Caching Strategy                  | `cache-`  | CRITICAL    |
+| Server Components & Data Fetching | `server-` | HIGH        |
+| Routing & Navigation              | `route-`  | HIGH        |
+| Server Actions & Mutations        | `action-` | MEDIUM-HIGH |
+| Streaming & Loading States        | `stream-` | MEDIUM      |
+| Metadata & SEO                    | `meta-`   | MEDIUM      |
+| Client Components                 | `client-` | LOW-MEDIUM  |
 
 ## Rule File Structure
 
@@ -86,20 +86,21 @@ Reference: [Link](https://example.com)
 Rule files follow the pattern: `{prefix}-{descriptive-slug}.md`
 
 Examples:
+
 - `build-dynamic-imports.md`
 - `cache-use-cache-directive.md`
 - `server-parallel-fetching.md`
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| CRITICAL | Fundamental issues that cause major performance problems |
-| HIGH | Significant optimizations with measurable impact |
-| MEDIUM-HIGH | Important patterns for common scenarios |
-| MEDIUM | Useful optimizations for specific cases |
-| LOW-MEDIUM | Minor improvements and best practices |
-| LOW | Edge cases and advanced patterns |
+| Level       | Description                                              |
+| ----------- | -------------------------------------------------------- |
+| CRITICAL    | Fundamental issues that cause major performance problems |
+| HIGH        | Significant optimizations with measurable impact         |
+| MEDIUM-HIGH | Important patterns for common scenarios                  |
+| MEDIUM      | Useful optimizations for specific cases                  |
+| LOW-MEDIUM  | Minor improvements and best practices                    |
+| LOW         | Edge cases and advanced patterns                         |
 
 ## Scripts
 

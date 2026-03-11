@@ -40,11 +40,12 @@ When using Hono with Vite's build tools, the incorrect export pattern breaks the
 ```typescript
 // ❌ WRONG: This causes the error
 export default {
-  fetch: app.fetch
-}
+  fetch: app.fetch,
+};
 ```
 
 **Why it breaks:**
+
 - Vite's bundler transforms the code
 - The `app.fetch` binding loses its `this` context
 - When Cloudflare calls `fetch()`, `this` is `undefined`
@@ -55,17 +56,18 @@ export default {
 Use the direct export pattern:
 
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
 // Define routes...
 
 // ✅ CORRECT
-export default app
+export default app;
 ```
 
 **Why this works:**
+
 - Hono's app object already implements the fetch handler
 - No context binding is lost
 - Vite can properly bundle the code
@@ -78,9 +80,9 @@ If you need scheduled/tail handlers, use Module Worker format:
 export default {
   fetch: app.fetch,
   scheduled: async (event, env, ctx) => {
-    console.log('Cron triggered:', event.cron)
-  }
-}
+    console.log('Cron triggered:', event.cron);
+  },
+};
 ```
 
 This works because Cloudflare's runtime handles the binding correctly for Module Workers.
@@ -125,6 +127,7 @@ Request → File not found → Return index.html
 ```
 
 **Without `run_worker_first`:**
+
 1. Request to `/api/hello`
 2. Static Assets handler checks: "Does `/api/hello` file exist?"
 3. No → SPA fallback → Returns `public/index.html`
@@ -140,12 +143,13 @@ Add `run_worker_first` to `wrangler.jsonc`:
     "directory": "./public/",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]  // ← CRITICAL
-  }
+    "run_worker_first": ["/api/*"], // ← CRITICAL
+  },
 }
 ```
 
 **What this does:**
+
 - Requests matching `/api/*` go to your Worker FIRST
 - If Worker doesn't handle it, then try Static Assets
 - Ensures API routes are never intercepted by SPA fallback
@@ -155,13 +159,8 @@ Add `run_worker_first` to `wrangler.jsonc`:
 ```jsonc
 {
   "assets": {
-    "run_worker_first": [
-      "/api/*",
-      "/auth/*",
-      "/webhooks/*",
-      "/_app/*"
-    ]
-  }
+    "run_worker_first": ["/api/*", "/auth/*", "/webhooks/*", "/_app/*"],
+  },
 }
 ```
 
@@ -205,8 +204,9 @@ Deployment succeeds, but cron triggers fail.
 The `@hono/vite-build/cloudflare-workers` plugin **only supports the `fetch` handler**.
 
 If you use:
+
 ```typescript
-export default app  // Only exports fetch handler
+export default app; // Only exports fetch handler
 ```
 
 ...then scheduled/tail handlers are not exported.
@@ -214,9 +214,9 @@ export default app  // Only exports fetch handler
 ### Fix Option 1: Use Module Worker Format
 
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
 // Define routes...
 
@@ -225,15 +225,15 @@ export default {
   fetch: app.fetch,
 
   scheduled: async (event, env, ctx) => {
-    console.log('Cron triggered:', event.cron)
+    console.log('Cron triggered:', event.cron);
     // Your scheduled logic here
   },
 
   tail: async (events, env, ctx) => {
     // Tail handler logic
-    console.log('Tail events:', events)
-  }
-}
+    console.log('Tail events:', events);
+  },
+};
 ```
 
 ### Fix Option 2: Use @cloudflare/vite-plugin
@@ -246,13 +246,14 @@ npm install -D @cloudflare/vite-plugin
 ```
 
 Update `vite.config.ts`:
+
 ```typescript
-import { defineConfig } from 'vite'
-import { cloudflare } from '@cloudflare/vite-plugin'
+import { defineConfig } from 'vite';
+import { cloudflare } from '@cloudflare/vite-plugin';
 
 export default defineConfig({
   plugins: [cloudflare()],
-})
+});
 ```
 
 This plugin supports all handler types.
@@ -262,8 +263,8 @@ This plugin supports all handler types.
 ```jsonc
 {
   "triggers": {
-    "crons": ["0 0 * * *"]  // Daily at midnight UTC
-  }
+    "crons": ["0 0 * * *"], // Daily at midnight UTC
+  },
 }
 ```
 
@@ -323,16 +324,16 @@ If updating doesn't fix it, try:
 
 ```typescript
 // vite.config.ts
-import { defineConfig } from 'vite'
-import { cloudflare } from '@cloudflare/vite-plugin'
+import { defineConfig } from 'vite';
+import { cloudflare } from '@cloudflare/vite-plugin';
 
 export default defineConfig({
   plugins: [
     cloudflare({
-      persist: true,  // Persist state between HMR updates
+      persist: true, // Persist state between HMR updates
     }),
   ],
-})
+});
 ```
 
 ### How to Verify Fix
@@ -375,6 +376,7 @@ export default defineConfig({
 4. Deployment validation fails
 
 **Most common in CI/CD** because:
+
 - Network latency varies
 - Parallel execution timing is different
 - No user interaction to retry
@@ -388,6 +390,7 @@ npm install -D wrangler@latest
 ```
 
 **Improvements in 4.x:**
+
 - Sequential upload of critical assets
 - Better retry logic
 - Manifest generation after all uploads complete
@@ -427,7 +430,7 @@ export default defineConfig({
       },
     },
   },
-})
+});
 ```
 
 ### How to Verify Fix
@@ -463,15 +466,16 @@ export default defineConfig({
 ```typescript
 // ❌ DEPRECATED: Service Worker format
 addEventListener('fetch', (event) => {
-  event.respondWith(handleRequest(event.request))
-})
+  event.respondWith(handleRequest(event.request));
+});
 
 async function handleRequest(request) {
-  return new Response('Hello World')
+  return new Response('Hello World');
 }
 ```
 
 **Problems with this format:**
+
 - Doesn't support bindings (KV, D1, R2, etc.)
 - No TypeScript types
 - No environment variable access
@@ -483,25 +487,27 @@ async function handleRequest(request) {
 // ✅ CORRECT: ES Module format
 export default {
   fetch(request, env, ctx) {
-    return new Response('Hello World')
-  }
-}
+    return new Response('Hello World');
+  },
+};
 ```
 
 **With Hono:**
+
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => c.text('Hello World'))
+app.get('/', (c) => c.text('Hello World'));
 
-export default app
+export default app;
 ```
 
 ### Migration Steps
 
 1. **Remove `addEventListener`**:
+
    ```diff
    - addEventListener('fetch', (event) => {
    -   event.respondWith(handleRequest(event.request))
@@ -509,6 +515,7 @@ export default app
    ```
 
 2. **Change to ES Module export**:
+
    ```diff
    + export default {
    +   fetch(request, env, ctx) {
@@ -518,6 +525,7 @@ export default app
    ```
 
 3. **Update function signatures** to accept `env`:
+
    ```diff
    - async function handleRequest(request) {
    + async function handleRequest(request, env) {
@@ -536,13 +544,13 @@ export default app
    - ✅ Has `export default`
 2. Check you can access bindings:
    ```typescript
-   const value = await env.MY_KV.get('key')
+   const value = await env.MY_KV.get('key');
    ```
 3. TypeScript types work:
    ```typescript
    type Bindings = {
-     MY_KV: KVNamespace
-   }
+     MY_KV: KVNamespace;
+   };
    ```
 
 ---
@@ -556,6 +564,7 @@ npm list hono @cloudflare/vite-plugin wrangler
 ```
 
 **Expected (as of 2026-01-06):**
+
 - `hono@4.11.3`
 - `@cloudflare/vite-plugin@1.17.1`
 - `wrangler@4.54.0`
@@ -585,6 +594,7 @@ WRANGLER_LOG=debug npm run deploy
 ### Check Browser Console
 
 Many issues are visible in the browser:
+
 - Open DevTools → Network tab
 - Check response Content-Type
 - Check response body
@@ -609,14 +619,14 @@ curl -i http://localhost:8787/styles.css
 
 ## Issue Summary Table
 
-| Issue | Error Message | Source | Fix |
-|-------|---------------|--------|-----|
-| **#1** | "Cannot read properties of undefined" | hono #3955 | `export default app` |
-| **#2** | API routes return HTML | workers-sdk #8879 | `run_worker_first: ["/api/*"]` |
-| **#3** | "Handler does not export scheduled()" | vite-plugins #275 | Module Worker format or @cloudflare/vite-plugin |
-| **#4** | "A hanging Promise was canceled" | workers-sdk #9518 | Update to vite-plugin@1.17.1+ |
-| **#5** | Non-deterministic deployment failures | workers-sdk #7555 | Use Wrangler 4.x+ with retry |
-| **#6** | Service Worker format issues | Cloudflare migration | Use ES Module format |
+| Issue  | Error Message                         | Source               | Fix                                             |
+| ------ | ------------------------------------- | -------------------- | ----------------------------------------------- |
+| **#1** | "Cannot read properties of undefined" | hono #3955           | `export default app`                            |
+| **#2** | API routes return HTML                | workers-sdk #8879    | `run_worker_first: ["/api/*"]`                  |
+| **#3** | "Handler does not export scheduled()" | vite-plugins #275    | Module Worker format or @cloudflare/vite-plugin |
+| **#4** | "A hanging Promise was canceled"      | workers-sdk #9518    | Update to vite-plugin@1.17.1+                   |
+| **#5** | Non-deterministic deployment failures | workers-sdk #7555    | Use Wrangler 4.x+ with retry                    |
+| **#6** | Service Worker format issues          | Cloudflare migration | Use ES Module format                            |
 
 ---
 

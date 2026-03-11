@@ -13,22 +13,22 @@ tags: anti, act, react, warnings
 
 ```tsx
 await act(async () => {
-  render(<UserProfile />)
-})
+  render(<UserProfile />);
+});
 
 await act(async () => {
-  fireEvent.click(screen.getByRole('button'))
-})
+  fireEvent.click(screen.getByRole('button'));
+});
 // Unnecessary - these already use act internally
 ```
 
 **Correct (let RTL handle act):**
 
 ```tsx
-render(<UserProfile />)
+render(<UserProfile />);
 
-const user = userEvent.setup()
-await user.click(screen.getByRole('button'))
+const user = userEvent.setup();
+await user.click(screen.getByRole('button'));
 // RTL and userEvent handle act() automatically
 ```
 
@@ -37,13 +37,13 @@ await user.click(screen.getByRole('button'))
 ```tsx
 // Direct state updates outside RTL utilities
 act(() => {
-  result.current.increment()
-})
+  result.current.increment();
+});
 
 // Manual timer advancement
 act(() => {
-  jest.advanceTimersByTime(1000)
-})
+  jest.advanceTimersByTime(1000);
+});
 ```
 
 **Note:** If you see "not wrapped in act(...)" warnings, the solution is usually to await async operations, not add more act() calls.

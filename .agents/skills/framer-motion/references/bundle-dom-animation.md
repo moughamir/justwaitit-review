@@ -13,18 +13,18 @@ The `domMax` feature bundle includes layout animations, drag, and pan gestures w
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion, domMax } from "framer-motion"; // Includes layout, drag, pan
+import { LazyMotion, domMax } from 'framer-motion'; // Includes layout, drag, pan
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={domMax}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={domMax}>{children}</LazyMotion>;
 }
 
 // components/NavigationMenu.tsx
-import { m } from "framer-motion";
+import { m } from 'framer-motion';
 
 export function NavigationMenu({ items }: NavigationMenuProps) {
   return (
@@ -33,7 +33,7 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
         <m.a
           key={item.href}
           href={item.href}
-          whileHover={{ color: "#0066cc" }} // Only uses basic animations
+          whileHover={{ color: '#0066cc' }} // Only uses basic animations
           whileTap={{ scale: 0.98 }}
         >
           {item.label}
@@ -48,18 +48,18 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion, domAnimation } from "framer-motion"; // 17kb smaller
+import { LazyMotion, domAnimation } from 'framer-motion'; // 17kb smaller
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={domAnimation}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
 }
 
 // components/NavigationMenu.tsx
-import { m } from "framer-motion";
+import { m } from 'framer-motion';
 
 export function NavigationMenu({ items }: NavigationMenuProps) {
   return (
@@ -68,7 +68,7 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
         <m.a
           key={item.href}
           href={item.href}
-          whileHover={{ color: "#0066cc" }}
+          whileHover={{ color: '#0066cc' }}
           whileTap={{ scale: 0.98 }}
         >
           {item.label}
@@ -80,6 +80,7 @@ export function NavigationMenu({ items }: NavigationMenuProps) {
 ```
 
 **When to use domMax instead:**
+
 - You need `layout` or `layoutId` animations
 - You need drag gestures (`drag`, `dragConstraints`)
 - You need pan gestures (`onPan`, `onPanStart`)

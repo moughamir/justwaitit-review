@@ -36,6 +36,7 @@ def load_sensor_readings(filepath: str) -> array:
 ```
 
 **Common type codes:**
+
 - `'b'` - signed char (1 byte)
 - `'i'` - signed int (4 bytes)
 - `'l'` - signed long (4-8 bytes)
@@ -43,6 +44,7 @@ def load_sensor_readings(filepath: str) -> array:
 - `'d'` - double (8 bytes)
 
 **When NOT to use array.array:**
+
 - When you need mixed types
 - When you need NumPy operations
 - For small datasets where overhead doesn't matter

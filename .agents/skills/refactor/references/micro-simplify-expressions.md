@@ -14,33 +14,39 @@ Complex boolean expressions can often be simplified. Apply boolean algebra and u
 ```typescript
 // Double negatives
 if (!user.isNotActive) {
-  activateFeatures()
+  activateFeatures();
 }
 
 // Redundant comparisons
 if (isValid === true) {
-  process()
+  process();
 }
 if (count !== 0) {
-  showItems()
+  showItems();
 }
 
 // Unnecessarily complex conditions
 if (status === 'active' || status === 'pending' || status === 'processing') {
-  handleInProgress()
+  handleInProgress();
 }
 
 // Redundant else
 function isEligible(user: User): boolean {
   if (user.age >= 18) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
 // Nested ternaries
-const label = isAdmin ? 'Admin' : isManager ? 'Manager' : isEmployee ? 'Employee' : 'Guest'
+const label = isAdmin
+  ? 'Admin'
+  : isManager
+    ? 'Manager'
+    : isEmployee
+      ? 'Employee'
+      : 'Guest';
 ```
 
 **Correct (simplified expressions):**
@@ -48,38 +54,40 @@ const label = isAdmin ? 'Admin' : isManager ? 'Manager' : isEmployee ? 'Employee
 ```typescript
 // Remove double negative
 if (user.isActive) {
-  activateFeatures()
+  activateFeatures();
 }
 
 // Simplify comparisons
 if (isValid) {
-  process()
+  process();
 }
-if (count) {  // Or: if (count > 0) for explicit intent
-  showItems()
+if (count) {
+  // Or: if (count > 0) for explicit intent
+  showItems();
 }
 
 // Use includes for multiple equality checks
-const inProgressStatuses = ['active', 'pending', 'processing']
+const inProgressStatuses = ['active', 'pending', 'processing'];
 if (inProgressStatuses.includes(status)) {
-  handleInProgress()
+  handleInProgress();
 }
 
 // Return the expression directly
 function isEligible(user: User): boolean {
-  return user.age >= 18
+  return user.age >= 18;
 }
 
 // Use object lookup instead of nested ternaries
 const roleLabels: Record<string, string> = {
   admin: 'Admin',
   manager: 'Manager',
-  employee: 'Employee'
-}
-const label = roleLabels[user.role] ?? 'Guest'
+  employee: 'Employee',
+};
+const label = roleLabels[user.role] ?? 'Guest';
 ```
 
 **Common simplifications:**
+
 - `if (x === true)` → `if (x)`
 - `if (x === false)` → `if (!x)`
 - `if (arr.length !== 0)` → `if (arr.length)`

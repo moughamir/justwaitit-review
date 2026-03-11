@@ -17,10 +17,10 @@ render(
     <button>Cancel</button>
     <button>Submit</button>
   </nav>
-)
+);
 
-const buttons = screen.getAllByRole('button')
-const submitButton = buttons[1]
+const buttons = screen.getAllByRole('button');
+const submitButton = buttons[1];
 // Breaks if button order changes
 ```
 
@@ -32,16 +32,16 @@ render(
     <button>Cancel</button>
     <button>Submit</button>
   </nav>
-)
+);
 
-const submitButton = screen.getByRole('button', { name: /submit/i })
+const submitButton = screen.getByRole('button', { name: /submit/i });
 // Always finds the right button regardless of order
 ```
 
 **Tip:** Use regex with `/i` flag for case-insensitive matching:
 
 ```tsx
-screen.getByRole('heading', { name: /welcome/i })
+screen.getByRole('heading', { name: /welcome/i });
 ```
 
 Reference: [Testing Library - getByRole name option](https://testing-library.com/docs/queries/byrole#name)

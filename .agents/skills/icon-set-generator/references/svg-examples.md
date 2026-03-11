@@ -132,12 +132,14 @@ Some icons need a filled element alongside stroked elements. Use `fill="currentC
 ## What to Avoid
 
 ### Bad: Hardcoded colours
+
 ```xml
 <!-- WRONG -->
 <circle cx="12" cy="12" r="8" stroke="#333" fill="#eee"/>
 ```
 
 ### Bad: Excessive precision
+
 ```xml
 <!-- WRONG -->
 <line x1="5.333333" y1="7.142857" x2="18.666667" y2="16.857143"/>
@@ -146,6 +148,7 @@ Some icons need a filled element alongside stroked elements. Use `fill="currentC
 ```
 
 ### Bad: Transform instead of coordinates
+
 ```xml
 <!-- WRONG -->
 <g transform="translate(2, 3) rotate(45)">
@@ -156,6 +159,7 @@ Some icons need a filled element alongside stroked elements. Use `fill="currentC
 ```
 
 ### Bad: Inconsistent padding
+
 ```xml
 <!-- WRONG: One icon uses full bleed, another has generous padding -->
 <!-- Icon A: path starts at x=1 (too close to edge) -->

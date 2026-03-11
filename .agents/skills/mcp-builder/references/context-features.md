@@ -460,11 +460,11 @@ async def elicitation_with_timeout(context: Context) -> dict:
 
 ## Context Feature Availability
 
-| Feature | Claude Desktop | Claude Code CLI | FastMCP Cloud | Custom Client |
-|---------|---------------|----------------|---------------|---------------|
-| Elicitation | ✅ | ✅ | ⚠️ Depends | ✅ With handler |
-| Progress | ✅ | ✅ | ✅ | ✅ With handler |
-| Sampling | ✅ | ✅ | ⚠️ Depends | ✅ With handler |
+| Feature     | Claude Desktop | Claude Code CLI | FastMCP Cloud | Custom Client   |
+| ----------- | -------------- | --------------- | ------------- | --------------- |
+| Elicitation | ✅             | ✅              | ⚠️ Depends    | ✅ With handler |
+| Progress    | ✅             | ✅              | ✅            | ✅ With handler |
+| Sampling    | ✅             | ✅              | ⚠️ Depends    | ✅ With handler |
 
 ⚠️ = Feature availability depends on client implementation
 

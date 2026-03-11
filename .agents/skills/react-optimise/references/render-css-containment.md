@@ -13,12 +13,12 @@ By default, any DOM change triggers layout recalculation for the entire document
 
 ```tsx
 function DashboardPanel({ widgets }: { widgets: Widget[] }) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div className="dashboard-panel">
       <button onClick={() => setCollapsed(!collapsed)}>
-        {collapsed ? "Expand" : "Collapse"}
+        {collapsed ? 'Expand' : 'Collapse'}
       </button>
       <div className="widget-grid">
         {widgets.map((widget) => (
@@ -29,7 +29,7 @@ function DashboardPanel({ widgets }: { widgets: Widget[] }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 // dashboard-panel.css
@@ -43,12 +43,12 @@ function DashboardPanel({ widgets }: { widgets: Widget[] }) {
 
 ```tsx
 function DashboardPanel({ widgets }: { widgets: Widget[] }) {
-  const [collapsed, setCollapsed] = useState(false)
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div className="dashboard-panel">
       <button onClick={() => setCollapsed(!collapsed)}>
-        {collapsed ? "Expand" : "Collapse"}
+        {collapsed ? 'Expand' : 'Collapse'}
       </button>
       <div className="widget-grid">
         {widgets.map((widget) => (
@@ -58,7 +58,7 @@ function DashboardPanel({ widgets }: { widgets: Widget[] }) {
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 // dashboard-panel.css

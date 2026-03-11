@@ -49,13 +49,13 @@ Present the list. Let the user add, remove, or rename before generating.
 
 Read `references/style-presets.md` for full preset definitions. Pick one as starting point:
 
-| Preset | Best For | Stroke | Caps/Joins | Corners |
-|--------|----------|--------|------------|---------|
-| Clean | Most business sites | 1.5px | round/round | 2px |
-| Sharp | Corporate/technical | 1.5px | square/miter | 0px |
-| Soft | Friendly/approachable | 2px | round/round | 4px |
-| Minimal | Elegant/editorial | 1px | round/round | 0px |
-| Bold | High impact/accessible | 2.5px | round/round | 2px |
+| Preset  | Best For               | Stroke | Caps/Joins   | Corners |
+| ------- | ---------------------- | ------ | ------------ | ------- |
+| Clean   | Most business sites    | 1.5px  | round/round  | 2px     |
+| Sharp   | Corporate/technical    | 1.5px  | square/miter | 0px     |
+| Soft    | Friendly/approachable  | 2px    | round/round  | 4px     |
+| Minimal | Elegant/editorial      | 1px    | round/round  | 0px     |
+| Bold    | High impact/accessible | 2.5px  | round/round  | 2px     |
 
 Tell the user which preset you're recommending and why, then confirm.
 
@@ -70,6 +70,7 @@ Generate in batches of ~5. After each batch, visually review for consistency bef
 ### Step 5: Deliver
 
 Output structure:
+
 ```
 icons/
 ├── style-spec.json

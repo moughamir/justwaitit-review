@@ -92,6 +92,7 @@ function UserCardContainer({ userId }: { userId: string }) {
 ```
 
 **Benefits:**
+
 - UserCard can be used in Storybook, tests, anywhere
 - Business logic is concentrated in container
 - Presentational components are pure functions of props

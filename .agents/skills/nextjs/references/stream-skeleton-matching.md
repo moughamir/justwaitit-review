@@ -67,6 +67,7 @@ export default async function Page() {
 ```
 
 **Tips:**
+
 - Use the same CSS classes for skeleton and content containers
 - Set explicit heights on dynamic content
 - Use `aspect-ratio` for images and videos

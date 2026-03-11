@@ -9,12 +9,14 @@ Industry-specific shapes and custom favicon templates beyond basic circles and s
 While circles and rounded squares work universally, industry-specific shapes can reinforce brand identity and improve recognition.
 
 **When to use custom shapes**:
+
 - Industry has visual conventions (house for real estate, shield for security)
 - Brand personality calls for unique shape
 - Client requests specific shape
 - Differentiation needed in crowded market
 
 **When to use standard shapes**:
+
 - Unclear industry fit
 - Risk of complexity at small sizes
 - Budget/time constraints
@@ -24,20 +26,20 @@ While circles and rounded squares work universally, industry-specific shapes can
 
 ## Shape Selection by Industry
 
-| Industry | Primary Shape | Alternative | Rationale |
-|----------|---------------|-------------|-----------|
-| **Technology** | Hexagon | Circuit | Precision, structure |
-| **Security** | Shield | Lock | Protection, safety |
-| **Real Estate** | House | Location pin | Property, home |
-| **Healthcare** | Cross | Heart | Medical, care |
-| **Finance** | Dollar sign | Bar chart | Money, growth |
-| **Legal** | Scales | Gavel | Justice, law |
-| **Education** | Book | Graduation cap | Learning, knowledge |
-| **Food** | Fork/knife | Chef hat | Dining, culinary |
-| **Travel** | Airplane | Compass | Journey, adventure |
-| **Retail** | Shopping bag | Tag | Commerce, products |
-| **Construction** | Hard hat | Wrench | Building, tools |
-| **Creative** | Brush | Lightbulb | Art, ideas |
+| Industry         | Primary Shape | Alternative    | Rationale            |
+| ---------------- | ------------- | -------------- | -------------------- |
+| **Technology**   | Hexagon       | Circuit        | Precision, structure |
+| **Security**     | Shield        | Lock           | Protection, safety   |
+| **Real Estate**  | House         | Location pin   | Property, home       |
+| **Healthcare**   | Cross         | Heart          | Medical, care        |
+| **Finance**      | Dollar sign   | Bar chart      | Money, growth        |
+| **Legal**        | Scales        | Gavel          | Justice, law         |
+| **Education**    | Book          | Graduation cap | Learning, knowledge  |
+| **Food**         | Fork/knife    | Chef hat       | Dining, culinary     |
+| **Travel**       | Airplane      | Compass        | Journey, adventure   |
+| **Retail**       | Shopping bag  | Tag            | Commerce, products   |
+| **Construction** | Hard hat      | Wrench         | Building, tools      |
+| **Creative**     | Brush         | Lightbulb      | Art, ideas           |
 
 ---
 
@@ -57,6 +59,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - Top-heavy design (wider at top)
 - Point at bottom
 - Symmetrical
@@ -93,6 +96,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - Triangular roof
 - Rectangular body
 - Optional door/window details
@@ -126,6 +130,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - Equal-length arms
 - Centered
 - Round or square ends
@@ -160,6 +165,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - Six equal sides
 - Technical/geometric feel
 - Popular in tech/SaaS
@@ -195,6 +201,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - 45-degree rotated square
 - Elegant, premium feel
 - Point at top/bottom
@@ -231,6 +238,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ```
 
 **Characteristics**:
+
 - Teardrop shape with circle at top
 - Point at bottom
 - Iconic "map marker" design
@@ -401,10 +409,10 @@ While circles and rounded squares work universally, industry-specific shapes can
 
 ### Shape Complexity Guidelines
 
-| Complexity Level | Description | Use Case |
-|------------------|-------------|----------|
-| **Simple** (3-5 shapes) | Circle + icon | Universal |
-| **Medium** (6-10 shapes) | House, shield, hexagon | Industry-specific |
+| Complexity Level         | Description               | Use Case          |
+| ------------------------ | ------------------------- | ----------------- |
+| **Simple** (3-5 shapes)  | Circle + icon             | Universal         |
+| **Medium** (6-10 shapes) | House, shield, hexagon    | Industry-specific |
 | **Complex** (11+ shapes) | Gear, lightbulb with rays | ⚠️ Use cautiously |
 
 **Rule**: Simpler is always better at favicon sizes. If unsure, simplify more.
@@ -463,6 +471,7 @@ While circles and rounded squares work universally, industry-specific shapes can
 ### A/B Testing
 
 Show colleagues 3 options:
+
 1. Custom shape (e.g., house for real estate)
 2. Standard circle with letter
 3. Standard rounded square with letter
@@ -476,6 +485,7 @@ Show colleagues 3 options:
 ## When to Avoid Custom Shapes
 
 ### Use Standard Shapes If:
+
 - Custom shape is too complex to simplify
 - Industry doesn't have clear visual convention
 - Testing shows standard shapes perform better

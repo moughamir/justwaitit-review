@@ -96,10 +96,10 @@ npx playwright test --project=firefox
 
 **Speed comparison:**
 
-| Strategy | Time | Coverage |
-|----------|------|----------|
-| Chromium only | 1× | 70% of issues |
-| Chromium + Firefox | 2× | 90% of issues |
-| All 5 browsers | 5× | 99% of issues |
+| Strategy           | Time | Coverage      |
+| ------------------ | ---- | ------------- |
+| Chromium only      | 1×   | 70% of issues |
+| Chromium + Firefox | 2×   | 90% of issues |
+| All 5 browsers     | 5×   | 99% of issues |
 
 Reference: [Playwright Projects](https://playwright.dev/docs/test-projects)

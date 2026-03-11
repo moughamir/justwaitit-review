@@ -13,55 +13,54 @@ Use `renderHook` to test custom hooks in isolation. This is useful for hook libr
 
 ```tsx
 test('useCounter increments', () => {
-  let result
+  let result;
   function CounterWrapper() {
-    result = useCounter()
-    return null
+    result = useCounter();
+    return null;
   }
 
-  render(<CounterWrapper />)
-  act(() => result.increment())
+  render(<CounterWrapper />);
+  act(() => result.increment());
   // Awkward pattern, result access is unclear
-})
+});
 ```
 
 **Correct (renderHook):**
 
 ```tsx
-import { renderHook, act } from '@testing-library/react'
+import { renderHook, act } from '@testing-library/react';
 
 test('useCounter increments', () => {
-  const { result } = renderHook(() => useCounter())
+  const { result } = renderHook(() => useCounter());
 
-  expect(result.current.count).toBe(0)
+  expect(result.current.count).toBe(0);
 
   act(() => {
-    result.current.increment()
-  })
+    result.current.increment();
+  });
 
-  expect(result.current.count).toBe(1)
-})
+  expect(result.current.count).toBe(1);
+});
 ```
 
 **With providers:**
 
 ```tsx
 const wrapper = ({ children }) => (
-  <QueryClientProvider client={queryClient}>
-    {children}
-  </QueryClientProvider>
-)
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+);
 
 test('useFetchUser returns user', async () => {
-  const { result } = renderHook(() => useFetchUser('123'), { wrapper })
+  const { result } = renderHook(() => useFetchUser('123'), { wrapper });
 
   await waitFor(() => {
-    expect(result.current.data).toEqual({ name: 'John' })
-  })
-})
+    expect(result.current.data).toEqual({ name: 'John' });
+  });
+});
 ```
 
 **When to prefer component testing:**
+
 - Hook is tightly coupled to specific UI
 - Testing user-visible behavior is more valuable
 

@@ -62,6 +62,7 @@ export function useUser(userId: string) {
 ```
 
 **Benefits:**
+
 - Adding a feature includes its API calls
 - Removing a feature removes its API calls
 - Feature can evolve its API independently

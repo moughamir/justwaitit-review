@@ -12,28 +12,28 @@ Showing a loading spinner on every page visit forces users to wait for the full 
 **Incorrect (loading spinner on every visit):**
 
 ```tsx
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 interface TeamMember {
-  id: string
-  name: string
-  role: string
-  avatarUrl: string
+  id: string;
+  name: string;
+  role: string;
+  avatarUrl: string;
 }
 
 function TeamDirectory() {
-  const [members, setMembers] = useState<TeamMember[]>([])
-  const [loading, setLoading] = useState(true)
+  const [members, setMembers] = useState<TeamMember[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setLoading(true) // spinner shown even when data hasn't changed
+    setLoading(true); // spinner shown even when data hasn't changed
     fetchTeamMembers().then((data) => {
-      setMembers(data)
-      setLoading(false)
-    })
-  }, [])
+      setMembers(data);
+      setLoading(false);
+    });
+  }, []);
 
-  if (loading) return <DirectorySkeleton />
+  if (loading) return <DirectorySkeleton />;
 
   return (
     <ul>
@@ -45,31 +45,31 @@ function TeamDirectory() {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 **Correct (instant cached data, background refresh):**
 
 ```tsx
-import { useQuery } from "@tanstack/react-query"
+import { useQuery } from '@tanstack/react-query';
 
 interface TeamMember {
-  id: string
-  name: string
-  role: string
-  avatarUrl: string
+  id: string;
+  name: string;
+  role: string;
+  avatarUrl: string;
 }
 
 function TeamDirectory() {
   const { data: members, isLoading } = useQuery({
-    queryKey: ["teamMembers"],
+    queryKey: ['teamMembers'],
     queryFn: fetchTeamMembers,
-    staleTime: 60_000,       // data considered fresh for 60 seconds
-    gcTime: 5 * 60_000,      // cached data kept for 5 minutes
-  })
+    staleTime: 60_000, // data considered fresh for 60 seconds
+    gcTime: 5 * 60_000, // cached data kept for 5 minutes
+  });
 
-  if (isLoading) return <DirectorySkeleton /> // only on first visit
+  if (isLoading) return <DirectorySkeleton />; // only on first visit
 
   return (
     <ul>
@@ -81,7 +81,7 @@ function TeamDirectory() {
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 

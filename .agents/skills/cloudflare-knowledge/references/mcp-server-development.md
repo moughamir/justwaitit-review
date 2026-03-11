@@ -46,23 +46,23 @@ npm install @cloudflare/mcp-server
   "name": "my-mcp-server",
   "main": "src/index.ts",
   "compatibility_date": "2024-01-01",
-  "compatibility_flags": ["nodejs_compat"]
+  "compatibility_flags": ["nodejs_compat"],
 }
 ```
 
 ### Basic MCP Server
 
 ```typescript
-import { McpServer } from "@cloudflare/mcp-server";
+import { McpServer } from '@cloudflare/mcp-server';
 
 interface Env {
   // Your bindings
 }
 
 const server = new McpServer({
-  name: "my-mcp-server",
-  version: "1.0.0",
-  description: "My custom MCP server for Cloudflare services",
+  name: 'my-mcp-server',
+  version: '1.0.0',
+  description: 'My custom MCP server for Cloudflare services',
 });
 
 export default {
@@ -82,17 +82,17 @@ Tools are functions that AI assistants can invoke.
 
 ```typescript
 server.addTool({
-  name: "get_current_time",
-  description: "Get the current UTC time",
+  name: 'get_current_time',
+  description: 'Get the current UTC time',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {},
   },
   handler: async () => {
     return {
       content: [
         {
-          type: "text",
+          type: 'text',
           text: new Date().toISOString(),
         },
       ],
@@ -105,27 +105,27 @@ server.addTool({
 
 ```typescript
 server.addTool({
-  name: "search_products",
-  description: "Search for products in the catalog",
+  name: 'search_products',
+  description: 'Search for products in the catalog',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
       query: {
-        type: "string",
-        description: "Search query",
+        type: 'string',
+        description: 'Search query',
       },
       category: {
-        type: "string",
-        description: "Product category filter",
-        enum: ["electronics", "clothing", "books", "home"],
+        type: 'string',
+        description: 'Product category filter',
+        enum: ['electronics', 'clothing', 'books', 'home'],
       },
       limit: {
-        type: "number",
-        description: "Maximum number of results",
+        type: 'number',
+        description: 'Maximum number of results',
         default: 10,
       },
     },
-    required: ["query"],
+    required: ['query'],
   },
   handler: async ({ query, category, limit }, { env }) => {
     // Access your D1 database or other services
@@ -134,7 +134,7 @@ server.addTool({
     return {
       content: [
         {
-          type: "text",
+          type: 'text',
           text: JSON.stringify(products, null, 2),
         },
       ],
@@ -147,17 +147,17 @@ server.addTool({
 
 ```typescript
 server.addTool({
-  name: "analyze_image",
-  description: "Analyze an image and return description",
+  name: 'analyze_image',
+  description: 'Analyze an image and return description',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
       url: {
-        type: "string",
-        description: "URL of the image to analyze",
+        type: 'string',
+        description: 'URL of the image to analyze',
       },
     },
-    required: ["url"],
+    required: ['url'],
   },
   handler: async ({ url }, { env }) => {
     // Fetch image
@@ -165,15 +165,18 @@ server.addTool({
     const imageData = await response.arrayBuffer();
 
     // Analyze with Workers AI
-    const analysis = await env.AI.run("@cf/meta/llama-3.2-11b-vision-instruct", {
-      image: imageData,
-      prompt: "Describe this image in detail.",
-    });
+    const analysis = await env.AI.run(
+      '@cf/meta/llama-3.2-11b-vision-instruct',
+      {
+        image: imageData,
+        prompt: 'Describe this image in detail.',
+      }
+    );
 
     return {
       content: [
         {
-          type: "text",
+          type: 'text',
           text: analysis.response,
         },
       ],
@@ -193,18 +196,18 @@ Resources are data sources that AI assistants can read.
 
 ```typescript
 server.addResource({
-  uri: "config://app-settings",
-  name: "Application Settings",
-  description: "Current application configuration",
-  mimeType: "application/json",
+  uri: 'config://app-settings',
+  name: 'Application Settings',
+  description: 'Current application configuration',
+  mimeType: 'application/json',
   handler: async () => {
     return {
       contents: [
         {
-          uri: "config://app-settings",
+          uri: 'config://app-settings',
           text: JSON.stringify({
-            version: "1.0.0",
-            features: ["search", "analytics", "export"],
+            version: '1.0.0',
+            features: ['search', 'analytics', 'export'],
           }),
         },
       ],
@@ -217,15 +220,15 @@ server.addResource({
 
 ```typescript
 server.addResource({
-  uri: "db://users/{id}",
-  name: "User Profile",
-  description: "Get user profile by ID",
-  mimeType: "application/json",
+  uri: 'db://users/{id}',
+  name: 'User Profile',
+  description: 'Get user profile by ID',
+  mimeType: 'application/json',
   handler: async ({ uri }, { env }) => {
-    const id = uri.split("/").pop();
-    const user = await env.DB.prepare(
-      "SELECT * FROM users WHERE id = ?"
-    ).bind(id).first();
+    const id = uri.split('/').pop();
+    const user = await env.DB.prepare('SELECT * FROM users WHERE id = ?')
+      .bind(id)
+      .first();
 
     return {
       contents: [
@@ -243,9 +246,9 @@ server.addResource({
 
 ```typescript
 server.addResource({
-  uri: "db://tables",
-  name: "Database Tables",
-  description: "List all tables in the database",
+  uri: 'db://tables',
+  name: 'Database Tables',
+  description: 'List all tables in the database',
   handler: async ({ env }) => {
     const tables = await env.DB.prepare(
       "SELECT name FROM sqlite_master WHERE type='table'"
@@ -254,7 +257,7 @@ server.addResource({
     return {
       contents: [
         {
-          uri: "db://tables",
+          uri: 'db://tables',
           text: JSON.stringify(tables.results),
         },
       ],
@@ -271,29 +274,29 @@ Prompts are reusable templates for AI interactions.
 
 ```typescript
 server.addPrompt({
-  name: "summarize_data",
-  description: "Summarize data from the database",
+  name: 'summarize_data',
+  description: 'Summarize data from the database',
   arguments: [
     {
-      name: "table",
-      description: "Table name to summarize",
+      name: 'table',
+      description: 'Table name to summarize',
       required: true,
     },
     {
-      name: "format",
-      description: "Output format (brief, detailed)",
+      name: 'format',
+      description: 'Output format (brief, detailed)',
       required: false,
     },
   ],
-  handler: async ({ table, format = "brief" }, { env }) => {
+  handler: async ({ table, format = 'brief' }, { env }) => {
     const data = await env.DB.prepare(`SELECT * FROM ${table} LIMIT 100`).all();
 
     return {
       messages: [
         {
-          role: "user",
+          role: 'user',
           content: {
-            type: "text",
+            type: 'text',
             text: `Please provide a ${format} summary of this data:\n\n${JSON.stringify(data.results)}`,
           },
         },
@@ -312,31 +315,31 @@ MCP uses OAuth 2.1 for authorization.
 ### Setup OAuth Provider
 
 ```typescript
-import { McpServer, OAuthProvider } from "@cloudflare/mcp-server";
+import { McpServer, OAuthProvider } from '@cloudflare/mcp-server';
 
 const oauth = new OAuthProvider({
-  clientId: "your-client-id",
+  clientId: 'your-client-id',
   clientSecret: env.OAUTH_CLIENT_SECRET,
-  authorizationEndpoint: "https://auth.example.com/authorize",
-  tokenEndpoint: "https://auth.example.com/token",
-  scopes: ["read", "write"],
+  authorizationEndpoint: 'https://auth.example.com/authorize',
+  tokenEndpoint: 'https://auth.example.com/token',
+  scopes: ['read', 'write'],
 });
 
 const server = new McpServer({
-  name: "my-secure-mcp-server",
-  version: "1.0.0",
+  name: 'my-secure-mcp-server',
+  version: '1.0.0',
   oauth,
 });
 
 // Tools will have access to the authenticated user
 server.addTool({
-  name: "get_my_data",
-  description: "Get data for the authenticated user",
+  name: 'get_my_data',
+  description: 'Get data for the authenticated user',
   handler: async (params, { env, user }) => {
     // user contains OAuth user info
     const data = await fetchUserData(user.id);
     return {
-      content: [{ type: "text", text: JSON.stringify(data) }],
+      content: [{ type: 'text', text: JSON.stringify(data) }],
     };
   },
 });
@@ -347,7 +350,7 @@ server.addTool({
 ```typescript
 // Verify Cloudflare Access JWT
 async function verifyAccess(request: Request, env: Env) {
-  const jwt = request.headers.get("CF-Access-JWT-Assertion");
+  const jwt = request.headers.get('CF-Access-JWT-Assertion');
   if (!jwt) return null;
 
   // Verify with Access public keys
@@ -368,7 +371,7 @@ async function verifyAccess(request: Request, env: Env) {
 ## Complete Example: Database MCP Server
 
 ```typescript
-import { McpServer } from "@cloudflare/mcp-server";
+import { McpServer } from '@cloudflare/mcp-server';
 
 interface Env {
   DB: D1Database;
@@ -376,30 +379,30 @@ interface Env {
 }
 
 const server = new McpServer({
-  name: "database-mcp",
-  version: "1.0.0",
-  description: "MCP server for database operations",
+  name: 'database-mcp',
+  version: '1.0.0',
+  description: 'MCP server for database operations',
 });
 
 // Tool: Query database
 server.addTool({
-  name: "query_database",
-  description: "Execute a read-only SQL query",
+  name: 'query_database',
+  description: 'Execute a read-only SQL query',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
       query: {
-        type: "string",
-        description: "SQL query (SELECT only)",
+        type: 'string',
+        description: 'SQL query (SELECT only)',
       },
     },
-    required: ["query"],
+    required: ['query'],
   },
   handler: async ({ query }, { env }) => {
     // Security: Only allow SELECT
-    if (!query.trim().toUpperCase().startsWith("SELECT")) {
+    if (!query.trim().toUpperCase().startsWith('SELECT')) {
       return {
-        content: [{ type: "text", text: "Error: Only SELECT queries allowed" }],
+        content: [{ type: 'text', text: 'Error: Only SELECT queries allowed' }],
         isError: true,
       };
     }
@@ -409,14 +412,14 @@ server.addTool({
       return {
         content: [
           {
-            type: "text",
+            type: 'text',
             text: JSON.stringify(result.results, null, 2),
           },
         ],
       };
     } catch (error) {
       return {
-        content: [{ type: "text", text: `Error: ${error.message}` }],
+        content: [{ type: 'text', text: `Error: ${error.message}` }],
         isError: true,
       };
     }
@@ -425,27 +428,25 @@ server.addTool({
 
 // Tool: Describe table
 server.addTool({
-  name: "describe_table",
-  description: "Get schema information for a table",
+  name: 'describe_table',
+  description: 'Get schema information for a table',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
       table: {
-        type: "string",
-        description: "Table name",
+        type: 'string',
+        description: 'Table name',
       },
     },
-    required: ["table"],
+    required: ['table'],
   },
   handler: async ({ table }, { env }) => {
-    const schema = await env.DB.prepare(
-      `PRAGMA table_info(${table})`
-    ).all();
+    const schema = await env.DB.prepare(`PRAGMA table_info(${table})`).all();
 
     return {
       content: [
         {
-          type: "text",
+          type: 'text',
           text: JSON.stringify(schema.results, null, 2),
         },
       ],
@@ -455,17 +456,17 @@ server.addTool({
 
 // Tool: Generate SQL
 server.addTool({
-  name: "generate_sql",
-  description: "Generate SQL query from natural language",
+  name: 'generate_sql',
+  description: 'Generate SQL query from natural language',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
       description: {
-        type: "string",
-        description: "Natural language description of the query",
+        type: 'string',
+        description: 'Natural language description of the query',
       },
     },
-    required: ["description"],
+    required: ['description'],
   },
   handler: async ({ description }, { env }) => {
     // Get schema context
@@ -482,34 +483,37 @@ server.addTool({
     }
 
     // Use AI to generate SQL
-    const response = await env.AI.run("@cf/meta/llama-3.3-70b-instruct-fp8-fast", {
-      messages: [
-        {
-          role: "system",
-          content: `You are a SQL expert. Generate a SQLite query based on the user's request.
+    const response = await env.AI.run(
+      '@cf/meta/llama-3.3-70b-instruct-fp8-fast',
+      {
+        messages: [
+          {
+            role: 'system',
+            content: `You are a SQL expert. Generate a SQLite query based on the user's request.
 Schema:
 ${JSON.stringify(schemaInfo, null, 2)}
 
 Only respond with the SQL query, no explanation.`,
-        },
-        {
-          role: "user",
-          content: description,
-        },
-      ],
-    });
+          },
+          {
+            role: 'user',
+            content: description,
+          },
+        ],
+      }
+    );
 
     return {
-      content: [{ type: "text", text: response.response }],
+      content: [{ type: 'text', text: response.response }],
     };
   },
 });
 
 // Resource: List tables
 server.addResource({
-  uri: "db://tables",
-  name: "Database Tables",
-  description: "List all tables in the database",
+  uri: 'db://tables',
+  name: 'Database Tables',
+  description: 'List all tables in the database',
   handler: async ({ env }) => {
     const tables = await env.DB.prepare(
       "SELECT name FROM sqlite_master WHERE type='table'"
@@ -518,7 +522,7 @@ server.addResource({
     return {
       contents: [
         {
-          uri: "db://tables",
+          uri: 'db://tables',
           text: JSON.stringify(tables.results.map((t) => t.name)),
         },
       ],
@@ -581,6 +585,7 @@ Connect to Cloudflare's built-in MCP servers:
 ```
 
 Available tools:
+
 - Workers management (deploy, list, logs)
 - R2 bucket operations
 - D1 database queries
@@ -608,12 +613,12 @@ Available tools:
 
 ```typescript
 server.addTool({
-  name: "risky_operation",
+  name: 'risky_operation',
   handler: async (params, { env }) => {
     try {
       const result = await riskyOperation(params);
       return {
-        content: [{ type: "text", text: JSON.stringify(result) }],
+        content: [{ type: 'text', text: JSON.stringify(result) }],
         isError: false,
       };
     } catch (error) {
@@ -621,11 +626,11 @@ server.addTool({
       return {
         content: [
           {
-            type: "text",
+            type: 'text',
             text: JSON.stringify({
               error: error.message,
-              code: error.code || "UNKNOWN",
-              suggestion: "Try with different parameters",
+              code: error.code || 'UNKNOWN',
+              suggestion: 'Try with different parameters',
             }),
           },
         ],

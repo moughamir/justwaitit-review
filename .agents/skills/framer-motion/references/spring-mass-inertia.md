@@ -12,15 +12,15 @@ Mass controls the inertia of animated elements. Default mass (1) works for small
 **Incorrect (default mass on large element):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function FullscreenDrawer({ isOpen }: { isOpen: boolean }) {
   return (
     <motion.div
       className="drawer-fullscreen"
-      initial={{ x: "100%" }}
-      animate={{ x: isOpen ? 0 : "100%" }}
-      transition={{ type: "spring", stiffness: 300, damping: 30 }}  // Feels too light for fullscreen element
+      initial={{ x: '100%' }}
+      animate={{ x: isOpen ? 0 : '100%' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }} // Feels too light for fullscreen element
     >
       <div className="drawer-content">
         <h2>Settings Panel</h2>
@@ -34,15 +34,15 @@ function FullscreenDrawer({ isOpen }: { isOpen: boolean }) {
 **Correct (increased mass for weight):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function FullscreenDrawer({ isOpen }: { isOpen: boolean }) {
   return (
     <motion.div
       className="drawer-fullscreen"
-      initial={{ x: "100%" }}
-      animate={{ x: isOpen ? 0 : "100%" }}
-      transition={{ type: "spring", stiffness: 300, damping: 30, mass: 1.5 }}  // Feels appropriately heavy
+      initial={{ x: '100%' }}
+      animate={{ x: isOpen ? 0 : '100%' }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30, mass: 1.5 }} // Feels appropriately heavy
     >
       <div className="drawer-content">
         <h2>Settings Panel</h2>
@@ -54,6 +54,7 @@ function FullscreenDrawer({ isOpen }: { isOpen: boolean }) {
 ```
 
 **Mass guidelines:**
+
 - `mass: 0.5-0.8`: Light, snappy micro-interactions (buttons, icons)
 - `mass: 1`: Default, suitable for cards, menus, tooltips
 - `mass: 1.2-2`: Heavy elements (drawers, modals, large panels)

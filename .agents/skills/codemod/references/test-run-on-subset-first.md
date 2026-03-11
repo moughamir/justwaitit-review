@@ -43,6 +43,7 @@ npx codemod jssg run ./transform.ts ./src --language tsx
 ```
 
 **Subset selection strategies:**
+
 - Start with smallest files
 - Include files with known edge cases
 - Test each file type (`.ts`, `.tsx`, `.js`)

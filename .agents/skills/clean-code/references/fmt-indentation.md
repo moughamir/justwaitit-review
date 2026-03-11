@@ -52,6 +52,7 @@ if (condition) {
 ```
 
 **Why maintain indentation?**
+
 - Visual scanning relies on indentation
 - Structure is immediately apparent
 - Debugging is easier when scope is visible

@@ -13,23 +13,23 @@ Detached DOM nodes and retained component closures are invisible in code review.
 
 ```tsx
 function ChatRoom({ roomId }: { roomId: string }) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [messages, setMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const connection = createChatConnection(roomId)
+    const connection = createChatConnection(roomId);
 
-    connection.on("message", (message: Message) => {
-      setMessages((prev) => [...prev, message])
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    })
+    connection.on('message', (message: Message) => {
+      setMessages((prev) => [...prev, message]);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    });
 
-    connection.connect()
+    connection.connect();
 
     // Missing cleanup — connection holds reference to setMessages closure
     // Navigating between rooms accumulates connections and message arrays
     // No way to detect this without heap analysis
-  }, [roomId])
+  }, [roomId]);
 
   return (
     <div className="chat-messages">
@@ -38,7 +38,7 @@ function ChatRoom({ roomId }: { roomId: string }) {
       ))}
       <div ref={messagesEndRef} />
     </div>
-  )
+  );
 }
 ```
 
@@ -55,23 +55,23 @@ function ChatRoom({ roomId }: { roomId: string }) {
 
 // Fix: proper cleanup after identifying the leak via heap snapshot
 function ChatRoom({ roomId }: { roomId: string }) {
-  const [messages, setMessages] = useState<Message[]>([])
-  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [messages, setMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const connection = createChatConnection(roomId)
+    const connection = createChatConnection(roomId);
 
-    connection.on("message", (message: Message) => {
-      setMessages((prev) => [...prev, message])
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
-    })
+    connection.on('message', (message: Message) => {
+      setMessages((prev) => [...prev, message]);
+      messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    });
 
-    connection.connect()
+    connection.connect();
 
     return () => {
-      connection.disconnect() // releases socket, listeners, and closure
-    }
-  }, [roomId])
+      connection.disconnect(); // releases socket, listeners, and closure
+    };
+  }, [roomId]);
 
   return (
     <div className="chat-messages">
@@ -80,7 +80,7 @@ function ChatRoom({ roomId }: { roomId: string }) {
       ))}
       <div ref={messagesEndRef} />
     </div>
-  )
+  );
 }
 
 // Verify fix: repeat snapshot comparison — no detached nodes remain

@@ -14,11 +14,7 @@ Tailwind scans source files for complete class strings at build time. It does no
 ```jsx
 // Tailwind cannot detect these classes — they WILL be purged
 function Badge({ color, size }) {
-  return (
-    <span className={`bg-${color}-500 text-${size}`}>
-      Badge
-    </span>
-  );
+  return <span className={`bg-${color}-500 text-${size}`}>Badge</span>;
 }
 ```
 
@@ -39,11 +35,7 @@ const sizeMap = {
 };
 
 function Badge({ color, size }) {
-  return (
-    <span className={`${colorMap[color]} ${sizeMap[size]}`}>
-      Badge
-    </span>
-  );
+  return <span className={`${colorMap[color]} ${sizeMap[size]}`}>Badge</span>;
 }
 ```
 

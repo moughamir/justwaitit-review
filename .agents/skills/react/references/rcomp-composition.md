@@ -69,6 +69,7 @@ function CardBody({ children }: { children: ReactNode }) {
 ```
 
 **Benefits:**
+
 - Each component has single responsibility
 - Easy to add new variants
 - TypeScript infers children correctly

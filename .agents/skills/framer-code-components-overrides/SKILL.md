@@ -19,6 +19,7 @@ metadata:
 ## Required Annotations
 
 Always include at minimum:
+
 ```typescript
 /**
  * @framerDisableUnlink
@@ -28,6 +29,7 @@ Always include at minimum:
 ```
 
 Full set:
+
 - `@framerDisableUnlink` — Prevents unlinking when modified
 - `@framerIntrinsicWidth` / `@framerIntrinsicHeight` — Default dimensions
 - `@framerSupportedLayoutWidth` / `@framerSupportedLayoutHeight` — `any`, `auto`, `fixed`, `any-prefer-fixed`
@@ -94,6 +96,7 @@ style={{
 ```
 
 Font control definition:
+
 ```typescript
 font: {
     type: ControlType.Font,
@@ -112,15 +115,15 @@ font: {
 All React state updates in Framer must be wrapped in `startTransition()`:
 
 ```typescript
-import { startTransition } from "react"
+import { startTransition } from 'react';
 
 // ❌ WRONG - May cause issues in Framer's rendering pipeline
-setCount(count + 1)
+setCount(count + 1);
 
 // ✅ CORRECT - Always wrap state updates
 startTransition(() => {
-    setCount(count + 1)
-})
+  setCount(count + 1);
+});
 ```
 
 This is Framer-specific and prevents performance issues with concurrent rendering.
@@ -130,6 +133,7 @@ This is Framer-specific and prevents performance issues with concurrent renderin
 Framer pre-renders on server. Browser APIs unavailable during SSR.
 
 **Two-phase rendering pattern:**
+
 ```typescript
 const [isClient, setIsClient] = useState(false)
 
@@ -145,6 +149,7 @@ if (!isClient) {
 ```
 
 **Never access directly at render time:**
+
 - `window`, `document`, `navigator`
 - `localStorage`, `sessionStorage`
 - `window.innerWidth`, `window.innerHeight`
@@ -161,6 +166,7 @@ const isOnCanvas = RenderTarget.current() === RenderTarget.canvas
 ```
 
 Use for:
+
 - Debug overlays
 - Disabling heavy effects in editor
 - Preview toggles
@@ -195,17 +201,18 @@ export function withVariantControl(Component): ComponentType {
 Framer's scroll detection uses viewport-based IntersectionObserver. Applying `overflow: scroll` to containers breaks this detection.
 
 For scroll-triggered animations, use:
+
 ```typescript
 const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting && !hasEntered) {
-                setHasEntered(true)
-            }
-        })
-    },
-    { threshold: 0.1 }
-)
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting && !hasEntered) {
+        setHasEntered(true);
+      }
+    });
+  },
+  { threshold: 0.1 }
+);
 ```
 
 ## WebGL in Framer
@@ -215,34 +222,37 @@ See [references/webgl-shaders.md](references/webgl-shaders.md) for shader implem
 ## NPM Package Imports
 
 Standard import (preferred):
+
 ```typescript
-import { Component } from "package-name"
+import { Component } from 'package-name';
 ```
 
 Force specific version via CDN when Framer cache is stuck:
+
 ```typescript
-import { Component } from "https://esm.sh/package-name@1.2.3?external=react,react-dom"
+import { Component } from 'https://esm.sh/package-name@1.2.3?external=react,react-dom';
 ```
 
 Always include `?external=react,react-dom` for React components.
 
 ## Common Pitfalls
 
-| Issue | Cause | Fix |
-|-------|-------|-----|
-| Font styles not applying | Accessing font props individually | Spread entire font object: `...props.font` |
-| Hydration mismatch | Browser API in render | Use `isClient` state pattern |
-| Override props undefined | Expecting property controls | Overrides don't support `addPropertyControls` |
-| Scroll animation broken | `overflow: scroll` on container | Use IntersectionObserver on viewport |
-| Shader attach error | Null shader from compilation failure | Check `createShader()` return before `attachShader()` |
-| Component display name | Need custom name in Framer UI | `Component.displayName = "Name"` |
-| TypeScript `Timeout` errors | Using `NodeJS.Timeout` type | Use `number` instead — browser environment |
-| Overlay stuck under content | Stacking context from parent | Use React Portal to render at `document.body` level |
-| Easing feels same for all curves | Not tracking initial distance | Track `initialDiff` when target changes for progress calculation |
+| Issue                            | Cause                                | Fix                                                              |
+| -------------------------------- | ------------------------------------ | ---------------------------------------------------------------- |
+| Font styles not applying         | Accessing font props individually    | Spread entire font object: `...props.font`                       |
+| Hydration mismatch               | Browser API in render                | Use `isClient` state pattern                                     |
+| Override props undefined         | Expecting property controls          | Overrides don't support `addPropertyControls`                    |
+| Scroll animation broken          | `overflow: scroll` on container      | Use IntersectionObserver on viewport                             |
+| Shader attach error              | Null shader from compilation failure | Check `createShader()` return before `attachShader()`            |
+| Component display name           | Need custom name in Framer UI        | `Component.displayName = "Name"`                                 |
+| TypeScript `Timeout` errors      | Using `NodeJS.Timeout` type          | Use `number` instead — browser environment                       |
+| Overlay stuck under content      | Stacking context from parent         | Use React Portal to render at `document.body` level              |
+| Easing feels same for all curves | Not tracking initial distance        | Track `initialDiff` when target changes for progress calculation |
 
 ## Mobile Optimization
 
 For particle systems and heavy animations:
+
 - Implement resize debouncing (500ms default)
 - Add size change threshold (15% minimum)
 - Handle orientation changes with dedicated listener
@@ -251,20 +261,22 @@ For particle systems and heavy animations:
 ## CMS Content Timing
 
 CMS content loads asynchronously after hydration. Processing sequence:
+
 1. SSR: Placeholder content
 2. Hydration: React attaches
 3. CMS Load: Real content (~50-200ms)
 
 Add delay before processing CMS data:
+
 ```typescript
 useEffect(() => {
-    if (isClient && props.children) {
-        const timer = setTimeout(() => {
-            processContent(props.children)
-        }, 100)
-        return () => clearTimeout(timer)
-    }
-}, [isClient, props.children])
+  if (isClient && props.children) {
+    const timer = setTimeout(() => {
+      processContent(props.children);
+    }, 100);
+    return () => clearTimeout(timer);
+  }
+}, [isClient, props.children]);
 ```
 
 ## Text Manipulation in Overrides
@@ -273,25 +285,26 @@ Framer text uses deeply nested structure. Process recursively:
 
 ```typescript
 const processChildren = (children) => {
-    if (typeof children === "string") {
-        return processText(children)
-    }
-    if (isValidElement(children)) {
-        return cloneElement(children, {
-            ...children.props,
-            children: processChildren(children.props.children)
-        })
-    }
-    if (Array.isArray(children)) {
-        return children.map(child => processChildren(child))
-    }
-    return children
-}
+  if (typeof children === 'string') {
+    return processText(children);
+  }
+  if (isValidElement(children)) {
+    return cloneElement(children, {
+      ...children.props,
+      children: processChildren(children.props.children),
+    });
+  }
+  if (Array.isArray(children)) {
+    return children.map((child) => processChildren(child));
+  }
+  return children;
+};
 ```
 
 ## Animation Best Practices
 
 **Separate positioning from animation:**
+
 ```typescript
 <motion.div
     style={{
@@ -303,6 +316,7 @@ const processChildren = (children) => {
 ```
 
 **Split animation phases for natural motion:**
+
 ```typescript
 // Up: snappy pop
 transition={{ duration: 0.15, ease: [0, 0, 0.39, 2.99] }}
@@ -314,6 +328,7 @@ transition={{ duration: 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
 ## Safari SVG Fix
 
 Force GPU acceleration for smooth SVG animations:
+
 ```typescript
 style={{
     willChange: "transform",
@@ -356,6 +371,7 @@ export default function ComponentWithOverlay(props) {
 ```
 
 **Key differences:**
+
 - `position: "fixed"` positions relative to viewport, not parent
 - Portal breaks out of component's DOM hierarchy and stacking context
 - Works for modals, tooltips, popovers, loading overlays
@@ -368,37 +384,38 @@ Portals work in both canvas editor and published site. No RenderTarget check nee
 **Pattern:** Show loading overlay and prevent page scroll until content is ready.
 
 ```typescript
-const [isLoading, setIsLoading] = useState(true)
-const [fadeOut, setFadeOut] = useState(false)
+const [isLoading, setIsLoading] = useState(true);
+const [fadeOut, setFadeOut] = useState(false);
 
 // Prevent scroll while loading (published site only)
 useEffect(() => {
-    const isPublished = RenderTarget.current() !== "CANVAS"
-    if (!isPublished || !isLoading) return
+  const isPublished = RenderTarget.current() !== 'CANVAS';
+  if (!isPublished || !isLoading) return;
 
-    const originalOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
+  const originalOverflow = document.body.style.overflow;
+  document.body.style.overflow = 'hidden';
 
-    return () => {
-        document.body.style.overflow = originalOverflow
-    }
-}, [isLoading])
+  return () => {
+    document.body.style.overflow = originalOverflow;
+  };
+}, [isLoading]);
 
 // Two-phase hide: fade-out → remove from DOM
 const hideLoader = () => {
-    setFadeOut(true)
-    setTimeout(() => setIsLoading(false), 300) // Match CSS transition
-}
+  setFadeOut(true);
+  setTimeout(() => setIsLoading(false), 300); // Match CSS transition
+};
 ```
 
 **Scroll to top on load** (fixes variant sequence issues):
+
 ```typescript
 useEffect(() => {
-    const isPublished = RenderTarget.current() !== "CANVAS"
-    if (isPublished) {
-        window.scrollTo(0, 0)
-    }
-}, [])
+  const isPublished = RenderTarget.current() !== 'CANVAS';
+  if (isPublished) {
+    window.scrollTo(0, 0);
+  }
+}, []);
 ```
 
 ## Easing Curves with Lerp Animations
@@ -409,53 +426,55 @@ useEffect(() => {
 
 ```typescript
 const animated = useRef({
-    property: {
-        current: 0,
-        target: 0,
-        initialDiff: 0,  // Track for easing calculations
-    }
-})
+  property: {
+    current: 0,
+    target: 0,
+    initialDiff: 0, // Track for easing calculations
+  },
+});
 
 // When target changes, store initial distance
 const updateTarget = (newTarget) => {
-    const entry = animated.current.property
-    entry.initialDiff = Math.abs(newTarget - entry.current)
-    entry.target = newTarget
-}
+  const entry = animated.current.property;
+  entry.initialDiff = Math.abs(newTarget - entry.current);
+  entry.target = newTarget;
+};
 
 // Apply easing in animation loop
 const applyEasing = (easingCurve) => {
-    const v = animated.current.property
-    const diff = v.target - v.current
-    let speed = 0.05  // Base speed
+  const v = animated.current.property;
+  const diff = v.target - v.current;
+  let speed = 0.05; // Base speed
 
-    if (easingCurve !== "ease-out") {
-        // Calculate progress: 0 at start, 1 near target
-        const diffMagnitude = Math.abs(diff)
-        const progress = v.initialDiff > 0
-            ? Math.max(0, Math.min(1, 1 - (diffMagnitude / v.initialDiff)))
-            : 1
+  if (easingCurve !== 'ease-out') {
+    // Calculate progress: 0 at start, 1 near target
+    const diffMagnitude = Math.abs(diff);
+    const progress =
+      v.initialDiff > 0
+        ? Math.max(0, Math.min(1, 1 - diffMagnitude / v.initialDiff))
+        : 1;
 
-        if (easingCurve === "ease-in") {
-            // Start slow, end fast (cubic)
-            speed *= (0.05 + Math.pow(progress, 3) * 10)
-        } else if (easingCurve === "ease-in-out") {
-            // Slow-fast-slow (smootherstep)
-            const smoothed = progress * progress * progress *
-                (progress * (progress * 6 - 15) + 10)
-            speed *= (0.2 + smoothed * 3)
-        }
+    if (easingCurve === 'ease-in') {
+      // Start slow, end fast (cubic)
+      speed *= 0.05 + Math.pow(progress, 3) * 10;
+    } else if (easingCurve === 'ease-in-out') {
+      // Slow-fast-slow (smootherstep)
+      const smoothed =
+        progress * progress * progress * (progress * (progress * 6 - 15) + 10);
+      speed *= 0.2 + smoothed * 3;
     }
-    // ease-out: use default exponential decay
+  }
+  // ease-out: use default exponential decay
 
-    v.current += diff * speed
-}
+  v.current += diff * speed;
+};
 ```
 
 **Why aggressive curves?**
 Exponential lerp naturally slows down approaching target. To create noticeable ease-in, need extreme multipliers (0.05x → 10x) to overcome the natural decay.
 
 **Property control:**
+
 ```typescript
 easingCurve: {
     type: ControlType.Enum,

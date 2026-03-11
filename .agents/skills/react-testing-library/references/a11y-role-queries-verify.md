@@ -13,16 +13,24 @@ Using `getByRole` queries inherently verifies accessibility. If an element lacks
 
 ```tsx
 // Component missing accessible name
-render(<button><Icon name="close" /></button>)
+render(
+  <button>
+    <Icon name="close" />
+  </button>
+);
 
-screen.getByRole('button', { name: /close/i })
+screen.getByRole('button', { name: /close/i });
 // Error: Unable to find an accessible element with the role "button"
 // and name "/close/i"
 
 // Fix: Add aria-label
-render(<button aria-label="Close"><Icon name="close" /></button>)
+render(
+  <button aria-label="Close">
+    <Icon name="close" />
+  </button>
+);
 
-screen.getByRole('button', { name: /close/i })
+screen.getByRole('button', { name: /close/i });
 // Passes - button is now accessible
 ```
 
@@ -30,8 +38,8 @@ screen.getByRole('button', { name: /close/i })
 
 ```tsx
 // Missing label association
-render(<input type="text" />)
-screen.getByRole('textbox', { name: /email/i })
+render(<input type="text" />);
+screen.getByRole('textbox', { name: /email/i });
 // Fails - no accessible name
 
 // Fix with label
@@ -40,8 +48,8 @@ render(
     <label htmlFor="email">Email</label>
     <input id="email" type="text" />
   </>
-)
-screen.getByRole('textbox', { name: /email/i })
+);
+screen.getByRole('textbox', { name: /email/i });
 // Passes
 ```
 
@@ -49,9 +57,9 @@ screen.getByRole('textbox', { name: /email/i })
 
 ```tsx
 // If this query works, the element is accessible
-const submitButton = screen.getByRole('button', { name: /submit/i })
-const emailInput = screen.getByLabelText('Email')
-const dialog = screen.getByRole('dialog', { name: /confirm/i })
+const submitButton = screen.getByRole('button', { name: /submit/i });
+const emailInput = screen.getByLabelText('Email');
+const dialog = screen.getByRole('dialog', { name: /confirm/i });
 ```
 
 Reference: [Testing Library Guiding Principles](https://testing-library.com/docs/guiding-principles)

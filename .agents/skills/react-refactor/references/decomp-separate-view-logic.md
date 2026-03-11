@@ -18,17 +18,19 @@ function SubscriptionManager({ userId }: { userId: string }) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCurrentPlan(userId).then(setPlan).catch(() => setError("Failed to load plan"));
+    fetchCurrentPlan(userId)
+      .then(setPlan)
+      .catch(() => setError('Failed to load plan'));
   }, [userId]);
 
   async function handleUpgrade(targetPlan: PlanTier) {
     if (!plan) return;
     if (plan.tier === targetPlan) {
-      setError("Already on this plan");
+      setError('Already on this plan');
       return;
     }
-    if (plan.tier === "enterprise" && targetPlan !== "enterprise") {
-      setError("Enterprise downgrades require support");
+    if (plan.tier === 'enterprise' && targetPlan !== 'enterprise') {
+      setError('Enterprise downgrades require support');
       return;
     }
     setIsUpgrading(true);
@@ -37,17 +39,19 @@ function SubscriptionManager({ userId }: { userId: string }) {
       const upgraded = await upgradePlan(userId, targetPlan);
       setPlan(upgraded);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upgrade failed");
+      setError(err instanceof Error ? err.message : 'Upgrade failed');
     } finally {
       setIsUpgrading(false);
     }
   }
 
   const renewalDate = plan
-    ? new Intl.DateTimeFormat("en-US", { dateStyle: "long" }).format(plan.renewsAt)
-    : "";
+    ? new Intl.DateTimeFormat('en-US', { dateStyle: 'long' }).format(
+        plan.renewsAt
+      )
+    : '';
 
-  const monthlyPrice = plan ? formatCurrency(plan.pricePerMonth) : "";
+  const monthlyPrice = plan ? formatCurrency(plan.pricePerMonth) : '';
 
   return (
     <div>
@@ -55,9 +59,11 @@ function SubscriptionManager({ userId }: { userId: string }) {
       {plan && (
         <>
           <h2>{plan.tier} Plan</h2>
-          <p>{monthlyPrice}/month — renews {renewalDate}</p>
-          <button onClick={() => handleUpgrade("pro")} disabled={isUpgrading}>
-            {isUpgrading ? "Upgrading..." : "Upgrade to Pro"}
+          <p>
+            {monthlyPrice}/month — renews {renewalDate}
+          </p>
+          <button onClick={() => handleUpgrade('pro')} disabled={isUpgrading}>
+            {isUpgrading ? 'Upgrading...' : 'Upgrade to Pro'}
           </button>
         </>
       )}
@@ -76,7 +82,9 @@ function useSubscription(userId: string) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetchCurrentPlan(userId).then(setPlan).catch(() => setError("Failed to load plan"));
+    fetchCurrentPlan(userId)
+      .then(setPlan)
+      .catch(() => setError('Failed to load plan'));
   }, [userId]);
 
   async function handleUpgrade(targetPlan: PlanTier) {
@@ -86,7 +94,7 @@ function useSubscription(userId: string) {
     try {
       setPlan(await upgradePlan(userId, targetPlan));
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Upgrade failed");
+      setError(err instanceof Error ? err.message : 'Upgrade failed');
     } finally {
       setIsUpgrading(false);
     }
@@ -106,8 +114,8 @@ function SubscriptionManager({ userId }: { userId: string }) {
         <>
           <h2>{plan.tier} Plan</h2>
           <p>{formatCurrency(plan.pricePerMonth)}/month</p>
-          <button onClick={() => handleUpgrade("pro")} disabled={isUpgrading}>
-            {isUpgrading ? "Upgrading..." : "Upgrade to Pro"}
+          <button onClick={() => handleUpgrade('pro')} disabled={isUpgrading}>
+            {isUpgrading ? 'Upgrading...' : 'Upgrade to Pro'}
           </button>
         </>
       )}

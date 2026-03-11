@@ -16,65 +16,72 @@ function AlertBanner({
   type,
   children,
 }: {
-  type: "info" | "success" | "error"
-  children: React.ReactNode
+  type: 'info' | 'success' | 'error';
+  children: React.ReactNode;
 }) {
   return (
     <div
       className={`rounded-lg p-4 ${
-        type === "info"
-          ? "border-blue-200 bg-blue-50 text-blue-800"
-          : type === "success"
-            ? "border-green-200 bg-green-50 text-green-800"
-            : "border-red-200 bg-red-50 text-red-800"
+        type === 'info'
+          ? 'border-blue-200 bg-blue-50 text-blue-800'
+          : type === 'success'
+            ? 'border-green-200 bg-green-50 text-green-800'
+            : 'border-red-200 bg-red-50 text-red-800'
       }`}
     >
       {/* Border style missing from base, must be repeated in each variant */}
       {children}
     </div>
-  )
+  );
 }
 ```
 
 **Correct (separated base and variant definitions):**
 
 ```tsx
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "@/lib/utils"
+import { cva, type VariantProps } from 'class-variance-authority';
+import { cn } from '@/lib/utils';
 
 const alertVariants = cva(
   // Base styles applied to all variants
-  "rounded-lg border p-4",
+  'rounded-lg border p-4',
   {
     variants: {
       type: {
         // Only color-related styles in variants
-        info: "border-blue-200 bg-blue-50 text-blue-800",
-        success: "border-green-200 bg-green-50 text-green-800",
-        error: "border-red-200 bg-red-50 text-red-800",
+        info: 'border-blue-200 bg-blue-50 text-blue-800',
+        success: 'border-green-200 bg-green-50 text-green-800',
+        error: 'border-red-200 bg-red-50 text-red-800',
       },
     },
     defaultVariants: {
-      type: "info",
+      type: 'info',
     },
   }
-)
+);
 
 interface AlertBannerProps
-  extends React.HTMLAttributes<HTMLDivElement>,
+  extends
+    React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof alertVariants> {}
 
-function AlertBanner({ type, className, children, ...props }: AlertBannerProps) {
+function AlertBanner({
+  type,
+  className,
+  children,
+  ...props
+}: AlertBannerProps) {
   return (
     <div className={cn(alertVariants({ type }), className)} {...props}>
       {children}
     </div>
-  )
+  );
 }
 // Base styles (rounded-lg, border, p-4) guaranteed on all variants
 ```
 
 **Benefits:**
+
 - Base styles guaranteed on all variants
 - Easy to add new variants without duplicating structure
 - Clear separation enables easier maintenance

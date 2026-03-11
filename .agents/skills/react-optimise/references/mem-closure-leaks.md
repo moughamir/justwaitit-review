@@ -13,7 +13,10 @@ Event handlers that capture large arrays, datasets, or DOM references in their c
 
 ```tsx
 function AnalyticsOverlay({ events }: { events: AnalyticsEvent[] }) {
-  const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(null)
+  const [hoverPosition, setHoverPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -22,21 +25,23 @@ function AnalyticsOverlay({ events }: { events: AnalyticsEvent[] }) {
         (event) =>
           Math.abs(event.x - e.clientX) < 10 &&
           Math.abs(event.y - e.clientY) < 10
-      )
+      );
       if (nearbyEvent) {
-        setHoverPosition({ x: e.clientX, y: e.clientY })
+        setHoverPosition({ x: e.clientX, y: e.clientY });
       }
-    }
+    };
 
-    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove);
     // Missing cleanup — handler retains events array after unmount
-  }, [events])
+  }, [events]);
 
   return hoverPosition ? (
-    <div style={{ position: "fixed", left: hoverPosition.x, top: hoverPosition.y }}>
+    <div
+      style={{ position: 'fixed', left: hoverPosition.x, top: hoverPosition.y }}
+    >
       <EventTooltip />
     </div>
-  ) : null
+  ) : null;
 }
 ```
 
@@ -44,40 +49,45 @@ function AnalyticsOverlay({ events }: { events: AnalyticsEvent[] }) {
 
 ```tsx
 function AnalyticsOverlay({ events }: { events: AnalyticsEvent[] }) {
-  const [hoverPosition, setHoverPosition] = useState<{ x: number; y: number } | null>(null)
-  const spatialIndexRef = useRef<Map<string, AnalyticsEvent>>(new Map())
+  const [hoverPosition, setHoverPosition] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
+  const spatialIndexRef = useRef<Map<string, AnalyticsEvent>>(new Map());
 
   useEffect(() => {
     // Build lightweight lookup — closure captures only the ref
-    const index = new Map<string, AnalyticsEvent>()
+    const index = new Map<string, AnalyticsEvent>();
     for (const event of events) {
-      const key = `${Math.round(event.x / 10)},${Math.round(event.y / 10)}`
-      index.set(key, event)
+      const key = `${Math.round(event.x / 10)},${Math.round(event.y / 10)}`;
+      index.set(key, event);
     }
-    spatialIndexRef.current = index
-  }, [events])
+    spatialIndexRef.current = index;
+  }, [events]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const key = `${Math.round(e.clientX / 10)},${Math.round(e.clientY / 10)}`
+      const key = `${Math.round(e.clientX / 10)},${Math.round(e.clientY / 10)}`;
       if (spatialIndexRef.current.has(key)) {
-        setHoverPosition({ x: e.clientX, y: e.clientY })
+        setHoverPosition({ x: e.clientX, y: e.clientY });
       } else {
-        setHoverPosition(null)
+        setHoverPosition(null);
       }
-    }
+    };
 
-    window.addEventListener("mousemove", handleMouseMove)
+    window.addEventListener('mousemove', handleMouseMove);
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   return hoverPosition ? (
-    <div style={{ position: "fixed", left: hoverPosition.x, top: hoverPosition.y }}>
+    <div
+      style={{ position: 'fixed', left: hoverPosition.x, top: hoverPosition.y }}
+    >
       <EventTooltip />
     </div>
-  ) : null
+  ) : null;
 }
 ```
 

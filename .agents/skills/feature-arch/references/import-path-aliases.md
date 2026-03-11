@@ -14,7 +14,7 @@ Configure path aliases to avoid relative import chains. Aliases make imports sel
 ```typescript
 // src/features/checkout/components/PaymentForm.tsx
 import { Button } from '../../../shared/components/Button';
-import { useAuth } from '../../../features/auth/hooks/useAuth';  // Also wrong: cross-feature
+import { useAuth } from '../../../features/auth/hooks/useAuth'; // Also wrong: cross-feature
 import { formatCurrency } from '../../../shared/utils/formatCurrency';
 import { useCheckout } from '../hooks/useCheckout';
 ```
@@ -25,7 +25,7 @@ import { useCheckout } from '../hooks/useCheckout';
 // src/features/checkout/components/PaymentForm.tsx
 import { Button } from '@/shared/components/Button';
 import { formatCurrency } from '@/shared/utils/formatCurrency';
-import { useCheckout } from '../hooks/useCheckout';  // Same feature = relative OK
+import { useCheckout } from '../hooks/useCheckout'; // Same feature = relative OK
 ```
 
 **tsconfig.json:**
@@ -45,6 +45,7 @@ import { useCheckout } from '../hooks/useCheckout';  // Same feature = relative 
 ```
 
 **Guidelines:**
+
 - Use `@/` prefix for absolute imports from src
 - Use relative imports (`./`, `../`) within the same feature
 - Relative imports within a feature make the feature more portable

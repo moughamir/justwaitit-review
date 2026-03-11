@@ -17,9 +17,9 @@ render(
     <label htmlFor="email">Email</label>
     <input id="email" data-testid="email-input" />
   </form>
-)
+);
 
-const input = screen.getByTestId('email-input')
+const input = screen.getByTestId('email-input');
 // User cannot see data-testid attribute
 ```
 
@@ -31,13 +31,14 @@ render(
     <label htmlFor="email">Email</label>
     <input id="email" data-testid="email-input" />
   </form>
-)
+);
 
-const input = screen.getByLabelText('Email')
+const input = screen.getByLabelText('Email');
 // User navigates by label text
 ```
 
 **When testid IS acceptable:**
+
 - Dynamic content where text changes frequently
 - Elements without semantic meaning (decorative containers)
 - As a fallback when no other query works

@@ -12,7 +12,7 @@ The `overflow-ellipsis` utility has been removed in Tailwind CSS v4. It was rena
 **Incorrect (what's wrong):**
 
 ```html
-<p class="overflow-ellipsis overflow-hidden whitespace-nowrap">
+<p class="overflow-hidden overflow-ellipsis whitespace-nowrap">
   This text will be truncated with an ellipsis when it overflows.
 </p>
 ```
@@ -20,7 +20,7 @@ The `overflow-ellipsis` utility has been removed in Tailwind CSS v4. It was rena
 **Correct (what's right):**
 
 ```html
-<p class="text-ellipsis overflow-hidden whitespace-nowrap">
+<p class="overflow-hidden text-ellipsis whitespace-nowrap">
   This text will be truncated with an ellipsis when it overflows.
 </p>
 

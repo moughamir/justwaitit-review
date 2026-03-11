@@ -20,7 +20,7 @@ Add custom breakpoints using the `@theme` directive. This is useful for project-
 **Correct (custom theme breakpoints):**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --breakpoint-xs: 480px;
@@ -30,7 +30,7 @@ Add custom breakpoints using the `@theme` directive. This is useful for project-
 ```
 
 ```html
-<div class="hidden xs:block 3xl:flex 4xl:grid">
+<div class="xs:block 3xl:flex 4xl:grid hidden">
   <!-- Named breakpoints, consistent usage -->
 </div>
 ```
@@ -40,12 +40,13 @@ Add custom breakpoints using the `@theme` directive. This is useful for project-
 ```css
 @theme {
   /* Override existing breakpoints */
-  --breakpoint-sm: 600px;  /* Was 640px */
-  --breakpoint-lg: 992px;  /* Was 1024px */
+  --breakpoint-sm: 600px; /* Was 640px */
+  --breakpoint-lg: 992px; /* Was 1024px */
 }
 ```
 
 **Benefits:**
+
 - Consistent breakpoint values across codebase
 - Self-documenting (named vs arbitrary)
 - Easy to update project-wide

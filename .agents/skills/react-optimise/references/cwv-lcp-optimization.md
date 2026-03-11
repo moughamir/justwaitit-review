@@ -23,7 +23,7 @@ function PropertyHero({ property }: { property: Property }) {
       <h1>{property.title}</h1>
       <p>{property.location}</p>
     </section>
-  )
+  );
 }
 
 function PropertyPage({ property }: { property: Property }) {
@@ -37,7 +37,7 @@ function PropertyPage({ property }: { property: Property }) {
       <PropertyDetails property={property} />
       <PropertyGallery images={property.galleryImages} />
     </>
-  )
+  );
 }
 ```
 
@@ -57,7 +57,7 @@ function PropertyHero({ property }: { property: Property }) {
       <h1>{property.title}</h1>
       <p>{property.location}</p>
     </section>
-  )
+  );
 }
 
 function PropertyPage({ property }: { property: Property }) {
@@ -82,7 +82,7 @@ function PropertyPage({ property }: { property: Property }) {
       <PropertyDetails property={property} />
       <PropertyGallery images={property.galleryImages} />
     </>
-  )
+  );
 }
 ```
 
