@@ -10,16 +10,20 @@ test.describe('Landing Page Preservation', () => {
     await expect(page.locator('header')).toBeVisible();
 
     // 2. Functional elements: Waitlist Form
+    // Scroll down so the waitlist section (which has content-visibility: auto) renders its child form
+    await page.evaluate(() => window.scrollTo(0, 5000));
+    await page.waitForTimeout(500);
+
     const waitlistForm = page.locator('form').first();
-    await expect(waitlistForm).toBeVisible();
+    await expect(waitlistForm).toBeVisible({ timeout: 10000 });
 
     const emailInput = waitlistForm.locator('input[type="email"]');
-    if (await emailInput.count() > 0) {
+    if ((await emailInput.count()) > 0) {
       await expect(emailInput).toBeVisible();
     }
 
     const submitBtn = waitlistForm.locator('button[type="submit"]');
-    if (await submitBtn.count() > 0) {
+    if ((await submitBtn.count()) > 0) {
       await expect(submitBtn).toBeVisible();
     }
 

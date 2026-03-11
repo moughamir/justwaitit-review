@@ -67,7 +67,7 @@ interface FormStep {
 
 interface FormField {
   name: string;
-  type: "text" | "email" | "select";
+  type: 'text' | 'email' | 'select';
   label: string;
   placeholder?: string;
   required: boolean;
@@ -91,7 +91,7 @@ interface FormState {
 // Component props
 interface WaitlistFormProps {
   source: string;
-  variant?: "simple" | "full";
+  variant?: 'simple' | 'full';
   className?: string;
 }
 
@@ -118,7 +118,7 @@ interface FormStepProps {
 ```typescript
 function useMultiStepForm(
   steps: FormStep[],
-  initialData?: Record<string, string>,
+  initialData?: Record<string, string>
 ): MultiStepFormReturn;
 ```
 
@@ -142,7 +142,7 @@ function useMultiStepForm(
 ```typescript
 function validateStep(
   step: FormStep,
-  formData: Record<string, string>,
+  formData: Record<string, string>
 ): ValidationResult;
 ```
 
@@ -166,8 +166,8 @@ function validateStep(
 
 ```typescript
 function handleStepTransition(
-  direction: "next" | "previous",
-  currentStep: number,
+  direction: 'next' | 'previous',
+  currentStep: number
 ): void;
 ```
 
@@ -578,10 +578,10 @@ For any form state, pressing Tab moves focus to the next interactive element in 
 }
 
 .form-card::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: url("/noise.svg");
+  background: url('/noise.svg');
   opacity: 0.03;
   pointer-events: none;
 }

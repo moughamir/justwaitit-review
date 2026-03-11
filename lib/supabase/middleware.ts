@@ -1,5 +1,5 @@
-import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { createServerClient } from '@supabase/ssr';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
@@ -10,7 +10,7 @@ export async function updateSession(request: NextRequest) {
 
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY!,
     {
       cookies: {
         getAll() {
@@ -18,7 +18,7 @@ export async function updateSession(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) =>
-            request.cookies.set({ name, value, ...options }),
+            request.cookies.set({ name, value, ...options })
           );
           response = NextResponse.next({
             request: {
@@ -26,11 +26,11 @@ export async function updateSession(request: NextRequest) {
             },
           });
           cookiesToSet.forEach(({ name, value, options }) =>
-            response.cookies.set({ name, value, ...options }),
+            response.cookies.set({ name, value, ...options })
           );
         },
       },
-    },
+    }
   );
 
   // This will refresh session if expired - required for Server Components
@@ -40,17 +40,17 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser();
 
   // Protected routes logic
-  if (request.nextUrl.pathname.startsWith("/protected") && !user) {
-    return NextResponse.redirect(new URL("/auth/login", request.url));
+  if (request.nextUrl.pathname.startsWith('/protected') && !user) {
+    return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
   // Auth routes logic (redirect to protected if already logged in)
-  if (request.nextUrl.pathname.startsWith("/auth") && user) {
+  if (request.nextUrl.pathname.startsWith('/auth') && user) {
     if (
-      !request.nextUrl.pathname.includes("/auth/confirm") &&
-      !request.nextUrl.pathname.includes("/auth/error")
+      !request.nextUrl.pathname.includes('/auth/confirm') &&
+      !request.nextUrl.pathname.includes('/auth/error')
     ) {
-      return NextResponse.redirect(new URL("/protected", request.url));
+      return NextResponse.redirect(new URL('/protected', request.url));
     }
   }
 

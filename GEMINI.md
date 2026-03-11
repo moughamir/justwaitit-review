@@ -40,10 +40,12 @@ This project, named **ANAQIO**, is a high-end AI fashion studio platform tailore
 ## Building and Running
 
 ### Prerequisites
+
 - Node.js & bun.
 - A Supabase project.
 
 ### Commands
+
 - `bun dev`: Starts the development server.
 - `bun build`: Builds the project for production.
 - `bun start`: Runs the built production server.
@@ -59,6 +61,7 @@ This project, named **ANAQIO**, is a high-end AI fashion studio platform tailore
 - **Video:** All video components reside in `remotion/` and are integrated into the React app via `@remotion/player`.
 
 ## Roadmap Status (as of Feb 2026)
+
 - **Phase 1 (Done):** Brand localization, typography standardization, and scaffolding.
 - **Phase 2 (Done):** Interactive Preview component with AI Relighting simulation.
 - **Phase 3 (Upcoming):** Dashboard for waitlisted users, refinement of Remotion video sequences, and "Style Preference" integration.

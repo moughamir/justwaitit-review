@@ -1,28 +1,29 @@
-"use client";
+'use client';
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { createClient } from '@/lib/supabase/client';
+import { cn } from '@/lib/utils';
 
 export function SignUpForm({
   className,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
+}: React.ComponentPropsWithoutRef<'div'>) {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [repeatPassword, setRepeatPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -34,7 +35,7 @@ export function SignUpForm({
     setError(null);
 
     if (password !== repeatPassword) {
-      setError("Passwords do not match");
+      setError('Passwords do not match');
       setIsLoading(false);
       return;
     }
@@ -48,26 +49,35 @@ export function SignUpForm({
         },
       });
       if (error) throw error;
-      router.push("/auth/sign-up-success");
+      router.push('/auth/sign-up-success');
     } catch (error: unknown) {
-      setError(error instanceof Error ? error.message : "An error occurred");
+      setError(error instanceof Error ? error.message : 'An error occurred');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6', className)} {...props}>
       <Card className="noise-overlay border-white/5">
         <CardHeader>
-          <CardTitle className="text-3xl font-bold font-display">Join anaqio</CardTitle>
-          <CardDescription className="font-body">Create your studio account to get started</CardDescription>
+          <CardTitle className="font-display text-3xl font-bold">
+            Join anaqio
+          </CardTitle>
+          <CardDescription className="font-body">
+            Create your studio account to get started
+          </CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
-            <div className="flex flex-col gap-6 relative z-10">
+            <div className="relative z-10 flex flex-col gap-6">
               <div className="grid gap-2">
-                <Label htmlFor="email" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Email</Label>
+                <Label
+                  htmlFor="email"
+                  className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                >
+                  Email
+                </Label>
                 <Input
                   id="email"
                   type="email"
@@ -75,12 +85,17 @@ export function SignUpForm({
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-background/50 border-white/10"
+                  className="border-white/10 bg-background/50"
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Password</Label>
+                  <Label
+                    htmlFor="password"
+                    className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                  >
+                    Password
+                  </Label>
                 </div>
                 <Input
                   id="password"
@@ -88,12 +103,17 @@ export function SignUpForm({
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="bg-background/50 border-white/10"
+                  className="border-white/10 bg-background/50"
                 />
               </div>
               <div className="grid gap-2">
                 <div className="flex items-center">
-                  <Label htmlFor="repeat-password" className="font-body text-xs uppercase tracking-widest text-muted-foreground">Repeat Password</Label>
+                  <Label
+                    htmlFor="repeat-password"
+                    className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                  >
+                    Repeat Password
+                  </Label>
                 </div>
                 <Input
                   id="repeat-password"
@@ -101,17 +121,27 @@ export function SignUpForm({
                   required
                   value={repeatPassword}
                   onChange={(e) => setRepeatPassword(e.target.value)}
-                  className="bg-background/50 border-white/10"
+                  className="border-white/10 bg-background/50"
                 />
               </div>
-              {error && <p className="text-xs font-medium text-destructive">{error}</p>}
-              <Button type="submit" variant="brand" className="w-full h-11" disabled={isLoading}>
-                {isLoading ? "Provisioning Account..." : "Create Account"}
+              {error && (
+                <p className="text-xs font-medium text-destructive">{error}</p>
+              )}
+              <Button
+                type="submit"
+                variant="brand"
+                className="h-11 w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? 'Provisioning Account...' : 'Create Account'}
               </Button>
             </div>
-            <div className="mt-6 text-center text-sm font-body text-muted-foreground">
-              Already have an account?{" "}
-              <Link href="/auth/login" className="text-foreground font-semibold underline underline-offset-4 hover:text-aq-blue transition-colors">
+            <div className="mt-6 text-center font-body text-sm text-muted-foreground">
+              Already have an account?{' '}
+              <Link
+                href="/auth/login"
+                className="font-semibold text-foreground underline underline-offset-4 transition-colors hover:text-aq-blue"
+              >
                 Sign in
               </Link>
             </div>

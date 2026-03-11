@@ -1,56 +1,77 @@
-import Link from "next/link";
+import Link from 'next/link';
 
+import { SocialLinks } from './SocialLinks';
+
+import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
+import { AnaqioLogo } from '@/components/ui/AnaqioLogo';
+import { footerColumns, footerContent } from '@/lib/content/navigation';
 
 export function Footer() {
   return (
-    <footer className="w-full border-t border-border/30 py-12 px-4 snap-start bg-background/50 backdrop-blur-sm relative z-10">
-      <div className="mx-auto max-w-5xl flex flex-col sm:flex-row items-center justify-between gap-10">
-        <div className="flex flex-col items-center sm:items-start gap-6">
-          <div className="space-y-2 text-center sm:text-left">
-            <p className="text-sm font-bold tracking-tighter font-display">ANAQIO™</p>
-            <p className="text-xs text-muted-foreground/80 font-serif italic">
-              Your Digital Atelier. Create. Style. Launch.
+    <div className="px-4 pt-20">
+      <footer className="bg-brand-gradient mx-auto w-full max-w-[1350px] overflow-x-hidden rounded-tl-3xl rounded-tr-3xl px-4 pt-8 text-aq-white backdrop-blur-sm sm:px-8 md:px-16 lg:px-28 lg:pt-12">
+        {/* ── Top Section ─────────────────────────────────────── */}
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:gap-12 lg:grid-cols-6">
+          {/* Brand Column */}
+          <div className="space-y-6 lg:col-span-3">
+            <Link href="/" aria-label="Anaqio Home" className="block">
+              <AnaqioLogo theme="dark" className="w-48" />
+            </Link>
+
+            <p className="max-w-96 font-serif text-sm/6 text-neutral-400">
+              {footerContent.description}
             </p>
-            <p className="text-[10px] text-muted-foreground/50 font-body">
-              {"\u00A9"} 2026 Anaqio. All rights reserved.
-            </p>
+
+            <SocialLinks />
           </div>
 
+          {/* Link Columns */}
+          <div className="grid grid-cols-2 items-start gap-8 md:grid-cols-3 md:gap-12 lg:col-span-3 lg:gap-16">
+            {footerColumns.map((col) => (
+              <div key={col.title}>
+                <h3 className="mb-4 text-sm font-medium">{col.title}</h3>
+                <ul className="space-y-3 text-sm text-neutral-300">
+                  {col.links.map((link) => (
+                    <li key={link.label} className="flex items-center gap-2">
+                      <Link
+                        href={link.href}
+                        className="transition-colors duration-200 hover:text-neutral-100"
+                      >
+                        {link.label}
+                      </Link>
+                      {link.badge && (
+                        <span className="rounded-full border border-aq-blue/40 bg-aq-blue/5 px-2 py-0.5 text-[11px] text-aq-blue">
+                          {link.badge}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
 
-        <nav aria-label="Footer Navigation" className="grid grid-cols-2 sm:flex items-center gap-x-10 gap-y-6 text-center sm:text-left">
-          <Link
-            href="/brand"
-            className="text-[10px] font-bold text-muted-foreground hover:text-aq-blue transition-colors duration-200 uppercase tracking-[0.2em]"
-          >
-            Brand
-          </Link>
-          <Link
-            href="/legal-mentions"
-            className="text-[10px] font-bold text-muted-foreground hover:text-aq-blue transition-colors duration-200 uppercase tracking-[0.2em]"
-          >
-            Legal
-          </Link>
-          <Link
-            href="/terms"
-            className="text-[10px] font-bold text-muted-foreground hover:text-aq-blue transition-colors duration-200 uppercase tracking-[0.2em]"
-          >
-            Terms
-          </Link>
-          <Link
-            href="/privacy"
-            className="text-[10px] font-bold text-muted-foreground hover:text-aq-blue transition-colors duration-200 uppercase tracking-[0.2em]"
-          >
-            Privacy
-          </Link>
-          <Link
-            href="/cookies"
-            className="text-[10px] font-bold text-muted-foreground hover:text-aq-blue transition-colors duration-200 uppercase tracking-[0.2em]"
-          >
-            Cookies
-          </Link>
-        </nav>
-      </div>
-    </footer>
+        {/* ── Bottom Bar + Giant Outlined Brand Text ──────────── */}
+        <div className="relative mx-auto mt-12 max-w-7xl pb-36 pt-4">
+          {/* Giant Outlined Brand Text — decorative watermark behind copyright */}
+          <AnaqioTypographyLogo
+            variant="outline"
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-0 mx-auto w-1/2 select-none opacity-[0.07] [user-drag:none]"
+          />
+
+          {/* Copyright bar */}
+          <div className="relative z-10 flex items-center justify-between border-t border-white/10 pb-4">
+            <p className="text-sm text-neutral-400">
+              {footerContent.copyright}
+            </p>
+            <p className="text-sm text-neutral-400">
+              {footerContent.allRightsReserved}
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }

@@ -1,125 +1,200 @@
-"use client";
+'use client';
 
-import { useRef, useEffect, useState } from "react";
-import { ArrowDownRight } from "lucide-react";
-import { Button } from "../ui/button";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+} from 'framer-motion';
+import { ArrowDownRight, ChevronDown } from 'lucide-react';
+import { useRef } from 'react';
 
-// Refined, slower cinematic animations
-// const containerVariants = { // Removed as per instruction
-//   hidden: {},
-//   visible: {
-//     transition: {
-//       staggerChildren: 0.25,
-//       delayChildren: 0.2, // Reduced delay to speed up LCP
-//     },
-//   },
-// };
-
-// const fadeUpVariants = { // Removed as per instruction
-//   hidden: { opacity: 0, y: 30 }, // Removed heavy blur filter, reduced y travel
-//   visible: {
-//     opacity: 1,
-//     y: 0,
-//     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
-//   },
-// };
+import { Button } from '@/components/ui/button';
+import { MagneticButton } from '@/components/ui/MagneticButton';
+import { ScrollLink } from '@/components/ui/scroll-link';
+import { useDeviceTier } from '@/hooks/use-device-tier';
+import { HeroSectionText } from '@/lib/content/hero';
+import { charReveal, ease } from '@/lib/motion';
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+  const reduced = useReducedMotion();
+  const tier = useDeviceTier();
+  const animated = !reduced && tier !== 'low';
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  const headlineY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
+
+  const subheadlineWords = HeroSectionText.subheadline.a.split(' ');
+  const proWords = HeroSectionText.headline.pro.split(' ');
 
   return (
     <section
-      ref={containerRef}
-      className="relative flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-24 min-h-screen overflow-hidden snap-start hero-gradient"
-      style={{ transform: "translateZ(0)" }} // GPU Acceleration
+      ref={sectionRef}
+      aria-labelledby="hero-heading"
+      className="relative flex min-h-[100dvh] flex-col overflow-hidden bg-background"
     >
-      {/* Immersive background effects */}
-      <div className="z-0 absolute inset-0 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background/95 to-background/50" />
-        {/* Reduced blur radius for performance */}
-        <div className="top-0 right-0 absolute bg-aq-blue/5 opacity-50 blur-3xl rounded-full w-[80vw] h-[80vh] mix-blend-screen" />
-        <div className="bottom-0 left-0 absolute bg-purple-500/5 opacity-30 blur-3xl rounded-full w-[50vw] h-[50vh] mix-blend-screen" />
-      </div>
+      {/* Semantic duplicate for screen readers / SEO */}
+      <h1 id="hero-heading" className="sr-only">
+        ANAQIO — {HeroSectionText.headline.pre} {HeroSectionText.headline.pro}
+      </h1>
 
-      {/* Main Content Container - Golden Grid Layout */}
+      {/* Layer 0: Background */}
       <div
-        ref={contentRef}
-        className="z-20 relative items-center gap-16 lg:gap-24 grid grid-cols-1 lg:grid-cols-[1.618fr_1fr] mx-auto w-full max-w-[1400px]"
+        data-atom
+        data-decorative
+        aria-hidden="true"
+        className="hero-gradient pointer-events-none absolute inset-0 z-0"
+      />
+      <div
+        data-atom
+        data-decorative
+        aria-hidden="true"
+        className="animated-grid pointer-events-none absolute inset-0 z-0 opacity-25"
+      />
+
+      {/* Layer 1: Perspective Grid Overlay */}
+      <div
+        data-atom
+        data-decorative
+        aria-hidden="true"
+        className="absolute inset-0 z-10 overflow-hidden"
       >
-        {/* Primary Fraction (1.618) - Core Messaging */}
-        <div className="flex flex-col items-start gap-12 lg:gap-16">
-
-          <div className="flex flex-col gap-8 w-full">
-            <h1
-              className="font-display font-bold lg:text-[5.5rem] text-4xl sm:text-6xl md:text-7xl text-balance leading-[0.95] tracking-tighter"
-            >
-              Skip the Studio. <br />
-              <span className="bg-clip-text bg-gradient-to-r from-aq-blue to-purple-400 font-serif font-light text-transparent italic tracking-normal">Ship the Collection.</span>
-            </h1>
-
-            <p
-              className="max-w-xl font-light text-muted-foreground/80 text-lg sm:text-xl md:text-2xl leading-relaxed"
-            >
-              Stop paying 5,000–20,000 MAD for unpredictable photoshoots. Anaqio's AI replaces expensive sets and models so you can style and launch your next campaign today.
-            </p>
-          </div>
-
-          <div
-            className="flex sm:flex-row flex-col items-start sm:items-center gap-6 sm:gap-10 pt-4"
-          >
-            <div className="group cursor-pointer">
-              <Button
-                variant={"brand"}
-                onClick={() => document.getElementById('waitlist')?.scrollIntoView({ behavior: 'smooth' })}
-                aria-label="Get Early Access to Anaqio"
-                className="group flex items-center gap-4 hover:bg-aq-blue py-8 rounded-tr-3xl rounded-bl-3xl font-bold text-background hover:text-white text-sm uppercase tracking-[0.2em] transition-all duration-700"
-              >
-                <span>Secure Beta Access</span>
-                <div className="relative flex justify-center items-center bg-background/10 group-hover:bg-white/20 rounded-full w-8 h-8 overflow-hidden transition-colors">
-                  <div className="group-hover:translate-x-1 group-hover:animate-bounce transform transition-transform duration-500 ease-in-out">
-                    <ArrowDownRight className="w-4 h-4" />
-                  </div>
-                </div>
-              </Button>
-            </div>
-
-            <div className="flex flex-col gap-2">
-              <span className="font-bold text-aq-blue text-xs uppercase tracking-[0.3em]">Only 200 Spots</span>
-              <span className="font-serif text-muted-foreground text-sm italic">Takes 30 seconds</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Golden Fraction (1) - Structured Negative Space / Interactive Element */}
-        <div
-          className="hidden relative lg:flex flex-col justify-center items-end h-full animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500 fill-mode-both"
-        >
-          {/* Typographic Art & Negative Space */}
-          <div className="group relative flex flex-col justify-between shadow-2xl p-12 border border-white/5 rounded-[3rem] w-full max-w-[400px] aspect-[3/4] overflow-hidden glass-strong">
-
-            <div className="absolute inset-0 bg-gradient-to-br from-aq-blue/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-
-            <div className="z-10 flex justify-between items-start w-full">
-              <span className="font-mono text-muted-foreground/50 text-xs">SYS.01</span>
-              <span className="font-mono text-muted-foreground/50 text-xs">AQ-CORE</span>
-            </div>
-
-            <div className="z-10 space-y-4">
-              <h3 className="font-serif text-white/90 text-5xl italic leading-none">
-                Fluid
-                <br />
-                <span className="bg-clip-text bg-gradient-to-r from-white to-white/50 font-display font-bold text-transparent text-4xl not-italic uppercase tracking-tighter">Reality</span>
-              </h3>
-              <div className="bg-aq-blue shadow-[0_0_10px_rgba(37,99,235,0.5)] w-12 h-[1px]" />
-              <p className="max-w-[200px] font-light text-muted-foreground/70 text-sm tracking-wide">
-                Physics-based lighting and structural fabric AI simulations.
-              </p>
-            </div>
-          </div>
-        </div>
-
+        <div className="perspective-grid mx-auto h-[160%] w-[120%]" />
       </div>
+
+      {/* Layer 2: Content Column */}
+      <div className="relative z-20 mx-auto flex w-full flex-1 flex-col items-center justify-center px-6 pt-24 text-center sm:px-12">
+        {/* Eyebrow atom: x: -24→0, opacity: 0→1 (0.6s, delay 0.15s) */}
+        <motion.div
+          data-atom
+          initial={animated ? { opacity: 0, x: -24 } : false}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.15, ease }}
+          className="flex items-center justify-center gap-4"
+        >
+          <div className="h-px w-10 bg-muted-foreground/40" />
+          <span className="font-label text-[0.65rem] font-medium uppercase tracking-label text-muted-foreground">
+            {HeroSectionText.eyebrow}
+          </span>
+          <div className="h-px w-10 bg-muted-foreground/40" />
+        </motion.div>
+
+        {/* Atom A: pre — charReveal per character */}
+        <motion.p
+          data-atom
+          aria-hidden="true"
+          style={animated ? { y: headlineY } : {}}
+          className="flex flex-wrap justify-center font-display font-light text-foreground"
+        >
+          {HeroSectionText.headline.pre.split('').map((char, i) => (
+            <motion.span
+              key={`pre-${char}-${i}`}
+              data-atom
+              aria-hidden="true"
+              {...(animated ? charReveal(reduced, i) : {})}
+              className="inline-block"
+              style={{
+                fontSize: 'clamp(3.5rem, 8vw, 9rem)',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              {char === ' ' ? '\u00A0' : char}
+            </motion.span>
+          ))}
+        </motion.p>
+        {/* Atom B: pro — word-by-word y: 20→0, gradient italic */}
+        <p
+          data-atom
+          aria-hidden="true"
+          className="flex flex-wrap justify-center font-display font-light italic"
+        >
+          {proWords.map((word, i) => (
+            <motion.span
+              key={`pro-${word}-${i}`}
+              data-atom
+              aria-hidden="true"
+              initial={animated ? { y: 20, opacity: 0 } : false}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.55, delay: 0.72 + i * 0.07, ease }}
+              className="text-brand-gradient mr-[0.25em] inline-block"
+              style={{
+                fontSize: 'clamp(2rem, 4vw, 4.5rem)',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </p>
+
+        <p
+          className="mt-8 text-sm leading-[1.8] text-muted-foreground sm:text-[0.93rem]"
+          aria-hidden="true"
+        >
+          {subheadlineWords.map((word, i) => (
+            <motion.span
+              key={`sub-${word}-${i}`}
+              data-atom
+              initial={animated ? { y: 16, opacity: 0 } : false}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.45, delay: 1.0 + i * 0.055, ease }}
+              className="mr-[0.3em] inline-block"
+            >
+              {word}
+            </motion.span>
+          ))}
+        </p>
+      </div>
+
+      {/* Layer 3: Interactive atoms (Buttons) */}
+      <div className="relative z-30 mb-12 mt-8 flex w-full flex-col items-center justify-center gap-4 px-6 sm:mb-16">
+        <motion.div
+          data-atom
+          initial={animated ? { y: 20, opacity: 0 } : false}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.1, ease }}
+          className="flex flex-col items-center gap-4 sm:flex-row"
+        >
+          <MagneticButton strength={tier === 'high' ? 0.35 : 0}>
+            <Button
+              variant="hero"
+              asChild
+              className="group h-12 gap-3 rounded-xl px-8 text-[0.7rem] font-semibold uppercase tracking-[0.18em]"
+            >
+              <ScrollLink targetId="waitlist">
+                <span>{HeroSectionText.cta.act}</span>
+                <ArrowDownRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              </ScrollLink>
+            </Button>
+          </MagneticButton>
+          <Button
+            variant="heroOutline"
+            asChild
+            className="h-11 gap-2 rounded-xl px-7 text-[0.7rem] font-medium uppercase tracking-[0.18em]"
+          >
+            <ScrollLink targetId="how-it-works">
+              {HeroSectionText.cta.learn}
+            </ScrollLink>
+          </Button>
+        </motion.div>
+      </div>
+
+      {/* Scroll indicator atom */}
+      <motion.div
+        data-atom
+        data-decorative
+        aria-hidden="true"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute bottom-8 left-1/2 z-20 -translate-x-1/2 text-muted-foreground/40"
+      >
+        <ChevronDown className="h-5 w-5" />
+      </motion.div>
     </section>
   );
 }

@@ -4,15 +4,15 @@
     "maxFileSize": 52428800
   },
   "output": {
-    "filePath": "repomix-output.json",
+    "filePath": "index.json",
     "style": "json",
-    "parsableStyle": false,
+    "parsableStyle": true,
     "fileSummary": true,
     "directoryStructure": true,
     "files": true,
-    "removeComments": false,
-    "removeEmptyLines": false,
-    "compress": false,
+    "removeComments": true,
+    "removeEmptyLines": true,
+    "compress": true,
     "topFilesLength": 5,
     "showLineNumbers": false,
     "truncateBase64": false,
@@ -32,7 +32,7 @@
     "useGitignore": true,
     "useDotIgnore": true,
     "useDefaultPatterns": true,
-    "customPatterns": []
+    "customPatterns": [".*/**", "node_modules"]
   },
   "security": {
     "enableSecurityCheck": true

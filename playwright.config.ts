@@ -15,7 +15,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
-    }
+    },
   ],
   webServer: {
     command: 'bun run build && bun start',

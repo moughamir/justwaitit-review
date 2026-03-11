@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an idea or improvement.
+title: 'feat: <short description>'
+labels: [enhancement]
+body:
+  - type: textarea
+    attributes:
+      label: Problem statement
+      description: What problem are you trying to solve?
+      placeholder: Users need to...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Proposed solution
+      description: Describe the feature, including UX and technical notes.
+      placeholder: Add a new component/page/endpoint that...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Alternatives considered
+      placeholder: Other approaches and why they were rejected.
+  - type: input
+    attributes:
+      label: Scope / Impacted areas
+      placeholder: app route, components, lib, hooks, tests.
+  - type: textarea
+    attributes:
+      label: Acceptance criteria
+      description: Define done.
+      placeholder: |
+        - [ ] Given X, when Y, then Z.
+        - [ ] Specific metrics/perf targets if relevant.
+  - type: textarea
+    attributes:
+      label: Mockups / References
+      description: Links, screenshots, or specs.

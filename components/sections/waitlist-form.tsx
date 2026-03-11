@@ -1,22 +1,52 @@
-"use client";
+'use client';
 
-import { useState, useTransition } from "react";
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { joinWaitlist } from "@/lib/actions/waitlist";
-import { cn } from "@/lib/utils";
+import { motion } from 'framer-motion';
+import { useState, useTransition, useMemo } from 'react';
+
+import { FormStep } from '@/components/sections/form-step';
+import { StepTransition } from '@/components/sections/step-transition';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { ProgressIndicator } from '@/components/ui/progress-indicator';
+import { useMultiStepForm } from '@/hooks/use-multi-step-form';
+import { joinWaitlist } from '@/lib/actions/waitlist';
+import { FULL_VARIANT_STEPS } from '@/lib/types/waitlist-form';
+import { cn } from '@/lib/utils';
+import { sanitizeEmail } from '@/lib/utils/form-validation';
 
 interface WaitlistFormProps {
   source: string;
-  variant?: "simple" | "full";
+  variant?: 'simple' | 'full';
   className?: string;
 }
 
-export function WaitlistForm({ source, variant = "full", className }: WaitlistFormProps) {
+export function WaitlistForm({
+  source,
+  variant = 'full',
+  className,
+}: WaitlistFormProps) {
   const [isPending, startTransition] = useTransition();
-  const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [message, setMessage] = useState('');
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
+
+  // Memoize step configurations for performance
+  const steps = useMemo(() => FULL_VARIANT_STEPS, []);
+
+  // Multi-step form state (only for full variant)
+  const {
+    currentStep,
+    totalSteps,
+    formData,
+    errors,
+    isAnimating,
+    next,
+    previous,
+    updateField,
+    markFieldTouched,
+    validateCurrentStep,
+    setIsAnimating,
+  } = useMultiStepForm(steps);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,43 +56,125 @@ export function WaitlistForm({ source, variant = "full", className }: WaitlistFo
       try {
         const result = await joinWaitlist(formData);
         if (result.success) {
-          setStatus("success");
+          setStatus('success');
           setMessage(result.message);
           (e.target as HTMLFormElement).reset();
         } else {
-          setStatus("error");
+          setStatus('error');
           setMessage(result.message);
         }
       } catch {
-        setStatus("error");
-        setMessage("Something went wrong. Please try again.");
+        setStatus('error');
+        setMessage('Something went wrong. Please try again.');
       }
     });
   };
 
-  if (status === "success") {
+  const handleMultiStepSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Validate current step before proceeding
+    if (!validateCurrentStep()) {
+      return;
+    }
+
+    // If not on final step, advance to next step
+    if (currentStep < totalSteps) {
+      setDirection('forward');
+      setIsAnimating(true);
+      setTimeout(() => {
+        next();
+        setIsAnimating(false);
+      }, 400);
+      return;
+    }
+
+    // Final step - submit form
+    const submitFormData = new FormData();
+    submitFormData.append('source', source);
+
+    // Add all form data with email sanitization
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key === 'email') {
+        submitFormData.append(key, sanitizeEmail(value));
+      } else {
+        submitFormData.append(key, value);
+      }
+    });
+
+    startTransition(async () => {
+      try {
+        const result = await joinWaitlist(submitFormData);
+        if (result.success) {
+          setStatus('success');
+          setMessage(result.message);
+        } else {
+          setStatus('error');
+          setMessage(result.message);
+        }
+      } catch {
+        setStatus('error');
+        setMessage('Something went wrong. Please try again.');
+      }
+    });
+  };
+
+  const handlePrevious = () => {
+    setDirection('backward');
+    setIsAnimating(true);
+    setTimeout(() => {
+      previous();
+      setIsAnimating(false);
+    }, 400);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    // Handle Enter key to submit/continue
+    if (e.key === 'Enter' && e.target instanceof HTMLInputElement) {
+      e.preventDefault();
+      const form = e.currentTarget;
+      const submitButton = form.querySelector(
+        'button[type="submit"]'
+      ) as HTMLButtonElement;
+      submitButton?.click();
+    }
+  };
+
+  if (status === 'success') {
     return (
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="py-8 text-center space-y-4"
+        className="space-y-4 py-8 text-center"
       >
-        <div className="w-16 h-16 rounded-full bg-green-500/10 border border-green-500/20 flex items-center justify-center mx-auto">
-          <svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+        <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-green-500/20 bg-green-500/10">
+          <svg
+            className="h-8 w-8 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 13l4 4L19 7"
+            />
           </svg>
         </div>
         <div className="space-y-2">
-          <p className="text-xl font-bold text-foreground">You&apos;re on the list!</p>
-          <p className="text-muted-foreground text-sm">{message}</p>
+          <p className="text-xl font-bold text-foreground">
+            You&apos;re on the list!
+          </p>
+          <p className="text-sm text-muted-foreground">{message}</p>
         </div>
       </motion.div>
     );
   }
 
-  if (variant === "simple") {
+  if (variant === 'simple') {
     return (
-      <form onSubmit={handleSubmit} className={cn("flex gap-2", className)}>
+      <form onSubmit={handleSubmit} className={cn('flex gap-2', className)}>
         <input type="hidden" name="source" value={source} />
         {/* Simple variant still needs role for validation, but we can default it or hide it if needed. 
             Actually the schema REQUIRES role. So simple variant might need to be more clever or we update schema.
@@ -75,133 +187,83 @@ export function WaitlistForm({ source, variant = "full", className }: WaitlistFo
           placeholder="professional@email.com"
           required
           disabled={isPending}
-          className="h-14 bg-background/50 border-white/10 rounded-xl px-6"
+          className="h-14 rounded-xl border-border/40 bg-background/50 px-6"
         />
-        <Button variant="brand" className="h-14 px-8 rounded-xl shrink-0" disabled={isPending}>
-          {isPending ? "Joining..." : "Get Access"}
+        <Button
+          variant="brand"
+          className="h-14 shrink-0 rounded-xl px-8"
+          disabled={isPending}
+        >
+          {isPending ? 'Joining...' : 'Get Access'}
         </Button>
-        {status === "error" && (
-          <p className="absolute -bottom-6 left-0 text-xs text-destructive">{message}</p>
+        {status === 'error' && (
+          <p className="absolute -bottom-6 left-0 text-xs text-destructive">
+            {message}
+          </p>
         )}
       </form>
     );
   }
 
+  // Full variant with multi-step form
   return (
-    <form onSubmit={handleSubmit} className={cn("space-y-5 relative z-10", className)}>
-      <input type="hidden" name="source" value={source} />
+    <form
+      onSubmit={handleMultiStepSubmit}
+      onKeyDown={handleKeyDown}
+      className={cn('relative z-10 space-y-6', className)}
+    >
+      {/* Progress Indicator */}
+      <ProgressIndicator currentStep={currentStep} totalSteps={totalSteps} />
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="full_name" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Name</label>
-          <Input
-            id="full_name"
-            type="text"
-            name="full_name"
-            placeholder="Your name"
-            required
-            disabled={isPending}
-            className="h-12 rounded-xl bg-background/40 border-white/10 placeholder:text-muted-foreground/30 focus:border-aq-blue/50 transition-all px-4"
-          />
-        </div>
-        <div className="space-y-2">
-          <label htmlFor="email" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Email</label>
-          <Input
-            id="email"
-            type="email"
-            name="email"
-            placeholder="professional@email.com"
-            required
-            disabled={isPending}
-            className="h-12 rounded-xl bg-background/40 border-white/10 placeholder:text-muted-foreground/30 focus:border-aq-blue/50 transition-all px-4"
-          />
-        </div>
-      </div>
+      {/* Step Content with Transition */}
+      <StepTransition currentStep={currentStep} direction={direction}>
+        <FormStep
+          step={steps[currentStep - 1]}
+          formData={formData}
+          errors={errors}
+          onChange={updateField}
+          onBlur={markFieldTouched}
+          disabled={isPending || isAnimating}
+        />
+      </StepTransition>
 
-      <div className="space-y-2">
-        <label htmlFor="role" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">What Best Describes You?</label>
-        <select
-          id="role"
-          name="role"
-          required
-          defaultValue=""
-          disabled={isPending}
-          className="flex h-12 w-full rounded-xl border border-white/10 bg-background/40 px-4 py-2 text-sm shadow-sm transition-colors focus:border-aq-blue/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 appearance-none text-foreground"
-        >
-          <option value="" disabled>Select your role</option>
-          <option value="Brand">Fashion Brand / Retailer</option>
-          <option value="Stylist">Stylist / Creative</option>
-          <option value="Seller">E-Commerce Seller</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="space-y-2">
-          <label htmlFor="company" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Company (Optional)</label>
-          <Input
-            id="company"
-            type="text"
-            name="company"
-            placeholder="Brand or Studio name"
-            disabled={isPending}
-            className="h-12 rounded-xl bg-background/40 border-white/10 placeholder:text-muted-foreground/30 focus:border-aq-blue/50 transition-all px-4"
-          />
-        </div>
-        <div className="space-y-2">
-          <label htmlFor="revenue_range" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Revenue (Optional)</label>
-          <select
-            id="revenue_range"
-            name="revenue_range"
-            defaultValue=""
-            disabled={isPending}
-            className="flex h-12 w-full rounded-xl border border-white/10 bg-background/40 px-4 py-2 text-sm shadow-sm transition-colors focus:border-aq-blue/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 appearance-none text-foreground"
-          >
-            <option value="">Monthly Revenue Range</option>
-            <option value="0-10k">0 - 10k DH</option>
-            <option value="10k-50k">10k - 50k DH</option>
-            <option value="50k-250k">50k - 250k DH</option>
-            <option value="250k+">250k DH+</option>
-          </select>
-        </div>
-      </div>
-
-      <div className="space-y-2">
-        <label htmlFor="aesthetic" className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">Desired Aesthetic (Optional)</label>
-        <select
-          id="aesthetic"
-          name="aesthetic"
-          defaultValue=""
-          disabled={isPending}
-          className="flex h-12 w-full rounded-xl border border-white/10 bg-background/40 px-4 py-2 text-sm shadow-sm transition-colors focus:border-aq-blue/50 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 appearance-none text-foreground"
-        >
-          <option value="">Select Aesthetic Preference</option>
-          <option value="Modern Minimalist">Modern Minimalist</option>
-          <option value="Traditional Moroccan">Traditional Moroccan</option>
-          <option value="Luxury Editorial">Luxury Editorial</option>
-          <option value="Streetwear">Streetwear</option>
-          <option value="Avant-Garde">Avant-Garde</option>
-        </select>
-      </div>
-
-      <Button
-        type="submit"
-        variant="brand"
-        disabled={isPending}
-        className="w-full h-14 rounded-xl text-base font-bold shadow-lg shadow-aq-blue/20"
-      >
-        {isPending ? "Securing your spot..." : "Secure Beta Access →"}
-      </Button>
-
-      {status === "error" && (
+      {/* Server Error Message */}
+      {status === 'error' && (
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="text-sm text-destructive font-medium text-center"
+          className="text-center text-sm font-medium text-destructive"
         >
           {message}
         </motion.p>
       )}
+
+      {/* Navigation Buttons */}
+      <div className="flex gap-3">
+        {currentStep > 1 && (
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handlePrevious}
+            disabled={isPending || isAnimating}
+            className="h-14 rounded-xl px-6"
+          >
+            ← Back
+          </Button>
+        )}
+        <Button
+          type="submit"
+          variant="brand"
+          disabled={isPending || isAnimating}
+          className="h-14 flex-1 rounded-xl text-base font-bold shadow-lg shadow-aq-blue/20"
+        >
+          {isPending
+            ? 'Securing your spot...'
+            : currentStep < totalSteps
+              ? 'Continue →'
+              : 'Secure Beta Access →'}
+        </Button>
+      </div>
     </form>
   );
 }

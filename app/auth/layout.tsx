@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function AuthLayout({
   children,
@@ -6,21 +6,22 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen bg-background flex flex-col noise-overlay">
-      <nav className="absolute top-0 left-0 right-0 p-8 flex justify-between items-center z-50">
-        <Link href="/" className="text-xl font-bold font-display tracking-tighter text-brand-gradient">
+    <div className="noise-overlay relative flex min-h-screen flex-col bg-background">
+      <nav className="absolute left-0 right-0 top-0 z-50 flex items-center justify-between p-8">
+        <Link
+          href="/"
+          className="text-brand-gradient font-display text-xl font-bold tracking-tighter"
+        >
           anaqio
         </Link>
       </nav>
-      
-      <main className="flex-1 flex items-center justify-center p-6 relative z-10">
-        <div className="w-full max-w-md">
-          {children}
-        </div>
+
+      <main className="relative z-10 flex flex-1 items-center justify-center p-6">
+        <div className="w-full max-w-md">{children}</div>
       </main>
 
-      <footer className="p-8 text-center relative z-10">
-        <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] font-semibold">
+      <footer className="relative z-10 p-8 text-center">
+        <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
           &copy; 2026 Anaqio Studio &middot; All Rights Reserved
         </p>
       </footer>

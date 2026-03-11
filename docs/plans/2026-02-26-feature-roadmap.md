@@ -25,13 +25,14 @@
 The project codebase has undergone a comprehensive review and several critical issues have been resolved, enhancing stability, type safety, and adherence to modern Next.js practices.
 
 **Resolved Issues:**
--   **Linting & Type Safety:** Addressed various `react/no-unescaped-entities`, `react/jsx-no-comment-textnodes` errors in `app/brand/brand-content.tsx` and unused variable/import warnings across components. Replaced `any[]` with specific types where possible.
--   **Image Optimization:** Replaced direct `<img>` tags with `next/image` in `components/sections/interactive-preview.tsx` for optimized image delivery.
--   **Zod Validation:** Corrected `ZodError` access from `error.errors` to `error.issues` in `lib/actions/waitlist.ts` for compatibility with current Zod versions.
--   **Supabase Middleware:** Fixed cookie handling in `lib/supabase/middleware.ts` (now `proxy.ts`) to align with `NextRequest` and `NextResponse` cookie API.
--   **Remotion Integration:** Resolved font loading (`weight` vs `weights`, `style` property) and composition registration (`registerComposition` vs `<Composition>`) issues in Remotion files. Ensured correct JSX processing by renaming `remotion/index.ts` to `remotion/index.tsx`.
--   **Tailwind CSS Configuration:** Imported `Config` type in `tailwind.config.ts` to resolve TypeScript errors.
--   **Next.js Middleware Migration:** Successfully migrated the deprecated `middleware.ts` file to the new `proxy.ts` convention using the `@next/codemod` tool, aligning with Next.js 16+ best practices.
+
+- **Linting & Type Safety:** Addressed various `react/no-unescaped-entities`, `react/jsx-no-comment-textnodes` errors in `app/brand/brand-content.tsx` and unused variable/import warnings across components. Replaced `any[]` with specific types where possible.
+- **Image Optimization:** Replaced direct `<img>` tags with `next/image` in `components/sections/interactive-preview.tsx` for optimized image delivery.
+- **Zod Validation:** Corrected `ZodError` access from `error.errors` to `error.issues` in `lib/actions/waitlist.ts` for compatibility with current Zod versions.
+- **Supabase Middleware:** Fixed cookie handling in `lib/supabase/middleware.ts` (now `proxy.ts`) to align with `NextRequest` and `NextResponse` cookie API.
+- **Remotion Integration:** Resolved font loading (`weight` vs `weights`, `style` property) and composition registration (`registerComposition` vs `<Composition>`) issues in Remotion files. Ensured correct JSX processing by renaming `remotion/index.ts` to `remotion/index.tsx`.
+- **Tailwind CSS Configuration:** Imported `Config` type in `tailwind.config.ts` to resolve TypeScript errors.
+- **Next.js Middleware Migration:** Successfully migrated the deprecated `middleware.ts` file to the new `proxy.ts` convention using the `@next/codemod` tool, aligning with Next.js 16+ best practices.
 
 ## Interactive Preview
 
@@ -76,17 +77,20 @@ The project codebase has undergone a comprehensive review and several critical i
 ## Implementation Timeline
 
 ### Phase 1: Brand Localization & Scaffolding (Completed)
+
 - [x] Refactor pricing to MAD/DH.
 - [x] Standardize Syne/Cormorant typography.
 - [x] Install Remotion and scaffold Intro Video.
 - [x] Deploy enhanced "Coming Soon" section.
 
 ### Phase 2: Interactive Preview (Completed)
+
 - [x] Build `InteractivePreview` component with Framer Motion.
 - [x] Integrate high-quality Moroccan environment placeholders.
 - [x] Implement "AI Relighting" simulation.
 
 ### Phase 3: Video & Lookbook Alpha (Upcoming)
+
 - [ ] Refine Remotion animation sequence with actual fashion assets.
 - [ ] Implement early-access dashboard for waitlisted users.
 - [x] Add `preferences` field to the waitlist table (migration).
@@ -97,7 +101,9 @@ The project codebase has undergone a comprehensive review and several critical i
 ## Task List for Phase 3
 
 ### Task 1: Refine Remotion Intro Video
+
 **Files:**
+
 - Modify: `remotion/IntroVideo.tsx`
 - Modify: `components/sections/ComingSoonSection.tsx`
 
@@ -105,7 +111,9 @@ The project codebase has undergone a comprehensive review and several critical i
 **Step 2:** Optimize video loading performance in the Player.
 
 ### Task 2: Style Preference Integration
+
 **Files:**
+
 - Modify: `lib/actions/waitlist.ts`
 - Modify: `components/sections/waitlist-form.tsx`
 
