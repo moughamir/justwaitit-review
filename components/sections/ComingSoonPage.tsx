@@ -68,6 +68,18 @@ export function ComingSoonPage() {
             transition={{ duration: 0.8, ease }}
             className="relative z-20 flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-24 pt-16 sm:h-[calc(100vh-4rem)] sm:pb-32 sm:pt-20"
           >
+            {/* Atmospheric Background Text */}
+            <motion.div
+              className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center overflow-hidden opacity-[0.02] mix-blend-overlay"
+              initial={animated ? { scale: 0.5, opacity: 0 } : false}
+              animate={{ scale: 0.8, opacity: 0.03 }}
+              transition={{ duration: 2, ease: 'easeOut' }}
+            >
+              <h2 className="whitespace-nowrap font-display text-[22vw] font-black uppercase tracking-tighter text-foreground">
+                Coming Soon
+              </h2>
+            </motion.div>
+
             {/* SEO backbone */}
             <h1 className="sr-only">ANAQIO — AI Fashion Studio Coming Soon</h1>
 

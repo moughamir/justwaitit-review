@@ -5,42 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
-import {
-  clipReveal,
-  fadeIn,
-  fadeUp,
-  fadeUpCard,
-  flipReveal,
-  slideInLeft,
-} from '@/lib/motion';
+import { clipReveal, fadeIn, fadeUp, flipReveal } from '@/lib/motion';
 
 /* ────────────────────────────────────────────────── */
 /*  Data                                               */
 /* ────────────────────────────────────────────────── */
-
-const painPoints = [
-  { number: 'MAD 50K+', label: 'average cost per studio shoot' },
-  { number: '3\u20136 wks', label: 'production cycle per collection' },
-  { number: '100s', label: 'of SKUs, one shoot can\u2019t cover them all' },
-];
-
-const workflowSteps = [
-  {
-    id: '01',
-    title: 'Upload',
-    desc: 'Drop in your garments, models, or raw assets.',
-  },
-  {
-    id: '02',
-    title: 'Generate',
-    desc: 'AI composes studio-quality scenes in minutes.',
-  },
-  {
-    id: '03',
-    title: 'Export',
-    desc: 'Download lookbooks, videos, or individual shots.',
-  },
-];
 
 const founders = [
   {
@@ -84,14 +53,46 @@ export default function AboutContent() {
           About Anaqio
         </h1>
 
-        {/* Ambient gradient orbs */}
-        <div
+        {/* Spotlight Effect */}
+        <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-40 -top-40 h-[400px] w-[400px] rounded-full bg-aq-blue/20 blur-[100px]"
+          className="pointer-events-none absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-aq-blue/10 blur-[120px]"
+          animate={
+            reduced
+              ? { opacity: 0.5 }
+              : { opacity: [0.3, 0.6, 0.3], scale: [1, 1.05, 1] }
+          }
+          transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         />
-        <div
+
+        {/* Ambient gradient orbs */}
+        <motion.div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-40 -right-40 h-[400px] w-[400px] rounded-full bg-aq-purple/20 blur-[100px]"
+          className="pointer-events-none absolute -left-40 -top-40 h-[500px] w-[500px] rounded-full bg-aq-blue/20 blur-[100px]"
+          animate={
+            reduced
+              ? { opacity: 1 }
+              : {
+                  x: [0, 80, 0, -80, 0],
+                  y: [0, 40, -40, 0, 0],
+                  scale: [1, 1.1, 1, 0.9, 1],
+                }
+          }
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+        />
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 -right-40 h-[500px] w-[500px] rounded-full bg-aq-purple/20 blur-[100px]"
+          animate={
+            reduced
+              ? { opacity: 1 }
+              : {
+                  x: [0, -80, 0, 80, 0],
+                  y: [0, -40, 40, 0, 0],
+                  scale: [1, 0.9, 1, 1.1, 1],
+                }
+          }
+          transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
         />
 
         <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-12 lg:flex-row lg:items-center xl:gap-24">
@@ -187,60 +188,12 @@ export default function AboutContent() {
       </section>
 
       {/* ═══════════════════════════════════════════ */}
-      {/* SECTION 2 — THE PROBLEM                     */}
-      {/* ═══════════════════════════════════════════ */}
-      <section
-        id="about-problem"
-        aria-labelledby="about-problem-heading"
-        className="relative border-y border-white/5 bg-background px-4 py-32 sm:px-6 lg:px-8"
-      >
-        <div className="relative z-10 mx-auto max-w-6xl">
-          <motion.div {...fadeUp(reduced)} className="max-w-2xl">
-            <h2
-              id="about-problem-heading"
-              className="font-display text-4xl font-light leading-tight sm:text-5xl"
-            >
-              The broken
-              <br />
-              <span className="font-medium text-aq-blue">studio pipeline.</span>
-            </h2>
-            <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
-              Every fashion shoot in Morocco means renting a space, booking
-              models, coordinating lighting, post-processing hundreds of RAW
-              files&nbsp;&mdash; and then doing it all again next season. The
-              result: brands that move slowly, spend heavily, and still end up
-              with imagery that looks like everyone else&rsquo;s.
-            </p>
-          </motion.div>
-
-          {/* Pain-point cards */}
-          <div className="mt-16 grid gap-6 sm:grid-cols-3">
-            {painPoints.map((point, i) => (
-              <motion.div
-                key={point.number}
-                className="group relative overflow-hidden rounded-[2rem] border border-white/5 bg-card/20 p-10 transition-colors duration-500 hover:bg-card/40"
-                {...fadeUpCard(reduced, i)}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-aq-blue/5 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                <p className="relative z-10 font-display text-5xl font-semibold tracking-tight text-foreground">
-                  {point.number}
-                </p>
-                <p className="relative z-10 mt-4 text-base font-medium text-muted-foreground/90">
-                  {point.label}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════ */}
-      {/* SECTION 3 — THE SOLUTION                    */}
+      {/* SECTION 2 — THE STUDIO                      */}
       {/* ═══════════════════════════════════════════ */}
       <section
         id="about-solution"
         aria-labelledby="about-solution-heading"
-        className="relative bg-background px-4 py-32 sm:px-6 lg:px-8"
+        className="relative border-t border-white/5 bg-background px-4 py-32 sm:px-6 lg:px-8"
       >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-aq-blue/5 via-background to-background" />
 
@@ -311,27 +264,6 @@ export default function AboutContent() {
                 className="object-cover transition-transform duration-1000 hover:scale-105"
               />
             </motion.div>
-          </div>
-
-          {/* Workflow steps */}
-          <div className="mt-24 grid gap-10 sm:grid-cols-3">
-            {workflowSteps.map((step, i) => (
-              <motion.div
-                key={step.id}
-                className="glass relative overflow-hidden rounded-2xl p-8"
-                {...slideInLeft(reduced, i)}
-              >
-                <div className="mb-6 inline-flex h-12 w-12 items-center justify-center rounded-full bg-aq-blue/10 font-display text-xl font-medium text-aq-blue">
-                  {step.id}
-                </div>
-                <h3 className="text-xl font-semibold text-foreground">
-                  {step.title}
-                </h3>
-                <p className="mt-3 leading-relaxed text-muted-foreground/90">
-                  {step.desc}
-                </p>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
