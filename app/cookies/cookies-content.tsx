@@ -16,8 +16,6 @@ export function CookiePolicyContent() {
   const [showConfirm, setShowConfirm] = useState(false);
 
   const savePreferences = () => {
-    // eslint-disable-next-line no-console
-    console.log('Cookie preferences saved:', preferences);
     setShowConfirm(true);
     setTimeout(() => setShowConfirm(false), 3000);
   };

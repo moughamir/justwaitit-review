@@ -102,12 +102,10 @@ export function NotifyForm({ animated }: { animated: boolean }) {
             </>
           )}
         </motion.button>
-        {status === 'error' && message && (
-          <p className="font-body text-xs text-destructive sm:col-span-2">
-            {message}
-          </p>
-        )}
       </form>
+      {status === 'error' && message && (
+        <p className="font-body text-xs text-destructive">{message}</p>
+      )}
       <motion.p
         className="text-center font-body text-[10px] text-muted-foreground/60 sm:text-left"
         {...fadeIn(reduced, 0.2)}
