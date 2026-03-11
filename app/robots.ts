@@ -22,8 +22,17 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: ['Googlebot', 'Bingbot'],
-        allow: ['/', '/brand', '/early-access', '/terms', '/privacy'],
-        disallow: ['/auth/', '/protected/', '/legal-mentions'],
+        allow: [
+          '/',
+          '/brand',
+          '/early-access',
+          '/about',
+          '/contact',
+          '/terms',
+          '/privacy',
+          '/cookies',
+        ],
+        disallow: ['/auth/', '/protected/', '/playground', '/legal-mentions'],
       },
       {
         userAgent: ['Twitterbot', 'FacebookExternalHit', 'LinkedInBot'],

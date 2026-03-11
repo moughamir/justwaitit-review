@@ -1,51 +1,58 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import * as React from 'react';
+import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 
 interface AnaqioLogoProps {
   className?: string;
   theme?: 'light' | 'dark';
+  /** Height in pixels for the graphic mark (wordmark scales proportionally) */
+  size?: number;
 }
 
-export function AnaqioLogo({ className, theme = 'light' }: AnaqioLogoProps) {
-  const isDark = theme === 'dark';
+export function AnaqioLogo({
+  className,
+  theme = 'light',
+  size = 40,
+}: AnaqioLogoProps) {
+  // GraphicLogo.svg viewBox: 713 × 587 → aspect ≈ 1.215
+  const graphicWidth = Math.round(size * (713.056 / 586.869));
+  // Typography logo viewBox: 1123 × 794 → aspect ≈ 1.414
+  const typoHeight = Math.round(size * 0.55); // wordmark sits a bit smaller
+  const typoWidth = Math.round(typoHeight * (1123 / 794));
 
   return (
     <div
-      className={cn(
-        'group relative flex items-center font-wordmark text-2xl font-bold tracking-[0.2em] transition-colors',
-        isDark ? 'text-white' : 'text-aq-ink',
-        className
-      )}
+      className={cn('flex items-center gap-3', className)}
       aria-label="Anaqio"
+      role="img"
     >
-      <span className="relative z-10 mr-[0.1em]">ANAQI</span>
-      <div className="relative z-10 flex h-[0.7em] w-[0.7em] items-center justify-center">
-        <motion.div
-          initial={{ rotate: 0 }}
-          animate={{ rotate: 180 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="relative flex h-full w-full items-center justify-center"
-        >
-          {/* Outer diamond */}
-          <div
-            className={cn(
-              'absolute inset-0 rotate-45 border-[1.5px]',
-              isDark ? 'border-white' : 'border-aq-ink'
-            )}
-          />
-          {/* Inner solid diamond */}
-          <div
-            className={cn(
-              'absolute h-[40%] w-[40%] rotate-45',
-              isDark ? 'bg-white' : 'bg-aq-blue'
-            )}
-          />
-        </motion.div>
-      </div>
+      {/* Graphic mark */}
+      <Image
+        src="/brand/anaqio-graphic-logo.svg"
+        alt=""
+        width={graphicWidth}
+        height={size}
+        className={cn(
+          'shrink-0',
+          theme === 'dark' ? 'brightness-0 invert' : ''
+        )}
+        priority
+      />
+
+      {/* Wordmark */}
+      <Image
+        src="/brand/anaqio-typography-logo.svg"
+        alt="Anaqio"
+        width={typoWidth}
+        height={typoHeight}
+        className={cn(
+          'shrink-0',
+          theme === 'dark' ? 'brightness-0 invert' : ''
+        )}
+        priority
+      />
     </div>
   );
 }

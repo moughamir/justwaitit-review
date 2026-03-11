@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
 import { WaitlistForm } from '@/components/sections/waitlist-form';
+import { BackButton } from '@/components/ui/back-button';
 
 export function EarlyAccessContent() {
   return (
@@ -16,10 +17,11 @@ export function EarlyAccessContent() {
         <section className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20">
           <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
             <div className="relative z-10 space-y-8">
+              <BackButton />
               <div className="flex items-center gap-3">
                 <div className="h-px w-8 bg-aq-blue" />
                 <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-                  Early Access · 2026
+                  Early Access · Q3 2026
                 </span>
               </div>
 

@@ -2,6 +2,9 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { AbstractBlobs } from './AbstractBlobs';
+import { NoisyBackground } from './NoisyBackground';
+
 /**
  * AbstractBackground — CSS-based animated blob system
  *
@@ -14,73 +17,30 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
  * - Full prefers-reduced-motion support
  */
 
-// Blob configuration: position offset %, size, color, drift speed, parallax factor
-const BLOBS = [
-  {
-    id: 0,
-    x: 15,
-    y: 20,
-    size: 420,
-    color: '#2563EB',
-    driftDur: 22,
-    parallax: 0.04,
-  },
-  {
-    id: 1,
-    x: 70,
-    y: 15,
-    size: 380,
-    color: '#7C3AED',
-    driftDur: 28,
-    parallax: 0.03,
-  },
-  {
-    id: 2,
-    x: 40,
-    y: 60,
-    size: 350,
-    color: '#3F57AF',
-    driftDur: 25,
-    parallax: 0.05,
-  },
-  {
-    id: 3,
-    x: 80,
-    y: 70,
-    size: 300,
-    color: '#6049A8',
-    driftDur: 30,
-    parallax: 0.02,
-  },
-  {
-    id: 4,
-    x: 25,
-    y: 80,
-    size: 280,
-    color: '#6F47A7',
-    driftDur: 26,
-    parallax: 0.035,
-  },
-  {
-    id: 5,
-    x: 55,
-    y: 35,
-    size: 320,
-    color: '#2563EB',
-    driftDur: 24,
-    parallax: 0.045,
-  },
-] as const;
-
-type Bubble = { id: string; x: number; y: number; size: number };
-
 const AbstractBackground: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const rafRef = useRef<number>(0);
   const mouseRef = useRef({ x: 0.5, y: 0.5 }); // Normalized [0,1]
   const gyroRef = useRef({ x: 0, y: 0 }); // Degrees mapped to [-1,1]
   const [scrollMorph, setScrollMorph] = useState(false);
-  const [bubbles, setBubbles] = useState<Bubble[]>([]);
+
+  // Reduced motion support
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // Use requestAnimationFrame to avoid setState in render
+    requestAnimationFrame(() => {
+      setReducedMotion(mediaQuery.matches);
+    });
+    const handleChange = () => {
+      requestAnimationFrame(() => {
+        setReducedMotion(mediaQuery.matches);
+      });
+    };
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
 
   // Throttled mousemove → CSS custom properties
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -160,39 +120,6 @@ const AbstractBackground: React.FC = () => {
     };
   }, [handleMouseMove, handleOrientation, handleScroll]);
 
-  // Generate bubbles dynamically based on viewport
-  useEffect(() => {
-    const gen = () => {
-      const w = window.innerWidth;
-      const isSmall = w < 640;
-      const count = isSmall ? 2 : 4; // sparser
-      const min = isSmall ? 60 : 80;
-      const max = isSmall ? 120 : 140; // smaller sizes
-      const arr: Bubble[] = [];
-      for (let i = 0; i < count; i++) {
-        const size = Math.round(min + Math.random() * (max - min));
-        arr.push({
-          id: `b-${i}`,
-          x: Math.round(10 + Math.random() * 80),
-          y: Math.round(8 + Math.random() * 70),
-          size,
-        });
-      }
-      setBubbles(arr);
-    };
-    gen();
-    const onResize = () => {
-      // throttle simple
-      if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
-        gen();
-        rafRef.current = 0;
-      });
-    };
-    window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
   return (
     <div
       ref={containerRef}
@@ -209,63 +136,12 @@ const AbstractBackground: React.FC = () => {
         } as React.CSSProperties
       }
     >
-      {/* Blur layer — single filter for all blobs */}
-      <div className="gravitate">
-        <div
-          className="absolute inset-0"
-          style={{ filter: 'blur(80px)', willChange: 'transform' }}
-        >
-          {BLOBS.map((blob) => (
-            <div
-              key={blob.id}
-              className={`abstract-blob ${scrollMorph ? 'abstract-blob--morphed' : ''}`}
-              style={
-                {
-                  '--blob-x': `${blob.x}%`,
-                  '--blob-y': `${blob.y}%`,
-                  '--blob-size': `${blob.size}px`,
-                  '--blob-color': blob.color,
-                  '--blob-drift-dur': `${blob.driftDur}s`,
-                  '--blob-parallax': blob.parallax,
-                  animationDelay: `${-blob.id * 3.5}s`,
-                } as React.CSSProperties
-              }
-            />
-          ))}
-        </div>
-
-        {/* Glass bubbles (subtle, Apple-like) */}
-        <div className="absolute inset-0">
-          {bubbles.map((b, i) => (
-            <div
-              key={b.id}
-              className="glass-bubble"
-              style={{
-                left: `${b.x}%`,
-                top: `${b.y}%`,
-                width: `${b.size}px`,
-                height: `${b.size}px`,
-                animationDelay: `${i * -2}s`,
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Noise overlay via SVG feTurbulence */}
-      <div className="absolute inset-0 opacity-[0.035]">
-        <svg className="h-full w-full" xmlns="http://www.w3.org/2000/svg">
-          <filter id="abstract-noise">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.65"
-              numOctaves="4"
-              stitchTiles="stitch"
-            />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#abstract-noise)" />
-        </svg>
-      </div>
+      {!reducedMotion && (
+        <>
+          <AbstractBlobs scrollMorph={scrollMorph} />
+        </>
+      )}
+      <NoisyBackground />
     </div>
   );
 };

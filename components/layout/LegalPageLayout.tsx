@@ -1,5 +1,6 @@
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
+import { BackButton } from '@/components/ui/back-button';
 
 interface LegalPageLayoutProps {
   /** Eyebrow label (e.g., "Data Protection", "Legal Framework") */
@@ -36,6 +37,7 @@ export function LegalPageLayout({
       <main className="noise-overlay relative px-6 pb-24 pt-32">
         <div className="mx-auto max-w-3xl">
           <header className="mb-16 border-b border-border/50 pb-12">
+            <BackButton />
             <div className="mb-6 flex items-center gap-3">
               <div className="h-px w-8 bg-aq-blue" />
               <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
