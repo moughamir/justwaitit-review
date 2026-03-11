@@ -11,6 +11,7 @@ import { NotifyForm } from './atoms/notify';
 import { LoadingScreen } from '@/components/sections/LoadingScreen';
 import AbstractBackground from '@/components/ui/AbstractBackground';
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
+import { PerspectiveGrid } from '@/components/ui/PerspectiveGrid';
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { ease, fadeIn, fadeUp } from '@/lib/motion';
 
@@ -47,6 +48,9 @@ export function ComingSoonPage() {
         className="hero-gradient fixed inset-0 z-0"
       />
 
+      {/* Perspective floor grid — z-10, sits above bg, below content */}
+      <PerspectiveGrid className="fixed inset-x-0 bottom-0 z-10 h-[30vh] opacity-20" />
+
       <AnimatePresence mode="wait">
         {phase === 'loading' && (
           <LoadingScreen
@@ -73,12 +77,12 @@ export function ComingSoonPage() {
               data-atom
               data-decorative
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center overflow-hidden opacity-[0.015] mix-blend-overlay"
+              className="pointer-events-none absolute inset-0 z-0 flex select-none items-center justify-center opacity-[0.015] mix-blend-overlay"
               initial={animated ? { scale: 0.6, opacity: 0 } : false}
               animate={{ scale: 0.75, opacity: 0.02 }}
               transition={{ duration: 2, ease: 'easeOut' }}
             >
-              <h2 className="whitespace-nowrap font-display text-[18vw] font-black uppercase leading-none tracking-tighter text-foreground">
+              <h2 className="w-full whitespace-nowrap px-[3vw] text-center font-display text-[12vw] font-black uppercase leading-none tracking-tighter text-foreground">
                 Coming Soon
               </h2>
             </motion.div>
