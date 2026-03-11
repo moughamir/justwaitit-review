@@ -11,21 +11,24 @@ import TiktokIcon from '@/components/ui/icons/tiktok';
 import YoutubeIcon from '@/components/ui/icons/youtube';
 
 export const socialLinks = [
-  { href: 'https://x.com/anaqio', label: 'X (Twitter)', Icon: NewTwitterIcon },
   {
-    href: 'https://instagram.com/anaqio',
+    href: 'https://www.instagram.com/anaqio_official/',
     label: 'Instagram',
     Icon: InstagramIcon,
   },
-  { href: 'https://tiktok.com/@anaqio', label: 'TikTok', Icon: TiktokIcon },
+
   {
-    href: 'https://linkedin.com/company/anaqio',
+    href: 'https://www.linkedin.com/company/anaqio',
     label: 'LinkedIn',
     Icon: LinkedinIcon,
   },
-  { href: 'https://youtube.com/@anaqio', label: 'YouTube', Icon: YoutubeIcon },
   {
-    href: 'https://pinterest.com/anaqio',
+    href: 'https://www.youtube.com/@anaqio-studio',
+    label: 'YouTube',
+    Icon: YoutubeIcon,
+  },
+  {
+    href: 'https://www.pinterest.com/anaqioVFS/',
     label: 'Pinterest',
     Icon: PinterestIcon,
   },
