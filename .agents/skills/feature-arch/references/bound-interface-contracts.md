@@ -17,7 +17,7 @@ export function CheckoutForm({ onSuccess }) {
   // What shape does onSuccess expect?
   // What data should be passed?
   const handleSubmit = () => {
-    onSuccess(someData);  // Caller must guess the shape
+    onSuccess(someData); // Caller must guess the shape
   };
 }
 ```
@@ -40,14 +40,19 @@ export interface CheckoutFormProps {
 }
 
 // src/features/checkout/components/CheckoutForm.tsx
-export function CheckoutForm({ userId, cartItems, onSuccess, onError }: CheckoutFormProps) {
+export function CheckoutForm({
+  userId,
+  cartItems,
+  onSuccess,
+  onError,
+}: CheckoutFormProps) {
   const handleSubmit = async () => {
     try {
       const result = await processCheckout(userId, cartItems);
       onSuccess({
         orderId: result.id,
         total: result.total,
-        items: result.items.map(i => ({ id: i.id, quantity: i.qty })),
+        items: result.items.map((i) => ({ id: i.id, quantity: i.qty })),
       });
     } catch (err) {
       onError(normalizeError(err));

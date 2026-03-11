@@ -49,11 +49,11 @@ Launched Jan 2026. Claude Code for non-developers. Provides local folder access 
 
 Fork work to specialised agents via the Task tool:
 
-| Built-in | Purpose |
-|----------|---------|
-| Explore | Read-only codebase exploration |
-| Plan | Architecture planning without edits |
-| general-purpose | Flexible multi-tool agent |
+| Built-in        | Purpose                             |
+| --------------- | ----------------------------------- |
+| Explore         | Read-only codebase exploration      |
+| Plan            | Architecture planning without edits |
+| general-purpose | Flexible multi-tool agent           |
 
 Custom agents defined in `.claude/agents/` directory. Subagents inherit MCP tools when the `tools` field is omitted from the agent config.
 
@@ -61,13 +61,13 @@ Custom agents defined in `.claude/agents/` directory. Subagents inherit MCP tool
 
 Event-driven automation configured in settings or `.claude/` directory:
 
-| Event | Fires when |
-|-------|-----------|
-| PreToolUse | Before a tool is called |
-| PostToolUse | After a tool completes |
-| Notification | On notifications |
-| TeammateIdle | Agent Teams: teammate finishes work |
-| TaskCompleted | Agent Teams: task marked complete |
+| Event         | Fires when                          |
+| ------------- | ----------------------------------- |
+| PreToolUse    | Before a tool is called             |
+| PostToolUse   | After a tool completes              |
+| Notification  | On notifications                    |
+| TeammateIdle  | Agent Teams: teammate finishes work |
+| TaskCompleted | Agent Teams: task marked complete   |
 
 ## Memory System
 
@@ -78,21 +78,22 @@ Hierarchical CLAUDE.md files loaded from current directory + all parent director
 - `~/project/src/CLAUDE.md` — directory-specific context
 
 Additional memory:
+
 - `~/.claude/rules/` — global rules (always loaded)
 - `.claude/rules/` — project rules
 - Memory frontmatter scopes: `user`, `project`, `local`
 
 ## Available Tools
 
-| Tool | Purpose |
-|------|---------|
-| Read, Write, Edit | File operations |
-| Glob, Grep | Search files and content |
-| Bash | Shell command execution |
-| WebFetch, WebSearch | Web access |
-| Task | Delegate to subagents |
-| ToolSearch | Discover deferred/MCP tools |
-| AskUserQuestion | Get user input |
+| Tool                | Purpose                     |
+| ------------------- | --------------------------- |
+| Read, Write, Edit   | File operations             |
+| Glob, Grep          | Search files and content    |
+| Bash                | Shell command execution     |
+| WebFetch, WebSearch | Web access                  |
+| Task                | Delegate to subagents       |
+| ToolSearch          | Discover deferred/MCP tools |
+| AskUserQuestion     | Get user input              |
 
 Plus any MCP tools from connected servers.
 

@@ -13,22 +13,26 @@ Subscriptions created in useEffect without a cleanup function accumulate listene
 
 ```tsx
 function StockTicker({ symbol }: { symbol: string }) {
-  const [price, setPrice] = useState<number | null>(null)
+  const [price, setPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket(`wss://market-feed.example.com/ws/${symbol}`)
+    const socket = new WebSocket(`wss://market-feed.example.com/ws/${symbol}`);
 
     socket.onmessage = (event) => {
-      const update = JSON.parse(event.data) as { price: number }
-      setPrice(update.price) // stale callback fires after unmount
-    }
+      const update = JSON.parse(event.data) as { price: number };
+      setPrice(update.price); // stale callback fires after unmount
+    };
 
     // No cleanup — socket stays open after unmount
     // Navigating away and back creates a second socket
     // 10 navigations = 10 open sockets consuming memory and bandwidth
-  }, [symbol])
+  }, [symbol]);
 
-  return <span className="ticker">{price ? `$${price.toFixed(2)}` : "Loading..."}</span>
+  return (
+    <span className="ticker">
+      {price ? `$${price.toFixed(2)}` : 'Loading...'}
+    </span>
+  );
 }
 ```
 
@@ -36,22 +40,26 @@ function StockTicker({ symbol }: { symbol: string }) {
 
 ```tsx
 function StockTicker({ symbol }: { symbol: string }) {
-  const [price, setPrice] = useState<number | null>(null)
+  const [price, setPrice] = useState<number | null>(null);
 
   useEffect(() => {
-    const socket = new WebSocket(`wss://market-feed.example.com/ws/${symbol}`)
+    const socket = new WebSocket(`wss://market-feed.example.com/ws/${symbol}`);
 
     socket.onmessage = (event) => {
-      const update = JSON.parse(event.data) as { price: number }
-      setPrice(update.price)
-    }
+      const update = JSON.parse(event.data) as { price: number };
+      setPrice(update.price);
+    };
 
     return () => {
-      socket.close() // closes connection on unmount or symbol change
-    }
-  }, [symbol])
+      socket.close(); // closes connection on unmount or symbol change
+    };
+  }, [symbol]);
 
-  return <span className="ticker">{price ? `$${price.toFixed(2)}` : "Loading..."}</span>
+  return (
+    <span className="ticker">
+      {price ? `$${price.toFixed(2)}` : 'Loading...'}
+    </span>
+  );
 }
 ```
 

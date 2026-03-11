@@ -50,7 +50,7 @@ export function LegalPageLayout({
                 {subtitle}
               </p>
             )}
-            {(effectiveDate || version) && (
+            {(effectiveDate ?? version) && (
               <div className="flex flex-wrap gap-x-8 gap-y-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 {effectiveDate && <span>{effectiveDate}</span>}
                 {version && <span>{version}</span>}

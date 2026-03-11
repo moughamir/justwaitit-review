@@ -23,7 +23,7 @@ const useThemeStore = create<ThemeState>()(
       skipHydration: true,
     }
   )
-)
+);
 
 // Store never loads persisted state
 // User always sees 'light' theme on page load

@@ -13,24 +13,32 @@ Pick one word for each concept and stick to it throughout the codebase. Mixing s
 
 ```typescript
 class UserController {
-  fetchUser(id: string): User { /* ... */ }
+  fetchUser(id: string): User {
+    /* ... */
+  }
 }
 
 class ProductController {
-  getProduct(id: string): Product { /* ... */ }
+  getProduct(id: string): Product {
+    /* ... */
+  }
 }
 
 class OrderController {
-  retrieveOrder(id: string): Order { /* ... */ }
+  retrieveOrder(id: string): Order {
+    /* ... */
+  }
 }
 
 // Elsewhere in the codebase
-const customer = loadCustomer(id)  // Is 'customer' different from 'user'?
-const buyer = getBuyer(id)  // Another synonym?
+const customer = loadCustomer(id); // Is 'customer' different from 'user'?
+const buyer = getBuyer(id); // Another synonym?
 
 // Data layer uses yet another term
 class UserRepository {
-  findById(id: string): User { /* ... */ }
+  findById(id: string): User {
+    /* ... */
+  }
 }
 ```
 
@@ -39,27 +47,36 @@ class UserRepository {
 ```typescript
 // Pick 'get' for all retrieval operations
 class UserController {
-  getUser(id: string): User { /* ... */ }
+  getUser(id: string): User {
+    /* ... */
+  }
 }
 
 class ProductController {
-  getProduct(id: string): Product { /* ... */ }
+  getProduct(id: string): Product {
+    /* ... */
+  }
 }
 
 class OrderController {
-  getOrder(id: string): Order { /* ... */ }
+  getOrder(id: string): Order {
+    /* ... */
+  }
 }
 
 // Consistent term for the entity
-const user = getUser(id)  // Always 'user', never 'customer' or 'buyer'
+const user = getUser(id); // Always 'user', never 'customer' or 'buyer'
 
 // Repository layer follows same convention
 class UserRepository {
-  getById(id: string): User { /* ... */ }
+  getById(id: string): User {
+    /* ... */
+  }
 }
 ```
 
 **Establish conventions for:**
+
 - CRUD operations: `create/get/update/delete` or `add/fetch/modify/remove`
 - Collections: `list/find/search/filter` - pick one set
 - Status changes: `activate/deactivate` or `enable/disable`

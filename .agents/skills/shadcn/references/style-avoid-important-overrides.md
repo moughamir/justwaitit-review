@@ -14,11 +14,11 @@ Never use `!important` to override shadcn/ui styles. It breaks the cascade and p
 ```tsx
 function BrandButton({ children }: { children: React.ReactNode }) {
   return (
-    <Button className="!bg-brand-500 !text-white !hover:bg-brand-600">
+    <Button className="!bg-brand-500 !hover:bg-brand-600 !text-white">
       {/* !important prevents any further customization */}
       {children}
     </Button>
-  )
+  );
 }
 
 // Consumer cannot override
@@ -28,33 +28,30 @@ function Page() {
       {/* bg-red-500 ignored due to !important */}
       Click me
     </BrandButton>
-  )
+  );
 }
 ```
 
 **Correct (proper specificity with cn()):**
 
 ```tsx
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils';
 
 function BrandButton({
   className,
   children,
 }: {
-  className?: string
-  children: React.ReactNode
+  className?: string;
+  children: React.ReactNode;
 }) {
   return (
     <Button
-      className={cn(
-        "bg-brand-500 text-white hover:bg-brand-600",
-        className
-      )}
+      className={cn('bg-brand-500 hover:bg-brand-600 text-white', className)}
     >
       {/* User className passed last, can override defaults */}
       {children}
     </Button>
-  )
+  );
 }
 
 // Consumer can customize
@@ -64,11 +61,12 @@ function Page() {
       {/* Works - className overrides defaults via cn() */}
       Click me
     </BrandButton>
-  )
+  );
 }
 ```
 
 **If styles aren't applying:**
+
 1. Check class order in `cn()` - later classes win
 2. Verify Tailwind config includes your custom colors
 3. Use browser DevTools to inspect computed styles

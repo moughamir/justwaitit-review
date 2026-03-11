@@ -12,7 +12,7 @@ React immediately removes components from the DOM when conditionally rendered ou
 **Incorrect (exit animation never runs):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function NotificationBanner({ message, isVisible }: NotificationProps) {
   return (
@@ -22,7 +22,7 @@ function NotificationBanner({ message, isVisible }: NotificationProps) {
           className="notification"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}  // Never runs - component unmounts immediately
+          exit={{ opacity: 0, y: -50 }} // Never runs - component unmounts immediately
         >
           {message}
         </motion.div>
@@ -35,7 +35,7 @@ function NotificationBanner({ message, isVisible }: NotificationProps) {
 **Correct (AnimatePresence enables exit animation):**
 
 ```tsx
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from 'framer-motion';
 
 function NotificationBanner({ message, isVisible }: NotificationProps) {
   return (
@@ -45,7 +45,7 @@ function NotificationBanner({ message, isVisible }: NotificationProps) {
           className="notification"
           initial={{ opacity: 0, y: -50 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -50 }}  // Runs before unmount
+          exit={{ opacity: 0, y: -50 }} // Runs before unmount
         >
           {message}
         </motion.div>

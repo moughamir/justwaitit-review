@@ -13,18 +13,28 @@ Local state for filters, pagination, and search queries breaks browser back/forw
 
 ```tsx
 function IssueTracker() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [statusFilter, setStatusFilter] = useState<"open" | "closed" | "all">("open");
+  const [searchQuery, setSearchQuery] = useState('');
+  const [statusFilter, setStatusFilter] = useState<'open' | 'closed' | 'all'>(
+    'open'
+  );
   const [page, setPage] = useState(1);
-  const [sortBy, setSortBy] = useState<"created" | "updated">("created");
+  const [sortBy, setSortBy] = useState<'created' | 'updated'>('created');
 
   // URL is always /issues — sharing it shows default filters, not the user's view
   const issues = useIssueSearch({ searchQuery, statusFilter, page, sortBy });
 
   return (
     <div>
-      <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-      <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value as "open" | "closed" | "all")}>
+      <input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <select
+        value={statusFilter}
+        onChange={(e) =>
+          setStatusFilter(e.target.value as 'open' | 'closed' | 'all')
+        }
+      >
         <option value="open">Open</option>
         <option value="closed">Closed</option>
         <option value="all">All</option>
@@ -42,10 +52,15 @@ function IssueTracker() {
 function IssueTracker() {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const searchQuery = searchParams.get("q") ?? "";
-  const statusFilter = (searchParams.get("status") ?? "open") as "open" | "closed" | "all";
-  const page = Number(searchParams.get("page") ?? "1");
-  const sortBy = (searchParams.get("sort") ?? "created") as "created" | "updated";
+  const searchQuery = searchParams.get('q') ?? '';
+  const statusFilter = (searchParams.get('status') ?? 'open') as
+    | 'open'
+    | 'closed'
+    | 'all';
+  const page = Number(searchParams.get('page') ?? '1');
+  const sortBy = (searchParams.get('sort') ?? 'created') as
+    | 'created'
+    | 'updated';
 
   // URL: /issues?q=auth&status=open&page=2&sort=updated — shareable, bookmarkable
   const issues = useIssueSearch({ searchQuery, statusFilter, page, sortBy });
@@ -61,14 +76,24 @@ function IssueTracker() {
 
   return (
     <div>
-      <input value={searchQuery} onChange={(e) => updateParam("q", e.target.value)} />
-      <select value={statusFilter} onChange={(e) => updateParam("status", e.target.value)}>
+      <input
+        value={searchQuery}
+        onChange={(e) => updateParam('q', e.target.value)}
+      />
+      <select
+        value={statusFilter}
+        onChange={(e) => updateParam('status', e.target.value)}
+      >
         <option value="open">Open</option>
         <option value="closed">Closed</option>
         <option value="all">All</option>
       </select>
       <IssueTable issues={issues.data} />
-      <Pagination current={page} total={issues.totalPages} onChange={(p) => updateParam("page", String(p))} />
+      <Pagination
+        current={page}
+        total={issues.totalPages}
+        onChange={(p) => updateParam('page', String(p))}
+      />
     </div>
   );
 }

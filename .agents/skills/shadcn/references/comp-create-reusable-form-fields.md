@@ -15,7 +15,7 @@ Extract common form field patterns into reusable components to reduce boilerplat
 function UserForm() {
   const form = useForm<UserFormValues>({
     resolver: zodResolver(userSchema),
-  })
+  });
 
   return (
     <Form {...form}>
@@ -47,7 +47,7 @@ function UserForm() {
       />
       {/* 10 more fields with identical structure... */}
     </Form>
-  )
+  );
 }
 ```
 
@@ -56,12 +56,12 @@ function UserForm() {
 ```tsx
 // components/form/text-field.tsx
 interface TextFieldProps<T extends FieldValues> {
-  control: Control<T>
-  name: Path<T>
-  label: string
-  placeholder?: string
-  description?: string
-  type?: "text" | "email" | "password"
+  control: Control<T>;
+  name: Path<T>;
+  label: string;
+  placeholder?: string;
+  description?: string;
+  type?: 'text' | 'email' | 'password';
 }
 
 function TextField<T extends FieldValues>({
@@ -70,7 +70,7 @@ function TextField<T extends FieldValues>({
   label,
   placeholder,
   description,
-  type = "text",
+  type = 'text',
 }: TextFieldProps<T>) {
   return (
     <FormField
@@ -87,16 +87,16 @@ function TextField<T extends FieldValues>({
         </FormItem>
       )}
     />
-  )
+  );
 }
 
 // components/form/select-field.tsx
 interface SelectFieldProps<T extends FieldValues> {
-  control: Control<T>
-  name: Path<T>
-  label: string
-  placeholder?: string
-  options: { value: string; label: string }[]
+  control: Control<T>;
+  name: Path<T>;
+  label: string;
+  placeholder?: string;
+  options: { value: string; label: string }[];
 }
 
 function SelectField<T extends FieldValues>({
@@ -131,18 +131,23 @@ function SelectField<T extends FieldValues>({
         </FormItem>
       )}
     />
-  )
+  );
 }
 
 // Usage - clean and consistent
 function UserForm() {
-  const form = useForm<UserFormValues>({ resolver: zodResolver(userSchema) })
+  const form = useForm<UserFormValues>({ resolver: zodResolver(userSchema) });
 
   return (
     <Form {...form}>
       <TextField control={form.control} name="firstName" label="First Name" />
       <TextField control={form.control} name="lastName" label="Last Name" />
-      <TextField control={form.control} name="email" label="Email" type="email" />
+      <TextField
+        control={form.control}
+        name="email"
+        label="Email"
+        type="email"
+      />
       <SelectField
         control={form.control}
         name="role"
@@ -150,7 +155,7 @@ function UserForm() {
         options={roleOptions}
       />
     </Form>
-  )
+  );
 }
 ```
 

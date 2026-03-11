@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -21,6 +21,12 @@ export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement>
   /** @deprecated Use `variant` instead */
   animated?: boolean;
   variant?: LogoAnimationVariant;
+  /**
+   * Loading progress (0–100). Only used when `variant="outline-fill"`.
+   * Phase 1 (0–40%): stroke draws on via pathLength.
+   * Phase 2 (40–100%): fill fades in, stroke fades out.
+   */
+  progress?: number;
 }
 
 // ─── Letter Path Data ───────────────────────────────────────────────────────
@@ -144,66 +150,91 @@ function StaggerLetters({ instanceId }: { instanceId: string }) {
   );
 }
 
-// ─── Variant: Outline → Fill (Mask Wipe) ────────────────────────────────────
-function OutlineFillLetters({ instanceId }: { instanceId: string }) {
-  const maskId = `${instanceId}-fill-mask`;
+// ─── Variant: Outline → Fill (Progress-driven) ─────────────────────────────
+// Phase 1 (progress 0–40): stroke draws on via pathLength 0→1
+// Phase 2 (progress 40–100): fill fades in, stroke fades out
+// Driven entirely by a MotionValue derived from the `progress` prop,
+// so no JS-per-frame updates — only transform + opacity.
+
+function OutlineFillLetter({
+  letter,
+  index,
+  instanceId,
+  progressMv,
+}: {
+  letter: (typeof letterPaths)[number];
+  index: number;
+  instanceId: string;
+  progressMv: ReturnType<typeof useMotionValue<number>>;
+}) {
+  // Stagger each letter slightly within the 0–40 phase
+  const staggerStart = index * 0.04; // 0, 0.04, 0.08 … max ~0.24
+  const strokeEnd = 0.4;
+
+  // Stroke draws on during phase 1 (0–40% of progress)
+  const pathLength = useTransform(
+    progressMv,
+    [staggerStart * 100, strokeEnd * 100],
+    [0, 1]
+  );
+  const strokeOpacity = useTransform(progressMv, [40, 70], [1, 0]);
+
+  // Fill fades in during phase 2 (40–100% of progress)
+  const fillOpacity = useTransform(progressMv, [40, 80], [0, 1]);
+
+  return (
+    <g>
+      {/* Outline stroke layer */}
+      <motion.path
+        d={letter.d}
+        transform="matrix(1 0 0 -1 0 794)"
+        fill="none"
+        stroke="#484da9"
+        strokeWidth="1.5"
+        style={{ pathLength, opacity: strokeOpacity }}
+      />
+      {/* Gradient fill layer */}
+      <motion.path
+        d={letter.d}
+        transform="matrix(1 0 0 -1 0 794)"
+        fill={`url(#${instanceId}-${letter.gradientId})`}
+        style={{ opacity: fillOpacity }}
+      />
+    </g>
+  );
+}
+
+function OutlineFillLetters({
+  instanceId,
+  progress,
+}: {
+  instanceId: string;
+  progress: number;
+}) {
+  const progressMv = useMotionValue(progress);
+
+  // Sync the MotionValue when the progress prop changes
+  React.useEffect(() => {
+    progressMv.set(progress);
+  }, [progress, progressMv]);
+
   return (
     <>
-      {/* Animated mask: rectangle slides left→right revealing gradient fill */}
-      <defs>
-        <mask id={maskId}>
-          <motion.rect
-            x="0"
-            y="0"
-            width="1123"
-            height="794"
-            fill="white"
-            initial={{ x: -1123 }}
-            animate={{ x: 0 }}
-            transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
-          />
-        </mask>
-      </defs>
-
-      {/* 1. Outline layer: draws on first */}
       {letterPaths.map((l, i) => (
-        <motion.path
-          key={`outline-${l.id}`}
-          d={l.d}
-          transform="matrix(1 0 0 -1 0 794)"
-          fill="none"
-          stroke="#484da9"
-          strokeWidth="1.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 1 }}
-          transition={{
-            pathLength: {
-              duration: 1.2,
-              ease: [0.22, 1, 0.36, 1],
-              delay: i * 0.06,
-            },
-            opacity: { duration: 0.3, delay: i * 0.06 },
-          }}
+        <OutlineFillLetter
+          key={l.id}
+          letter={l}
+          index={i}
+          instanceId={instanceId}
+          progressMv={progressMv}
         />
       ))}
-
-      {/* 2. Fill layer: revealed by mask wipe */}
-      <g mask={`url(#${maskId})`}>
-        {letterPaths.map((l) => (
-          <path
-            key={`fill-${l.id}`}
-            fill={`url(#${instanceId}-${l.gradientId})`}
-            d={l.d}
-            transform="matrix(1 0 0 -1 0 794)"
-          />
-        ))}
-      </g>
     </>
   );
 }
 
 // ─── Variant: Outline Only ─────────────────────────────────────────────────
-function OutlineLetters({ instanceId }: { instanceId: string }) {
+function OutlineLetters({ instanceId: _instanceId }: { instanceId: string }) {
   return (
     <>
       {letterPaths.map((l, i) => (
@@ -346,6 +377,7 @@ function LockInLetters({ instanceId }: { instanceId: string }) {
 export function AnaqioTypographyLogo({
   animated = false,
   variant,
+  progress = 0,
   className,
   ...props
 }: AnaqioTypographyLogoProps) {
@@ -363,7 +395,9 @@ export function AnaqioTypographyLogo({
       case 'outline':
         return <OutlineLetters instanceId={instanceId} />;
       case 'outline-fill':
-        return <OutlineFillLetters instanceId={instanceId} />;
+        return (
+          <OutlineFillLetters instanceId={instanceId} progress={progress} />
+        );
       case 'spin':
         return <SpinLetters instanceId={instanceId} />;
       case 'spring-hover':

@@ -56,12 +56,14 @@ function SimpleList({ items }: { items: string[] }) {
 ```
 
 **When to memoize:**
+
 - React Profiler shows component is slow
 - Large arrays (1000+ items) with expensive operations
 - Passing callbacks to many memoized children
 - Complex object creation passed as props
 
 **When NOT to memoize:**
+
 - Simple calculations (length, concatenation)
 - Components that render fast (<16ms)
 - Dependencies change on every render

@@ -33,6 +33,7 @@ FASTMCP_LOG_LEVEL=DEBUG fastmcp dev server.py
 ```
 
 **Features:**
+
 - Interactive inspector UI
 - Hot reload on file changes
 - Detailed logging
@@ -54,6 +55,7 @@ fastmcp run server.py --transport sse
 ```
 
 **Options:**
+
 - `--transport`: `stdio`, `http`, or `sse`
 - `--port`: Port number (for HTTP/SSE)
 - `--host`: Host address (default: 127.0.0.1)
@@ -74,6 +76,7 @@ fastmcp inspect server.py --verbose
 ```
 
 **Output includes:**
+
 - List of tools
 - List of resources
 - List of prompts
@@ -97,6 +100,7 @@ fastmcp install server.py --config-path ~/.config/Claude/claude_desktop_config.j
 ```
 
 **What it does:**
+
 - Adds server to Claude Desktop configuration
 - Sets up proper command and arguments
 - Validates server before installing
@@ -120,6 +124,7 @@ Manual configuration (if not using `fastmcp install`):
 ```
 
 **Config locations:**
+
 - **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Linux**: `~/.config/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`

@@ -40,6 +40,7 @@ npx codemod workflow run -w ./workflow.yaml
 ```
 
 **Validation checks:**
+
 - YAML syntax and schema compliance
 - Node dependency DAG (no cycles)
 - Referenced files exist (codemods, rules)

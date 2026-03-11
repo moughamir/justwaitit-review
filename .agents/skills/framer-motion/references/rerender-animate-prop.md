@@ -17,12 +17,13 @@ function PulsingButton({ isActive }) {
 
   return (
     <motion.button
-      animate={{  // New object on every render, animation restarts
+      animate={{
+        // New object on every render, animation restarts
         scale: isActive ? 1.1 : 1,
         backgroundColor: isActive ? '#10b981' : '#6b7280',
       }}
       transition={{ duration: 0.3 }}
-      onClick={() => setClicks(c => c + 1)}
+      onClick={() => setClicks((c) => c + 1)}
     >
       Clicked {clicks} times
     </motion.button>
@@ -44,9 +45,9 @@ function PulsingButton({ isActive }) {
   return (
     <motion.button
       variants={buttonVariants}
-      animate={isActive ? 'active' : 'inactive'}  // String reference is stable
+      animate={isActive ? 'active' : 'inactive'} // String reference is stable
       transition={{ duration: 0.3 }}
-      onClick={() => setClicks(c => c + 1)}
+      onClick={() => setClicks((c) => c + 1)}
     >
       Clicked {clicks} times
     </motion.button>

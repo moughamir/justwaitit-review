@@ -52,15 +52,15 @@ src/features/user/
 
 **Recommended conventions:**
 
-| File Type | Convention | Example |
-|-----------|------------|---------|
-| React components | PascalCase | `UserProfile.tsx` |
-| Hooks | camelCase with use prefix | `useUser.ts` |
-| API functions | kebab-case | `get-user.ts` |
-| Stores | kebab-case | `user-store.ts` |
-| Utilities | kebab-case | `format-date.ts` |
-| Types | index.ts or kebab-case | `types/index.ts` |
-| Tests | match source + .test | `UserProfile.test.tsx` |
+| File Type        | Convention                | Example                |
+| ---------------- | ------------------------- | ---------------------- |
+| React components | PascalCase                | `UserProfile.tsx`      |
+| Hooks            | camelCase with use prefix | `useUser.ts`           |
+| API functions    | kebab-case                | `get-user.ts`          |
+| Stores           | kebab-case                | `user-store.ts`        |
+| Utilities        | kebab-case                | `format-date.ts`       |
+| Types            | index.ts or kebab-case    | `types/index.ts`       |
+| Tests            | match source + .test      | `UserProfile.test.tsx` |
 
 **ESLint enforcement:**
 

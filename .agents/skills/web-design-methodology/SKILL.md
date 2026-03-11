@@ -1,6 +1,6 @@
 ---
 name: web-design-methodology
-description: "Universal web design implementation methodology — BEM, responsive, accessibility, CSS architecture, spacing systems, dark mode. The HOW of building production-grade HTML/CSS."
+description: 'Universal web design implementation methodology — BEM, responsive, accessibility, CSS architecture, spacing systems, dark mode. The HOW of building production-grade HTML/CSS.'
 ---
 
 # Web Design Methodology
@@ -10,6 +10,7 @@ Universal patterns for building production-grade HTML/CSS. This skill covers imp
 ## What You Produce
 
 Production-ready HTML/CSS prototypes with:
+
 - Semantic CSS custom properties (tokens)
 - BEM-named components
 - Mobile-first responsive design
@@ -37,6 +38,7 @@ prototype/
 ```
 
 **Build order:**
+
 1. `variables.css` — tokens first
 2. `favicon.svg` — simple SVG from brand colour
 3. `styles.css` — all BEM components
@@ -52,26 +54,40 @@ Use Block-Element-Modifier naming. No exceptions.
 
 ```css
 /* Block */
-.hero { }
-.card { }
-.nav { }
+.hero {
+}
+.card {
+}
+.nav {
+}
 
 /* Element (child of block) */
-.hero__title { }
-.hero__subtitle { }
-.hero__cta { }
-.card__image { }
-.card__content { }
+.hero__title {
+}
+.hero__subtitle {
+}
+.hero__cta {
+}
+.card__image {
+}
+.card__content {
+}
 
 /* Modifier (variation) */
-.hero--split { }
-.hero--minimal { }
-.card--featured { }
-.btn--primary { }
-.btn--lg { }
+.hero--split {
+}
+.hero--minimal {
+}
+.card--featured {
+}
+.btn--primary {
+}
+.btn--lg {
+}
 ```
 
 **Rules:**
+
 - Blocks are standalone components
 - Elements are children, connected with `__`
 - Modifiers are variations, connected with `--`
@@ -101,7 +117,7 @@ See `references/css-variables-template.md` for the complete token template.
   color: #333333;
   border: 1px solid #e5e5e5;
   border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   padding: 24px;
 }
 ```
@@ -111,11 +127,13 @@ See `references/css-variables-template.md` for the complete token template.
 Dark mode is **optional** — only add if the brief requests it. Most business sites ship faster as light-only.
 
 **When to include:**
+
 - Brief explicitly requests it
 - Tech/developer audiences (expected)
 - Portfolio/creative sites (aesthetic choice)
 
 **When to skip:**
+
 - Trades, hospitality, professional services
 - When simplicity and fast shipping matter more
 
@@ -126,22 +144,23 @@ Use class-based toggle, never CSS media queries.
 ```css
 /* Light mode (default) */
 :root {
-  --background: #F9FAFB;
-  --foreground: #0F172A;
-  --card: #FFFFFF;
-  --card-foreground: #1E293B;
+  --background: #f9fafb;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #1e293b;
 }
 
 /* Dark mode (via .dark class on html) */
 .dark {
-  --background: #0F172A;
-  --foreground: #F1F5F9;
-  --card: #1E293B;
-  --card-foreground: #F1F5F9;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
 }
 ```
 
 **Rules:**
+
 - `.dark` class on `<html>`, toggled via JavaScript
 - NEVER use `@media (prefers-color-scheme: dark)` — JS handles system preference
 - Every background token needs a paired foreground token
@@ -159,10 +178,18 @@ Mobile-first. Design for 375px, enhance upward.
 
 ```css
 /* Base: 375px (mobile) — no media query needed */
-@media (min-width: 640px) { /* sm — large phone */ }
-@media (min-width: 768px) { /* md — tablet */ }
-@media (min-width: 1024px) { /* lg — small desktop */ }
-@media (min-width: 1440px) { /* xl — standard desktop */ }
+@media (min-width: 640px) {
+  /* sm — large phone */
+}
+@media (min-width: 768px) {
+  /* md — tablet */
+}
+@media (min-width: 1024px) {
+  /* lg — small desktop */
+}
+@media (min-width: 1440px) {
+  /* xl — standard desktop */
+}
 ```
 
 ### Mobile Priorities
@@ -177,14 +204,20 @@ Mobile-first. Design for 375px, enhance upward.
 ### Wide Screen Constraints
 
 ```css
-.prose { max-width: 65ch; }
-.hero__content { max-width: min(640px, 45vw); }
+.prose {
+  max-width: 65ch;
+}
+.hero__content {
+  max-width: min(640px, 45vw);
+}
 .container {
   max-width: 1280px;
   margin-inline: auto;
   padding-inline: var(--space-4);
 }
-.section { padding: clamp(3rem, 6vw, 6rem) 0; }
+.section {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
 ```
 
 Use `assets/mobile-nav.js` for the hamburger menu implementation.
@@ -213,29 +246,36 @@ Not uniform padding. Sections breathe differently:
 
 ```css
 /* Tight section (service list, FAQ) */
-.section--compact { padding: clamp(2rem, 4vw, 4rem) 0; }
+.section--compact {
+  padding: clamp(2rem, 4vw, 4rem) 0;
+}
 
 /* Standard section */
-.section { padding: clamp(3rem, 6vw, 6rem) 0; }
+.section {
+  padding: clamp(3rem, 6vw, 6rem) 0;
+}
 
 /* Breathing room (editorial break, testimonial) */
-.section--spacious { padding: clamp(4rem, 8vw, 10rem) 0; }
+.section--spacious {
+  padding: clamp(4rem, 8vw, 10rem) 0;
+}
 ```
 
 ## Shadow System
 
-| Element | Shadow |
-|---------|--------|
-| Cards at rest | `--shadow-sm` |
+| Element        | Shadow        |
+| -------------- | ------------- |
+| Cards at rest  | `--shadow-sm` |
 | Cards on hover | `--shadow-md` |
-| Dropdowns | `--shadow-lg` |
-| Modals | `--shadow-xl` |
+| Dropdowns      | `--shadow-lg` |
+| Modals         | `--shadow-xl` |
 
 Not everything needs shadow. Use sparingly.
 
 ## Icons
 
 Use Lucide icons via inline SVG:
+
 - Size: 24px inline, 32-48px for feature blocks
 - Stroke width: 1.5 or 2 (consistent throughout)
 - Colour: `currentColor` (inherits text colour)

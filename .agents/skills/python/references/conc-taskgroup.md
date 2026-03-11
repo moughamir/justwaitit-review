@@ -41,6 +41,7 @@ async def fetch_all_data(user_ids: list[int]) -> list[dict | Exception]:
 ```
 
 **Benefits of TaskGroup:**
+
 - Automatic cancellation on first error
 - Proper cleanup of all tasks
 - Clear lifetime boundaries

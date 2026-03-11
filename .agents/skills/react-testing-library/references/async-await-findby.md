@@ -12,10 +12,10 @@ tags: async, findBy, await, promises
 **Incorrect (missing await):**
 
 ```tsx
-render(<AsyncComponent />)
+render(<AsyncComponent />);
 
-const element = screen.findByRole('button')
-expect(element).toBeInTheDocument()
+const element = screen.findByRole('button');
+expect(element).toBeInTheDocument();
 // element is a Promise, not a DOM node!
 // Test passes before element appears
 ```
@@ -23,21 +23,22 @@ expect(element).toBeInTheDocument()
 **Correct (properly awaited):**
 
 ```tsx
-render(<AsyncComponent />)
+render(<AsyncComponent />);
 
-const element = await screen.findByRole('button')
-expect(element).toBeInTheDocument()
+const element = await screen.findByRole('button');
+expect(element).toBeInTheDocument();
 // Waits for element, then asserts
 ```
 
 **Also applies to findAllBy:**
 
 ```tsx
-const items = await screen.findAllByRole('listitem')
-expect(items).toHaveLength(3)
+const items = await screen.findAllByRole('listitem');
+expect(items).toHaveLength(3);
 ```
 
 **Tip:** Configure ESLint to catch this:
+
 ```json
 {
   "rules": {

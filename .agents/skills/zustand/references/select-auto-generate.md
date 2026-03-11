@@ -19,35 +19,35 @@ const useSettingsStore = create<SettingsState>((set) => ({
   fontSize: 14,
   autoSave: true,
   // ... 20 more settings
-}))
+}));
 
 // Tedious to write for each property
-export const useTheme = () => useSettingsStore((s) => s.theme)
-export const useLanguage = () => useSettingsStore((s) => s.language)
-export const useNotifications = () => useSettingsStore((s) => s.notifications)
+export const useTheme = () => useSettingsStore((s) => s.theme);
+export const useLanguage = () => useSettingsStore((s) => s.language);
+export const useNotifications = () => useSettingsStore((s) => s.notifications);
 // ... 20 more hooks
 ```
 
 **Correct (auto-generate selectors):**
 
 ```typescript
-import { StoreApi, UseBoundStore } from 'zustand'
+import { StoreApi, UseBoundStore } from 'zustand';
 
 type WithSelectors<S> = S extends { getState: () => infer T }
   ? S & { use: { [K in keyof T]: () => T[K] } }
-  : never
+  : never;
 
 const createSelectors = <S extends UseBoundStore<StoreApi<object>>>(
   store: S
 ) => {
-  const storeIn = store as WithSelectors<typeof store>
-  storeIn.use = {}
+  const storeIn = store as WithSelectors<typeof store>;
+  storeIn.use = {};
   for (const key of Object.keys(storeIn.getState())) {
     (storeIn.use as Record<string, () => unknown>)[key] = () =>
-      storeIn((s) => s[key as keyof typeof s])
+      storeIn((s) => s[key as keyof typeof s]);
   }
-  return storeIn
-}
+  return storeIn;
+};
 
 // Create store with auto-generated selectors
 const useSettingsStoreBase = create<SettingsState>((set) => ({
@@ -56,16 +56,17 @@ const useSettingsStoreBase = create<SettingsState>((set) => ({
   notifications: true,
   fontSize: 14,
   autoSave: true,
-}))
+}));
 
-export const useSettingsStore = createSelectors(useSettingsStoreBase)
+export const useSettingsStore = createSelectors(useSettingsStoreBase);
 
 // Usage - type-safe auto-generated hooks
-const theme = useSettingsStore.use.theme()
-const language = useSettingsStore.use.language()
+const theme = useSettingsStore.use.theme();
+const language = useSettingsStore.use.language();
 ```
 
 **Benefits:**
+
 - No manual selector boilerplate
 - Type-safe generated hooks
 - Consistent patterns across the codebase

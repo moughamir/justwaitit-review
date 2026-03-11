@@ -17,7 +17,7 @@ Generic best practices are starting points, not absolute rules. Teams adopt spec
 
 // Existing file uses function declarations throughout
 function validateEmail(email) {
-  return email.includes("@");
+  return email.includes('@');
 }
 
 // Developer "simplifies" new additions to arrow functions
@@ -32,7 +32,7 @@ const validateAge = (age) => age >= 0 && age <= 150;
 // This team prefers hoisting behavior and consistent style
 
 function validateEmail(email) {
-  return email.includes("@");
+  return email.includes('@');
 }
 
 function validatePhone(phone) {

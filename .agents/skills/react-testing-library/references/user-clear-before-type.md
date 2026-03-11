@@ -12,36 +12,36 @@ tags: user, userEvent, clear, type, inputs
 **Incorrect (appends instead of replaces):**
 
 ```tsx
-const user = userEvent.setup()
-render(<EditableField defaultValue="Hello" />)
+const user = userEvent.setup();
+render(<EditableField defaultValue="Hello" />);
 
-const input = screen.getByRole('textbox')
-await user.type(input, 'World')
+const input = screen.getByRole('textbox');
+await user.type(input, 'World');
 
-expect(input).toHaveValue('HelloWorld')
+expect(input).toHaveValue('HelloWorld');
 // Oops - wanted "World", got "HelloWorld"
 ```
 
 **Correct (clear then type):**
 
 ```tsx
-const user = userEvent.setup()
-render(<EditableField defaultValue="Hello" />)
+const user = userEvent.setup();
+render(<EditableField defaultValue="Hello" />);
 
-const input = screen.getByRole('textbox')
-await user.clear(input)
-await user.type(input, 'World')
+const input = screen.getByRole('textbox');
+await user.clear(input);
+await user.type(input, 'World');
 
-expect(input).toHaveValue('World')
+expect(input).toHaveValue('World');
 // Input value is exactly "World"
 ```
 
 **Alternative - select all and type:**
 
 ```tsx
-const input = screen.getByRole('textbox')
-await user.tripleClick(input)  // Select all text
-await user.type(input, 'New value')
+const input = screen.getByRole('textbox');
+await user.tripleClick(input); // Select all text
+await user.type(input, 'New value');
 // Replaces selected text
 ```
 

@@ -10,6 +10,7 @@ Comprehensive code refactoring guide based on Martin Fowler's catalog and Clean 
 ## When to Apply
 
 Reference these guidelines when:
+
 - Refactoring existing code to improve maintainability
 - Decomposing long methods or large classes
 - Reducing coupling between components
@@ -18,16 +19,16 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Structure & Decomposition | CRITICAL | `struct-` |
-| 2 | Coupling & Dependencies | CRITICAL | `couple-` |
-| 3 | Naming & Clarity | HIGH | `name-` |
-| 4 | Conditional Logic | HIGH | `cond-` |
-| 5 | Abstraction & Patterns | MEDIUM-HIGH | `pattern-` |
-| 6 | Data Organization | MEDIUM | `data-` |
-| 7 | Error Handling | MEDIUM | `error-` |
-| 8 | Micro-Refactoring | LOW | `micro-` |
+| Priority | Category                  | Impact      | Prefix     |
+| -------- | ------------------------- | ----------- | ---------- |
+| 1        | Structure & Decomposition | CRITICAL    | `struct-`  |
+| 2        | Coupling & Dependencies   | CRITICAL    | `couple-`  |
+| 3        | Naming & Clarity          | HIGH        | `name-`    |
+| 4        | Conditional Logic         | HIGH        | `cond-`    |
+| 5        | Abstraction & Patterns    | MEDIUM-HIGH | `pattern-` |
+| 6        | Data Organization         | MEDIUM      | `data-`    |
+| 7        | Error Handling            | MEDIUM      | `error-`   |
+| 8        | Micro-Refactoring         | LOW         | `micro-`   |
 
 ## Quick Reference
 

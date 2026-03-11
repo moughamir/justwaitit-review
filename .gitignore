@@ -14,7 +14,6 @@
 /coverage
 
 # next.js
-/.next/
 /out/
 
 # production
@@ -34,11 +33,13 @@ yarn-error.log*
 .env*.local
 .env
 
-# vercel
-.vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
 package-lock.json
 bun.lock
+.**/*
+ui-designer.md
+test-results
+.mcp.json

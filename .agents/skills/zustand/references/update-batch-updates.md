@@ -19,18 +19,18 @@ const useFormStore = create<FormState>((set) => ({
   isSubmitting: false,
 
   submitForm: async () => {
-    set({ isSubmitting: true })          // Re-render 1
-    set({ errors: {} })                   // Re-render 2
+    set({ isSubmitting: true }); // Re-render 1
+    set({ errors: {} }); // Re-render 2
 
     try {
-      await submitToServer(get().values)
-      set({ isSubmitting: false })        // Re-render 3
+      await submitToServer(get().values);
+      set({ isSubmitting: false }); // Re-render 3
     } catch (error) {
-      set({ errors: parseErrors(error) }) // Re-render 4
-      set({ isSubmitting: false })        // Re-render 5
+      set({ errors: parseErrors(error) }); // Re-render 4
+      set({ isSubmitting: false }); // Re-render 5
     }
   },
-}))
+}));
 ```
 
 **Correct (batched updates):**
@@ -44,24 +44,25 @@ const useFormStore = create<FormState>((set, get) => ({
 
   submitForm: async () => {
     // Single update for start
-    set({ isSubmitting: true, errors: {} })
+    set({ isSubmitting: true, errors: {} });
 
     try {
-      await submitToServer(get().values)
+      await submitToServer(get().values);
       // Single update for success
-      set({ isSubmitting: false })
+      set({ isSubmitting: false });
     } catch (error) {
       // Single update for failure
       set({
         errors: parseErrors(error),
         isSubmitting: false,
-      })
+      });
     }
   },
-}))
+}));
 ```
 
 **Note on React 18:** React 18 batches state updates automatically within event handlers and effects. However, batching in Zustand still matters for:
+
 - State consistency within a single synchronous operation
 - Reducing subscriber notifications
 - Clear intent in code
@@ -70,9 +71,9 @@ const useFormStore = create<FormState>((set, get) => ({
 
 ```typescript
 // Separate updates when they're truly independent
-set({ count: state.count + 1 })
+set({ count: state.count + 1 });
 // ... some async work
-set({ lastUpdated: Date.now() })
+set({ lastUpdated: Date.now() });
 ```
 
 Reference: [Zustand Documentation](https://zustand.docs.pmnd.rs/)

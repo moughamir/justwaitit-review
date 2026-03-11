@@ -20,6 +20,7 @@
 **Research Type**: Interviews | Survey | Usability Testing | A/B Test | Field Study
 
 **Participant Criteria**:
+
 - [Criterion 1 - who we talked to]
 - [Criterion 2]
 - [Criterion 3]
@@ -45,6 +46,7 @@
 ### Finding 1: [Theme/Pattern]
 
 **Evidence**: [Quotes, data, observations]
+
 - "[User quote 1]" - Participant 1
 - "[User quote 2]" - Participant 2
 - Data point: [Specific metric or observation]
@@ -58,6 +60,7 @@
 ### Finding 2: [Theme/Pattern]
 
 **Evidence**: [Quotes, data, observations]
+
 - "[User quote 3]" - Participant 3
 - "[User quote 4]" - Participant 4
 - Data point: [Specific metric or observation]
@@ -71,6 +74,7 @@
 ### Finding 3: [Theme/Pattern]
 
 **Evidence**: [Quotes, data, observations]
+
 - "[User quote 5]" - Participant 5
 - Data point: [Specific metric or observation]
 
@@ -87,14 +91,17 @@
 **Demographics**: [Age, location, tech savviness]
 
 **Goals**:
+
 - [Goal 1]
 - [Goal 2]
 
 **Pain Points**:
+
 - [Pain point 1]
 - [Pain point 2]
 
 **Behaviors**:
+
 - [Behavior 1]
 - [Behavior 2]
 
@@ -136,8 +143,8 @@
 
 ## Assumptions Tested
 
-| Assumption | Test Method | Result | Action |
-|------------|-------------|--------|--------|
+| Assumption     | Test Method     | Result                                     | Action       |
+| -------------- | --------------- | ------------------------------------------ | ------------ |
 | [Assumption 1] | [How we tested] | ✅ Validated / ❌ Invalidated / ⚠️ Partial | [What to do] |
 | [Assumption 2] | [How we tested] | ✅ Validated / ❌ Invalidated / ⚠️ Partial | [What to do] |
 | [Assumption 3] | [How we tested] | ✅ Validated / ❌ Invalidated / ⚠️ Partial | [What to do] |
@@ -147,22 +154,25 @@
 ## Opportunity Areas
 
 ### High Priority
+
 - [Opportunity 1 - biggest impact]
 - [Opportunity 2]
 
 ### Medium Priority
+
 - [Opportunity 3]
 - [Opportunity 4]
 
 ### Low Priority
+
 - [Opportunity 5]
 
 ---
 
 ## Risks Identified
 
-| Risk | Source | Mitigation |
-|------|--------|------------|
+| Risk     | Source                 | Mitigation       |
+| -------- | ---------------------- | ---------------- |
 | [Risk 1] | [Where this came from] | [How to address] |
 | [Risk 2] | [Where this came from] | [How to address] |
 
@@ -192,12 +202,12 @@
 
 ### Participant Details
 
-| ID | Demographics | Session Date | Duration |
-|----|--------------|--------------|----------|
-| P1 | [Details] | YYYY-MM-DD | 45 min |
-| P2 | [Details] | YYYY-MM-DD | 60 min |
-| P3 | [Details] | YYYY-MM-DD | 50 min |
+| ID  | Demographics | Session Date | Duration |
+| --- | ------------ | ------------ | -------- |
+| P1  | [Details]    | YYYY-MM-DD   | 45 min   |
+| P2  | [Details]    | YYYY-MM-DD   | 60 min   |
+| P3  | [Details]    | YYYY-MM-DD   | 50 min   |
 
 ---
 
-*This research document follows the PRD Mastery research framework*
+_This research document follows the PRD Mastery research framework_

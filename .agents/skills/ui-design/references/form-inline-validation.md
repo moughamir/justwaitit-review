@@ -59,6 +59,7 @@ form.addEventListener('submit', (event) => {
 ```
 
 **Validation timing rules:**
+
 - Required fields: Validate on blur AND on submit
 - Format validation: Validate on blur, clear on valid input
 - Never validate empty required fields on blur (wait for submit)

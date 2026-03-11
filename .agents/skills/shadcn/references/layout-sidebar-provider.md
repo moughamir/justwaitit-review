@@ -13,19 +13,20 @@ SidebarProvider must wrap any component that uses sidebar state or controls. Wit
 
 ```tsx
 // app/layout.tsx
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from '@/components/app-sidebar';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Layout({ children }) {
   return (
     <div className="flex">
-      <AppSidebar />  {/* Error: useSidebar must be used within SidebarProvider */}
+      <AppSidebar />{' '}
+      {/* Error: useSidebar must be used within SidebarProvider */}
       <main>
-        <SidebarTrigger />  {/* Also fails */}
+        <SidebarTrigger /> {/* Also fails */}
         {children}
       </main>
     </div>
-  )
+  );
 }
 ```
 
@@ -33,8 +34,8 @@ export default function Layout({ children }) {
 
 ```tsx
 // app/layout.tsx
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "@/components/app-sidebar"
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 
 export default function Layout({ children }) {
   return (
@@ -48,7 +49,7 @@ export default function Layout({ children }) {
         {children}
       </main>
     </SidebarProvider>
-  )
+  );
 }
 ```
 

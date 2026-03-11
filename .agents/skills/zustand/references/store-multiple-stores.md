@@ -28,7 +28,7 @@ const useStore = create<AppState>((set) => ({
   // Theme domain
   theme: 'light',
   setTheme: (theme) => set({ theme }),
-}))
+}));
 // Any state change triggers re-renders in all subscribed components
 ```
 
@@ -38,26 +38,27 @@ const useStore = create<AppState>((set) => ({
 const useUserStore = create<UserState>((set) => ({
   user: null,
   setUser: (user) => set({ user }),
-}))
+}));
 
 const useCartStore = create<CartState>((set) => ({
   cartItems: [],
   addToCart: (item) => set((s) => ({ cartItems: [...s.cartItems, item] })),
-}))
+}));
 
 const useUIStore = create<UIState>((set) => ({
   sidebarOpen: false,
   toggleSidebar: () => set((s) => ({ sidebarOpen: !s.sidebarOpen })),
-}))
+}));
 
 const useThemeStore = create<ThemeState>((set) => ({
   theme: 'light',
   setTheme: (theme) => set({ theme }),
-}))
+}));
 // Cart changes only affect components subscribed to useCartStore
 ```
 
 **Benefits:**
+
 - Smaller subscription scope means fewer unnecessary re-renders
 - Easier to test and maintain isolated domains
 - Better code splitting potential

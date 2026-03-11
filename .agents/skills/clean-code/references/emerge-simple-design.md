@@ -52,6 +52,7 @@ public class PaymentProcessor {
 **Rule 4 is the most overlooked:** After making code correct, expressive, and DRY, actively look for things to remove. Every class, method, and variable should justify its existence. If you have one implementation of an interface, question whether you need the interface. If a design pattern adds indirection without a current concrete benefit, remove it.
 
 **When more structure is justified:**
+
 - When you have 2+ implementations today (not hypothetically)
 - When a framework requires it (e.g., dependency injection interfaces)
 - When tests need seams for mocking external dependencies

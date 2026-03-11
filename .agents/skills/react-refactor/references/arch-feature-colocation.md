@@ -30,10 +30,10 @@ Organizing by type (components/, hooks/, styles/, tests/) scatters the files for
 //     useInvoices.test.ts
 
 // Deleting the feature means hunting across all 5 directories
-import { useInvoices } from "../../hooks/useInvoices";
-import { Invoice } from "../../types/invoice";
-import { calculateTotal } from "../../utils/invoiceCalculations";
-import { InvoiceRow } from "./InvoiceRow";
+import { useInvoices } from '../../hooks/useInvoices';
+import { Invoice } from '../../types/invoice';
+import { calculateTotal } from '../../utils/invoiceCalculations';
+import { InvoiceRow } from './InvoiceRow';
 ```
 
 **Correct (feature-based — self-contained module):**
@@ -56,10 +56,10 @@ import { InvoiceRow } from "./InvoiceRow";
 //       index.ts          <- public API for other features
 
 // All imports are local — no cross-directory navigation
-import { useInvoices } from "./useInvoices";
-import { Invoice } from "./invoice.types";
-import { calculateTotal } from "./invoiceCalculations";
-import { InvoiceRow } from "./InvoiceRow";
+import { useInvoices } from './useInvoices';
+import { Invoice } from './invoice.types';
+import { calculateTotal } from './invoiceCalculations';
+import { InvoiceRow } from './InvoiceRow';
 ```
 
 Reference: [Kent C. Dodds - Colocation](https://kentcdodds.com/blog/colocation)

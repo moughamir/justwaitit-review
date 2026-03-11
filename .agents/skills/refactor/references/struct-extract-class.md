@@ -13,29 +13,31 @@ When a class grows too large, it becomes difficult to understand and maintain. E
 
 ```typescript
 class Employee {
-  name: string
-  email: string
-  phone: string
-  street: string
-  city: string
-  state: string
-  zipCode: string
-  country: string
+  name: string;
+  email: string;
+  phone: string;
+  street: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  country: string;
 
   getFullAddress(): string {
-    return `${this.street}, ${this.city}, ${this.state} ${this.zipCode}, ${this.country}`
+    return `${this.street}, ${this.city}, ${this.state} ${this.zipCode}, ${this.country}`;
   }
 
   validateAddress(): boolean {
-    return this.street.length > 0 && this.city.length > 0 && this.zipCode.length > 0
+    return (
+      this.street.length > 0 && this.city.length > 0 && this.zipCode.length > 0
+    );
   }
 
   formatPhoneForDisplay(): string {
-    return this.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+    return this.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
   }
 
   getContactInfo(): string {
-    return `${this.email} | ${this.formatPhoneForDisplay()}`
+    return `${this.email} | ${this.formatPhoneForDisplay()}`;
   }
 }
 ```
@@ -44,16 +46,16 @@ class Employee {
 
 ```typescript
 class Employee {
-  name: string
-  contact: ContactInfo
-  address: Address
+  name: string;
+  contact: ContactInfo;
+  address: Address;
 
   getContactInfo(): string {
-    return this.contact.format()
+    return this.contact.format();
   }
 
   getFullAddress(): string {
-    return this.address.format()
+    return this.address.format();
   }
 }
 
@@ -67,11 +69,13 @@ class Address {
   ) {}
 
   format(): string {
-    return `${this.street}, ${this.city}, ${this.state} ${this.zipCode}, ${this.country}`
+    return `${this.street}, ${this.city}, ${this.state} ${this.zipCode}, ${this.country}`;
   }
 
   isValid(): boolean {
-    return this.street.length > 0 && this.city.length > 0 && this.zipCode.length > 0
+    return (
+      this.street.length > 0 && this.city.length > 0 && this.zipCode.length > 0
+    );
   }
 }
 
@@ -82,18 +86,19 @@ class ContactInfo {
   ) {}
 
   format(): string {
-    return `${this.email} | ${this.formatPhone()}`
+    return `${this.email} | ${this.formatPhone()}`;
   }
 
   private formatPhone(): string {
-    return this.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3')
+    return this.phone.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
   }
 }
 ```
 
 **Signs you need to extract:**
+
 - Groups of fields that are always used together
 - Methods that operate on a subset of fields
-- Fields with common prefixes (address_, contact_)
+- Fields with common prefixes (address*, contact*)
 
 Reference: [Extract Class](https://refactoring.com/catalog/extractClass.html)

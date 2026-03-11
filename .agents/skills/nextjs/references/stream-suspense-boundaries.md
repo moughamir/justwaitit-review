@@ -56,6 +56,7 @@ export default function DashboardPage() {
 ```
 
 **Guidelines for Suspense boundaries:**
+
 - Wrap each independent data-fetching component
 - Group related components in single boundary
 - Keep fallbacks similar in size to actual content (prevent layout shift)

@@ -15,6 +15,7 @@ Assumptions are conditions believed to be true that haven't been validated. Cons
 ## Feature: Payment Processing
 
 ### Requirements
+
 - Accept credit card payments
 - Process refunds
 - Generate invoices
@@ -30,28 +31,33 @@ Assumptions are conditions believed to be true that haven't been validated. Cons
 ## Feature: Payment Processing
 
 ### Assumptions (To Be Validated)
+
 - [ ] Stripe account is already configured and approved
 - [ ] All transactions will be in USD initially
 - [ ] Sales tax calculation is handled by a separate service
 - [ ] PCI compliance is managed at infrastructure level
 
 ### Constraints (Fixed Limitations)
+
 - Must use Stripe (contractual obligation)
 - Maximum transaction: $10,000 (fraud policy)
 - Refund window: 30 days (business policy)
 - No cryptocurrency payments (regulatory)
 
 ### Dependencies
+
 - Tax calculation service must be deployed first
 - Legal team must approve terms of service copy
 
 ### Validation Plan
+
 1. Week 1: Confirm Stripe account status with finance
 2. Week 1: Verify tax service API availability
 3. Week 2: Legal review of payment terms
 ```
 
 **When to validate assumptions:**
+
 - Before sprint planning
 - When assumptions affect architecture
 - When cost of being wrong is high

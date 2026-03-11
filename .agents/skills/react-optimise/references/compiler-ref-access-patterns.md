@@ -13,18 +13,18 @@ Reading `ref.current` during the render phase causes a compiler bailout because 
 
 ```tsx
 function ChatMessages({ messages }: { messages: Message[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const prevCountRef = useRef(messages.length)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const prevCountRef = useRef(messages.length);
 
   // Bailout: reading ref.current during render
   const isAtBottom =
     scrollRef.current !== null &&
     scrollRef.current.scrollHeight - scrollRef.current.scrollTop <=
-      scrollRef.current.clientHeight + 50
+      scrollRef.current.clientHeight + 50;
 
   // Bailout: reading and writing ref in render
-  const hasNewMessages = messages.length > prevCountRef.current
-  prevCountRef.current = messages.length
+  const hasNewMessages = messages.length > prevCountRef.current;
+  prevCountRef.current = messages.length;
 
   return (
     <div ref={scrollRef}>
@@ -33,7 +33,7 @@ function ChatMessages({ messages }: { messages: Message[] }) {
       ))}
       {hasNewMessages && isAtBottom && <ScrollAnchor />}
     </div>
-  )
+  );
 }
 ```
 
@@ -41,30 +41,30 @@ function ChatMessages({ messages }: { messages: Message[] }) {
 
 ```tsx
 function ChatMessages({ messages }: { messages: Message[] }) {
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const [isAtBottom, setIsAtBottom] = useState(true)
-  const [hasNewMessages, setHasNewMessages] = useState(false)
-  const prevCountRef = useRef(messages.length)
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [isAtBottom, setIsAtBottom] = useState(true);
+  const [hasNewMessages, setHasNewMessages] = useState(false);
+  const prevCountRef = useRef(messages.length);
 
   useEffect(() => {
-    setHasNewMessages(messages.length > prevCountRef.current)
-    prevCountRef.current = messages.length
-  }, [messages.length])
+    setHasNewMessages(messages.length > prevCountRef.current);
+    prevCountRef.current = messages.length;
+  }, [messages.length]);
 
   useEffect(() => {
-    const element = scrollRef.current
-    if (!element) return
+    const element = scrollRef.current;
+    if (!element) return;
 
     const checkScroll = () => {
       setIsAtBottom(
         element.scrollHeight - element.scrollTop <= element.clientHeight + 50
-      )
-    }
+      );
+    };
 
-    checkScroll()
-    element.addEventListener("scroll", checkScroll, { passive: true })
-    return () => element.removeEventListener("scroll", checkScroll)
-  }, [])
+    checkScroll();
+    element.addEventListener('scroll', checkScroll, { passive: true });
+    return () => element.removeEventListener('scroll', checkScroll);
+  }, []);
 
   return (
     <div ref={scrollRef}>
@@ -73,7 +73,7 @@ function ChatMessages({ messages }: { messages: Message[] }) {
       ))}
       {hasNewMessages && isAtBottom && <ScrollAnchor />}
     </div>
-  )
+  );
 }
 ```
 

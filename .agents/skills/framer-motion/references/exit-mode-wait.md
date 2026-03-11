@@ -12,8 +12,8 @@ By default, `AnimatePresence` renders entering and exiting elements simultaneous
 **Incorrect (overlapping transitions):**
 
 ```tsx
-import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -24,7 +24,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
         key={location.pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}  // Old and new pages render simultaneously, causing overlap
+        exit={{ opacity: 0 }} // Old and new pages render simultaneously, causing overlap
       >
         {children}
       </motion.div>
@@ -36,8 +36,8 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 **Correct (sequential with mode="wait"):**
 
 ```tsx
-import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 function PageTransition({ children }: { children: React.ReactNode }) {
   const location = useLocation();
@@ -48,7 +48,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
         key={location.pathname}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}  // Old page exits fully before new page enters
+        exit={{ opacity: 0 }} // Old page exits fully before new page enters
       >
         {children}
       </motion.div>
@@ -58,6 +58,7 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 ```
 
 **Mode options:**
+
 - `"sync"` (default): Enter and exit animations happen simultaneously
 - `"wait"`: Exit completes before enter begins
 - `"popLayout"`: Exiting elements are popped from layout flow

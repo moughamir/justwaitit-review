@@ -1,6 +1,6 @@
 ---
 name: nextjs-seo
-argument-hint: "[question or URL]"
+argument-hint: '[question or URL]'
 description: Next.js SEO optimization guide. Use when building Next.js apps, optimizing for search engines, fixing Google indexing issues, implementing metadata, sitemaps, robots.txt, JSON-LD, or auditing SEO.
 ---
 
@@ -54,7 +54,9 @@ export const metadata: Metadata = {
     siteName: 'Site Name',
     title: 'Site Title',
     description: 'Description for social sharing',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Site preview' }],
+    images: [
+      { url: '/og-image.png', width: 1200, height: 630, alt: 'Site preview' },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -124,20 +126,20 @@ export default function robots(): MetadataRoute.Robots {
 
 ### Rendering Strategy for SEO
 
-| Strategy | Use When | SEO Impact |
-|----------|----------|------------|
-| SSG (Static) | Content rarely changes | Best - pre-rendered HTML |
-| SSR | Dynamic content per request | Great - server-rendered |
-| ISR | Large sites, periodic updates | Great - cached + fresh |
-| CSR | Dashboards, authenticated areas | Poor - avoid for SEO pages |
+| Strategy     | Use When                        | SEO Impact                 |
+| ------------ | ------------------------------- | -------------------------- |
+| SSG (Static) | Content rarely changes          | Best - pre-rendered HTML   |
+| SSR          | Dynamic content per request     | Great - server-rendered    |
+| ISR          | Large sites, periodic updates   | Great - cached + fresh     |
+| CSR          | Dashboards, authenticated areas | Poor - avoid for SEO pages |
 
 ### Core Web Vitals Targets
 
-| Metric | Target | Impact |
-|--------|--------|--------|
-| LCP (Largest Contentful Paint) | < 2.5s | Loading speed |
-| INP (Interaction to Next Paint) | < 200ms | Interactivity |
-| CLS (Cumulative Layout Shift) | < 0.1 | Visual stability |
+| Metric                          | Target  | Impact           |
+| ------------------------------- | ------- | ---------------- |
+| LCP (Largest Contentful Paint)  | < 2.5s  | Loading speed    |
+| INP (Interaction to Next Paint) | < 200ms | Interactivity    |
+| CLS (Cumulative Layout Shift)   | < 0.1   | Visual stability |
 
 ## References
 

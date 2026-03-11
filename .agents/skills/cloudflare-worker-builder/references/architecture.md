@@ -21,17 +21,18 @@ This document explains the architectural patterns used in Cloudflare Workers wit
 ### The Correct Pattern (ES Module Format)
 
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
 // Define routes...
 
 // ✅ CORRECT: Export the Hono app directly
-export default app
+export default app;
 ```
 
 **Why this works:**
+
 - Hono's app object already implements the `fetch` handler
 - When Cloudflare calls your Worker, it automatically invokes `app.fetch()`
 - This is the **ES Module Worker format** (modern, recommended)
@@ -41,11 +42,12 @@ export default app
 ```typescript
 // ❌ WRONG: This causes "Cannot read properties of undefined (reading 'map')" error
 export default {
-  fetch: app.fetch
-}
+  fetch: app.fetch,
+};
 ```
 
 **Why this fails:**
+
 - When using Vite's build tools with Hono, the `app.fetch` binding is lost
 - The Vite bundler transforms the code in a way that breaks the `this` context
 - Source: [honojs/hono #3955](https://github.com/honojs/hono/issues/3955)
@@ -53,9 +55,9 @@ export default {
 ### Module Worker Format (When You Need Multiple Handlers)
 
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
 // Define routes...
 
@@ -65,17 +67,18 @@ export default {
 
   scheduled: async (event, env, ctx) => {
     // Cron job logic
-    console.log('Cron triggered:', event.cron)
+    console.log('Cron triggered:', event.cron);
   },
 
   tail: async (events, env, ctx) => {
     // Tail handler logic
-    console.log('Tail events:', events)
-  }
-}
+    console.log('Tail events:', events);
+  },
+};
 ```
 
 **When to use this:**
+
 - You need scheduled (cron) handlers
 - You need tail handlers for log consumption
 - You need queue consumers
@@ -88,11 +91,12 @@ export default {
 ```typescript
 // ❌ DEPRECATED: Never use this format
 addEventListener('fetch', (event) => {
-  event.respondWith(handleRequest(event.request))
-})
+  event.respondWith(handleRequest(event.request));
+});
 ```
 
 **Why never use this:**
+
 - Deprecated since Cloudflare Workers v2
 - Doesn't support modern features (D1, Vectorize, etc.)
 - Not compatible with TypeScript types
@@ -125,8 +129,8 @@ In `wrangler.jsonc`:
     "directory": "./public/",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
-  }
+    "run_worker_first": ["/api/*"],
+  },
 }
 ```
 
@@ -135,11 +139,13 @@ In `wrangler.jsonc`:
 ### Route Priority
 
 1. **Worker routes** (if matched by `run_worker_first`)
+
    ```typescript
    app.get('/api/hello', (c) => c.json({ ... }))
    ```
 
 2. **Static files** (if file exists in `public/`)
+
    ```
    public/styles.css → Served as-is
    public/logo.png → Served as-is
@@ -157,15 +163,15 @@ In `wrangler.jsonc`:
 ```typescript
 // Match all API versions
 app.get('/api/:version/users', (c) => {
-  const version = c.req.param('version')
-  return c.json({ version })
-})
+  const version = c.req.param('version');
+  return c.json({ version });
+});
 
 // Match nested routes
 app.get('/api/users/:id/posts/:postId', (c) => {
-  const { id, postId } = c.req.param()
-  return c.json({ userId: id, postId })
-})
+  const { id, postId } = c.req.param();
+  return c.json({ userId: id, postId });
+});
 ```
 
 #### Regex Routes
@@ -173,20 +179,20 @@ app.get('/api/users/:id/posts/:postId', (c) => {
 ```typescript
 // Match numeric IDs only
 app.get('/api/users/:id{[0-9]+}', (c) => {
-  const id = c.req.param('id')
-  return c.json({ id: parseInt(id) })
-})
+  const id = c.req.param('id');
+  return c.json({ id: parseInt(id) });
+});
 ```
 
 #### Route Groups
 
 ```typescript
-const api = new Hono()
+const api = new Hono();
 
-api.get('/users', (c) => c.json({ users: [] }))
-api.get('/posts', (c) => c.json({ posts: [] }))
+api.get('/users', (c) => c.json({ users: [] }));
+api.get('/posts', (c) => c.json({ posts: [] }));
 
-app.route('/api', api)  // Mount at /api
+app.route('/api', api); // Mount at /api
 ```
 
 ---
@@ -206,11 +212,12 @@ app.route('/api', api)  // Mount at /api
 // Handle all unmatched routes
 app.all('*', (c) => {
   // Forward to Static Assets
-  return c.env.ASSETS.fetch(c.req.raw)
-})
+  return c.env.ASSETS.fetch(c.req.raw);
+});
 ```
 
 **What this does:**
+
 - Forwards request to Static Assets handler
 - Static Assets checks if file exists
 - If yes: Returns file
@@ -220,32 +227,32 @@ app.all('*', (c) => {
 
 ```typescript
 app.all('*', async (c) => {
-  const response = await c.env.ASSETS.fetch(c.req.raw)
+  const response = await c.env.ASSETS.fetch(c.req.raw);
 
   // If Static Assets returns 404, customize response
   if (response.status === 404) {
-    return c.json({ error: 'Not Found' }, 404)
+    return c.json({ error: 'Not Found' }, 404);
   }
 
-  return response
-})
+  return response;
+});
 ```
 
 ### Asset Preprocessing
 
 ```typescript
 app.all('*', async (c) => {
-  const url = new URL(c.req.url)
+  const url = new URL(c.req.url);
 
   // Rewrite /old-path to /new-path
   if (url.pathname === '/old-path') {
-    url.pathname = '/new-path'
+    url.pathname = '/new-path';
   }
 
   // Create new request with modified URL
-  const modifiedRequest = new Request(url, c.req.raw)
-  return c.env.ASSETS.fetch(modifiedRequest)
-})
+  const modifiedRequest = new Request(url, c.req.raw);
+  return c.env.ASSETS.fetch(modifiedRequest);
+});
 ```
 
 ---
@@ -256,14 +263,14 @@ app.all('*', async (c) => {
 
 ```typescript
 type Bindings = {
-  ASSETS: Fetcher               // Static Assets (always present)
-  MY_KV: KVNamespace            // KV namespace
-  DB: D1Database                // D1 database
-  MY_BUCKET: R2Bucket           // R2 bucket
-  MY_VAR: string                // Environment variable
-}
+  ASSETS: Fetcher; // Static Assets (always present)
+  MY_KV: KVNamespace; // KV namespace
+  DB: D1Database; // D1 database
+  MY_BUCKET: R2Bucket; // R2 bucket
+  MY_VAR: string; // Environment variable
+};
 
-const app = new Hono<{ Bindings: Bindings }>()
+const app = new Hono<{ Bindings: Bindings }>();
 ```
 
 ### Accessing Bindings
@@ -271,13 +278,13 @@ const app = new Hono<{ Bindings: Bindings }>()
 ```typescript
 app.get('/api/data', async (c) => {
   // Type-safe access to bindings
-  const value = await c.env.MY_KV.get('key')
-  const result = await c.env.DB.prepare('SELECT * FROM users').all()
-  const object = await c.env.MY_BUCKET.get('file.txt')
-  const variable = c.env.MY_VAR
+  const value = await c.env.MY_KV.get('key');
+  const result = await c.env.DB.prepare('SELECT * FROM users').all();
+  const object = await c.env.MY_BUCKET.get('file.txt');
+  const variable = c.env.MY_VAR;
 
-  return c.json({ value, result, object, variable })
-})
+  return c.json({ value, result, object, variable });
+});
 ```
 
 ### Auto-Generated Types
@@ -287,18 +294,18 @@ Run `wrangler types` to generate `worker-configuration.d.ts`:
 ```typescript
 // Auto-generated by Wrangler
 interface Env {
-  ASSETS: Fetcher
-  MY_KV: KVNamespace
-  DB: D1Database
-  MY_BUCKET: R2Bucket
-  MY_VAR: string
+  ASSETS: Fetcher;
+  MY_KV: KVNamespace;
+  DB: D1Database;
+  MY_BUCKET: R2Bucket;
+  MY_VAR: string;
 }
 ```
 
 Then use:
 
 ```typescript
-const app = new Hono<{ Bindings: Env }>()
+const app = new Hono<{ Bindings: Env }>();
 ```
 
 ---
@@ -312,21 +319,23 @@ npm run dev
 ```
 
 **What happens:**
+
 - Miniflare simulates Cloudflare's runtime locally
 - Bindings are emulated (KV, D1, R2)
 - HMR enabled via Vite plugin
 - Runs on http://localhost:8787
 
 **Configuration**:
+
 ```typescript
 // vite.config.ts
 export default defineConfig({
   plugins: [
     cloudflare({
-      persist: true,  // Persist data between restarts
+      persist: true, // Persist data between restarts
     }),
   ],
-})
+});
 ```
 
 ### Production Deployment (wrangler deploy)
@@ -336,12 +345,14 @@ npm run deploy
 ```
 
 **What happens:**
+
 - Vite builds your code
 - Wrangler uploads to Cloudflare
 - Static Assets uploaded separately
 - Worker deployed to edge network
 
 **Build Output**:
+
 ```
 dist/
 ├── index.js        # Your Worker code (bundled)
@@ -358,22 +369,19 @@ dist/
     "staging": {
       "name": "my-worker-staging",
       "vars": { "ENV": "staging" },
-      "kv_namespaces": [
-        { "binding": "MY_KV", "id": "staging-kv-id" }
-      ]
+      "kv_namespaces": [{ "binding": "MY_KV", "id": "staging-kv-id" }],
     },
     "production": {
       "name": "my-worker-production",
       "vars": { "ENV": "production" },
-      "kv_namespaces": [
-        { "binding": "MY_KV", "id": "production-kv-id" }
-      ]
-    }
-  }
+      "kv_namespaces": [{ "binding": "MY_KV", "id": "production-kv-id" }],
+    },
+  },
 }
 ```
 
 Deploy to specific environment:
+
 ```bash
 wrangler deploy --env staging
 wrangler deploy --env production
@@ -383,11 +391,11 @@ wrangler deploy --env production
 
 ```typescript
 app.get('/api/info', (c) => {
-  const isDev = c.req.url.includes('localhost')
-  const env = c.env.ENV || 'development'
+  const isDev = c.req.url.includes('localhost');
+  const env = c.env.ENV || 'development';
 
-  return c.json({ isDev, env })
-})
+  return c.json({ isDev, env });
+});
 ```
 
 ---
@@ -397,11 +405,13 @@ app.get('/api/info', (c) => {
 ### Cold Starts
 
 Cloudflare Workers have **extremely fast cold starts** (~5ms):
+
 - Code is distributed globally
 - No containers to spin up
 - Minimal initialization overhead
 
 Keep your bundle small:
+
 - Avoid large dependencies
 - Use tree-shaking (Vite does this automatically)
 - Lazy-load heavy modules
@@ -431,11 +441,11 @@ Keep your bundle small:
 ### 1. Use Middleware for Common Logic
 
 ```typescript
-import { logger } from 'hono/logger'
-import { cors } from 'hono/cors'
+import { logger } from 'hono/logger';
+import { cors } from 'hono/cors';
 
-app.use('*', logger())
-app.use('/api/*', cors())
+app.use('*', logger());
+app.use('/api/*', cors());
 ```
 
 ### 2. Separate API and Static Routes
@@ -454,9 +464,9 @@ app.all('*', (c) => c.env.ASSETS.fetch(c.req.raw))
 
 ```typescript
 app.onError((err, c) => {
-  console.error(err)
-  return c.json({ error: 'Internal Server Error' }, 500)
-})
+  console.error(err);
+  return c.json({ error: 'Internal Server Error' }, 500);
+});
 ```
 
 ### 4. Use TypeScript
@@ -464,32 +474,32 @@ app.onError((err, c) => {
 ```typescript
 // Define types for request/response
 type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 app.get('/api/users/:id', async (c) => {
-  const id = parseInt(c.req.param('id'))
-  const user: User = { id, name: 'Alice' }
-  return c.json(user)
-})
+  const id = parseInt(c.req.param('id'));
+  const user: User = { id, name: 'Alice' };
+  return c.json(user);
+});
 ```
 
 ### 5. Validate Input
 
 ```typescript
-import { z } from 'zod'
+import { z } from 'zod';
 
 const schema = z.object({
   name: z.string(),
   email: z.string().email(),
-})
+});
 
 app.post('/api/users', async (c) => {
-  const body = await c.req.json()
-  const validated = schema.parse(body)
-  return c.json({ success: true, data: validated })
-})
+  const body = await c.req.json();
+  const validated = schema.parse(body);
+  return c.json({ success: true, data: validated });
+});
 ```
 
 ---
@@ -501,11 +511,12 @@ app.post('/api/users', async (c) => {
 **Cause**: Missing `run_worker_first` configuration
 
 **Fix**: Add to `wrangler.jsonc`:
+
 ```jsonc
 {
   "assets": {
-    "run_worker_first": ["/api/*"]
-  }
+    "run_worker_first": ["/api/*"],
+  },
 }
 ```
 
@@ -514,6 +525,7 @@ app.post('/api/users', async (c) => {
 **Cause**: Race condition in older Vite plugin versions
 
 **Fix**: Update to latest:
+
 ```bash
 npm install -D @cloudflare/vite-plugin@1.13.13
 ```

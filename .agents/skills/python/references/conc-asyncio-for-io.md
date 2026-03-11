@@ -40,6 +40,7 @@ async def fetch_all_apis(urls: list[str]) -> list[dict]:
 ```
 
 **When to use each model:**
+
 - **asyncio**: I/O-bound, high concurrency (thousands of connections)
 - **threading**: I/O-bound, simpler code, moderate concurrency
 - **multiprocessing**: CPU-bound, true parallelism needed

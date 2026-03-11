@@ -23,14 +23,15 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   // Expects to only update theme, but replaces entire preferences
-  updateTheme: (theme) => set({
-    user: {
-      preferences: { theme },
-    },
-  }),
+  updateTheme: (theme) =>
+    set({
+      user: {
+        preferences: { theme },
+      },
+    }),
   // Result: user = { preferences: { theme: 'light' } }
   // name, email, and notifications are lost!
-}))
+}));
 ```
 
 **Correct (preserve nested structure):**
@@ -47,16 +48,17 @@ const useUserStore = create<UserState>((set) => ({
   },
 
   // Spread to preserve existing properties at each level
-  updateTheme: (theme) => set((state) => ({
-    user: {
-      ...state.user,
-      preferences: {
-        ...state.user.preferences,
-        theme,
+  updateTheme: (theme) =>
+    set((state) => ({
+      user: {
+        ...state.user,
+        preferences: {
+          ...state.user.preferences,
+          theme,
+        },
       },
-    },
-  })),
-}))
+    })),
+}));
 ```
 
 **Alternative (flatten state structure):**
@@ -71,23 +73,24 @@ const useUserStore = create<UserState>((set) => ({
 
   // Simple top-level updates
   updateTheme: (prefTheme) => set({ prefTheme }),
-}))
+}));
 ```
 
 **Alternative (use immer for deep updates):**
 
 ```typescript
-import { immer } from 'zustand/middleware/immer'
+import { immer } from 'zustand/middleware/immer';
 
 const useUserStore = create<UserState>()(
   immer((set) => ({
     user: { name: 'John', preferences: { theme: 'dark' } },
 
-    updateTheme: (theme) => set((state) => {
-      state.user.preferences.theme = theme
-    }),
+    updateTheme: (theme) =>
+      set((state) => {
+        state.user.preferences.theme = theme;
+      }),
   }))
-)
+);
 ```
 
 Reference: [Zustand Documentation - Updating State](https://zustand.docs.pmnd.rs/guides/updating-state)

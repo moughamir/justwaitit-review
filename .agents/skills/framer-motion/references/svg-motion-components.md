@@ -12,7 +12,7 @@ Framer Motion's SVG components (motion.path, motion.circle, motion.rect, etc.) h
 **Incorrect (CSS animation on SVG elements):**
 
 ```tsx
-import { useState } from "react";
+import { useState } from 'react';
 
 function PulsingCircle() {
   const [isActive, setIsActive] = useState(false);
@@ -25,8 +25,8 @@ function PulsingCircle() {
         r={20}
         fill="blue"
         style={{
-          transform: isActive ? "scale(1.5)" : "scale(1)",  // Transform origin issues in SVG
-          transition: "transform 0.3s",
+          transform: isActive ? 'scale(1.5)' : 'scale(1)', // Transform origin issues in SVG
+          transition: 'transform 0.3s',
         }}
         onClick={() => setIsActive(!isActive)}
       />
@@ -38,8 +38,8 @@ function PulsingCircle() {
 **Correct (motion.circle with proper transforms):**
 
 ```tsx
-import { motion } from "framer-motion";
-import { useState } from "react";
+import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 function PulsingCircle() {
   const [isActive, setIsActive] = useState(false);
@@ -51,7 +51,7 @@ function PulsingCircle() {
         cy={50}
         r={20}
         fill="blue"
-        animate={{ scale: isActive ? 1.5 : 1 }}  // Handles transform origin correctly
+        animate={{ scale: isActive ? 1.5 : 1 }} // Handles transform origin correctly
         transition={{ duration: 0.3 }}
         onClick={() => setIsActive(!isActive)}
       />

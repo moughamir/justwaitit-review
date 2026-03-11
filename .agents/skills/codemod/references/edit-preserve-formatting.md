@@ -14,11 +14,11 @@ When replacing nodes, preserve the surrounding whitespace and formatting to main
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const functions = root.findAll({
-    rule: { pattern: "function $NAME() { $$$BODY }" }
+    rule: { pattern: 'function $NAME() { $$$BODY }' },
   });
 
-  const edits = functions.map(fn => {
-    const name = fn.getMatch("NAME")?.text();
+  const edits = functions.map((fn) => {
+    const name = fn.getMatch('NAME')?.text();
     // Hardcoded formatting ignores original style
     return fn.replace(`const ${name} = () => {}`);
     // Original: function   foo()  { ... }
@@ -35,23 +35,25 @@ const transform: Transform<TSX> = (root) => {
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const functions = root.findAll({
-    rule: { pattern: "function $NAME() { $$$BODY }" }
+    rule: { pattern: 'function $NAME() { $$$BODY }' },
   });
 
-  const edits = functions.map(fn => {
-    const name = fn.getMatch("NAME");
-    const body = fn.getMultipleMatches("BODY");
+  const edits = functions.map((fn) => {
+    const name = fn.getMatch('NAME');
+    const body = fn.getMultipleMatches('BODY');
 
     if (!name) return fn.replace(fn.text());
 
     // Preserve body formatting exactly
-    const bodyText = body.map(b => b.text()).join("");
+    const bodyText = body.map((b) => b.text()).join('');
 
     // Match the original node's formatting
     const original = fn.text();
-    const leadingSpace = original.match(/^(\s*)/)?.[1] || "";
+    const leadingSpace = original.match(/^(\s*)/)?.[1] || '';
 
-    return fn.replace(`${leadingSpace}const ${name.text()} = () => {${bodyText}}`);
+    return fn.replace(
+      `${leadingSpace}const ${name.text()} = () => {${bodyText}}`
+    );
   });
 
   return root.commitEdits(edits);
@@ -63,13 +65,13 @@ const transform: Transform<TSX> = (root) => {
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const functions = root.findAll({
-    rule: { pattern: "function $NAME() { $$$BODY }" }
+    rule: { pattern: 'function $NAME() { $$$BODY }' },
   });
 
-  const edits = functions.map(fn => {
+  const edits = functions.map((fn) => {
     // getTransformed preserves original text exactly
-    const nameText = fn.getTransformed("NAME") || "anonymous";
-    const bodyText = fn.getTransformed("BODY") || "";
+    const nameText = fn.getTransformed('NAME') || 'anonymous';
+    const bodyText = fn.getTransformed('BODY') || '';
 
     return fn.replace(`const ${nameText} = () => {${bodyText}}`);
   });

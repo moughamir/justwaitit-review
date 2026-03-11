@@ -35,27 +35,39 @@ function countProducts(
 }
 
 // Calling code is hard to read
-const products = searchProducts(10, 100, 'electronics', true, 'price', 'asc', 1, 20)
+const products = searchProducts(
+  10,
+  100,
+  'electronics',
+  true,
+  'price',
+  'asc',
+  1,
+  20
+);
 ```
 
 **Correct (parameter object with behavior):**
 
 ```typescript
 interface ProductFilter {
-  minPrice?: number
-  maxPrice?: number
-  category?: string
-  inStock?: boolean
+  minPrice?: number;
+  maxPrice?: number;
+  category?: string;
+  inStock?: boolean;
 }
 
 interface PaginationOptions {
-  sortBy?: string
-  sortOrder?: 'asc' | 'desc'
-  page?: number
-  pageSize?: number
+  sortBy?: string;
+  sortOrder?: 'asc' | 'desc';
+  page?: number;
+  pageSize?: number;
 }
 
-function searchProducts(filter: ProductFilter, pagination: PaginationOptions): Product[] {
+function searchProducts(
+  filter: ProductFilter,
+  pagination: PaginationOptions
+): Product[] {
   // Implementation
 }
 
@@ -64,9 +76,19 @@ function countProducts(filter: ProductFilter): number {
 }
 
 // Calling code is self-documenting
-const filter: ProductFilter = { minPrice: 10, maxPrice: 100, category: 'electronics', inStock: true }
-const pagination: PaginationOptions = { sortBy: 'price', sortOrder: 'asc', page: 1, pageSize: 20 }
-const products = searchProducts(filter, pagination)
+const filter: ProductFilter = {
+  minPrice: 10,
+  maxPrice: 100,
+  category: 'electronics',
+  inStock: true,
+};
+const pagination: PaginationOptions = {
+  sortBy: 'price',
+  sortOrder: 'asc',
+  page: 1,
+  pageSize: 20,
+};
+const products = searchProducts(filter, pagination);
 ```
 
 **Alternative (class with validation):**
@@ -79,22 +101,27 @@ class ProductFilter {
     public category?: string,
     public inStock?: boolean
   ) {
-    this.validate()
+    this.validate();
   }
 
   private validate(): void {
-    if (this.minPrice !== undefined && this.maxPrice !== undefined && this.minPrice > this.maxPrice) {
-      throw new Error('minPrice cannot exceed maxPrice')
+    if (
+      this.minPrice !== undefined &&
+      this.maxPrice !== undefined &&
+      this.minPrice > this.maxPrice
+    ) {
+      throw new Error('minPrice cannot exceed maxPrice');
     }
   }
 
   hasPrice(): boolean {
-    return this.minPrice !== undefined || this.maxPrice !== undefined
+    return this.minPrice !== undefined || this.maxPrice !== undefined;
   }
 }
 ```
 
 **Benefits:**
+
 - Related parameters travel together
 - Validation logic has a natural home
 - Adding new parameters doesn't change function signatures

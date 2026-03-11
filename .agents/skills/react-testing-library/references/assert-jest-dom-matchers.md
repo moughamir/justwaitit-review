@@ -12,24 +12,24 @@ Use `@testing-library/jest-dom` matchers instead of generic Jest matchers. They 
 **Incorrect (generic Jest matchers):**
 
 ```tsx
-render(<Button disabled>Submit</Button>)
+render(<Button disabled>Submit</Button>);
 
-const button = screen.getByRole('button')
-expect(button.disabled).toBe(true)
-expect(button.textContent).toBe('Submit')
-expect(document.body.contains(button)).toBe(true)
+const button = screen.getByRole('button');
+expect(button.disabled).toBe(true);
+expect(button.textContent).toBe('Submit');
+expect(document.body.contains(button)).toBe(true);
 // Unclear error messages, tests implementation
 ```
 
 **Correct (jest-dom matchers):**
 
 ```tsx
-render(<Button disabled>Submit</Button>)
+render(<Button disabled>Submit</Button>);
 
-const button = screen.getByRole('button')
-expect(button).toBeDisabled()
-expect(button).toHaveTextContent('Submit')
-expect(button).toBeInTheDocument()
+const button = screen.getByRole('button');
+expect(button).toBeDisabled();
+expect(button).toHaveTextContent('Submit');
+expect(button).toBeInTheDocument();
 // Clear error: "Expected element to be disabled but it was enabled"
 ```
 

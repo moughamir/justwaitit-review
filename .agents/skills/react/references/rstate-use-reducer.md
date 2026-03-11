@@ -13,19 +13,19 @@ When state has multiple sub-values or complex update logic, useReducer provides 
 
 ```typescript
 function ShoppingCart() {
-  const [items, setItems] = useState([])
-  const [total, setTotal] = useState(0)
-  const [discount, setDiscount] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [items, setItems] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [discount, setDiscount] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   function addItem(item) {
-    setItems([...items, item])
-    setTotal(total + item.price)
+    setItems([...items, item]);
+    setTotal(total + item.price);
     // Easy to forget to update all related state
   }
 
   function applyDiscount(code) {
-    setLoading(true)
+    setLoading(true);
     // Complex logic spread across multiple setters
   }
 }
@@ -35,17 +35,17 @@ function ShoppingCart() {
 
 ```typescript
 type CartState = {
-  items: Item[]
-  total: number
-  discount: number
-  loading: boolean
-}
+  items: Item[];
+  total: number;
+  discount: number;
+  loading: boolean;
+};
 
 type CartAction =
   | { type: 'ADD_ITEM'; item: Item }
   | { type: 'REMOVE_ITEM'; id: string }
   | { type: 'APPLY_DISCOUNT'; code: string; amount: number }
-  | { type: 'SET_LOADING'; loading: boolean }
+  | { type: 'SET_LOADING'; loading: boolean };
 
 function cartReducer(state: CartState, action: CartAction): CartState {
   switch (action.type) {
@@ -53,24 +53,24 @@ function cartReducer(state: CartState, action: CartAction): CartState {
       return {
         ...state,
         items: [...state.items, action.item],
-        total: state.total + action.item.price
-      }
+        total: state.total + action.item.price,
+      };
     case 'APPLY_DISCOUNT':
       return {
         ...state,
         discount: action.amount,
-        loading: false
-      }
+        loading: false,
+      };
     default:
-      return state
+      return state;
   }
 }
 
 function ShoppingCart() {
-  const [state, dispatch] = useReducer(cartReducer, initialState)
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   function addItem(item: Item) {
-    dispatch({ type: 'ADD_ITEM', item })
+    dispatch({ type: 'ADD_ITEM', item });
   }
 }
 // All state transitions in one place, testable, predictable

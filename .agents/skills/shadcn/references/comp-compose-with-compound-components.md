@@ -13,14 +13,14 @@ Build custom components using compound component patterns like shadcn/ui. This c
 
 ```tsx
 interface SettingsCardProps {
-  title: string
-  description: string
-  icon: LucideIcon
-  switchLabel: string
-  switchChecked: boolean
-  onSwitchChange: (checked: boolean) => void
-  badge?: string
-  footer?: React.ReactNode
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  switchLabel: string;
+  switchChecked: boolean;
+  onSwitchChange: (checked: boolean) => void;
+  badge?: string;
+  footer?: React.ReactNode;
 }
 
 function SettingsCard({
@@ -47,42 +47,54 @@ function SettingsCard({
       </CardContent>
       {footer && <CardFooter>{footer}</CardFooter>}
     </Card>
-  )
+  );
 }
 ```
 
 **Correct (compound component pattern):**
 
 ```tsx
-const SettingsCardContext = createContext<{ disabled?: boolean }>({})
+const SettingsCardContext = createContext<{ disabled?: boolean }>({});
 
-function SettingsCard({ children, disabled }: { children: React.ReactNode; disabled?: boolean }) {
+function SettingsCard({
+  children,
+  disabled,
+}: {
+  children: React.ReactNode;
+  disabled?: boolean;
+}) {
   return (
     <SettingsCardContext.Provider value={{ disabled }}>
-      <Card className={cn(disabled && "opacity-50")}>{children}</Card>
+      <Card className={cn(disabled && 'opacity-50')}>{children}</Card>
     </SettingsCardContext.Provider>
-  )
+  );
 }
 
 function SettingsCardHeader({ children }: { children: React.ReactNode }) {
-  return <CardHeader className="flex flex-row items-center gap-4">{children}</CardHeader>
+  return (
+    <CardHeader className="flex flex-row items-center gap-4">
+      {children}
+    </CardHeader>
+  );
 }
 
 function SettingsCardIcon({ icon: Icon }: { icon: LucideIcon }) {
-  return <Icon className="h-5 w-5 text-muted-foreground" />
+  return <Icon className="h-5 w-5 text-muted-foreground" />;
 }
 
 function SettingsCardTitle({ children }: { children: React.ReactNode }) {
-  return <CardTitle className="text-base">{children}</CardTitle>
+  return <CardTitle className="text-base">{children}</CardTitle>;
 }
 
 function SettingsCardContent({ children }: { children: React.ReactNode }) {
-  return <CardContent>{children}</CardContent>
+  return <CardContent>{children}</CardContent>;
 }
 
 function SettingsCardAction({ children }: { children: React.ReactNode }) {
-  const { disabled } = useContext(SettingsCardContext)
-  return <div className={cn(disabled && "pointer-events-none")}>{children}</div>
+  const { disabled } = useContext(SettingsCardContext);
+  return (
+    <div className={cn(disabled && 'pointer-events-none')}>{children}</div>
+  );
 }
 
 // Usage - flexible composition
@@ -93,12 +105,14 @@ function SettingsCardAction({ children }: { children: React.ReactNode }) {
     <Badge>Beta</Badge>
   </SettingsCardHeader>
   <SettingsCardContent>
-    <p className="text-muted-foreground">Receive alerts for important updates</p>
+    <p className="text-muted-foreground">
+      Receive alerts for important updates
+    </p>
   </SettingsCardContent>
   <SettingsCardAction>
     <Switch checked={enabled} onCheckedChange={setEnabled} />
   </SettingsCardAction>
-</SettingsCard>
+</SettingsCard>;
 ```
 
 Reference: [Compound Components Pattern](https://www.patterns.dev/react/compound-pattern/)

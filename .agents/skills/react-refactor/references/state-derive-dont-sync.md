@@ -12,14 +12,21 @@ Using useEffect to compute a derived value from other state causes a double-rend
 **Incorrect (useEffect sync — double render + sync drift risk):**
 
 ```tsx
-function ProductCatalog({ products, categoryFilter, priceRange }: ProductCatalogProps) {
+function ProductCatalog({
+  products,
+  categoryFilter,
+  priceRange,
+}: ProductCatalogProps) {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   // First render: stale filteredProducts. Second render: correct filteredProducts.
   useEffect(() => {
     const filtered = products.filter(
-      (p) => p.category === categoryFilter && p.price >= priceRange.min && p.price <= priceRange.max
+      (p) =>
+        p.category === categoryFilter &&
+        p.price >= priceRange.min &&
+        p.price <= priceRange.max
     );
     setFilteredProducts(filtered);
   }, [products, categoryFilter, priceRange]);
@@ -33,7 +40,9 @@ function ProductCatalog({ products, categoryFilter, priceRange }: ProductCatalog
   return (
     <div>
       <p>Total: {formatCurrency(totalPrice)}</p>
-      {filteredProducts.map((p) => <ProductCard key={p.id} product={p} />)}
+      {filteredProducts.map((p) => (
+        <ProductCard key={p.id} product={p} />
+      ))}
     </div>
   );
 }
@@ -42,10 +51,17 @@ function ProductCatalog({ products, categoryFilter, priceRange }: ProductCatalog
 **Correct (derive during render — single pass, always in sync):**
 
 ```tsx
-function ProductCatalog({ products, categoryFilter, priceRange }: ProductCatalogProps) {
+function ProductCatalog({
+  products,
+  categoryFilter,
+  priceRange,
+}: ProductCatalogProps) {
   // Computed every render — always consistent with source data
   const filteredProducts = products.filter(
-    (p) => p.category === categoryFilter && p.price >= priceRange.min && p.price <= priceRange.max
+    (p) =>
+      p.category === categoryFilter &&
+      p.price >= priceRange.min &&
+      p.price <= priceRange.max
   );
 
   const totalPrice = filteredProducts.reduce((sum, p) => sum + p.price, 0);
@@ -53,7 +69,9 @@ function ProductCatalog({ products, categoryFilter, priceRange }: ProductCatalog
   return (
     <div>
       <p>Total: {formatCurrency(totalPrice)}</p>
-      {filteredProducts.map((p) => <ProductCard key={p.id} product={p} />)}
+      {filteredProducts.map((p) => (
+        <ProductCard key={p.id} product={p} />
+      ))}
     </div>
   );
 }

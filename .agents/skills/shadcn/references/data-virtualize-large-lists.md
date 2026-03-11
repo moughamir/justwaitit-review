@@ -16,46 +16,46 @@ function LogViewer({ logs }: { logs: LogEntry[] }) {
   return (
     <div className="h-[600px] overflow-auto">
       {logs.map((log) => (
-        <div key={log.id} className="p-2 border-b">
+        <div key={log.id} className="border-b p-2">
           {/* Renders 10,000 DOM nodes for 10,000 logs */}
           <span className="text-muted-foreground">{log.timestamp}</span>
           <span className="ml-2">{log.message}</span>
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
 **Correct (virtualized with TanStack Virtual):**
 
 ```tsx
-import { useVirtualizer } from "@tanstack/react-virtual"
+import { useVirtualizer } from '@tanstack/react-virtual';
 
 function LogViewer({ logs }: { logs: LogEntry[] }) {
-  const parentRef = useRef<HTMLDivElement>(null)
+  const parentRef = useRef<HTMLDivElement>(null);
 
   const virtualizer = useVirtualizer({
     count: logs.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 40, // Estimated row height in pixels
     overscan: 5, // Render 5 extra rows above/below viewport
-  })
+  });
 
   return (
     <div ref={parentRef} className="h-[600px] overflow-auto">
       <div
         style={{
           height: `${virtualizer.getTotalSize()}px`,
-          position: "relative",
+          position: 'relative',
         }}
       >
         {virtualizer.getVirtualItems().map((virtualRow) => {
-          const log = logs[virtualRow.index]
+          const log = logs[virtualRow.index];
           return (
             <div
               key={virtualRow.key}
-              className="absolute w-full p-2 border-b"
+              className="absolute w-full border-b p-2"
               style={{
                 height: `${virtualRow.size}px`,
                 transform: `translateY(${virtualRow.start}px)`,
@@ -65,15 +65,16 @@ function LogViewer({ logs }: { logs: LogEntry[] }) {
               <span className="text-muted-foreground">{log.timestamp}</span>
               <span className="ml-2">{log.message}</span>
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
+  );
 }
 ```
 
 **When to virtualize:**
+
 - Lists with 100+ items
 - Tables with 50+ rows and complex cells
 - Log viewers, chat histories, infinite scroll

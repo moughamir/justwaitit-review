@@ -33,7 +33,10 @@ function InvoiceForm() {
 function InvoiceSummary() {
   // Reaches into parent's ref — cannot be tested or reused independently
   const { lineItems, discount, taxRate } = formStateRef.current!;
-  const subtotal = lineItems.reduce((sum, li) => sum + li.price * li.quantity, 0);
+  const subtotal = lineItems.reduce(
+    (sum, li) => sum + li.price * li.quantity,
+    0
+  );
   const tax = subtotal * taxRate;
   const total = subtotal - discount + tax;
 
@@ -76,7 +79,10 @@ interface InvoiceSummaryProps {
 
 // Fully self-contained — testable with any props, reusable anywhere
 function InvoiceSummary({ lineItems, discount, taxRate }: InvoiceSummaryProps) {
-  const subtotal = lineItems.reduce((sum, li) => sum + li.price * li.quantity, 0);
+  const subtotal = lineItems.reduce(
+    (sum, li) => sum + li.price * li.quantity,
+    0
+  );
   const tax = subtotal * taxRate;
   const total = subtotal - discount + tax;
 

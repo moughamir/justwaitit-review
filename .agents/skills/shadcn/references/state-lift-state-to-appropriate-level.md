@@ -18,11 +18,11 @@ function ProductPage() {
       <ProductGallery />
       <ProductDetails />
     </div>
-  )
+  );
 }
 
 function ProductGallery() {
-  const [selectedImage, setSelectedImage] = useState(0)
+  const [selectedImage, setSelectedImage] = useState(0);
   // selectedImage needed by ProductDetails for zoom feature
   // but state is isolated in ProductGallery
 }
@@ -36,7 +36,7 @@ function ProductDetails() {
 
 ```tsx
 function ProductPage() {
-  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   return (
     <div className="grid grid-cols-2 gap-8">
@@ -46,15 +46,15 @@ function ProductPage() {
       />
       <ProductDetails selectedImageIndex={selectedImageIndex} />
     </div>
-  )
+  );
 }
 
 function ProductGallery({
   selectedIndex,
   onSelectImage,
 }: {
-  selectedIndex: number
-  onSelectImage: (index: number) => void
+  selectedIndex: number;
+  onSelectImage: (index: number) => void;
 }) {
   return (
     <div className="space-y-4">
@@ -65,7 +65,7 @@ function ProductGallery({
         {images.map((image, index) => (
           <Button
             key={image.id}
-            variant={index === selectedIndex ? "default" : "outline"}
+            variant={index === selectedIndex ? 'default' : 'outline'}
             onClick={() => onSelectImage(index)}
           >
             <img src={image.thumbnail} alt="" className="h-12 w-12" />
@@ -73,7 +73,7 @@ function ProductGallery({
         ))}
       </div>
     </div>
-  )
+  );
 }
 ```
 
@@ -82,12 +82,12 @@ function ProductGallery({
 ```tsx
 // When prop drilling goes beyond 2-3 levels
 const SelectedImageContext = createContext<{
-  selectedIndex: number
-  setSelectedIndex: (index: number) => void
-} | null>(null)
+  selectedIndex: number;
+  setSelectedIndex: (index: number) => void;
+} | null>(null);
 
 function ProductPage() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
     <SelectedImageContext.Provider value={{ selectedIndex, setSelectedIndex }}>
@@ -96,7 +96,7 @@ function ProductPage() {
         <ProductDetails />
       </div>
     </SelectedImageContext.Provider>
-  )
+  );
 }
 ```
 

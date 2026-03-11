@@ -75,15 +75,17 @@ const priority = priorityMatrix[`${urgency}-${importance}`];
 ```tsx
 function UserAvatar({ user }: Props) {
   return (
-    <div className={
-      user.status === 'online'
-        ? user.isPremium
-          ? 'avatar-premium-online'
-          : 'avatar-online'
-        : user.status === 'away'
-          ? 'avatar-away'
-          : 'avatar-offline'
-    }>
+    <div
+      className={
+        user.status === 'online'
+          ? user.isPremium
+            ? 'avatar-premium-online'
+            : 'avatar-online'
+          : user.status === 'away'
+            ? 'avatar-away'
+            : 'avatar-offline'
+      }
+    >
       {user.name}
     </div>
   );
@@ -104,11 +106,7 @@ function getAvatarClass(user: User): string {
 }
 
 function UserAvatar({ user }: Props) {
-  return (
-    <div className={getAvatarClass(user)}>
-      {user.name}
-    </div>
-  );
+  return <div className={getAvatarClass(user)}>{user.name}</div>;
 }
 ```
 

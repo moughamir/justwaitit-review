@@ -14,7 +14,7 @@ Add brand colors and custom design tokens by extending the Tailwind theme rather
 ```tsx
 function BrandedCard() {
   return (
-    <Card className="bg-[#1a365d] border-[#2a4a7f]">
+    <Card className="border-[#2a4a7f] bg-[#1a365d]">
       <CardHeader>
         <CardTitle className="text-[#e2e8f0]">
           {/* Arbitrary values: no autocomplete, hard to maintain */}
@@ -25,7 +25,7 @@ function BrandedCard() {
         <p className="text-[#a0aec0]">Welcome to your dashboard</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 ```
 
@@ -38,18 +38,18 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          50: "#e6f0ff",
-          100: "#b3d1ff",
-          500: "#1a365d",
-          600: "#153050",
-          700: "#102540",
-          foreground: "#e2e8f0",
-          muted: "#a0aec0",
+          50: '#e6f0ff',
+          100: '#b3d1ff',
+          500: '#1a365d',
+          600: '#153050',
+          700: '#102540',
+          foreground: '#e2e8f0',
+          muted: '#a0aec0',
         },
       },
     },
   },
-}
+};
 ```
 
 ```tsx
@@ -66,11 +66,12 @@ function BrandedCard() {
         <p className="text-brand-muted">Welcome to your dashboard</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 ```
 
 **Benefits of theme extension:**
+
 - IDE autocomplete for all custom values
 - Single source of truth for brand colors
 - Easy global updates when brand changes

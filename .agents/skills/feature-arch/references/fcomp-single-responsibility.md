@@ -92,6 +92,7 @@ export async function PostPage({ postId }: { postId: string }) {
 ```
 
 **Benefits:**
+
 - PostContent can be tested without comments
 - CommentList can be reused elsewhere
 - Each component is ~20-50 lines, easy to understand

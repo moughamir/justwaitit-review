@@ -15,9 +15,11 @@ Break large features into smaller, estimable work items using a Work Breakdown S
 ## Feature: User Dashboard
 
 ### Description
+
 Build a dashboard showing user analytics and activity.
 
 ### Estimate
+
 2 sprints (rough guess)
 
 // Hidden complexity: API design, caching, charts, permissions, mobile
@@ -59,6 +61,7 @@ Build a dashboard showing user analytics and activity.
 ```
 
 **WBS principles:**
+
 - Each item should be independently estimable
 - Aim for items under 8 story points
 - Reveal dependencies between items

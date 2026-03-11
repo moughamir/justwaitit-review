@@ -21,18 +21,19 @@ const useCartStore = create<CartState>((set) => ({
   setTotal: (total) => set({ total }),
 
   // Component must calculate business logic
-  addItem: (item) => set((s) => ({
-    items: [...s.items, item],
-    total: s.total + item.price,
-  })),
-}))
+  addItem: (item) =>
+    set((s) => ({
+      items: [...s.items, item],
+      total: s.total + item.price,
+    })),
+}));
 
 // Component handles logic
 const handleAddToCart = (product) => {
   if (product.stock > 0) {
-    addItem({ ...product, quantity: 1 })
+    addItem({ ...product, quantity: 1 });
   }
-}
+};
 ```
 
 **Correct (event-style names):**
@@ -44,34 +45,35 @@ const useCartStore = create<CartState>((set, get) => ({
 
   // Event names describe what happened
   itemAddedToCart: (product: Product) => {
-    if (product.stock <= 0) return
+    if (product.stock <= 0) return;
 
     set((s) => ({
       items: [...s.items, { ...product, quantity: 1 }],
       total: s.total + product.price,
-    }))
+    }));
   },
 
   itemRemovedFromCart: (productId: string) => {
-    const item = get().items.find((i) => i.id === productId)
-    if (!item) return
+    const item = get().items.find((i) => i.id === productId);
+    if (!item) return;
 
     set((s) => ({
       items: s.items.filter((i) => i.id !== productId),
       total: s.total - item.price * item.quantity,
-    }))
+    }));
   },
 
   cartCleared: () => set({ items: [], total: 0 }),
-}))
+}));
 
 // Component is simple
 const handleAddToCart = (product) => {
-  itemAddedToCart(product)
-}
+  itemAddedToCart(product);
+};
 ```
 
 **Benefits:**
+
 - Business logic encapsulated in store
 - Components become thinner and easier to test
 - Action names are self-documenting

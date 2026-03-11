@@ -24,7 +24,7 @@ Use logical property utilities (`ms-`, `me-`, `ps-`, `pe-`) instead of physical 
 **Correct (logical properties):**
 
 ```html
-<div class="ms-4 me-8 ps-2 pe-6">
+<div class="me-8 ms-4 pe-6 ps-2">
   <!-- LTR: margin-left/right, padding-left/right -->
   <!-- RTL: automatically flips to match direction -->
 </div>
@@ -37,15 +37,15 @@ Use logical property utilities (`ms-`, `me-`, `ps-`, `pe-`) instead of physical 
 
 **Logical property mapping:**
 
-| Physical | Logical | LTR | RTL |
-|----------|---------|-----|-----|
-| `ml-*` | `ms-*` | left | right |
-| `mr-*` | `me-*` | right | left |
-| `pl-*` | `ps-*` | left | right |
-| `pr-*` | `pe-*` | right | left |
-| `left-*` | `start-*` | left | right |
-| `right-*` | `end-*` | right | left |
-| `text-left` | `text-start` | left | right |
-| `text-right` | `text-end` | right | left |
+| Physical     | Logical      | LTR   | RTL   |
+| ------------ | ------------ | ----- | ----- |
+| `ml-*`       | `ms-*`       | left  | right |
+| `mr-*`       | `me-*`       | right | left  |
+| `pl-*`       | `ps-*`       | left  | right |
+| `pr-*`       | `pe-*`       | right | left  |
+| `left-*`     | `start-*`    | left  | right |
+| `right-*`    | `end-*`      | right | left  |
+| `text-left`  | `text-start` | left  | right |
+| `text-right` | `text-end`   | right | left  |
 
 Reference: [Tailwind CSS v4.0 Release](https://tailwindcss.com/blog/tailwindcss-v4)

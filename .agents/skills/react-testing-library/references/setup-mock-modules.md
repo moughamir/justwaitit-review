@@ -14,44 +14,44 @@ Call `jest.mock()` at the top level of your test file, not inside tests. Jest ho
 ```tsx
 test('fetches user data', async () => {
   jest.mock('./api', () => ({
-    fetchUser: jest.fn().mockResolvedValue({ name: 'John' })
-  }))
+    fetchUser: jest.fn().mockResolvedValue({ name: 'John' }),
+  }));
 
-  render(<UserProfile />)
+  render(<UserProfile />);
   // Mock may not be applied correctly
-})
+});
 ```
 
 **Correct (mock at module level):**
 
 ```tsx
-import { fetchUser } from './api'
+import { fetchUser } from './api';
 
-jest.mock('./api')
+jest.mock('./api');
 
-const mockFetchUser = fetchUser as jest.MockedFunction<typeof fetchUser>
+const mockFetchUser = fetchUser as jest.MockedFunction<typeof fetchUser>;
 
 test('fetches user data', async () => {
-  mockFetchUser.mockResolvedValue({ name: 'John' })
+  mockFetchUser.mockResolvedValue({ name: 'John' });
 
-  render(<UserProfile />)
-  expect(await screen.findByText('John')).toBeInTheDocument()
-})
+  render(<UserProfile />);
+  expect(await screen.findByText('John')).toBeInTheDocument();
+});
 
 test('handles error', async () => {
-  mockFetchUser.mockRejectedValue(new Error('Network error'))
+  mockFetchUser.mockRejectedValue(new Error('Network error'));
 
-  render(<UserProfile />)
-  expect(await screen.findByRole('alert')).toHaveTextContent('Network error')
-})
+  render(<UserProfile />);
+  expect(await screen.findByRole('alert')).toHaveTextContent('Network error');
+});
 ```
 
 **Reset mocks between tests:**
 
 ```tsx
 beforeEach(() => {
-  jest.clearAllMocks()
-})
+  jest.clearAllMocks();
+});
 ```
 
 Reference: [Jest - Manual Mocks](https://jestjs.io/docs/manual-mocks)

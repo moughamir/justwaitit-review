@@ -66,7 +66,9 @@ await Promise.all([
 ]);
 
 // Wait for element state
-await page.getByRole('button', { name: 'Submit' }).waitFor({ state: 'visible' });
+await page
+  .getByRole('button', { name: 'Submit' })
+  .waitFor({ state: 'visible' });
 
 // Wait for function condition
 await page.waitForFunction(() => {

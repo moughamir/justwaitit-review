@@ -13,12 +13,12 @@ Every context value change re-renders the entire consumer subtree, regardless of
 
 ```tsx
 interface DashboardContextValue {
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   locale: string;
   currentUser: User;
-  liveVisitorCount: number;    // Updates every second
-  realtimeRevenue: number;     // Updates every second
-  activeAlerts: Alert[];       // Updates every few seconds
+  liveVisitorCount: number; // Updates every second
+  realtimeRevenue: number; // Updates every second
+  activeAlerts: Alert[]; // Updates every few seconds
 }
 
 const DashboardContext = createContext<DashboardContextValue>(null!);
@@ -30,7 +30,7 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Every tick re-renders Navbar, Sidebar, Footer — everything consuming this context
-    const ws = connectWebSocket("/metrics", (data) => {
+    const ws = connectWebSocket('/metrics', (data) => {
       setLiveVisitorCount(data.visitors);
       setRealtimeRevenue(data.revenue);
       setActiveAlerts(data.alerts);
@@ -38,7 +38,14 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
     return () => ws.close();
   }, []);
 
-  const value = { theme: "light", locale: "en", currentUser: user, liveVisitorCount, realtimeRevenue, activeAlerts };
+  const value = {
+    theme: 'light',
+    locale: 'en',
+    currentUser: user,
+    liveVisitorCount,
+    realtimeRevenue,
+    activeAlerts,
+  };
   return <DashboardContext value={value}>{children}</DashboardContext>;
 }
 ```
@@ -48,7 +55,7 @@ function DashboardProvider({ children }: { children: React.ReactNode }) {
 ```tsx
 // Static context — changes on login or settings update only
 interface AppConfigContextValue {
-  theme: "light" | "dark";
+  theme: 'light' | 'dark';
   locale: string;
   currentUser: User;
 }
@@ -61,7 +68,7 @@ function LiveMetricsPanel() {
   const [revenue, setRevenue] = useState(0);
 
   useEffect(() => {
-    const ws = connectWebSocket("/metrics", (data) => {
+    const ws = connectWebSocket('/metrics', (data) => {
       setVisitorCount(data.visitors);
       setRevenue(data.revenue);
     });

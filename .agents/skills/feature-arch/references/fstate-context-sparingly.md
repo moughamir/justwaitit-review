@@ -61,11 +61,13 @@ function CartItemCount() {
 ```
 
 **When context is appropriate:**
+
 - Dependency injection (API client, auth)
 - Theme/locale (changes rarely)
 - Feature flags (read-only)
 
 **When to use stores:**
+
 - Frequently updating state
 - Multiple components need different slices
 - Need fine-grained subscriptions

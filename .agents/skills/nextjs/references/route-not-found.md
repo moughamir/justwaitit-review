@@ -53,6 +53,7 @@ export default function ProductNotFound() {
 ```
 
 **Benefits:**
+
 - Correct 404 HTTP status for SEO
 - Crawlers understand the page doesn't exist
 - Custom UI for missing resources

@@ -54,6 +54,7 @@ test('checkout empty cart', async ({ page }) => {
 ```
 
 **Benefits:**
+
 - Tests can run in any order
 - Failures are isolated and easier to debug
 - Parallel execution becomes safe

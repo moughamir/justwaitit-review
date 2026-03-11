@@ -12,7 +12,7 @@ Tailwind CSS v4 renames several utility classes to create consistent scaling. Up
 **Incorrect (v3 class names):**
 
 ```html
-<input class="shadow-sm blur-sm rounded-sm ring ring-blue-500" />
+<input class="rounded-sm shadow-sm ring ring-blue-500 blur-sm" />
 <button class="outline-none">Click me</button>
 ```
 
@@ -25,15 +25,15 @@ Tailwind CSS v4 renames several utility classes to create consistent scaling. Up
 
 **Complete rename mapping:**
 
-| v3 Class | v4 Class | Reason |
-|----------|----------|--------|
-| `shadow-sm` | `shadow-xs` | Scale consistency |
-| `shadow` | `shadow-sm` | Scale consistency |
-| `blur-sm` | `blur-xs` | Scale consistency |
-| `rounded-sm` | `rounded-xs` | Scale consistency |
-| `ring` (3px) | `ring-3` | Explicit width |
-| `ring` (1px) | `ring` | New default |
-| `outline-none` | `outline-hidden` | Semantic clarity |
+| v3 Class       | v4 Class         | Reason            |
+| -------------- | ---------------- | ----------------- |
+| `shadow-sm`    | `shadow-xs`      | Scale consistency |
+| `shadow`       | `shadow-sm`      | Scale consistency |
+| `blur-sm`      | `blur-xs`        | Scale consistency |
+| `rounded-sm`   | `rounded-xs`     | Scale consistency |
+| `ring` (3px)   | `ring-3`         | Explicit width    |
+| `ring` (1px)   | `ring`           | New default       |
+| `outline-none` | `outline-hidden` | Semantic clarity  |
 
 **Automated migration:**
 

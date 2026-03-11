@@ -28,49 +28,53 @@ Designate one canonical location for each document type. Multiple copies lead to
 
 **Correct (single source per document type):**
 
-```markdown
+````markdown
 ## Documentation Sources of Truth
 
 ### Document Locations
 
-| Document Type | Canonical Location | Format | Owner |
-|---------------|-------------------|--------|-------|
-| PRD | Confluence: /projects/dashboard/prd | Wiki | PM |
-| Technical Spec | Confluence: /projects/dashboard/tech | Wiki | Tech Lead |
-| User Stories | Jira: Dashboard Epic | Jira tickets | PM |
-| API Docs | Swagger: /api/dashboard | OpenAPI | Backend Lead |
-| Designs | Figma: Dashboard Project | Figma | Designer |
-| Meeting Notes | Confluence: /projects/dashboard/meetings | Wiki | Rotating |
+| Document Type  | Canonical Location                       | Format       | Owner        |
+| -------------- | ---------------------------------------- | ------------ | ------------ |
+| PRD            | Confluence: /projects/dashboard/prd      | Wiki         | PM           |
+| Technical Spec | Confluence: /projects/dashboard/tech     | Wiki         | Tech Lead    |
+| User Stories   | Jira: Dashboard Epic                     | Jira tickets | PM           |
+| API Docs       | Swagger: /api/dashboard                  | OpenAPI      | Backend Lead |
+| Designs        | Figma: Dashboard Project                 | Figma        | Designer     |
+| Meeting Notes  | Confluence: /projects/dashboard/meetings | Wiki         | Rotating     |
 
 ### Linking Policy
 
 All documents link to each other:
+
 ```yaml
 prd:
   links_to:
-    - technical_spec: "Implementation details"
-    - designs: "Visual specifications"
-    - user_stories: "Detailed requirements"
+    - technical_spec: 'Implementation details'
+    - designs: 'Visual specifications'
+    - user_stories: 'Detailed requirements'
   links_from:
-    - project_page: "Main PRD link"
+    - project_page: 'Main PRD link'
 
 technical_spec:
   links_to:
-    - api_docs: "API details"
-    - architecture_diagrams: "System design"
+    - api_docs: 'API details'
+    - architecture_diagrams: 'System design'
   links_from:
-    - prd: "Technical reference"
+    - prd: 'Technical reference'
 ```
+````
 
 ### Prohibited Practices
 
 **Never:**
+
 - Email spec documents as attachments
 - Copy sections into Slack messages
 - Create "local copies" of shared docs
 - Make decisions in documents not linked to source
 
 **Instead:**
+
 - Share links to canonical location
 - Quote with link to source
 - Edit the source document
@@ -121,6 +125,7 @@ This is the CANONICAL source for product requirements.
 Other copies are not authoritative.
 ---
 ```
+
 ```
 
 **Single source requirements:**
@@ -131,3 +136,4 @@ Other copies are not authoritative.
 - Header identifies canonical status
 
 Reference: [Atlassian - Documentation Best Practices](https://www.atlassian.com/software-teams/documentation)
+```

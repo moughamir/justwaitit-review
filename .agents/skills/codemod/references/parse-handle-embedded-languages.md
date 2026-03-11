@@ -14,14 +14,16 @@ Code often contains embedded languages (CSS in styled-components, SQL in templat
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const styledComponents = root.findAll({
-    rule: { pattern: "styled.$TAG`$$$CSS`" }
+    rule: { pattern: 'styled.$TAG`$$$CSS`' },
   });
 
-  const edits = styledComponents.map(match => {
-    const css = match.getMatch("CSS")?.text() || "";
+  const edits = styledComponents.map((match) => {
+    const css = match.getMatch('CSS')?.text() || '';
     // Regex-based CSS transformation - fragile, misses edge cases
-    const newCss = css.replace(/color:\s*red/g, "color: blue");
-    return match.replace(`styled.${match.getMatch("TAG")?.text()}\`${newCss}\``);
+    const newCss = css.replace(/color:\s*red/g, 'color: blue');
+    return match.replace(
+      `styled.${match.getMatch('TAG')?.text()}\`${newCss}\``
+    );
   });
 
   return root.commitEdits(edits);
@@ -31,37 +33,40 @@ const transform: Transform<TSX> = (root) => {
 **Correct (parsing embedded CSS):**
 
 ```typescript
-import { parseAsync } from "codemod:ast-grep";
+import { parseAsync } from 'codemod:ast-grep';
 
 const transform: Transform<TSX> = async (root) => {
   const styledComponents = root.findAll({
-    rule: { pattern: "styled.$TAG`$$$CSS`" }
+    rule: { pattern: 'styled.$TAG`$$$CSS`' },
   });
 
-  const edits = await Promise.all(styledComponents.map(async match => {
-    const cssText = match.getMatch("CSS")?.text() || "";
+  const edits = await Promise.all(
+    styledComponents.map(async (match) => {
+      const cssText = match.getMatch('CSS')?.text() || '';
 
-    // Parse CSS content as actual CSS
-    const cssRoot = await parseAsync("css", cssText);
-    const colorDecls = cssRoot.root().findAll({
-      rule: { pattern: "color: red" }
-    });
+      // Parse CSS content as actual CSS
+      const cssRoot = await parseAsync('css', cssText);
+      const colorDecls = cssRoot.root().findAll({
+        rule: { pattern: 'color: red' },
+      });
 
-    if (colorDecls.length === 0) return null;
+      if (colorDecls.length === 0) return null;
 
-    // Transform CSS using AST
-    const cssEdits = colorDecls.map(decl => decl.replace("color: blue"));
-    const newCss = cssRoot.commitEdits(cssEdits);
+      // Transform CSS using AST
+      const cssEdits = colorDecls.map((decl) => decl.replace('color: blue'));
+      const newCss = cssRoot.commitEdits(cssEdits);
 
-    const tag = match.getMatch("TAG")?.text();
-    return match.replace(`styled.${tag}\`${newCss}\``);
-  }));
+      const tag = match.getMatch('TAG')?.text();
+      return match.replace(`styled.${tag}\`${newCss}\``);
+    })
+  );
 
   return root.commitEdits(edits.filter(Boolean) as Edit[]);
 };
 ```
 
 **Embedded language scenarios:**
+
 - `styled-components` / `emotion` → CSS parser
 - Template literal SQL → SQL parser (if supported)
 - GraphQL tagged templates → GraphQL parser

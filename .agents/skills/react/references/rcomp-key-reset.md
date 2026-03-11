@@ -69,6 +69,7 @@ function UserEditor({ user }: { user: User }) {
 ```
 
 **Use key reset for:**
+
 - Form editors switching between items
 - Chat components switching rooms
 - Any stateful component that should reset on prop change

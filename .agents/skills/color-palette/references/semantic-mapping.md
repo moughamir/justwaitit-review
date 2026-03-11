@@ -8,85 +8,85 @@ Map shade scale to semantic tokens for components and UI patterns.
 
 ### Light Mode
 
-| Token | Shade | Hex (Teal example) | Use Case |
-|-------|-------|--------------------|----------|
-| `background` | white | `#FFFFFF` | Page/card backgrounds |
-| `foreground` | 950 | `#042F2E` | Body text |
-| `card` | white | `#FFFFFF` | Card backgrounds |
-| `card-foreground` | 900 | `#134E4A` | Card text |
-| `popover` | white | `#FFFFFF` | Dropdown/tooltip backgrounds |
-| `popover-foreground` | 950 | `#042F2E` | Dropdown text |
-| `primary` | 600 | `#0D9488` | Primary buttons, links |
-| `primary-foreground` | white | `#FFFFFF` | Text on primary buttons |
-| `secondary` | 100 | `#CCFBF1` | Secondary buttons |
-| `secondary-foreground` | 900 | `#134E4A` | Text on secondary buttons |
-| `muted` | 50 | `#F0FDFA` | Disabled backgrounds, subtle sections |
-| `muted-foreground` | 600 | `#0D9488` | Muted text, captions |
-| `accent` | 100 | `#CCFBF1` | Hover states, subtle highlights |
-| `accent-foreground` | 900 | `#134E4A` | Text on accent backgrounds |
-| `destructive` | red-600 | `#DC2626` | Delete buttons, errors |
-| `destructive-foreground` | white | `#FFFFFF` | Text on destructive buttons |
-| `border` | 200 | `#99F6E4` | Input borders, dividers |
-| `input` | 200 | `#99F6E4` | Input field borders |
-| `ring` | 600 | `#0D9488` | Focus rings |
+| Token                    | Shade   | Hex (Teal example) | Use Case                              |
+| ------------------------ | ------- | ------------------ | ------------------------------------- |
+| `background`             | white   | `#FFFFFF`          | Page/card backgrounds                 |
+| `foreground`             | 950     | `#042F2E`          | Body text                             |
+| `card`                   | white   | `#FFFFFF`          | Card backgrounds                      |
+| `card-foreground`        | 900     | `#134E4A`          | Card text                             |
+| `popover`                | white   | `#FFFFFF`          | Dropdown/tooltip backgrounds          |
+| `popover-foreground`     | 950     | `#042F2E`          | Dropdown text                         |
+| `primary`                | 600     | `#0D9488`          | Primary buttons, links                |
+| `primary-foreground`     | white   | `#FFFFFF`          | Text on primary buttons               |
+| `secondary`              | 100     | `#CCFBF1`          | Secondary buttons                     |
+| `secondary-foreground`   | 900     | `#134E4A`          | Text on secondary buttons             |
+| `muted`                  | 50      | `#F0FDFA`          | Disabled backgrounds, subtle sections |
+| `muted-foreground`       | 600     | `#0D9488`          | Muted text, captions                  |
+| `accent`                 | 100     | `#CCFBF1`          | Hover states, subtle highlights       |
+| `accent-foreground`      | 900     | `#134E4A`          | Text on accent backgrounds            |
+| `destructive`            | red-600 | `#DC2626`          | Delete buttons, errors                |
+| `destructive-foreground` | white   | `#FFFFFF`          | Text on destructive buttons           |
+| `border`                 | 200     | `#99F6E4`          | Input borders, dividers               |
+| `input`                  | 200     | `#99F6E4`          | Input field borders                   |
+| `ring`                   | 600     | `#0D9488`          | Focus rings                           |
 
 ### Dark Mode
 
-| Token | Shade | Hex (Teal example) | Use Case |
-|-------|-------|--------------------|----------|
-| `background` | 950 | `#042F2E` | Page/card backgrounds |
-| `foreground` | 50 | `#F0FDFA` | Body text |
-| `card` | 900 | `#134E4A` | Card backgrounds |
-| `card-foreground` | 50 | `#F0FDFA` | Card text |
-| `popover` | 900 | `#134E4A` | Dropdown backgrounds |
-| `popover-foreground` | 50 | `#F0FDFA` | Dropdown text |
-| `primary` | 500 | `#14B8A6` | Primary buttons (brighter in dark) |
-| `primary-foreground` | white | `#FFFFFF` | Text on primary buttons |
-| `secondary` | 800 | `#115E59` | Secondary buttons |
-| `secondary-foreground` | 50 | `#F0FDFA` | Text on secondary buttons |
-| `muted` | 800 | `#115E59` | Disabled backgrounds |
-| `muted-foreground` | 400 | `#2DD4BF` | Muted text |
-| `accent` | 800 | `#115E59` | Hover states |
-| `accent-foreground` | 50 | `#F0FDFA` | Text on accent backgrounds |
-| `destructive` | red-500 | `#EF4444` | Delete buttons (brighter) |
-| `destructive-foreground` | white | `#FFFFFF` | Text on destructive |
-| `border` | 800 | `#115E59` | Borders |
-| `input` | 800 | `#115E59` | Input borders |
-| `ring` | 500 | `#14B8A6` | Focus rings |
+| Token                    | Shade   | Hex (Teal example) | Use Case                           |
+| ------------------------ | ------- | ------------------ | ---------------------------------- |
+| `background`             | 950     | `#042F2E`          | Page/card backgrounds              |
+| `foreground`             | 50      | `#F0FDFA`          | Body text                          |
+| `card`                   | 900     | `#134E4A`          | Card backgrounds                   |
+| `card-foreground`        | 50      | `#F0FDFA`          | Card text                          |
+| `popover`                | 900     | `#134E4A`          | Dropdown backgrounds               |
+| `popover-foreground`     | 50      | `#F0FDFA`          | Dropdown text                      |
+| `primary`                | 500     | `#14B8A6`          | Primary buttons (brighter in dark) |
+| `primary-foreground`     | white   | `#FFFFFF`          | Text on primary buttons            |
+| `secondary`              | 800     | `#115E59`          | Secondary buttons                  |
+| `secondary-foreground`   | 50      | `#F0FDFA`          | Text on secondary buttons          |
+| `muted`                  | 800     | `#115E59`          | Disabled backgrounds               |
+| `muted-foreground`       | 400     | `#2DD4BF`          | Muted text                         |
+| `accent`                 | 800     | `#115E59`          | Hover states                       |
+| `accent-foreground`      | 50      | `#F0FDFA`          | Text on accent backgrounds         |
+| `destructive`            | red-500 | `#EF4444`          | Delete buttons (brighter)          |
+| `destructive-foreground` | white   | `#FFFFFF`          | Text on destructive                |
+| `border`                 | 800     | `#115E59`          | Borders                            |
+| `input`                  | 800     | `#115E59`          | Input borders                      |
+| `ring`                   | 500     | `#14B8A6`          | Focus rings                        |
 
 ---
 
 ## CSS Output Template (Tailwind v4 @theme)
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   /* Shade scale */
-  --color-primary-50: #F0FDFA;
-  --color-primary-100: #CCFBF1;
-  --color-primary-200: #99F6E4;
-  --color-primary-300: #5EEAD4;
-  --color-primary-400: #2DD4BF;
-  --color-primary-500: #14B8A6;
-  --color-primary-600: #0D9488;
-  --color-primary-700: #0F766E;
-  --color-primary-800: #115E59;
-  --color-primary-900: #134E4A;
-  --color-primary-950: #042F2E;
+  --color-primary-50: #f0fdfa;
+  --color-primary-100: #ccfbf1;
+  --color-primary-200: #99f6e4;
+  --color-primary-300: #5eead4;
+  --color-primary-400: #2dd4bf;
+  --color-primary-500: #14b8a6;
+  --color-primary-600: #0d9488;
+  --color-primary-700: #0f766e;
+  --color-primary-800: #115e59;
+  --color-primary-900: #134e4a;
+  --color-primary-950: #042f2e;
 
   /* Light mode semantic tokens */
-  --color-background: #FFFFFF;
+  --color-background: #ffffff;
   --color-foreground: var(--color-primary-950);
 
-  --color-card: #FFFFFF;
+  --color-card: #ffffff;
   --color-card-foreground: var(--color-primary-900);
 
-  --color-popover: #FFFFFF;
+  --color-popover: #ffffff;
   --color-popover-foreground: var(--color-primary-950);
 
   --color-primary: var(--color-primary-600);
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-foreground: #ffffff;
 
   --color-secondary: var(--color-primary-100);
   --color-secondary-foreground: var(--color-primary-900);
@@ -97,8 +97,8 @@ Map shade scale to semantic tokens for components and UI patterns.
   --color-accent: var(--color-primary-100);
   --color-accent-foreground: var(--color-primary-900);
 
-  --color-destructive: #DC2626;
-  --color-destructive-foreground: #FFFFFF;
+  --color-destructive: #dc2626;
+  --color-destructive-foreground: #ffffff;
 
   --color-border: var(--color-primary-200);
   --color-input: var(--color-primary-200);
@@ -119,7 +119,7 @@ Map shade scale to semantic tokens for components and UI patterns.
   --color-popover-foreground: var(--color-primary-50);
 
   --color-primary: var(--color-primary-500);
-  --color-primary-foreground: #FFFFFF;
+  --color-primary-foreground: #ffffff;
 
   --color-secondary: var(--color-primary-800);
   --color-secondary-foreground: var(--color-primary-50);
@@ -130,8 +130,8 @@ Map shade scale to semantic tokens for components and UI patterns.
   --color-accent: var(--color-primary-800);
   --color-accent-foreground: var(--color-primary-50);
 
-  --color-destructive: #EF4444;
-  --color-destructive-foreground: #FFFFFF;
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #ffffff;
 
   --color-border: var(--color-primary-800);
   --color-input: var(--color-primary-800);
@@ -165,7 +165,7 @@ Map shade scale to semantic tokens for components and UI patterns.
 ### Cards
 
 ```tsx
-<div className="bg-card text-card-foreground border-border rounded-lg">
+<div className="rounded-lg border-border bg-card text-card-foreground">
   <h2>Card Title</h2>
   <p className="text-muted-foreground">Card description</p>
 </div>
@@ -175,7 +175,7 @@ Map shade scale to semantic tokens for components and UI patterns.
 
 ```tsx
 <input
-  className="bg-background text-foreground border-input focus:ring-ring"
+  className="border-input bg-background text-foreground focus:ring-ring"
   placeholder="Enter text"
 />
 ```
@@ -183,9 +183,7 @@ Map shade scale to semantic tokens for components and UI patterns.
 ### Muted Text
 
 ```tsx
-<p className="text-muted-foreground">
-  This is secondary/helper text
-</p>
+<p className="text-muted-foreground">This is secondary/helper text</p>
 ```
 
 ---
@@ -194,16 +192,16 @@ Map shade scale to semantic tokens for components and UI patterns.
 
 **CRITICAL**: Every background token MUST have a paired foreground token.
 
-| Background | Foreground | Why |
-|------------|------------|-----|
-| `background` | `foreground` | Main page text |
-| `card` | `card-foreground` | Card text readability |
-| `popover` | `popover-foreground` | Dropdown text |
-| `primary` | `primary-foreground` | Button text contrast |
-| `secondary` | `secondary-foreground` | Secondary button contrast |
-| `muted` | `muted-foreground` | Muted section text |
-| `accent` | `accent-foreground` | Accent section text |
-| `destructive` | `destructive-foreground` | Error button text |
+| Background    | Foreground               | Why                       |
+| ------------- | ------------------------ | ------------------------- |
+| `background`  | `foreground`             | Main page text            |
+| `card`        | `card-foreground`        | Card text readability     |
+| `popover`     | `popover-foreground`     | Dropdown text             |
+| `primary`     | `primary-foreground`     | Button text contrast      |
+| `secondary`   | `secondary-foreground`   | Secondary button contrast |
+| `muted`       | `muted-foreground`       | Muted section text        |
+| `accent`      | `accent-foreground`      | Accent section text       |
+| `destructive` | `destructive-foreground` | Error button text         |
 
 **Never** use a background token without its foreground pair, or dark mode will break.
 
@@ -214,6 +212,7 @@ Map shade scale to semantic tokens for components and UI patterns.
 The `primary` color is your brand identity. Use it for:
 
 ### Primary Actions
+
 - Call-to-action buttons
 - Primary navigation links
 - Active states
@@ -221,11 +220,13 @@ The `primary` color is your brand identity. Use it for:
 - Progress indicators
 
 ### Focus States
+
 - Focus rings on inputs
 - Keyboard navigation highlights
 - Active form fields
 
 ### Brand Elements
+
 - Logos (when appropriate)
 - Brand-colored sections
 - Accent text for emphasis
@@ -238,6 +239,7 @@ The `primary` color is your brand identity. Use it for:
 ## Adjusting for Brand Identity
 
 ### Conservative Brands (Finance, Law, Healthcare)
+
 - Use darker primary shade (700) for buttons
 - Reduce saturation in light shades (50-300)
 - Prefer muted over accent
@@ -248,6 +250,7 @@ The `primary` color is your brand identity. Use it for:
 ```
 
 ### Vibrant Brands (Creative, Tech, Entertainment)
+
 - Use brighter primary shade (500-600)
 - Keep full saturation
 - Use accent more liberally
@@ -258,6 +261,7 @@ The `primary` color is your brand identity. Use it for:
 ```
 
 ### Minimal Brands (Design, Architecture)
+
 - Use primary sparingly
 - Emphasize muted and neutral tones
 - Subtle borders (primary-100 instead of 200)
@@ -278,9 +282,8 @@ For designs with multiple brand colors:
   /* Primary (brand color) */
   --color-primary-*: /* teal shades */
 
-  /* Accent (complementary) */
-  --color-accent-50: #FFF7ED;
-  --color-accent-600: #EA580C; /* Orange */
+  /* Accent (complementary) */ --color-accent-50: #fff7ed;
+  --color-accent-600: #ea580c; /* Orange */
   --color-accent-950: #431407;
 
   /* Use accent for secondary CTAs, highlights */

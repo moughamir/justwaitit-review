@@ -30,7 +30,11 @@ function useMapMarkers(viewport: MapViewport) {
 }
 
 function MapContainer() {
-  const [viewport, setViewport] = useState<MapViewport>({ latitude: 51.5074, longitude: -0.1278, zoom: 12 });
+  const [viewport, setViewport] = useState<MapViewport>({
+    latitude: 51.5074,
+    longitude: -0.1278,
+    zoom: 12,
+  });
 
   // Even when viewport values haven't changed, passing the object creates a new reference
   const markers = useMapMarkers(viewport);
@@ -54,7 +58,11 @@ function useMapMarkers(viewport: MapViewport) {
 }
 
 function MapContainer() {
-  const [viewport, setViewport] = useState<MapViewport>({ latitude: 51.5074, longitude: -0.1278, zoom: 12 });
+  const [viewport, setViewport] = useState<MapViewport>({
+    latitude: 51.5074,
+    longitude: -0.1278,
+    zoom: 12,
+  });
 
   const markers = useMapMarkers(viewport);
   return <Map viewport={viewport} markers={markers} onMove={setViewport} />;

@@ -19,7 +19,7 @@ function DraggableCard({ children }: DraggableCardProps) {
   useEffect(() => {
     // Must manually track container size
     const updateSize = () => {
-      const container = document.getElementById("drag-container");
+      const container = document.getElementById('drag-container');
       if (container) {
         setContainerSize({
           width: container.offsetWidth,
@@ -28,15 +28,16 @@ function DraggableCard({ children }: DraggableCardProps) {
       }
     };
     updateSize();
-    window.addEventListener("resize", updateSize);  // Manual resize handling
-    return () => window.removeEventListener("resize", updateSize);
+    window.addEventListener('resize', updateSize); // Manual resize handling
+    return () => window.removeEventListener('resize', updateSize);
   }, []);
 
   return (
     <div id="drag-container" className="container">
       <motion.div
         drag
-        dragConstraints={{  // Hardcoded calculations
+        dragConstraints={{
+          // Hardcoded calculations
           top: 0,
           left: 0,
           right: containerSize.width - cardSize.width,
@@ -61,7 +62,7 @@ function DraggableCard({ children }: DraggableCardProps) {
     <div ref={containerRef} className="container">
       <motion.div
         drag
-        dragConstraints={containerRef}  // Automatic boundary calculation
+        dragConstraints={containerRef} // Automatic boundary calculation
         className="card"
       >
         {children}

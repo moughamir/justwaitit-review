@@ -13,7 +13,7 @@ Use `import type` syntax when importing only TypeScript types. This ensures type
 
 ```typescript
 // src/features/checkout/components/CheckoutForm.tsx
-import { User, useUser } from '@/features/user';  // Creates runtime dependency for type
+import { User, useUser } from '@/features/user'; // Creates runtime dependency for type
 
 export function CheckoutForm({ userId }: { userId: string }) {
   // We only need the User type, not useUser
@@ -25,7 +25,7 @@ export function CheckoutForm({ userId }: { userId: string }) {
 
 ```typescript
 // src/features/checkout/components/CheckoutForm.tsx
-import type { User } from '@/features/user';  // Type-only, no runtime dependency
+import type { User } from '@/features/user'; // Type-only, no runtime dependency
 
 export function CheckoutForm({ userId }: { userId: string }) {
   const [user, setUser] = useState<User | null>(null);
@@ -64,6 +64,7 @@ export interface CheckoutSession {
 ```
 
 **Benefits:**
+
 - No runtime bundle impact for type-only imports
 - Clear distinction between runtime and compile-time dependencies
 - Enables type sharing without architectural coupling
@@ -73,7 +74,7 @@ export interface CheckoutSession {
 ```json
 {
   "compilerOptions": {
-    "verbatimModuleSyntax": true  // Enforces type-only imports
+    "verbatimModuleSyntax": true // Enforces type-only imports
   }
 }
 ```

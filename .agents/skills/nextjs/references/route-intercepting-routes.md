@@ -70,6 +70,7 @@ export default async function PhotoPage({ params }: { params: { id: string } }) 
 ```
 
 **Interception conventions:**
+
 - `(.)` - Same level
 - `(..)` - One level up
 - `(..)(..)` - Two levels up

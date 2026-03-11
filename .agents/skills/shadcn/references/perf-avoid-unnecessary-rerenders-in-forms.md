@@ -65,21 +65,18 @@ function OrderTotal({ control }: { control: Control<CheckoutFormValues> }) {
 
 ```tsx
 function CheckoutForm() {
-  const form = useForm<CheckoutFormValues>()
+  const form = useForm<CheckoutFormValues>();
 
   // Only watch specific fields needed for calculations
-  const [items, coupon] = form.watch(["items", "coupon"])
+  const [items, coupon] = form.watch(['items', 'coupon']);
   // Still causes re-renders but only for these 2 fields
 
-  return (
-    <Form {...form}>
-      {/* ... */}
-    </Form>
-  )
+  return <Form {...form}>{/* ... */}</Form>;
 }
 ```
 
 **Best practices:**
+
 - Use `useWatch` in isolated child components
 - Watch specific field names, not entire form
 - Use `useFormState` for submission/validation state

@@ -12,27 +12,27 @@ The `never` type represents values that never occur. Use it to mark code paths t
 **Incorrect (unreachable code assumed but not verified):**
 
 ```typescript
-type UserRole = "admin" | "editor" | "viewer"
+type UserRole = 'admin' | 'editor' | 'viewer';
 
 function getPermissionLevel(role: UserRole): number {
-  if (role === "admin") return 3
-  if (role === "editor") return 2
-  if (role === "viewer") return 1
-  return 0 // "Unreachable" — but if a new role is added, returns 0 silently
+  if (role === 'admin') return 3;
+  if (role === 'editor') return 2;
+  if (role === 'viewer') return 1;
+  return 0; // "Unreachable" — but if a new role is added, returns 0 silently
 }
 ```
 
 **Correct (never catches newly reachable paths):**
 
 ```typescript
-type UserRole = "admin" | "editor" | "viewer"
+type UserRole = 'admin' | 'editor' | 'viewer';
 
 function getPermissionLevel(role: UserRole): number {
-  if (role === "admin") return 3
-  if (role === "editor") return 2
-  if (role === "viewer") return 1
+  if (role === 'admin') return 3;
+  if (role === 'editor') return 2;
+  if (role === 'viewer') return 1;
 
-  const _exhaustive: never = role // Compile error if a new role is added
-  throw new Error(`Unknown role: ${_exhaustive}`)
+  const _exhaustive: never = role; // Compile error if a new role is added
+  throw new Error(`Unknown role: ${_exhaustive}`);
 }
 ```

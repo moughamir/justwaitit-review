@@ -17,44 +17,44 @@ const useBoundStore = create<BearSlice & FishSlice>()((...a) => ({
   ...createBearSlice(...a),
   ...createFishSlice(...a),
   ...createSharedSlice(...a), // SharedSlice not in type!
-}))
+}));
 
 // SharedSlice actions won't be typed correctly
-const { addBoth } = useBoundStore() // Type error
+const { addBoth } = useBoundStore(); // Type error
 ```
 
 **Correct (complete combined type):**
 
 ```typescript
-import { create, StateCreator } from 'zustand'
+import { create, StateCreator } from 'zustand';
 
 interface BearSlice {
-  bears: number
-  addBear: () => void
+  bears: number;
+  addBear: () => void;
 }
 
 interface FishSlice {
-  fish: number
-  addFish: () => void
+  fish: number;
+  addFish: () => void;
 }
 
 interface SharedSlice {
-  addBoth: () => void
-  getTotalAnimals: () => number
+  addBoth: () => void;
+  getTotalAnimals: () => number;
 }
 
 // Complete combined type
-type BoundStore = BearSlice & FishSlice & SharedSlice
+type BoundStore = BearSlice & FishSlice & SharedSlice;
 
 const createBearSlice: StateCreator<BoundStore, [], [], BearSlice> = (set) => ({
   bears: 0,
   addBear: () => set((s) => ({ bears: s.bears + 1 })),
-})
+});
 
 const createFishSlice: StateCreator<BoundStore, [], [], FishSlice> = (set) => ({
   fish: 0,
   addFish: () => set((s) => ({ fish: s.fish + 1 })),
-})
+});
 
 // SharedSlice can access all other slices type-safely
 const createSharedSlice: StateCreator<BoundStore, [], [], SharedSlice> = (
@@ -62,24 +62,25 @@ const createSharedSlice: StateCreator<BoundStore, [], [], SharedSlice> = (
   get
 ) => ({
   addBoth: () => {
-    get().addBear()
-    get().addFish()
+    get().addBear();
+    get().addFish();
   },
   getTotalAnimals: () => get().bears + get().fish,
-})
+});
 
 // Properly typed combined store
 const useBoundStore = create<BoundStore>()((...a) => ({
   ...createBearSlice(...a),
   ...createFishSlice(...a),
   ...createSharedSlice(...a),
-}))
+}));
 
 // All methods are properly typed
-const { bears, fish, addBoth, getTotalAnimals } = useBoundStore()
+const { bears, fish, addBoth, getTotalAnimals } = useBoundStore();
 ```
 
 **Benefits:**
+
 - Cross-slice method calls are type-checked
 - IDE autocomplete works across all slices
 - Compile-time errors catch missing slice implementations

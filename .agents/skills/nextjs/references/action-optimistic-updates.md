@@ -68,6 +68,7 @@ export function LikeButton({ postId, initialLikes }: { postId: string; initialLi
 ```
 
 **When to use:**
+
 - Like/vote buttons
 - Adding items to cart
 - Toggling favorites

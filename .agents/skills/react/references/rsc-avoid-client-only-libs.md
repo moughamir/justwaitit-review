@@ -59,6 +59,7 @@ export default async function Page() {
 ```
 
 **Common client-only libraries:**
+
 - Animation: framer-motion, react-spring
 - State: zustand (browser storage), jotai (atoms)
 - UI: react-hot-toast, react-modal

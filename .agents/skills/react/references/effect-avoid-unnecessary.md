@@ -47,9 +47,9 @@ function BuyButton({ product }) {
   useEffect(() => {
     // ❌ Analytics for user action in effect
     if (product.wasAddedToCart) {
-      trackPurchase(product)
+      trackPurchase(product);
     }
-  }, [product])
+  }, [product]);
 }
 ```
 

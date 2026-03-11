@@ -57,6 +57,7 @@ public void processShipment(Shipment shipment) {
 ```
 
 **Implementation:**
+
 - Document the team's coding standards
 - Use automated formatters (Prettier, Black, google-java-format)
 - Enforce in CI/CD pipelines

@@ -25,7 +25,7 @@ Remove the `content` configuration entirely. Tailwind v4 auto-detection respects
 For edge cases where you need to include files outside the project root — such as a monorepo dependency — use the `@source` directive in your CSS:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
-@source "../node_modules/@my-company/ui-lib";
+@source '../node_modules/@my-company/ui-lib';
 ```

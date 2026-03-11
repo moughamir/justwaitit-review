@@ -12,40 +12,45 @@ Reference theme colors via CSS variables (--primary, --background, etc.) rather 
 **Incorrect (hardcoded colors break theming):**
 
 ```tsx
-function StatusCard({ status }: { status: "active" | "inactive" }) {
+function StatusCard({ status }: { status: 'active' | 'inactive' }) {
   return (
-    <Card className="bg-white dark:bg-gray-800 border-gray-200">
+    <Card className="border-gray-200 bg-white dark:bg-gray-800">
       <CardHeader>
-        <CardTitle className={status === "active" ? "text-green-600" : "text-gray-500"}>
+        <CardTitle
+          className={status === 'active' ? 'text-green-600' : 'text-gray-500'}
+        >
           {/* Hardcoded colors don't adapt to theme changes */}
           Status: {status}
         </CardTitle>
       </CardHeader>
     </Card>
-  )
+  );
 }
 ```
 
 **Correct (CSS variables adapt to theme):**
 
 ```tsx
-function StatusCard({ status }: { status: "active" | "inactive" }) {
+function StatusCard({ status }: { status: 'active' | 'inactive' }) {
   return (
-    <Card className="bg-card border-border">
+    <Card className="border-border bg-card">
       <CardHeader>
         <CardTitle
-          className={status === "active" ? "text-primary" : "text-muted-foreground"}
+          className={
+            status === 'active' ? 'text-primary' : 'text-muted-foreground'
+          }
         >
           {/* Colors automatically update with theme */}
           Status: {status}
         </CardTitle>
       </CardHeader>
     </Card>
-  )
+  );
 }
 ```
 
 **shadcn/ui CSS variable naming:**
+
 - `bg-background`, `text-foreground` - Base colors
 - `bg-card`, `text-card-foreground` - Card surfaces
 - `bg-primary`, `text-primary-foreground` - Primary actions

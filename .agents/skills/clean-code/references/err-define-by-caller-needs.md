@@ -59,6 +59,7 @@ try {
 ```
 
 **Benefits of wrapping:**
+
 - Minimizes dependencies on third-party APIs
 - Easier to mock for testing
 - Easier to switch implementations later

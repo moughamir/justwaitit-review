@@ -14,10 +14,10 @@ When you need to find multiple different patterns, combine them into a single qu
 ```typescript
 const transform: Transform<TSX> = (root) => {
   // 4 separate traversals of the AST
-  const requires = root.findAll({ rule: { pattern: "require($PATH)" } });
-  const imports = root.findAll({ rule: { kind: "import_statement" } });
-  const exports = root.findAll({ rule: { kind: "export_statement" } });
-  const dynamicImports = root.findAll({ rule: { pattern: "import($PATH)" } });
+  const requires = root.findAll({ rule: { pattern: 'require($PATH)' } });
+  const imports = root.findAll({ rule: { kind: 'import_statement' } });
+  const exports = root.findAll({ rule: { kind: 'export_statement' } });
+  const dynamicImports = root.findAll({ rule: { pattern: 'import($PATH)' } });
 
   // Each traversal walks the entire tree
   // 4N time complexity
@@ -33,20 +33,26 @@ const transform: Transform<TSX> = (root) => {
   const moduleStatements = root.findAll({
     rule: {
       any: [
-        { pattern: "require($PATH)" },
-        { kind: "import_statement" },
-        { kind: "export_statement" },
-        { pattern: "import($PATH)" }
-      ]
-    }
+        { pattern: 'require($PATH)' },
+        { kind: 'import_statement' },
+        { kind: 'export_statement' },
+        { pattern: 'import($PATH)' },
+      ],
+    },
   });
 
   // Categorize after collection
-  const requires = moduleStatements.filter(n => n.text().startsWith("require"));
-  const imports = moduleStatements.filter(n => n.kind() === "import_statement");
-  const exports = moduleStatements.filter(n => n.kind() === "export_statement");
-  const dynamicImports = moduleStatements.filter(n =>
-    n.kind() === "call_expression" && n.text().includes("import(")
+  const requires = moduleStatements.filter((n) =>
+    n.text().startsWith('require')
+  );
+  const imports = moduleStatements.filter(
+    (n) => n.kind() === 'import_statement'
+  );
+  const exports = moduleStatements.filter(
+    (n) => n.kind() === 'export_statement'
+  );
+  const dynamicImports = moduleStatements.filter(
+    (n) => n.kind() === 'call_expression' && n.text().includes('import(')
   );
 
   // 1N time complexity + fast array filtering
@@ -55,6 +61,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **When to combine:**
+
 - Searching for related patterns (all module syntax)
 - Collecting nodes for analysis (all function definitions)
 - Building a manifest (all API usages)

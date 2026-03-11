@@ -14,7 +14,7 @@ State lifted too high forces intermediate components to forward props they do no
 ```tsx
 function ProductPage() {
   // searchQuery is only used by SearchResults, but ProductPage re-renders on every keystroke
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div>
@@ -27,13 +27,27 @@ function ProductPage() {
   );
 }
 
-function SearchBar({ query, onQueryChange }: { query: string; onQueryChange: (q: string) => void }) {
-  return <input value={query} onChange={(e) => onQueryChange(e.target.value)} />;
+function SearchBar({
+  query,
+  onQueryChange,
+}: {
+  query: string;
+  onQueryChange: (q: string) => void;
+}) {
+  return (
+    <input value={query} onChange={(e) => onQueryChange(e.target.value)} />
+  );
 }
 
 function SearchResults({ query }: { query: string }) {
   const results = useProductSearch(query);
-  return <ul>{results.map((r) => <li key={r.id}>{r.name}</li>)}</ul>;
+  return (
+    <ul>
+      {results.map((r) => (
+        <li key={r.id}>{r.name}</li>
+      ))}
+    </ul>
+  );
 }
 ```
 
@@ -45,20 +59,28 @@ function ProductPage() {
     <div>
       <ProductHeader />
       <ProductCategories />
-      <ProductSearch /> {/* State lives here — ProductPage never re-renders for keystrokes */}
+      <ProductSearch />{' '}
+      {/* State lives here — ProductPage never re-renders for keystrokes */}
       <ProductFooter />
     </div>
   );
 }
 
 function ProductSearch() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const results = useProductSearch(searchQuery);
 
   return (
     <div>
-      <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-      <ul>{results.map((r) => <li key={r.id}>{r.name}</li>)}</ul>
+      <input
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <ul>
+        {results.map((r) => (
+          <li key={r.id}>{r.name}</li>
+        ))}
+      </ul>
     </div>
   );
 }

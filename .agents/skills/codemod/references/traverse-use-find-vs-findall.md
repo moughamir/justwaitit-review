@@ -15,7 +15,7 @@ Use `find()` when you only need the first match - it stops traversal immediately
 const transform: Transform<TSX> = (root) => {
   // Finds ALL imports, then takes first
   const imports = root.findAll({
-    rule: { kind: "import_statement" }
+    rule: { kind: 'import_statement' },
   });
 
   // Only needed the first import location for insertion
@@ -33,7 +33,7 @@ const transform: Transform<TSX> = (root) => {
 const transform: Transform<TSX> = (root) => {
   // Stops at first match
   const firstImport = root.find({
-    rule: { kind: "import_statement" }
+    rule: { kind: 'import_statement' },
   });
 
   if (!firstImport) return null;
@@ -44,12 +44,14 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Use find() when:**
+
 - Checking if any match exists
 - Finding insertion point (first/last import)
 - Validating presence of a pattern
 - Getting a single representative node
 
 **Use findAll() when:**
+
 - Transforming all occurrences
 - Counting matches
 - Collecting nodes for batch operations

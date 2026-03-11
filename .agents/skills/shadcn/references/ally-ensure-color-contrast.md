@@ -55,6 +55,7 @@ When customizing shadcn/ui theme colors, ensure text meets WCAG AA contrast rati
 ```
 
 **WCAG requirements:**
+
 - Normal text (< 18pt): 4.5:1 minimum
 - Large text (≥ 18pt or 14pt bold): 3:1 minimum
 - UI components and graphics: 3:1 minimum

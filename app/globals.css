@@ -78,30 +78,30 @@
 
 @layer base {
   :root {
-    color-scheme: light;
-    /* 60% dominant — warm cream/parchment */
-    --background: 35 24.6% 86.5%;
-    --foreground: 25 30% 8%;
-    /* Card surfaces (part of 60%) */
-    --card: 35 20% 91%;
-    --card-foreground: 25 30% 8%;
-    --popover: 35 20% 91%;
-    --popover-foreground: 25 30% 8%;
+    color-scheme: dark;
+    /* 60% dominant — dark ink */
+    --background: 222 47% 11%;
+    --foreground: 210 40% 98%;
+    /* Card surfaces */
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 98%;
     /* 10% accent — brand blue for CTAs and highlights */
     --primary: 221 83% 53%;
-    --primary-foreground: 35 20% 96%;
-    /* 30% secondary — warm charcoal for contrast sections */
-    --secondary: 25 20% 15%;
-    --secondary-foreground: 35 22% 92%;
+    --primary-foreground: 210 40% 98%;
+    /* 30% secondary — deep slate for contrast sections */
+    --secondary: 215 25% 27%;
+    --secondary-foreground: 210 40% 98%;
     /* Supporting tones */
-    --muted: 35 15% 82%;
-    --muted-foreground: 25 18% 38%;
-    --accent: 35 20% 82%;
-    --accent-foreground: 25 30% 8%;
-    --destructive: 0 72% 50%;
-    --destructive-foreground: 35 20% 96%;
-    --border: 35 15% 74%;
-    --input: 35 15% 74%;
+    --muted: 215 25% 27%;
+    --muted-foreground: 215 20% 65%;
+    --accent: 215 25% 27%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 215 25% 27%;
+    --input: 215 25% 27%;
     --ring: 221 83% 53%;
     --radius: 0.75rem;
 
@@ -142,15 +142,15 @@
   background-image:
     repeating-linear-gradient(
       0deg,
-      rgba(15, 23, 42, 0.06) 0,
-      rgba(15, 23, 42, 0.06) 1px,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 1px,
       transparent 1px,
       transparent 40px
     ),
     repeating-linear-gradient(
       90deg,
-      rgba(15, 23, 42, 0.06) 0,
-      rgba(15, 23, 42, 0.06) 1px,
+      rgba(255, 255, 255, 0.06) 0,
+      rgba(255, 255, 255, 0.06) 1px,
       transparent 1px,
       transparent 40px
     );
@@ -257,6 +257,19 @@
   }
   50% {
     box-shadow: 0 0 40px rgba(37, 99, 235, 0.2);
+  }
+}
+
+@keyframes glass-bubble-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(15px, -20px) rotate(2deg);
+  }
+  66% {
+    transform: translate(-10px, 15px) rotate(-1deg);
   }
 }
 
@@ -627,16 +640,18 @@
 
 /* Glass bubbles layer (Apple-style) */
 .glass-bubble {
-  @apply absolute rounded-full border border-white/20 bg-white/10 shadow-[inset_0_1px_0_rgba(255,255,255,.35),0_16px_40px_rgba(2,6,23,.08)] backdrop-blur-2xl will-change-transform;
+  @apply absolute rounded-full border border-white/10 bg-white/5 shadow-[inset_0_1px_0_rgba(255,255,255,.2),0_16px_40px_rgba(2,6,23,.05)] backdrop-blur-3xl will-change-transform;
+  animation: glass-bubble-float 20s ease-in-out infinite;
 }
 .glass-bubble::before {
   content: '';
-  @apply absolute left-1/2 top-1/2 h-[140%] w-[140%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10;
-  background: radial-gradient(circle at 50% 30%, white 0%, transparent 60%);
+  @apply absolute left-1/4 top-1/4 h-1/2 w-1/2 rounded-full opacity-20;
+  background: radial-gradient(circle at center, white 0%, transparent 80%);
+  filter: blur(4px);
 }
 .glass-bubble {
-  translate: calc((var(--mouse-x, 0.5) - 0.5) * 40px)
-    calc((var(--mouse-y, 0.5) - 0.5) * 40px);
+  translate: calc((var(--mouse-x, 0.5) - 0.5) * 60px)
+    calc((var(--mouse-y, 0.5) - 0.5) * 60px);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -13,13 +13,19 @@ Approximately 8% of men and 0.5% of women have color vision deficiency. Using on
 
 ```html
 <style>
-  .required-field { border-color: red; }
-  .success-message { color: green; }
-  .error-message { color: red; }
+  .required-field {
+    border-color: red;
+  }
+  .success-message {
+    color: green;
+  }
+  .error-message {
+    color: red;
+  }
 </style>
 
 <form>
-  <input class="required-field" name="email">
+  <input class="required-field" name="email" />
   <span class="error-message">Invalid email</span>
 </form>
 
@@ -39,27 +45,27 @@ Approximately 8% of men and 0.5% of women have color vision deficiency. Using on
     border-width: 2px;
   }
   .required-field::after {
-    content: "*";
+    content: '*';
   }
 
   .success-message {
     color: #2e7d32;
   }
   .success-message::before {
-    content: "✓ ";
+    content: '✓ ';
   }
 
   .error-message {
     color: #d32f2f;
   }
   .error-message::before {
-    content: "⚠ ";
+    content: '⚠ ';
   }
 </style>
 
 <form>
   <label>Email <span class="required-asterisk">*</span></label>
-  <input class="required-field" name="email" aria-required="true">
+  <input class="required-field" name="email" aria-required="true" />
   <span class="error-message">⚠ Invalid email format</span>
 </form>
 
@@ -71,6 +77,7 @@ Approximately 8% of men and 0.5% of women have color vision deficiency. Using on
 ```
 
 **Redundant indicators:**
+
 - Icons (✓, ⚠, ✗) alongside colored text
 - Patterns or shapes in charts/graphs
 - Text labels ("Required", "Error", "Success")

@@ -65,6 +65,7 @@ export const routes = [
 ```
 
 **App layer responsibilities:**
+
 - Route definitions and navigation
 - Provider composition (Auth, Query, Theme)
 - Global error boundaries

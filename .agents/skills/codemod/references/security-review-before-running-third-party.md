@@ -45,6 +45,7 @@ npx codemod @trusted-org/reviewed-migration
 ```
 
 **Warning signs in codemods:**
+
 - Requests `child_process` capability
 - Fetches from non-official URLs
 - Writes files outside project directory
@@ -52,6 +53,7 @@ npx codemod @trusted-org/reviewed-migration
 - No test suite or documentation
 
 **Trusted sources:**
+
 - Official framework maintainers
 - Well-known organizations
 - Codemods with visible source and tests

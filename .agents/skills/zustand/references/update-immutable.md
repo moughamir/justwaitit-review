@@ -17,19 +17,19 @@ const useListStore = create<ListState>((set, get) => ({
 
   addItem: (item) => {
     // Mutates existing array
-    get().items.push(item)
-    set({ items: get().items })
+    get().items.push(item);
+    set({ items: get().items });
     // Same array reference, components may not re-render
   },
 
   updateItem: (id, updates) => {
-    const items = get().items
-    const item = items.find((i) => i.id === id)
+    const items = get().items;
+    const item = items.find((i) => i.id === id);
     // Mutates existing object
-    Object.assign(item, updates)
-    set({ items })
+    Object.assign(item, updates);
+    set({ items });
   },
-}))
+}));
 ```
 
 **Correct (creates new references):**
@@ -38,42 +38,47 @@ const useListStore = create<ListState>((set, get) => ({
 const useListStore = create<ListState>((set) => ({
   items: [],
 
-  addItem: (item) => set((state) => ({
-    items: [...state.items, item], // New reference, triggers re-render
-  })),
+  addItem: (item) =>
+    set((state) => ({
+      items: [...state.items, item], // New reference, triggers re-render
+    })),
 
-  updateItem: (id, updates) => set((state) => ({
-    items: state.items.map((item) =>
-      item.id === id ? { ...item, ...updates } : item
-    ),
-  })),
+  updateItem: (id, updates) =>
+    set((state) => ({
+      items: state.items.map((item) =>
+        item.id === id ? { ...item, ...updates } : item
+      ),
+    })),
 
-  removeItem: (id) => set((state) => ({
-    items: state.items.filter((item) => item.id !== id),
-  })),
-}))
+  removeItem: (id) =>
+    set((state) => ({
+      items: state.items.filter((item) => item.id !== id),
+    })),
+}));
 ```
 
 **Alternative (use immer for complex updates):**
 
 ```typescript
-import { immer } from 'zustand/middleware/immer'
+import { immer } from 'zustand/middleware/immer';
 
 const useListStore = create<ListState>()(
   immer((set) => ({
     items: [],
 
     // Immer allows mutation syntax, handles immutability internally
-    addItem: (item) => set((state) => {
-      state.items.push(item)
-    }),
+    addItem: (item) =>
+      set((state) => {
+        state.items.push(item);
+      }),
 
-    updateItem: (id, updates) => set((state) => {
-      const item = state.items.find((i) => i.id === id)
-      if (item) Object.assign(item, updates)
-    }),
+    updateItem: (id, updates) =>
+      set((state) => {
+        const item = state.items.find((i) => i.id === id);
+        if (item) Object.assign(item, updates);
+      }),
   }))
-)
+);
 ```
 
 Reference: [Zustand - Immer Middleware](https://zustand.docs.pmnd.rs/integrations/immer-middleware)

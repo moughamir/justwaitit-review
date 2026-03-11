@@ -61,6 +61,7 @@ public int divide(int a, int b) {
 ```
 
 **Benefits:**
+
 - Tests cover requirements, not implementation
 - Edge cases discovered through test-first thinking
 - High coverage achieved naturally

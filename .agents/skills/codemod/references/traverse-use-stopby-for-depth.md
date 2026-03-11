@@ -16,13 +16,13 @@ const transform: Transform<TSX> = (root) => {
   // Searches through ALL ancestors up to root
   const awaitInTry = root.findAll({
     rule: {
-      kind: "await_expression",
+      kind: 'await_expression',
       inside: {
-        kind: "try_statement"
-      }
+        kind: 'try_statement',
+      },
       // Without stopBy, climbs entire ancestor chain
       // In deeply nested code, this is expensive
-    }
+    },
   });
 
   return null;
@@ -36,29 +36,29 @@ const transform: Transform<TSX> = (root) => {
   // Stop at nearest function boundary
   const awaitInTry = root.findAll({
     rule: {
-      kind: "await_expression",
+      kind: 'await_expression',
       inside: {
-        kind: "try_statement",
+        kind: 'try_statement',
         stopBy: {
           any: [
-            { kind: "function_declaration" },
-            { kind: "arrow_function" },
-            { kind: "method_definition" }
-          ]
-        }
-      }
-    }
+            { kind: 'function_declaration' },
+            { kind: 'arrow_function' },
+            { kind: 'method_definition' },
+          ],
+        },
+      },
+    },
   });
 
   // Or use "neighbor" to check only immediate parent
   const directChild = root.findAll({
     rule: {
-      kind: "identifier",
+      kind: 'identifier',
       inside: {
-        kind: "variable_declarator",
-        stopBy: "neighbor"  // Only checks direct parent
-      }
-    }
+        kind: 'variable_declarator',
+        stopBy: 'neighbor', // Only checks direct parent
+      },
+    },
   });
 
   return null;
@@ -66,6 +66,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **stopBy options:**
+
 - `"neighbor"` - check only immediate parent/children
 - `"end"` - search to tree boundary (default)
 - `{ kind: "x" }` - stop at specific node type

@@ -100,6 +100,7 @@ export const test = base.extend({
 ```
 
 **When NOT to block:**
+
 - Testing third-party integrations
 - Testing cookie consent flows
 - Testing ads functionality

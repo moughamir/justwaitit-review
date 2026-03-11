@@ -40,16 +40,16 @@ export default async function ProductsPage() {
 
 ```typescript
 // lib/data.ts
-import { unstable_cache } from 'next/cache'
+import { unstable_cache } from 'next/cache';
 
 export const getProducts = unstable_cache(
   async () => {
-    const res = await fetch('https://api.store.com/products')
-    return res.json()
+    const res = await fetch('https://api.store.com/products');
+    return res.json();
   },
   ['products'],
-  { revalidate: 3600 }  // Cache for 1 hour
-)
+  { revalidate: 3600 } // Cache for 1 hour
+);
 ```
 
 Reference: [Next.js 16 Cache Components](https://nextjs.org/blog/next-16)

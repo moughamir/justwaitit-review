@@ -13,35 +13,36 @@ When unsure which role to use in `getByRole`, use `logRoles()` to see all availa
 
 ```tsx
 test('finds navigation links', () => {
-  render(<Navigation />)
+  render(<Navigation />);
 
   // Guessing roles without knowing what's available
-  screen.getByRole('nav')        // Error: no element with role "nav"
-  screen.getByRole('menuitem')   // Error: no element with role "menuitem"
+  screen.getByRole('nav'); // Error: no element with role "nav"
+  screen.getByRole('menuitem'); // Error: no element with role "menuitem"
   // Trial and error wastes time
-})
+});
 ```
 
 **Correct (discover roles first):**
 
 ```tsx
-import { logRoles } from '@testing-library/dom'
+import { logRoles } from '@testing-library/dom';
 
 test('finds navigation links', () => {
-  const { container } = render(<Navigation />)
+  const { container } = render(<Navigation />);
 
-  logRoles(container)
+  logRoles(container);
   // Console shows:
   // navigation: <nav />
   // link: <a href="/home" />, <a href="/about" />
 
   // Now we know the correct roles
-  screen.getByRole('navigation')
-  screen.getAllByRole('link')
-})
+  screen.getByRole('navigation');
+  screen.getAllByRole('link');
+});
 ```
 
 **Common implicit roles to remember:**
+
 - `<button>` → button
 - `<input type="text">` → textbox
 - `<input type="checkbox">` → checkbox

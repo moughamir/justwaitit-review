@@ -12,7 +12,7 @@ When using the devtools middleware, provide action names as the third argument t
 **Incorrect (unnamed actions):**
 
 ```typescript
-import { devtools } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware';
 
 const useBearStore = create<BearState>()(
   devtools((set) => ({
@@ -23,14 +23,14 @@ const useBearStore = create<BearState>()(
     increasePopulation: () => set((s) => ({ bears: s.bears + 1 })),
     eatHoney: () => set((s) => ({ honey: s.honey - 10 })),
   }))
-)
+);
 // DevTools shows: "anonymous", "anonymous" - hard to trace
 ```
 
 **Correct (named actions):**
 
 ```typescript
-import { devtools } from 'zustand/middleware'
+import { devtools } from 'zustand/middleware';
 
 const useBearStore = create<BearState>()(
   devtools((set) => ({
@@ -40,18 +40,14 @@ const useBearStore = create<BearState>()(
     increasePopulation: () =>
       set(
         (s) => ({ bears: s.bears + 1 }),
-        undefined,               // replace flag (false = merge)
+        undefined, // replace flag (false = merge)
         'bears/increasePopulation' // action name
       ),
 
     eatHoney: () =>
-      set(
-        (s) => ({ honey: s.honey - 10 }),
-        undefined,
-        'bears/eatHoney'
-      ),
+      set((s) => ({ honey: s.honey - 10 }), undefined, 'bears/eatHoney'),
   }))
-)
+);
 // DevTools shows: "bears/increasePopulation", "bears/eatHoney"
 ```
 
@@ -66,12 +62,8 @@ const createBearSlice: StateCreator<
 > = (set) => ({
   bears: 0,
   addBear: () =>
-    set(
-      (s) => ({ bears: s.bears + 1 }),
-      undefined,
-      'bear/addBear'
-    ),
-})
+    set((s) => ({ bears: s.bears + 1 }), undefined, 'bear/addBear'),
+});
 
 const createFishSlice: StateCreator<
   BearStore,
@@ -80,16 +72,12 @@ const createFishSlice: StateCreator<
   FishSlice
 > = (set) => ({
   fish: 0,
-  addFish: () =>
-    set(
-      (s) => ({ fish: s.fish + 1 }),
-      undefined,
-      'fish/addFish'
-    ),
-})
+  addFish: () => set((s) => ({ fish: s.fish + 1 }), undefined, 'fish/addFish'),
+});
 ```
 
 **Benefits:**
+
 - Clear action history in DevTools
 - Time-travel debugging becomes useful
 - Easier to trace state changes in complex apps

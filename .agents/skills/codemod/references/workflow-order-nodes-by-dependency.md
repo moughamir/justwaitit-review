@@ -13,7 +13,7 @@ Define explicit `depends_on` relationships between workflow nodes. The engine ex
 
 ```yaml
 # workflow.yaml - assumes sequential execution
-version: "1"
+version: '1'
 nodes:
   - id: add-types
     steps:
@@ -38,7 +38,7 @@ nodes:
 
 ```yaml
 # workflow.yaml - explicit DAG
-version: "1"
+version: '1'
 nodes:
   - id: add-types
     steps:
@@ -46,7 +46,7 @@ nodes:
         codemod: ./scripts/add-types.ts
 
   - id: update-imports
-    depends_on: [add-types]  # Explicit dependency
+    depends_on: [add-types] # Explicit dependency
     steps:
       - type: js-ast-grep
         codemod: ./scripts/update-imports.ts
@@ -58,13 +58,14 @@ nodes:
         command: npx eslint --fix .
 
   - id: run-tests
-    depends_on: [fix-lint]  # Waits for all transforms
+    depends_on: [fix-lint] # Waits for all transforms
     steps:
       - type: run
         command: npm test
 ```
 
 **Dependency patterns:**
+
 - Transform order: `[parse] → [transform] → [format] → [test]`
 - Parallel-safe nodes can omit mutual dependencies
 - Use arrays for multiple dependencies: `depends_on: [a, b]`

@@ -63,6 +63,7 @@ private void requireNonEmpty(String value, String message) {
 Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.
 
 **When NOT to apply DRY:**
+
 - **Coincidental duplication:** Two code blocks look similar but serve different purposes and will evolve independently. Extracting a shared function creates a false coupling that makes both harder to change later.
 - **Premature abstraction:** If the code has only been duplicated once, wait. The third occurrence reveals the true abstraction. Premature extraction often produces awkward, over-parameterized helpers.
 - **Cross-boundary duplication:** Sometimes duplication across microservices or bounded contexts is preferable to introducing a shared library that couples the services.

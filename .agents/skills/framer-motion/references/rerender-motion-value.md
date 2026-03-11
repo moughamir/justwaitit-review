@@ -13,13 +13,13 @@ Motion values update the DOM directly without triggering React re-renders. Using
 
 ```tsx
 function DraggableCard() {
-  const [x, setX] = useState(0);  // Re-renders on every drag frame
+  const [x, setX] = useState(0); // Re-renders on every drag frame
 
   return (
     <motion.div
       drag="x"
       style={{ x }}
-      onDrag={(_, info) => setX(info.point.x)}  // 60+ setState calls per second
+      onDrag={(_, info) => setX(info.point.x)} // 60+ setState calls per second
     >
       <ExpensiveChildComponent />
     </motion.div>
@@ -31,7 +31,7 @@ function DraggableCard() {
 
 ```tsx
 function DraggableCard() {
-  const x = useMotionValue(0);  // Updates DOM directly, no re-renders
+  const x = useMotionValue(0); // Updates DOM directly, no re-renders
 
   return (
     <motion.div

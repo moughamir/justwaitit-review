@@ -44,15 +44,15 @@ function Counter() {
 ```typescript
 function handleClick() {
   // Incorrect - all use same count value
-  setCount(count + 1)
-  setCount(count + 1)
-  setCount(count + 1)
+  setCount(count + 1);
+  setCount(count + 1);
+  setCount(count + 1);
   // Result: count + 1 (not count + 3)
 
   // Correct - each update sees previous result
-  setCount(c => c + 1)
-  setCount(c => c + 1)
-  setCount(c => c + 1)
+  setCount((c) => c + 1);
+  setCount((c) => c + 1);
+  setCount((c) => c + 1);
   // Result: count + 3
 }
 ```

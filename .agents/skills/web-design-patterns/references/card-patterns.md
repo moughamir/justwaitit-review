@@ -11,11 +11,13 @@ A thinking framework for card-based layouts that don't look AI-generated.
 ### When to Use Cards (vs. Other Patterns)
 
 **Use cards when**:
+
 - Items are independent and self-contained (services, team members, pricing tiers)
 - Users need to scan and compare discrete options
 - Each item has 2-4 distinct pieces of information (title, description, CTA)
 
 **Don't use cards when**:
+
 - Content is sequential (use numbered lists or timeline)
 - There's a single narrative flow (use article layout or alternating rows)
 - Items have deep hierarchy within them (use accordion or tabs)
@@ -26,6 +28,7 @@ A thinking framework for card-based layouts that don't look AI-generated.
 Every card needs **clear internal hierarchy**. The eye should know where to look first, second, third.
 
 **Hierarchy tools**:
+
 1. **Size**: Larger elements draw attention
 2. **Weight**: Bold stands out more than regular text
 3. **Colour**: High contrast grabs attention
@@ -33,6 +36,7 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 5. **Whitespace**: More space around = more important
 
 **Typical card reading order**:
+
 1. Image or icon — instant visual recognition
 2. Title — what is this?
 3. Description — why should I care?
@@ -55,6 +59,7 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 **The orphan problem**: Never leave 1 card alone on a row.
 
 **Safe layouts that work with ANY count**:
+
 - Full-width featured card + responsive grid below
 - Alternating full-width rows
 - Simple responsive grid (1 col -> 2 col -> 3 col) that wraps naturally
@@ -62,11 +67,13 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 ### Question 2: Is There Hierarchy in Importance?
 
 **When hierarchy exists**: Use featured card patterns
+
 - Make the important card 2x the size
 - Give it an image while others get icons
 - Use a stronger CTA button (primary vs outline)
 
 **When all items are equal**: Use uniform grid
+
 - Same card dimensions for all
 - Consistent internal structure
 
@@ -95,6 +102,7 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 ### Strategy 2: Mix Card Formats Within a Section
 
 **Service section example**:
+
 - Card 1: Image + title + description + "Learn More" link
 - Card 2: Icon + title + description + "View pricing" link
 - Card 3: Large number/stat + title + brief text (no CTA)
@@ -102,6 +110,7 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 ### Strategy 3: Consider Non-Card Alternatives
 
 **Alternatives to consider**:
+
 - **Alternating rows**: Better for 3-5 detailed items with images
 - **Numbered list**: Better for sequential steps or ranked items
 - **Timeline**: Better for chronological content
@@ -112,6 +121,7 @@ Every card needs **clear internal hierarchy**. The eye should know where to look
 ### Strategy 4: Vary Visual Treatment
 
 Even if card structure is similar, vary the visual style:
+
 - Some cards with images, some with icons, some with neither
 - Some cards with subtle background, some with borders, some with shadows
 - Different padding (featured card gets more breathing room)
@@ -129,6 +139,7 @@ Even if card structure is similar, vary the visual style:
 ### Handling Orphan Items
 
 **Solutions**:
+
 1. Add a featured card that spans 2+ cells to adjust the math
 2. Switch to alternating rows
 3. Add/remove an item to reach grid-friendly count
@@ -146,28 +157,33 @@ Even if card structure is similar, vary the visual style:
 ## 5. Business Context Considerations
 
 ### Services
+
 - Clear hierarchy (featured service if you have a specialty)
 - 3-5 services max on one screen
 - Strong CTAs on every card
 
 ### Team
+
 - Founder/owner deserves featured treatment
 - Real photos beat stock photos every time
 - Include personality details, not just titles
 
 ### Pricing
+
 - Always 2-3 tiers
 - Highlight the recommended tier
 - Align features for easy comparison
 - Make CTA buttons at same vertical position
 
 ### Portfolio / Case Studies
+
 - Minimise card chrome
 - Images should be the hero
 - Bento or masonry works well
 - Brief text (title + client + link is enough)
 
 ### Features / Benefits
+
 - Consider if cards are even needed (icon list might be better)
 - Keep text minimal
 - Grid can be denser (3-4 columns)
@@ -213,6 +229,7 @@ Even if card structure is similar, vary the visual style:
 ```
 
 **Why this works:**
+
 1. Grid `align-items: stretch` — makes grid items fill their cell height
 2. Card `height: 100%` — card expands to fill the stretched grid cell
 3. Content `flex-grow: 1` — content area fills space between image and tags
@@ -224,24 +241,29 @@ Even if card structure is similar, vary the visual style:
 ## 7. Decision Flowchart
 
 **Question 1: How many items?**
+
 - 1 item -> Not a card, just a content block
 - 2 items -> Equal cards side-by-side OR one featured + one supporting
 - 3-6 items -> Continue to Question 2
 - 7+ items -> Consider alternating rows OR simple grid
 
 **Question 2: Is there clear hierarchy?**
+
 - Yes -> Featured card pattern (make primary item 2x size)
 - No, all equal -> Continue to Question 3
 
 **Question 3: What's the content?**
+
 - Image-heavy -> 2 columns or bento grid, larger cards
 - Text-heavy -> 3-4 columns or alternating rows, smaller cards
 - Mixed -> Featured pattern or varied card sizes
 
 **Question 4: Check the grid math**
+
 - Does your item count create orphans? -> Adjust grid
 
 **Question 5: Does it look AI-generated?**
+
 - All cards identical? -> Add size variation
 - All same format? -> Mix image/icon/text cards
 - Feels templated? -> Break the grid, add asymmetry
@@ -250,15 +272,15 @@ Even if card structure is similar, vary the visual style:
 
 ## 8. Quick Reference by Scenario
 
-| Scenario | Item Count | Best Pattern | Key Principle |
-|----------|-----------|-------------|---------------|
-| Services (main offering clear) | 3-5 | Featured + grid | Show hierarchy |
-| Services (all equal) | 4-6 | Simple 3-col grid | Clean and scannable |
-| Services (detailed) | 3-4 | Alternating rows | Give descriptions space |
-| Team (with founder) | 4-8 | Featured founder + grid | Leadership stands out |
-| Team (all equal) | 6-9 | Simple 3-col grid | Keep personal |
-| Pricing | 2-3 | 3-col with featured middle | Guide decision |
-| Portfolio | 6-12 | Bento or masonry | Let work speak |
-| Features | 6-12 | Dense 4-col or icon list | Fast scanning |
-| Case studies | 3-6 | 2-col or alternating | Give detail space |
-| Testimonials | 3-6 | Consider non-card pattern | Cards not ideal here |
+| Scenario                       | Item Count | Best Pattern               | Key Principle           |
+| ------------------------------ | ---------- | -------------------------- | ----------------------- |
+| Services (main offering clear) | 3-5        | Featured + grid            | Show hierarchy          |
+| Services (all equal)           | 4-6        | Simple 3-col grid          | Clean and scannable     |
+| Services (detailed)            | 3-4        | Alternating rows           | Give descriptions space |
+| Team (with founder)            | 4-8        | Featured founder + grid    | Leadership stands out   |
+| Team (all equal)               | 6-9        | Simple 3-col grid          | Keep personal           |
+| Pricing                        | 2-3        | 3-col with featured middle | Guide decision          |
+| Portfolio                      | 6-12       | Bento or masonry           | Let work speak          |
+| Features                       | 6-12       | Dense 4-col or icon list   | Fast scanning           |
+| Case studies                   | 3-6        | 2-col or alternating       | Give detail space       |
+| Testimonials                   | 3-6        | Consider non-card pattern  | Cards not ideal here    |

@@ -64,6 +64,7 @@ public class WikiPageResponder implements SecureResponder {
 ```
 
 **Guidelines:**
+
 - Blank lines between concepts (methods, logical sections)
 - Related code grouped together
 - Caller above callee (top-down reading)

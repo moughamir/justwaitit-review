@@ -64,6 +64,7 @@ function SearchResults() {
 ```
 
 **When to use:**
+
 - Filtering large lists
 - Tab switches with heavy content
 - Route transitions

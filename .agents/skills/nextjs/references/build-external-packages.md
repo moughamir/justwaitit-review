@@ -15,10 +15,10 @@ Some Node.js packages with native bindings or complex dependencies should not be
 // next.config.ts
 const nextConfig = {
   // No external packages configured
-}
+};
 
 // lib/pdf.ts
-import puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer';
 // Build fails or produces oversized bundles
 ```
 
@@ -32,16 +32,17 @@ const nextConfig = {
     'sharp',
     'canvas',
     '@prisma/client',
-    'bcrypt'
-  ]
-}
+    'bcrypt',
+  ],
+};
 
 // lib/pdf.ts
-import puppeteer from 'puppeteer'
+import puppeteer from 'puppeteer';
 // Loaded at runtime from node_modules
 ```
 
 **Common packages to externalize:**
+
 - Database drivers: `@prisma/client`, `pg`, `mysql2`
 - Image processing: `sharp`, `canvas`
 - Native bindings: `bcrypt`, `argon2`

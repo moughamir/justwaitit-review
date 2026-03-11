@@ -49,6 +49,7 @@ async def process_data(data: dict) -> dict:
 ```
 
 **Why it works:**
+
 - No circular dependencies
 - Cloud deployment safe
 - Easy to maintain
@@ -429,7 +430,7 @@ async def increment_counter(name: str) -> dict:
 
 ## Anti-Patterns to Avoid
 
-### ❌ Factory Functions in __init__.py
+### ❌ Factory Functions in **init**.py
 
 ```python
 # DON'T DO THIS

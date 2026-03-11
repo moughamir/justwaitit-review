@@ -312,29 +312,29 @@ export default function ScrollSequence(props) {
 ```typescript
 // On Load - triggers immediately
 useEffect(() => {
-    if (props.triggerOnLoad && !hasTriggered) {
-        setHasTriggered(true)
-        setTriggerTime(Date.now())
-    }
-}, [])
+  if (props.triggerOnLoad && !hasTriggered) {
+    setHasTriggered(true);
+    setTriggerTime(Date.now());
+  }
+}, []);
 
 // On Scroll - triggers when visible
 useEffect(() => {
-    if (props.triggerOnLoad) return
+  if (props.triggerOnLoad) return;
 
-    const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting && !hasTriggered) {
-                setHasTriggered(true)
-                setTriggerTime(Date.now())
-            }
-        },
-        { threshold: 0.1 }
-    )
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting && !hasTriggered) {
+        setHasTriggered(true);
+        setTriggerTime(Date.now());
+      }
+    },
+    { threshold: 0.1 }
+  );
 
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-}, [props.triggerOnLoad, hasTriggered])
+  if (ref.current) observer.observe(ref.current);
+  return () => observer.disconnect();
+}, [props.triggerOnLoad, hasTriggered]);
 ```
 
 ## Auto-Sized Text Fix
@@ -358,10 +358,10 @@ Working placeholder URLs for components with media controls:
 
 ```typescript
 const placeholders = {
-    image: "https://framerusercontent.com/images/GfGkADagM4KEibNcIiRUWlfrR0.jpg",
-    video: "https://framerusercontent.com/assets/MLWPbW1dUQawJLhhun3dBwpgJak.mp4",
-    audio: "https://framerusercontent.com/assets/8w3IUatLX9a5JVJ6XPCVuHi94.mp3",
-}
+  image: 'https://framerusercontent.com/images/GfGkADagM4KEibNcIiRUWlfrR0.jpg',
+  video: 'https://framerusercontent.com/assets/MLWPbW1dUQawJLhhun3dBwpgJak.mp4',
+  audio: 'https://framerusercontent.com/assets/8w3IUatLX9a5JVJ6XPCVuHi94.mp3',
+};
 ```
 
 Use these when setting default values via parameter destructuring (since `ControlType.ResponsiveImage` and `ControlType.File` don't support `defaultValue`).

@@ -1,9 +1,19 @@
 ---
-name: "PRD Mastery: Context-Aware, Expert-Driven, and Token-Efficient Refinement"
-description: "A skill that blends the wisdom of top industry experts, ensures token-efficient PRDs, and organizes outputs in a clear folder structure."
-version: "1.0"
-author: "Callum Bir"
-keywords: ["PRD", "product requirements", "business analysis", "product management", "documentation", "Cagan", "Torres", "Biddle"]
+name: 'PRD Mastery: Context-Aware, Expert-Driven, and Token-Efficient Refinement'
+description: 'A skill that blends the wisdom of top industry experts, ensures token-efficient PRDs, and organizes outputs in a clear folder structure.'
+version: '1.0'
+author: 'Callum Bir'
+keywords:
+  [
+    'PRD',
+    'product requirements',
+    'business analysis',
+    'product management',
+    'documentation',
+    'Cagan',
+    'Torres',
+    'Biddle',
+  ]
 ---
 
 # PRD Mastery Skills
@@ -12,6 +22,7 @@ keywords: ["PRD", "product requirements", "business analysis", "product manageme
 **Package Manager:** pnpm  
 **Key Focus:** Context-aware PRD creation, token efficiency, expert-driven guidance  
 **Official References:**
+
 - Marty Cagan - "Inspired: How to Create Tech Products Customers Love"
 - Teresa Torres - "Continuous Discovery Habits"
 - George Biddle - Product Management Best Practices
@@ -48,7 +59,7 @@ The PRD Mastery skill helps AI agents create high-quality, context-aware Product
 ✅ Expert-guided user interviews to extract requirements  
 ✅ Token-optimized output format  
 ✅ Structured organization system for PRD management  
-✅ Reusable templates and examples  
+✅ Reusable templates and examples
 
 ---
 
@@ -67,11 +78,13 @@ pnpm --version
 ### Quick Start
 
 1. **Run Repository Reconnaissance**
+
    ```bash
    node .claude/skills/ba-prd-skills/repo_scan.js
    ```
 
 2. **Review Preliminary Findings**
+
    ```bash
    cat prelim_summary.md
    ```
@@ -88,6 +101,7 @@ pnpm --version
 **Goal**: Automatically determine if the project is new or existing, identify tech stack, and document context.
 
 **Process**:
+
 1. Run `repo_scan.js` to analyze:
    - Existing codebase structure
    - Technology stack (frameworks, languages, tools)
@@ -103,13 +117,15 @@ pnpm --version
    - Recommended next steps
 
 **Example Output**:
+
 ```markdown
 # Preliminary Project Summary
 
 **Project Type**: Existing
 **Tech Stack**: Next.js 16, React, TypeScript, Prisma ORM
 **Architecture**: App Router with server components
-**Key Observations**: 
+**Key Observations**:
+
 - Well-structured authentication system using Auth.js
 - Vector database integration with Upstash
 - MCP server pattern implementation
@@ -124,6 +140,7 @@ pnpm --version
 **Context-Aware Questions**:
 
 For **New Projects**:
+
 - What problem are you solving?
 - Who are your target users?
 - What are the core user outcomes you want to enable?
@@ -131,6 +148,7 @@ For **New Projects**:
 - What are your scalability expectations?
 
 For **Existing Projects**:
+
 - What are you trying to improve or add?
 - Are there pain points with the current architecture?
 - Should we maintain the existing tech stack or consider changes?
@@ -138,6 +156,7 @@ For **Existing Projects**:
 - What are the migration constraints?
 
 **Adaptive Follow-ups**:
+
 - If user provides technical details → Validate against current stack, identify gaps
 - If user is non-technical → Translate to technical requirements, suggest options
 - If requirements are vague → Use expert questioning to narrow scope
@@ -245,51 +264,64 @@ Each PRD follows a token-efficient format:
 **Last Updated**: YYYY-MM-DD
 
 ## Summary
+
 [2-3 sentence overview optimized for AI parsing]
 
 ## Problem Statement
+
 - User need: [Specific user problem]
 - Business goal: [Why this matters]
 - Success metric: [How we measure success]
 
 ## Target Users
+
 - Primary: [Who benefits most]
 - Secondary: [Additional users]
 
 ## Key Outcomes
+
 1. [Outcome 1 - user benefit]
 2. [Outcome 2 - business benefit]
 3. [Outcome 3 - technical benefit]
 
 ## Requirements
+
 ### Must Have
+
 - [ ] Requirement 1
 - [ ] Requirement 2
 
 ### Should Have
+
 - [ ] Requirement 3
 
 ### Could Have
+
 - [ ] Requirement 4
 
 ## Technical Approach
+
 - Stack: [Tech stack]
 - Architecture: [High-level approach]
 - Integration points: [Key integrations]
 
 ## Risks & Assumptions
+
 - Risk: [Risk] | Mitigation: [Plan]
 - Assumption: [Assumption] | Validation: [How to test]
 
 ## Success Criteria
+
 - Metric 1: [Target]
 - Metric 2: [Target]
 
 ## Implementation Plan
+
 1. Phase 1: [Scope] - [Timeline]
 2. Phase 2: [Scope] - [Timeline]
 
 ## Resources
+
 - Design: [Link]
 - Research: [Link]
 - Technical specs: [Link]
@@ -304,7 +336,9 @@ Each PRD follows a token-efficient format:
 Combine expert approaches into a cohesive discovery process:
 
 #### Phase 1: Problem Discovery (Cagan)
+
 **Questions to Ask**:
+
 1. What problem are we solving?
 2. For whom?
 3. Why now?
@@ -313,7 +347,9 @@ Combine expert approaches into a cohesive discovery process:
 **Output**: Clear problem statement
 
 #### Phase 2: Opportunity Assessment (Torres)
+
 **Questions to Ask**:
+
 1. What opportunities exist?
 2. Which has the most impact?
 3. What assumptions are we making?
@@ -322,7 +358,9 @@ Combine expert approaches into a cohesive discovery process:
 **Output**: Prioritized opportunities with testable assumptions
 
 #### Phase 3: Solution Definition (Biddle)
+
 **Questions to Ask**:
+
 1. What's the minimal viable solution?
 2. What are the technical constraints?
 3. Who needs to approve this?
@@ -338,10 +376,12 @@ Combine expert approaches into a cohesive discovery process:
 
 1. **Use Structured Lists Over Paragraphs**
    ❌ Avoid: "The authentication system needs to support multiple providers including Google OAuth, GitHub, and email/password authentication. It should also handle session management and provide secure token storage."
-   
+
    ✅ Prefer:
+
    ```markdown
    **Authentication Requirements**:
+
    - Providers: Google OAuth, GitHub, email/password
    - Session management: Required
    - Token storage: Secure, encrypted
@@ -389,6 +429,7 @@ Combine expert approaches into a cohesive discovery process:
 ```
 
 This format is:
+
 - Easy to parse
 - Quick to scan
 - Clear hierarchy
@@ -434,6 +475,7 @@ EOF
 ### Version Control
 
 Each PRD should be:
+
 - Tracked in git
 - Reviewed via pull requests
 - Updated with clear change logs
@@ -456,14 +498,14 @@ const techStack = {
   framework: detectFramework(),
   language: detectLanguage(),
   database: detectDatabase(),
-  deployment: detectDeployment()
+  deployment: detectDeployment(),
 };
 
 // Analyze architecture
 const architecture = {
   pattern: detectPattern(),
   structure: analyzeStructure(),
-  integrations: findIntegrations()
+  integrations: findIntegrations(),
 };
 ```
 
@@ -548,16 +590,19 @@ cp prds/templates/prd-template.md prds/prd-001-user-authentication/prd.md
 ### Expert Resources
 
 **Marty Cagan**:
+
 - Book: "Inspired: How to Create Tech Products Customers Love"
 - Focus: Product discovery and validation
 - Key takeaway: Fall in love with the problem, not the solution
 
 **Teresa Torres**:
+
 - Book: "Continuous Discovery Habits"
 - Focus: Weekly user touchpoints and opportunity solution trees
 - Key takeaway: Continuous discovery enables better decisions
 
 **George Biddle**:
+
 - Focus: Structured product management frameworks
 - Key takeaway: Clear structure enables team alignment
 
@@ -573,19 +618,22 @@ cp prds/templates/prd-template.md prds/prd-001-user-authentication/prd.md
 ## Token Efficiency Cheat Sheet
 
 ### Before (Verbose)
+
 ```markdown
-The authentication system will need to support multiple authentication 
-providers to give users flexibility in how they log in. We should support 
-Google OAuth because many users have Google accounts, GitHub OAuth for 
-developers, and also traditional email and password authentication for 
+The authentication system will need to support multiple authentication
+providers to give users flexibility in how they log in. We should support
+Google OAuth because many users have Google accounts, GitHub OAuth for
+developers, and also traditional email and password authentication for
 users who prefer not to use third-party providers.
 ```
 
 **Token count**: ~60 tokens
 
 ### After (Optimized)
+
 ```markdown
 **Auth Providers**:
+
 - Google OAuth (most users have accounts)
 - GitHub OAuth (developer audience)
 - Email/password (privacy-conscious users)

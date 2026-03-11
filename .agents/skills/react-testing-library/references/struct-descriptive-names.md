@@ -12,46 +12,62 @@ Test names should describe the behavior being tested, not the implementation. Go
 **Incorrect (vague or implementation-focused):**
 
 ```tsx
-test('renders', () => { /* ... */ })
+test('renders', () => {
+  /* ... */
+});
 
-test('handleClick', () => { /* ... */ })
+test('handleClick', () => {
+  /* ... */
+});
 
-test('should work', () => { /* ... */ })
+test('should work', () => {
+  /* ... */
+});
 
-test('useState', () => { /* ... */ })
+test('useState', () => {
+  /* ... */
+});
 // What behavior do these verify?
 ```
 
 **Correct (behavior-focused):**
 
 ```tsx
-test('displays user name when loaded', () => { /* ... */ })
+test('displays user name when loaded', () => {
+  /* ... */
+});
 
-test('increments counter when plus button clicked', () => { /* ... */ })
+test('increments counter when plus button clicked', () => {
+  /* ... */
+});
 
-test('shows error message for invalid email', () => { /* ... */ })
+test('shows error message for invalid email', () => {
+  /* ... */
+});
 
-test('disables submit button while form is submitting', () => { /* ... */ })
+test('disables submit button while form is submitting', () => {
+  /* ... */
+});
 ```
 
 **Pattern: describes what happens under what conditions:**
 
 ```tsx
 describe('LoginForm', () => {
-  test('shows validation error when email is empty', () => {})
-  test('shows validation error when password is too short', () => {})
-  test('calls onSubmit with credentials when form is valid', () => {})
-  test('disables submit button during authentication', () => {})
-  test('redirects to dashboard on successful login', () => {})
-})
+  test('shows validation error when email is empty', () => {});
+  test('shows validation error when password is too short', () => {});
+  test('calls onSubmit with credentials when form is valid', () => {});
+  test('disables submit button during authentication', () => {});
+  test('redirects to dashboard on successful login', () => {});
+});
 ```
 
 **Avoid "should" prefix - it's redundant:**
 
 ```tsx
 // Unnecessary
-test('should display error message', () => {})
+test('should display error message', () => {});
 
 // Cleaner
-test('displays error message when validation fails', () => {})
+test('displays error message when validation fails', () => {});
 ```

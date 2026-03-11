@@ -16,12 +16,12 @@ When your state shape changes, users with old persisted data will have issues. U
 const useUserStore = create<UserState>()(
   persist(
     (set) => ({
-      username: '',           // Renamed to 'name' in v2
+      username: '', // Renamed to 'name' in v2
       email: '',
     }),
     { name: 'user-storage' }
   )
-)
+);
 
 // Later, you rename username to name:
 // Old persisted data: { username: 'john' }
@@ -32,14 +32,15 @@ const useUserStore = create<UserState>()(
 **Correct (versioned with migration):**
 
 ```typescript
-import { persist } from 'zustand/middleware'
+import { persist } from 'zustand/middleware';
 
 interface UserStateV2 {
-  name: string        // Renamed from username
-  email: string
-  preferences: {      // New in v2
-    theme: string
-  }
+  name: string; // Renamed from username
+  email: string;
+  preferences: {
+    // New in v2
+    theme: string;
+  };
 }
 
 const useUserStore = create<UserStateV2>()(
@@ -53,7 +54,7 @@ const useUserStore = create<UserStateV2>()(
       name: 'user-storage',
       version: 2,
       migrate: (persisted: unknown, version: number) => {
-        const state = persisted as Record<string, unknown>
+        const state = persisted as Record<string, unknown>;
 
         if (version === 0 || version === 1) {
           // Migrate from v1 to v2
@@ -61,14 +62,14 @@ const useUserStore = create<UserStateV2>()(
             name: state.username || state.name || '',
             email: state.email || '',
             preferences: state.preferences || { theme: 'light' },
-          }
+          };
         }
 
-        return state as UserStateV2
+        return state as UserStateV2;
       },
     }
   )
-)
+);
 ```
 
 **Alternative (multi-step migrations):**
@@ -84,24 +85,26 @@ const migrations: Record<number, (state: unknown) => unknown> = {
     ...state,
     preferences: state.preferences || { theme: 'light' },
   }),
-}
+};
 
 const useUserStore = create<UserState>()(
   persist(
-    (set) => ({ /* ... */ }),
+    (set) => ({
+      /* ... */
+    }),
     {
       name: 'user-storage',
       version: 2,
       migrate: (persisted, version) => {
-        let state = persisted
+        let state = persisted;
         for (let v = version; v < 2; v++) {
-          state = migrations[v + 1]?.(state) || state
+          state = migrations[v + 1]?.(state) || state;
         }
-        return state as UserState
+        return state as UserState;
       },
     }
   )
-)
+);
 ```
 
 Reference: [Zustand - Persist Middleware](https://zustand.docs.pmnd.rs/middlewares/persist)

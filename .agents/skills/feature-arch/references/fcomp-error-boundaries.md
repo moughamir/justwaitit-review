@@ -92,6 +92,7 @@ function FeatureErrorFallback({ feature }: { feature: string }) {
 ```
 
 **Benefits:**
+
 - One feature failing doesn't crash the page
 - Errors are attributed to specific features
 - Users can continue using working features

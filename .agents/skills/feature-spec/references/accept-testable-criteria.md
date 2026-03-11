@@ -27,6 +27,7 @@ Every acceptance criterion must be verifiable with a true/false answer. Subjecti
 ## Acceptance Criteria
 
 ### Usability (Testable)
+
 - [ ] All form fields have visible labels
 - [ ] Error messages appear within 2px of the invalid field
 - [ ] Tab order follows visual layout (left-to-right, top-to-bottom)
@@ -34,18 +35,21 @@ Every acceptance criterion must be verifiable with a true/false answer. Subjecti
 - [ ] Forms can be submitted using Enter key
 
 ### Performance (Testable)
+
 - [ ] Page loads in < 2 seconds on 3G (WebPageTest)
 - [ ] Time to first byte < 200ms
 - [ ] No layout shifts after initial render (CLS < 0.1)
 - [ ] Search results appear within 500ms of typing
 
 ### Error Handling (Testable)
+
 - [ ] Network errors show retry button + message
 - [ ] Form validation errors are shown before submission
 - [ ] 500 errors display error ID for support
 - [ ] All errors are logged with stack traces
 
 ### Visual Design (Testable)
+
 - [ ] Matches Figma design with < 5px variance
 - [ ] Uses only colors from design system palette
 - [ ] Typography matches style guide (font, size, weight)
@@ -53,6 +57,7 @@ Every acceptance criterion must be verifiable with a true/false answer. Subjecti
 ```
 
 **Testability checklist:**
+
 - Can a machine verify this? (automation potential)
 - Can two people agree if it passes? (objectivity)
 - Is there a clear pass/fail threshold? (measurability)

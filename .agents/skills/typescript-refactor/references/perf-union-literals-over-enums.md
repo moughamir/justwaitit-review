@@ -13,14 +13,14 @@ Regular enums emit a runtime lookup object with forward and reverse mappings, ad
 
 ```typescript
 enum OrderStatus {
-  Pending = "pending",
-  Processing = "processing",
-  Shipped = "shipped",
-  Delivered = "delivered",
+  Pending = 'pending',
+  Processing = 'processing',
+  Shipped = 'shipped',
+  Delivered = 'delivered',
 }
 
 function isComplete(status: OrderStatus): boolean {
-  return status === OrderStatus.Delivered
+  return status === OrderStatus.Delivered;
 }
 // Emits: var OrderStatus; (function(OrderStatus) { ... })(OrderStatus || ...)
 ```
@@ -28,15 +28,16 @@ function isComplete(status: OrderStatus): boolean {
 **Correct (union literal, zero runtime cost):**
 
 ```typescript
-type OrderStatus = "pending" | "processing" | "shipped" | "delivered"
+type OrderStatus = 'pending' | 'processing' | 'shipped' | 'delivered';
 
 function isComplete(status: OrderStatus): boolean {
-  return status === "delivered"
+  return status === 'delivered';
 }
 // Emits: function isComplete(status) { return status === "delivered" }
 ```
 
 **When NOT to use this pattern:**
+
 - When you need runtime iteration over all values (use `as const` array instead)
 - When reverse mapping (value → key) is required
 

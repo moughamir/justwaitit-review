@@ -13,13 +13,13 @@ Objects and arrays created during render have new references each time. Move the
 
 ```typescript
 function ChatRoom({ roomId }) {
-  const options = { roomId, serverUrl: 'https://chat.example.com' }
+  const options = { roomId, serverUrl: 'https://chat.example.com' };
 
   useEffect(() => {
-    const connection = createConnection(options)
-    connection.connect()
-    return () => connection.disconnect()
-  }, [options])  // New object every render = infinite loop!
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]); // New object every render = infinite loop!
 }
 ```
 
@@ -28,11 +28,11 @@ function ChatRoom({ roomId }) {
 ```typescript
 function ChatRoom({ roomId }) {
   useEffect(() => {
-    const options = { roomId, serverUrl: 'https://chat.example.com' }
-    const connection = createConnection(options)
-    connection.connect()
-    return () => connection.disconnect()
-  }, [roomId])  // Primitive dependency, stable
+    const options = { roomId, serverUrl: 'https://chat.example.com' };
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [roomId]); // Primitive dependency, stable
 }
 ```
 
@@ -40,16 +40,19 @@ function ChatRoom({ roomId }) {
 
 ```typescript
 function ChatRoom({ roomId }) {
-  const options = useMemo(() => ({
-    roomId,
-    serverUrl: 'https://chat.example.com'
-  }), [roomId])
+  const options = useMemo(
+    () => ({
+      roomId,
+      serverUrl: 'https://chat.example.com',
+    }),
+    [roomId]
+  );
 
   useEffect(() => {
-    const connection = createConnection(options)
-    connection.connect()
-    return () => connection.disconnect()
-  }, [options])  // Stable reference when roomId is same
+    const connection = createConnection(options);
+    connection.connect();
+    return () => connection.disconnect();
+  }, [options]); // Stable reference when roomId is same
 }
 ```
 

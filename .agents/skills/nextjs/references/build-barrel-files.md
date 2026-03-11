@@ -13,13 +13,13 @@ Barrel files (index.ts with re-exports) prevent tree-shaking and slow down devel
 
 ```typescript
 // lib/utils/index.ts (barrel file)
-export * from './formatDate'
-export * from './formatCurrency'
-export * from './validateEmail'
+export * from './formatDate';
+export * from './formatCurrency';
+export * from './validateEmail';
 // ... 50 more exports
 
 // app/dashboard/page.tsx
-import { formatDate } from '@/lib/utils'
+import { formatDate } from '@/lib/utils';
 // Loads all 50+ modules even though only formatDate is used
 ```
 
@@ -27,7 +27,7 @@ import { formatDate } from '@/lib/utils'
 
 ```typescript
 // app/dashboard/page.tsx
-import { formatDate } from '@/lib/utils/formatDate'
+import { formatDate } from '@/lib/utils/formatDate';
 // Loads only the formatDate module
 ```
 

@@ -19,26 +19,27 @@ class UserService {
   // }
 
   async getUser(id: string): Promise<User> {
-    return this.userRepository.findById(id)
+    return this.userRepository.findById(id);
   }
 
   // Method that's never called anywhere
   async getUsersByDepartment(deptId: string): Promise<User[]> {
-    return this.userRepository.findByDepartment(deptId)
+    return this.userRepository.findByDepartment(deptId);
   }
 
   // Feature flag that's always false in production
   async getUsers(): Promise<User[]> {
-    if (process.env.USE_LEGACY_QUERY === 'true') {  // Never true
-      return this.legacyGetUsers()
+    if (process.env.USE_LEGACY_QUERY === 'true') {
+      // Never true
+      return this.legacyGetUsers();
     }
-    return this.userRepository.findAll()
+    return this.userRepository.findAll();
   }
 
   // Dead code from abandoned feature
   private legacyGetUsers(): Promise<User[]> {
     // Old implementation no longer used
-    return this.db.query('SELECT * FROM users_legacy')
+    return this.db.query('SELECT * FROM users_legacy');
   }
 }
 ```
@@ -48,11 +49,11 @@ class UserService {
 ```typescript
 class UserService {
   async getUser(id: string): Promise<User> {
-    return this.userRepository.findById(id)
+    return this.userRepository.findById(id);
   }
 
   async getUsers(): Promise<User[]> {
-    return this.userRepository.findAll()
+    return this.userRepository.findAll();
   }
 }
 
@@ -61,6 +62,7 @@ class UserService {
 ```
 
 **Signs of dead code:**
+
 - Methods with no callers (IDE can detect)
 - Commented-out code blocks
 - Feature flags that are always false
@@ -68,6 +70,7 @@ class UserService {
 - Conditions that are always true/false
 
 **When NOT to delete:**
+
 - API endpoints that external systems might call
 - Hooks/callbacks registered with external frameworks
 - Code that appears dead but is invoked via reflection

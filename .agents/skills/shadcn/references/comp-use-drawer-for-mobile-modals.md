@@ -26,18 +26,20 @@ function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
         </DialogHeader>
         <DialogFooter>
           <Button variant="outline">Cancel</Button>
-          <Button variant="destructive" onClick={onConfirm}>Delete</Button>
+          <Button variant="destructive" onClick={onConfirm}>
+            Delete
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 ```
 
 **Correct (responsive Dialog/Drawer):**
 
 ```tsx
-import { useMediaQuery } from "@/hooks/use-media-query"
+import { useMediaQuery } from '@/hooks/use-media-query';
 import {
   Dialog,
   DialogContent,
@@ -46,7 +48,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogTrigger,
-} from "@/components/ui/dialog"
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerContent,
@@ -55,17 +57,21 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerTrigger,
-} from "@/components/ui/drawer"
+} from '@/components/ui/drawer';
 
 function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
-  const [open, setOpen] = useState(false)
-  const isDesktop = useMediaQuery("(min-width: 768px)")
+  const [open, setOpen] = useState(false);
+  const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const content = (
     <>
       <p className="text-muted-foreground">This action cannot be undone.</p>
-      <div className="flex gap-2 mt-4">
-        <Button variant="outline" onClick={() => setOpen(false)} className="flex-1">
+      <div className="mt-4 flex gap-2">
+        <Button
+          variant="outline"
+          onClick={() => setOpen(false)}
+          className="flex-1"
+        >
           Cancel
         </Button>
         <Button variant="destructive" onClick={onConfirm} className="flex-1">
@@ -73,7 +79,7 @@ function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
         </Button>
       </div>
     </>
-  )
+  );
 
   if (isDesktop) {
     return (
@@ -88,7 +94,7 @@ function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
           {content}
         </DialogContent>
       </Dialog>
-    )
+    );
   }
 
   return (
@@ -103,7 +109,7 @@ function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
         <div className="px-4 pb-4">{content}</div>
       </DrawerContent>
     </Drawer>
-  )
+  );
 }
 ```
 
@@ -111,17 +117,17 @@ function ConfirmDelete({ onConfirm }: { onConfirm: () => void }) {
 
 ```tsx
 function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false)
+  const [matches, setMatches] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia(query)
-    setMatches(media.matches)
-    const listener = (e: MediaQueryListEvent) => setMatches(e.matches)
-    media.addEventListener("change", listener)
-    return () => media.removeEventListener("change", listener)
-  }, [query])
+    const media = window.matchMedia(query);
+    setMatches(media.matches);
+    const listener = (e: MediaQueryListEvent) => setMatches(e.matches);
+    media.addEventListener('change', listener);
+    return () => media.removeEventListener('change', listener);
+  }, [query]);
 
-  return matches
+  return matches;
 }
 ```
 

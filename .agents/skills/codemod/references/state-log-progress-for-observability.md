@@ -14,10 +14,10 @@ Add progress logging for transforms that process many files. Logs help monitor p
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const matches = root.findAll({
-    rule: { pattern: "oldApi($$$ARGS)" }
+    rule: { pattern: 'oldApi($$$ARGS)' },
   });
 
-  const edits = matches.map(m => m.replace("newApi()"));
+  const edits = matches.map((m) => m.replace('newApi()'));
 
   return root.commitEdits(edits);
 };
@@ -37,7 +37,7 @@ const transform: Transform<TSX> = (root, options) => {
   console.log(`Processing: ${filename}`);
 
   const matches = root.findAll({
-    rule: { pattern: "oldApi($$$ARGS)" }
+    rule: { pattern: 'oldApi($$$ARGS)' },
   });
 
   if (matches.length === 0) {
@@ -49,8 +49,10 @@ const transform: Transform<TSX> = (root, options) => {
 
   const edits = matches.map((m, i) => {
     const line = m.range().start.line;
-    console.log(`  [${i + 1}/${matches.length}] Line ${line}: ${m.text().slice(0, 50)}...`);
-    return m.replace("newApi()");
+    console.log(
+      `  [${i + 1}/${matches.length}] Line ${line}: ${m.text().slice(0, 50)}...`
+    );
+    return m.replace('newApi()');
   });
 
   console.log(`  Transformed ${edits.length} occurrences`);
@@ -68,6 +70,7 @@ const transform: Transform<TSX> = (root, options) => {
 ```
 
 **Logging best practices:**
+
 - Log filename at start of each file
 - Log match counts for debugging
 - Include line numbers for review

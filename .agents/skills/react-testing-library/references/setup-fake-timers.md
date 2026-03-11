@@ -12,50 +12,50 @@ When using Jest's fake timers, configure `userEvent.setup()` with `advanceTimers
 **Incorrect (test hangs):**
 
 ```tsx
-jest.useFakeTimers()
+jest.useFakeTimers();
 
 test('shows loading then content', async () => {
-  const user = userEvent.setup()
-  render(<DelayedContent delay={1000} />)
+  const user = userEvent.setup();
+  render(<DelayedContent delay={1000} />);
 
-  await user.click(screen.getByRole('button'))
+  await user.click(screen.getByRole('button'));
   // Test hangs! userEvent waits for real time
-})
+});
 ```
 
 **Correct (configure advanceTimers):**
 
 ```tsx
-jest.useFakeTimers()
+jest.useFakeTimers();
 
 test('shows loading then content', async () => {
   const user = userEvent.setup({
-    advanceTimers: jest.advanceTimersByTime
-  })
-  render(<DelayedContent delay={1000} />)
+    advanceTimers: jest.advanceTimersByTime,
+  });
+  render(<DelayedContent delay={1000} />);
 
-  await user.click(screen.getByRole('button'))
+  await user.click(screen.getByRole('button'));
   // userEvent advances fake timers automatically
 
-  expect(screen.getByText('Content loaded')).toBeInTheDocument()
-})
+  expect(screen.getByText('Content loaded')).toBeInTheDocument();
+});
 ```
 
 **With setup in beforeEach:**
 
 ```tsx
-let user: ReturnType<typeof userEvent.setup>
+let user: ReturnType<typeof userEvent.setup>;
 
 beforeEach(() => {
-  jest.useFakeTimers()
+  jest.useFakeTimers();
   user = userEvent.setup({
-    advanceTimers: jest.advanceTimersByTime
-  })
-})
+    advanceTimers: jest.advanceTimersByTime,
+  });
+});
 
 afterEach(() => {
-  jest.useRealTimers()
-})
+  jest.useRealTimers();
+});
 ```
 
 Reference: [userEvent - advanceTimers option](https://testing-library.com/docs/user-event/options#advancetimers)

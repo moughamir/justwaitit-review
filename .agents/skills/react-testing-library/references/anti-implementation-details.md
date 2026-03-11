@@ -12,16 +12,16 @@ Test what users experience, not how it's implemented internally. Implementation 
 **Incorrect (tests internal state and methods):**
 
 ```tsx
-import { render } from '@testing-library/react'
+import { render } from '@testing-library/react';
 
 test('counter increments', () => {
-  const { container } = render(<Counter />)
-  const instance = container.firstChild._reactInternals
+  const { container } = render(<Counter />);
+  const instance = container.firstChild._reactInternals;
 
-  expect(instance.memoizedState).toBe(0)
-  instance.memoizedProps.onClick()
-  expect(instance.memoizedState).toBe(1)
-})
+  expect(instance.memoizedState).toBe(0);
+  instance.memoizedProps.onClick();
+  expect(instance.memoizedState).toBe(1);
+});
 // Tests React internals, not user behavior
 ```
 
@@ -29,17 +29,18 @@ test('counter increments', () => {
 
 ```tsx
 test('counter increments', async () => {
-  render(<Counter />)
-  const user = userEvent.setup()
+  render(<Counter />);
+  const user = userEvent.setup();
 
-  expect(screen.getByText('Count: 0')).toBeInTheDocument()
-  await user.click(screen.getByRole('button', { name: /increment/i }))
-  expect(screen.getByText('Count: 1')).toBeInTheDocument()
-})
+  expect(screen.getByText('Count: 0')).toBeInTheDocument();
+  await user.click(screen.getByRole('button', { name: /increment/i }));
+  expect(screen.getByText('Count: 1')).toBeInTheDocument();
+});
 // Tests what user sees and does
 ```
 
 **Signs you're testing implementation details:**
+
 - Accessing component instance or internal state
 - Testing specific hook calls or internal methods
 - Using container.querySelector with implementation-specific selectors

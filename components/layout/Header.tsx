@@ -118,7 +118,7 @@ export function Header() {
           <Button
             variant="brand"
             className={cn(
-              'rounded backdrop-blur-xl transition-all duration-500',
+              'mr-1 rounded backdrop-blur-xl transition-all duration-500 sm:mr-2',
               isScrolled ? 'text-xs' : 'text-sm'
             )}
             onClick={() =>

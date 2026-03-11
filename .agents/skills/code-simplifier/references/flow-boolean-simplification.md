@@ -13,7 +13,7 @@ Complex boolean expressions with double negations, redundant comparisons, and ta
 
 ```typescript
 function shouldShowBanner(user: User, settings: Settings): boolean {
-  if (!(!user.isSubscribed)) {
+  if (!!user.isSubscribed) {
     return false;
   }
   if (user.dismissed !== true && !settings.bannersDisabled) {
@@ -98,15 +98,15 @@ func validateConfig(config *Config) error {
 
 ### Key Simplification Rules
 
-| Pattern | Simplifies To |
-|---------|---------------|
-| `!!x` | `x` |
-| `!(a && b)` | `!a \|\| !b` (De Morgan's) |
-| `!(a \|\| b)` | `!a && !b` (De Morgan's) |
-| `x === true` | `x` |
-| `x === false` | `!x` |
-| `x !== true` | `!x` |
-| `!(x !== y)` | `x === y` |
+| Pattern       | Simplifies To              |
+| ------------- | -------------------------- |
+| `!!x`         | `x`                        |
+| `!(a && b)`   | `!a \|\| !b` (De Morgan's) |
+| `!(a \|\| b)` | `!a && !b` (De Morgan's)   |
+| `x === true`  | `x`                        |
+| `x === false` | `!x`                       |
+| `x !== true`  | `!x`                       |
+| `!(x !== y)`  | `x === y`                  |
 
 ### When NOT to Apply
 

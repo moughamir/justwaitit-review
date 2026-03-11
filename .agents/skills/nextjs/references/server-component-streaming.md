@@ -65,6 +65,7 @@ async function Analytics() {
 ```
 
 **Benefits:**
+
 - First paint happens immediately
 - Each section appears as soon as its data is ready
 - Slow components don't block fast ones

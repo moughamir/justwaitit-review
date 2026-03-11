@@ -66,6 +66,7 @@ public class Triangle implements Shape {
 ```
 
 **Choose based on anticipated changes:**
+
 - Adding new functions often? Use data structures (procedural)
 - Adding new types often? Use objects (polymorphic)
 

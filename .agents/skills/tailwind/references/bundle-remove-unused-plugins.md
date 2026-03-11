@@ -23,7 +23,7 @@ Tailwind CSS v4 includes features that previously required separate plugins. Rem
 
 ```css
 /* Duplicate functionality */
-@import "@tailwindcss/container-queries";
+@import '@tailwindcss/container-queries';
 ```
 
 **Correct (use built-in features):**
@@ -47,6 +47,7 @@ Tailwind CSS v4 includes features that previously required separate plugins. Rem
 ```
 
 **Built-in features in v4:**
+
 - Container queries (`@container`, `@sm:`, `@lg:`)
 - Aspect ratio utilities
 - Logical properties

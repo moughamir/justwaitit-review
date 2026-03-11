@@ -14,20 +14,18 @@ When using semantic analysis for cross-file transformations, verify that target 
 ```typescript
 const transform: Transform<TSX> = async (root) => {
   const exportedFn = root.find({
-    rule: { pattern: "export function deprecatedApi($$$)" }
+    rule: { pattern: 'export function deprecatedApi($$$)' },
   });
 
   if (!exportedFn) return null;
 
-  const refs = exportedFn.field("name")?.references() || [];
+  const refs = exportedFn.field('name')?.references() || [];
 
   // Blindly edits all references
   for (const fileRef of refs) {
     for (const ref of fileRef.refs) {
       // Might edit node_modules!
-      fileRef.root.write(
-        fileRef.root.commitEdits([ref.replace("newApi")])
-      );
+      fileRef.root.write(fileRef.root.commitEdits([ref.replace('newApi')]));
     }
   }
 
@@ -42,12 +40,12 @@ const transform: Transform<TSX> = async (root) => {
   const projectRoot = process.cwd();
 
   const exportedFn = root.find({
-    rule: { pattern: "export function deprecatedApi($$$)" }
+    rule: { pattern: 'export function deprecatedApi($$$)' },
   });
 
   if (!exportedFn) return null;
 
-  const refs = exportedFn.field("name")?.references() || [];
+  const refs = exportedFn.field('name')?.references() || [];
 
   for (const fileRef of refs) {
     const filePath = fileRef.root.filename();
@@ -59,21 +57,19 @@ const transform: Transform<TSX> = async (root) => {
     }
 
     // Skip node_modules
-    if (filePath.includes("node_modules")) {
+    if (filePath.includes('node_modules')) {
       console.log(`Skipping dependency: ${filePath}`);
       continue;
     }
 
     // Skip generated files
-    if (filePath.includes("/dist/") || filePath.includes("/build/")) {
+    if (filePath.includes('/dist/') || filePath.includes('/build/')) {
       continue;
     }
 
     // Safe to edit
     for (const ref of fileRef.refs) {
-      fileRef.root.write(
-        fileRef.root.commitEdits([ref.replace("newApi")])
-      );
+      fileRef.root.write(fileRef.root.commitEdits([ref.replace('newApi')]));
     }
   }
 
@@ -82,6 +78,7 @@ const transform: Transform<TSX> = async (root) => {
 ```
 
 **File ownership checks:**
+
 - `startsWith(projectRoot)` - within project
 - `!includes("node_modules")` - not a dependency
 - `!includes("/dist/")` - not generated code

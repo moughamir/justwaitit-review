@@ -74,6 +74,7 @@ export default async function AnalyticsSlot() {
 ```
 
 **Benefits:**
+
 - Each slot loads independently
 - Each slot has its own loading.tsx
 - Each slot can have its own error.tsx

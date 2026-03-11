@@ -19,9 +19,9 @@ test('shows user name', () => {
         <Header />
       </UserProvider>
     </ThemeProvider>
-  )
+  );
   // Must repeat wrapper on every rerender
-})
+});
 ```
 
 **Correct (wrapper option):**
@@ -29,18 +29,16 @@ test('shows user name', () => {
 ```tsx
 const AllProviders = ({ children }) => (
   <ThemeProvider>
-    <UserProvider>
-      {children}
-    </UserProvider>
+    <UserProvider>{children}</UserProvider>
   </ThemeProvider>
-)
+);
 
 test('shows user name', () => {
-  const { rerender } = render(<Header />, { wrapper: AllProviders })
+  const { rerender } = render(<Header />, { wrapper: AllProviders });
 
   // Providers persist through rerender
-  rerender(<Header showAvatar />)
-})
+  rerender(<Header showAvatar />);
+});
 ```
 
 **Create a custom render function:**
@@ -48,10 +46,10 @@ test('shows user name', () => {
 ```tsx
 // test-utils.tsx
 const customRender = (ui, options) =>
-  render(ui, { wrapper: AllProviders, ...options })
+  render(ui, { wrapper: AllProviders, ...options });
 
-export * from '@testing-library/react'
-export { customRender as render }
+export * from '@testing-library/react';
+export { customRender as render };
 ```
 
 Reference: [Testing Library - wrapper option](https://testing-library.com/docs/react-testing-library/api#wrapper)

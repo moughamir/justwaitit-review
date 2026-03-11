@@ -25,7 +25,7 @@ Sprint 3: Authentication System
 
 **Correct (dependency-aware sequencing):**
 
-```markdown
+````markdown
 ## Feature Dependencies
 
 ```mermaid
@@ -35,33 +35,39 @@ graph LR
     A --> D[User Profile]
     D --> C
 ```
+````
 
 ### Dependency Analysis
 
-| Feature | Depends On | Blocks | Priority |
-|---------|------------|--------|----------|
-| Authentication | None | Analytics, Profile | P0 (Critical Path) |
-| Analytics API | Authentication | Dashboard | P0 (Critical Path) |
-| User Profile | Authentication | Dashboard | P1 |
-| User Dashboard | Analytics, Profile | None | P1 |
+| Feature        | Depends On         | Blocks             | Priority           |
+| -------------- | ------------------ | ------------------ | ------------------ |
+| Authentication | None               | Analytics, Profile | P0 (Critical Path) |
+| Analytics API  | Authentication     | Dashboard          | P0 (Critical Path) |
+| User Profile   | Authentication     | Dashboard          | P1                 |
+| User Dashboard | Analytics, Profile | None               | P1                 |
 
 ### Revised Sprint Plan
 
 **Sprint 1: Foundation (Unblock everything)**
+
 - Authentication System (no dependencies)
 - Begin Analytics API (parallel after auth done)
 
 **Sprint 2: Data Layer**
+
 - Complete Analytics API
 - User Profile
 
 **Sprint 3: UI Layer**
+
 - User Dashboard (all dependencies satisfied)
 
 ### Critical Path
+
 Authentication → Analytics API → Dashboard
 
 _Any delay in critical path delays final delivery_
+
 ```
 
 **Dependency management tips:**
@@ -71,3 +77,4 @@ _Any delay in critical path delays final delivery_
 - Create interface contracts early to enable parallel work
 
 Reference: [Eleken - Product Feature Prioritization](https://www.eleken.co/blog-posts/product-feature-prioritization)
+```

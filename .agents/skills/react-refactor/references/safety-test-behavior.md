@@ -12,22 +12,22 @@ Tests that assert on internal state values, hook return values, or component ins
 **Incorrect (testing implementation — breaks on internal refactor):**
 
 ```tsx
-import { renderHook, act } from "@testing-library/react";
+import { renderHook, act } from '@testing-library/react';
 
 // Testing internal hook state directly
-test("newsletter form manages subscription state", () => {
+test('newsletter form manages subscription state', () => {
   const { result } = renderHook(() => useNewsletterForm());
 
   // Coupled to internal state shape — breaks if renamed or restructured
-  expect(result.current.email).toBe("");
+  expect(result.current.email).toBe('');
   expect(result.current.isSubmitting).toBe(false);
   expect(result.current.isSubscribed).toBe(false);
 
   act(() => {
-    result.current.setEmail("dev@example.com");
+    result.current.setEmail('dev@example.com');
   });
 
-  expect(result.current.email).toBe("dev@example.com");
+  expect(result.current.email).toBe('dev@example.com');
 
   // Renaming isSubmitting to isPending breaks this test
   // Moving from useState to useReducer breaks this test
@@ -38,22 +38,24 @@ test("newsletter form manages subscription state", () => {
 **Correct (testing behavior — survives internal rewrites):**
 
 ```tsx
-import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-test("newsletter form subscribes user and shows confirmation", async () => {
+test('newsletter form subscribes user and shows confirmation', async () => {
   const user = userEvent.setup();
   render(<NewsletterForm />);
 
-  const emailInput = screen.getByLabelText("Email address");
-  const subscribeButton = screen.getByRole("button", { name: "Subscribe" });
+  const emailInput = screen.getByLabelText('Email address');
+  const subscribeButton = screen.getByRole('button', { name: 'Subscribe' });
 
-  await user.type(emailInput, "dev@example.com");
+  await user.type(emailInput, 'dev@example.com');
   await user.click(subscribeButton);
 
   // Asserts on what the user sees — survives any internal refactor
-  expect(await screen.findByText("Subscribed successfully")).toBeInTheDocument();
-  expect(emailInput).toHaveValue("");
+  expect(
+    await screen.findByText('Subscribed successfully')
+  ).toBeInTheDocument();
+  expect(emailInput).toHaveValue('');
   expect(subscribeButton).toBeEnabled();
 });
 

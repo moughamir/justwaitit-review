@@ -75,12 +75,14 @@ fn delete(&self, page: &Page) -> Result<(), DeletionError> {
 ```
 
 **The principle is language-agnostic:** separate error-handling logic from business logic. The mechanism differs:
+
 - **Java/C#/Python:** try-catch with specific exception types
 - **Go:** explicit error returns with early return pattern
 - **Rust:** `Result<T, E>` with `?` operator
 - **TypeScript/Kotlin:** `Result` types or exceptions depending on the domain
 
 **When NOT to use exceptions:**
+
 - In Go, Rust, or other languages designed around explicit error values — use their idiomatic patterns instead
 - For expected business outcomes (e.g., "user not found") — consider returning `Optional` or a domain-specific result type rather than throwing
 - In performance-critical hot paths where exception overhead matters

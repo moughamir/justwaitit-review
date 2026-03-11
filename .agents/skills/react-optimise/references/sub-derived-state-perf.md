@@ -13,30 +13,34 @@ Using useEffect to synchronize derived state from props or other state causes a 
 
 ```tsx
 interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
 }
 
 function CartSummary({ cartItems }: { cartItems: CartItem[] }) {
-  const [totalPrice, setTotalPrice] = useState(0)
-  const [itemCount, setItemCount] = useState(0)
-  const [hasExpensiveItem, setHasExpensiveItem] = useState(false)
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [itemCount, setItemCount] = useState(0);
+  const [hasExpensiveItem, setHasExpensiveItem] = useState(false);
 
   useEffect(() => {
     // Fires after render, triggers a second render with updated values
-    setTotalPrice(cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0))
-    setItemCount(cartItems.reduce((sum, item) => sum + item.quantity, 0))
-    setHasExpensiveItem(cartItems.some((item) => item.price > 100))
-  }, [cartItems])
+    setTotalPrice(
+      cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    );
+    setItemCount(cartItems.reduce((sum, item) => sum + item.quantity, 0));
+    setHasExpensiveItem(cartItems.some((item) => item.price > 100));
+  }, [cartItems]);
 
   return (
     <div>
-      <p>{itemCount} items — ${totalPrice.toFixed(2)}</p>
+      <p>
+        {itemCount} items — ${totalPrice.toFixed(2)}
+      </p>
       {hasExpensiveItem && <span className="badge">Premium items in cart</span>}
     </div>
-  )
+  );
 }
 ```
 
@@ -44,26 +48,28 @@ function CartSummary({ cartItems }: { cartItems: CartItem[] }) {
 
 ```tsx
 interface CartItem {
-  id: string
-  name: string
-  price: number
-  quantity: number
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
 }
 
 function CartSummary({ cartItems }: { cartItems: CartItem[] }) {
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
-  )
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0)
-  const hasExpensiveItem = cartItems.some((item) => item.price > 100)
+  );
+  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const hasExpensiveItem = cartItems.some((item) => item.price > 100);
 
   return (
     <div>
-      <p>{itemCount} items — ${totalPrice.toFixed(2)}</p>
+      <p>
+        {itemCount} items — ${totalPrice.toFixed(2)}
+      </p>
       {hasExpensiveItem && <span className="badge">Premium items in cart</span>}
     </div>
-  )
+  );
 }
 ```
 

@@ -12,7 +12,7 @@ The `pathLength` property normalizes any path to a length of 1, enabling simple 
 **Incorrect (manual strokeDasharray calculation):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function CheckmarkIcon() {
   // Must calculate exact path length (varies per path)
@@ -26,7 +26,7 @@ function CheckmarkIcon() {
         stroke="currentColor"
         strokeWidth={2}
         initial={{ strokeDasharray: pathLength, strokeDashoffset: pathLength }}
-        animate={{ strokeDashoffset: 0 }}  // Breaks if path changes
+        animate={{ strokeDashoffset: 0 }} // Breaks if path changes
         transition={{ duration: 0.5 }}
       />
     </svg>
@@ -37,7 +37,7 @@ function CheckmarkIcon() {
 **Correct (normalized pathLength):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function CheckmarkIcon() {
   return (
@@ -48,7 +48,7 @@ function CheckmarkIcon() {
         stroke="currentColor"
         strokeWidth={2}
         initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}  // Works for any path, no calculation needed
+        animate={{ pathLength: 1 }} // Works for any path, no calculation needed
         transition={{ duration: 0.5 }}
       />
     </svg>

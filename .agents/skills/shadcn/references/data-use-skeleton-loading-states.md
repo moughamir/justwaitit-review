@@ -13,7 +13,7 @@ Use shadcn/ui Skeleton components to show content placeholders during data loadi
 
 ```tsx
 function UserProfile({ userId }: { userId: string }) {
-  const { data: user, isLoading } = useQuery(["user", userId], fetchUser)
+  const { data: user, isLoading } = useQuery(['user', userId], fetchUser);
 
   if (isLoading) {
     return (
@@ -21,7 +21,7 @@ function UserProfile({ userId }: { userId: string }) {
         <Loader2 className="h-8 w-8 animate-spin" />
         {/* Content jumps when data loads - layout shift */}
       </div>
-    )
+    );
   }
 
   return (
@@ -38,14 +38,14 @@ function UserProfile({ userId }: { userId: string }) {
         </div>
       </CardHeader>
     </Card>
-  )
+  );
 }
 ```
 
 **Correct (skeleton matching final layout):**
 
 ```tsx
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from '@/components/ui/skeleton';
 
 function UserProfileSkeleton() {
   return (
@@ -60,14 +60,14 @@ function UserProfileSkeleton() {
         </div>
       </CardHeader>
     </Card>
-  )
+  );
 }
 
 function UserProfile({ userId }: { userId: string }) {
-  const { data: user, isLoading } = useQuery(["user", userId], fetchUser)
+  const { data: user, isLoading } = useQuery(['user', userId], fetchUser);
 
   if (isLoading) {
-    return <UserProfileSkeleton />
+    return <UserProfileSkeleton />;
     // Same dimensions as loaded content - no layout shift
   }
 
@@ -85,11 +85,12 @@ function UserProfile({ userId }: { userId: string }) {
         </div>
       </CardHeader>
     </Card>
-  )
+  );
 }
 ```
 
 **Skeleton best practices:**
+
 - Match skeleton dimensions to final content exactly
 - Use `animate-pulse` (default) for subtle loading indication
 - Group related skeletons to show content hierarchy

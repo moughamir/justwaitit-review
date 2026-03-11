@@ -15,14 +15,14 @@ Generic patterns match too many nodes, causing performance degradation and false
 const transform: Transform<TSX> = (root) => {
   // Matches EVERY function call in the codebase
   const matches = root.findAll({
-    rule: { pattern: "$FN($$$ARGS)" }
+    rule: { pattern: '$FN($$$ARGS)' },
   });
   // On a 10k file codebase: matches millions of nodes
   // Takes minutes to process
 
   // Then filters in JS - wasteful
-  const consoleCalls = matches.filter(m =>
-    m.getMatch("FN")?.text().startsWith("console")
+  const consoleCalls = matches.filter((m) =>
+    m.getMatch('FN')?.text().startsWith('console')
   );
   return null;
 };
@@ -35,9 +35,9 @@ const transform: Transform<TSX> = (root) => {
   // Pattern specifies exact target
   const matches = root.findAll({
     rule: {
-      kind: "call_expression",
-      pattern: "console.$METHOD($$$ARGS)"
-    }
+      kind: 'call_expression',
+      pattern: 'console.$METHOD($$$ARGS)',
+    },
   });
   // Matches only console.* calls
   // 1000x fewer matches, milliseconds to process
@@ -47,6 +47,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Specificity guidelines:**
+
 - Include literal text where known (object names, method prefixes)
 - Add `kind` constraints to limit node types
 - Use `inside`/`has` to require structural context

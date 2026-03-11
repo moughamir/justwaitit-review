@@ -44,6 +44,7 @@ Complex fulcrumPoint = Complex.fromRealNumber(23.0);
 Use `get`, `set`, `is`, and `has` prefixes consistently for accessors, mutators, and predicates.
 
 **Language-specific conventions:**
+
 - **Java/C#:** `getName()`, `setName()`, `isActive()` (JavaBean conventions)
 - **Python:** Use `@property` decorators — `user.name` not `user.get_name()`
 - **Kotlin/Swift:** Direct property access with `val`/`var` — `user.name` not `user.getName()`

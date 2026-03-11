@@ -15,30 +15,30 @@ When a conditional simply maps values to other values, replace it with a lookup 
 function getStatusLabel(status: string): string {
   switch (status) {
     case 'pending':
-      return 'Awaiting Review'
+      return 'Awaiting Review';
     case 'approved':
-      return 'Approved'
+      return 'Approved';
     case 'rejected':
-      return 'Rejected'
+      return 'Rejected';
     case 'in_progress':
-      return 'In Progress'
+      return 'In Progress';
     case 'completed':
-      return 'Completed'
+      return 'Completed';
     case 'cancelled':
-      return 'Cancelled'
+      return 'Cancelled';
     default:
-      return 'Unknown'
+      return 'Unknown';
   }
 }
 
 function getStatusColor(status: string): string {
   switch (status) {
     case 'pending':
-      return '#FFA500'
+      return '#FFA500';
     case 'approved':
-      return '#00FF00'
+      return '#00FF00';
     case 'rejected':
-      return '#FF0000'
+      return '#FF0000';
     // ... same pattern repeated
   }
 }
@@ -48,9 +48,9 @@ function getStatusColor(status: string): string {
 
 ```typescript
 interface StatusConfig {
-  label: string
-  color: string
-  icon: string
+  label: string;
+  color: string;
+  icon: string;
 }
 
 const STATUS_CONFIG: Record<string, StatusConfig> = {
@@ -59,30 +59,36 @@ const STATUS_CONFIG: Record<string, StatusConfig> = {
   rejected: { label: 'Rejected', color: '#FF0000', icon: 'x' },
   in_progress: { label: 'In Progress', color: '#0000FF', icon: 'spinner' },
   completed: { label: 'Completed', color: '#008000', icon: 'check-circle' },
-  cancelled: { label: 'Cancelled', color: '#808080', icon: 'ban' }
-}
+  cancelled: { label: 'Cancelled', color: '#808080', icon: 'ban' },
+};
 
-const DEFAULT_STATUS: StatusConfig = { label: 'Unknown', color: '#000000', icon: 'question' }
+const DEFAULT_STATUS: StatusConfig = {
+  label: 'Unknown',
+  color: '#000000',
+  icon: 'question',
+};
 
 function getStatusConfig(status: string): StatusConfig {
-  return STATUS_CONFIG[status] ?? DEFAULT_STATUS
+  return STATUS_CONFIG[status] ?? DEFAULT_STATUS;
 }
 
 function getStatusLabel(status: string): string {
-  return getStatusConfig(status).label
+  return getStatusConfig(status).label;
 }
 
 function getStatusColor(status: string): string {
-  return getStatusConfig(status).color
+  return getStatusConfig(status).color;
 }
 ```
 
 **Benefits:**
+
 - Single source of truth for all status-related data
 - Adding a new status is one line, not changes to multiple switches
 - Configuration can be externalized (loaded from JSON/database)
 
 **When NOT to use:**
+
 - Logic between cases is complex and varies significantly
 - Only 2-3 cases exist and unlikely to grow
 

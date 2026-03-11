@@ -88,7 +88,7 @@ ingress:
   - hostname: secure.example.com
     service: https://localhost:8443
     originRequest:
-      noTLSVerify: true  # Accept self-signed certs
+      noTLSVerify: true # Accept self-signed certs
       connectTimeout: 30s
       tlsTimeout: 10s
       httpHostHeader: internal-hostname
@@ -117,14 +117,14 @@ originRequest:
   tcpKeepAlive: 30s
   keepAliveConnections: 100
   keepAliveTimeout: 1m30s
-  httpHostHeader: ""
-  originServerName: ""
-  caPool: ""
+  httpHostHeader: ''
+  originServerName: ''
+  caPool: ''
   noTLSVerify: false
   disableChunkedEncoding: false
   proxyAddress: 127.0.0.1
   proxyPort: 0
-  proxyType: ""
+  proxyType: ''
   http2Origin: false
 
 ingress:
@@ -135,11 +135,11 @@ ingress:
       noTLSVerify: true
 
   - hostname: api.example.com
-    service: http://localhost:8081  # Failover
+    service: http://localhost:8081 # Failover
 
   # Health checks
   - hostname: health.example.com
-    service: hello_world  # Built-in health endpoint
+    service: hello_world # Built-in health endpoint
 
   - service: http_status:404
 ```
@@ -279,6 +279,7 @@ include:
 ```
 
 Generate service token:
+
 1. Go to Access > Service Auth
 2. Create Service Token
 3. Use in requests:
@@ -296,8 +297,11 @@ interface Env {
   TEAM_DOMAIN: string;
 }
 
-async function validateAccessJWT(request: Request, env: Env): Promise<{ email: string } | null> {
-  const jwt = request.headers.get("CF-Access-JWT-Assertion");
+async function validateAccessJWT(
+  request: Request,
+  env: Env
+): Promise<{ email: string } | null> {
+  const jwt = request.headers.get('CF-Access-JWT-Assertion');
   if (!jwt) return null;
 
   try {
@@ -307,7 +311,7 @@ async function validateAccessJWT(request: Request, env: Env): Promise<{ email: s
     const { public_certs } = await certsResponse.json();
 
     // Verify JWT (simplified - use proper JWT library)
-    const [header, payload, signature] = jwt.split(".");
+    const [header, payload, signature] = jwt.split('.');
     const decodedPayload = JSON.parse(atob(payload));
 
     // Verify claims
@@ -330,7 +334,7 @@ export default {
     const user = await validateAccessJWT(request, env);
 
     if (!user) {
-      return new Response("Unauthorized", { status: 401 });
+      return new Response('Unauthorized', { status: 401 });
     }
 
     return new Response(`Hello, ${user.email}!`);
@@ -383,15 +387,15 @@ Include/exclude specific IPs or domains from WARP:
 
 # Exclude mode (default): These bypass WARP
 exclude:
-  - 10.0.0.0/8      # Internal network
-  - 172.16.0.0/12   # Internal network
-  - 192.168.0.0/16  # Internal network
-  - localhost       # Local development
+  - 10.0.0.0/8 # Internal network
+  - 172.16.0.0/12 # Internal network
+  - 192.168.0.0/16 # Internal network
+  - localhost # Local development
 
 # Include mode: Only these go through WARP
 include:
   - company-api.com
-  - 10.100.0.0/16   # Only corporate network
+  - 10.100.0.0/16 # Only corporate network
 ```
 
 ### Device Posture Checks
@@ -406,8 +410,8 @@ include:
 # OS version check
 - rule_name: Minimum macOS version
   type: os_version
-  operator: >=
-  version: "13.0"
+  operator: >
+  version: '13.0'
   platform: macOS
 
 # Firewall check
@@ -478,7 +482,7 @@ include:
   action: Do Not Inspect
   traffic: http
   selector: Domain
-    - "*.banking.com"  # Don't inspect banking
+    - "*.banking.com" # Don't inspect banking
 ```
 
 ---

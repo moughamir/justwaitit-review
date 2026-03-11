@@ -13,12 +13,12 @@ Debounce search inputs to prevent API calls on every keystroke. Users type 3-5 c
 
 ```tsx
 function SearchUsers() {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
   const { data, isLoading } = useQuery(
-    ["users", query],
+    ['users', query],
     () => searchUsers(query),
     { enabled: query.length > 0 }
-  )
+  );
   // User types "john" = 4 API calls in < 1 second
 
   return (
@@ -31,24 +31,24 @@ function SearchUsers() {
       {isLoading && <Skeleton className="h-20" />}
       {/* Results flicker between each keystroke */}
     </div>
-  )
+  );
 }
 ```
 
 **Correct (debounced search):**
 
 ```tsx
-import { useDebouncedValue } from "@/hooks/use-debounced-value"
+import { useDebouncedValue } from '@/hooks/use-debounced-value';
 
 function SearchUsers() {
-  const [query, setQuery] = useState("")
-  const debouncedQuery = useDebouncedValue(query, 300) // 300ms delay
+  const [query, setQuery] = useState('');
+  const debouncedQuery = useDebouncedValue(query, 300); // 300ms delay
 
   const { data, isLoading } = useQuery(
-    ["users", debouncedQuery],
+    ['users', debouncedQuery],
     () => searchUsers(debouncedQuery),
     { enabled: debouncedQuery.length > 0 }
-  )
+  );
   // User types "john" = 1 API call after they stop typing
 
   return (
@@ -61,7 +61,7 @@ function SearchUsers() {
       {isLoading && <Skeleton className="h-20" />}
       {/* Stable results, no flickering */}
     </div>
-  )
+  );
 }
 ```
 
@@ -69,18 +69,19 @@ function SearchUsers() {
 
 ```tsx
 function useDebouncedValue<T>(value: T, delay: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value)
+  const [debouncedValue, setDebouncedValue] = useState(value);
 
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delay)
-    return () => clearTimeout(timer)
-  }, [value, delay])
+    const timer = setTimeout(() => setDebouncedValue(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
 
-  return debouncedValue
+  return debouncedValue;
 }
 ```
 
 **Recommended delays:**
+
 - Search inputs: 300-500ms
 - Autocomplete: 150-300ms
 - Filter updates: 200-400ms

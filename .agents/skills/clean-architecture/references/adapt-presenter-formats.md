@@ -18,21 +18,27 @@ function InvoiceView({ invoice }: { invoice: Invoice }) {
   const formattedDate = new Date(invoice.dueDate).toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
-    year: 'numeric'
-  })
+    year: 'numeric',
+  });
 
   const formattedTotal = new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: invoice.currency
-  }).format(invoice.total / 100)
+    currency: invoice.currency,
+  }).format(invoice.total / 100);
 
-  const statusColor = invoice.status === 'paid' ? 'green'
-    : invoice.status === 'overdue' ? 'red'
-    : 'yellow'
+  const statusColor =
+    invoice.status === 'paid'
+      ? 'green'
+      : invoice.status === 'overdue'
+        ? 'red'
+        : 'yellow';
 
-  const daysOverdue = invoice.status === 'overdue'
-    ? Math.floor((Date.now() - new Date(invoice.dueDate).getTime()) / 86400000)
-    : 0
+  const daysOverdue =
+    invoice.status === 'overdue'
+      ? Math.floor(
+          (Date.now() - new Date(invoice.dueDate).getTime()) / 86400000
+        )
+      : 0;
 
   return (
     <div>
@@ -41,7 +47,7 @@ function InvoiceView({ invoice }: { invoice: Invoice }) {
       <span>Total: {formattedTotal}</span>
       {daysOverdue > 0 && <span>{daysOverdue} days overdue</span>}
     </div>
-  )
+  );
 }
 ```
 
@@ -50,12 +56,12 @@ function InvoiceView({ invoice }: { invoice: Invoice }) {
 ```tsx
 // presenter/InvoicePresenter.ts
 interface InvoiceViewModel {
-  invoiceNumber: string
-  status: string
-  statusColor: 'green' | 'yellow' | 'red'
-  dueDate: string
-  total: string
-  overdueMessage: string | null
+  invoiceNumber: string;
+  status: string;
+  statusColor: 'green' | 'yellow' | 'red';
+  dueDate: string;
+  total: string;
+  overdueMessage: string | null;
 }
 
 class InvoicePresenter {
@@ -66,25 +72,27 @@ class InvoicePresenter {
       statusColor: this.getStatusColor(invoice.status),
       dueDate: this.formatDate(invoice.dueDate, locale),
       total: this.formatMoney(invoice.total, invoice.currency, locale),
-      overdueMessage: this.getOverdueMessage(invoice)
-    }
+      overdueMessage: this.getOverdueMessage(invoice),
+    };
   }
 
   private getStatusColor(status: string): 'green' | 'yellow' | 'red' {
-    const colors = { paid: 'green', pending: 'yellow', overdue: 'red' }
-    return colors[status] || 'yellow'
+    const colors = { paid: 'green', pending: 'yellow', overdue: 'red' };
+    return colors[status] || 'yellow';
   }
 
   private formatDate(date: Date, locale: string): string {
     return new Intl.DateTimeFormat(locale, {
-      month: 'long', day: 'numeric', year: 'numeric'
-    }).format(date)
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(date);
   }
 
   private getOverdueMessage(invoice: InvoiceResult): string | null {
-    if (invoice.status !== 'overdue') return null
-    const days = this.calculateDaysOverdue(invoice.dueDate)
-    return `${days} day${days !== 1 ? 's' : ''} overdue`
+    if (invoice.status !== 'overdue') return null;
+    const days = this.calculateDaysOverdue(invoice.dueDate);
+    return `${days} day${days !== 1 ? 's' : ''} overdue`;
   }
 }
 
@@ -97,11 +105,12 @@ function InvoiceView({ vm }: { vm: InvoiceViewModel }) {
       <span>Total: {vm.total}</span>
       {vm.overdueMessage && <span>{vm.overdueMessage}</span>}
     </div>
-  )
+  );
 }
 ```
 
 **Benefits:**
+
 - Formatting logic tested without UI framework
 - Same use case serves different locales via different presenter configs
 - View components trivially simple, easy to redesign

@@ -31,35 +31,41 @@ Week 9: Stakeholder demo
 ## Project Timeline with Checkpoints
 
 ### Week 1: Problem Alignment
+
 - [ ] Share problem statement with all stakeholders
 - [ ] Confirm we're solving the right problem
 - [ ] Document any disagreements
 
 ### Week 2: Requirements Review
+
 - [ ] Share draft requirements document
 - [ ] 48-hour feedback window
 - [ ] Resolution meeting for conflicts
 - **Checkpoint: Requirements approved**
 
 ### Week 3: Design Review
+
 - [ ] Share wireframes and user flows
 - [ ] Walkthrough with key stakeholders
 - [ ] Incorporate feedback before high-fidelity
 - **Checkpoint: Design direction approved**
 
 ### Week 4: Design Refinement
+
 - [ ] Share high-fidelity mockups
 - [ ] Prototype key interactions
 - [ ] Final design sign-off
 - **Checkpoint: Design approved for development**
 
 ### Week 6: Mid-Development Check
+
 - [ ] Demo working prototype (even if incomplete)
 - [ ] Validate core assumptions
 - [ ] Surface integration concerns early
 - **Checkpoint: No major direction changes**
 
 ### Week 8: Pre-Launch Review
+
 - [ ] Feature complete demo
 - [ ] Stakeholder acceptance testing
 - [ ] Final go/no-go decision
@@ -67,6 +73,7 @@ Week 9: Stakeholder demo
 ```
 
 **Feedback cadence by project size:**
+
 - Small (< 2 weeks): Beginning and end
 - Medium (2-6 weeks): Weekly checkpoints
 - Large (> 6 weeks): Bi-weekly checkpoints + async updates

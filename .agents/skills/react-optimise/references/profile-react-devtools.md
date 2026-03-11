@@ -13,7 +13,7 @@ React's Performance Tracks integration in Chrome DevTools shows exactly which co
 
 ```tsx
 function InventoryDashboard({ warehouses }: { warehouses: Warehouse[] }) {
-  console.log("InventoryDashboard rendered") // clutters console, no timing data
+  console.log('InventoryDashboard rendered'); // clutters console, no timing data
 
   return (
     <div>
@@ -21,17 +21,17 @@ function InventoryDashboard({ warehouses }: { warehouses: Warehouse[] }) {
       <WarehouseMap warehouses={warehouses} />
       <InventoryTable warehouses={warehouses} />
     </div>
-  )
+  );
 }
 
 function WarehouseMap({ warehouses }: { warehouses: Warehouse[] }) {
-  console.log("WarehouseMap rendered") // no information about render duration
-  return <MapVisualization data={warehouses} />
+  console.log('WarehouseMap rendered'); // no information about render duration
+  return <MapVisualization data={warehouses} />;
 }
 
 function InventoryTable({ warehouses }: { warehouses: Warehouse[] }) {
-  console.log("InventoryTable rendered") // cannot compare relative costs
-  return <Table rows={warehouses.flatMap((w) => w.inventory)} />
+  console.log('InventoryTable rendered'); // cannot compare relative costs
+  return <Table rows={warehouses.flatMap((w) => w.inventory)} />;
 }
 ```
 
@@ -62,7 +62,7 @@ function InventoryDashboard({ warehouses }: { warehouses: Warehouse[] }) {
         <VirtualizedInventoryTable warehouses={warehouses} />
       </Suspense>
     </div>
-  )
+  );
 }
 ```
 

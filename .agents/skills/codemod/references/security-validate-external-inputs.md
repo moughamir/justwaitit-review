@@ -17,12 +17,12 @@ const transform: Transform<TSX> = async (root, options) => {
 
   // Direct use of user input in pattern - dangerous!
   const matches = root.findAll({
-    rule: { pattern: `import { $$$NAMES } from "${targetModule}"` }
+    rule: { pattern: `import { $$$NAMES } from "${targetModule}"` },
   });
 
   // User input in shell command - injection vulnerability!
-  const { execSync } = await import("child_process");
-  execSync(`npm info ${targetModule}`);  // Dangerous!
+  const { execSync } = await import('child_process');
+  execSync(`npm info ${targetModule}`); // Dangerous!
 
   return null;
 };
@@ -42,19 +42,20 @@ const transform: Transform<TSX> = async (root, options) => {
 
   // Safe to use in pattern after validation
   const matches = root.findAll({
-    rule: { pattern: `import { $$$NAMES } from "${targetModule}"` }
+    rule: { pattern: `import { $$$NAMES } from "${targetModule}"` },
   });
 
   // Escape for shell if needed
-  const safeModule = targetModule.replace(/[^a-zA-Z0-9@\/-]/g, "");
-  const { execSync } = await import("child_process");
-  execSync(`npm info "${safeModule}"`);  // Quoted and sanitized
+  const safeModule = targetModule.replace(/[^a-zA-Z0-9@\/-]/g, '');
+  const { execSync } = await import('child_process');
+  execSync(`npm info "${safeModule}"`); // Quoted and sanitized
 
   return null;
 };
 ```
 
 **Input validation patterns:**
+
 - Module names: `/^[@a-z0-9\-\/]+$/i`
 - File paths: Resolve and check within project root
 - Identifiers: `/^[a-zA-Z_][a-zA-Z0-9_]*$/`

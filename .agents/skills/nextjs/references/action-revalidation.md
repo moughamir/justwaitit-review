@@ -12,11 +12,11 @@ Always invalidate relevant cached data after mutations. Use `revalidatePath` for
 **Incorrect (stale cache after mutation):**
 
 ```typescript
-'use server'
+'use server';
 
 export async function deletePost(postId: string) {
-  await db.posts.delete({ where: { id: postId } })
-  redirect('/posts')
+  await db.posts.delete({ where: { id: postId } });
+  redirect('/posts');
   // Posts list still shows deleted post from cache!
 }
 ```
@@ -24,32 +24,32 @@ export async function deletePost(postId: string) {
 **Correct (invalidating cache):**
 
 ```typescript
-'use server'
+'use server';
 
-import { revalidatePath, revalidateTag } from 'next/cache'
-import { redirect } from 'next/navigation'
+import { revalidatePath, revalidateTag } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function deletePost(postId: string) {
-  await db.posts.delete({ where: { id: postId } })
+  await db.posts.delete({ where: { id: postId } });
 
   // Option 1: Revalidate specific path
-  revalidatePath('/posts')
+  revalidatePath('/posts');
 
   // Option 2: Revalidate by tag (more granular)
-  revalidateTag('posts')
+  revalidateTag('posts');
 
-  redirect('/posts')
+  redirect('/posts');
 }
 
 export async function updatePost(postId: string, formData: FormData) {
   await db.posts.update({
     where: { id: postId },
-    data: { title: formData.get('title') }
-  })
+    data: { title: formData.get('title') },
+  });
 
   // Revalidate both the list and detail pages
-  revalidatePath('/posts')
-  revalidatePath(`/posts/${postId}`)
+  revalidatePath('/posts');
+  revalidatePath(`/posts/${postId}`);
 }
 ```
 
@@ -57,18 +57,18 @@ export async function updatePost(postId: string, formData: FormData) {
 
 ```typescript
 // Specific route
-revalidatePath('/posts')
+revalidatePath('/posts');
 
 // Dynamic route with specific ID
-revalidatePath(`/posts/${postId}`)
+revalidatePath(`/posts/${postId}`);
 
 // All routes using a layout
-revalidatePath('/dashboard', 'layout')
+revalidatePath('/dashboard', 'layout');
 
 // By cache tag
-revalidateTag('posts')
+revalidateTag('posts');
 
 // Multiple tags
-revalidateTag('posts')
-revalidateTag(`post-${postId}`)
+revalidateTag('posts');
+revalidateTag(`post-${postId}`);
 ```

@@ -13,16 +13,16 @@ React Compiler auto-memoizes components and hooks, but bails out when it encount
 
 ```tsx
 function OrderSummary({ orders }: { orders: Order[] }) {
-  const sorted = orders.sort((a, b) => b.total - a.total) // mutates input array
-  const totals: Record<string, number> = {}
+  const sorted = orders.sort((a, b) => b.total - a.total); // mutates input array
+  const totals: Record<string, number> = {};
 
   for (const order of sorted) {
-    totals[order.status] = (totals[order.status] ?? 0) + order.total // builds object via mutation
+    totals[order.status] = (totals[order.status] ?? 0) + order.total; // builds object via mutation
   }
 
-  let discountLabel = ""
-  if (totals["completed"] > 500) {
-    discountLabel = "VIP Discount Applied" // reassignment in conditional
+  let discountLabel = '';
+  if (totals['completed'] > 500) {
+    discountLabel = 'VIP Discount Applied'; // reassignment in conditional
   }
 
   return (
@@ -32,7 +32,7 @@ function OrderSummary({ orders }: { orders: Order[] }) {
         <OrderRow key={order.id} order={order} />
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -40,15 +40,15 @@ function OrderSummary({ orders }: { orders: Order[] }) {
 
 ```tsx
 function OrderSummary({ orders }: { orders: Order[] }) {
-  const sorted = [...orders].sort((a, b) => b.total - a.total)
+  const sorted = [...orders].sort((a, b) => b.total - a.total);
 
-  const totals = Object.groupBy(sorted, (order) => order.status)
-  const completedTotal = (totals["completed"] ?? []).reduce(
+  const totals = Object.groupBy(sorted, (order) => order.status);
+  const completedTotal = (totals['completed'] ?? []).reduce(
     (sum, order) => sum + order.total,
     0
-  )
+  );
 
-  const discountLabel = completedTotal > 500 ? "VIP Discount Applied" : ""
+  const discountLabel = completedTotal > 500 ? 'VIP Discount Applied' : '';
 
   return (
     <div>
@@ -57,7 +57,7 @@ function OrderSummary({ orders }: { orders: Order[] }) {
         <OrderRow key={order.id} order={order} />
       ))}
     </div>
-  )
+  );
 }
 ```
 

@@ -28,6 +28,7 @@ Definition of Done (DoD) includes everything required for a feature to be truly 
 ## Definition of Done Checklist
 
 ### Code Quality
+
 - [ ] Code written and compiles without warnings
 - [ ] Unit tests written with > 80% coverage
 - [ ] Integration tests for critical paths
@@ -35,40 +36,47 @@ Definition of Done (DoD) includes everything required for a feature to be truly 
 - [ ] No known bugs (or documented with tickets)
 
 ### Documentation
+
 - [ ] README updated if setup steps changed
 - [ ] API documentation updated (OpenAPI/Swagger)
 - [ ] User-facing help docs written/updated
 - [ ] Changelog entry added
 
 ### Testing
+
 - [ ] Manual QA completed and signed off
 - [ ] Cross-browser testing (Chrome, Firefox, Safari)
 - [ ] Mobile responsive testing completed
 - [ ] Accessibility testing (keyboard, screen reader)
 
 ### Observability
+
 - [ ] Logging added for key operations
 - [ ] Metrics/monitoring dashboards updated
 - [ ] Alerts configured for error conditions
 - [ ] Feature flag configured (if applicable)
 
 ### Security
+
 - [ ] Security review completed (if auth/data changes)
 - [ ] No secrets in code
 - [ ] Input validation implemented
 
 ### Deployment
+
 - [ ] Database migrations tested
 - [ ] Rollback plan documented
 - [ ] Environment variables documented
 - [ ] Deployed to staging and verified
 
 ### Sign-off
+
 - [ ] Product owner accepts feature
 - [ ] Release notes drafted
 ```
 
 **DoD per feature type:**
+
 - Bug fix: Code, tests, verification
 - New feature: Full checklist above
 - Refactor: Code, tests, performance comparison

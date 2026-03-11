@@ -14,20 +14,16 @@ Long tasks that exceed 50ms block the main thread, preventing the browser from p
 ```tsx
 function OrderConfirmation({ orderId }: { orderId: string }) {
   const handleConfirm = () => {
-    validateInventory(orderId)     // 150ms
-    calculateShipping(orderId)     // 100ms
-    applyDiscountRules(orderId)    // 80ms
-    generateInvoice(orderId)       // 120ms
-    updateAnalytics(orderId)       // 70ms
+    validateInventory(orderId); // 150ms
+    calculateShipping(orderId); // 100ms
+    applyDiscountRules(orderId); // 80ms
+    generateInvoice(orderId); // 120ms
+    updateAnalytics(orderId); // 70ms
     // total: 520ms blocking — browser cannot paint "Processing..." until done
-    navigateToReceipt(orderId)
-  }
+    navigateToReceipt(orderId);
+  };
 
-  return (
-    <button onClick={handleConfirm}>
-      Confirm Order
-    </button>
-  )
+  return <button onClick={handleConfirm}>Confirm Order</button>;
 }
 ```
 
@@ -35,39 +31,39 @@ function OrderConfirmation({ orderId }: { orderId: string }) {
 
 ```tsx
 function OrderConfirmation({ orderId }: { orderId: string }) {
-  const [processing, setProcessing] = useState(false)
+  const [processing, setProcessing] = useState(false);
 
   const handleConfirm = async () => {
-    setProcessing(true) // browser paints "Processing..." immediately
+    setProcessing(true); // browser paints "Processing..." immediately
 
-    validateInventory(orderId)
-    await yieldToMain()
+    validateInventory(orderId);
+    await yieldToMain();
 
-    calculateShipping(orderId)
-    await yieldToMain()
+    calculateShipping(orderId);
+    await yieldToMain();
 
-    applyDiscountRules(orderId)
-    await yieldToMain()
+    applyDiscountRules(orderId);
+    await yieldToMain();
 
-    generateInvoice(orderId)
-    await yieldToMain()
+    generateInvoice(orderId);
+    await yieldToMain();
 
-    updateAnalytics(orderId)
-    navigateToReceipt(orderId)
-  }
+    updateAnalytics(orderId);
+    navigateToReceipt(orderId);
+  };
 
   return (
     <button onClick={handleConfirm} disabled={processing}>
-      {processing ? "Processing..." : "Confirm Order"}
+      {processing ? 'Processing...' : 'Confirm Order'}
     </button>
-  )
+  );
 }
 
 function yieldToMain(): Promise<void> {
-  if ("scheduler" in globalThis && "yield" in scheduler) {
-    return scheduler.yield() // preferred: preserves task priority
+  if ('scheduler' in globalThis && 'yield' in scheduler) {
+    return scheduler.yield(); // preferred: preserves task priority
   }
-  return new Promise((resolve) => setTimeout(resolve, 0))
+  return new Promise((resolve) => setTimeout(resolve, 0));
 }
 ```
 

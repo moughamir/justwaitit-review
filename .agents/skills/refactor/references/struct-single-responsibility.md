@@ -13,20 +13,20 @@ A class should have only one reason to change. When a class handles multiple res
 
 ```typescript
 class UserService {
-  private users: Map<string, User> = new Map()
+  private users: Map<string, User> = new Map();
 
   createUser(data: UserData): User {
-    const user = { id: crypto.randomUUID(), ...data }
-    this.users.set(user.id, user)
+    const user = { id: crypto.randomUUID(), ...data };
+    this.users.set(user.id, user);
 
     // Sending email is a separate responsibility
-    const emailBody = `Welcome ${user.name}! Your account is ready.`
-    this.sendEmail(user.email, 'Welcome', emailBody)
+    const emailBody = `Welcome ${user.name}! Your account is ready.`;
+    this.sendEmail(user.email, 'Welcome', emailBody);
 
     // Logging is a separate responsibility
-    console.log(`[${new Date().toISOString()}] User created: ${user.id}`)
+    console.log(`[${new Date().toISOString()}] User created: ${user.id}`);
 
-    return user
+    return user;
   }
 
   private sendEmail(to: string, subject: string, body: string): void {
@@ -46,27 +46,27 @@ class UserService {
   ) {}
 
   createUser(data: UserData): User {
-    const user = this.userRepository.create(data)
-    this.notificationService.sendWelcomeEmail(user)
-    this.logger.info('User created', { userId: user.id })
-    return user
+    const user = this.userRepository.create(data);
+    this.notificationService.sendWelcomeEmail(user);
+    this.logger.info('User created', { userId: user.id });
+    return user;
   }
 }
 
 class UserRepository {
-  private users: Map<string, User> = new Map()
+  private users: Map<string, User> = new Map();
 
   create(data: UserData): User {
-    const user = { id: crypto.randomUUID(), ...data }
-    this.users.set(user.id, user)
-    return user
+    const user = { id: crypto.randomUUID(), ...data };
+    this.users.set(user.id, user);
+    return user;
   }
 }
 
 class NotificationService {
   sendWelcomeEmail(user: User): void {
-    const body = `Welcome ${user.name}! Your account is ready.`
-    this.sendEmail(user.email, 'Welcome', body)
+    const body = `Welcome ${user.name}! Your account is ready.`;
+    this.sendEmail(user.email, 'Welcome', body);
   }
 
   private sendEmail(to: string, subject: string, body: string): void {
@@ -76,6 +76,7 @@ class NotificationService {
 ```
 
 **Benefits:**
+
 - Each class can change independently
 - Classes are easier to test in isolation
 - Code is more reusable across different contexts

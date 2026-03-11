@@ -67,6 +67,7 @@ export default defineConfig({
 ```
 
 **Benefits:**
+
 - Tests match production behavior exactly
 - Catches minification and tree-shaking bugs
 - Validates environment variable handling

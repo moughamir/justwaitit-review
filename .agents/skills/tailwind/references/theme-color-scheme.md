@@ -15,7 +15,7 @@ Use the `color-scheme` utility to ensure native browser elements (scrollbars, fo
 <html class="dark">
   <body class="bg-gray-900 text-white">
     <!-- Dark background, but scrollbars are still light -->
-    <div class="overflow-auto h-screen">
+    <div class="h-screen overflow-auto">
       <!-- Light scrollbar on dark background -->
     </div>
   </body>
@@ -25,10 +25,10 @@ Use the `color-scheme` utility to ensure native browser elements (scrollbars, fo
 **Correct (coordinated color scheme):**
 
 ```html
-<html class="dark scheme-dark">
+<html class="scheme-dark dark">
   <body class="bg-gray-900 text-white">
     <!-- Scrollbars and native elements are dark -->
-    <div class="overflow-auto h-screen">
+    <div class="h-screen overflow-auto">
       <!-- Dark scrollbar matches theme -->
     </div>
   </body>
@@ -46,6 +46,7 @@ Use the `color-scheme` utility to ensure native browser elements (scrollbars, fo
 ```
 
 **Affected native elements:**
+
 - Scrollbars
 - Form inputs (checkboxes, radios)
 - `<select>` dropdowns

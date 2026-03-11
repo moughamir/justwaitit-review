@@ -7,12 +7,14 @@ Detailed techniques for extracting and simplifying logo icons into favicons.
 ## Overview: When to Extract vs Create New
 
 ### Extract from Logo ✅
+
 - Logo has standalone icon element (symbol, mark, shape)
 - Icon is recognizable without accompanying text
 - Icon works at small sizes (simple enough)
 - Client has brand guidelines requiring logo consistency
 
 ### Create New Icon ❌
+
 - Logo is text-only (no graphic element)
 - Logo icon is too complex to simplify
 - Icon requires text to make sense
@@ -25,41 +27,49 @@ Detailed techniques for extracting and simplifying logo icons into favicons.
 ### Icon Types in Logos
 
 **1. Standalone Symbol**
+
 - Geometric shapes (stars, circles, triangles)
 - Objects (rocket, leaf, house, gear)
 - Abstract marks (swooshes, curves, unique shapes)
 
 **Examples**:
+
 - Twitter bird (without text)
 - Apple apple (bitten apple silhouette)
 - Nike swoosh (without text)
 
 **2. Lettermark/Monogram**
+
 - Single letter styled uniquely
 - Multiple letters forming a mark
 - Ligature (connected letters)
 
 **Examples**:
+
 - McDonald's "M" golden arches
 - Facebook "f" (old logo)
 - HBO interconnected letters
 
 **3. Pictorial Icon**
+
 - Recognizable real-world object
 - Simplified illustration
 - Industry-specific symbol
 
 **Examples**:
+
 - Starbucks mermaid
 - Shell shell
 - Target bullseye
 
 **4. Geometric Pattern**
+
 - Repeating shapes
 - Grid-based designs
 - Sacred geometry
 
 **Examples**:
+
 - Microsoft window grid
 - Adidas three stripes
 - Olympics rings
@@ -90,6 +100,7 @@ Open your logo file (SVG preferred) and identify:
 **If you have the logo as SVG**:
 
 1. **Open in code editor** (VS Code, Sublime)
+
    ```xml
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 60">
      <!-- Logo content -->
@@ -105,6 +116,7 @@ Open your logo file (SVG preferred) and identify:
 2. **Identify icon group** (look for `<g>` with id, or grouped shapes)
 
 3. **Copy icon paths only**
+
    ```xml
    <!-- Extract just these -->
    <circle cx="30" cy="30" r="20" fill="#0066cc"/>
@@ -112,6 +124,7 @@ Open your logo file (SVG preferred) and identify:
    ```
 
 4. **Create new SVG** with 32x32 viewBox
+
    ```xml
    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
      <!-- Paste icon paths, adjust coordinates -->
@@ -172,6 +185,7 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 ### Simplification Rules
 
 #### Rule 1: Minimum Feature Size
+
 **At 16x16, one pixel = 6% of canvas**
 
 - Features < 2px wide become invisible
@@ -181,6 +195,7 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 **Action**: Remove or merge features smaller than 2-3px
 
 #### Rule 2: Reduce Shape Count
+
 **Too many shapes = muddy appearance**
 
 - Aim for 3-5 major shapes
@@ -188,9 +203,11 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 - Remove decorative elements
 
 **Example**:
+
 - Detailed rocket (10 shapes) → Simple rocket (4 shapes: body, window, fins, flame)
 
 #### Rule 3: Increase Stroke Width
+
 **Thin lines vanish at small sizes**
 
 - Minimum stroke: 2px (preferably 3px)
@@ -200,6 +217,7 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 **Before**: 0.5px hairline → **After**: 3px bold stroke
 
 #### Rule 4: Reduce Color Count
+
 **Too many colors = visual noise**
 
 - 2-3 colors maximum
@@ -209,12 +227,14 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 **Example**: 6-color gradient logo → 2-color favicon (primary + white)
 
 #### Rule 5: Remove Text
+
 **Text is illegible below 8-10px font size**
 
 - Remove all text elements from icon
 - If text is core identity, use monogram instead (see monogram-patterns.md)
 
 #### Rule 6: Increase Negative Space
+
 **Crowded icons are unreadable**
 
 - Add 10-20% padding around icon edges
@@ -238,11 +258,13 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 ### Centering Techniques
 
 **Manual Method** (design tool):
+
 1. Select icon shapes
 2. Use align tools: "Align center" + "Align middle"
 3. Verify equal padding on all sides
 
 **SVG Method** (code):
+
 1. Calculate bounding box of icon paths
 2. Apply transform to center:
    ```xml
@@ -260,6 +282,7 @@ Icons that work at 200px often fail at 16px. Simplification is critical.
 - Too large: Touches edges, feels cramped
 
 **Test at extremes**:
+
 - 16x16 (minimum display)
 - 512x512 (maximum display)
 
@@ -267,12 +290,12 @@ Should be recognizable at both scales.
 
 ### Padding Standards
 
-| Canvas Size | Recommended Padding | Icon Size |
-|-------------|---------------------|-----------|
-| 32×32 | 3-5px | 22-26px |
-| 180×180 (iOS) | 25-35px | 110-130px |
-| 192×192 (Android) | 20-30px | 132-152px |
-| 512×512 (PWA) | 50-75px | 362-412px |
+| Canvas Size       | Recommended Padding | Icon Size |
+| ----------------- | ------------------- | --------- |
+| 32×32             | 3-5px               | 22-26px   |
+| 180×180 (iOS)     | 25-35px             | 110-130px |
+| 192×192 (Android) | 20-30px             | 132-152px |
+| 512×512 (PWA)     | 50-75px             | 362-412px |
 
 ---
 
@@ -281,22 +304,27 @@ Should be recognizable at both scales.
 ### Path Optimization Techniques
 
 **1. Reduce Anchor Points**
+
 - Fewer points = cleaner render, smaller file
 - Use tool: Illustrator's Simplify, Figma's Flatten, Inkscape's Simplify
 
 **2. Convert Curves to Straight Lines** (where appropriate)
+
 - Curves with tiny variation → straight line
 - Reduces complexity without visual loss
 
 **3. Merge Overlapping Paths**
+
 - Union operation on adjacent shapes
 - Reduces layer count
 
 **4. Round Coordinates**
+
 - Round x/y to nearest 0.5 or 1.0
 - Cleaner SVG code, better rendering
 
 **5. Remove Unnecessary Attributes**
+
 - Strip metadata, comments
 - Remove unused definitions
 - Use SVGO tool for automated optimization
@@ -314,6 +342,7 @@ svgo favicon.svg
 ```
 
 **Configuration** (preserve viewBox, colors):
+
 ```json
 {
   "plugins": [
@@ -332,6 +361,7 @@ svgo favicon.svg
 **Original**: Twitter logo with bird + text
 
 **Extraction Steps**:
+
 1. Identified bird shape (single path element in SVG)
 2. Copied bird path
 3. Created 32×32 viewBox
@@ -342,6 +372,7 @@ svgo favicon.svg
 **Result**: Clean bird silhouette, recognizable at 16×16
 
 **Simplifications**:
+
 - 15 anchor points → 8 anchor points
 - 3 separate shapes → 1 merged shape
 - Gradient → solid color
@@ -351,6 +382,7 @@ svgo favicon.svg
 **Original**: Detailed mermaid illustration in circle
 
 **Extraction Steps**:
+
 1. Identified circular boundary + mermaid figure
 2. Removed outer ring text
 3. Simplified mermaid (removed hair details, crown details)
@@ -361,6 +393,7 @@ svgo favicon.svg
 **Result**: Recognizable mermaid silhouette
 
 **Simplifications**:
+
 - 50+ shapes → 12 shapes
 - 4 colors → 2 colors
 - Complex hair → simple crown + outline
@@ -370,6 +403,7 @@ svgo favicon.svg
 **Original**: Swoosh + text
 
 **Extraction Steps**:
+
 1. Copied swoosh path (single shape)
 2. Centered in 32×32 canvas
 3. Scaled to fill 75% (swoosh is horizontal, needs more width)
@@ -423,15 +457,18 @@ svgo favicon.svg
 ### Alternative Approaches
 
 **Option 1: Create Monogram** (see monogram-patterns.md)
+
 - Use initials or abbreviation
 - Place in geometric shape
 - Match logo colors
 
 **Option 2: Use Primary Brand Element**
+
 - Extract most recognizable shape
 - May not be exact logo icon, but brand-consistent
 
 **Option 3: Consult Designer**
+
 - Request icon variation from brand designer
 - Provide specifications (32×32, 2-3 colors, simple)
 
@@ -453,15 +490,15 @@ svgo favicon.svg
 
 ## Tools Reference
 
-| Tool | Use Case | Cost |
-|------|----------|------|
-| **VS Code** | Edit SVG source code | Free |
-| **Figma** | Visual extraction, scaling | Free (web) |
-| **Illustrator** | Professional icon work | $20/mo |
-| **Inkscape** | Free Illustrator alternative | Free |
-| **SVGO** | Automated SVG optimization | Free |
-| **ImageMagick** | Generate ICO and PNGs | Free |
-| **RealFaviconGenerator** | Online all-in-one | Free |
+| Tool                     | Use Case                     | Cost       |
+| ------------------------ | ---------------------------- | ---------- |
+| **VS Code**              | Edit SVG source code         | Free       |
+| **Figma**                | Visual extraction, scaling   | Free (web) |
+| **Illustrator**          | Professional icon work       | $20/mo     |
+| **Inkscape**             | Free Illustrator alternative | Free       |
+| **SVGO**                 | Automated SVG optimization   | Free       |
+| **ImageMagick**          | Generate ICO and PNGs        | Free       |
+| **RealFaviconGenerator** | Online all-in-one            | Free       |
 
 ---
 

@@ -15,7 +15,7 @@ Meta variables (`$NAME`, `$$$ARGS`) capture arbitrary AST nodes, enabling flexib
 const transform: Transform<TSX> = (root) => {
   // Only matches exact string "error"
   const matches = root.findAll({
-    rule: { pattern: 'console.error("error")' }
+    rule: { pattern: 'console.error("error")' },
   });
   // Misses: console.error(message), console.error(err.message)
   // Misses: console.error("Error:", details)
@@ -29,17 +29,17 @@ const transform: Transform<TSX> = (root) => {
 const transform: Transform<TSX> = (root) => {
   // $ARG captures any single argument
   const singleArg = root.findAll({
-    rule: { pattern: "console.error($ARG)" }
+    rule: { pattern: 'console.error($ARG)' },
   });
 
   // $$$ARGS captures zero or more arguments
   const anyArgs = root.findAll({
-    rule: { pattern: "console.error($$$ARGS)" }
+    rule: { pattern: 'console.error($$$ARGS)' },
   });
 
   // Access captured values
   for (const match of anyArgs) {
-    const args = match.getMultipleMatches("ARGS");
+    const args = match.getMultipleMatches('ARGS');
     console.log(`Found ${args.length} arguments`);
   }
 
@@ -48,6 +48,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Meta variable syntax:**
+
 - `$NAME` - captures exactly one node
 - `$$$NAME` - captures zero or more nodes
 - `$_` - anonymous single capture (don't need value)

@@ -13,25 +13,25 @@ The dependency graph must be a Directed Acyclic Graph (DAG). Cycles create rippl
 
 ```typescript
 // modules/orders/OrderService.ts
-import { CustomerService } from '../customers/CustomerService'
+import { CustomerService } from '../customers/CustomerService';
 
 export class OrderService {
   constructor(private customers: CustomerService) {}
 
   async createOrder(customerId: string) {
-    const customer = await this.customers.findById(customerId)
+    const customer = await this.customers.findById(customerId);
     // ...
   }
 }
 
 // modules/customers/CustomerService.ts
-import { OrderService } from '../orders/OrderService'  // Cycle!
+import { OrderService } from '../orders/OrderService'; // Cycle!
 
 export class CustomerService {
   constructor(private orders: OrderService) {}
 
   async getCustomerWithOrders(customerId: string) {
-    const orders = await this.orders.findByCustomer(customerId)
+    const orders = await this.orders.findByCustomer(customerId);
     // ...
   }
 }
@@ -43,17 +43,17 @@ export class CustomerService {
 ```typescript
 // modules/orders/ports/CustomerProvider.ts
 export interface CustomerProvider {
-  findById(id: string): Promise<Customer>
+  findById(id: string): Promise<Customer>;
 }
 
 // modules/orders/OrderService.ts
-import { CustomerProvider } from './ports/CustomerProvider'
+import { CustomerProvider } from './ports/CustomerProvider';
 
 export class OrderService {
   constructor(private customers: CustomerProvider) {}
 
   async createOrder(customerId: string) {
-    const customer = await this.customers.findById(customerId)
+    const customer = await this.customers.findById(customerId);
     // ...
   }
 }
@@ -66,13 +66,13 @@ export class CustomerService implements CustomerProvider {
 }
 
 // modules/customers/adapters/OrderAdapter.ts
-import { OrderService } from '../../orders/OrderService'
+import { OrderService } from '../../orders/OrderService';
 
 export class CustomerOrderAdapter {
   constructor(private orders: OrderService) {}
 
   async getOrdersForCustomer(customerId: string) {
-    return this.orders.findByCustomer(customerId)
+    return this.orders.findByCustomer(customerId);
   }
 }
 ```

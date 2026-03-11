@@ -13,18 +13,18 @@ When using LazyMotion, developers might accidentally import `motion` instead of 
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation } from 'framer-motion';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <LazyMotion features={domAnimation}>
-      {children}
-    </LazyMotion>
-  );
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return <LazyMotion features={domAnimation}>{children}</LazyMotion>;
 }
 
 // components/SearchInput.tsx
-import { motion } from "framer-motion"; // Accidental import - no warning!
+import { motion } from 'framer-motion'; // Accidental import - no warning!
 
 export function SearchInput({ onSearch }: SearchInputProps) {
   return (
@@ -42,9 +42,13 @@ export function SearchInput({ onSearch }: SearchInputProps) {
 
 ```tsx
 // app/layout.tsx
-import { LazyMotion, domAnimation } from "framer-motion";
+import { LazyMotion, domAnimation } from 'framer-motion';
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <LazyMotion features={domAnimation} strict>
       {children}
@@ -53,7 +57,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 }
 
 // components/SearchInput.tsx
-import { m } from "framer-motion"; // Correct import with m component
+import { m } from 'framer-motion'; // Correct import with m component
 
 export function SearchInput({ onSearch }: SearchInputProps) {
   return (
@@ -68,6 +72,7 @@ export function SearchInput({ onSearch }: SearchInputProps) {
 ```
 
 **Error thrown with strict mode when using motion:**
+
 ```text
 Error: motion components must be wrapped in a LazyMotion component with
 the "domAnimation" or "domMax" features. You are using a motion component

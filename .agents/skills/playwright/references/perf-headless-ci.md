@@ -80,10 +80,10 @@ export default defineConfig({
 
 **Performance comparison:**
 
-| Mode | Speed | Memory | Use Case |
-|------|-------|--------|----------|
-| Headless | 100% | ~100MB | CI, automated runs |
-| Headed | 60-70% | ~300MB | Debugging, demos |
+| Mode            | Speed  | Memory | Use Case               |
+| --------------- | ------ | ------ | ---------------------- |
+| Headless        | 100%   | ~100MB | CI, automated runs     |
+| Headed          | 60-70% | ~300MB | Debugging, demos       |
 | Headed + slowMo | 30-50% | ~300MB | Step-by-step debugging |
 
 **CI configuration example:**

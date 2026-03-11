@@ -14,16 +14,16 @@ Use this structure when writing responsiveness check reports.
 
 ## Summary
 
-| Width | Status | Issues |
-|-------|--------|--------|
-| 320px | Fail | 2 critical, 1 high |
-| 375px | Fail | 1 high |
-| 768px | Warn | 1 medium |
-| 1024px | Pass | — |
-| 1280px | Pass | — |
-| 1440px | Pass | — |
-| 1920px | Warn | 1 medium |
-| 2560px | Fail | 1 high |
+| Width  | Status | Issues             |
+| ------ | ------ | ------------------ |
+| 320px  | Fail   | 2 critical, 1 high |
+| 375px  | Fail   | 1 high             |
+| 768px  | Warn   | 1 medium           |
+| 1024px | Pass   | —                  |
+| 1280px | Pass   | —                  |
+| 1440px | Pass   | —                  |
+| 1920px | Warn   | 1 medium           |
+| 2560px | Fail   | 1 high             |
 
 **Overall**: X issues across Y breakpoints. [1-sentence summary of the main finding.]
 
@@ -46,12 +46,12 @@ Use this structure when writing responsiveness check reports.
 
 ## Transition Analysis
 
-| Transition | Observed At | Clean? | Notes |
-|-----------|-------------|--------|-------|
-| Nav: hamburger → full | ~960px | Yes | Smooth transition, no flicker |
-| Grid: 1-col → 2-col | ~700px | No | Cards overlap briefly at 680-720px |
-| Sidebar appears | ~1100px | Yes | Content reflows cleanly |
-| Footer: stacked → inline | ~640px | Yes | — |
+| Transition               | Observed At | Clean? | Notes                              |
+| ------------------------ | ----------- | ------ | ---------------------------------- |
+| Nav: hamburger → full    | ~960px      | Yes    | Smooth transition, no flicker      |
+| Grid: 1-col → 2-col      | ~700px      | No     | Cards overlap briefly at 680-720px |
+| Sidebar appears          | ~1100px     | Yes    | Content reflows cleanly            |
+| Footer: stacked → inline | ~640px      | Yes    | —                                  |
 
 ## Per-Breakpoint Notes
 
@@ -76,21 +76,23 @@ Only include breakpoints with findings. Skip clean ones.
 Group by effort:
 
 ### Quick Fixes (CSS only)
+
 - Add `overflow-x: hidden` on hero container
 - Set `max-width: 100%` on service card images
 - Add `max-w-[1600px]` container for ultra-wide
 
 ### Structural Changes
+
 - Add a breakpoint between 768–1024px for tablet-specific layout
 - Rethink grid gap scaling for 1920px+
 ```
 
 ## Status Definitions
 
-| Status | Meaning |
-|--------|---------|
-| **Pass** | No layout issues at this width |
-| **Warn** | Minor issues (medium/low severity) — usable but not polished |
+| Status   | Meaning                                                                       |
+| -------- | ----------------------------------------------------------------------------- |
+| **Pass** | No layout issues at this width                                                |
+| **Warn** | Minor issues (medium/low severity) — usable but not polished                  |
 | **Fail** | Critical or high severity issues — layout is broken or significantly degraded |
 
 ## Writing Guidelines

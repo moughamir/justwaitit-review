@@ -73,6 +73,7 @@ export function PostCard({ post }: { post: Post }) {
 ```
 
 **When to accept N+1:**
+
 - N is always small (< 5 items)
 - Data is heavily cached and cache hits are near 100%
 - Lazy loading is appropriate (user rarely views related data)

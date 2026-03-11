@@ -51,16 +51,16 @@ pnpm validate
 
 ### Prefix Reference
 
-| Prefix | Category | Impact |
-|--------|----------|--------|
-| `arch-` | Component Architecture | CRITICAL |
-| `state-` | State Architecture | CRITICAL |
-| `hook-` | Hook Patterns | HIGH |
-| `decomp-` | Component Decomposition | HIGH |
-| `migrate-` | Modern React Migration | MEDIUM-HIGH |
-| `couple-` | Coupling & Cohesion | MEDIUM |
-| `data-` | Data & Side Effects | MEDIUM |
-| `safety-` | Refactoring Safety | LOW-MEDIUM |
+| Prefix     | Category                | Impact      |
+| ---------- | ----------------------- | ----------- |
+| `arch-`    | Component Architecture  | CRITICAL    |
+| `state-`   | State Architecture      | CRITICAL    |
+| `hook-`    | Hook Patterns           | HIGH        |
+| `decomp-`  | Component Decomposition | HIGH        |
+| `migrate-` | Modern React Migration  | MEDIUM-HIGH |
+| `couple-`  | Coupling & Cohesion     | MEDIUM      |
+| `data-`    | Data & Side Effects     | MEDIUM      |
+| `safety-`  | Refactoring Safety      | LOW-MEDIUM  |
 
 ## Rule File Structure
 
@@ -98,25 +98,26 @@ Reference: [Link](https://example.com)
 Rule files follow the pattern: `{prefix}-{description}.md`
 
 Examples:
+
 - `arch-compound-components.md` — Component architecture, about compound component pattern
 - `state-colocate-with-consumers.md` — State architecture, about state colocation
 - `safety-characterization-tests.md` — Refactoring safety, about characterization tests
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| CRITICAL | Core architectural issue; affects maintainability, testability, and scalability |
-| HIGH | Strong impact on code quality and developer experience |
-| MEDIUM-HIGH | Important for migrating to modern React patterns |
-| MEDIUM | Improves module boundaries and data flow clarity |
-| LOW-MEDIUM | Creates safety nets for aggressive refactoring |
+| Level       | Description                                                                     |
+| ----------- | ------------------------------------------------------------------------------- |
+| CRITICAL    | Core architectural issue; affects maintainability, testability, and scalability |
+| HIGH        | Strong impact on code quality and developer experience                          |
+| MEDIUM-HIGH | Important for migrating to modern React patterns                                |
+| MEDIUM      | Improves module boundaries and data flow clarity                                |
+| LOW-MEDIUM  | Creates safety nets for aggressive refactoring                                  |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Compiles rules into AGENTS.md |
+| Command         | Description                         |
+| --------------- | ----------------------------------- |
+| `pnpm build`    | Compiles rules into AGENTS.md       |
 | `pnpm validate` | Validates skill structure and rules |
 
 ## Contributing
@@ -131,6 +132,7 @@ Examples:
 ## Acknowledgments
 
 This skill draws from:
+
 - [React Documentation](https://react.dev)
 - [Thinking in React](https://react.dev/learn/thinking-in-react)
 - [Kent C. Dodds Blog](https://kentcdodds.com)

@@ -17,10 +17,10 @@ const nextConfig = {
   experimental: {
     turbo: {
       // Disabling caching slows down restarts
-      persistentCaching: false
-    }
-  }
-}
+      persistentCaching: false,
+    },
+  },
+};
 ```
 
 **Correct (leveraging Turbopack defaults):**
@@ -36,12 +36,12 @@ const nextConfig = {
       rules: {
         '*.svg': {
           loaders: ['@svgr/webpack'],
-          as: '*.js'
-        }
-      }
-    }
-  }
-}
+          as: '*.js',
+        },
+      },
+    },
+  },
+};
 ```
 
 **Development command:**

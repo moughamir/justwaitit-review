@@ -18,23 +18,24 @@ Tailwind uses a mobile-first breakpoint system. With over 60% of global web traf
 <div class="text-sm md:text-base lg:text-lg">...</div>
 
 <!-- INCORRECT: Desktop-first thinking -->
-<div class="lg:text-lg md:text-base text-sm">...</div>
+<div class="text-sm md:text-base lg:text-lg">...</div>
 ```
 
 ### Default Breakpoints
 
-| Prefix | Min Width | Typical Devices | CSS Media Query |
-|--------|-----------|-----------------|-----------------|
-| (none) | 0px | All mobile phones | All sizes |
-| `sm:` | 640px (40rem) | Large phones, small tablets | `@media (min-width: 640px)` |
-| `md:` | 768px (48rem) | Tablets (portrait) | `@media (min-width: 768px)` |
-| `lg:` | 1024px (64rem) | Tablets (landscape), laptops | `@media (min-width: 1024px)` |
-| `xl:` | 1280px (80rem) | Desktops | `@media (min-width: 1280px)` |
-| `2xl:` | 1536px (96rem) | Large desktops | `@media (min-width: 1536px)` |
+| Prefix | Min Width      | Typical Devices              | CSS Media Query              |
+| ------ | -------------- | ---------------------------- | ---------------------------- |
+| (none) | 0px            | All mobile phones            | All sizes                    |
+| `sm:`  | 640px (40rem)  | Large phones, small tablets  | `@media (min-width: 640px)`  |
+| `md:`  | 768px (48rem)  | Tablets (portrait)           | `@media (min-width: 768px)`  |
+| `lg:`  | 1024px (64rem) | Tablets (landscape), laptops | `@media (min-width: 1024px)` |
+| `xl:`  | 1280px (80rem) | Desktops                     | `@media (min-width: 1280px)` |
+| `2xl:` | 1536px (96rem) | Large desktops               | `@media (min-width: 1536px)` |
 
 ### 2025/2026 Device Coverage
 
 Common device sizes to test:
+
 - **320px**: Older iPhones, smallest supported
 - **375px**: Modern iPhone base (~17% of mobile)
 - **390-430px**: Modern large phones (~35% of mobile)
@@ -49,19 +50,20 @@ Common device sizes to test:
 ```css
 @theme {
   /* Add custom breakpoints for specific content needs */
-  --breakpoint-xs: 20rem;   /* 320px - very small devices */
+  --breakpoint-xs: 20rem; /* 320px - very small devices */
   --breakpoint-3xl: 100rem; /* 1600px */
   --breakpoint-4xl: 120rem; /* 1920px - full HD */
 
   /* Override existing breakpoints based on YOUR content */
-  --breakpoint-sm: 36rem;   /* 576px - when content needs space */
-  --breakpoint-lg: 62rem;   /* 992px - common content width */
+  --breakpoint-sm: 36rem; /* 576px - when content needs space */
+  --breakpoint-lg: 62rem; /* 992px - common content width */
 }
 ```
 
 Usage:
+
 ```html
-<div class="grid xs:grid-cols-2 3xl:grid-cols-6">
+<div class="xs:grid-cols-2 3xl:grid-cols-6 grid">
   <!-- Custom breakpoints work like built-in ones -->
 </div>
 ```
@@ -73,7 +75,7 @@ Instead of targeting devices, let your content determine breakpoints:
 ```css
 @theme {
   /* Based on content needs, not device specs */
-  --breakpoint-prose: 65ch;  /* Optimal reading width */
+  --breakpoint-prose: 65ch; /* Optimal reading width */
   --breakpoint-content: 75rem; /* Main content max */
 }
 ```
@@ -85,7 +87,9 @@ Test your design at various widths and add breakpoints where layout breaks.
 #### Responsive Grid
 
 ```html
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+<div
+  class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+>
   <div>Item 1</div>
   <div>Item 2</div>
   <div>Item 3</div>
@@ -96,11 +100,11 @@ Test your design at various widths and add breakpoints where layout breaks.
 #### Responsive Typography
 
 ```html
-<h1 class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold">
+<h1 class="text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl">
   Responsive Heading
 </h1>
 
-<p class="text-sm md:text-base lg:text-lg leading-relaxed">
+<p class="text-sm leading-relaxed md:text-base lg:text-lg">
   Responsive paragraph text
 </p>
 ```
@@ -108,18 +112,16 @@ Test your design at various widths and add breakpoints where layout breaks.
 #### Responsive Spacing
 
 ```html
-<section class="py-8 md:py-12 lg:py-16 px-4 md:px-8 lg:px-12">
-  <div class="max-w-4xl mx-auto">
-    Content with responsive padding
-  </div>
+<section class="px-4 py-8 md:px-8 md:py-12 lg:px-12 lg:py-16">
+  <div class="mx-auto max-w-4xl">Content with responsive padding</div>
 </section>
 ```
 
 #### Responsive Navigation
 
 ```html
-<nav class="flex flex-col md:flex-row items-center justify-between">
-  <div class="hidden md:flex gap-4">
+<nav class="flex flex-col items-center justify-between md:flex-row">
+  <div class="hidden gap-4 md:flex">
     <!-- Desktop navigation -->
   </div>
   <button class="md:hidden">
@@ -151,13 +153,13 @@ Test your design at various widths and add breakpoints where layout breaks.
 Container queries enable component-level responsiveness, independent of viewport size. This is essential for reusable components in 2025.
 
 ```css
-@plugin "@tailwindcss/container-queries";
+@plugin '@tailwindcss/container-queries';
 ```
 
 ```html
 <!-- Mark parent as a query container -->
 <div class="@container">
-  <div class="flex flex-col @md:flex-row @lg:gap-8">
+  <div class="@md:flex-row @lg:gap-8 flex flex-col">
     <!-- Responds to container size, not viewport -->
   </div>
 </div>
@@ -172,24 +174,24 @@ Container queries enable component-level responsiveness, independent of viewport
 
 ### Container Query Breakpoints
 
-| Class | Min-width | Use Case |
-|-------|-----------|----------|
-| `@xs` | 20rem (320px) | Small widgets |
-| `@sm` | 24rem (384px) | Compact cards |
-| `@md` | 28rem (448px) | Standard cards |
-| `@lg` | 32rem (512px) | Wide cards |
-| `@xl` | 36rem (576px) | Full-width components |
-| `@2xl` | 42rem (672px) | Large containers |
-| `@3xl` | 48rem (768px) | Page sections |
+| Class  | Min-width     | Use Case              |
+| ------ | ------------- | --------------------- |
+| `@xs`  | 20rem (320px) | Small widgets         |
+| `@sm`  | 24rem (384px) | Compact cards         |
+| `@md`  | 28rem (448px) | Standard cards        |
+| `@lg`  | 32rem (512px) | Wide cards            |
+| `@xl`  | 36rem (576px) | Full-width components |
+| `@2xl` | 42rem (672px) | Large containers      |
+| `@3xl` | 48rem (768px) | Page sections         |
 
 ### When to Use Container vs Viewport Queries
 
-| Container Queries | Viewport Queries |
-|-------------------|------------------|
-| Reusable components | Page-level layouts |
-| Cards in various contexts | Navigation bars |
-| Sidebar widgets | Hero sections |
-| CMS/embedded content | Full-width sections |
+| Container Queries         | Viewport Queries    |
+| ------------------------- | ------------------- |
+| Reusable components       | Page-level layouts  |
+| Cards in various contexts | Navigation bars     |
+| Sidebar widgets           | Hero sections       |
+| CMS/embedded content      | Full-width sections |
 
 ### Max-Width Breakpoints
 
@@ -200,9 +202,7 @@ Target screens below a certain size:
 <div class="md:hidden">Small screens only</div>
 
 <!-- Custom max-width media query -->
-<div class="[@media(max-width:600px)]:text-sm">
-  Custom max-width
-</div>
+<div class="[@media(max-width:600px)]:text-sm">Custom max-width</div>
 ```
 
 ## Dark Mode
@@ -212,7 +212,7 @@ Target screens below a certain size:
 Dark mode follows the user's operating system preference using `prefers-color-scheme`:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 /* No additional configuration needed */
 ```
 
@@ -228,7 +228,7 @@ Dark mode follows the user's operating system preference using `prefers-color-sc
 Control dark mode with a CSS class:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant dark (&:where(.dark, .dark *));
 ```
@@ -237,9 +237,7 @@ Control dark mode with a CSS class:
 <!-- Add .dark class to html or body to enable dark mode -->
 <html class="dark">
   <body>
-    <div class="bg-white dark:bg-gray-900">
-      Content
-    </div>
+    <div class="bg-white dark:bg-gray-900">Content</div>
   </body>
 </html>
 ```
@@ -254,9 +252,10 @@ function toggleDarkMode() {
 
 // With localStorage persistence
 function initDarkMode() {
-  const isDark = localStorage.getItem('darkMode') === 'true' ||
+  const isDark =
+    localStorage.getItem('darkMode') === 'true' ||
     (!localStorage.getItem('darkMode') &&
-     window.matchMedia('(prefers-color-scheme: dark)').matches);
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   document.documentElement.classList.toggle('dark', isDark);
 }
@@ -282,14 +281,17 @@ function setTheme(theme) {
 
 function applyTheme() {
   const theme = localStorage.getItem('theme') || 'system';
-  const isDark = theme === 'dark' ||
-    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const isDark =
+    theme === 'dark' ||
+    (theme === 'system' &&
+      window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   document.documentElement.classList.toggle('dark', isDark);
 }
 
 // Listen for system preference changes
-window.matchMedia('(prefers-color-scheme: dark)')
+window
+  .matchMedia('(prefers-color-scheme: dark)')
   .addEventListener('change', () => {
     if (localStorage.getItem('theme') === 'system') {
       applyTheme();
@@ -383,7 +385,9 @@ export function ThemeToggle() {
 <div class="border border-gray-200 dark:border-gray-700">Bordered element</div>
 
 <!-- Interactive elements -->
-<button class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700">
+<button
+  class="bg-blue-500 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+>
   Button
 </button>
 ```
@@ -428,12 +432,9 @@ export function ThemeToggle() {
 
 ```html
 <!-- Different layouts AND colors based on screen size and theme -->
-<div class="
-  grid grid-cols-1 md:grid-cols-2
-  bg-white dark:bg-gray-900
-  p-4 md:p-8
-  text-gray-900 dark:text-white
-">
+<div
+  class="grid grid-cols-1 bg-white p-4 text-gray-900 md:grid-cols-2 md:p-8 dark:bg-gray-900 dark:text-white"
+>
   <div class="hidden dark:md:block">
     Only visible on md+ screens in dark mode
   </div>
@@ -447,9 +448,9 @@ export function ThemeToggle() {
 ```html
 <!-- CORRECT: Mobile-first progression -->
 <div class="text-sm md:text-base lg:text-lg">
-
-<!-- WRONG: Desktop-first thinking (more code, more bugs) -->
-<div class="lg:text-lg md:text-base text-sm">
+  <!-- WRONG: Desktop-first thinking (more code, more bugs) -->
+  <div class="text-sm md:text-base lg:text-lg"></div>
+</div>
 ```
 
 ### 2. Touch-Friendly Interactive Elements
@@ -458,14 +459,10 @@ WCAG 2.2 requires 24x24px minimum, but 44x44px is recommended:
 
 ```html
 <!-- Touch-friendly button (44px minimum) -->
-<button class="min-h-11 min-w-11 px-4 py-2.5">
-  Click me
-</button>
+<button class="min-h-11 min-w-11 px-4 py-2.5">Click me</button>
 
 <!-- Touch-friendly navigation link -->
-<a href="#" class="block py-3 px-4 min-h-11">
-  Navigation Item
-</a>
+<a href="#" class="block min-h-11 px-4 py-3"> Navigation Item </a>
 
 <!-- Adequate spacing between touch targets -->
 <div class="flex gap-3">
@@ -510,7 +507,7 @@ npm install -D @tailwindcss/debug-screens
 ```
 
 ```css
-@plugin "@tailwindcss/debug-screens";
+@plugin '@tailwindcss/debug-screens';
 ```
 
 ### 4. Reduce Repetition with Components
@@ -519,7 +516,7 @@ npm install -D @tailwindcss/debug-screens
 /* components.css */
 @layer components {
   .card {
-    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm;
+    @apply rounded-lg bg-white p-6 shadow-sm dark:bg-gray-800;
   }
 
   .section {
@@ -531,19 +528,16 @@ npm install -D @tailwindcss/debug-screens
 ### 5. Consider Color Contrast
 
 Ensure sufficient contrast in both light and dark modes (WCAG 2.2):
+
 - **Normal text**: 4.5:1 contrast ratio minimum
 - **Large text (18pt+)**: 3:1 contrast ratio minimum
 - **Interactive elements**: 3:1 against adjacent colors
 
 ```html
 <!-- Good contrast in both modes -->
-<button class="
-  bg-blue-600 text-white
-  dark:bg-blue-500 dark:text-white
-  hover:bg-blue-700 dark:hover:bg-blue-400
-  /* Focus ring for accessibility */
-  focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
-">
+<button
+  class="/* Focus for accessibility */ bg-blue-600 text-white ring hover:bg-blue-700 focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:bg-blue-500 dark:text-white dark:hover:bg-blue-400"
+>
   Action
 </button>
 ```
@@ -553,12 +547,9 @@ Ensure sufficient contrast in both light and dark modes (WCAG 2.2):
 Respect users who prefer reduced motion:
 
 ```html
-<div class="
-  transition-transform duration-300
-  hover:scale-105
-  motion-reduce:transition-none
-  motion-reduce:hover:scale-100
-">
+<div
+  class="transition-transform duration-300 hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
+>
   Respects motion preferences
 </div>
 ```
@@ -567,12 +558,7 @@ Respect users who prefer reduced motion:
 
 ```html
 <!-- Lazy load below-fold images -->
-<img
-  src="image.jpg"
-  alt="Description"
-  loading="lazy"
-  class="w-full h-auto"
-/>
+<img src="image.jpg" alt="Description" loading="lazy" class="h-auto w-full" />
 
 <!-- Responsive srcset -->
 <img
@@ -581,7 +567,7 @@ Respect users who prefer reduced motion:
   sizes="(min-width: 1024px) 50vw, 100vw"
   alt="Responsive image"
   loading="lazy"
-  class="w-full h-auto"
+  class="h-auto w-full"
 />
 ```
 
@@ -595,7 +581,7 @@ Respect users who prefer reduced motion:
 
 ```html
 <!-- Bottom navigation respects device notch -->
-<nav class="fixed bottom-0 inset-x-0 safe-area-pb bg-white border-t">
+<nav class="safe-area-pb fixed inset-x-0 bottom-0 border-t bg-white">
   Navigation
 </nav>
 ```

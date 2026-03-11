@@ -82,6 +82,7 @@ test('admin can create user', async ({ adminPage }) => {
 ```
 
 **Benefits:**
+
 - DRY principle enforced
 - Automatic setup and teardown
 - Composable fixtures for complex scenarios

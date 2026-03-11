@@ -44,6 +44,7 @@ public int findMaxDailyGain(int[] dailyPrices, int numberOfDays) {
 ```
 
 **Techniques for expressiveness:**
+
 - Choose good names (the single most effective technique)
 - Keep functions and classes small and focused
 - Use standard patterns and nomenclature — when you use the Strategy pattern, name the class with "Strategy" so readers recognize the intent

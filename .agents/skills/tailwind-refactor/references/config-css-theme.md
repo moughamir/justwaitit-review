@@ -34,12 +34,12 @@ module.exports = {
 **Correct (what's right):**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-brand: #3b82f6;
   --color-surface: #f8fafc;
-  --font-display: "Inter", sans-serif;
+  --font-display: 'Inter', sans-serif;
   --spacing-18: 4.5rem;
 }
 ```
@@ -47,5 +47,5 @@ module.exports = {
 If you have a large or complex config that cannot be migrated all at once, use the escape hatch to reference a legacy config file:
 
 ```css
-@config "../../tailwind.config.js";
+@config '../../tailwind.config.js';
 ```

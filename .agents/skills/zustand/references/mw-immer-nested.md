@@ -30,31 +30,32 @@ const useFormStore = create<FormState>((set) => ({
     },
   },
 
-  setFieldValue: (section, field, value) => set((state) => ({
-    form: {
-      ...state.form,
-      sections: {
-        ...state.form.sections,
-        [section]: {
-          ...state.form.sections[section],
-          fields: {
-            ...state.form.sections[section].fields,
-            [field]: {
-              ...state.form.sections[section].fields[field],
-              value,
+  setFieldValue: (section, field, value) =>
+    set((state) => ({
+      form: {
+        ...state.form,
+        sections: {
+          ...state.form.sections,
+          [section]: {
+            ...state.form.sections[section],
+            fields: {
+              ...state.form.sections[section].fields,
+              [field]: {
+                ...state.form.sections[section].fields[field],
+                value,
+              },
             },
           },
         },
       },
-    },
-  })),
-}))
+    })),
+}));
 ```
 
 **Correct (immer middleware):**
 
 ```typescript
-import { immer } from 'zustand/middleware/immer'
+import { immer } from 'zustand/middleware/immer';
 
 const useFormStore = create<FormState>()(
   immer((set) => ({
@@ -76,27 +77,32 @@ const useFormStore = create<FormState>()(
     },
 
     // Direct mutation syntax, immer handles immutability
-    setFieldValue: (section, field, value) => set((state) => {
-      state.form.sections[section].fields[field].value = value
-    }),
+    setFieldValue: (section, field, value) =>
+      set((state) => {
+        state.form.sections[section].fields[field].value = value;
+      }),
 
-    setFieldError: (section, field, error) => set((state) => {
-      state.form.sections[section].fields[field].error = error
-    }),
+    setFieldError: (section, field, error) =>
+      set((state) => {
+        state.form.sections[section].fields[field].error = error;
+      }),
 
-    touchField: (section, field) => set((state) => {
-      state.form.sections[section].fields[field].touched = true
-    }),
+    touchField: (section, field) =>
+      set((state) => {
+        state.form.sections[section].fields[field].touched = true;
+      }),
   }))
-)
+);
 ```
 
 **When to use immer:**
+
 - Deeply nested state (3+ levels)
 - Array operations (push, splice, filter in-place)
 - Complex conditional updates
 
 **When NOT to use:**
+
 - Simple flat state
 - Performance-critical hot paths (immer has overhead)
 

@@ -10,6 +10,7 @@ Comprehensive performance optimization guide for Next.js 16 App Router applicati
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing new Next.js 16 App Router code
 - Configuring caching strategies with 'use cache' directive
 - Implementing server components and data fetching
@@ -18,16 +19,16 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Build & Bundle Optimization | CRITICAL | `build-` |
-| 2 | Caching Strategy | CRITICAL | `cache-` |
-| 3 | Server Components & Data Fetching | HIGH | `server-` |
-| 4 | Routing & Navigation | HIGH | `route-` |
-| 5 | Server Actions & Mutations | MEDIUM-HIGH | `action-` |
-| 6 | Streaming & Loading States | MEDIUM | `stream-` |
-| 7 | Metadata & SEO | MEDIUM | `meta-` |
-| 8 | Client Components | LOW-MEDIUM | `client-` |
+| Priority | Category                          | Impact      | Prefix    |
+| -------- | --------------------------------- | ----------- | --------- |
+| 1        | Build & Bundle Optimization       | CRITICAL    | `build-`  |
+| 2        | Caching Strategy                  | CRITICAL    | `cache-`  |
+| 3        | Server Components & Data Fetching | HIGH        | `server-` |
+| 4        | Routing & Navigation              | HIGH        | `route-`  |
+| 5        | Server Actions & Mutations        | MEDIUM-HIGH | `action-` |
+| 6        | Streaming & Loading States        | MEDIUM      | `stream-` |
+| 7        | Metadata & SEO                    | MEDIUM      | `meta-`   |
+| 8        | Client Components                 | LOW-MEDIUM  | `client-` |
 
 ## Quick Reference
 

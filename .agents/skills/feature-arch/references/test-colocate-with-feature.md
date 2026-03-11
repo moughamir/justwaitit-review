@@ -60,6 +60,7 @@ src/features/user/components/
 ```
 
 **Benefits:**
+
 - Moving a feature moves its tests
 - Deleting a feature deletes its tests
 - Test coverage is visible in the feature folder

@@ -13,21 +13,21 @@ When client code navigates through object chains (a.b.c.method()), changes to in
 
 ```typescript
 class Person {
-  department: Department
+  department: Department;
 }
 
 class Department {
-  manager: Person
+  manager: Person;
 }
 
 // Client code couples to the entire chain
 function getManagerName(person: Person): string {
-  return person.department.manager.name  // Knows about Department internals
+  return person.department.manager.name; // Knows about Department internals
 }
 
 function notifyManager(person: Person, message: string): void {
-  const managerEmail = person.department.manager.email  // Chain repeated
-  sendEmail(managerEmail, message)
+  const managerEmail = person.department.manager.email; // Chain repeated
+  sendEmail(managerEmail, message);
 }
 
 // If Department structure changes, ALL callers break
@@ -37,34 +37,35 @@ function notifyManager(person: Person, message: string): void {
 
 ```typescript
 class Person {
-  private department: Department
+  private department: Department;
 
   getManager(): Person {
-    return this.department.manager
+    return this.department.manager;
   }
 
   getManagerName(): string {
-    return this.department.manager.name
+    return this.department.manager.name;
   }
 
   getManagerEmail(): string {
-    return this.department.manager.email
+    return this.department.manager.email;
   }
 }
 
 // Client code only depends on Person interface
 function getManagerName(person: Person): string {
-  return person.getManagerName()
+  return person.getManagerName();
 }
 
 function notifyManager(person: Person, message: string): void {
-  sendEmail(person.getManagerEmail(), message)
+  sendEmail(person.getManagerEmail(), message);
 }
 
 // Department changes only affect Person class
 ```
 
 **When NOT to hide:**
+
 - The delegate relationship is part of the public API
 - Hiding would create an excessively large interface
 - The chain is genuinely stable and unlikely to change

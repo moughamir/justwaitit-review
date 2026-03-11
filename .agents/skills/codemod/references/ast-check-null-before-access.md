@@ -13,13 +13,13 @@ AST navigation methods return `null` when nodes don't exist. Always check for nu
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const calls = root.findAll({ rule: { kind: "call_expression" } });
+  const calls = root.findAll({ rule: { kind: 'call_expression' } });
 
-  const edits = calls.map(call => {
+  const edits = calls.map((call) => {
     // Crashes if callee is computed: obj[method]()
-    const methodName = call.field("function").field("property").text();
+    const methodName = call.field('function').field('property').text();
     // Crashes if no arguments
-    const firstArg = call.field("arguments").children()[0].text();
+    const firstArg = call.field('arguments').children()[0].text();
 
     return call.replace(`newMethod(${firstArg})`);
   });
@@ -32,16 +32,16 @@ const transform: Transform<TSX> = (root) => {
 
 ```typescript
 const transform: Transform<TSX> = (root) => {
-  const calls = root.findAll({ rule: { kind: "call_expression" } });
+  const calls = root.findAll({ rule: { kind: 'call_expression' } });
 
-  const edits = calls.flatMap(call => {
-    const callee = call.field("function");
+  const edits = calls.flatMap((call) => {
+    const callee = call.field('function');
     if (!callee) return [];
 
-    const property = callee.field("property");
+    const property = callee.field('property');
     if (!property) return [];
 
-    const args = call.field("arguments");
+    const args = call.field('arguments');
     const firstArg = args?.children()[0];
     if (!firstArg) return [];
 
@@ -54,6 +54,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Best practices:**
+
 - Use optional chaining (`?.`) for exploratory access
 - Use explicit null checks before transformations
 - Return empty arrays from `flatMap` for invalid nodes

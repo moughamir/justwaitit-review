@@ -6,19 +6,19 @@ Detect project type from file presence to determine which documentation files ar
 
 Check indicators in priority order (first match wins for primary type, but types can stack):
 
-| Indicator Files | Project Type |
-|----------------|-------------|
-| `wrangler.jsonc` or `wrangler.toml` | cloudflare-worker |
-| `vite.config.*` + `src/` with `.tsx` files | vite-react |
-| `vite.config.*` without React | vite-app |
-| `next.config.*` | nextjs |
-| `src/index.ts` + `FastMCP` or `McpAgent` imports | mcp-server |
-| `skills/` dir + SKILL.md files within | skills-repo |
-| `src/routes/` or `src/api/` or `app/api/` | api-project |
-| `drizzle.config.*` or `prisma/schema.prisma` or D1 bindings in wrangler | database-project |
-| `.claude/agents/` + operational scripts | claude-ops |
-| `package.json` only (generic Node) | node-project |
-| `pyproject.toml` or `setup.py` | python-project |
+| Indicator Files                                                         | Project Type      |
+| ----------------------------------------------------------------------- | ----------------- |
+| `wrangler.jsonc` or `wrangler.toml`                                     | cloudflare-worker |
+| `vite.config.*` + `src/` with `.tsx` files                              | vite-react        |
+| `vite.config.*` without React                                           | vite-app          |
+| `next.config.*`                                                         | nextjs            |
+| `src/index.ts` + `FastMCP` or `McpAgent` imports                        | mcp-server        |
+| `skills/` dir + SKILL.md files within                                   | skills-repo       |
+| `src/routes/` or `src/api/` or `app/api/`                               | api-project       |
+| `drizzle.config.*` or `prisma/schema.prisma` or D1 bindings in wrangler | database-project  |
+| `.claude/agents/` + operational scripts                                 | claude-ops        |
+| `package.json` only (generic Node)                                      | node-project      |
+| `pyproject.toml` or `setup.py`                                          | python-project    |
 
 **Stacking**: A Cloudflare Worker with D1 bindings is both `cloudflare-worker` and `database-project`. Union the expected docs.
 
@@ -26,46 +26,46 @@ Check indicators in priority order (first match wins for primary type, but types
 
 ### All projects
 
-| Doc | Purpose |
-|-----|---------|
+| Doc                | Purpose                                           |
+| ------------------ | ------------------------------------------------- |
 | `CLAUDE.md` (root) | Project identity, stack, commands, critical rules |
 
 ### cloudflare-worker
 
-| Doc | Purpose |
-|-----|---------|
+| Doc               | Purpose                                          |
+| ----------------- | ------------------------------------------------ |
 | `ARCHITECTURE.md` | Worker entry point, bindings, routes, middleware |
 
 ### vite-react / nextjs
 
-| Doc | Purpose |
-|-----|---------|
+| Doc               | Purpose                                                   |
+| ----------------- | --------------------------------------------------------- |
 | `ARCHITECTURE.md` | Component tree, routing, state management, build pipeline |
 
 ### mcp-server
 
-| Doc | Purpose |
-|-----|---------|
-| `ARCHITECTURE.md` | Server structure, tool registration, auth flow |
+| Doc                | Purpose                                         |
+| ------------------ | ----------------------------------------------- |
+| `ARCHITECTURE.md`  | Server structure, tool registration, auth flow  |
 | `API_ENDPOINTS.md` | Tool catalogue with parameters and return types |
 
 ### api-project
 
-| Doc | Purpose |
-|-----|---------|
-| `API_ENDPOINTS.md` | Routes, methods, request/response schemas, auth requirements |
-| `DATABASE_SCHEMA.md` | Tables, relationships, indexes, migration workflow |
+| Doc                  | Purpose                                                      |
+| -------------------- | ------------------------------------------------------------ |
+| `API_ENDPOINTS.md`   | Routes, methods, request/response schemas, auth requirements |
+| `DATABASE_SCHEMA.md` | Tables, relationships, indexes, migration workflow           |
 
 ### database-project
 
-| Doc | Purpose |
-|-----|---------|
+| Doc                  | Purpose                                            |
+| -------------------- | -------------------------------------------------- |
 | `DATABASE_SCHEMA.md` | Tables, relationships, indexes, migration commands |
 
 ### skills-repo
 
-| Doc | Purpose |
-|-----|---------|
+| Doc                  | Purpose                                     |
+| -------------------- | ------------------------------------------- |
 | Per-skill `SKILL.md` | Each skill directory needs its own SKILL.md |
 
 ### claude-ops
@@ -80,18 +80,23 @@ No additional docs beyond CLAUDE.md — operational repos are typically self-doc
 # Architecture
 
 ## Overview
+
 [One paragraph: what this project does and how it's structured]
 
 ## Stack
+
 [Tech stack with versions]
 
 ## Directory Structure
+
 [Tree with purpose annotations]
 
 ## Key Flows
+
 [1-3 main data/request flows through the system]
 
 ## Deployment
+
 [How to deploy, what happens on deploy]
 ```
 
@@ -101,15 +106,19 @@ No additional docs beyond CLAUDE.md — operational repos are typically self-doc
 # Database Schema
 
 ## Tables
+
 [Table per section: name, columns, types, constraints]
 
 ## Relationships
+
 [Foreign keys, join patterns]
 
 ## Migrations
+
 [How to create/run migrations, local vs remote]
 
 ## Indexes
+
 [Non-obvious indexes and why they exist]
 ```
 
@@ -119,12 +128,15 @@ No additional docs beyond CLAUDE.md — operational repos are typically self-doc
 # API Endpoints
 
 ## Authentication
+
 [Auth method, where tokens come from]
 
 ## Endpoints
+
 [Per endpoint: method, path, params, response shape, auth required]
 
 ## Error Handling
+
 [Standard error format, common error codes]
 ```
 
@@ -132,11 +144,11 @@ No additional docs beyond CLAUDE.md — operational repos are typically self-doc
 
 Projects with a `docs/` folder get its contents scanned for staleness and overlap with CLAUDE.md. Common patterns:
 
-| Pattern | Example |
-|---------|---------|
-| Component docs | `docs/RICH_CONTENT_COMPONENTS.md` |
-| API guides | `docs/api-guide.md` |
-| Planning briefs | `docs/briefs/feature-x.md` |
+| Pattern         | Example                           |
+| --------------- | --------------------------------- |
+| Component docs  | `docs/RICH_CONTENT_COMPONENTS.md` |
+| API guides      | `docs/api-guide.md`               |
+| Planning briefs | `docs/briefs/feature-x.md`        |
 
 The audit doesn't manage docs/ content — it flags staleness (broken file references) and overlap (sections duplicated with CLAUDE.md).
 

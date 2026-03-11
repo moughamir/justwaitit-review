@@ -13,27 +13,27 @@ Fetch requests and async operations that complete after a component unmounts att
 
 ```tsx
 function UserProfile({ userId }: { userId: string }) {
-  const [profile, setProfile] = useState<UserData | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [profile, setProfile] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(true)
+    setIsLoading(true);
 
     fetch(`/api/users/${userId}`)
       .then((response) => response.json())
       .then((userData: UserData) => {
-        setProfile(userData) // fires even if component already unmounted
-        setIsLoading(false)
+        setProfile(userData); // fires even if component already unmounted
+        setIsLoading(false);
       })
       .catch((error) => {
-        console.error("Failed to load profile:", error)
-        setIsLoading(false)
-      })
+        console.error('Failed to load profile:', error);
+        setIsLoading(false);
+      });
     // No cancellation — navigating away mid-request keeps closure alive
-  }, [userId])
+  }, [userId]);
 
-  if (isLoading) return <ProfileSkeleton />
-  return <ProfileCard profile={profile!} />
+  if (isLoading) return <ProfileSkeleton />;
+  return <ProfileCard profile={profile!} />;
 }
 ```
 
@@ -41,33 +41,33 @@ function UserProfile({ userId }: { userId: string }) {
 
 ```tsx
 function UserProfile({ userId }: { userId: string }) {
-  const [profile, setProfile] = useState<UserData | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [profile, setProfile] = useState<UserData | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const controller = new AbortController()
-    setIsLoading(true)
+    const controller = new AbortController();
+    setIsLoading(true);
 
     fetch(`/api/users/${userId}`, { signal: controller.signal })
       .then((response) => response.json())
       .then((userData: UserData) => {
-        setProfile(userData)
-        setIsLoading(false)
+        setProfile(userData);
+        setIsLoading(false);
       })
       .catch((error) => {
-        if (error.name !== "AbortError") {
-          console.error("Failed to load profile:", error)
-          setIsLoading(false)
+        if (error.name !== 'AbortError') {
+          console.error('Failed to load profile:', error);
+          setIsLoading(false);
         }
-      })
+      });
 
     return () => {
-      controller.abort() // cancels in-flight request, releases closure
-    }
-  }, [userId])
+      controller.abort(); // cancels in-flight request, releases closure
+    };
+  }, [userId]);
 
-  if (isLoading) return <ProfileSkeleton />
-  return <ProfileCard profile={profile!} />
+  if (isLoading) return <ProfileSkeleton />;
+  return <ProfileCard profile={profile!} />;
 }
 ```
 

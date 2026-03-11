@@ -29,19 +29,19 @@ Specify how the feature handles failures before implementation. Undefined error 
 
 **Correct (explicit error handling specification):**
 
-```markdown
+````markdown
 ## Feature: Payment Processing - Error Handling
 
 ### Failure Modes and Responses
 
-| Failure | Detection | User Experience | System Response |
-|---------|-----------|-----------------|-----------------|
-| Card declined | Stripe error code | "Card declined. Try another." | Log, no retry |
-| Insufficient funds | Stripe error code | "Insufficient funds." | Log, no retry |
-| Stripe timeout | 30s timeout | "Processing delayed, check email" | Queue retry |
-| Stripe down | 503 response | "Payments temporarily unavailable" | Alert ops, show ETA |
-| Network error | Connection refused | "Connection error, retrying..." | Auto-retry 3x |
-| Order creation fails | DB error after charge | Silent to user | Refund + alert |
+| Failure              | Detection             | User Experience                    | System Response     |
+| -------------------- | --------------------- | ---------------------------------- | ------------------- |
+| Card declined        | Stripe error code     | "Card declined. Try another."      | Log, no retry       |
+| Insufficient funds   | Stripe error code     | "Insufficient funds."              | Log, no retry       |
+| Stripe timeout       | 30s timeout           | "Processing delayed, check email"  | Queue retry         |
+| Stripe down          | 503 response          | "Payments temporarily unavailable" | Alert ops, show ETA |
+| Network error        | Connection refused    | "Connection error, retrying..."    | Auto-retry 3x       |
+| Order creation fails | DB error after charge | Silent to user                     | Refund + alert      |
 
 ### Transaction Flow with Error Handling
 
@@ -84,27 +84,28 @@ User submits payment
         ▼
     Show success
 ```
+````
 
 ### Retry Strategy
 
 ```yaml
 payment_charge:
-  max_retries: 0  # Never auto-retry charges
-  reason: "Duplicate charges are worse than failed payments"
+  max_retries: 0 # Never auto-retry charges
+  reason: 'Duplicate charges are worse than failed payments'
 
 payment_status_check:
   max_retries: 5
   initial_delay: 1s
   backoff: exponential
   max_delay: 30s
-  reason: "Stripe may be slow but will eventually respond"
+  reason: 'Stripe may be slow but will eventually respond'
 
 order_creation:
   max_retries: 3
   initial_delay: 100ms
   backoff: linear
   on_final_failure: queue_refund
-  reason: "DB failures are usually transient"
+  reason: 'DB failures are usually transient'
 
 confirmation_email:
   max_retries: 10
@@ -112,7 +113,7 @@ confirmation_email:
   backoff: exponential
   max_delay: 1h
   on_final_failure: log_and_continue
-  reason: "Email can be delayed, not critical path"
+  reason: 'Email can be delayed, not critical path'
 ```
 
 ### Compensation and Recovery
@@ -125,26 +126,26 @@ async function handleOrderCreationFailure(paymentId, error) {
   logger.error('Order creation failed after payment', {
     payment_id: paymentId,
     error: error.message,
-    stack: error.stack
+    stack: error.stack,
   });
 
   // 2. Mark payment for refund
   await PaymentRecord.update(paymentId, {
     status: 'refund_pending',
-    failure_reason: error.message
+    failure_reason: error.message,
   });
 
   // 3. Queue refund job (idempotent)
   await RefundQueue.add({
     payment_id: paymentId,
     reason: 'order_creation_failed',
-    idempotency_key: `refund-${paymentId}`
+    idempotency_key: `refund-${paymentId}`,
   });
 
   // 4. Alert operations
   await AlertService.notify('payment-ops', {
     severity: 'high',
-    message: `Payment ${paymentId} requires refund - order creation failed`
+    message: `Payment ${paymentId} requires refund - order creation failed`,
   });
 }
 ```
@@ -152,6 +153,7 @@ async function handleOrderCreationFailure(paymentId, error) {
 ### Error Response Standards
 
 **User-facing errors:**
+
 ```json
 {
   "error": {
@@ -165,10 +167,12 @@ async function handleOrderCreationFailure(paymentId, error) {
 ```
 
 **Internal errors (never expose to users):**
+
 - Database connection strings
 - Stack traces
 - Internal service names
 - Raw exception messages
+
 ```
 
 **Error handling checklist:**
@@ -179,3 +183,4 @@ async function handleOrderCreationFailure(paymentId, error) {
 - Alerting thresholds set
 
 Reference: [Microsoft Cloud Design Patterns - Retry](https://docs.microsoft.com/en-us/azure/architecture/patterns/retry)
+```

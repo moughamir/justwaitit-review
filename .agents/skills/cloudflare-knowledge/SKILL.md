@@ -10,6 +10,7 @@ Comprehensive Cloudflare platform knowledge covering all features, pricing, and 
 ## Activation Triggers
 
 Activate this skill when users ask about:
+
 - Cloudflare Workers development
 - Wrangler CLI commands and configuration
 - Storage services (R2, D1, KV, Durable Objects, Queues)
@@ -205,7 +206,7 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
 
   // Environment variables
   "vars": {
-    "API_URL": "https://api.example.com"
+    "API_URL": "https://api.example.com",
   },
 
   // KV Namespaces
@@ -213,8 +214,8 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     {
       "binding": "MY_KV",
       "id": "<namespace-id>",
-      "preview_id": "<preview-namespace-id>"
-    }
+      "preview_id": "<preview-namespace-id>",
+    },
   ],
 
   // R2 Buckets
@@ -223,8 +224,8 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
       "binding": "MY_BUCKET",
       "bucket_name": "my-bucket",
       "preview_bucket_name": "my-bucket-preview",
-      "jurisdiction": "eu"
-    }
+      "jurisdiction": "eu",
+    },
   ],
 
   // D1 Databases
@@ -232,8 +233,8 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     {
       "binding": "DB",
       "database_id": "<database-id>",
-      "database_name": "my-database"
-    }
+      "database_name": "my-database",
+    },
   ],
 
   // Durable Objects
@@ -241,19 +242,19 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     "bindings": [
       {
         "name": "MY_DO",
-        "class_name": "MyDurableObject"
-      }
-    ]
+        "class_name": "MyDurableObject",
+      },
+    ],
   },
   "migrations": [
     {
       "tag": "v1",
-      "new_classes": ["MyDurableObject"]
+      "new_classes": ["MyDurableObject"],
     },
     {
       "tag": "v2",
-      "new_sqlite_classes": ["MyDurableObjectWithSQL"]
-    }
+      "new_sqlite_classes": ["MyDurableObjectWithSQL"],
+    },
   ],
 
   // Queues
@@ -261,8 +262,8 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     "producers": [
       {
         "binding": "MY_QUEUE",
-        "queue": "my-queue"
-      }
+        "queue": "my-queue",
+      },
     ],
     "consumers": [
       {
@@ -270,56 +271,56 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
         "max_batch_size": 10,
         "max_batch_timeout": 30,
         "max_retries": 3,
-        "dead_letter_queue": "my-dlq"
-      }
-    ]
+        "dead_letter_queue": "my-dlq",
+      },
+    ],
   },
 
   // Hyperdrive
   "hyperdrive": [
     {
       "binding": "MY_DB_POOL",
-      "id": "<hyperdrive-config-id>"
-    }
+      "id": "<hyperdrive-config-id>",
+    },
   ],
 
   // Workers AI
   "ai": {
-    "binding": "AI"
+    "binding": "AI",
   },
 
   // Vectorize
   "vectorize": [
     {
       "binding": "MY_VECTORS",
-      "index_name": "my-index"
-    }
+      "index_name": "my-index",
+    },
   ],
 
   // Browser Rendering
   "browser": {
-    "binding": "BROWSER"
+    "binding": "BROWSER",
   },
 
   // Service Bindings (Worker-to-Worker)
   "services": [
     {
       "binding": "OTHER_WORKER",
-      "service": "other-worker-name"
-    }
+      "service": "other-worker-name",
+    },
   ],
 
   // Cron Triggers
   "triggers": {
-    "crons": ["0 * * * *", "0 6 * * *"]
+    "crons": ["0 * * * *", "0 6 * * *"],
   },
 
   // Routes
   "routes": [
     {
       "pattern": "example.com/*",
-      "zone_name": "example.com"
-    }
+      "zone_name": "example.com",
+    },
   ],
 
   // Observability
@@ -327,8 +328,8 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     "logs": {
       "enabled": true,
       "invocation_logs": true,
-      "head_sampling_rate": 1
-    }
+      "head_sampling_rate": 1,
+    },
   },
 
   // Environments
@@ -336,19 +337,19 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
     "staging": {
       "name": "my-worker-staging",
       "vars": {
-        "API_URL": "https://staging-api.example.com"
-      }
+        "API_URL": "https://staging-api.example.com",
+      },
     },
     "production": {
       "name": "my-worker-production",
       "routes": [
         {
           "pattern": "api.example.com/*",
-          "zone_name": "example.com"
-        }
-      ]
-    }
-  }
+          "zone_name": "example.com",
+        },
+      ],
+    },
+  },
 }
 ```
 
@@ -359,6 +360,7 @@ npx wrangler hyperdrive update my-hyperdrive --connection-string="postgres://...
 ### KV (Key-Value Store)
 
 **Characteristics:**
+
 - Eventually consistent (up to 60s propagation)
 - Max value size: 25 MiB
 - Max key size: 512 bytes
@@ -371,42 +373,45 @@ interface Env {
 }
 
 // Write operations
-await env.MY_KV.put("key", "string value");
-await env.MY_KV.put("key", JSON.stringify(object));
-await env.MY_KV.put("key", arrayBuffer);
+await env.MY_KV.put('key', 'string value');
+await env.MY_KV.put('key', JSON.stringify(object));
+await env.MY_KV.put('key', arrayBuffer);
 
 // With TTL (seconds)
-await env.MY_KV.put("session", data, { expirationTtl: 3600 });
+await env.MY_KV.put('session', data, { expirationTtl: 3600 });
 
 // With absolute expiration
-await env.MY_KV.put("session", data, { expiration: Math.floor(Date.now() / 1000) + 3600 });
+await env.MY_KV.put('session', data, {
+  expiration: Math.floor(Date.now() / 1000) + 3600,
+});
 
 // With metadata
-await env.MY_KV.put("user:123", userData, {
-  metadata: { type: "user", version: 2 }
+await env.MY_KV.put('user:123', userData, {
+  metadata: { type: 'user', version: 2 },
 });
 
 // Read operations
-const value = await env.MY_KV.get("key");  // Returns string or null
-const json = await env.MY_KV.get("key", "json");  // Parses JSON
-const buffer = await env.MY_KV.get("key", "arrayBuffer");
-const stream = await env.MY_KV.get("key", "stream");
+const value = await env.MY_KV.get('key'); // Returns string or null
+const json = await env.MY_KV.get('key', 'json'); // Parses JSON
+const buffer = await env.MY_KV.get('key', 'arrayBuffer');
+const stream = await env.MY_KV.get('key', 'stream');
 
 // With metadata
-const { value, metadata } = await env.MY_KV.getWithMetadata("key");
+const { value, metadata } = await env.MY_KV.getWithMetadata('key');
 
 // List keys
 const list = await env.MY_KV.list();
-const filtered = await env.MY_KV.list({ prefix: "user:", limit: 100 });
+const filtered = await env.MY_KV.list({ prefix: 'user:', limit: 100 });
 // Pagination: use list.cursor for next page
 
 // Delete
-await env.MY_KV.delete("key");
+await env.MY_KV.delete('key');
 ```
 
 ### R2 (Object Storage)
 
 **Characteristics:**
+
 - S3-compatible API
 - Zero egress fees
 - Max object size: 5 TB
@@ -419,31 +424,31 @@ interface Env {
 }
 
 // Put object
-await env.MY_BUCKET.put("path/to/file.json", JSON.stringify(data), {
+await env.MY_BUCKET.put('path/to/file.json', JSON.stringify(data), {
   httpMetadata: {
-    contentType: "application/json",
-    cacheControl: "max-age=3600",
+    contentType: 'application/json',
+    cacheControl: 'max-age=3600',
   },
   customMetadata: {
-    uploadedBy: "worker",
-    version: "1.0",
+    uploadedBy: 'worker',
+    version: '1.0',
   },
 });
 
 // Put with checksums
-await env.MY_BUCKET.put("file.bin", data, {
-  md5: expectedMd5,  // Validates on upload
+await env.MY_BUCKET.put('file.bin', data, {
+  md5: expectedMd5, // Validates on upload
   sha256: expectedSha256,
 });
 
 // Get object
-const object = await env.MY_BUCKET.get("path/to/file.json");
+const object = await env.MY_BUCKET.get('path/to/file.json');
 if (object) {
   const text = await object.text();
   const json = await object.json();
   const buffer = await object.arrayBuffer();
   const blob = await object.blob();
-  const stream = object.body;  // ReadableStream
+  const stream = object.body; // ReadableStream
 
   // Metadata
   console.log(object.key, object.size, object.etag);
@@ -452,22 +457,22 @@ if (object) {
 }
 
 // Head (metadata only)
-const head = await env.MY_BUCKET.head("path/to/file.json");
+const head = await env.MY_BUCKET.head('path/to/file.json');
 
 // List objects
 const list = await env.MY_BUCKET.list();
 const filtered = await env.MY_BUCKET.list({
-  prefix: "uploads/",
-  delimiter: "/",
+  prefix: 'uploads/',
+  delimiter: '/',
   limit: 1000,
 });
 
 // Delete
-await env.MY_BUCKET.delete("path/to/file.json");
-await env.MY_BUCKET.delete(["file1.json", "file2.json"]);  // Batch delete
+await env.MY_BUCKET.delete('path/to/file.json');
+await env.MY_BUCKET.delete(['file1.json', 'file2.json']); // Batch delete
 
 // Multipart upload (for files > 5GB)
-const upload = await env.MY_BUCKET.createMultipartUpload("large-file.zip");
+const upload = await env.MY_BUCKET.createMultipartUpload('large-file.zip');
 const part1 = await upload.uploadPart(1, chunk1);
 const part2 = await upload.uploadPart(2, chunk2);
 await upload.complete([part1, part2]);
@@ -479,6 +484,7 @@ await upload.abort();
 ### D1 (SQLite Database)
 
 **Characteristics:**
+
 - Serverless SQLite
 - Strong consistency
 - Max database size: 10 GB (GA)
@@ -490,35 +496,44 @@ interface Env {
 }
 
 // Prepared statements (recommended)
-const stmt = env.DB.prepare("SELECT * FROM users WHERE id = ?");
+const stmt = env.DB.prepare('SELECT * FROM users WHERE id = ?');
 const { results } = await stmt.bind(userId).all();
 const user = await stmt.bind(userId).first();
-const value = await stmt.bind(userId).first("name");  // Single column
+const value = await stmt.bind(userId).first('name'); // Single column
 
 // Insert/Update
 const { meta } = await env.DB.prepare(
-  "INSERT INTO users (name, email) VALUES (?, ?)"
-).bind(name, email).run();
+  'INSERT INTO users (name, email) VALUES (?, ?)'
+)
+  .bind(name, email)
+  .run();
 console.log(meta.last_row_id, meta.changes);
 
 // Batch operations (single transaction)
 const results = await env.DB.batch([
-  env.DB.prepare("INSERT INTO users (name) VALUES (?)").bind("Alice"),
-  env.DB.prepare("INSERT INTO users (name) VALUES (?)").bind("Bob"),
+  env.DB.prepare('INSERT INTO users (name) VALUES (?)').bind('Alice'),
+  env.DB.prepare('INSERT INTO users (name) VALUES (?)').bind('Bob'),
   env.DB.prepare("UPDATE counters SET value = value + 1 WHERE name = 'users'"),
 ]);
 
 // Raw execution
-await env.DB.exec("PRAGMA table_info(users)");
+await env.DB.exec('PRAGMA table_info(users)');
 
 // Transaction pattern (using batch)
 await env.DB.batch([
-  env.DB.prepare("UPDATE accounts SET balance = balance - ? WHERE id = ?").bind(100, fromId),
-  env.DB.prepare("UPDATE accounts SET balance = balance + ? WHERE id = ?").bind(100, toId),
+  env.DB.prepare('UPDATE accounts SET balance = balance - ? WHERE id = ?').bind(
+    100,
+    fromId
+  ),
+  env.DB.prepare('UPDATE accounts SET balance = balance + ? WHERE id = ?').bind(
+    100,
+    toId
+  ),
 ]);
 ```
 
 **D1 Best Practices:**
+
 ```sql
 -- Create indexes for WHERE clause columns
 CREATE INDEX idx_users_email ON users(email);
@@ -536,6 +551,7 @@ PRAGMA optimize;
 ### Durable Objects
 
 **Characteristics:**
+
 - Single-threaded, globally unique instances
 - Built-in SQLite storage
 - WebSocket support with Hibernation
@@ -551,7 +567,7 @@ export class Counter {
     this.state = state;
     // Restore state from storage
     this.state.blockConcurrencyWhile(async () => {
-      this.value = (await this.state.storage.get("value")) || 0;
+      this.value = (await this.state.storage.get('value')) || 0;
     });
   }
 
@@ -559,16 +575,16 @@ export class Counter {
     const url = new URL(request.url);
 
     switch (url.pathname) {
-      case "/increment":
+      case '/increment':
         this.value++;
-        await this.state.storage.put("value", this.value);
+        await this.state.storage.put('value', this.value);
         return Response.json({ value: this.value });
 
-      case "/value":
+      case '/value':
         return Response.json({ value: this.value });
 
       default:
-        return new Response("Not found", { status: 404 });
+        return new Response('Not found', { status: 404 });
     }
   }
 }
@@ -576,7 +592,7 @@ export class Counter {
 // Worker that uses the Durable Object
 export default {
   async fetch(request: Request, env: Env) {
-    const id = env.COUNTER.idFromName("global");
+    const id = env.COUNTER.idFromName('global');
     const stub = env.COUNTER.get(id);
     return stub.fetch(request);
   },
@@ -584,6 +600,7 @@ export default {
 ```
 
 **WebSocket Hibernation:**
+
 ```typescript
 export class ChatRoom {
   state: DurableObjectState;
@@ -593,7 +610,7 @@ export class ChatRoom {
   }
 
   async fetch(request: Request): Promise<Response> {
-    if (request.headers.get("Upgrade") === "websocket") {
+    if (request.headers.get('Upgrade') === 'websocket') {
       const pair = new WebSocketPair();
       const [client, server] = Object.values(pair);
 
@@ -602,7 +619,7 @@ export class ChatRoom {
 
       return new Response(null, { status: 101, webSocket: client });
     }
-    return new Response("Expected WebSocket", { status: 400 });
+    return new Response('Expected WebSocket', { status: 400 });
   }
 
   // Called when hibernated DO receives WebSocket message
@@ -621,7 +638,7 @@ export class ChatRoom {
 
   async webSocketError(ws: WebSocket, error: unknown) {
     // Handle error
-    ws.close(1011, "Internal error");
+    ws.close(1011, 'Internal error');
   }
 }
 ```
@@ -629,6 +646,7 @@ export class ChatRoom {
 ### Queues
 
 **Characteristics:**
+
 - Async message processing
 - At-least-once delivery
 - Automatic retries with dead letter queues
@@ -643,12 +661,12 @@ interface Env {
 export default {
   async fetch(request: Request, env: Env) {
     // Send single message
-    await env.MY_QUEUE.send({ type: "email", to: "user@example.com" });
+    await env.MY_QUEUE.send({ type: 'email', to: 'user@example.com' });
 
     // Send with options
     await env.MY_QUEUE.send(
-      { type: "process", id: 123 },
-      { contentType: "json" }
+      { type: 'process', id: 123 },
+      { contentType: 'json' }
     );
 
     // Batch send
@@ -658,7 +676,7 @@ export default {
       { body: { id: 3 } },
     ]);
 
-    return new Response("Queued");
+    return new Response('Queued');
   },
 };
 
@@ -675,10 +693,10 @@ export default {
       try {
         console.log(`Processing: ${JSON.stringify(message.body)}`);
         await processMessage(message.body);
-        message.ack();  // Mark as processed
+        message.ack(); // Mark as processed
       } catch (e) {
         console.error(`Failed: ${e}`);
-        message.retry();  // Will retry (up to max_retries)
+        message.retry(); // Will retry (up to max_retries)
       }
     }
   },
@@ -811,7 +829,7 @@ npx wrangler hyperdrive create my-db \
 ### Usage
 
 ```typescript
-import { Client } from "pg";
+import { Client } from 'pg';
 
 interface Env {
   MY_DB: Hyperdrive;
@@ -825,7 +843,7 @@ export default {
     });
 
     await client.connect();
-    const result = await client.query("SELECT * FROM users WHERE id = $1", [1]);
+    const result = await client.query('SELECT * FROM users WHERE id = $1', [1]);
 
     // No need to call client.end() - Hyperdrive manages pooling
     return Response.json(result.rows);
@@ -836,12 +854,14 @@ export default {
 ### When to Use Hyperdrive
 
 **Use Hyperdrive when:**
+
 - Connecting to remote PostgreSQL/MySQL databases
 - High-latency database connections (different regions)
 - Frequent identical read queries (caching)
 - Many concurrent database connections needed
 
 **Don't use Hyperdrive when:**
+
 - Using D1 (already edge-native)
 - Local development (use direct connection)
 - Need prepared statements across requests (transaction mode limitation)
@@ -850,6 +870,7 @@ export default {
 ### Performance Benefits
 
 Without Hyperdrive:
+
 ```
 Worker -> TCP handshake (1 RTT)
        -> TLS negotiation (3 RTTs)
@@ -859,6 +880,7 @@ Total: 8 round-trips before first query
 ```
 
 With Hyperdrive:
+
 ```
 Worker -> Hyperdrive pool (cached connection)
        -> Query (1 RTT to pool, reuses DB connection)
@@ -874,6 +896,7 @@ Total: 1 round-trip to query
 Expose internal services securely without opening firewall ports.
 
 **Installation:**
+
 ```bash
 # macOS
 brew install cloudflared
@@ -887,6 +910,7 @@ sudo chmod +x cloudflared && sudo mv cloudflared /usr/local/bin/
 ```
 
 **Setup:**
+
 ```bash
 # Login
 cloudflared tunnel login
@@ -915,6 +939,7 @@ cloudflared tunnel run my-tunnel
 ```
 
 **Run as Service:**
+
 ```bash
 # Linux
 sudo cloudflared service install
@@ -959,47 +984,47 @@ Policy:
 ### Building MCP Server on Workers
 
 ```typescript
-import { McpServer } from "@cloudflare/mcp-server";
+import { McpServer } from '@cloudflare/mcp-server';
 
 interface Env {
   DB: D1Database;
 }
 
 const server = new McpServer({
-  name: "my-mcp-server",
-  version: "1.0.0",
+  name: 'my-mcp-server',
+  version: '1.0.0',
 });
 
 // Define tools
 server.addTool({
-  name: "query_database",
-  description: "Query the D1 database",
+  name: 'query_database',
+  description: 'Query the D1 database',
   parameters: {
-    type: "object",
+    type: 'object',
     properties: {
-      query: { type: "string", description: "SQL query to execute" },
+      query: { type: 'string', description: 'SQL query to execute' },
     },
-    required: ["query"],
+    required: ['query'],
   },
   handler: async ({ query }, { env }) => {
     const result = await env.DB.prepare(query).all();
     return {
-      content: [{ type: "text", text: JSON.stringify(result.results) }],
+      content: [{ type: 'text', text: JSON.stringify(result.results) }],
     };
   },
 });
 
 // Define resources
 server.addResource({
-  uri: "db://tables",
-  name: "Database Tables",
-  description: "List of all tables",
+  uri: 'db://tables',
+  name: 'Database Tables',
+  description: 'List of all tables',
   handler: async ({ env }) => {
     const tables = await env.DB.prepare(
       "SELECT name FROM sqlite_master WHERE type='table'"
     ).all();
     return {
-      contents: [{ uri: "db://tables", text: JSON.stringify(tables.results) }],
+      contents: [{ uri: 'db://tables', text: JSON.stringify(tables.results) }],
     };
   },
 });
@@ -1028,6 +1053,7 @@ export default {
 ### Cloudflare's Managed MCP Servers
 
 Available at `https://mcp.cloudflare.com/`:
+
 - Workers management
 - R2 bucket operations
 - D1 database queries
@@ -1035,6 +1061,7 @@ Available at `https://mcp.cloudflare.com/`:
 - Analytics access
 
 **Connect from Claude/Cursor:**
+
 ```json
 {
   "mcpServers": {
@@ -1068,7 +1095,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install dependencies
         run: npm ci
@@ -1097,21 +1124,21 @@ jobs:
 
 ### Workers
 
-| Plan | Price | Requests | CPU Time |
-|------|-------|----------|----------|
-| Free | $0 | 100K/day | 10ms/invocation |
-| Paid | $5/mo | 10M included | 30s/invocation |
-| Usage | +$0.30/M requests | - | $0.02/M ms |
+| Plan  | Price             | Requests     | CPU Time        |
+| ----- | ----------------- | ------------ | --------------- |
+| Free  | $0                | 100K/day     | 10ms/invocation |
+| Paid  | $5/mo             | 10M included | 30s/invocation  |
+| Usage | +$0.30/M requests | -            | $0.02/M ms      |
 
 ### Storage
 
-| Service | Free Tier | Paid |
-|---------|-----------|------|
-| KV | 100K reads, 1K writes/day | $0.50/M reads, $5/M writes |
-| R2 | 10GB storage, 10M Class A ops | $0.015/GB, $4.50/M Class A |
-| D1 | 5M rows read, 100K writes/day | $0.001/M rows, $1/M writes |
-| Durable Objects | 1M requests | $0.15/M requests |
-| Queues | 1M messages | $0.40/M messages |
+| Service         | Free Tier                     | Paid                       |
+| --------------- | ----------------------------- | -------------------------- |
+| KV              | 100K reads, 1K writes/day     | $0.50/M reads, $5/M writes |
+| R2              | 10GB storage, 10M Class A ops | $0.015/GB, $4.50/M Class A |
+| D1              | 5M rows read, 100K writes/day | $0.001/M rows, $1/M writes |
+| Durable Objects | 1M requests                   | $0.15/M requests           |
+| Queues          | 1M messages                   | $0.40/M messages           |
 
 ### AI Workers
 
@@ -1151,14 +1178,14 @@ jobs:
 
 ## Quick Reference
 
-| Task | Command/Code |
-|------|--------------|
-| New project | `npm create cloudflare@latest` |
-| Local dev | `npx wrangler dev` |
-| Deploy | `npx wrangler deploy` |
-| Create D1 | `npx wrangler d1 create name` |
-| Create KV | `npx wrangler kv namespace create NAME` |
-| Create R2 | `npx wrangler r2 bucket create name` |
-| Set secret | `npx wrangler secret put NAME` |
-| Create queue | `npx wrangler queues create name` |
-| Create tunnel | `cloudflared tunnel create name` |
+| Task          | Command/Code                            |
+| ------------- | --------------------------------------- |
+| New project   | `npm create cloudflare@latest`          |
+| Local dev     | `npx wrangler dev`                      |
+| Deploy        | `npx wrangler deploy`                   |
+| Create D1     | `npx wrangler d1 create name`           |
+| Create KV     | `npx wrangler kv namespace create NAME` |
+| Create R2     | `npx wrangler r2 bucket create name`    |
+| Set secret    | `npx wrangler secret put NAME`          |
+| Create queue  | `npx wrangler queues create name`       |
+| Create tunnel | `cloudflared tunnel create name`        |

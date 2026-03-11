@@ -15,6 +15,7 @@ Before detailing feature implementation, document the system context. Show where
 ## Feature: User Notifications
 
 ### Implementation
+
 - Add NotificationService class
 - Store notifications in database
 - Send via email and push
@@ -26,7 +27,7 @@ Before detailing feature implementation, document the system context. Show where
 
 **Correct (system context documented):**
 
-```markdown
+````markdown
 ## Feature: User Notifications
 
 ### System Context Diagram
@@ -59,29 +60,31 @@ Before detailing feature implementation, document the system context. Show where
 │  └────────┘  └────────┘  └────────┘  └────────┘            │
 └──────────────────────────────────────────────────────────────┘
 ```
+````
 
 ### Dependencies (This Feature Needs)
 
-| Dependency | Version | Purpose | Failure Impact |
-|------------|---------|---------|----------------|
-| SendGrid API | v3 | Email delivery | Degraded (queue) |
-| Firebase FCM | Current | Push notifications | Degraded (skip) |
-| PostgreSQL | 14+ | Notification storage | Critical (block) |
-| Redis | 6+ | Rate limiting cache | Degraded (allow all) |
-| User Service | Internal | User preferences | Critical (block) |
+| Dependency   | Version  | Purpose              | Failure Impact       |
+| ------------ | -------- | -------------------- | -------------------- |
+| SendGrid API | v3       | Email delivery       | Degraded (queue)     |
+| Firebase FCM | Current  | Push notifications   | Degraded (skip)      |
+| PostgreSQL   | 14+      | Notification storage | Critical (block)     |
+| Redis        | 6+       | Rate limiting cache  | Degraded (allow all) |
+| User Service | Internal | User preferences     | Critical (block)     |
 
 ### Dependents (Need This Feature)
 
-| Service | Use Case | Integration Point |
-|---------|----------|-------------------|
-| Order Service | Order status updates | Event: order.status.changed |
-| Auth Service | Login alerts | Event: auth.suspicious.login |
-| Payment Service | Payment receipts | Event: payment.completed |
-| Marketing | Campaign notifications | API: POST /notifications/bulk |
+| Service         | Use Case               | Integration Point             |
+| --------------- | ---------------------- | ----------------------------- |
+| Order Service   | Order status updates   | Event: order.status.changed   |
+| Auth Service    | Login alerts           | Event: auth.suspicious.login  |
+| Payment Service | Payment receipts       | Event: payment.completed      |
+| Marketing       | Campaign notifications | API: POST /notifications/bulk |
 
 ### Integration Contracts
 
 **Event Schema (consumed):**
+
 ```json
 {
   "event_type": "order.status.changed",
@@ -92,11 +95,13 @@ Before detailing feature implementation, document the system context. Show where
 ```
 
 **API Contract (exposed):**
+
 ```http
 POST /api/v1/notifications
 Authorization: Bearer {service_token}
 Content-Type: application/json
 ```
+
 ```
 
 **Context documentation checklist:**
@@ -106,3 +111,4 @@ Content-Type: application/json
 - Integration contracts specified
 
 Reference: [Arc42 - Software Architecture Documentation](https://arc42.org/overview)
+```

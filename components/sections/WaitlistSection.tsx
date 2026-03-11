@@ -32,7 +32,7 @@ export function WaitlistSection() {
     <Section
       id="waitlist"
       aria-labelledby="waitlist-heading"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-24"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pb-24 pt-32 lg:pt-48"
       style={{ contentVisibility: 'auto', containIntrinsicSize: '1px 1200px' }}
     >
       {/* Background Atmosphere */}

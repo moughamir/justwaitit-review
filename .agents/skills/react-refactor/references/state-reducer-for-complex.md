@@ -43,34 +43,39 @@ type WizardState = {
   currentStep: number;
   completedSteps: Set<number>;
 } & (
-  | { status: "idle"; error: null }
-  | { status: "submitting"; error: null }
-  | { status: "error"; error: string }
-  | { status: "success"; error: null }
+  | { status: 'idle'; error: null }
+  | { status: 'submitting'; error: null }
+  | { status: 'error'; error: string }
+  | { status: 'success'; error: null }
 );
 
 type WizardAction =
-  | { type: "SUBMIT_STEP" }
-  | { type: "STEP_VALIDATED" }
-  | { type: "STEP_FAILED"; error: string }
-  | { type: "GO_BACK" };
+  | { type: 'SUBMIT_STEP' }
+  | { type: 'STEP_VALIDATED' }
+  | { type: 'STEP_FAILED'; error: string }
+  | { type: 'GO_BACK' };
 
 function wizardReducer(state: WizardState, action: WizardAction): WizardState {
   switch (action.type) {
-    case "SUBMIT_STEP":
-      return { ...state, status: "submitting", error: null };
-    case "STEP_VALIDATED":
+    case 'SUBMIT_STEP':
+      return { ...state, status: 'submitting', error: null };
+    case 'STEP_VALIDATED':
       return {
         ...state,
-        status: "idle",
+        status: 'idle',
         error: null,
         currentStep: state.currentStep + 1,
         completedSteps: new Set(state.completedSteps).add(state.currentStep),
       };
-    case "STEP_FAILED":
-      return { ...state, status: "error", error: action.error };
-    case "GO_BACK":
-      return { ...state, status: "idle", error: null, currentStep: Math.max(0, state.currentStep - 1) };
+    case 'STEP_FAILED':
+      return { ...state, status: 'error', error: action.error };
+    case 'GO_BACK':
+      return {
+        ...state,
+        status: 'idle',
+        error: null,
+        currentStep: Math.max(0, state.currentStep - 1),
+      };
   }
 }
 
@@ -78,17 +83,17 @@ function CheckoutWizard() {
   const [state, dispatch] = useReducer(wizardReducer, {
     currentStep: 0,
     completedSteps: new Set(),
-    status: "idle",
+    status: 'idle',
     error: null,
   });
 
   async function handleNext() {
-    dispatch({ type: "SUBMIT_STEP" });
+    dispatch({ type: 'SUBMIT_STEP' });
     try {
       await validateStep(state.currentStep);
-      dispatch({ type: "STEP_VALIDATED" }); // Transition always resets submitting
+      dispatch({ type: 'STEP_VALIDATED' }); // Transition always resets submitting
     } catch (err) {
-      dispatch({ type: "STEP_FAILED", error: err.message });
+      dispatch({ type: 'STEP_FAILED', error: err.message });
     }
   }
 }

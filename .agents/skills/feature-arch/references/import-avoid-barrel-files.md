@@ -20,7 +20,7 @@ export * from './UserBadge';
 // ... 20 more exports
 
 // src/features/user/index.ts
-export * from './components';  // Re-exports everything
+export * from './components'; // Re-exports everything
 export * from './hooks';
 export * from './utils';
 
@@ -40,7 +40,7 @@ export { useUser } from './hooks/useUser';
 export type { User } from './types';
 
 // Consumer
-import { UserAvatar } from '@/features/user';  // Only UserAvatar bundled
+import { UserAvatar } from '@/features/user'; // Only UserAvatar bundled
 ```
 
 **Alternative for large features:**
@@ -56,6 +56,7 @@ import { UserAvatar } from '@/features/user/components/UserAvatar';
 ```
 
 **When barrel files are OK:**
+
 - Feature public API (index.ts) with explicit exports
 - Small features with < 10 exports
 - Type-only exports (no runtime impact)

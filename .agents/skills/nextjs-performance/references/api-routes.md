@@ -12,14 +12,14 @@ Route handlers in `app/` directory per API endpoints con supporto streaming e ed
 
 ```typescript
 // app/api/users/route.ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
-export const dynamic = 'force-static'
-export const revalidate = 3600
+export const dynamic = 'force-static';
+export const revalidate = 3600;
 
 export async function GET() {
-  const users = await db.user.findMany()
-  return NextResponse.json(users)
+  const users = await db.user.findMany();
+  return NextResponse.json(users);
 }
 ```
 
@@ -29,18 +29,18 @@ export async function GET() {
 // app/api/users/route.ts
 export async function POST(request: Request) {
   try {
-    const body = await request.json()
+    const body = await request.json();
 
     const user = await db.user.create({
       data: body,
-    })
+    });
 
-    return NextResponse.json(user, { status: 201 })
+    return NextResponse.json(user, { status: 201 });
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to create user' },
       { status: 500 }
-    )
+    );
   }
 }
 ```
@@ -51,19 +51,19 @@ export async function POST(request: Request) {
 
 ```typescript
 // app/api/edge/route.ts
-export const runtime = 'edge'
-export const preferredRegion = 'iad1' // US East
+export const runtime = 'edge';
+export const preferredRegion = 'iad1'; // US East
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url)
-  const query = searchParams.get('q')
+  const { searchParams } = new URL(request.url);
+  const query = searchParams.get('q');
 
   // Edge runtime: minore cold start, distribuito globalmente
-  const result = await fetch(`https://api.example.com/search?q=${query}`)
+  const result = await fetch(`https://api.example.com/search?q=${query}`);
 
   return new Response(await result.text(), {
     headers: { 'content-type': 'application/json' },
-  })
+  });
 }
 ```
 
@@ -73,10 +73,10 @@ export async function GET(request: Request) {
 
 ```typescript
 // app/api/stream/route.ts
-export const runtime = 'edge'
+export const runtime = 'edge';
 
 export async function POST(request: Request) {
-  const { prompt } = await request.json()
+  const { prompt } = await request.json();
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
@@ -89,12 +89,12 @@ export async function POST(request: Request) {
       messages: [{ role: 'user', content: prompt }],
       stream: true,
     }),
-  })
+  });
 
   // Stream la response direttamente
   return new Response(response.body, {
     headers: { 'Content-Type': 'text/event-stream' },
-  })
+  });
 }
 ```
 
@@ -105,23 +105,23 @@ export async function POST(request: Request) {
 ```typescript
 // app/api/data/route.ts
 export async function GET() {
-  const data = await fetchData()
+  const data = await fetchData();
 
   return NextResponse.json(data, {
     headers: {
       'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300',
     },
-  })
+  });
 }
 
 // Con ETag
 export async function GET(request: Request) {
-  const data = await fetchData()
-  const etag = generateETag(data)
+  const data = await fetchData();
+  const etag = generateETag(data);
 
   // Check If-None-Match
   if (request.headers.get('If-None-Match') === etag) {
-    return new Response(null, { status: 304 })
+    return new Response(null, { status: 304 });
   }
 
   return NextResponse.json(data, {
@@ -129,7 +129,7 @@ export async function GET(request: Request) {
       ETag: etag,
       'Cache-Control': 'public, max-age=3600',
     },
-  })
+  });
 }
 ```
 
@@ -139,31 +139,37 @@ export async function GET(request: Request) {
 
 ```typescript
 // middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
   // CORS headers
-  const response = NextResponse.next()
+  const response = NextResponse.next();
 
-  response.headers.set('Access-Control-Allow-Origin', '*')
-  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  response.headers.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set(
+    'Access-Control-Allow-Methods',
+    'GET, POST, PUT, DELETE, OPTIONS'
+  );
+  response.headers.set(
+    'Access-Control-Allow-Headers',
+    'Content-Type, Authorization'
+  );
 
   // Rate limiting semplice
-  const ip = request.ip ?? 'anonymous'
-  const limit = await checkRateLimit(ip)
+  const ip = request.ip ?? 'anonymous';
+  const limit = await checkRateLimit(ip);
 
   if (!limit.success) {
-    return new NextResponse('Rate limit exceeded', { status: 429 })
+    return new NextResponse('Rate limit exceeded', { status: 429 });
   }
 
-  return response
+  return response;
 }
 
 export const config = {
   matcher: '/api/:path*',
-}
+};
 ```
 
 ---
@@ -172,7 +178,7 @@ export const config = {
 
 ```typescript
 // app/api/error-handler.ts
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
 export class APIError extends Error {
   constructor(
@@ -180,7 +186,7 @@ export class APIError extends Error {
     public statusCode: number = 500,
     public code: string = 'INTERNAL_ERROR'
   ) {
-    super(message)
+    super(message);
   }
 }
 
@@ -189,28 +195,28 @@ export function handleError(error: unknown) {
     return NextResponse.json(
       { error: error.message, code: error.code },
       { status: error.statusCode }
-    )
+    );
   }
 
-  console.error(error)
+  console.error(error);
   return NextResponse.json(
     { error: 'Internal server error', code: 'INTERNAL_ERROR' },
     { status: 500 }
-  )
+  );
 }
 
 // Uso
-import { APIError, handleError } from './error-handler'
+import { APIError, handleError } from './error-handler';
 
 export async function GET() {
   try {
-    const data = await fetchData()
+    const data = await fetchData();
     if (!data) {
-      throw new APIError('Not found', 404, 'NOT_FOUND')
+      throw new APIError('Not found', 404, 'NOT_FOUND');
     }
-    return NextResponse.json(data)
+    return NextResponse.json(data);
   } catch (error) {
-    return handleError(error)
+    return handleError(error);
   }
 }
 ```
@@ -222,12 +228,12 @@ export async function GET() {
 ```typescript
 // app/api/(public)/health/route.ts
 export async function GET() {
-  return NextResponse.json({ status: 'ok', timestamp: Date.now() })
+  return NextResponse.json({ status: 'ok', timestamp: Date.now() });
 }
 
 // app/api/(private)/admin/route.ts
 export async function GET() {
   // Protetto da middleware auth
-  return NextResponse.json({ data: 'sensitive' })
+  return NextResponse.json({ data: 'sensitive' });
 }
 ```

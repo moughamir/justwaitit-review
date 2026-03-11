@@ -62,16 +62,16 @@ pnpm validate
 
 1. Choose the appropriate category prefix:
 
-   | Category | Prefix | Impact |
-   |----------|--------|--------|
-   | Component Architecture | `arch-` | CRITICAL |
-   | Accessibility | `a11y-` | CRITICAL |
-   | Styling & Theming | `style-` | HIGH |
-   | Form Patterns | `form-` | HIGH |
-   | Data Display | `data-` | MEDIUM-HIGH |
-   | Component Composition | `comp-` | MEDIUM |
-   | Performance | `perf-` | MEDIUM |
-   | State Management | `state-` | LOW-MEDIUM |
+   | Category               | Prefix   | Impact      |
+   | ---------------------- | -------- | ----------- |
+   | Component Architecture | `arch-`  | CRITICAL    |
+   | Accessibility          | `a11y-`  | CRITICAL    |
+   | Styling & Theming      | `style-` | HIGH        |
+   | Form Patterns          | `form-`  | HIGH        |
+   | Data Display           | `data-`  | MEDIUM-HIGH |
+   | Component Composition  | `comp-`  | MEDIUM      |
+   | Performance            | `perf-`  | MEDIUM      |
+   | State Management       | `state-` | LOW-MEDIUM  |
 
 2. Create a new file in `references/` with the naming pattern: `{prefix}-{description}.md`
 
@@ -115,28 +115,29 @@ Reference: [Source](url)
 Rule files use the pattern: `{prefix}-{kebab-case-description}.md`
 
 Examples:
+
 - `arch-use-asChild-for-custom-triggers.md`
 - `a11y-preserve-aria-attributes.md`
 - `style-use-css-variables-for-theming.md`
 
 ## Impact Levels
 
-| Level | Description | Examples |
-|-------|-------------|----------|
-| CRITICAL | Foundational - wrong patterns cascade everywhere | Component structure, accessibility |
-| HIGH | Significant UX/DX impact | Theming, form validation |
-| MEDIUM-HIGH | Important for specific use cases | Data tables, loading states |
-| MEDIUM | Improves quality noticeably | Composition, performance |
-| LOW-MEDIUM | Nice to have, situational | State patterns |
-| LOW | Edge cases or micro-optimizations | Advanced patterns |
+| Level       | Description                                      | Examples                           |
+| ----------- | ------------------------------------------------ | ---------------------------------- |
+| CRITICAL    | Foundational - wrong patterns cascade everywhere | Component structure, accessibility |
+| HIGH        | Significant UX/DX impact                         | Theming, form validation           |
+| MEDIUM-HIGH | Important for specific use cases                 | Data tables, loading states        |
+| MEDIUM      | Improves quality noticeably                      | Composition, performance           |
+| LOW-MEDIUM  | Nice to have, situational                        | State patterns                     |
+| LOW         | Edge cases or micro-optimizations                | Advanced patterns                  |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Build AGENTS.md from references |
+| Command         | Description                       |
+| --------------- | --------------------------------- |
+| `pnpm build`    | Build AGENTS.md from references   |
 | `pnpm validate` | Validate skill against guidelines |
-| `pnpm lint` | Lint markdown files |
+| `pnpm lint`     | Lint markdown files               |
 
 ## Contributing
 

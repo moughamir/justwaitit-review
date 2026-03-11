@@ -15,16 +15,19 @@ For use with Claude Code in terminal environments.
 {Description of what this tool does}
 
 **Usage:**
+
 ```bash
 npx tsx scripts/{tool-name}.ts <required-arg>
 npx tsx scripts/{tool-name}.ts --option value
 ```
 
 **Arguments:**
+
 - `<required-arg>` - Description
 - `--option <value>` - Description (default: x)
 
 **Examples:**
+
 ```bash
 # Basic usage
 npx tsx scripts/{tool-name}.ts 12345
@@ -37,6 +40,7 @@ npx tsx scripts/{tool-name}.ts 12345 --verbose
 ```
 
 **Output:**
+
 ```json
 {
   "success": true,
@@ -52,12 +56,12 @@ npx tsx scripts/{tool-name}.ts 12345 --verbose
 
 All scripts support these common options:
 
-| Option | Description |
-|--------|-------------|
+| Option            | Description                             |
+| ----------------- | --------------------------------------- |
 | `--output <file>` | Write results to file instead of stdout |
-| `--format <type>` | Output format: json, csv, table |
-| `--verbose` | Show debug information |
-| `--help` | Show usage information |
+| `--format <type>` | Output format: json, csv, table         |
+| `--verbose`       | Show debug information                  |
+| `--help`          | Show usage information                  |
 
 ## Error Handling
 

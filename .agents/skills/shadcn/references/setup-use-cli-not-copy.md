@@ -13,10 +13,10 @@ The CLI handles import paths, peer dependencies, and file placement automaticall
 
 ```typescript
 // Copied button.tsx manually
-import { Slot } from "@radix-ui/react-slot"
+import { Slot } from '@radix-ui/react-slot';
 // Error: @radix-ui/react-slot is not installed
 
-import { cva, type VariantProps } from "class-variance-authority"
+import { cva, type VariantProps } from 'class-variance-authority';
 // Error: class-variance-authority is not installed
 ```
 

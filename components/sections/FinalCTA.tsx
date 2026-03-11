@@ -36,7 +36,7 @@ export function FinalCTA() {
       ref={sectionRef}
       id="final-cta"
       aria-labelledby="cta-heading"
-      className="relative flex min-h-[70dvh] w-full flex-col items-center justify-center overflow-hidden px-4"
+      className="relative flex min-h-[50dvh] w-full flex-col items-center justify-center overflow-hidden px-4 py-16"
     >
       <h2 id="cta-heading" className="sr-only">
         {srHeading}

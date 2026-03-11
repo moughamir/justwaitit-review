@@ -45,6 +45,7 @@ sessions.sort(Comparator.comparing(Session::getCreatedAt).reversed());
 ```
 
 **Good comment situations:**
+
 - Legal comments (copyright, license)
 - Explanation of intent or rationale
 - Clarification of obscure API behavior

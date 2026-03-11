@@ -59,6 +59,7 @@ async def test_http_server(port=8000):
 ```
 
 Start the server separately:
+
 ```bash
 python server.py --transport http --port 8000 &
 SERVER_PID=$!

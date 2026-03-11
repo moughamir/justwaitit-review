@@ -103,7 +103,9 @@ import { createContext, useContext, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
 // Context for shared state
-const CardContext = createContext<{ variant?: 'default' | 'elevated' | 'outline' }>({});
+const CardContext = createContext<{
+  variant?: 'default' | 'elevated' | 'outline';
+}>({});
 
 // Root component
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -122,11 +124,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
       <CardContext.Provider value={{ variant }}>
         <div
           ref={ref}
-          className={cn(
-            'rounded-xl',
-            variants[variant],
-            className
-          )}
+          className={cn('rounded-xl', variants[variant], className)}
           {...props}
         >
           {children}
@@ -137,51 +135,55 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 
 // Sub-components
-const CardHeader = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('flex flex-col gap-1.5 p-6 pb-0', className)}
-      {...props}
-    />
-  )
-);
+const CardHeader = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn('flex flex-col gap-1.5 p-6 pb-0', className)}
+    {...props}
+  />
+));
 
-const CardTitle = forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
-  ({ className, ...props }, ref) => (
-    <h3
-      ref={ref}
-      className={cn('text-xl font-semibold leading-none tracking-tight', className)}
-      {...props}
-    />
-  )
-);
+const CardTitle = forwardRef<
+  HTMLHeadingElement,
+  React.HTMLAttributes<HTMLHeadingElement>
+>(({ className, ...props }, ref) => (
+  <h3
+    ref={ref}
+    className={cn(
+      'text-xl font-semibold leading-none tracking-tight',
+      className
+    )}
+    {...props}
+  />
+));
 
-const CardDescription = forwardRef<HTMLParagraphElement, React.HTMLAttributes<HTMLParagraphElement>>(
-  ({ className, ...props }, ref) => (
-    <p
-      ref={ref}
-      className={cn('text-sm text-gray-500', className)}
-      {...props}
-    />
-  )
-);
+const CardDescription = forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, ...props }, ref) => (
+  <p ref={ref} className={cn('text-sm text-gray-500', className)} {...props} />
+));
 
-const CardContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div ref={ref} className={cn('p-6', className)} {...props} />
-  )
-);
+const CardContent = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div ref={ref} className={cn('p-6', className)} {...props} />
+));
 
-const CardFooter = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-  ({ className, ...props }, ref) => (
-    <div
-      ref={ref}
-      className={cn('flex items-center p-6 pt-0', className)}
-      {...props}
-    />
-  )
-);
+const CardFooter = forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn('flex items-center p-6 pt-0', className)}
+    {...props}
+  />
+));
 
 // Named exports
 Card.displayName = 'Card';
@@ -191,7 +193,14 @@ CardDescription.displayName = 'CardDescription';
 CardContent.displayName = 'CardContent';
 CardFooter.displayName = 'CardFooter';
 
-export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter };
+export {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+};
 ```
 
 ### Usage
@@ -235,23 +244,7 @@ function DropdownContent({ children, ...props }) {
     <div
       data-state={isOpen ? 'open' : 'closed'}
       data-side={side}
-      className="
-        absolute z-50 min-w-[8rem] overflow-hidden rounded-md
-        border border-gray-200 bg-white p-1 shadow-lg
-
-        data-state-open:animate-in
-        data-state-open:fade-in-0
-        data-state-open:zoom-in-95
-
-        data-state-closed:animate-out
-        data-state-closed:fade-out-0
-        data-state-closed:zoom-out-95
-
-        data-side-top:slide-in-from-bottom-2
-        data-side-bottom:slide-in-from-top-2
-        data-side-left:slide-in-from-right-2
-        data-side-right:slide-in-from-left-2
-      "
+      className="data-state-open:animate-in data-state-open:fade-in-0 data-state-open:zoom-in-95 data-state-closed:animate-out data-state-closed:fade-out-0 data-state-closed:zoom-out-95 data-side-top:slide-in-from-bottom-2 data-side-bottom:slide-in-from-top-2 data-side-left:slide-in-from-right-2 data-side-right:slide-in-from-left-2 absolute z-50 min-w-[8rem] overflow-hidden rounded-md border border-gray-200 bg-white p-1 shadow-lg"
       {...props}
     >
       {children}
@@ -264,14 +257,7 @@ function DropdownItem({ children, disabled, ...props }) {
     <div
       data-highlighted={isHighlighted || undefined}
       data-disabled={disabled || undefined}
-      className="
-        relative flex cursor-pointer select-none items-center
-        rounded-sm px-2 py-1.5 text-sm outline-none
-
-        data-highlighted:bg-gray-100
-        data-disabled:pointer-events-none
-        data-disabled:opacity-50
-      "
+      className="data-highlighted:bg-gray-100 data-disabled:pointer-events-none data-disabled:opacity-50 relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none"
       {...props}
     >
       {children}
@@ -291,14 +277,12 @@ function DropdownItem({ children, disabled, ...props }) {
     src="image.jpg"
     class="transition-transform duration-300 group-hover:scale-110"
   />
-  <div class="
-    absolute inset-0 bg-gradient-to-t from-black/80 to-transparent
-    opacity-0 transition-opacity group-hover:opacity-100
-  ">
-    <div class="
-      absolute bottom-0 left-0 right-0 p-6
-      translate-y-4 transition-transform group-hover:translate-y-0
-    ">
+  <div
+    class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 transition-opacity group-hover:opacity-100"
+  >
+    <div
+      class="absolute bottom-0 left-0 right-0 translate-y-4 p-6 transition-transform group-hover:translate-y-0"
+    >
       <h3 class="text-xl font-bold text-white">Title</h3>
       <p class="text-gray-200">Description</p>
     </div>
@@ -308,40 +292,28 @@ function DropdownItem({ children, disabled, ...props }) {
 <!-- Named groups for nested components -->
 <div class="group/card">
   <div class="group/header">
-    <button class="group-hover/header:text-blue-500">
-      Header Action
-    </button>
+    <button class="group-hover/header:text-blue-500">Header Action</button>
   </div>
-  <div class="group-hover/card:bg-gray-50">
-    Card content
-  </div>
+  <div class="group-hover/card:bg-gray-50">Card content</div>
 </div>
 
 <!-- Peer pattern: Sibling state affects elements -->
 <div class="relative">
   <input
     type="email"
-    class="peer w-full border rounded-lg px-4 py-2 placeholder-transparent"
+    class="peer w-full rounded-lg border px-4 py-2 placeholder-transparent"
     placeholder="Email"
   />
-  <label class="
-    absolute left-4 top-2 text-gray-500
-    transition-all
-    peer-placeholder-shown:top-2 peer-placeholder-shown:text-base
-    peer-focus:-top-6 peer-focus:text-sm peer-focus:text-blue-500
-    peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-sm
-  ">
+  <label
+    class="absolute left-4 top-2 text-gray-500 transition-all peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-focus:-top-6 peer-focus:text-sm peer-focus:text-blue-500 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:text-sm"
+  >
     Email address
   </label>
 </div>
 
 <!-- Peer for form validation -->
 <div>
-  <input
-    type="email"
-    class="peer"
-    required
-  />
+  <input type="email" class="peer" required />
   <p class="hidden text-red-500 peer-invalid:block">
     Please enter a valid email
   </p>
@@ -516,16 +488,11 @@ function Modal({ isOpen, onClose, title, children }) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="
-                w-full max-w-md transform overflow-hidden rounded-2xl
-                bg-white p-6 text-left align-middle shadow-xl transition-all
-              ">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                 <Dialog.Title className="text-lg font-medium leading-6 text-gray-900">
                   {title}
                 </Dialog.Title>
-                <div className="mt-2">
-                  {children}
-                </div>
+                <div className="mt-2">{children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -544,42 +511,23 @@ import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 function Dropdown() {
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="
-        inline-flex items-center justify-center rounded-md
-        bg-white px-4 py-2 text-sm font-medium
-        border border-gray-300 hover:bg-gray-50
-        focus:outline-none focus:ring-2 focus:ring-brand-500
-      ">
+      <DropdownMenu.Trigger className="focus:ring-brand-500 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium hover:bg-gray-50 focus:outline-none focus:ring-2">
         Options
         <ChevronDownIcon className="ml-2 h-4 w-4" />
       </DropdownMenu.Trigger>
 
       <DropdownMenu.Portal>
         <DropdownMenu.Content
-          className="
-            min-w-[200px] rounded-md bg-white p-1 shadow-lg
-            border border-gray-200
-            animate-in fade-in-0 zoom-in-95
-            data-[side=bottom]:slide-in-from-top-2
-            data-[side=top]:slide-in-from-bottom-2
-          "
+          className="min-w-[200px] rounded-md border border-gray-200 bg-white p-1 shadow-lg animate-in fade-in-0 zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=top]:slide-in-from-bottom-2"
           sideOffset={5}
         >
-          <DropdownMenu.Item className="
-            relative flex cursor-pointer select-none items-center
-            rounded-sm px-2 py-2 text-sm outline-none
-            data-[highlighted]:bg-gray-100
-          ">
+          <DropdownMenu.Item className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm outline-none data-[highlighted]:bg-gray-100">
             Profile
           </DropdownMenu.Item>
 
           <DropdownMenu.Separator className="my-1 h-px bg-gray-200" />
 
-          <DropdownMenu.Item className="
-            relative flex cursor-pointer select-none items-center
-            rounded-sm px-2 py-2 text-sm text-red-600 outline-none
-            data-[highlighted]:bg-red-50
-          ">
+          <DropdownMenu.Item className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-2 text-sm text-red-600 outline-none data-[highlighted]:bg-red-50">
             Delete
           </DropdownMenu.Item>
         </DropdownMenu.Content>
@@ -617,10 +565,7 @@ function StaggeredList({ items }) {
 function Skeleton({ className, ...props }) {
   return (
     <div
-      className={cn(
-        'animate-pulse rounded-md bg-gray-200',
-        className
-      )}
+      className={cn('animate-pulse rounded-md bg-gray-200', className)}
       {...props}
     />
   );
@@ -666,7 +611,7 @@ export function cn(...inputs: ClassValue[]) {
 @layer components {
   /* Consistent focus ring */
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2;
+    @apply focus-visible:ring-brand-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
   }
 
   /* Consistent disabled state */
@@ -707,9 +652,15 @@ export function Button({ ... }) { ... }
 // Button.test.tsx
 describe('Button', () => {
   it('renders all variants correctly', () => {
-    const variants = ['default', 'secondary', 'outline', 'ghost', 'destructive'];
+    const variants = [
+      'default',
+      'secondary',
+      'outline',
+      'ghost',
+      'destructive',
+    ];
 
-    variants.forEach(variant => {
+    variants.forEach((variant) => {
       render(<Button variant={variant}>Test</Button>);
       // Assert classes are applied correctly
     });

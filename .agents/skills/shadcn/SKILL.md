@@ -10,6 +10,7 @@ Comprehensive best practices guide for shadcn/ui applications, maintained by the
 ## When to Apply
 
 Reference these guidelines when:
+
 - Installing and configuring shadcn/ui in a project
 - Writing new shadcn/ui components or composing primitives
 - Implementing forms with React Hook Form and Zod validation
@@ -19,18 +20,18 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | CLI & Project Setup | CRITICAL | `setup-` |
-| 2 | Component Architecture | CRITICAL | `arch-` |
-| 3 | Accessibility Preservation | CRITICAL | `ally-` |
-| 4 | Styling & Theming | HIGH | `style-` |
-| 5 | Form Patterns | HIGH | `form-` |
-| 6 | Data Display | MEDIUM-HIGH | `data-` |
-| 7 | Layout & Navigation | MEDIUM | `layout-` |
-| 8 | Component Composition | MEDIUM | `comp-` |
-| 9 | Performance Optimization | MEDIUM | `perf-` |
-| 10 | State Management | LOW-MEDIUM | `state-` |
+| Priority | Category                   | Impact      | Prefix    |
+| -------- | -------------------------- | ----------- | --------- |
+| 1        | CLI & Project Setup        | CRITICAL    | `setup-`  |
+| 2        | Component Architecture     | CRITICAL    | `arch-`   |
+| 3        | Accessibility Preservation | CRITICAL    | `ally-`   |
+| 4        | Styling & Theming          | HIGH        | `style-`  |
+| 5        | Form Patterns              | HIGH        | `form-`   |
+| 6        | Data Display               | MEDIUM-HIGH | `data-`   |
+| 7        | Layout & Navigation        | MEDIUM      | `layout-` |
+| 8        | Component Composition      | MEDIUM      | `comp-`   |
+| 9        | Performance Optimization   | MEDIUM      | `perf-`   |
+| 10       | State Management           | LOW-MEDIUM  | `state-`  |
 
 ## Quick Reference
 
@@ -135,9 +136,9 @@ For a single-file reference containing all rules, see [AGENTS.md](AGENTS.md).
 
 ## Reference Files
 
-| File | Description |
-|------|-------------|
-| [AGENTS.md](AGENTS.md) | Complete compiled guide with all rules |
-| [references/_sections.md](references/_sections.md) | Category definitions and ordering |
-| [assets/templates/_template.md](assets/templates/_template.md) | Template for new rules |
-| [metadata.json](metadata.json) | Version and reference information |
+| File                                                            | Description                            |
+| --------------------------------------------------------------- | -------------------------------------- |
+| [AGENTS.md](AGENTS.md)                                          | Complete compiled guide with all rules |
+| [references/\_sections.md](references/_sections.md)             | Category definitions and ordering      |
+| [assets/templates/\_template.md](assets/templates/_template.md) | Template for new rules                 |
+| [metadata.json](metadata.json)                                  | Version and reference information      |

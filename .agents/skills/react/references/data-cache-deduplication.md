@@ -60,12 +60,12 @@ async function Sidebar() {
 **With cacheSignal for cleanup (React 19.2):**
 
 ```typescript
-import { cache, cacheSignal } from 'react'
+import { cache, cacheSignal } from 'react';
 
 const fetchWithCleanup = cache(async (url: string) => {
-  const res = await fetch(url, { signal: cacheSignal() })
-  return res.json()
-})
+  const res = await fetch(url, { signal: cacheSignal() });
+  return res.json();
+});
 // Fetch is automatically aborted if cache lifetime ends (render aborted/failed)
 ```
 

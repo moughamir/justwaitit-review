@@ -13,11 +13,11 @@ JSSG uses deny-by-default security. Only request capabilities your codemod actua
 
 ```yaml
 # codemod.yaml - over-permissioned
-schema_version: "1.0"
+schema_version: '1.0'
 name: simple-rename
 capabilities:
-  - fs           # Not needed for simple AST transform
-  - fetch        # Not needed
+  - fs # Not needed for simple AST transform
+  - fetch # Not needed
   - child_process # Definitely not needed!
 ```
 
@@ -25,9 +25,9 @@ capabilities:
 // Transform doesn't use any capabilities
 const transform: Transform<TSX> = (root) => {
   const matches = root.findAll({
-    rule: { pattern: "oldName" }
+    rule: { pattern: 'oldName' },
   });
-  const edits = matches.map(m => m.replace("newName"));
+  const edits = matches.map((m) => m.replace('newName'));
   return root.commitEdits(edits);
 };
 ```
@@ -36,7 +36,7 @@ const transform: Transform<TSX> = (root) => {
 
 ```yaml
 # codemod.yaml - least-privilege
-schema_version: "1.0"
+schema_version: '1.0'
 name: simple-rename
 # No capabilities needed for pure AST transforms
 # capabilities: []  (implicit)
@@ -44,14 +44,15 @@ name: simple-rename
 
 ```yaml
 # codemod.yaml - only what's needed
-schema_version: "1.0"
+schema_version: '1.0'
 name: config-migrator
 capabilities:
-  - fs  # Only fs, needed to read config file
+  - fs # Only fs, needed to read config file
 # No fetch or child_process
 ```
 
 **When each capability is needed:**
+
 - `fs` - Reading config files, writing reports
 - `fetch` - Downloading schemas, API validation
 - `child_process` - Running external tools (rare)

@@ -36,7 +36,7 @@ function SettingsDialog() {
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }
 ```
 
@@ -44,7 +44,7 @@ function SettingsDialog() {
 
 ```tsx
 function SettingsDialog() {
-  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   return (
     <>
@@ -58,7 +58,10 @@ function SettingsDialog() {
           </DialogHeader>
           <div className="space-y-4">
             {/* Settings content */}
-            <Button variant="destructive" onClick={() => setShowDeleteConfirm(true)}>
+            <Button
+              variant="destructive"
+              onClick={() => setShowDeleteConfirm(true)}
+            >
               Delete Account
             </Button>
           </div>
@@ -70,7 +73,8 @@ function SettingsDialog() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Account?</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. Your data will be permanently deleted.
+              This action cannot be undone. Your data will be permanently
+              deleted.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -80,7 +84,7 @@ function SettingsDialog() {
         </AlertDialogContent>
       </AlertDialog>
     </>
-  )
+  );
 }
 ```
 
@@ -101,6 +105,7 @@ function SettingsDialog() {
 ```
 
 **Guidelines:**
+
 - Use AlertDialog for confirmations (designed for this pattern)
 - Set `modal={false}` on DropdownMenu inside Dialogs
 - Manage nested dialog state in parent component

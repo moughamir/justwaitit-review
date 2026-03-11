@@ -13,16 +13,16 @@ When a parent component owns state that changes frequently, all JSX declared ins
 
 ```tsx
 function ProductPage() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   return (
     <div onMouseMove={(e) => setMousePosition({ x: e.clientX, y: e.clientY })}>
       <Cursor position={mousePosition} />
-      <ProductGallery />   {/* re-renders on every mouse move */}
-      <ProductReviews />   {/* re-renders on every mouse move */}
-      <RelatedProducts />  {/* re-renders on every mouse move */}
+      <ProductGallery /> {/* re-renders on every mouse move */}
+      <ProductReviews /> {/* re-renders on every mouse move */}
+      <RelatedProducts /> {/* re-renders on every mouse move */}
     </div>
-  )
+  );
 }
 ```
 
@@ -30,14 +30,14 @@ function ProductPage() {
 
 ```tsx
 function MouseTracker({ children }: { children: ReactNode }) {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   return (
     <div onMouseMove={(e) => setMousePosition({ x: e.clientX, y: e.clientY })}>
       <Cursor position={mousePosition} />
       {children} {/* same JSX reference — React skips reconciliation */}
     </div>
-  )
+  );
 }
 
 function ProductPage() {
@@ -47,7 +47,7 @@ function ProductPage() {
       <ProductReviews />
       <RelatedProducts />
     </MouseTracker>
-  )
+  );
 }
 ```
 

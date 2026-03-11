@@ -15,27 +15,38 @@ Transform a method so that its body reads like a series of steps at the same lev
 async function publishArticle(article: Article, author: User): Promise<void> {
   // Low-level validation mixed with high-level flow
   if (!article.title || article.title.trim().length === 0) {
-    throw new Error('Title required')
+    throw new Error('Title required');
   }
   if (!article.content || article.content.length < 100) {
-    throw new Error('Content must be at least 100 characters')
+    throw new Error('Content must be at least 100 characters');
   }
   if (!author.permissions.includes('publish')) {
-    throw new Error('User cannot publish')
+    throw new Error('User cannot publish');
   }
 
-  article.status = 'published'
-  article.publishedAt = new Date()
-  article.slug = article.title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  article.status = 'published';
+  article.publishedAt = new Date();
+  article.slug = article.title
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
 
-  await db.articles.update(article.id, article)
+  await db.articles.update(article.id, article);
 
-  const followers = await db.users.find({ following: author.id })
+  const followers = await db.users.find({ following: author.id });
   for (const follower of followers) {
-    await sendEmail(follower.email, `New article: ${article.title}`, article.excerpt)
+    await sendEmail(
+      follower.email,
+      `New article: ${article.title}`,
+      article.excerpt
+    );
   }
 
-  await searchIndex.add({ id: article.id, title: article.title, content: article.content })
+  await searchIndex.add({
+    id: article.id,
+    title: article.title,
+    content: article.content,
+  });
 }
 ```
 
@@ -43,28 +54,28 @@ async function publishArticle(article: Article, author: User): Promise<void> {
 
 ```typescript
 async function publishArticle(article: Article, author: User): Promise<void> {
-  validateArticleForPublishing(article)
-  verifyPublishPermission(author)
+  validateArticleForPublishing(article);
+  verifyPublishPermission(author);
 
-  const publishedArticle = markAsPublished(article)
-  await saveArticle(publishedArticle)
+  const publishedArticle = markAsPublished(article);
+  await saveArticle(publishedArticle);
 
-  await notifyFollowers(author, publishedArticle)
-  await indexForSearch(publishedArticle)
+  await notifyFollowers(author, publishedArticle);
+  await indexForSearch(publishedArticle);
 }
 
 function validateArticleForPublishing(article: Article): void {
   if (!article.title?.trim()) {
-    throw new Error('Title required')
+    throw new Error('Title required');
   }
   if (!article.content || article.content.length < 100) {
-    throw new Error('Content must be at least 100 characters')
+    throw new Error('Content must be at least 100 characters');
   }
 }
 
 function verifyPublishPermission(author: User): void {
   if (!author.permissions.includes('publish')) {
-    throw new Error('User cannot publish')
+    throw new Error('User cannot publish');
   }
 }
 
@@ -73,16 +84,20 @@ function markAsPublished(article: Article): Article {
     ...article,
     status: 'published',
     publishedAt: new Date(),
-    slug: generateSlug(article.title)
-  }
+    slug: generateSlug(article.title),
+  };
 }
 
 function generateSlug(title: string): string {
-  return title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^a-z0-9-]/g, '');
 }
 ```
 
 **Benefits:**
+
 - Main method reads like documentation
 - Each helper can be tested independently
 - Easy to modify individual steps without affecting others

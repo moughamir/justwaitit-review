@@ -38,13 +38,20 @@ function MemberList({ orgId }: { orgId: string }) {
 **Correct (flat composition — dependencies visible at call site):**
 
 ```tsx
-function useMembers(orgId: string, token: string, page: number, pageSize: number) {
+function useMembers(
+  orgId: string,
+  token: string,
+  page: number,
+  pageSize: number
+) {
   const [members, setMembers] = useState<Member[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
-    fetchMembers(orgId, { page, pageSize }, token).then(setMembers).finally(() => setIsLoading(false));
+    fetchMembers(orgId, { page, pageSize }, token)
+      .then(setMembers)
+      .finally(() => setIsLoading(false));
   }, [orgId, page, pageSize, token]);
 
   return { members, isLoading };

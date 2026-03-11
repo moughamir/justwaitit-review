@@ -6,13 +6,13 @@ Best practices for writing efficient, safe, and maintainable code transformation
 
 This skill provides 48 rules across 11 categories to help you write better codemods:
 
-| Impact | Categories |
-|--------|------------|
-| CRITICAL | AST Understanding, Pattern Efficiency, Parsing Strategy |
-| HIGH | Node Traversal, Semantic Analysis |
-| MEDIUM-HIGH | Edit Operations, Workflow Design |
-| MEDIUM | Testing Strategy, State Management |
-| LOW-MEDIUM/LOW | Security, Package Structure |
+| Impact         | Categories                                              |
+| -------------- | ------------------------------------------------------- |
+| CRITICAL       | AST Understanding, Pattern Efficiency, Parsing Strategy |
+| HIGH           | Node Traversal, Semantic Analysis                       |
+| MEDIUM-HIGH    | Edit Operations, Workflow Design                        |
+| MEDIUM         | Testing Strategy, State Management                      |
+| LOW-MEDIUM/LOW | Security, Package Structure                             |
 
 ## Structure
 
@@ -56,19 +56,19 @@ pnpm validate
 3. Follow the template in `assets/templates/_template.md`
 4. Run validation to check formatting
 
-| Category | Prefix | When to Use |
-|----------|--------|-------------|
-| AST Understanding | `ast-` | AST structure, tree-sitter concepts |
-| Pattern Efficiency | `pattern-` | Pattern syntax, matching optimization |
-| Parsing Strategy | `parse-` | Parser selection, language handling |
-| Node Traversal | `traverse-` | Navigation, search optimization |
-| Semantic Analysis | `semantic-` | Cross-file analysis, symbol resolution |
-| Edit Operations | `edit-` | Code modification, formatting |
-| Workflow Design | `workflow-` | YAML configuration, orchestration |
-| Testing Strategy | `test-` | Fixtures, validation approaches |
-| State Management | `state-` | Progress tracking, resumability |
-| Security | `security-` | Capabilities, permissions |
-| Package Structure | `pkg-` | Metadata, organization |
+| Category           | Prefix      | When to Use                            |
+| ------------------ | ----------- | -------------------------------------- |
+| AST Understanding  | `ast-`      | AST structure, tree-sitter concepts    |
+| Pattern Efficiency | `pattern-`  | Pattern syntax, matching optimization  |
+| Parsing Strategy   | `parse-`    | Parser selection, language handling    |
+| Node Traversal     | `traverse-` | Navigation, search optimization        |
+| Semantic Analysis  | `semantic-` | Cross-file analysis, symbol resolution |
+| Edit Operations    | `edit-`     | Code modification, formatting          |
+| Workflow Design    | `workflow-` | YAML configuration, orchestration      |
+| Testing Strategy   | `test-`     | Fixtures, validation approaches        |
+| State Management   | `state-`    | Progress tracking, resumability        |
+| Security           | `security-` | Capabilities, permissions              |
+| Package Structure  | `pkg-`      | Metadata, organization                 |
 
 ## Rule File Structure
 
@@ -107,20 +107,21 @@ Files follow the pattern: `{prefix}-{description}.md`
 - `description`: Kebab-case description of the rule
 
 Examples:
+
 - `ast-explore-before-writing.md`
 - `pattern-avoid-overly-generic.md`
 - `workflow-use-matrix-for-parallelism.md`
 
 ## Impact Levels
 
-| Level | Definition | Examples |
-|-------|------------|----------|
-| CRITICAL | Foundational issues that cascade through entire pipeline | Wrong parser, inefficient patterns |
-| HIGH | Significant performance or correctness impact | Traversal optimization, semantic analysis |
-| MEDIUM-HIGH | Important for reliability and maintainability | Edit batching, workflow design |
-| MEDIUM | Good practices that prevent common issues | Testing, state management |
-| LOW-MEDIUM | Security and safety considerations | Capabilities, input validation |
-| LOW | Organization and discoverability | Package structure, metadata |
+| Level       | Definition                                               | Examples                                  |
+| ----------- | -------------------------------------------------------- | ----------------------------------------- |
+| CRITICAL    | Foundational issues that cascade through entire pipeline | Wrong parser, inefficient patterns        |
+| HIGH        | Significant performance or correctness impact            | Traversal optimization, semantic analysis |
+| MEDIUM-HIGH | Important for reliability and maintainability            | Edit batching, workflow design            |
+| MEDIUM      | Good practices that prevent common issues                | Testing, state management                 |
+| LOW-MEDIUM  | Security and safety considerations                       | Capabilities, input validation            |
+| LOW         | Organization and discoverability                         | Package structure, metadata               |
 
 ## Scripts
 
@@ -143,6 +144,7 @@ node ../../scripts/build-agents-md.js ./
 ## Acknowledgments
 
 Based on official Codemod documentation and community best practices:
+
 - [Codemod Documentation](https://docs.codemod.com)
 - [ast-grep Guide](https://ast-grep.github.io)
 - [Martin Fowler - Codemods for API Refactoring](https://martinfowler.com/articles/codemods-api-refactoring.html)

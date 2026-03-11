@@ -24,7 +24,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 <!-- Responsive Holy Grail -->
 <div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
   <header>Header</header>
-  <div class="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[250px_1fr_300px]">
+  <div
+    class="grid grid-cols-1 md:grid-cols-[250px_1fr] lg:grid-cols-[250px_1fr_300px]"
+  >
     <aside class="order-2 md:order-1">Sidebar</aside>
     <main class="order-1 md:order-2">Main</main>
     <aside class="order-3 hidden lg:block">Right</aside>
@@ -38,20 +40,32 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ```css
 @utility grid-areas-dashboard {
   grid-template-areas:
-    "header header header"
-    "nav main aside"
-    "nav footer footer";
+    'header header header'
+    'nav main aside'
+    'nav footer footer';
 }
 
-@utility area-header { grid-area: header; }
-@utility area-nav { grid-area: nav; }
-@utility area-main { grid-area: main; }
-@utility area-aside { grid-area: aside; }
-@utility area-footer { grid-area: footer; }
+@utility area-header {
+  grid-area: header;
+}
+@utility area-nav {
+  grid-area: nav;
+}
+@utility area-main {
+  grid-area: main;
+}
+@utility area-aside {
+  grid-area: aside;
+}
+@utility area-footer {
+  grid-area: footer;
+}
 ```
 
 ```html
-<div class="grid grid-areas-dashboard grid-cols-[200px_1fr_250px] grid-rows-[60px_1fr_40px] min-h-screen">
+<div
+  class="grid-areas-dashboard grid min-h-screen grid-cols-[200px_1fr_250px] grid-rows-[60px_1fr_40px]"
+>
   <header class="area-header bg-white shadow">Header</header>
   <nav class="area-nav bg-gray-100">Navigation</nav>
   <main class="area-main p-6">Main Content</main>
@@ -65,9 +79,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ```html
 <!-- Auto-fill: Creates as many tracks as fit, even empty ones -->
 <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-6">
-  <div class="bg-white rounded-lg shadow p-4">Card 1</div>
-  <div class="bg-white rounded-lg shadow p-4">Card 2</div>
-  <div class="bg-white rounded-lg shadow p-4">Card 3</div>
+  <div class="rounded-lg bg-white p-4 shadow">Card 1</div>
+  <div class="rounded-lg bg-white p-4 shadow">Card 2</div>
+  <div class="rounded-lg bg-white p-4 shadow">Card 3</div>
 </div>
 
 <!-- Auto-fit: Collapses empty tracks -->
@@ -76,7 +90,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </div>
 
 <!-- With arbitrary values -->
-<div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4">
+<div
+  class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,300px),1fr))] gap-4"
+>
   <!-- Handles edge case where container is smaller than minmax min -->
 </div>
 ```
@@ -97,7 +113,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ```html
 <div class="grid grid-cols-4 gap-4">
   <!-- Span 2 columns but align children to parent grid -->
-  <div class="col-span-2 grid subgrid-cols gap-4">
+  <div class="subgrid-cols col-span-2 grid gap-4">
     <div>Aligned to parent column 1</div>
     <div>Aligned to parent column 2</div>
   </div>
@@ -151,7 +167,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 <!-- Fixed + flexible -->
 <div class="flex">
   <div class="w-64 shrink-0">Fixed 256px</div>
-  <div class="flex-1 min-w-0">Flexible (can shrink)</div>
+  <div class="min-w-0 flex-1">Flexible (can shrink)</div>
 </div>
 
 <!-- Prevent shrinking with text overflow -->
@@ -165,10 +181,10 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Column-based masonry -->
-<div class="flex flex-col flex-wrap h-[800px] gap-4">
-  <div class="w-[calc(33.333%-1rem)] h-48">Item 1</div>
-  <div class="w-[calc(33.333%-1rem)] h-64">Item 2</div>
-  <div class="w-[calc(33.333%-1rem)] h-32">Item 3</div>
+<div class="flex h-[800px] flex-col flex-wrap gap-4">
+  <div class="h-48 w-[calc(33.333%-1rem)]">Item 1</div>
+  <div class="h-64 w-[calc(33.333%-1rem)]">Item 2</div>
+  <div class="h-32 w-[calc(33.333%-1rem)]">Item 3</div>
   <!-- Items flow vertically then wrap to next column -->
 </div>
 ```
@@ -178,14 +194,14 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ### Basic Container Queries
 
 ```css
-@plugin "@tailwindcss/container-queries";
+@plugin '@tailwindcss/container-queries';
 ```
 
 ```html
 <!-- Define container -->
 <div class="@container">
   <!-- Respond to container width -->
-  <div class="flex flex-col @md:flex-row @lg:grid @lg:grid-cols-3 gap-4">
+  <div class="@md:flex-row @lg:grid @lg:grid-cols-3 flex flex-col gap-4">
     <div>Item 1</div>
     <div>Item 2</div>
     <div>Item 3</div>
@@ -226,7 +242,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Sticky header -->
-<header class="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b">
+<header class="sticky top-0 z-50 border-b bg-white/80 backdrop-blur-sm">
   Navigation
 </header>
 
@@ -236,15 +252,17 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </aside>
 
 <!-- Sticky table header -->
-<div class="overflow-auto max-h-96">
+<div class="max-h-96 overflow-auto">
   <table>
     <thead class="sticky top-0 bg-white shadow">
       <tr>
-        <th class="sticky left-0 bg-white z-10">Corner cell</th>
+        <th class="sticky left-0 z-10 bg-white">Corner cell</th>
         <th>Column 2</th>
       </tr>
     </thead>
-    <tbody>...</tbody>
+    <tbody>
+      ...
+    </tbody>
   </table>
 </div>
 ```
@@ -253,7 +271,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Fixed bottom navigation (mobile) -->
-<nav class="fixed bottom-0 inset-x-0 z-50 bg-white border-t md:hidden">
+<nav class="fixed inset-x-0 bottom-0 z-50 border-t bg-white md:hidden">
   <div class="flex justify-around py-2">
     <a href="#">Home</a>
     <a href="#">Search</a>
@@ -262,7 +280,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </nav>
 
 <!-- Fixed action button -->
-<button class="fixed bottom-6 right-6 z-40 rounded-full bg-brand-500 p-4 shadow-lg">
+<button
+  class="bg-brand-500 fixed bottom-6 right-6 z-40 rounded-full p-4 shadow-lg"
+>
   <PlusIcon />
 </button>
 ```
@@ -281,14 +301,30 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
   --z-toast: 800;
 }
 
-@utility z-dropdown { z-index: var(--z-dropdown); }
-@utility z-sticky { z-index: var(--z-sticky); }
-@utility z-fixed { z-index: var(--z-fixed); }
-@utility z-modal-backdrop { z-index: var(--z-modal-backdrop); }
-@utility z-modal { z-index: var(--z-modal); }
-@utility z-popover { z-index: var(--z-popover); }
-@utility z-tooltip { z-index: var(--z-tooltip); }
-@utility z-toast { z-index: var(--z-toast); }
+@utility z-dropdown {
+  z-index: var(--z-dropdown);
+}
+@utility z-sticky {
+  z-index: var(--z-sticky);
+}
+@utility z-fixed {
+  z-index: var(--z-fixed);
+}
+@utility z-modal-backdrop {
+  z-index: var(--z-modal-backdrop);
+}
+@utility z-modal {
+  z-index: var(--z-modal);
+}
+@utility z-popover {
+  z-index: var(--z-popover);
+}
+@utility z-tooltip {
+  z-index: var(--z-tooltip);
+}
+@utility z-toast {
+  z-index: var(--z-toast);
+}
 ```
 
 ## Overflow and Scrolling
@@ -338,10 +374,10 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Horizontal carousel -->
-<div class="flex snap-x snap-mandatory overflow-x-auto gap-4 pb-4">
-  <div class="snap-start shrink-0 w-80">Card 1</div>
-  <div class="snap-start shrink-0 w-80">Card 2</div>
-  <div class="snap-start shrink-0 w-80">Card 3</div>
+<div class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4">
+  <div class="w-80 shrink-0 snap-start">Card 1</div>
+  <div class="w-80 shrink-0 snap-start">Card 2</div>
+  <div class="w-80 shrink-0 snap-start">Card 3</div>
 </div>
 
 <!-- Full-page sections -->
@@ -376,7 +412,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
   <video class="h-full w-full object-cover">...</video>
 </div>
 
-<div class="aspect-square rounded-full overflow-hidden">
+<div class="aspect-square overflow-hidden rounded-full">
   <img src="avatar.jpg" class="h-full w-full object-cover" />
 </div>
 
@@ -390,10 +426,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ```html
 <!-- Focus on specific part of image -->
 <div class="h-64 overflow-hidden">
-  <img
-    src="portrait.jpg"
-    class="h-full w-full object-cover object-top"
-  />
+  <img src="portrait.jpg" class="h-full w-full object-cover object-top" />
 </div>
 
 <!-- Arbitrary object position -->
@@ -406,14 +439,12 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Works for LTR and RTL -->
-<div class="ps-4 pe-6 ms-auto">
+<div class="ms-auto pe-6 ps-4">
   Padding and margin that respect text direction
 </div>
 
 <!-- Block direction (vertical in horizontal writing modes) -->
-<div class="pbs-4 pbe-6 mbs-auto">
-  Block-direction spacing
-</div>
+<div class="pbs-4 pbe-6 mbs-auto">Block-direction spacing</div>
 ```
 
 ### Space Between with Dividers
@@ -445,9 +476,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </article>
 
 <!-- Pull quote that breaks out -->
-<div class="max-w-prose mx-auto px-4">
+<div class="mx-auto max-w-prose px-4">
   <p>Normal content...</p>
-  <blockquote class="-mx-8 md:-mx-16 px-8 md:px-16 py-8 bg-gray-100">
+  <blockquote class="-mx-8 bg-gray-100 px-8 py-8 md:-mx-16 md:px-16">
     Featured quote that extends beyond content width
   </blockquote>
 </div>
@@ -459,7 +490,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Responsive columns -->
-<div class="columns-1 sm:columns-2 lg:columns-3 gap-8">
+<div class="columns-1 gap-8 sm:columns-2 lg:columns-3">
   <p>Content flows across columns...</p>
 </div>
 
@@ -470,9 +501,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 <!-- Prevent breaks inside elements -->
 <div class="columns-2">
-  <div class="break-inside-avoid mb-4">
-    Card that stays together
-  </div>
+  <div class="mb-4 break-inside-avoid">Card that stays together</div>
 </div>
 ```
 
@@ -482,13 +511,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <div class="@container">
-  <div class="
-    /* Container query for component-level responsiveness */
-    @md:flex @md:gap-4
-
-    /* Media query for page-level responsiveness */
-    lg:grid lg:grid-cols-2
-  ">
+  <div
+    class="/* Container query for component-level responsiveness */ @md:flex @md:gap-4 /* Media query for page-level responsiveness */ lg:grid lg:grid-cols-2"
+  >
     Content
   </div>
 </div>
@@ -503,7 +528,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
   <button class="md:hidden">Menu</button>
 
   <!-- Desktop navigation -->
-  <ul class="hidden md:flex gap-4">
+  <ul class="hidden gap-4 md:flex">
     <li>Home</li>
     <li>About</li>
     <li>Contact</li>
@@ -515,7 +540,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Fluid padding -->
-<section class="py-[clamp(2rem,5vw,6rem)] px-[clamp(1rem,3vw,4rem)]">
+<section class="px-[clamp(1rem,3vw,4rem)] py-[clamp(2rem,5vw,6rem)]">
   Content with responsive padding
 </section>
 
@@ -535,7 +560,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 <div class="hidden print:block">Print-only content</div>
 
 <!-- Print-specific styles -->
-<article class="print:text-black print:bg-white">
+<article class="print:bg-white print:text-black">
   <h1 class="text-2xl print:text-xl">Heading</h1>
   <a href="..." class="text-blue-500 print:text-black print:underline">
     Link (shows as text when printed)
@@ -548,9 +573,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </div>
 
 <!-- Force page break -->
-<div class="print:break-before-page">
-  Start on new page
-</div>
+<div class="print:break-before-page">Start on new page</div>
 ```
 
 ## Best Practices
@@ -560,9 +583,9 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 ```html
 <!-- Prefer Grid for 2D layouts -->
 <div class="grid grid-cols-3 gap-4">
-
-<!-- Prefer Flexbox for 1D layouts -->
-<div class="flex items-center gap-2">
+  <!-- Prefer Flexbox for 1D layouts -->
+  <div class="flex items-center gap-2"></div>
+</div>
 ```
 
 ### 2. Handle Edge Cases
@@ -574,7 +597,7 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 </div>
 
 <!-- Prevent grid blowout -->
-<div class="grid grid-cols-1 min-w-0">
+<div class="grid min-w-0 grid-cols-1">
   <div class="overflow-hidden">Content that might overflow</div>
 </div>
 ```
@@ -583,10 +606,10 @@ description: Tailwind CSS advanced layout techniques including CSS Grid and Flex
 
 ```html
 <!-- Prefer max-w-prose for reading content -->
-<article class="max-w-prose mx-auto">
-
-<!-- Use container for page sections -->
-<div class="container mx-auto px-4">
+<article class="mx-auto max-w-prose">
+  <!-- Use container for page sections -->
+  <div class="container mx-auto px-4"></div>
+</article>
 ```
 
 ### 4. Test All Breakpoints

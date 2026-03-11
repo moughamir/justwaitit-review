@@ -5,6 +5,7 @@ A comprehensive code simplification skill for AI agents and LLMs, containing 45 
 ## Overview
 
 This skill guides code simplification with a focus on:
+
 - **Context-first approach**: Understand project conventions before making changes
 - **Behavior preservation**: Change how code is written, never what it does
 - **Scope discipline**: Focus on recently modified code, keep diffs small
@@ -89,13 +90,13 @@ Good example - minimal diff from incorrect
 
 ## Impact Levels
 
-| Level | Description | When to Use |
-|-------|-------------|-------------|
-| CRITICAL | Must follow, violations cause bugs or breaking changes | Context discovery, behavior preservation |
-| HIGH | Strongly recommended, violations harm maintainability | Scope management, control flow |
-| MEDIUM-HIGH | Recommended for clarity and consistency | Naming conventions |
-| MEDIUM | Good practice, apply when beneficial | Duplication, dead code |
-| LOW-MEDIUM | Nice to have, language-specific optimizations | Language idioms |
+| Level       | Description                                            | When to Use                              |
+| ----------- | ------------------------------------------------------ | ---------------------------------------- |
+| CRITICAL    | Must follow, violations cause bugs or breaking changes | Context discovery, behavior preservation |
+| HIGH        | Strongly recommended, violations harm maintainability  | Scope management, control flow           |
+| MEDIUM-HIGH | Recommended for clarity and consistency                | Naming conventions                       |
+| MEDIUM      | Good practice, apply when beneficial                   | Duplication, dead code                   |
+| LOW-MEDIUM  | Nice to have, language-specific optimizations          | Language idioms                          |
 
 ## Scripts
 

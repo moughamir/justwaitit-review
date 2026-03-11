@@ -1,25 +1,12 @@
 'use client';
 
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { useInterval } from '@/hooks/use-interval';
 import { WhoItsForSectionText } from '@/lib/content/who-its-for';
 import { slideInLeft, ease } from '@/lib/motion';
-
-// Quick fallback hook implementation for useInterval
-function useIntervalFallback(callback: () => void, delay: number | null) {
-  const savedCallback = useRef(callback);
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-  useEffect(() => {
-    if (delay !== null) {
-      const id = setInterval(() => savedCallback.current(), delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
-}
 
 export function WhoItsForSection() {
   const { eyebrow, headline, audiences } = WhoItsForSectionText;
@@ -29,7 +16,7 @@ export function WhoItsForSection() {
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
 
-  useIntervalFallback(() => {
+  useInterval(() => {
     if (!isHovered) setActive((a) => (a + 1) % audiences.length);
   }, 4000);
 
@@ -42,7 +29,7 @@ export function WhoItsForSection() {
     <section
       id="who-its-for"
       aria-labelledby="who-heading"
-      className="relative flex min-h-screen flex-col justify-center px-4 py-24 sm:px-16"
+      className="relative flex min-h-screen flex-col justify-center px-4 pb-24 pt-32 sm:px-16 lg:pt-48"
     >
       <h2 id="who-heading" className="sr-only">
         {eyebrow}: {headline.pre} {headline.gradient}

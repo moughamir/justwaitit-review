@@ -19,10 +19,10 @@ Refactoring without tests means changing behavior without a safety net. Bugs int
 export function calculateShippingCost(
   weight: number,
   destination: string,
-  isExpedited: boolean,
+  isExpedited: boolean
 ): number {
   // Refactored version — looks cleaner but subtly broke the weight >= 50 case
-  const baseRate = destination === "international" ? 25 : 10;
+  const baseRate = destination === 'international' ? 25 : 10;
   const weightSurcharge = weight * 0.5;
   const expeditedMultiplier = isExpedited ? 1.5 : 1;
   return (baseRate + weightSurcharge) * expeditedMultiplier;
@@ -35,28 +35,28 @@ export function calculateShippingCost(
 
 ```tsx
 // Step 1: Write tests that capture CURRENT behavior before any changes
-import { calculateShippingCost } from "./ShippingCalculator";
+import { calculateShippingCost } from './ShippingCalculator';
 
-describe("calculateShippingCost — characterization", () => {
-  test("domestic standard under 50lbs", () => {
-    expect(calculateShippingCost(10, "domestic", false)).toBe(15);
+describe('calculateShippingCost — characterization', () => {
+  test('domestic standard under 50lbs', () => {
+    expect(calculateShippingCost(10, 'domestic', false)).toBe(15);
   });
 
-  test("domestic standard at 50lbs threshold", () => {
+  test('domestic standard at 50lbs threshold', () => {
     // Discovered: 50lb+ uses flat rate $45, not per-pound
-    expect(calculateShippingCost(50, "domestic", false)).toBe(45);
+    expect(calculateShippingCost(50, 'domestic', false)).toBe(45);
   });
 
-  test("domestic expedited under 50lbs", () => {
-    expect(calculateShippingCost(10, "domestic", true)).toBe(22.5);
+  test('domestic expedited under 50lbs', () => {
+    expect(calculateShippingCost(10, 'domestic', true)).toBe(22.5);
   });
 
-  test("international standard", () => {
-    expect(calculateShippingCost(10, "international", false)).toBe(30);
+  test('international standard', () => {
+    expect(calculateShippingCost(10, 'international', false)).toBe(30);
   });
 
-  test("international expedited at threshold", () => {
-    expect(calculateShippingCost(50, "international", true)).toBe(90);
+  test('international expedited at threshold', () => {
+    expect(calculateShippingCost(50, 'international', true)).toBe(90);
   });
 });
 

@@ -38,6 +38,7 @@ def process_tasks(tasks: list[str]) -> list[str]:
 ```
 
 **Benefits:**
+
 - `appendleft()` and `popleft()` are O(1)
 - `append()` and `pop()` are O(1)
 - Thread-safe for single append/pop operations

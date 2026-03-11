@@ -12,7 +12,7 @@ Once React Compiler is enabled and validated, manual `useMemo`, `useCallback`, a
 **Incorrect (manual memoization with compiler already enabled):**
 
 ```tsx
-"use memo"
+'use memo';
 
 const UserProfile = memo(function UserProfile({
   user,
@@ -21,17 +21,17 @@ const UserProfile = memo(function UserProfile({
   const fullName = useMemo(
     () => `${user.firstName} ${user.lastName}`,
     [user.firstName, user.lastName]
-  )
+  );
 
   const handleFollow = useCallback(
     () => onFollow(user.id),
     [user.id, onFollow]
-  )
+  );
 
   const joinDate = useMemo(
-    () => new Intl.DateTimeFormat("en-GB").format(user.createdAt),
+    () => new Intl.DateTimeFormat('en-GB').format(user.createdAt),
     [user.createdAt]
-  )
+  );
 
   return (
     <div>
@@ -39,19 +39,19 @@ const UserProfile = memo(function UserProfile({
       <span>Joined {joinDate}</span>
       <button onClick={handleFollow}>Follow</button>
     </div>
-  )
-})
+  );
+});
 ```
 
 **Correct (clean code, compiler handles memoization):**
 
 ```tsx
-"use memo"
+'use memo';
 
 function UserProfile({ user, onFollow }: UserProfileProps) {
-  const fullName = `${user.firstName} ${user.lastName}`
-  const handleFollow = () => onFollow(user.id)
-  const joinDate = new Intl.DateTimeFormat("en-GB").format(user.createdAt)
+  const fullName = `${user.firstName} ${user.lastName}`;
+  const handleFollow = () => onFollow(user.id);
+  const joinDate = new Intl.DateTimeFormat('en-GB').format(user.createdAt);
 
   return (
     <div>
@@ -59,7 +59,7 @@ function UserProfile({ user, onFollow }: UserProfileProps) {
       <span>Joined {joinDate}</span>
       <button onClick={handleFollow}>Follow</button>
     </div>
-  )
+  );
 }
 ```
 

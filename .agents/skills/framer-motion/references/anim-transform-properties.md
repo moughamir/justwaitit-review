@@ -12,14 +12,14 @@ Transform properties (x, y, scale, rotate) are GPU-accelerated and bypass the br
 **Incorrect (layout-triggering properties):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function ExpandingCard() {
   return (
     <motion.div
       className="card"
       initial={{ width: 200, height: 100 }}
-      animate={{ width: 400, height: 200 }}  // Triggers layout recalculation every frame
+      animate={{ width: 400, height: 200 }} // Triggers layout recalculation every frame
       transition={{ duration: 0.5 }}
     >
       <p>Content here</p>
@@ -32,7 +32,7 @@ function SlidingPanel() {
     <motion.div
       className="panel"
       initial={{ left: -300 }}
-      animate={{ left: 0 }}  // Causes reflow, not GPU-accelerated
+      animate={{ left: 0 }} // Causes reflow, not GPU-accelerated
       transition={{ duration: 0.3 }}
     >
       <nav>Menu items</nav>
@@ -44,14 +44,14 @@ function SlidingPanel() {
 **Correct (GPU-accelerated transforms):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function ExpandingCard() {
   return (
     <motion.div
       className="card"
       initial={{ scale: 0.5 }}
-      animate={{ scale: 1 }}  // GPU-accelerated, no layout recalculation
+      animate={{ scale: 1 }} // GPU-accelerated, no layout recalculation
       transition={{ duration: 0.5 }}
     >
       <p>Content here</p>
@@ -64,7 +64,7 @@ function SlidingPanel() {
     <motion.div
       className="panel"
       initial={{ x: -300 }}
-      animate={{ x: 0 }}  // GPU-accelerated transform
+      animate={{ x: 0 }} // GPU-accelerated transform
       transition={{ duration: 0.3 }}
     >
       <nav>Menu items</nav>
@@ -74,6 +74,7 @@ function SlidingPanel() {
 ```
 
 **Property mapping:**
+
 - `top/left/right/bottom` → `x`, `y`
 - `width/height` → `scale`, `scaleX`, `scaleY`
 - CSS `transform: rotate()` → `rotate`

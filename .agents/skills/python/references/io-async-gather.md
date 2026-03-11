@@ -34,6 +34,7 @@ async def fetch_user_data(user_id: str) -> dict:
 ```
 
 **When NOT to use this pattern:**
+
 - When operations depend on each other's results
 - When you need to handle individual failures differently (use `return_exceptions=True` or `asyncio.TaskGroup`)
 

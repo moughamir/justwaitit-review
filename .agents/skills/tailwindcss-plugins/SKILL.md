@@ -18,8 +18,8 @@ npm install -D @tailwindcss/typography
 ```
 
 ```css
-@import "tailwindcss";
-@plugin "@tailwindcss/typography";
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 ```
 
 #### Basic Usage
@@ -33,13 +33,13 @@ npm install -D @tailwindcss/typography
 
 #### Size Modifiers
 
-| Class | Description |
-|-------|-------------|
-| `prose-sm` | Smaller text (14px base) |
-| `prose` | Default (16px base) |
-| `prose-lg` | Larger text (18px base) |
-| `prose-xl` | Extra large (20px base) |
-| `prose-2xl` | Huge (24px base) |
+| Class       | Description              |
+| ----------- | ------------------------ |
+| `prose-sm`  | Smaller text (14px base) |
+| `prose`     | Default (16px base)      |
+| `prose-lg`  | Larger text (18px base)  |
+| `prose-xl`  | Extra large (20px base)  |
+| `prose-2xl` | Huge (24px base)         |
 
 ```html
 <article class="prose md:prose-lg lg:prose-xl">
@@ -69,16 +69,9 @@ npm install -D @tailwindcss/typography
 Override specific elements:
 
 ```html
-<article class="
-  prose
-  prose-headings:text-blue-600
-  prose-a:text-blue-500
-  prose-a:no-underline
-  prose-code:text-pink-500
-  prose-img:rounded-lg
-  prose-strong:text-gray-900
-  prose-blockquote:border-blue-500
-">
+<article
+  class="prose prose-headings:text-blue-600 prose-a:text-blue-500 prose-a:no-underline prose-code:text-pink-500 prose-img:rounded-lg prose-strong:text-gray-900 prose-blockquote:border-blue-500"
+>
   Content
 </article>
 ```
@@ -87,9 +80,7 @@ Override specific elements:
 
 ```html
 <!-- Remove max-width constraint -->
-<article class="prose max-w-none">
-  Full width content
-</article>
+<article class="prose max-w-none">Full width content</article>
 ```
 
 #### Escaping Prose Styles
@@ -111,8 +102,8 @@ Override specific elements:
 #### Custom Class Name
 
 ```css
-@plugin "@tailwindcss/typography" {
-  className: wysiwyg;
+@plugin '@tailwindcss/typography' {
+  classname: wysiwyg;
 }
 ```
 
@@ -131,13 +122,14 @@ npm install -D @tailwindcss/forms
 ```
 
 ```css
-@import "tailwindcss";
-@plugin "@tailwindcss/forms";
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
 ```
 
 #### Styled Elements
 
 The plugin applies styles to:
+
 - `input[type='text']`
 - `input[type='email']`
 - `input[type='password']`
@@ -160,7 +152,10 @@ The plugin applies styles to:
 
 ```html
 <!-- Text input -->
-<input type="email" class="rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500">
+<input
+  type="email"
+  class="rounded-lg border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+/>
 
 <!-- Select -->
 <select class="rounded-lg border-gray-300">
@@ -169,10 +164,10 @@ The plugin applies styles to:
 </select>
 
 <!-- Checkbox -->
-<input type="checkbox" class="rounded text-blue-500 focus:ring-blue-500">
+<input type="checkbox" class="rounded text-blue-500 focus:ring-blue-500" />
 
 <!-- Radio -->
-<input type="radio" class="text-blue-500 focus:ring-blue-500">
+<input type="radio" class="text-blue-500 focus:ring-blue-500" />
 
 <!-- Textarea -->
 <textarea class="rounded-lg border-gray-300" rows="4"></textarea>
@@ -183,7 +178,7 @@ The plugin applies styles to:
 For opt-in styling (doesn't apply global resets):
 
 ```css
-@plugin "@tailwindcss/forms" {
+@plugin '@tailwindcss/forms' {
   strategy: class;
 }
 ```
@@ -199,26 +194,26 @@ For opt-in styling (doesn't apply global resets):
 
 #### Form Classes Reference
 
-| Class | Element |
-|-------|---------|
-| `form-input` | Text inputs |
-| `form-textarea` | Textareas |
-| `form-select` | Selects |
+| Class              | Element          |
+| ------------------ | ---------------- |
+| `form-input`       | Text inputs      |
+| `form-textarea`    | Textareas        |
+| `form-select`      | Selects          |
 | `form-multiselect` | Multiple selects |
-| `form-checkbox` | Checkboxes |
-| `form-radio` | Radio buttons |
+| `form-checkbox`    | Checkboxes       |
+| `form-radio`       | Radio buttons    |
 
 #### Styling Checkboxes/Radios
 
 ```html
 <!-- Colored checkbox -->
-<input type="checkbox" class="rounded text-pink-500">
+<input type="checkbox" class="rounded text-pink-500" />
 
 <!-- Accent color (native) -->
-<input type="checkbox" class="accent-purple-600">
+<input type="checkbox" class="accent-purple-600" />
 
 <!-- Custom size -->
-<input type="checkbox" class="h-6 w-6 rounded text-blue-500">
+<input type="checkbox" class="h-6 w-6 rounded text-blue-500" />
 ```
 
 ### @tailwindcss/container-queries
@@ -232,8 +227,8 @@ npm install -D @tailwindcss/container-queries
 ```
 
 ```css
-@import "tailwindcss";
-@plugin "@tailwindcss/container-queries";
+@import 'tailwindcss';
+@plugin '@tailwindcss/container-queries';
 ```
 
 #### Basic Usage
@@ -242,7 +237,7 @@ npm install -D @tailwindcss/container-queries
 <!-- Define a container -->
 <div class="@container">
   <!-- Use container query breakpoints -->
-  <div class="flex flex-col @md:flex-row @lg:gap-8">
+  <div class="@md:flex-row @lg:gap-8 flex flex-col">
     <div class="@sm:text-lg @md:text-xl">
       Responsive to container, not viewport
     </div>
@@ -252,16 +247,16 @@ npm install -D @tailwindcss/container-queries
 
 #### Container Breakpoints
 
-| Prefix | Width |
-|--------|-------|
-| `@xs` | 320px |
-| `@sm` | 384px |
-| `@md` | 448px |
-| `@lg` | 512px |
-| `@xl` | 576px |
-| `@2xl` | 672px |
-| `@3xl` | 768px |
-| `@4xl` | 896px |
+| Prefix | Width  |
+| ------ | ------ |
+| `@xs`  | 320px  |
+| `@sm`  | 384px  |
+| `@md`  | 448px  |
+| `@lg`  | 512px  |
+| `@xl`  | 576px  |
+| `@2xl` | 672px  |
+| `@3xl` | 768px  |
+| `@4xl` | 896px  |
 | `@5xl` | 1024px |
 | `@6xl` | 1152px |
 | `@7xl` | 1280px |
@@ -272,15 +267,11 @@ npm install -D @tailwindcss/container-queries
 <!-- Name the container -->
 <div class="@container/sidebar">
   <!-- Reference by name -->
-  <div class="@md/sidebar:flex">
-    Only flex when sidebar container is md
-  </div>
+  <div class="@md/sidebar:flex">Only flex when sidebar container is md</div>
 </div>
 
 <div class="@container/main">
-  <div class="@lg/main:grid-cols-3">
-    Grid when main container is lg
-  </div>
+  <div class="@lg/main:grid-cols-3">Grid when main container is lg</div>
 </div>
 ```
 
@@ -288,9 +279,7 @@ npm install -D @tailwindcss/container-queries
 
 ```html
 <div class="@container">
-  <div class="@[400px]:flex @[600px]:grid">
-    Arbitrary breakpoint values
-  </div>
+  <div class="@[400px]:flex @[600px]:grid">Arbitrary breakpoint values</div>
 </div>
 ```
 
@@ -326,9 +315,14 @@ For complex plugins requiring JavaScript:
 
 ```javascript
 // plugins/my-plugin.js
-import plugin from 'tailwindcss/plugin'
+import plugin from 'tailwindcss/plugin';
 
-export default plugin(function({ addUtilities, addComponents, matchUtilities, theme }) {
+export default plugin(function ({
+  addUtilities,
+  addComponents,
+  matchUtilities,
+  theme,
+}) {
   // Add static utilities
   addUtilities({
     '.content-auto': {
@@ -337,7 +331,7 @@ export default plugin(function({ addUtilities, addComponents, matchUtilities, th
     '.text-balance': {
       'text-wrap': 'balance',
     },
-  })
+  });
 
   // Add components
   addComponents({
@@ -353,7 +347,7 @@ export default plugin(function({ addUtilities, addComponents, matchUtilities, th
         backgroundColor: theme('colors.blue.600'),
       },
     },
-  })
+  });
 
   // Add dynamic utilities
   matchUtilities(
@@ -363,25 +357,25 @@ export default plugin(function({ addUtilities, addComponents, matchUtilities, th
       }),
     },
     { values: theme('textShadow') }
-  )
-})
+  );
+});
 ```
 
 Load in CSS:
 
 ```css
-@import "tailwindcss";
-@plugin "./plugins/my-plugin.js";
+@import 'tailwindcss';
+@plugin './plugins/my-plugin.js';
 ```
 
 ### Plugin with Theme Extension
 
 ```javascript
 // plugins/gradients.js
-import plugin from 'tailwindcss/plugin'
+import plugin from 'tailwindcss/plugin';
 
 export default plugin(
-  function({ matchUtilities, theme }) {
+  function ({ matchUtilities, theme }) {
     matchUtilities(
       {
         'text-gradient': (value) => ({
@@ -391,7 +385,7 @@ export default plugin(
         }),
       },
       { values: theme('textGradient') }
-    )
+    );
   },
   {
     theme: {
@@ -402,45 +396,45 @@ export default plugin(
       },
     },
   }
-)
+);
 ```
 
 ### Adding Custom Variants
 
 ```javascript
 // plugins/variants.js
-import plugin from 'tailwindcss/plugin'
+import plugin from 'tailwindcss/plugin';
 
-export default plugin(function({ addVariant }) {
+export default plugin(function ({ addVariant }) {
   // Peer states
-  addVariant('peer-checked', ':merge(.peer):checked ~ &')
+  addVariant('peer-checked', ':merge(.peer):checked ~ &');
 
   // Group states
-  addVariant('group-focus-visible', ':merge(.group):focus-visible &')
+  addVariant('group-focus-visible', ':merge(.group):focus-visible &');
 
   // Data attributes
-  addVariant('data-active', '&[data-active="true"]')
-  addVariant('data-loading', '&[data-loading]')
+  addVariant('data-active', '&[data-active="true"]');
+  addVariant('data-loading', '&[data-loading]');
 
   // Custom selectors
-  addVariant('hocus', ['&:hover', '&:focus'])
-  addVariant('not-first', '&:not(:first-child)')
-  addVariant('not-last', '&:not(:last-child)')
-})
+  addVariant('hocus', ['&:hover', '&:focus']);
+  addVariant('not-first', '&:not(:first-child)');
+  addVariant('not-last', '&:not(:last-child)');
+});
 ```
 
 ## Community Plugins
 
 ### Popular Plugins
 
-| Plugin | Description |
-|--------|-------------|
-| `tailwindcss-animate` | Animation utilities |
-| `tailwindcss-motion` | Advanced motion/animation |
-| `@headlessui/tailwindcss` | Headless UI variants |
-| `tailwind-scrollbar` | Scrollbar styling |
-| `tailwindcss-3d` | 3D transform utilities |
-| `tailwindcss-fluid-type` | Fluid typography |
+| Plugin                    | Description               |
+| ------------------------- | ------------------------- |
+| `tailwindcss-animate`     | Animation utilities       |
+| `tailwindcss-motion`      | Advanced motion/animation |
+| `@headlessui/tailwindcss` | Headless UI variants      |
+| `tailwind-scrollbar`      | Scrollbar styling         |
+| `tailwindcss-3d`          | 3D transform utilities    |
+| `tailwindcss-fluid-type`  | Fluid typography          |
 
 ### tailwindcss-animate
 
@@ -449,15 +443,15 @@ npm install -D tailwindcss-animate
 ```
 
 ```css
-@plugin "tailwindcss-animate";
+@plugin 'tailwindcss-animate';
 ```
 
 ```html
-<div class="animate-in fade-in slide-in-from-bottom-4 duration-500">
+<div class="duration-500 animate-in fade-in slide-in-from-bottom-4">
   Animated content
 </div>
 
-<div class="animate-out fade-out slide-out-to-top-4 duration-300">
+<div class="duration-300 animate-out fade-out slide-out-to-top-4">
   Exiting content
 </div>
 ```
@@ -468,7 +462,7 @@ npm install -D tailwindcss-animate
 
 ```css
 /* Only load plugins you actually use */
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 /* @plugin "@tailwindcss/forms"; -- commented out if not using */
 ```
 

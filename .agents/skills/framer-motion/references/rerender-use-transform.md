@@ -18,7 +18,7 @@ function ScrollProgress() {
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on('change', (v) => {
-      setOpacity(1 - v);  // Triggers re-render on every scroll frame
+      setOpacity(1 - v); // Triggers re-render on every scroll frame
     });
     return unsubscribe;
   }, [scrollYProgress]);
@@ -32,7 +32,7 @@ function ScrollProgress() {
 ```tsx
 function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);  // No re-renders
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]); // No re-renders
 
   return <motion.div style={{ opacity }} />;
 }

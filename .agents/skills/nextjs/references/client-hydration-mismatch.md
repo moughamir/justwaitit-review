@@ -64,6 +64,7 @@ export function Timestamp() {
 ```
 
 **Common causes:**
+
 - `Date.now()`, `Math.random()`
 - `window.innerWidth`, `navigator.userAgent`
 - Browser extensions modifying HTML

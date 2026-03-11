@@ -43,7 +43,7 @@ Every `@theme` variable becomes available as a utility class and adds to IDE aut
 ```css
 @theme inline {
   /* Values are inlined into utilities instead of generating CSS variables */
-  --font-sans: "Inter", sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --color-brand: oklch(0.623 0.214 259.1);
 }
 /* Generates: .font-sans { font-family: "Inter", sans-serif; } */
@@ -51,6 +51,7 @@ Every `@theme` variable becomes available as a utility class and adds to IDE aut
 ```
 
 **Benefits:**
+
 - Cleaner IDE autocomplete with only relevant tokens
 - Fewer CSS variable declarations in output
 - Clearer design system constraints

@@ -12,7 +12,7 @@ Tailwind v4 supports any integer spacing value dynamically from the `--spacing` 
 **Incorrect (what's wrong):**
 
 ```html
-<div class="p-[12px] mt-[28px] gap-[16px]">
+<div class="mt-[28px] gap-[16px] p-[12px]">
   <section class="mb-[32px] px-[24px]">Hardcoded pixel values</section>
 </div>
 ```
@@ -20,7 +20,7 @@ Tailwind v4 supports any integer spacing value dynamically from the `--spacing` 
 **Correct (what's right):**
 
 ```html
-<div class="p-3 mt-7 gap-4">
+<div class="mt-7 gap-4 p-3">
   <section class="mb-8 px-6">Scale values from the spacing system</section>
 </div>
 ```

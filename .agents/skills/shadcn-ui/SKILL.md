@@ -1,6 +1,6 @@
 ---
 name: shadcn-ui
-description: "Install and configure shadcn/ui components for React projects. Guides component selection, installation order, dependency management, customisation with semantic tokens, and common UI recipes (forms, data tables, navigation, modals). Use after tailwind-theme-builder has set up the theme infrastructure, when adding components, building forms, creating data tables, or setting up navigation."
+description: 'Install and configure shadcn/ui components for React projects. Guides component selection, installation order, dependency management, customisation with semantic tokens, and common UI recipes (forms, data tables, navigation, modals). Use after tailwind-theme-builder has set up the theme infrastructure, when adding components, building forms, creating data tables, or setting up navigation.'
 ---
 
 # shadcn/ui Components
@@ -45,13 +45,13 @@ pnpm dlx shadcn@latest add navigation-menu command
 
 ### External Dependencies
 
-| Component | Requires |
-|-----------|----------|
-| Form | `react-hook-form`, `zod`, `@hookform/resolvers` |
-| Toast | `sonner` |
-| Data Table | `@tanstack/react-table` |
-| Command | `cmdk` |
-| Date Picker | `date-fns` (optional) |
+| Component   | Requires                                        |
+| ----------- | ----------------------------------------------- |
+| Form        | `react-hook-form`, `zod`, `@hookform/resolvers` |
+| Toast       | `sonner`                                        |
+| Data Table  | `@tanstack/react-table`                         |
+| Command     | `cmdk`                                          |
+| Date Picker | `date-fns` (optional)                           |
 
 Install external deps separately: `pnpm add react-hook-form zod @hookform/resolvers`
 
@@ -87,13 +87,13 @@ const actual = value === "__any__" ? "" : value
 
 ```tsx
 // Don't use dynamic import — icons get tree-shaken in production
-import * as LucideIcons from 'lucide-react'
-const Icon = LucideIcons[iconName]  // BREAKS in prod
+import * as LucideIcons from 'lucide-react';
+const Icon = LucideIcons[iconName]; // BREAKS in prod
 
 // Use explicit map
-import { Home, Users, Settings, type LucideIcon } from 'lucide-react'
-const ICON_MAP: Record<string, LucideIcon> = { Home, Users, Settings }
-const Icon = ICON_MAP[iconName]
+import { Home, Users, Settings, type LucideIcon } from 'lucide-react';
+const ICON_MAP: Record<string, LucideIcon> = { Home, Users, Settings };
+const Icon = ICON_MAP[iconName];
 ```
 
 ### Dialog Width Override
@@ -116,15 +116,15 @@ Add custom variants by editing the component file in `src/components/ui/`:
 
 ```tsx
 // button.tsx — add a "brand" variant
-const buttonVariants = cva("...", {
+const buttonVariants = cva('...', {
   variants: {
     variant: {
-      default: "bg-primary text-primary-foreground",
-      brand: "bg-brand text-brand-foreground hover:bg-brand/90",
+      default: 'bg-primary text-primary-foreground',
+      brand: 'bg-brand text-brand-foreground hover:bg-brand/90',
       // ... existing variants
     },
   },
-})
+});
 ```
 
 ### Colour overrides
@@ -146,14 +146,14 @@ Use semantic tokens from your theme — never raw Tailwind colours:
 
 Determine what UI patterns the project needs:
 
-| Need | Components |
-|------|-----------|
-| Forms with validation | Form, Input, Label, Select, Textarea, Button, Toast |
-| Data display with sorting | Table, Badge, Pagination |
-| Admin CRUD interface | Dialog, Form, Table, Button, Toast |
-| Marketing/landing page | Card, Button, Badge, Separator |
-| Settings/preferences | Tabs, Form, Switch, Select, Toast |
-| Navigation | NavigationMenu (desktop), Sheet (mobile), ModeToggle |
+| Need                      | Components                                           |
+| ------------------------- | ---------------------------------------------------- |
+| Forms with validation     | Form, Input, Label, Select, Textarea, Button, Toast  |
+| Data display with sorting | Table, Badge, Pagination                             |
+| Admin CRUD interface      | Dialog, Form, Table, Button, Toast                   |
+| Marketing/landing page    | Card, Button, Badge, Separator                       |
+| Settings/preferences      | Tabs, Form, Switch, Select, Toast                    |
+| Navigation                | NavigationMenu (desktop), Sheet (mobile), ModeToggle |
 
 ### Step 2: Install Components
 
@@ -175,7 +175,7 @@ Apply project-specific colours and variants using semantic tokens from the theme
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                                         | Read                                                                   |
+| -------------------------------------------- | ---------------------------------------------------------------------- |
 | Choosing components, install commands, props | [references/component-catalogue.md](references/component-catalogue.md) |
-| Building complete UI patterns | [references/recipes.md](references/recipes.md) |
+| Building complete UI patterns                | [references/recipes.md](references/recipes.md)                         |

@@ -64,6 +64,7 @@ export function DashboardPage({ userId }: { userId: string }) {
 ```
 
 **When sequential is necessary:**
+
 - Second request depends on first request's result
 - Rate limiting requires throttled requests
 - User must complete a step before seeing next data

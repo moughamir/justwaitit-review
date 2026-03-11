@@ -51,17 +51,17 @@ pnpm validate
 
 ### Prefix Reference
 
-| Prefix | Category | Impact |
-|--------|----------|--------|
-| `query-` | Query Selection | CRITICAL |
-| `async-` | Async Handling | CRITICAL |
-| `anti-` | Common Anti-Patterns | CRITICAL |
-| `user-` | User Interaction | HIGH |
-| `assert-` | Assertions | HIGH |
-| `setup-` | Component Setup | MEDIUM |
-| `struct-` | Test Structure | MEDIUM |
-| `debug-` | Debugging | LOW-MEDIUM |
-| `a11y-` | Accessibility Testing | LOW |
+| Prefix    | Category              | Impact     |
+| --------- | --------------------- | ---------- |
+| `query-`  | Query Selection       | CRITICAL   |
+| `async-`  | Async Handling        | CRITICAL   |
+| `anti-`   | Common Anti-Patterns  | CRITICAL   |
+| `user-`   | User Interaction      | HIGH       |
+| `assert-` | Assertions            | HIGH       |
+| `setup-`  | Component Setup       | MEDIUM     |
+| `struct-` | Test Structure        | MEDIUM     |
+| `debug-`  | Debugging             | LOW-MEDIUM |
+| `a11y-`   | Accessibility Testing | LOW        |
 
 ## Rule File Structure
 
@@ -102,27 +102,28 @@ Rule files follow the pattern: `{prefix}-{description}.md`
 - **description**: kebab-case description of the rule (e.g., `prefer-role`, `await-findby`)
 
 Examples:
+
 - `query-prefer-role.md` - Query selection rule about preferring getByRole
 - `async-await-findby.md` - Async handling rule about awaiting findBy queries
 - `anti-container-queries.md` - Anti-pattern rule about avoiding container queries
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| **CRITICAL** | Fundamental issues that cause test failures, false positives, or major maintenance burden |
-| **HIGH** | Important patterns that significantly improve test quality and reliability |
-| **MEDIUM** | Good practices that improve maintainability and readability |
-| **LOW-MEDIUM** | Helpful patterns for specific situations |
-| **LOW** | Nice-to-have improvements and advanced techniques |
+| Level          | Description                                                                               |
+| -------------- | ----------------------------------------------------------------------------------------- |
+| **CRITICAL**   | Fundamental issues that cause test failures, false positives, or major maintenance burden |
+| **HIGH**       | Important patterns that significantly improve test quality and reliability                |
+| **MEDIUM**     | Good practices that improve maintainability and readability                               |
+| **LOW-MEDIUM** | Helpful patterns for specific situations                                                  |
+| **LOW**        | Nice-to-have improvements and advanced techniques                                         |
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `pnpm build` | Generate AGENTS.md compiled document |
-| `pnpm validate` | Check skill structure against guidelines |
-| `pnpm validate --strict` | Fail on warnings as well as errors |
+| Command                  | Description                              |
+| ------------------------ | ---------------------------------------- |
+| `pnpm build`             | Generate AGENTS.md compiled document     |
+| `pnpm validate`          | Check skill structure against guidelines |
+| `pnpm validate --strict` | Fail on warnings as well as errors       |
 
 ## Contributing
 

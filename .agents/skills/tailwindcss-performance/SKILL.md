@@ -9,11 +9,11 @@ description: Tailwind CSS performance optimization including v4 improvements and
 
 Tailwind CSS v4 features a completely rewritten engine in Rust:
 
-| Metric | v3 | v4 |
-|--------|----|----|
-| Full builds | Baseline | Up to 5x faster |
+| Metric             | v3           | v4                   |
+| ------------------ | ------------ | -------------------- |
+| Full builds        | Baseline     | Up to 5x faster      |
 | Incremental builds | Milliseconds | Microseconds (100x+) |
-| Engine | JavaScript | Rust |
+| Engine             | JavaScript   | Rust                 |
 
 ## JIT (Just-In-Time) Compilation
 
@@ -30,7 +30,7 @@ JIT generates styles on-demand as classes are discovered in your files:
 Unlike v3, JIT is always enabled in v4—no configuration needed:
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 /* JIT is automatic */
 ```
 
@@ -42,7 +42,7 @@ v4 automatically detects template files—no content configuration required:
 
 ```css
 /* v4 - Works automatically */
-@import "tailwindcss";
+@import 'tailwindcss';
 ```
 
 ### Explicit Content (v4)
@@ -50,15 +50,15 @@ v4 automatically detects template files—no content configuration required:
 If automatic detection fails, specify sources explicitly:
 
 ```css
-@import "tailwindcss";
-@source "./src/**/*.{html,js,jsx,ts,tsx,vue,svelte}";
-@source "./components/**/*.{js,jsx,ts,tsx}";
+@import 'tailwindcss';
+@source './src/**/*.{html,js,jsx,ts,tsx,vue,svelte}';
+@source './components/**/*.{js,jsx,ts,tsx}';
 ```
 
 ### Excluding Paths
 
 ```css
-@source not "./src/legacy/**";
+@source not './src/legacy/**';
 ```
 
 ## Tree Shaking
@@ -125,7 +125,7 @@ className={colorClasses[color]}  // ✓ Detected
 
 ```css
 /* In your CSS for v4 */
-@source inline("text-blue-500 text-red-500 text-green-500");
+@source inline('text-blue-500 text-red-500 text-green-500');
 ```
 
 #### 4. CSS Variables
@@ -147,11 +147,13 @@ className={colorClasses[color]}  // ✓ Detected
 ```html
 <!-- SLOW - Transitions all properties -->
 <button class="transition-all duration-200">
-
-<!-- FAST - Only transitions specific properties -->
-<button class="transition-colors duration-200">
-<button class="transition-transform duration-200">
-<button class="transition-opacity duration-200">
+  <!-- FAST - Only transitions specific properties -->
+  <button class="transition-colors duration-200">
+    <button class="transition-transform duration-200">
+      <button class="transition-opacity duration-200"></button>
+    </button>
+  </button>
+</button>
 ```
 
 ### GPU-Accelerated Properties
@@ -160,13 +162,13 @@ Prefer `transform` and `opacity` for smooth animations:
 
 ```html
 <!-- GOOD - GPU accelerated -->
-<div class="transform hover:scale-105 transition-transform">
-
-<!-- GOOD - GPU accelerated -->
-<div class="opacity-100 hover:opacity-80 transition-opacity">
-
-<!-- SLOW - May cause repaints -->
-<div class="left-0 hover:left-4 transition-all">
+<div class="transform transition-transform hover:scale-105">
+  <!-- GOOD - GPU accelerated -->
+  <div class="opacity-100 transition-opacity hover:opacity-80">
+    <!-- SLOW - May cause repaints -->
+    <div class="left-0 transition-all hover:left-4"></div>
+  </div>
+</div>
 ```
 
 ## CSS Variable Usage
@@ -192,7 +194,7 @@ In v4, use CSS variables directly instead of `theme()`:
 For performance-critical paths:
 
 ```css
-@import "tailwindcss/theme.css" theme(static);
+@import 'tailwindcss/theme.css' theme(static);
 ```
 
 This inlines theme values instead of using CSS variables.
@@ -203,8 +205,8 @@ This inlines theme values instead of using CSS variables.
 
 ```javascript
 // vite.config.js
-import tailwindcss from '@tailwindcss/vite'
-import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [tailwindcss()],
@@ -216,11 +218,11 @@ export default defineConfig({
       output: {
         manualChunks: {
           // Split vendor CSS if needed
-        }
-      }
-    }
-  }
-})
+        },
+      },
+    },
+  },
+});
 ```
 
 ### PostCSS with cssnano
@@ -230,9 +232,9 @@ export default defineConfig({
 export default {
   plugins: {
     '@tailwindcss/postcss': {},
-    cssnano: process.env.NODE_ENV === 'production' ? {} : false
-  }
-}
+    cssnano: process.env.NODE_ENV === 'production' ? {} : false,
+  },
+};
 ```
 
 ## Reducing Bundle Size
@@ -241,7 +243,7 @@ export default {
 
 ```css
 /* Only load what you need */
-@plugin "@tailwindcss/typography";
+@plugin '@tailwindcss/typography';
 /* Don't load unused plugins */
 ```
 
@@ -345,12 +347,12 @@ gzip -c dist/assets/main.css | wc -c
 
 ### Common Issues
 
-| Issue | Solution |
-|-------|----------|
+| Issue            | Solution                                   |
+| ---------------- | ------------------------------------------ |
 | Large CSS output | Check for dynamic classes, safelist issues |
-| Slow builds | Ensure v4, check file globs |
-| Missing styles | Check content detection, class names |
-| Slow animations | Use GPU-accelerated properties |
+| Slow builds      | Ensure v4, check file globs                |
+| Missing styles   | Check content detection, class names       |
+| Slow animations  | Use GPU-accelerated properties             |
 
 ## Lazy Loading CSS
 
@@ -360,7 +362,7 @@ For very large apps, consider code-splitting CSS:
 // Dynamically import CSS for routes
 const AdminPage = lazy(() =>
   import('./admin.css').then(() => import('./AdminPage'))
-)
+);
 ```
 
 ## Best Practices Summary

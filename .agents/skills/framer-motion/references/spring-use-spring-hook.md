@@ -12,14 +12,14 @@ The `useSpring` hook creates a motion value that animates with spring physics wh
 **Incorrect (abrupt value changes):**
 
 ```tsx
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 function ProgressIndicator({ progress }: { progress: number }) {
-  const scaleX = useMotionValue(progress);  // Jumps instantly when progress changes
+  const scaleX = useMotionValue(progress); // Jumps instantly when progress changes
 
   // Update motion value imperatively
   useEffect(() => {
-    scaleX.set(progress);  // Abrupt jump, no animation
+    scaleX.set(progress); // Abrupt jump, no animation
   }, [progress, scaleX]);
 
   return (
@@ -34,10 +34,10 @@ function ProgressIndicator({ progress }: { progress: number }) {
 **Correct (smooth spring transitions):**
 
 ```tsx
-import { motion, useSpring, useTransform } from "framer-motion";
+import { motion, useSpring, useTransform } from 'framer-motion';
 
 function ProgressIndicator({ progress }: { progress: number }) {
-  const scaleX = useSpring(progress, { stiffness: 100, damping: 20 });  // Animates smoothly to new value
+  const scaleX = useSpring(progress, { stiffness: 100, damping: 20 }); // Animates smoothly to new value
 
   // useSpring automatically animates when progress prop changes
 
@@ -51,6 +51,7 @@ function ProgressIndicator({ progress }: { progress: number }) {
 ```
 
 **useSpring options:**
+
 - Accepts same spring config: `stiffness`, `damping`, `mass`
 - Can accept a MotionValue as source: `useSpring(motionValue, config)`
 - Returns a MotionValue that can be used in style props or transformed

@@ -24,7 +24,7 @@ function PropertyGallery({ images }: { images: PropertyImage[] }) {
         />
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -46,25 +46,25 @@ function PropertyGallery({ images }: { images: PropertyImage[] }) {
           `}
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           alt={image.caption}
-          loading={index < 4 ? "eager" : "lazy"} // first 4 images load immediately
+          loading={index < 4 ? 'eager' : 'lazy'} // first 4 images load immediately
           decoding="async"
           className="gallery-image"
         />
       ))}
     </div>
-  )
+  );
 }
 
 interface PropertyImage {
-  id: string
-  caption: string
-  originalUrl: string
+  id: string;
+  caption: string;
+  originalUrl: string;
   sizes: {
-    small: string   // 400px wide
-    medium: string  // 800px wide
-    large: string   // 1200px wide
-    xlarge: string  // 2000px wide
-  }
+    small: string; // 400px wide
+    medium: string; // 800px wide
+    large: string; // 1200px wide
+    xlarge: string; // 2000px wide
+  };
 }
 ```
 

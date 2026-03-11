@@ -12,17 +12,18 @@ Comprehensive guide to SQL Server index design and optimization.
 
 ### Index Types
 
-| Type | Description | Best For |
-|------|-------------|----------|
-| Clustered | Table data order | Primary access path, range scans |
-| Nonclustered | Separate structure | Specific query patterns |
-| Columnstore | Column-based storage | Analytics, aggregations |
-| Filtered | Partial index | Well-known subsets |
-| Covering | All columns needed | Avoiding key lookups |
+| Type         | Description          | Best For                         |
+| ------------ | -------------------- | -------------------------------- |
+| Clustered    | Table data order     | Primary access path, range scans |
+| Nonclustered | Separate structure   | Specific query patterns          |
+| Columnstore  | Column-based storage | Analytics, aggregations          |
+| Filtered     | Partial index        | Well-known subsets               |
+| Covering     | All columns needed   | Avoiding key lookups             |
 
 ### Clustered Index Guidelines
 
 **Ideal Clustered Key:**
+
 - Narrow (small data type)
 - Unique or mostly unique
 - Ever-increasing (identity, sequential GUID)
@@ -66,15 +67,15 @@ ON Orders(OrderDate DESC, OrderID DESC);
 
 ### By Query Pattern
 
-| Pattern | Recommended Index |
-|---------|-------------------|
-| `WHERE Col = value` | Nonclustered on Col |
+| Pattern                        | Recommended Index           |
+| ------------------------------ | --------------------------- |
+| `WHERE Col = value`            | Nonclustered on Col         |
 | `WHERE Col = v1 AND Col2 = v2` | Nonclustered on (Col, Col2) |
-| `WHERE Col = v ORDER BY Col2` | Nonclustered on (Col, Col2) |
-| `WHERE Col BETWEEN x AND y` | Col as leftmost key |
-| `SELECT * WHERE Col = v` | Clustered or covering NC |
-| Large aggregations | Columnstore |
-| Specific subset queries | Filtered index |
+| `WHERE Col = v ORDER BY Col2`  | Nonclustered on (Col, Col2) |
+| `WHERE Col BETWEEN x AND y`    | Col as leftmost key         |
+| `SELECT * WHERE Col = v`       | Clustered or covering NC    |
+| Large aggregations             | Columnstore                 |
+| Specific subset queries        | Filtered index              |
 
 ### Column Order in Composite Keys
 
@@ -97,6 +98,7 @@ WHERE A = 1 AND C = 3          -- B skipped (partial match only)
 ## Columnstore Indexes
 
 ### Clustered Columnstore
+
 ```sql
 -- Best for data warehousing
 CREATE CLUSTERED COLUMNSTORE INDEX CCI_FactSales
@@ -109,6 +111,7 @@ ORDER (DateKey, ProductKey);
 ```
 
 ### Nonclustered Columnstore
+
 ```sql
 -- Hybrid OLTP/OLAP
 CREATE NONCLUSTERED COLUMNSTORE INDEX NCCI_Orders_Analysis
@@ -117,6 +120,7 @@ WHERE Status = 'Completed';
 ```
 
 ### Columnstore Best Practices
+
 1. **Load batches >= 102,400 rows** - Creates compressed segments
 2. **Order data by filtered columns** - Better segment elimination
 3. **Use REORGANIZE, not REBUILD** - More efficient maintenance
@@ -178,11 +182,11 @@ INCLUDE (OrderDate, Amount, Status);
 
 ### Fragmentation Guidelines
 
-| Fragmentation % | Action |
-|-----------------|--------|
-| < 5% | None needed |
-| 5-30% | REORGANIZE |
-| > 30% | REBUILD |
+| Fragmentation % | Action      |
+| --------------- | ----------- |
+| < 5%            | None needed |
+| 5-30%           | REORGANIZE  |
+| > 30%           | REBUILD     |
 
 ```sql
 -- Reorganize (online, minimal locking)
@@ -204,6 +208,7 @@ ALTER INDEX IX_Orders_CustomerID ON Orders RESUME;
 ```
 
 ### Statistics Update
+
 ```sql
 -- Update after index changes
 UPDATE STATISTICS Orders;
@@ -223,6 +228,7 @@ WHERE object_id = OBJECT_ID('Orders');
 ## Performance Monitoring
 
 ### Index Usage Stats
+
 ```sql
 SELECT
     OBJECT_NAME(i.object_id) AS TableName,
@@ -240,6 +246,7 @@ ORDER BY ius.user_seeks + ius.user_scans DESC;
 ```
 
 ### Missing Index Recommendations
+
 ```sql
 SELECT
     migs.avg_user_impact AS ImpactPercent,
@@ -254,4 +261,3 @@ JOIN sys.dm_db_missing_index_details mid
     ON mig.index_handle = mid.index_handle
 ORDER BY migs.avg_user_impact DESC;
 ```
-

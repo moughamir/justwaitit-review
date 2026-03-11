@@ -12,54 +12,56 @@ When a user types quickly in a search field or navigates between pages, earlier 
 **Incorrect (stale response overwrites fresh data):**
 
 ```tsx
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 interface SearchResult {
-  id: string
-  title: string
-  relevanceScore: number
+  id: string;
+  title: string;
+  relevanceScore: number;
 }
 
 function PropertySearch({ query }: { query: string }) {
-  const [results, setResults] = useState<SearchResult[]>([])
+  const [results, setResults] = useState<SearchResult[]>([]);
 
   useEffect(() => {
-    if (!query) return
+    if (!query) return;
 
     // slow "apartment" request (500ms) resolves AFTER fast "apartment london" (200ms)
     fetch(`/api/search?q=${encodeURIComponent(query)}`)
       .then((response) => response.json())
-      .then((data) => setResults(data.results))
-  }, [query])
+      .then((data) => setResults(data.results));
+  }, [query]);
 
   return (
     <ul>
       {results.map((result) => (
-        <li key={result.id}>{result.title} ({result.relevanceScore})</li>
+        <li key={result.id}>
+          {result.title} ({result.relevanceScore})
+        </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
 **Correct (stale requests aborted on re-fetch):**
 
 ```tsx
-import { useEffect, useState } from "react"
+import { useEffect, useState } from 'react';
 
 interface SearchResult {
-  id: string
-  title: string
-  relevanceScore: number
+  id: string;
+  title: string;
+  relevanceScore: number;
 }
 
 function PropertySearch({ query }: { query: string }) {
-  const [results, setResults] = useState<SearchResult[]>([])
+  const [results, setResults] = useState<SearchResult[]>([]);
 
   useEffect(() => {
-    if (!query) return
+    if (!query) return;
 
-    const controller = new AbortController()
+    const controller = new AbortController();
 
     fetch(`/api/search?q=${encodeURIComponent(query)}`, {
       signal: controller.signal,
@@ -67,19 +69,21 @@ function PropertySearch({ query }: { query: string }) {
       .then((response) => response.json())
       .then((data) => setResults(data.results))
       .catch((error) => {
-        if (error.name !== "AbortError") throw error // ignore aborted requests
-      })
+        if (error.name !== 'AbortError') throw error; // ignore aborted requests
+      });
 
-    return () => controller.abort() // cancels previous request when query changes
-  }, [query])
+    return () => controller.abort(); // cancels previous request when query changes
+  }, [query]);
 
   return (
     <ul>
       {results.map((result) => (
-        <li key={result.id}>{result.title} ({result.relevanceScore})</li>
+        <li key={result.id}>
+          {result.title} ({result.relevanceScore})
+        </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 

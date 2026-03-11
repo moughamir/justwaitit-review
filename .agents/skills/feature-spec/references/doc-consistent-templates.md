@@ -13,11 +13,13 @@ Use standardized templates for recurring document types. Consistent structure ma
 
 ```markdown
 ## PRD #1 (by Alice)
+
 - Overview
 - Features
 - Timeline
 
 ## PRD #2 (by Bob)
+
 1. Problem Statement
 2. User Stories
 3. Success Metrics
@@ -25,6 +27,7 @@ Use standardized templates for recurring document types. Consistent structure ma
 5. Risks
 
 ## PRD #3 (by Carol)
+
 Executive Summary
 Background
 Proposal
@@ -37,7 +40,7 @@ Next Steps
 
 **Correct (standardized template):**
 
-```markdown
+````markdown
 ## PRD Template v2.0
 
 Every PRD follows this structure. Sections may be brief but cannot
@@ -59,14 +62,17 @@ reviewers:
     role: [Role]
     status: [Pending | Approved | Requested Changes]
 ```
+````
 
 ### 2. Executive Summary
-*2-3 sentences. What are we building and why?*
+
+_2-3 sentences. What are we building and why?_
 
 [Write summary here]
 
 ### 3. Problem Statement
-*What problem does this solve? For whom? How do we know it's a problem?*
+
+_What problem does this solve? For whom? How do we know it's a problem?_
 
 **Problem:** [Description]
 **Affected users:** [User segments]
@@ -74,9 +80,9 @@ reviewers:
 
 ### 4. Goals and Success Metrics
 
-| Goal | Metric | Baseline | Target | Timeline |
-|------|--------|----------|--------|----------|
-| [Goal 1] | [Metric] | [Current] | [Target] | [When] |
+| Goal     | Metric   | Baseline  | Target   | Timeline |
+| -------- | -------- | --------- | -------- | -------- |
+| [Goal 1] | [Metric] | [Current] | [Target] | [When]   |
 
 ### 5. User Stories
 
@@ -93,43 +99,49 @@ Acceptance Criteria:
 ### 6. Scope
 
 **In Scope:**
+
 - [Item 1]
 - [Item 2]
 
 **Out of Scope:**
+
 - [Item 1] - [Reason]
 
 **Future Considerations:**
+
 - [Item 1] - [Tentative timeline]
 
 ### 7. Requirements
 
 #### 7.1 Functional Requirements
-| ID | Requirement | Priority | Notes |
-|----|-------------|----------|-------|
+
+| ID     | Requirement   | Priority            | Notes   |
+| ------ | ------------- | ------------------- | ------- |
 | FR-001 | [Requirement] | [Must/Should/Could] | [Notes] |
 
 #### 7.2 Non-Functional Requirements
-| Category | Requirement |
-|----------|-------------|
-| Performance | [Requirement] |
-| Security | [Requirement] |
+
+| Category      | Requirement   |
+| ------------- | ------------- |
+| Performance   | [Requirement] |
+| Security      | [Requirement] |
 | Accessibility | [Requirement] |
 
 ### 8. Dependencies and Risks
 
-| Dependency/Risk | Type | Impact | Mitigation |
-|-----------------|------|--------|------------|
-| [Item] | [Dependency/Risk] | [H/M/L] | [Action] |
+| Dependency/Risk | Type              | Impact  | Mitigation |
+| --------------- | ----------------- | ------- | ---------- |
+| [Item]          | [Dependency/Risk] | [H/M/L] | [Action]   |
 
 ### 9. Timeline
 
-| Milestone | Date | Dependencies |
-|-----------|------|--------------|
+| Milestone   | Date   | Dependencies   |
+| ----------- | ------ | -------------- |
 | [Milestone] | [Date] | [Dependencies] |
 
 ### 10. Appendix
-*Supporting materials, research, mockups, technical details*
+
+_Supporting materials, research, mockups, technical details_
 
 ---
 
@@ -139,6 +151,7 @@ Acceptance Criteria:
 - Provide brief answers; link to details
 - Update version number on each significant change
 - Get reviewer sign-off before development starts
+
 ```
 
 ### Template Library
@@ -161,6 +174,7 @@ Acceptance Criteria:
 ```
 
 **Template requirements:**
+
 - Standard structure for each document type
 - Required vs optional sections marked
 - Examples and guidance included

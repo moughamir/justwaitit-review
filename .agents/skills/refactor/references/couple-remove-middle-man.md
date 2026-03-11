@@ -13,14 +13,26 @@ When a class becomes a simple pass-through with too many delegating methods, let
 
 ```typescript
 class Person {
-  private department: Department
+  private department: Department;
 
-  getDepartmentName(): string { return this.department.getName() }
-  getDepartmentCode(): string { return this.department.getCode() }
-  getDepartmentBudget(): number { return this.department.getBudget() }
-  getDepartmentManager(): Person { return this.department.getManager() }
-  getDepartmentLocation(): string { return this.department.getLocation() }
-  getDepartmentEmployeeCount(): number { return this.department.getEmployeeCount() }
+  getDepartmentName(): string {
+    return this.department.getName();
+  }
+  getDepartmentCode(): string {
+    return this.department.getCode();
+  }
+  getDepartmentBudget(): number {
+    return this.department.getBudget();
+  }
+  getDepartmentManager(): Person {
+    return this.department.getManager();
+  }
+  getDepartmentLocation(): string {
+    return this.department.getLocation();
+  }
+  getDepartmentEmployeeCount(): number {
+    return this.department.getEmployeeCount();
+  }
   // Person becomes a bloated wrapper around Department
 }
 
@@ -31,32 +43,33 @@ class Person {
 
 ```typescript
 class Person {
-  private _department: Department
+  private _department: Department;
 
   // Only hide what genuinely needs hiding
   getManager(): Person {
-    return this._department.getManager()
+    return this._department.getManager();
   }
 
   // Expose the delegate for direct access
   get department(): Department {
-    return this._department
+    return this._department;
   }
 }
 
 // Client accesses Department directly for detailed queries
 function formatDepartmentInfo(person: Person): string {
-  const dept = person.department
-  return `${dept.getName()} (${dept.getCode()}) - ${dept.getLocation()}`
+  const dept = person.department;
+  return `${dept.getName()} (${dept.getCode()}) - ${dept.getLocation()}`;
 }
 
 // Person only delegates what makes semantic sense
 function getDirectManager(person: Person): Person {
-  return person.getManager()
+  return person.getManager();
 }
 ```
 
 **Guidelines for balance:**
+
 - Hide navigation that reveals internal structure
 - Expose stable, cohesive objects that have their own API
 - Count the delegating methods—if they outnumber real methods, reconsider

@@ -34,9 +34,10 @@ wrangler whoami
 ```
 
 Add to `wrangler.jsonc`:
+
 ```jsonc
 {
-  "account_id": "YOUR_ACCOUNT_ID_HERE"
+  "account_id": "YOUR_ACCOUNT_ID_HERE",
 }
 ```
 
@@ -51,6 +52,7 @@ export CLOUDFLARE_API_TOKEN="your-token"
 ```
 
 **Create API token**:
+
 1. Go to: https://dash.cloudflare.com/profile/api-tokens
 2. Click "Create Token"
 3. Use template: "Edit Cloudflare Workers"
@@ -215,11 +217,9 @@ wrangler r2 object get my-bucket/file.txt --file local-file.txt
   "main": "src/index.ts",
   "compatibility_date": "2025-10-11",
   "vars": {
-    "ENV": "production"
+    "ENV": "production",
   },
-  "kv_namespaces": [
-    { "binding": "MY_KV", "id": "production-kv-id" }
-  ]
+  "kv_namespaces": [{ "binding": "MY_KV", "id": "production-kv-id" }],
 }
 ```
 
@@ -234,7 +234,7 @@ wrangler r2 object get my-bucket/file.txt --file local-file.txt
 
   // Shared configuration
   "observability": {
-    "enabled": true
+    "enabled": true,
   },
 
   // Environment-specific configuration
@@ -243,37 +243,40 @@ wrangler r2 object get my-bucket/file.txt --file local-file.txt
       "name": "my-worker-staging",
       "vars": {
         "ENV": "staging",
-        "API_URL": "https://api-staging.example.com"
+        "API_URL": "https://api-staging.example.com",
       },
-      "kv_namespaces": [
-        { "binding": "MY_KV", "id": "staging-kv-id" }
-      ],
+      "kv_namespaces": [{ "binding": "MY_KV", "id": "staging-kv-id" }],
       "d1_databases": [
-        { "binding": "DB", "database_name": "my-db-staging", "database_id": "staging-db-id" }
-      ]
+        {
+          "binding": "DB",
+          "database_name": "my-db-staging",
+          "database_id": "staging-db-id",
+        },
+      ],
     },
 
     "production": {
       "name": "my-worker-production",
       "vars": {
         "ENV": "production",
-        "API_URL": "https://api.example.com"
+        "API_URL": "https://api.example.com",
       },
-      "kv_namespaces": [
-        { "binding": "MY_KV", "id": "production-kv-id" }
-      ],
+      "kv_namespaces": [{ "binding": "MY_KV", "id": "production-kv-id" }],
       "d1_databases": [
-        { "binding": "DB", "database_name": "my-db", "database_id": "production-db-id" }
+        {
+          "binding": "DB",
+          "database_name": "my-db",
+          "database_id": "production-db-id",
+        },
       ],
-      "routes": [
-        { "pattern": "example.com/*", "zone_name": "example.com" }
-      ]
-    }
-  }
+      "routes": [{ "pattern": "example.com/*", "zone_name": "example.com" }],
+    },
+  },
 }
 ```
 
 Deploy:
+
 ```bash
 wrangler deploy --env staging
 wrangler deploy --env production
@@ -283,11 +286,11 @@ wrangler deploy --env production
 
 ```typescript
 app.get('/api/info', (c) => {
-  const env = c.env.ENV || 'development'
-  const apiUrl = c.env.API_URL || 'http://localhost:3000'
+  const env = c.env.ENV || 'development';
+  const apiUrl = c.env.API_URL || 'http://localhost:3000';
 
-  return c.json({ env, apiUrl })
-})
+  return c.json({ env, apiUrl });
+});
 ```
 
 ---
@@ -376,6 +379,7 @@ jobs:
 ```
 
 **Add secrets to GitHub**:
+
 1. Go to: Repository → Settings → Secrets → Actions
 2. Add `CLOUDFLARE_API_TOKEN`
 3. Add `CLOUDFLARE_ACCOUNT_ID`
@@ -419,6 +423,7 @@ deploy_production:
 ```
 
 **Add variables to GitLab**:
+
 1. Go to: Settings → CI/CD → Variables
 2. Add `CLOUDFLARE_API_TOKEN` (masked)
 3. Add `CLOUDFLARE_ACCOUNT_ID`
@@ -460,6 +465,7 @@ echo "🔗 Check logs: wrangler tail --env $ENV"
 ```
 
 Usage:
+
 ```bash
 chmod +x scripts/deploy.sh
 ./scripts/deploy.sh staging
@@ -476,7 +482,7 @@ Always set a recent `compatibility_date`:
 
 ```jsonc
 {
-  "compatibility_date": "2025-10-11"
+  "compatibility_date": "2025-10-11",
 }
 ```
 
@@ -489,12 +495,13 @@ Always set a recent `compatibility_date`:
 ```jsonc
 {
   "observability": {
-    "enabled": true
-  }
+    "enabled": true,
+  },
 }
 ```
 
 **Provides**:
+
 - Real-time metrics
 - Error tracking
 - Performance monitoring
@@ -504,8 +511,8 @@ Always set a recent `compatibility_date`:
 ```jsonc
 {
   "limits": {
-    "cpu_ms": 50  // Maximum CPU time per request (paid plan)
-  }
+    "cpu_ms": 50, // Maximum CPU time per request (paid plan)
+  },
 }
 ```
 
@@ -516,13 +523,14 @@ Always set a recent `compatibility_date`:
   "routes": [
     {
       "pattern": "api.example.com/*",
-      "zone_name": "example.com"
-    }
-  ]
+      "zone_name": "example.com",
+    },
+  ],
 }
 ```
 
 **Or via dashboard**:
+
 1. Workers & Pages → Your Worker → Triggers
 2. Add Custom Domain
 
@@ -536,31 +544,31 @@ wrangler secret put DATABASE_URL
 
 ```typescript
 // Access in code
-const apiKey = c.env.API_KEY
+const apiKey = c.env.API_KEY;
 ```
 
 ### 6. Implement Rate Limiting
 
 ```typescript
-import { Hono } from 'hono'
+import { Hono } from 'hono';
 
-const app = new Hono()
+const app = new Hono();
 
 app.use('/api/*', async (c, next) => {
-  const ip = c.req.header('cf-connecting-ip')
-  const key = `rate-limit:${ip}`
+  const ip = c.req.header('cf-connecting-ip');
+  const key = `rate-limit:${ip}`;
 
-  const count = await c.env.MY_KV.get(key)
+  const count = await c.env.MY_KV.get(key);
   if (count && parseInt(count) > 100) {
-    return c.json({ error: 'Rate limit exceeded' }, 429)
+    return c.json({ error: 'Rate limit exceeded' }, 429);
   }
 
   await c.env.MY_KV.put(key, (parseInt(count || '0') + 1).toString(), {
-    expirationTtl: 60  // 1 minute
-  })
+    expirationTtl: 60, // 1 minute
+  });
 
-  await next()
-})
+  await next();
+});
 ```
 
 ### 7. Add Health Check Endpoint
@@ -570,44 +578,49 @@ app.get('/health', (c) => {
   return c.json({
     status: 'ok',
     version: '1.0.0',
-    timestamp: new Date().toISOString()
-  })
-})
+    timestamp: new Date().toISOString(),
+  });
+});
 ```
 
 ### 8. Implement Error Tracking
 
 ```typescript
 app.onError((err, c) => {
-  console.error('Error:', err)
+  console.error('Error:', err);
 
   // Send to error tracking service
   // await sendToSentry(err)
 
-  return c.json({
-    error: 'Internal Server Error',
-    requestId: c.req.header('cf-ray')
-  }, 500)
-})
+  return c.json(
+    {
+      error: 'Internal Server Error',
+      requestId: c.req.header('cf-ray'),
+    },
+    500
+  );
+});
 ```
 
 ### 9. Use Structured Logging
 
 ```typescript
-import { logger } from 'hono/logger'
+import { logger } from 'hono/logger';
 
-app.use('*', logger())
+app.use('*', logger());
 
 app.get('/api/users', (c) => {
-  console.log(JSON.stringify({
-    level: 'info',
-    message: 'Fetching users',
-    userId: c.req.header('x-user-id'),
-    timestamp: new Date().toISOString()
-  }))
+  console.log(
+    JSON.stringify({
+      level: 'info',
+      message: 'Fetching users',
+      userId: c.req.header('x-user-id'),
+      timestamp: new Date().toISOString(),
+    })
+  );
 
-  return c.json({ users: [] })
-})
+  return c.json({ users: [] });
+});
 ```
 
 ### 10. Test Before Deploying
@@ -656,6 +669,7 @@ wrangler tail --format json
 ### Analytics Dashboard
 
 View in Cloudflare Dashboard:
+
 1. Workers & Pages → Your Worker → Metrics
 2. See:
    - Requests per second
@@ -667,21 +681,23 @@ View in Cloudflare Dashboard:
 
 ```typescript
 app.use('*', async (c, next) => {
-  const start = Date.now()
+  const start = Date.now();
 
-  await next()
+  await next();
 
-  const duration = Date.now() - start
+  const duration = Date.now() - start;
 
-  console.log(JSON.stringify({
-    type: 'metric',
-    name: 'request_duration',
-    value: duration,
-    path: c.req.path,
-    method: c.req.method,
-    status: c.res.status
-  }))
-})
+  console.log(
+    JSON.stringify({
+      type: 'metric',
+      name: 'request_duration',
+      value: duration,
+      path: c.req.path,
+      method: c.req.method,
+      status: c.res.status,
+    })
+  );
+});
 ```
 
 ### External Monitoring
@@ -690,15 +706,15 @@ app.use('*', async (c, next) => {
 
 ```typescript
 app.use('*', async (c, next) => {
-  await next()
+  await next();
 
   // Write to Analytics Engine
   c.env.ANALYTICS.writeDataPoint({
     indexes: [c.req.path],
     blobs: [c.req.method, c.req.header('user-agent')],
-    doubles: [Date.now(), c.res.status]
-  })
-})
+    doubles: [Date.now(), c.res.status],
+  });
+});
 ```
 
 **Or send to external services**:
@@ -709,14 +725,14 @@ await fetch('https://api.datadoghq.com/api/v1/logs', {
   method: 'POST',
   headers: {
     'DD-API-KEY': c.env.DATADOG_API_KEY,
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   },
   body: JSON.stringify({
     message: 'Request processed',
     status: c.res.status,
-    path: c.req.path
-  })
-})
+    path: c.req.path,
+  }),
+});
 ```
 
 ---
@@ -742,9 +758,9 @@ wrangler rollback --deployment-id DEPLOYMENT_ID
     {
       "pattern": "example.com/*",
       "zone_name": "example.com",
-      "script": "my-worker"
-    }
-  ]
+      "script": "my-worker",
+    },
+  ],
 }
 ```
 
@@ -769,6 +785,7 @@ ls -lh dist/
 ```
 
 **Tips**:
+
 - Avoid large dependencies
 - Use dynamic imports for heavy modules
 - Tree-shake unused code
@@ -777,23 +794,23 @@ ls -lh dist/
 
 ```typescript
 app.get('/api/data', async (c) => {
-  const cache = caches.default
-  const cacheKey = new Request(c.req.url, c.req.raw)
+  const cache = caches.default;
+  const cacheKey = new Request(c.req.url, c.req.raw);
 
-  let response = await cache.match(cacheKey)
+  let response = await cache.match(cacheKey);
 
   if (!response) {
     // Fetch data
-    const data = await fetchData()
-    response = c.json(data)
+    const data = await fetchData();
+    response = c.json(data);
 
     // Cache for 5 minutes
-    response.headers.set('Cache-Control', 'max-age=300')
-    c.executionCtx.waitUntil(cache.put(cacheKey, response.clone()))
+    response.headers.set('Cache-Control', 'max-age=300');
+    c.executionCtx.waitUntil(cache.put(cacheKey, response.clone()));
   }
 
-  return response
-})
+  return response;
+});
 ```
 
 ### 3. Optimize Database Queries
@@ -801,11 +818,15 @@ app.get('/api/data', async (c) => {
 ```typescript
 // ❌ Bad: N+1 queries
 for (const user of users) {
-  const posts = await c.env.DB.prepare('SELECT * FROM posts WHERE user_id = ?').bind(user.id).all()
+  const posts = await c.env.DB.prepare('SELECT * FROM posts WHERE user_id = ?')
+    .bind(user.id)
+    .all();
 }
 
 // ✅ Good: Single query
-const posts = await c.env.DB.prepare('SELECT * FROM posts WHERE user_id IN (?)').bind(userIds).all()
+const posts = await c.env.DB.prepare('SELECT * FROM posts WHERE user_id IN (?)')
+  .bind(userIds)
+  .all();
 ```
 
 ---

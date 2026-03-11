@@ -13,26 +13,26 @@ When a variable is used only once and its expression is just as clear, inline it
 
 ```typescript
 function isValidOrder(order: Order): boolean {
-  const hasItems = order.items.length > 0
-  const hasCustomer = order.customerId !== null
-  const isNotCancelled = order.status !== 'cancelled'
+  const hasItems = order.items.length > 0;
+  const hasCustomer = order.customerId !== null;
+  const isNotCancelled = order.status !== 'cancelled';
 
-  return hasItems && hasCustomer && isNotCancelled
+  return hasItems && hasCustomer && isNotCancelled;
 }
 
 function formatPrice(amount: number): string {
-  const roundedAmount = Math.round(amount * 100) / 100
-  const formattedAmount = roundedAmount.toFixed(2)
-  const priceWithSymbol = '$' + formattedAmount
+  const roundedAmount = Math.round(amount * 100) / 100;
+  const formattedAmount = roundedAmount.toFixed(2);
+  const priceWithSymbol = '$' + formattedAmount;
 
-  return priceWithSymbol
+  return priceWithSymbol;
 }
 
 function getDiscount(customer: Customer): number {
-  const isPremium = customer.tier === 'premium'
-  const discount = isPremium ? 0.2 : 0
+  const isPremium = customer.tier === 'premium';
+  const discount = isPremium ? 0.2 : 0;
 
-  return discount
+  return discount;
 }
 ```
 
@@ -40,21 +40,24 @@ function getDiscount(customer: Customer): number {
 
 ```typescript
 function isValidOrder(order: Order): boolean {
-  return order.items.length > 0 &&
-         order.customerId !== null &&
-         order.status !== 'cancelled'
+  return (
+    order.items.length > 0 &&
+    order.customerId !== null &&
+    order.status !== 'cancelled'
+  );
 }
 
 function formatPrice(amount: number): string {
-  return '$' + (Math.round(amount * 100) / 100).toFixed(2)
+  return '$' + (Math.round(amount * 100) / 100).toFixed(2);
 }
 
 function getDiscount(customer: Customer): number {
-  return customer.tier === 'premium' ? 0.2 : 0
+  return customer.tier === 'premium' ? 0.2 : 0;
 }
 ```
 
 **When NOT to inline:**
+
 - Variable name adds significant clarity to a complex expression
 - Variable is used multiple times
 - Expression has side effects (should only execute once)
@@ -65,11 +68,12 @@ function getDiscount(customer: Customer): number {
 ```typescript
 // Keep - the name adds meaning
 function shouldShowWarning(user: User, action: Action): boolean {
-  const hasDestructiveIntent = action.type === 'delete' || action.type === 'purge'
-  const lacksConfirmation = !action.confirmed
-  const isHighValueTarget = user.accountValue > 10000
+  const hasDestructiveIntent =
+    action.type === 'delete' || action.type === 'purge';
+  const lacksConfirmation = !action.confirmed;
+  const isHighValueTarget = user.accountValue > 10000;
 
-  return hasDestructiveIntent && lacksConfirmation && isHighValueTarget
+  return hasDestructiveIntent && lacksConfirmation && isHighValueTarget;
 }
 ```
 

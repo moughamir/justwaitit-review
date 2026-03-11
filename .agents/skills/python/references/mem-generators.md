@@ -50,6 +50,7 @@ def get_active_users(users: list[dict]):
 ```
 
 **When NOT to use generators:**
+
 - When you need random access to elements
 - When you need to iterate multiple times
 

@@ -14,16 +14,16 @@ Replace temporary variables with query methods when the value is used multiple t
 ```typescript
 class Order {
   getPrice(): number {
-    const basePrice = this.quantity * this.itemPrice
-    let discountFactor: number
+    const basePrice = this.quantity * this.itemPrice;
+    let discountFactor: number;
 
     if (basePrice > 1000) {
-      discountFactor = 0.95
+      discountFactor = 0.95;
     } else {
-      discountFactor = 0.98
+      discountFactor = 0.98;
     }
 
-    return basePrice * discountFactor
+    return basePrice * discountFactor;
   }
 }
 
@@ -36,29 +36,30 @@ class Order {
 ```typescript
 class Order {
   getPrice(): number {
-    return this.basePrice * this.discountFactor
+    return this.basePrice * this.discountFactor;
   }
 
   get basePrice(): number {
-    return this.quantity * this.itemPrice
+    return this.quantity * this.itemPrice;
   }
 
   get discountFactor(): number {
-    return this.basePrice > 1000 ? 0.95 : 0.98
+    return this.basePrice > 1000 ? 0.95 : 0.98;
   }
 }
 
 // Now these can be used elsewhere
 class OrderPrinter {
   printReceipt(order: Order): void {
-    console.log(`Base Price: ${order.basePrice}`)
-    console.log(`Discount: ${(1 - order.discountFactor) * 100}%`)
-    console.log(`Final: ${order.getPrice()}`)
+    console.log(`Base Price: ${order.basePrice}`);
+    console.log(`Discount: ${(1 - order.discountFactor) * 100}%`);
+    console.log(`Final: ${order.getPrice()}`);
   }
 }
 ```
 
 **When NOT to replace:**
+
 - Variable is used once and extraction adds no clarity
 - Calculation is expensive and would be repeated (use memoization or keep temp)
 - Variable represents an intermediate step in a complex algorithm
@@ -68,19 +69,19 @@ class OrderPrinter {
 ```typescript
 // If worried about repeated calculation
 class Order {
-  private _basePrice: number | null = null
+  private _basePrice: number | null = null;
 
   get basePrice(): number {
     if (this._basePrice === null) {
-      this._basePrice = this.quantity * this.itemPrice
+      this._basePrice = this.quantity * this.itemPrice;
     }
-    return this._basePrice
+    return this._basePrice;
   }
 
   // Invalidate cache when data changes
   set quantity(value: number) {
-    this._quantity = value
-    this._basePrice = null
+    this._quantity = value;
+    this._basePrice = null;
   }
 }
 ```

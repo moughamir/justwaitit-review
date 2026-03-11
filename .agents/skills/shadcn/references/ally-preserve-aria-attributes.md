@@ -13,7 +13,7 @@ Radix primitives automatically manage ARIA attributes for accessibility. Overrid
 
 ```tsx
 function CustomAccordion({ items }: { items: AccordionItem[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
     <div>
@@ -34,7 +34,7 @@ function CustomAccordion({ items }: { items: AccordionItem[] }) {
         </div>
       ))}
     </div>
-  )
+  );
 }
 ```
 
@@ -46,7 +46,7 @@ import {
   AccordionContent,
   AccordionItem as AccordionItemComponent,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from '@/components/ui/accordion';
 
 function CustomAccordion({ items }: { items: AccordionItem[] }) {
   return (
@@ -64,11 +64,12 @@ function CustomAccordion({ items }: { items: AccordionItem[] }) {
         </AccordionItemComponent>
       ))}
     </Accordion>
-  )
+  );
 }
 ```
 
 **ARIA attributes managed by Radix:**
+
 - `aria-expanded` on triggers (Accordion, Collapsible, Dialog)
 - `aria-controls` / `aria-labelledby` for content relationships
 - `role` attributes (dialog, menu, tablist, etc.)

@@ -62,6 +62,7 @@ src/
 ```
 
 **Benefits:**
+
 - Adding a feature = adding one folder
 - Removing a feature = removing one folder
 - Feature ownership is immediately clear

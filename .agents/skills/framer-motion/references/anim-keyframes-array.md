@@ -12,18 +12,18 @@ Keyframe arrays define multi-step animations in a single declaration, allowing M
 **Incorrect (chained animations with state):**
 
 ```tsx
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
+import { motion, useAnimation } from 'framer-motion';
+import { useEffect } from 'react';
 
 function PulsingDot() {
   const controls = useAnimation();
 
   useEffect(() => {
     const sequence = async () => {
-      await controls.start({ scale: 1.5 });    // First animation
-      await controls.start({ scale: 0.8 });    // Wait, then second
-      await controls.start({ scale: 1 });      // Wait, then third
-      sequence();  // Loop (causes re-renders)
+      await controls.start({ scale: 1.5 }); // First animation
+      await controls.start({ scale: 0.8 }); // Wait, then second
+      await controls.start({ scale: 1 }); // Wait, then third
+      sequence(); // Loop (causes re-renders)
     };
     sequence();
   }, [controls]);
@@ -39,7 +39,7 @@ function ShakingButton() {
     await controls.start({ x: 10 });
     await controls.start({ x: -10 });
     await controls.start({ x: 10 });
-    await controls.start({ x: 0 });  // Five separate animations
+    await controls.start({ x: 0 }); // Five separate animations
   };
 
   return (
@@ -53,20 +53,20 @@ function ShakingButton() {
 **Correct (keyframe arrays):**
 
 ```tsx
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
 
 function PulsingDot() {
   return (
     <motion.div
       className="dot"
       animate={{
-        scale: [1, 1.5, 0.8, 1]  // All keyframes in one array
+        scale: [1, 1.5, 0.8, 1], // All keyframes in one array
       }}
       transition={{
         duration: 1.5,
         repeat: Infinity,
-        ease: "easeInOut",
-        times: [0, 0.3, 0.7, 1]  // Control timing of each keyframe
+        ease: 'easeInOut',
+        times: [0, 0.3, 0.7, 1], // Control timing of each keyframe
       }}
     />
   );
@@ -126,6 +126,7 @@ function ShakingButton() {
 ```
 
 **When to use keyframes vs variants:**
+
 - Keyframes: Single element, continuous motion, loops
 - Variants + staggerChildren: Multiple elements, orchestrated sequences
 

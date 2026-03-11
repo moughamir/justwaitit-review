@@ -39,12 +39,12 @@ import { ProductCard } from '@/features/product';
 
 **Naming patterns:**
 
-| Type | Pattern | Example |
-|------|---------|---------|
-| Feature component | `{Feature}{Component}` | `UserProfile`, `CartSummary` |
-| Feature hook | `use{Feature}{Action}` | `useUserAuth`, `useCartItems` |
-| Feature API | `{action}{Feature}` | `getUser`, `updateCart` |
-| Feature store | `use{Feature}Store` | `useCartStore`, `useUserStore` |
+| Type              | Pattern                | Example                        |
+| ----------------- | ---------------------- | ------------------------------ |
+| Feature component | `{Feature}{Component}` | `UserProfile`, `CartSummary`   |
+| Feature hook      | `use{Feature}{Action}` | `useUserAuth`, `useCartItems`  |
+| Feature API       | `{action}{Feature}`    | `getUser`, `updateCart`        |
+| Feature store     | `use{Feature}Store`    | `useCartStore`, `useUserStore` |
 
 **Exception for shared components:**
 
@@ -58,6 +58,7 @@ export function Card({ children, ...props }) { ... }
 ```
 
 **Benefits:**
+
 - IDE autocomplete shows meaningful options
 - Imports are self-documenting
 - No aliasing required

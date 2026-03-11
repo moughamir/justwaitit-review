@@ -1,14 +1,13 @@
 'use client';
 
 import {
-  AnimatePresence,
   motion,
   useScroll,
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
@@ -18,7 +17,6 @@ import { HeroSectionText } from '@/lib/content/hero';
 import { charReveal, ease } from '@/lib/motion';
 
 export function HeroSection() {
-  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
@@ -30,15 +28,6 @@ export function HeroSection() {
   });
 
   const headlineY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
-
-  useEffect(() => {
-    const wordInterval = setInterval(() => {
-      setCurrentWordIndex(
-        (prev) => (prev + 1) % HeroSectionText.supportLine.words.length
-      );
-    }, 2500);
-    return () => clearInterval(wordInterval);
-  }, []);
 
   const subheadlineWords = HeroSectionText.subheadline.a.split(' ');
   const proWords = HeroSectionText.headline.pro.split(' ');
@@ -163,7 +152,7 @@ export function HeroSection() {
       </div>
 
       {/* Layer 3: Interactive atoms (Buttons) */}
-      <div className="relative z-30 mb-20 mt-8 flex w-full flex-col items-center justify-center gap-4 px-6 sm:mb-24">
+      <div className="relative z-30 mb-12 mt-8 flex w-full flex-col items-center justify-center gap-4 px-6 sm:mb-16">
         <motion.div
           data-atom
           initial={animated ? { y: 20, opacity: 0 } : false}

@@ -10,6 +10,7 @@ Comprehensive software craftsmanship guide based on Robert C. Martin's "Clean Co
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing new functions, classes, or modules
 - Naming variables, functions, classes, or files
 - Reviewing code for maintainability issues
@@ -19,18 +20,18 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | Meaningful Names | CRITICAL | `name-` |
-| 2 | Functions | CRITICAL | `func-` |
-| 3 | Comments | HIGH | `cmt-` |
-| 4 | Formatting | HIGH | `fmt-` |
-| 5 | Error Handling | HIGH | `err-` |
-| 6 | Objects and Data Structures | MEDIUM-HIGH | `obj-` |
-| 7 | Boundaries | MEDIUM-HIGH | `bound-` |
-| 8 | Classes and Systems | MEDIUM-HIGH | `class-` |
-| 9 | Unit Tests | MEDIUM | `test-` |
-| 10 | Emergence and Simple Design | MEDIUM | `emerge-` |
+| Priority | Category                    | Impact      | Prefix    |
+| -------- | --------------------------- | ----------- | --------- |
+| 1        | Meaningful Names            | CRITICAL    | `name-`   |
+| 2        | Functions                   | CRITICAL    | `func-`   |
+| 3        | Comments                    | HIGH        | `cmt-`    |
+| 4        | Formatting                  | HIGH        | `fmt-`    |
+| 5        | Error Handling              | HIGH        | `err-`    |
+| 6        | Objects and Data Structures | MEDIUM-HIGH | `obj-`    |
+| 7        | Boundaries                  | MEDIUM-HIGH | `bound-`  |
+| 8        | Classes and Systems         | MEDIUM-HIGH | `class-`  |
+| 9        | Unit Tests                  | MEDIUM      | `test-`   |
+| 10       | Emergence and Simple Design | MEDIUM      | `emerge-` |
 
 ## Quick Reference
 
@@ -121,8 +122,8 @@ Read individual reference files for detailed explanations and code examples:
 
 ## Reference Files
 
-| File | Description |
-|------|-------------|
-| [references/_sections.md](references/_sections.md) | Category definitions and ordering |
-| [assets/templates/_template.md](assets/templates/_template.md) | Template for new rules |
-| [metadata.json](metadata.json) | Version and reference information |
+| File                                                            | Description                       |
+| --------------------------------------------------------------- | --------------------------------- |
+| [references/\_sections.md](references/_sections.md)             | Category definitions and ordering |
+| [assets/templates/\_template.md](assets/templates/_template.md) | Template for new rules            |
+| [metadata.json](metadata.json)                                  | Version and reference information |

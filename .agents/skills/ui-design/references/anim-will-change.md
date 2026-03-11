@@ -60,7 +60,7 @@ element.addEventListener('animationend', () => {
 
 // Or for scroll-triggered animations
 const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+  entries.forEach((entry) => {
     entry.target.style.willChange = entry.isIntersecting
       ? 'transform, opacity'
       : 'auto';
@@ -69,6 +69,7 @@ const observer = new IntersectionObserver((entries) => {
 ```
 
 **will-change guidelines:**
+
 - Never use `will-change: *` globally
 - Apply just before animation starts
 - Remove after animation completes

@@ -12,12 +12,12 @@ Every route a user never visits is wasted bytes in the initial bundle. Wrapping 
 **Incorrect (all routes in a single bundle):**
 
 ```tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Dashboard from "./pages/Dashboard"
-import OrderHistory from "./pages/OrderHistory"
-import ProductCatalog from "./pages/ProductCatalog"
-import UserSettings from "./pages/UserSettings"
-import AdminPanel from "./pages/AdminPanel" // 120KB — most users never see this
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Dashboard from './pages/Dashboard';
+import OrderHistory from './pages/OrderHistory';
+import ProductCatalog from './pages/ProductCatalog';
+import UserSettings from './pages/UserSettings';
+import AdminPanel from './pages/AdminPanel'; // 120KB — most users never see this
 
 function App() {
   return (
@@ -30,22 +30,22 @@ function App() {
         <Route path="/admin" element={<AdminPanel />} />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 ```
 
 **Correct (each route loads its own chunk):**
 
 ```tsx
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { lazy, Suspense } from "react"
-import { PageSkeleton } from "./components/PageSkeleton"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
+import { PageSkeleton } from './components/PageSkeleton';
 
-const Dashboard = lazy(() => import("./pages/Dashboard"))
-const OrderHistory = lazy(() => import("./pages/OrderHistory"))
-const ProductCatalog = lazy(() => import("./pages/ProductCatalog"))
-const UserSettings = lazy(() => import("./pages/UserSettings"))
-const AdminPanel = lazy(() => import("./pages/AdminPanel"))
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const OrderHistory = lazy(() => import('./pages/OrderHistory'));
+const ProductCatalog = lazy(() => import('./pages/ProductCatalog'));
+const UserSettings = lazy(() => import('./pages/UserSettings'));
+const AdminPanel = lazy(() => import('./pages/AdminPanel'));
 
 function App() {
   return (
@@ -60,7 +60,7 @@ function App() {
         </Routes>
       </Suspense>
     </BrowserRouter>
-  )
+  );
 }
 ```
 

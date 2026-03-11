@@ -37,21 +37,21 @@ function Editor() {
 ```typescript
 // Reading from localStorage
 const [user, setUser] = useState(() => {
-  const saved = localStorage.getItem('user')
-  return saved ? JSON.parse(saved) : null
-})
+  const saved = localStorage.getItem('user');
+  return saved ? JSON.parse(saved) : null;
+});
 
 // Complex object creation
 const [formState, setFormState] = useState(() => ({
   fields: createDefaultFields(),
   validation: initializeValidation(),
-  touched: new Set()
-}))
+  touched: new Set(),
+}));
 
 // Expensive transformation
 const [data, setData] = useState(() =>
-  rawData.map(item => transformItem(item))
-)
+  rawData.map((item) => transformItem(item))
+);
 ```
 
 **Note:** The initializer function receives no arguments. If you need props, create a closure: `useState(() => computeFrom(props.value))`

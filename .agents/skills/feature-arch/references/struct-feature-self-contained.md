@@ -56,6 +56,7 @@ features/checkout/
 ```
 
 **When NOT to use this pattern:**
+
 - Truly generic utilities (date formatting, string helpers) belong in `shared/`
 - UI primitives (Button, Input) belong in `shared/components/`
 

@@ -13,18 +13,18 @@ Framer Motion's `whileHover` and `whileTap` props are optimized internally to up
 
 ```tsx
 function ActionButton({ label, onClick }: ActionButtonProps) {
-  const [isHovered, setIsHovered] = useState(false);  // State triggers re-renders
+  const [isHovered, setIsHovered] = useState(false); // State triggers re-renders
   const [isPressed, setIsPressed] = useState(false);
 
   return (
     <motion.button
-      onMouseEnter={() => setIsHovered(true)}   // Re-render on hover
-      onMouseLeave={() => setIsHovered(false)}  // Re-render on leave
-      onMouseDown={() => setIsPressed(true)}    // Re-render on press
-      onMouseUp={() => setIsPressed(false)}     // Re-render on release
+      onMouseEnter={() => setIsHovered(true)} // Re-render on hover
+      onMouseLeave={() => setIsHovered(false)} // Re-render on leave
+      onMouseDown={() => setIsPressed(true)} // Re-render on press
+      onMouseUp={() => setIsPressed(false)} // Re-render on release
       animate={{
         scale: isPressed ? 0.95 : isHovered ? 1.05 : 1,
-        backgroundColor: isHovered ? "#3b82f6" : "#2563eb",
+        backgroundColor: isHovered ? '#3b82f6' : '#2563eb',
       }}
       onClick={onClick}
     >
@@ -40,9 +40,9 @@ function ActionButton({ label, onClick }: ActionButtonProps) {
 function ActionButton({ label, onClick }: ActionButtonProps) {
   return (
     <motion.button
-      whileHover={{ scale: 1.05, backgroundColor: "#3b82f6" }}  // Optimized internally
-      whileTap={{ scale: 0.95 }}  // No state, no re-renders
-      initial={{ backgroundColor: "#2563eb" }}
+      whileHover={{ scale: 1.05, backgroundColor: '#3b82f6' }} // Optimized internally
+      whileTap={{ scale: 0.95 }} // No state, no re-renders
+      initial={{ backgroundColor: '#2563eb' }}
       onClick={onClick}
     >
       {label}

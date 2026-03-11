@@ -17,9 +17,9 @@ render(
     <label htmlFor="username">Username</label>
     <input id="username" placeholder="Enter username" />
   </form>
-)
+);
 
-const input = screen.getByPlaceholderText('Enter username')
+const input = screen.getByPlaceholderText('Enter username');
 // Placeholder is not a substitute for a label
 ```
 
@@ -31,17 +31,17 @@ render(
     <label htmlFor="username">Username</label>
     <input id="username" placeholder="Enter username" />
   </form>
-)
+);
 
-const input = screen.getByLabelText('Username')
+const input = screen.getByLabelText('Username');
 // Verifies label-input association works
 ```
 
 **Note:** This also works with `aria-label` and `aria-labelledby`:
 
 ```tsx
-<input aria-label="Search" />
-const input = screen.getByLabelText('Search')
+<input aria-label="Search" />;
+const input = screen.getByLabelText('Search');
 ```
 
 Reference: [Testing Library Queries - ByLabelText](https://testing-library.com/docs/queries/bylabeltext)

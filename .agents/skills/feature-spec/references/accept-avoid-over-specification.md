@@ -28,18 +28,21 @@ Acceptance criteria should specify what, not how. Over-specified criteria constr
 ## Acceptance Criteria
 
 ### User Intent
+
 - [ ] User must confirm before destructive actions
 - [ ] Confirmation clearly states the consequence
 - [ ] User can cancel without any side effects
 - [ ] Confirmation state is persisted across page refreshes
 
 ### User Experience
+
 - [ ] Confirmation appears immediately (< 100ms)
 - [ ] Primary action is visually prominent
 - [ ] Escape key dismisses without confirming
 - [ ] Focus is trapped within confirmation UI
 
 ### Accessibility
+
 - [ ] Confirmation is announced to screen readers
 - [ ] Both actions are keyboard accessible
 - [ ] Focus returns to trigger element on dismiss
@@ -52,12 +55,14 @@ _Design system components preferred but not required._
 ```
 
 **Signs of over-specification:**
+
 - CSS classes or specific styling mentioned
 - Specific API endpoints or data formats
 - Framework-specific implementation details
 - Database column names or schema
 
 **When implementation details are appropriate:**
+
 - Regulatory requirements mandate specific approaches
 - Integration with existing systems constrains options
 - Team explicitly requests guidance

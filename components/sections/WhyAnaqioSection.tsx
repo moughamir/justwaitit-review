@@ -41,7 +41,7 @@ export function WhyAnaqioSection() {
         {eyebrow}: {headline.pre} {headline.gradient}
       </h2>
 
-      <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-4 md:px-16">
+      <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-4 pt-24 md:px-16 md:pt-32">
         {/* Background Atmospheric Atom */}
         <span
           data-atom
@@ -54,7 +54,7 @@ export function WhyAnaqioSection() {
         </span>
 
         {/* Section Header */}
-        <div className="relative z-20 mt-24 flex-shrink-0">
+        <div className="relative z-20 flex-shrink-0">
           <p
             data-atom
             className="mb-4 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"

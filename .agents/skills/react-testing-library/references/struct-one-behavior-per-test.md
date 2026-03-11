@@ -13,20 +13,20 @@ Each test should verify one specific behavior. Multiple behaviors in one test ob
 
 ```tsx
 test('user profile', async () => {
-  render(<UserProfile userId="123" />)
+  render(<UserProfile userId="123" />);
 
   // Behavior 1: Loading state
-  expect(screen.getByText('Loading...')).toBeInTheDocument()
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
 
   // Behavior 2: Data display
-  expect(await screen.findByText('John Doe')).toBeInTheDocument()
-  expect(screen.getByText('john@example.com')).toBeInTheDocument()
+  expect(await screen.findByText('John Doe')).toBeInTheDocument();
+  expect(screen.getByText('john@example.com')).toBeInTheDocument();
 
   // Behavior 3: Edit mode
-  const user = userEvent.setup()
-  await user.click(screen.getByRole('button', { name: /edit/i }))
-  expect(screen.getByLabelText('Name')).toHaveValue('John Doe')
-})
+  const user = userEvent.setup();
+  await user.click(screen.getByRole('button', { name: /edit/i }));
+  expect(screen.getByLabelText('Name')).toHaveValue('John Doe');
+});
 // If test fails, which behavior broke?
 ```
 
@@ -34,26 +34,26 @@ test('user profile', async () => {
 
 ```tsx
 test('shows loading state initially', () => {
-  render(<UserProfile userId="123" />)
-  expect(screen.getByText('Loading...')).toBeInTheDocument()
-})
+  render(<UserProfile userId="123" />);
+  expect(screen.getByText('Loading...')).toBeInTheDocument();
+});
 
 test('displays user data after loading', async () => {
-  render(<UserProfile userId="123" />)
+  render(<UserProfile userId="123" />);
 
-  expect(await screen.findByText('John Doe')).toBeInTheDocument()
-  expect(screen.getByText('john@example.com')).toBeInTheDocument()
-})
+  expect(await screen.findByText('John Doe')).toBeInTheDocument();
+  expect(screen.getByText('john@example.com')).toBeInTheDocument();
+});
 
 test('enters edit mode when edit button clicked', async () => {
-  const user = userEvent.setup()
-  render(<UserProfile userId="123" />)
-  await screen.findByText('John Doe')
+  const user = userEvent.setup();
+  render(<UserProfile userId="123" />);
+  await screen.findByText('John Doe');
 
-  await user.click(screen.getByRole('button', { name: /edit/i }))
+  await user.click(screen.getByRole('button', { name: /edit/i }));
 
-  expect(screen.getByLabelText('Name')).toHaveValue('John Doe')
-})
+  expect(screen.getByLabelText('Name')).toHaveValue('John Doe');
+});
 ```
 
 Reference: [Testing Trophy](https://kentcdodds.com/blog/the-testing-trophy-and-testing-classifications)

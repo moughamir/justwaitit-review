@@ -13,40 +13,40 @@ When tests fail unexpectedly, use `screen.debug()` to see the current DOM state.
 
 ```tsx
 test('shows user profile', async () => {
-  render(<UserProfile userId="123" />)
+  render(<UserProfile userId="123" />);
 
   // Test fails: Unable to find element with text "John Doe"
-  expect(screen.getByText('John Doe')).toBeInTheDocument()
+  expect(screen.getByText('John Doe')).toBeInTheDocument();
   // Why? Is the text different? Is it loading? Is there an error?
-})
+});
 ```
 
 **Correct (inspect DOM state):**
 
 ```tsx
 test('shows user profile', async () => {
-  render(<UserProfile userId="123" />)
+  render(<UserProfile userId="123" />);
 
-  screen.debug()
+  screen.debug();
   // Console shows: <div>Loading...</div>
   // Ah! Need to wait for loading to complete
 
-  expect(await screen.findByText('John Doe')).toBeInTheDocument()
-})
+  expect(await screen.findByText('John Doe')).toBeInTheDocument();
+});
 ```
 
 **Debug specific elements:**
 
 ```tsx
-const form = screen.getByRole('form')
-screen.debug(form)
+const form = screen.getByRole('form');
+screen.debug(form);
 // Prints only the form element tree
 ```
 
 **Limit output size:**
 
 ```tsx
-screen.debug(undefined, 500)
+screen.debug(undefined, 500);
 // Print only first 500 characters
 ```
 

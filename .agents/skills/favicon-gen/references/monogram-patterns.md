@@ -7,6 +7,7 @@ Comprehensive guide for creating text-based favicons when no logo icon exists.
 ## When to Use Monograms
 
 ### ✅ Use Monogram Favicons When:
+
 - Business has text-only logo (no icon element)
 - Logo is too complex to simplify into 16×16 favicon
 - Need temporary favicon before logo finalized
@@ -14,6 +15,7 @@ Comprehensive guide for creating text-based favicons when no logo icon exists.
 - Industry standard uses lettermarks (law firms, consulting)
 
 ### ❌ Don't Use Monograms When:
+
 - Logo has extractable icon element (use extraction-methods.md)
 - Business name is single generic word ("Solutions", "Services")
 - Initials are confusing (e.g., "XYZ Corp" → "XC" not "XYZ")
@@ -27,35 +29,36 @@ Choosing the right letters makes or breaks monogram readability.
 
 ### Single-Word Business Names
 
-| Business Name | Options | Best Choice | Reasoning |
-|---------------|---------|-------------|-----------|
-| **Acme** | A, AC, ACM | **A** | Single letter cleanest |
-| **Stratton** | S, ST, STR | **S** | Single letter sufficient |
-| **Microsoft** | M, MS, MIC | **M** | Single letter iconic |
-| **Amazon** | A, AM, AMZ | **A** | Single letter + arrow better |
+| Business Name | Options    | Best Choice | Reasoning                    |
+| ------------- | ---------- | ----------- | ---------------------------- |
+| **Acme**      | A, AC, ACM | **A**       | Single letter cleanest       |
+| **Stratton**  | S, ST, STR | **S**       | Single letter sufficient     |
+| **Microsoft** | M, MS, MIC | **M**       | Single letter iconic         |
+| **Amazon**    | A, AM, AMZ | **A**       | Single letter + arrow better |
 
 **Rule**: For single words, use first letter UNLESS:
+
 - First letter is too common (A, S, M) → add second letter
 - Acronym is well-known (FBI, NASA) → use full acronym
 
 ### Two-Word Business Names
 
-| Business Name | Options | Best Choice | Reasoning |
-|---------------|---------|-------------|-----------|
-| **Blue Sky** | B, BS, BSK | **BS** | Both initials balanced |
-| **Red Fox** | R, RF, RFX | **RF** | Clean two-letter combo |
-| **Digital Ocean** | D, DO, DIG | **DO** | Two-letter balanced |
-| **Creative Agency** | C, CA, CRA | **CA** | Standard initials |
+| Business Name       | Options    | Best Choice | Reasoning              |
+| ------------------- | ---------- | ----------- | ---------------------- |
+| **Blue Sky**        | B, BS, BSK | **BS**      | Both initials balanced |
+| **Red Fox**         | R, RF, RFX | **RF**      | Clean two-letter combo |
+| **Digital Ocean**   | D, DO, DIG | **DO**      | Two-letter balanced    |
+| **Creative Agency** | C, CA, CRA | **CA**      | Standard initials      |
 
 **Rule**: Use both initials (first letter of each word) for two-word names.
 
 ### Three-Word Business Names
 
-| Business Name | Options | Best Choice | Reasoning |
-|---------------|---------|-------------|-----------|
-| **Big Red Box** | B, BR, BRB | **BR** | Drop last initial |
-| **North Star Digital** | N, NS, NSD | **NS** | First two words |
-| **Blue Sky Consulting** | B, BS, BSC | **BS** | First two words |
+| Business Name           | Options    | Best Choice | Reasoning         |
+| ----------------------- | ---------- | ----------- | ----------------- |
+| **Big Red Box**         | B, BR, BRB | **BR**      | Drop last initial |
+| **North Star Digital**  | N, NS, NSD | **NS**      | First two words   |
+| **Blue Sky Consulting** | B, BS, BSC | **BS**      | First two words   |
 
 **Rule**: Use first two initials (drop third) OR use all three if each is critical to identity.
 
@@ -63,28 +66,32 @@ Choosing the right letters makes or breaks monogram readability.
 
 ### Acronym Business Names
 
-| Business Name | Monogram | Rule |
-|---------------|----------|------|
-| **FBI** | FBI | Use full acronym (established) |
-| **NASA** | NASA | Use full acronym (iconic) |
-| **HSBC** | HSBC | Use full acronym (brand) |
-| **BMW** | BMW | Use full acronym (3 letters) |
+| Business Name | Monogram | Rule                           |
+| ------------- | -------- | ------------------------------ |
+| **FBI**       | FBI      | Use full acronym (established) |
+| **NASA**      | NASA     | Use full acronym (iconic)      |
+| **HSBC**      | HSBC     | Use full acronym (brand)       |
+| **BMW**       | BMW      | Use full acronym (3 letters)   |
 
 **Rule**: If business commonly uses acronym, use full acronym as monogram.
 
 ### Special Cases
 
 **Ampersand names** ("Smith & Jones"):
+
 - Use initials only: SJ
 - Omit the "&" (too detailed for small sizes)
 
 **Names with "The"** ("The Agency"):
+
 - Omit "The", use remaining initials: A or AG
 
 **Hyphenated names** ("Blue-Green Design"):
+
 - Treat as two words: BG or BGD
 
 **Numbers in name** ("7 Eleven", "22 Designs"):
+
 - Use number + letter: 7E, 22D
 - OR omit number, use letters only: E, D
 
@@ -94,24 +101,24 @@ Choosing the right letters makes or breaks monogram readability.
 
 ### Web-Safe Font Recommendations
 
-| Font Family | Character | Best For | Weight |
-|-------------|-----------|----------|--------|
-| **Arial** | Clean, neutral | Corporate, professional | 700 (bold) |
-| **Helvetica** | Classic, refined | Design agencies, premium | 700 (bold) |
-| **Verdana** | Wide, readable | 1-2 letters max | 700 (bold) |
-| **Georgia** | Serif, elegant | Law, finance, traditional | 700 (bold) |
-| **Trebuchet MS** | Modern, humanist | Tech, startups | 700 (bold) |
+| Font Family      | Character        | Best For                  | Weight     |
+| ---------------- | ---------------- | ------------------------- | ---------- |
+| **Arial**        | Clean, neutral   | Corporate, professional   | 700 (bold) |
+| **Helvetica**    | Classic, refined | Design agencies, premium  | 700 (bold) |
+| **Verdana**      | Wide, readable   | 1-2 letters max           | 700 (bold) |
+| **Georgia**      | Serif, elegant   | Law, finance, traditional | 700 (bold) |
+| **Trebuchet MS** | Modern, humanist | Tech, startups            | 700 (bold) |
 
 **Rule**: Always use `font-weight="bold"` (700). Regular (400) weight disappears at 16×16.
 
 ### Font Size by Letter Count
 
-| Letters | Font Size (32px canvas) | Approximate Fill |
-|---------|-------------------------|------------------|
-| **1 letter** | 18-20px | ~60% height |
-| **2 letters** | 14-16px | ~50% height |
-| **3 letters** | 11-13px | ~40% height |
-| **4+ letters** | ❌ Too many | Illegible |
+| Letters        | Font Size (32px canvas) | Approximate Fill |
+| -------------- | ----------------------- | ---------------- |
+| **1 letter**   | 18-20px                 | ~60% height      |
+| **2 letters**  | 14-16px                 | ~50% height      |
+| **3 letters**  | 11-13px                 | ~40% height      |
+| **4+ letters** | ❌ Too many             | Illegible        |
 
 **Rule**: Maximum 3 letters. More = illegible at 16×16.
 
@@ -131,11 +138,11 @@ For 2-3 letter monograms, adjust spacing:
 
 ### Uppercase vs Lowercase
 
-| Style | Use Case | Example |
-|-------|----------|---------|
-| **Uppercase** | Professional, corporate, finance | AC, BS, RF |
-| **Lowercase** | Friendly, modern, tech | ac, bs, rf |
-| **Title Case** | Rare, casual | Ac, Bs, Rf |
+| Style          | Use Case                         | Example    |
+| -------------- | -------------------------------- | ---------- |
+| **Uppercase**  | Professional, corporate, finance | AC, BS, RF |
+| **Lowercase**  | Friendly, modern, tech           | ac, bs, rf |
+| **Title Case** | Rare, casual                     | Ac, Bs, Rf |
 
 **Rule**: Uppercase is default for professional contexts. Lowercase for casual/modern brands.
 
@@ -158,6 +165,7 @@ Monograms need containing shapes for definition.
 ```
 
 **Characteristics**:
+
 - Most versatile shape
 - Works on any background
 - Universally recognized
@@ -176,6 +184,7 @@ Monograms need containing shapes for definition.
 ```
 
 **Characteristics**:
+
 - Matches iOS icon style
 - Modern, app-like
 - `rx="6"` = 18.75% corner radius (standard)
@@ -194,6 +203,7 @@ Monograms need containing shapes for definition.
 ```
 
 **Characteristics**:
+
 - Implies security/protection
 - Good for legal, finance, security industries
 - More complex shape (test at 16×16)
@@ -212,6 +222,7 @@ Monograms need containing shapes for definition.
 ```
 
 **Characteristics**:
+
 - Technical, geometric feel
 - Popular in tech/SaaS
 - Six-sided symmetry
@@ -230,6 +241,7 @@ Monograms need containing shapes for definition.
 ```
 
 **Characteristics**:
+
 - Elegant, premium
 - Diamond/gem association
 - Good for luxury brands
@@ -240,14 +252,14 @@ Monograms need containing shapes for definition.
 
 ### High-Contrast Combinations (Recommended)
 
-| Background | Text | Contrast Ratio | Use Case |
-|------------|------|----------------|----------|
-| **#0066cc** (Blue) | #ffffff (White) | 6.3:1 ✅ | Corporate, trust |
-| **#1a1a1a** (Dark gray) | #ffffff (White) | 17.9:1 ✅ | Modern, minimal |
-| **#d62828** (Red) | #ffffff (White) | 5.5:1 ✅ | Bold, urgent |
-| **#2a9d8f** (Teal) | #ffffff (White) | 4.5:1 ✅ | Fresh, health |
-| **#7209b7** (Purple) | #ffffff (White) | 8.6:1 ✅ | Creative, premium |
-| **#ffffff** (White) | #1a1a1a (Dark) | 17.9:1 ✅ | Light mode sites |
+| Background              | Text            | Contrast Ratio | Use Case          |
+| ----------------------- | --------------- | -------------- | ----------------- |
+| **#0066cc** (Blue)      | #ffffff (White) | 6.3:1 ✅       | Corporate, trust  |
+| **#1a1a1a** (Dark gray) | #ffffff (White) | 17.9:1 ✅      | Modern, minimal   |
+| **#d62828** (Red)       | #ffffff (White) | 5.5:1 ✅       | Bold, urgent      |
+| **#2a9d8f** (Teal)      | #ffffff (White) | 4.5:1 ✅       | Fresh, health     |
+| **#7209b7** (Purple)    | #ffffff (White) | 8.6:1 ✅       | Creative, premium |
+| **#ffffff** (White)     | #1a1a1a (Dark)  | 17.9:1 ✅      | Light mode sites  |
 
 **Rule**: Minimum 4.5:1 contrast ratio (WCAG AA). Test at https://webaim.org/resources/contrastchecker/
 
@@ -259,6 +271,7 @@ Match favicon to existing brand palette:
 **White or contrasting brand color → Text**
 
 Example:
+
 - Brand: Navy (#003366) + Gold (#c5a778)
 - Favicon: Navy background, gold text
 - Alternative: Gold background, navy text (test contrast)
@@ -282,6 +295,7 @@ Gradients can look muddy at small sizes. If using:
 ```
 
 **Guidelines**:
+
 - Use 2-stop gradients only (more = muddy)
 - Similar colors (same hue family)
 - Test at 16×16 (gradient may be invisible)
@@ -364,6 +378,7 @@ Connecting multiple letters into single shape:
 ```
 
 **When to use**:
+
 - Brand has established ligature logo
 - Professional designer available
 - 2-letter combination only (3+ too complex)
@@ -462,6 +477,7 @@ Use `text-anchor="middle"` and `x` at center:
 ### A/B Test with Colleagues
 
 Show 3-5 options:
+
 - Different shapes (circle vs square vs shield)
 - Different letter counts (A vs AC vs ACM)
 - Different colors (primary vs secondary brand colors)
@@ -472,15 +488,15 @@ Show 3-5 options:
 
 ## Common Mistakes
 
-| Mistake | Impact | Fix |
-|---------|--------|-----|
-| **Too many letters** (4+) | Illegible | Max 3 letters |
-| **Regular font weight** | Letters disappear | Use bold (700) |
-| **Wrong font size** | Too big or too small | Follow size guidelines (18-20px for 1 letter) |
-| **Low contrast** | Hard to read | Minimum 4.5:1 contrast |
-| **Lowercase only** | Less readable | Use uppercase for professional contexts |
-| **No shape** | Letter floats | Always use containing shape |
-| **Complex ligature** | Muddy at small sizes | Keep simple or use separate letters |
+| Mistake                   | Impact               | Fix                                           |
+| ------------------------- | -------------------- | --------------------------------------------- |
+| **Too many letters** (4+) | Illegible            | Max 3 letters                                 |
+| **Regular font weight**   | Letters disappear    | Use bold (700)                                |
+| **Wrong font size**       | Too big or too small | Follow size guidelines (18-20px for 1 letter) |
+| **Low contrast**          | Hard to read         | Minimum 4.5:1 contrast                        |
+| **Lowercase only**        | Less readable        | Use uppercase for professional contexts       |
+| **No shape**              | Letter floats        | Always use containing shape                   |
+| **Complex ligature**      | Muddy at small sizes | Keep simple or use separate letters           |
 
 ---
 
@@ -489,6 +505,7 @@ Show 3-5 options:
 Use these copy-paste templates as starting points:
 
 ### Single Letter, Circle, Blue/White
+
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <circle cx="16" cy="16" r="16" fill="#0066cc"/>
@@ -498,6 +515,7 @@ Use these copy-paste templates as starting points:
 ```
 
 ### Two Letters, Rounded Square, Dark/White
+
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="6" fill="#1a1a1a"/>
@@ -508,6 +526,7 @@ Use these copy-paste templates as starting points:
 ```
 
 ### Three Letters, Shield, Navy/Gold
+
 ```xml
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <path d="M16,2 L28,8 L28,16 C28,24 16,30 16,30 C16,30 4,24 4,16 L4,8 Z"
@@ -525,24 +544,28 @@ Use these copy-paste templates as starting points:
 ## Quick Reference
 
 **Letter Selection**:
+
 - 1 word → 1 letter
 - 2 words → 2 letters (both initials)
 - 3 words → 2 letters (first two initials)
 - Acronym → full acronym (FBI, BMW, IBM)
 
 **Font Sizes**:
+
 - 1 letter → 18-20px
 - 2 letters → 14-16px
 - 3 letters → 11-13px
 - 4+ letters → ❌ Too many
 
 **Shapes**:
+
 - Circle → universal, safe
 - Rounded square → modern, apps
 - Shield → security, legal, trust
 - Hexagon → tech, engineering
 
 **Colors**:
+
 - Minimum 4.5:1 contrast
 - Match brand colors
 - Default: Blue bg + white text

@@ -14,14 +14,14 @@ Collect all edits into an array and call `commitEdits()` once at the end. Multip
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const consoleCalls = root.findAll({
-    rule: { pattern: "console.log($$$ARGS)" }
+    rule: { pattern: 'console.log($$$ARGS)' },
   });
 
   let result = root.root().text();
 
   for (const call of consoleCalls) {
     // Each commit regenerates the entire source string
-    result = root.commitEdits([call.replace("logger.info()")]);
+    result = root.commitEdits([call.replace('logger.info()')]);
     // Edits applied sequentially - O(n²) string operations
     // Later edits may use stale positions
   }
@@ -35,13 +35,13 @@ const transform: Transform<TSX> = (root) => {
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const consoleCalls = root.findAll({
-    rule: { pattern: "console.log($$$ARGS)" }
+    rule: { pattern: 'console.log($$$ARGS)' },
   });
 
   // Collect all edits first
-  const edits = consoleCalls.map(call => {
-    const args = call.getMultipleMatches("ARGS");
-    const argsText = args.map(a => a.text()).join(", ");
+  const edits = consoleCalls.map((call) => {
+    const args = call.getMultipleMatches('ARGS');
+    const argsText = args.map((a) => a.text()).join(', ');
     return call.replace(`logger.info(${argsText})`);
   });
 
@@ -53,6 +53,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Why batching matters:**
+
 - Single string reconstruction pass
 - Correct position calculations for overlapping ranges
 - Atomic application (all or nothing)

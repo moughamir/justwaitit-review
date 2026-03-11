@@ -30,15 +30,15 @@ rm -f tailwind.config.ts
 Copy `assets/vite.config.ts` or add the Tailwind plugin:
 
 ```typescript
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import path from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  resolve: { alias: { '@': path.resolve(__dirname, './src') } }
-})
+  resolve: { alias: { '@': path.resolve(__dirname, './src') } },
+});
 ```
 
 ### Step 3: Four-Step CSS Architecture (Mandatory)
@@ -48,8 +48,8 @@ This exact order is required. Skipping steps breaks the theme.
 **src/index.css:**
 
 ```css
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 /* 1. Define CSS variables at root (NOT inside @layer base) */
 :root {
@@ -101,6 +101,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ```
 
 Add a theme toggle:
+
 ```bash
 pnpm dlx shadcn@latest add dropdown-menu
 ```
@@ -127,12 +128,14 @@ See `references/dark-mode.md` for the ModeToggle component.
 ## Critical Rules
 
 **Always:**
+
 - Wrap colours with `hsl()` in `:root`/`.dark`
 - Use `@theme inline` to map all CSS variables
 - Use `@tailwindcss/vite` plugin (NOT PostCSS)
 - Delete `tailwind.config.ts` if it exists
 
 **Never:**
+
 - Put `:root`/`.dark` inside `@layer base`
 - Use `.dark { @theme { } }` (v4 doesn't support nested @theme)
 - Double-wrap: `hsl(var(--background))`
@@ -142,14 +145,14 @@ See `references/dark-mode.md` for the ModeToggle component.
 
 ## Common Errors
 
-| Symptom | Cause | Fix |
-|---------|-------|-----|
-| `bg-primary` doesn't work | Missing `@theme inline` | Add `@theme inline` block |
-| Colours all black/white | Double `hsl()` wrapping | Use `var(--colour)` not `hsl(var(--colour))` |
-| Dark mode not switching | Missing ThemeProvider | Wrap app in `<ThemeProvider>` |
-| Build fails | `tailwind.config.ts` exists | Delete the file |
-| Animation errors | Using `tailwindcss-animate` | Install `tw-animate-css` instead |
-| `@apply` fails on custom class | v4 breaking change | Use `@utility` instead of `@layer components` |
+| Symptom                        | Cause                       | Fix                                           |
+| ------------------------------ | --------------------------- | --------------------------------------------- |
+| `bg-primary` doesn't work      | Missing `@theme inline`     | Add `@theme inline` block                     |
+| Colours all black/white        | Double `hsl()` wrapping     | Use `var(--colour)` not `hsl(var(--colour))`  |
+| Dark mode not switching        | Missing ThemeProvider       | Wrap app in `<ThemeProvider>`                 |
+| Build fails                    | `tailwind.config.ts` exists | Delete the file                               |
+| Animation errors               | Using `tailwindcss-animate` | Install `tw-animate-css` instead              |
+| `@apply` fails on custom class | v4 breaking change          | Use `@utility` instead of `@layer components` |
 
 See `references/common-gotchas.md` for detailed error explanations with sources.
 
@@ -158,6 +161,7 @@ See `references/common-gotchas.md` for detailed error explanations with sources.
 ## Asset Files
 
 Copy from `assets/` directory:
+
 - `index.css` — Complete CSS with all colour variables
 - `components.json` — shadcn/ui v4 config
 - `vite.config.ts` — Vite + Tailwind plugin

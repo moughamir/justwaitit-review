@@ -13,24 +13,30 @@ Array index keys cause React's reconciler to treat every element as changed when
 
 ```tsx
 interface Notification {
-  id: string
-  message: string
-  timestamp: number
-  priority: "low" | "medium" | "high"
+  id: string;
+  message: string;
+  timestamp: number;
+  priority: 'low' | 'medium' | 'high';
 }
 
-function NotificationFeed({ notifications }: { notifications: Notification[] }) {
-  const sorted = [...notifications].sort((a, b) => b.timestamp - a.timestamp)
+function NotificationFeed({
+  notifications,
+}: {
+  notifications: Notification[];
+}) {
+  const sorted = [...notifications].sort((a, b) => b.timestamp - a.timestamp);
 
   return (
     <ul>
       {sorted.map((notification, index) => (
-        <li key={index}> {/* reorder changes every key — full DOM rebuild */}
+        <li key={index}>
+          {' '}
+          {/* reorder changes every key — full DOM rebuild */}
           <NotificationCard notification={notification} />
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 
@@ -38,14 +44,18 @@ function NotificationFeed({ notifications }: { notifications: Notification[] }) 
 
 ```tsx
 interface Notification {
-  id: string
-  message: string
-  timestamp: number
-  priority: "low" | "medium" | "high"
+  id: string;
+  message: string;
+  timestamp: number;
+  priority: 'low' | 'medium' | 'high';
 }
 
-function NotificationFeed({ notifications }: { notifications: Notification[] }) {
-  const sorted = [...notifications].sort((a, b) => b.timestamp - a.timestamp)
+function NotificationFeed({
+  notifications,
+}: {
+  notifications: Notification[];
+}) {
+  const sorted = [...notifications].sort((a, b) => b.timestamp - a.timestamp);
 
   return (
     <ul>
@@ -55,7 +65,7 @@ function NotificationFeed({ notifications }: { notifications: Notification[] }) 
         </li>
       ))}
     </ul>
-  )
+  );
 }
 ```
 

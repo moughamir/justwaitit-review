@@ -13,7 +13,7 @@ Accessing properties on `unknown`, union types, or external input without narrow
 
 ```typescript
 function formatValue(value: string | number | boolean): string {
-  return value.toFixed(2) // Runtime error if string or boolean
+  return value.toFixed(2); // Runtime error if string or boolean
 }
 ```
 
@@ -21,12 +21,12 @@ function formatValue(value: string | number | boolean): string {
 
 ```typescript
 function formatValue(value: string | number | boolean): string {
-  if (typeof value === "number") {
-    return value.toFixed(2)
+  if (typeof value === 'number') {
+    return value.toFixed(2);
   }
-  if (typeof value === "boolean") {
-    return value ? "yes" : "no"
+  if (typeof value === 'boolean') {
+    return value ? 'yes' : 'no';
   }
-  return value // Already narrowed to string
+  return value; // Already narrowed to string
 }
 ```

@@ -45,6 +45,7 @@ catch (SQLException e) {
 ```
 
 **Include in exception messages:**
+
 - What operation was being attempted
 - What data was involved (IDs, names, quantities)
 - Why it failed (the specific error condition)

@@ -54,6 +54,7 @@ Without `font-display`, browsers may hide text until custom fonts load (FOIT). T
 ```
 
 **font-display values:**
+
 - `swap`: Show fallback immediately, always swap (may cause CLS)
 - `optional`: No CLS, but font may not appear on first visit
 - `fallback`: Brief block, then swap window (balanced)

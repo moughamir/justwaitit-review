@@ -13,13 +13,13 @@ Use the `@custom-variant` directive to define custom variants directly in CSS, r
 
 ```javascript
 // tailwind.config.js — v3 approach
-const plugin = require("tailwindcss/plugin");
+const plugin = require('tailwindcss/plugin');
 
 module.exports = {
   plugins: [
     plugin(function ({ addVariant }) {
-      addVariant("theme-midnight", "&:where([data-theme='midnight'] *)");
-      addVariant("sidebar-open", "&:where([data-sidebar='open'] *)");
+      addVariant('theme-midnight', "&:where([data-theme='midnight'] *)");
+      addVariant('sidebar-open', "&:where([data-sidebar='open'] *)");
     }),
   ],
 };
@@ -29,7 +29,7 @@ module.exports = {
 
 ```css
 /* styles.css */
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @custom-variant theme-midnight (&:where([data-theme="midnight"] *));
 @custom-variant sidebar-open (&:where([data-sidebar="open"] *));
@@ -37,12 +37,12 @@ module.exports = {
 
 ```html
 <div data-theme="midnight">
-  <p class="text-gray-900 theme-midnight:text-white">
+  <p class="theme-midnight:text-white text-gray-900">
     Adapts to midnight theme
   </p>
 </div>
 
-<nav class="w-16 sidebar-open:w-64 transition-all">
+<nav class="sidebar-open:w-64 w-16 transition-all">
   Expands when sidebar is open
 </nav>
 ```
@@ -51,7 +51,7 @@ module.exports = {
 
 ```css
 @custom-variant theme-dark {
-  &:where([data-theme="dark"] *) {
+  &:where([data-theme='dark'] *) {
     @slot;
   }
 }

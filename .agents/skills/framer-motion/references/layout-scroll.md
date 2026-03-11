@@ -14,7 +14,10 @@ Layout animations calculate element positions relative to the viewport. When a l
 ```tsx
 function MessageList({ messages }: Props) {
   return (
-    <div className="message-container" style={{ overflowY: "auto", height: 400 }}>
+    <div
+      className="message-container"
+      style={{ overflowY: 'auto', height: 400 }}
+    >
       {/* When scrolled, new messages animate from wrong position */}
       {messages.map((message) => (
         <motion.div
@@ -40,7 +43,7 @@ function MessageList({ messages }: Props) {
     <motion.div
       layoutScroll // Accounts for scroll offset in layout calculations
       className="message-container"
-      style={{ overflowY: "auto", height: 400 }}
+      style={{ overflowY: 'auto', height: 400 }}
     >
       {messages.map((message) => (
         <motion.div
@@ -59,6 +62,7 @@ function MessageList({ messages }: Props) {
 ```
 
 **When to use layoutScroll:**
+
 - Scrollable lists with reorderable items
 - Chat interfaces with layout-animated messages
 - Infinite scroll feeds with layout transitions
@@ -67,8 +71,8 @@ function MessageList({ messages }: Props) {
 **Note:** Apply `layoutScroll` to ALL scrollable ancestors in the hierarchy, not just the immediate parent. For deeply nested scroll containers, each scrollable element needs the prop.
 
 ```tsx
-<motion.div layoutScroll style={{ overflowY: "auto" }}>
-  <motion.div layoutScroll style={{ overflowX: "auto" }}>
+<motion.div layoutScroll style={{ overflowY: 'auto' }}>
+  <motion.div layoutScroll style={{ overflowX: 'auto' }}>
     <motion.div layout>Content</motion.div>
   </motion.div>
 </motion.div>

@@ -39,7 +39,13 @@ function AuctionBidPanel({ endsAt }: { endsAt: Date }) {
   // 20 lines of timer plumbing before the actual UI begins
   return (
     <div>
-      {isExpired ? <p>Auction ended</p> : <p>{hours}h {minutes}m {seconds}s</p>}
+      {isExpired ? (
+        <p>Auction ended</p>
+      ) : (
+        <p>
+          {hours}h {minutes}m {seconds}s
+        </p>
+      )}
       <BidForm disabled={isExpired} />
     </div>
   );
@@ -50,7 +56,9 @@ function AuctionBidPanel({ endsAt }: { endsAt: Date }) {
 
 ```tsx
 function useCountdown(targetDate: Date) {
-  const [timeRemaining, setTimeRemaining] = useState(targetDate.getTime() - Date.now());
+  const [timeRemaining, setTimeRemaining] = useState(
+    targetDate.getTime() - Date.now()
+  );
 
   useEffect(() => {
     function tick() {
@@ -75,7 +83,13 @@ function AuctionBidPanel({ endsAt }: { endsAt: Date }) {
 
   return (
     <div>
-      {isExpired ? <p>Auction ended</p> : <p>{hours}h {minutes}m {seconds}s</p>}
+      {isExpired ? (
+        <p>Auction ended</p>
+      ) : (
+        <p>
+          {hours}h {minutes}m {seconds}s
+        </p>
+      )}
       <BidForm disabled={isExpired} />
     </div>
   );

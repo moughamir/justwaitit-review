@@ -44,11 +44,13 @@ assertThat(actual).isEqualTo(expected);
 ```
 
 **Why fewer arguments?**
+
 - Easier to understand
 - Easier to test (fewer combinations)
 - Less chance of argument order errors
 
 **Acceptable monadic forms:**
+
 - Asking a question: `boolean fileExists(String path)`
 - Transforming input: `InputStream openFile(String path)`
 - Events: `void passwordAttemptFailed(int attempts)`

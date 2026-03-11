@@ -12,7 +12,7 @@ Direct imports of API clients and external services weld a component to a specif
 **Incorrect (hard import — coupled to specific HTTP client):**
 
 ```tsx
-import { apiClient } from "@/lib/apiClient";
+import { apiClient } from '@/lib/apiClient';
 
 interface OrderSummaryProps {
   orderId: string;
@@ -74,7 +74,7 @@ export function OrderSummary({ orderId }: { orderId: string }) {
 
 // Test — no module mocking needed
 const fakeService: OrderService = {
-  getOrder: async () => ({ id: "1", vendor: "Acme", total: 99 }),
+  getOrder: async () => ({ id: '1', vendor: 'Acme', total: 99 }),
 };
 render(
   <OrderServiceProvider service={fakeService}>

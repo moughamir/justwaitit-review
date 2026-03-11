@@ -168,14 +168,14 @@ function canAccessSystem(user: User, config: Config): boolean {
 
 ### Refactoring Patterns
 
-| Negative Form | Positive Form |
-|--------------|---------------|
-| `!isNotValid` | `isValid` |
-| `!isEmpty` | `hasItems` |
-| `!isDisabled` | `isEnabled` |
-| `notFound === false` | `found === true` or just `found` |
-| `!user.inactive` | `user.isActive` (may need data change) |
-| `errors.length === 0` | `isValid` or `hasNoErrors` |
+| Negative Form         | Positive Form                          |
+| --------------------- | -------------------------------------- |
+| `!isNotValid`         | `isValid`                              |
+| `!isEmpty`            | `hasItems`                             |
+| `!isDisabled`         | `isEnabled`                            |
+| `notFound === false`  | `found === true` or just `found`       |
+| `!user.inactive`      | `user.isActive` (may need data change) |
+| `errors.length === 0` | `isValid` or `hasNoErrors`             |
 
 ### Benefits
 

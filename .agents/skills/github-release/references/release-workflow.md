@@ -47,6 +47,7 @@ git push origin --tags
 ```
 
 If push fails:
+
 - Set upstream: `git push -u origin ${BRANCH}`
 - Check auth: `gh auth status`
 - Verify remote: `git remote -v`
@@ -85,6 +86,7 @@ gh release create v1.0.0 --title "Release v1.0.0" --notes "..." --draft
 ## Post-Release
 
 Depending on project type:
+
 - **npm package**: `npm publish`
 - **Announce**: Social media, relevant communities
 - **Update docs**: Ensure README references latest version

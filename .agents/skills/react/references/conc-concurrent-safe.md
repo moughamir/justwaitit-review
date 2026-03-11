@@ -52,20 +52,20 @@ function UserCard({ user }) {
 
 ```typescript
 // ✅ Pure calculations during render
-const fullName = `${firstName} ${lastName}`
+const fullName = `${firstName} ${lastName}`;
 
 // ✅ Memoized expensive calculations
-const sorted = useMemo(() => [...items].sort(compare), [items])
+const sorted = useMemo(() => [...items].sort(compare), [items]);
 
 // ✅ Stable references with useId
-const inputId = useId()
+const inputId = useId();
 
 // ❌ Mutations during render
-items.push(newItem)
+items.push(newItem);
 
 // ❌ Subscriptions during render
-window.addEventListener('resize', handler)
+window.addEventListener('resize', handler);
 
 // ❌ External state reads without sync
-const width = window.innerWidth
+const width = window.innerWidth;
 ```

@@ -50,6 +50,7 @@ export default async function ProductsPage() {
 ```
 
 **When to use client-side fetching:**
+
 - User-initiated actions (load more, search)
 - Real-time updates (polling, WebSocket)
 - After-interaction data (comments on expand)
@@ -57,15 +58,15 @@ export default async function ProductsPage() {
 **Recommended client-side library:**
 
 ```typescript
-'use client'
+'use client';
 
-import useSWR from 'swr'
+import useSWR from 'swr';
 
 export function SearchResults({ query }: { query: string }) {
   const { data, isLoading } = useSWR(
     query ? `/api/search?q=${query}` : null,
     fetcher
-  )
+  );
   // Client fetch appropriate for user-initiated search
 }
 ```

@@ -14,10 +14,10 @@ When using `@apply` in Vue/Svelte component styles or CSS modules, use `@referen
 ```vue
 <style scoped>
 /* Imports entire stylesheet, duplicates in output */
-@import "../styles/main.css";
+@import '../styles/main.css';
 
 .custom-button {
-  @apply bg-brand-500 px-4 py-2 rounded;
+  @apply bg-brand-500 rounded px-4 py-2;
 }
 </style>
 ```
@@ -30,7 +30,7 @@ When using `@apply` in Vue/Svelte component styles or CSS modules, use `@referen
 @reference "../styles/main.css";
 
 .custom-button {
-  @apply bg-brand-500 px-4 py-2 rounded;
+  @apply bg-brand-500 rounded px-4 py-2;
 }
 </style>
 ```
@@ -42,7 +42,7 @@ When using `@apply` in Vue/Svelte component styles or CSS modules, use `@referen
 @reference "../../styles/main.css";
 
 .button {
-  @apply bg-blue-500 text-white px-4 py-2 rounded;
+  @apply rounded bg-blue-500 px-4 py-2 text-white;
 }
 
 .button:hover {
@@ -51,6 +51,7 @@ When using `@apply` in Vue/Svelte component styles or CSS modules, use `@referen
 ```
 
 **Benefits:**
+
 - Access to theme variables and utilities
 - Zero CSS duplication in output
 - Works with scoped styles

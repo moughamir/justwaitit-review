@@ -8,12 +8,12 @@ WCAG contrast ratio formulas and verification methods for accessible color palet
 
 ### Minimum Contrast Ratios
 
-| Content Type | AA | AAA |
-|--------------|-----|-----|
-| **Normal text** (<18px or <14px bold) | 4.5:1 | 7:1 |
-| **Large text** (≥18px or ≥14px bold) | 3:1 | 4.5:1 |
-| **UI components** (buttons, borders) | 3:1 | Not defined |
-| **Graphical objects** (icons, charts) | 3:1 | Not defined |
+| Content Type                          | AA    | AAA         |
+| ------------------------------------- | ----- | ----------- |
+| **Normal text** (<18px or <14px bold) | 4.5:1 | 7:1         |
+| **Large text** (≥18px or ≥14px bold)  | 3:1   | 4.5:1       |
+| **UI components** (buttons, borders)  | 3:1   | Not defined |
+| **Graphical objects** (icons, charts) | 3:1   | Not defined |
 
 **Target**: AA for most projects, AAA for high-accessibility needs (government, healthcare).
 
@@ -44,6 +44,7 @@ function getLuminance(hex) {
 **Output**: Value between 0 (black) and 1 (white).
 
 **Examples**:
+
 - `#FFFFFF` (white) → 1.0
 - `#000000` (black) → 0.0
 - `#14B8A6` (teal-500) → 0.42
@@ -65,6 +66,7 @@ function getContrastRatio(hex1, hex2) {
 ```
 
 **Example**:
+
 ```javascript
 getContrastRatio('#FFFFFF', '#0D9488'); // White text on teal-600
 // → 4.56:1 (passes AA for normal text)
@@ -78,31 +80,31 @@ Approximate contrast ratios for common shade pairs (teal palette):
 
 ### Light Mode
 
-| Foreground | Background | Ratio | Pass AA? | Use Case |
-|------------|------------|-------|----------|----------|
-| 950 | white | 18.5:1 | ✅ AAA | Body text |
-| 900 | white | 14.2:1 | ✅ AAA | Card text |
-| 800 | white | 10.8:1 | ✅ AAA | Strong text |
-| 700 | white | 8.1:1 | ✅ AAA | Text |
-| 600 | white | 5.7:1 | ✅ AA | Text, buttons |
-| 500 | white | 3.9:1 | ❌ Fail | Too light for text |
-| 400 | white | 2.8:1 | ❌ Fail | UI only |
-| white | 600 | 5.7:1 | ✅ AA | Button text |
-| white | 700 | 8.1:1 | ✅ AAA | Button text |
-| 600 | 50 | 5.4:1 | ✅ AA | Muted section text |
+| Foreground | Background | Ratio  | Pass AA? | Use Case           |
+| ---------- | ---------- | ------ | -------- | ------------------ |
+| 950        | white      | 18.5:1 | ✅ AAA   | Body text          |
+| 900        | white      | 14.2:1 | ✅ AAA   | Card text          |
+| 800        | white      | 10.8:1 | ✅ AAA   | Strong text        |
+| 700        | white      | 8.1:1  | ✅ AAA   | Text               |
+| 600        | white      | 5.7:1  | ✅ AA    | Text, buttons      |
+| 500        | white      | 3.9:1  | ❌ Fail  | Too light for text |
+| 400        | white      | 2.8:1  | ❌ Fail  | UI only            |
+| white      | 600        | 5.7:1  | ✅ AA    | Button text        |
+| white      | 700        | 8.1:1  | ✅ AAA   | Button text        |
+| 600        | 50         | 5.4:1  | ✅ AA    | Muted section text |
 
 ### Dark Mode
 
-| Foreground | Background | Ratio | Pass AA? | Use Case |
-|------------|------------|-------|----------|----------|
-| 50 | 950 | 18.5:1 | ✅ AAA | Body text |
-| 50 | 900 | 14.2:1 | ✅ AAA | Card text |
-| 100 | 950 | 16.8:1 | ✅ AAA | Text |
-| 400 | 950 | 8.2:1 | ✅ AAA | Muted text |
-| 400 | 900 | 6.3:1 | ✅ AA | Muted text |
-| white | 500 | 3.9:1 | ❌ Fail | Too bright |
-| white | 600 | 5.7:1 | ✅ AA | Button text |
-| white | 700 | 8.1:1 | ✅ AAA | Button text |
+| Foreground | Background | Ratio  | Pass AA? | Use Case    |
+| ---------- | ---------- | ------ | -------- | ----------- |
+| 50         | 950        | 18.5:1 | ✅ AAA   | Body text   |
+| 50         | 900        | 14.2:1 | ✅ AAA   | Card text   |
+| 100        | 950        | 16.8:1 | ✅ AAA   | Text        |
+| 400        | 950        | 8.2:1  | ✅ AAA   | Muted text  |
+| 400        | 900        | 6.3:1  | ✅ AA    | Muted text  |
+| white      | 500        | 3.9:1  | ❌ Fail  | Too bright  |
+| white      | 600        | 5.7:1  | ✅ AA    | Button text |
+| white      | 700        | 8.1:1  | ✅ AAA   | Button text |
 
 **Pattern**: Darker shades (700+) work for text on light backgrounds. Lighter shades (50-100) work on dark backgrounds.
 
@@ -141,12 +143,14 @@ Approximate contrast ratios for common shade pairs (teal palette):
 **Symptom**: White text on teal-500 = 3.9:1 (fails AA 4.5:1).
 
 **Fix 1**: Use darker shade for primary button.
+
 ```css
 /* Instead of shade 500 */
 --color-primary: var(--color-primary-600); /* Darker, 5.7:1 contrast */
 ```
 
 **Fix 2**: Use dark text instead of white.
+
 ```css
 --color-primary-foreground: var(--color-primary-950); /* Dark text */
 ```
@@ -160,6 +164,7 @@ Approximate contrast ratios for common shade pairs (teal palette):
 **Symptom**: primary-400 on primary-800 = 4.1:1 (fails AA 4.5:1).
 
 **Fix**: Use more extreme shades.
+
 ```css
 .dark {
   --color-muted: var(--color-primary-900); /* Darker background */
@@ -176,13 +181,20 @@ Approximate contrast ratios for common shade pairs (teal palette):
 **Symptom**: primary-500 text on white = 3.9:1 (fails AA).
 
 **Fix 1**: Darken link color.
+
 ```css
-a { color: var(--color-primary-700); } /* 8.1:1 ✅ */
+a {
+  color: var(--color-primary-700);
+} /* 8.1:1 ✅ */
 ```
 
 **Fix 2**: Add underline (doesn't rely on color alone).
+
 ```css
-a { text-decoration: underline; color: var(--color-primary-500); }
+a {
+  text-decoration: underline;
+  color: var(--color-primary-500);
+}
 ```
 
 **Best practice**: Combine color + underline for accessibility.
@@ -193,17 +205,17 @@ a { text-decoration: underline; color: var(--color-primary-500); }
 
 Approximate contrast ratios by lightness difference:
 
-| Lightness Difference | Contrast Ratio | Pass AA? |
-|----------------------|----------------|----------|
-| 10% → 90% | ~12:1 | ✅ AAA |
-| 10% → 80% | ~9:1 | ✅ AAA |
-| 10% → 70% | ~7:1 | ✅ AAA |
-| 10% → 60% | ~5.5:1 | ✅ AA |
-| 10% → 50% | ~4.2:1 | ❌ Borderline |
-| 20% → 90% | ~9:1 | ✅ AAA |
-| 30% → 90% | ~7:1 | ✅ AAA |
-| 40% → 90% | ~5.5:1 | ✅ AA |
-| 50% → 90% | ~4.2:1 | ❌ Borderline |
+| Lightness Difference | Contrast Ratio | Pass AA?      |
+| -------------------- | -------------- | ------------- |
+| 10% → 90%            | ~12:1          | ✅ AAA        |
+| 10% → 80%            | ~9:1           | ✅ AAA        |
+| 10% → 70%            | ~7:1           | ✅ AAA        |
+| 10% → 60%            | ~5.5:1         | ✅ AA         |
+| 10% → 50%            | ~4.2:1         | ❌ Borderline |
+| 20% → 90%            | ~9:1           | ✅ AAA        |
+| 30% → 90%            | ~7:1           | ✅ AAA        |
+| 40% → 90%            | ~5.5:1         | ✅ AA         |
+| 50% → 90%            | ~4.2:1         | ❌ Borderline |
 
 **Rule of thumb**: For text, aim for 50%+ lightness difference (e.g., 10% background + 60%+ foreground).
 
@@ -292,6 +304,7 @@ const ratio = getContrastRatio('#FFFFFF', backgroundFinal);
 ### 2. Gradients
 
 Check both endpoints:
+
 ```javascript
 const gradient = 'linear-gradient(to right, #14B8A6, #0D9488)';
 // Check: white text on #14B8A6 AND white text on #0D9488

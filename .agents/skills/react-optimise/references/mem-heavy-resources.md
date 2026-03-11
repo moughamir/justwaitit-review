@@ -13,29 +13,29 @@ Canvas contexts, Web Workers, object URLs, and media streams allocate significan
 
 ```tsx
 function ImageEditor({ imageFile }: { imageFile: File }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const objectUrl = URL.createObjectURL(imageFile) // 5-20MB blob retained
-    const worker = new Worker("/image-processing-worker.js") // thread + memory allocated
-    const img = new Image()
+    const objectUrl = URL.createObjectURL(imageFile); // 5-20MB blob retained
+    const worker = new Worker('/image-processing-worker.js'); // thread + memory allocated
+    const img = new Image();
 
     img.onload = () => {
-      const ctx = canvasRef.current?.getContext("2d")
-      ctx?.drawImage(img, 0, 0)
+      const ctx = canvasRef.current?.getContext('2d');
+      ctx?.drawImage(img, 0, 0);
 
-      worker.postMessage({ type: "analyze", imageData: objectUrl })
+      worker.postMessage({ type: 'analyze', imageData: objectUrl });
       worker.onmessage = (e) => {
-        console.log("Analysis complete:", e.data)
-      }
-    }
+        console.log('Analysis complete:', e.data);
+      };
+    };
 
-    img.src = objectUrl
+    img.src = objectUrl;
     // No cleanup — object URL, worker, and canvas context persist after unmount
     // Each mount leaks ~25MB (object URL + worker heap + canvas buffer)
-  }, [imageFile])
+  }, [imageFile]);
 
-  return <canvas ref={canvasRef} width={1920} height={1080} />
+  return <canvas ref={canvasRef} width={1920} height={1080} />;
 }
 ```
 
@@ -43,37 +43,37 @@ function ImageEditor({ imageFile }: { imageFile: File }) {
 
 ```tsx
 function ImageEditor({ imageFile }: { imageFile: File }) {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    const objectUrl = URL.createObjectURL(imageFile)
-    const worker = new Worker("/image-processing-worker.js")
-    const img = new Image()
+    const objectUrl = URL.createObjectURL(imageFile);
+    const worker = new Worker('/image-processing-worker.js');
+    const img = new Image();
 
     img.onload = () => {
-      const ctx = canvasRef.current?.getContext("2d")
-      ctx?.drawImage(img, 0, 0)
+      const ctx = canvasRef.current?.getContext('2d');
+      ctx?.drawImage(img, 0, 0);
 
-      worker.postMessage({ type: "analyze", imageData: objectUrl })
+      worker.postMessage({ type: 'analyze', imageData: objectUrl });
       worker.onmessage = (e) => {
-        console.log("Analysis complete:", e.data)
-      }
-    }
+        console.log('Analysis complete:', e.data);
+      };
+    };
 
-    img.src = objectUrl
+    img.src = objectUrl;
 
     return () => {
-      URL.revokeObjectURL(objectUrl) // frees blob memory
-      worker.terminate() // kills thread and releases worker heap
-      const ctx = canvasRef.current?.getContext("2d")
+      URL.revokeObjectURL(objectUrl); // frees blob memory
+      worker.terminate(); // kills thread and releases worker heap
+      const ctx = canvasRef.current?.getContext('2d');
       if (ctx && canvasRef.current) {
-        canvasRef.current.width = 0 // releases canvas buffer memory
-        canvasRef.current.height = 0
+        canvasRef.current.width = 0; // releases canvas buffer memory
+        canvasRef.current.height = 0;
       }
-    }
-  }, [imageFile])
+    };
+  }, [imageFile]);
 
-  return <canvas ref={canvasRef} width={1920} height={1080} />
+  return <canvas ref={canvasRef} width={1920} height={1080} />;
 }
 ```
 

@@ -25,12 +25,13 @@ Users can share files with other users.
 
 **Correct (security designed in):**
 
-```markdown
+````markdown
 ## Feature: File Sharing - Security Specification
 
 ### Threat Model
 
 **Assets to protect:**
+
 - User files (confidentiality, integrity)
 - User metadata (privacy)
 - System resources (availability)
@@ -44,33 +45,35 @@ Users can share files with other users.
 
 ### Attack Surface Analysis
 
-| Attack Vector | Threat | Mitigation |
-|---------------|--------|------------|
+| Attack Vector            | Threat                                  | Mitigation                             |
+| ------------------------ | --------------------------------------- | -------------------------------------- |
 | Unauthorized file access | IDOR (Insecure Direct Object Reference) | Access control checks on every request |
-| Malicious file upload | Malware distribution | File scanning, type validation |
-| Path traversal | Server file access | Sanitize filenames, use UUIDs |
-| Denial of service | Resource exhaustion | Rate limiting, file size limits |
-| Share link enumeration | Unauthorized access | Cryptographic random tokens |
+| Malicious file upload    | Malware distribution                    | File scanning, type validation         |
+| Path traversal           | Server file access                      | Sanitize filenames, use UUIDs          |
+| Denial of service        | Resource exhaustion                     | Rate limiting, file size limits        |
+| Share link enumeration   | Unauthorized access                     | Cryptographic random tokens            |
 
 ### Authentication & Authorization
 
 **Authentication:**
+
 - Required for: Upload, delete, manage shares
 - Optional for: Access via share link (if public)
 - Method: JWT with 15-minute expiry + refresh token
 
 **Authorization Matrix:**
 
-| Action | Owner | Shared User (Edit) | Shared User (View) | Public Link | Anonymous |
-|--------|-------|-------------------|-------------------|-------------|-----------|
-| View file | ✓ | ✓ | ✓ | ✓ | ✗ |
-| Download | ✓ | ✓ | ✓ | Configurable | ✗ |
-| Edit/Replace | ✓ | ✓ | ✗ | ✗ | ✗ |
-| Delete | ✓ | ✗ | ✗ | ✗ | ✗ |
-| Manage shares | ✓ | ✗ | ✗ | ✗ | ✗ |
-| View share link | ✓ | ✓ | ✗ | N/A | ✗ |
+| Action          | Owner | Shared User (Edit) | Shared User (View) | Public Link  | Anonymous |
+| --------------- | ----- | ------------------ | ------------------ | ------------ | --------- |
+| View file       | ✓     | ✓                  | ✓                  | ✓            | ✗         |
+| Download        | ✓     | ✓                  | ✓                  | Configurable | ✗         |
+| Edit/Replace    | ✓     | ✓                  | ✗                  | ✗            | ✗         |
+| Delete          | ✓     | ✗                  | ✗                  | ✗            | ✗         |
+| Manage shares   | ✓     | ✗                  | ✗                  | ✗            | ✗         |
+| View share link | ✓     | ✓                  | ✗                  | N/A          | ✗         |
 
 **Implementation:**
+
 ```python
 def check_file_access(user_id: str, file_id: str, action: str) -> bool:
     file = get_file(file_id)  # Raises 404 if not found
@@ -87,10 +90,12 @@ def check_file_access(user_id: str, file_id: str, action: str) -> bool:
     # No access - return same error as "not found" to prevent enumeration
     raise NotFoundError("File not found")
 ```
+````
 
 ### Input Validation
 
 **File upload validation:**
+
 ```yaml
 filename:
   max_length: 255
@@ -114,26 +119,29 @@ share_link_token:
 
 ### Rate Limiting
 
-| Endpoint | Limit | Window | Response |
-|----------|-------|--------|----------|
-| POST /files (upload) | 10 | 1 minute | 429 + Retry-After |
-| GET /files/:id | 100 | 1 minute | 429 + Retry-After |
-| POST /shares | 20 | 1 minute | 429 + Retry-After |
-| GET /shares/:token | 50 | 1 minute | 429 + Retry-After |
+| Endpoint             | Limit | Window   | Response          |
+| -------------------- | ----- | -------- | ----------------- |
+| POST /files (upload) | 10    | 1 minute | 429 + Retry-After |
+| GET /files/:id       | 100   | 1 minute | 429 + Retry-After |
+| POST /shares         | 20    | 1 minute | 429 + Retry-After |
+| GET /shares/:token   | 50    | 1 minute | 429 + Retry-After |
 
 ### Data Protection
 
 **At rest:**
+
 - Files encrypted with AES-256-GCM
 - Keys stored in AWS KMS
 - Separate key per customer (enterprise)
 
 **In transit:**
+
 - TLS 1.3 required
 - HSTS enabled
 - Certificate pinning for mobile apps
 
 **Retention:**
+
 - Deleted files: Soft delete for 30 days
 - Permanent delete: Overwrite + crypto erase
 - Audit logs: 1 year retention
@@ -141,12 +149,13 @@ share_link_token:
 ### Audit Logging
 
 All security-relevant events logged:
+
 ```json
 {
   "timestamp": "2024-03-15T10:30:00Z",
   "event": "file.accessed",
-  "actor": {"type": "user", "id": "user_123"},
-  "resource": {"type": "file", "id": "file_456"},
+  "actor": { "type": "user", "id": "user_123" },
+  "resource": { "type": "file", "id": "file_456" },
   "action": "download",
   "context": {
     "ip": "192.168.1.1",
@@ -156,6 +165,7 @@ All security-relevant events logged:
   "result": "success"
 }
 ```
+
 ```
 
 **Security checklist:**
@@ -167,3 +177,4 @@ All security-relevant events logged:
 - Audit logging planned
 
 Reference: [OWASP Application Security Verification Standard](https://owasp.org/www-project-application-security-verification-standard/)
+```

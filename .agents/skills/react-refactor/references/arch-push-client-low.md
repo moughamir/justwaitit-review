@@ -13,12 +13,12 @@ A `'use client'` directive makes the component and every component it imports cl
 
 ```tsx
 // app/dashboard/page.tsx
-"use client"; // Every child becomes client-side
+'use client'; // Every child becomes client-side
 
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState("overview");
+  const [activeTab, setActiveTab] = useState('overview');
 
   return (
     <div>
@@ -30,11 +30,11 @@ export default function DashboardPage() {
 
       {/* Navigation tabs — the only interactive part */}
       <nav>
-        {["overview", "analytics", "settings"].map((tab) => (
+        {['overview', 'analytics', 'settings'].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={activeTab === tab ? "active" : ""}
+            className={activeTab === tab ? 'active' : ''}
           >
             {tab}
           </button>
@@ -42,9 +42,9 @@ export default function DashboardPage() {
       </nav>
 
       {/* Heavy data display — re-fetched on client, adding waterfall */}
-      {activeTab === "overview" && <OverviewPanel />}
-      {activeTab === "analytics" && <AnalyticsPanel />}
-      {activeTab === "settings" && <SettingsPanel />}
+      {activeTab === 'overview' && <OverviewPanel />}
+      {activeTab === 'analytics' && <AnalyticsPanel />}
+      {activeTab === 'settings' && <SettingsPanel />}
     </div>
   );
 }
@@ -73,21 +73,36 @@ export default function DashboardPage() {
 }
 
 // components/DashboardTabs.tsx — 'use client' only on the leaf
-"use client";
-import { type ReactNode, useState } from "react";
+('use client');
+import { type ReactNode, useState } from 'react';
 
-export function DashboardTabs({ overviewPanel, analyticsPanel, settingsPanel }: {
-  overviewPanel: ReactNode; analyticsPanel: ReactNode; settingsPanel: ReactNode;
+export function DashboardTabs({
+  overviewPanel,
+  analyticsPanel,
+  settingsPanel,
+}: {
+  overviewPanel: ReactNode;
+  analyticsPanel: ReactNode;
+  settingsPanel: ReactNode;
 }) {
-  const [activeTab, setActiveTab] = useState("overview");
-  const panels = { overview: overviewPanel, analytics: analyticsPanel, settings: settingsPanel };
+  const [activeTab, setActiveTab] = useState('overview');
+  const panels = {
+    overview: overviewPanel,
+    analytics: analyticsPanel,
+    settings: settingsPanel,
+  };
 
   return (
     <div>
       <nav>
         {Object.keys(panels).map((tab) => (
-          <button key={tab} onClick={() => setActiveTab(tab)}
-            className={activeTab === tab ? "active" : ""}>{tab}</button>
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={activeTab === tab ? 'active' : ''}
+          >
+            {tab}
+          </button>
         ))}
       </nav>
       {panels[activeTab as keyof typeof panels]}

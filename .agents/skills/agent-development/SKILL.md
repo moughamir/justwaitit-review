@@ -47,11 +47,11 @@ System prompt body in second person ("You are...")
 
 Agent identifier for namespacing and invocation.
 
-| Rule | Detail |
-|------|--------|
-| Length | 3-50 characters |
-| Format | Lowercase letters, numbers, hyphens only |
-| Start/end | Must be alphanumeric (not hyphen) |
+| Rule       | Detail                                                         |
+| ---------- | -------------------------------------------------------------- |
+| Length     | 3-50 characters                                                |
+| Format     | Lowercase letters, numbers, hyphens only                       |
+| Start/end  | Must be alphanumeric (not hyphen)                              |
 | Convention | Role-based: `code-reviewer`, `test-generator`, `domain-expert` |
 
 **Invalid names:** `ag` (too short), `-agent-` (starts/ends with hyphen), `my_agent` (underscores)
@@ -61,12 +61,14 @@ Agent identifier for namespacing and invocation.
 Defines WHEN Claude should trigger this agent. Poor descriptions = agent never triggers.
 
 **Must include:**
+
 1. Triggering conditions ("Use this agent when...")
 2. 2-4 `<example>` blocks showing usage scenarios
 3. Each example: context, user request, assistant response, commentary
 4. Both proactive and reactive triggering scenarios
 
 **Good description pattern:**
+
 ```yaml
 description: |
   Use this agent when the user needs help with [domain]. Trigger for:
@@ -88,12 +90,12 @@ description: |
 
 ### model (required)
 
-| Value | When to use |
-|-------|-------------|
+| Value     | When to use                                      |
+| --------- | ------------------------------------------------ |
 | `inherit` | **Default choice** - uses parent session's model |
-| `sonnet` | Balanced capability/speed |
-| `opus` | Most capable, for complex reasoning |
-| `haiku` | Fast/cheap, for simple validation |
+| `sonnet`  | Balanced capability/speed                        |
+| `opus`    | Most capable, for complex reasoning              |
+| `haiku`   | Fast/cheap, for simple validation                |
 
 **Always use `inherit` unless the agent specifically needs a different capability level.**
 
@@ -101,13 +103,13 @@ description: |
 
 Visual identifier in UI. Choose based on agent function:
 
-| Color | Use for |
-|-------|---------|
-| `blue` / `cyan` | Analysis, review, research |
-| `green` | Success-oriented, generation, creation |
-| `yellow` | Caution, validation, checking |
-| `red` | Critical, security, destructive operations |
-| `magenta` | Creative, design, architecture |
+| Color           | Use for                                    |
+| --------------- | ------------------------------------------ |
+| `blue` / `cyan` | Analysis, review, research                 |
+| `green`         | Success-oriented, generation, creation     |
+| `yellow`        | Caution, validation, checking              |
+| `red`           | Critical, security, destructive operations |
+| `magenta`       | Creative, design, architecture             |
 
 Use distinct colors for different agents within the same plugin.
 
@@ -140,29 +142,35 @@ The markdown body becomes the agent's system prompt. Write in **second person** 
 You are [role] specializing in [domain].
 
 ## Core Responsibilities
+
 1. [Primary responsibility]
 2. [Secondary responsibility]
 
 ## Process
+
 1. [Step one]
 2. [Step two]
 3. [Step three]
 
 ## Quality Standards
+
 - [Standard 1]
 - [Standard 2]
 
 ## Output Format
+
 - [What to include]
 - [How to structure results]
 
 ## Edge Cases
+
 - [Situation]: [How to handle]
 ```
 
 ### Best Practices
 
 **DO:**
+
 - Write in second person ("You are...", "You will...")
 - Be specific about responsibilities and process steps
 - Define output format clearly
@@ -171,6 +179,7 @@ You are [role] specializing in [domain].
 - Include skill activation instructions if the agent should load skills
 
 **DON'T:**
+
 - Write in first person ("I am...", "I will...")
 - Be vague or generic ("help with stuff")
 - Skip process steps
@@ -196,6 +205,7 @@ Expert agents should load relevant skills before answering. Include skill activa
 
 ```markdown
 ## Skill Activation
+
 When the user asks about [topic], load `plugin-name:skill-name` before responding.
 ```
 
@@ -223,11 +233,11 @@ Before finalizing an agent:
 
 ## Common Mistakes
 
-| Mistake | Fix |
-|---------|-----|
-| Vague description without examples | Add 2-4 `<example>` blocks with concrete user phrases |
-| `model: sonnet` when `inherit` works | Use `inherit` unless agent needs specific capability |
-| Too many tools granted | Restrict to minimum needed tools |
-| Generic system prompt | Be specific about process, output format, quality standards |
-| No skill activation | Add skill loading instructions for knowledge-dependent agents |
-| Multiple agents in one plugin | Use one expert agent with skills for different topics |
+| Mistake                              | Fix                                                           |
+| ------------------------------------ | ------------------------------------------------------------- |
+| Vague description without examples   | Add 2-4 `<example>` blocks with concrete user phrases         |
+| `model: sonnet` when `inherit` works | Use `inherit` unless agent needs specific capability          |
+| Too many tools granted               | Restrict to minimum needed tools                              |
+| Generic system prompt                | Be specific about process, output format, quality standards   |
+| No skill activation                  | Add skill loading instructions for knowledge-dependent agents |
+| Multiple agents in one plugin        | Use one expert agent with skills for different topics         |

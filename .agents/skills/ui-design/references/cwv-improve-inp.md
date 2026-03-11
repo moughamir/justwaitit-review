@@ -21,7 +21,7 @@ button.addEventListener('click', () => {
 
 dropdown.addEventListener('change', (event) => {
   // DOM thrashing during interaction
-  items.forEach(item => {
+  items.forEach((item) => {
     item.style.display = shouldShow(item) ? 'block' : 'none';
     item.getBoundingClientRect(); // Forces reflow each iteration
   });
@@ -47,9 +47,9 @@ button.addEventListener('click', async () => {
 
 dropdown.addEventListener('change', (event) => {
   // Batch DOM updates
-  const updates = items.map(item => ({
+  const updates = items.map((item) => ({
     element: item,
-    display: shouldShow(item) ? 'block' : 'none'
+    display: shouldShow(item) ? 'block' : 'none',
   }));
 
   requestAnimationFrame(() => {
@@ -62,6 +62,7 @@ dropdown.addEventListener('change', (event) => {
 ```
 
 **INP optimization strategies:**
+
 - Show immediate visual feedback on interaction
 - Use `requestAnimationFrame` for DOM updates
 - Break long tasks with `scheduler.yield()` or `setTimeout`

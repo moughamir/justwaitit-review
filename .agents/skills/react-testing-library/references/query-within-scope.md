@@ -23,9 +23,9 @@ render(
       <button>Delete</button>
     </article>
   </div>
-)
+);
 
-const deleteButton = screen.getByRole('button', { name: /delete/i })
+const deleteButton = screen.getByRole('button', { name: /delete/i });
 // Error: Found multiple elements with role "button"
 ```
 
@@ -43,10 +43,10 @@ render(
       <button>Delete</button>
     </article>
   </div>
-)
+);
 
-const firstPost = screen.getByRole('article', { name: /first post/i })
-const deleteButton = within(firstPost).getByRole('button', { name: /delete/i })
+const firstPost = screen.getByRole('article', { name: /first post/i });
+const deleteButton = within(firstPost).getByRole('button', { name: /delete/i });
 // Finds only the delete button within first post
 ```
 

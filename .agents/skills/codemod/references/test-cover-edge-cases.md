@@ -53,6 +53,7 @@ tests/
 ```
 
 **Edge cases to always test:**
+
 - Empty files
 - Files with only comments
 - Already-transformed code (idempotency)

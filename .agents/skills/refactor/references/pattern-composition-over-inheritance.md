@@ -13,20 +13,28 @@ Inheritance creates tight coupling and can lead to fragile base class problems. 
 
 ```typescript
 class Animal {
-  eat(): void { /* ... */ }
+  eat(): void {
+    /* ... */
+  }
 }
 
 class FlyingAnimal extends Animal {
-  fly(): void { /* ... */ }
+  fly(): void {
+    /* ... */
+  }
 }
 
 class SwimmingAnimal extends Animal {
-  swim(): void { /* ... */ }
+  swim(): void {
+    /* ... */
+  }
 }
 
 // Problem: Duck can fly AND swim - which class to extend?
 class FlyingSwimmingAnimal extends FlyingAnimal {
-  swim(): void { /* ... */ }  // Duplicated from SwimmingAnimal
+  swim(): void {
+    /* ... */
+  } // Duplicated from SwimmingAnimal
 }
 
 class Duck extends FlyingSwimmingAnimal {}
@@ -39,54 +47,55 @@ class Duck extends FlyingSwimmingAnimal {}
 
 ```typescript
 interface Behavior {
-  perform(): void
+  perform(): void;
 }
 
 class FlyingBehavior implements Behavior {
   perform(): void {
-    console.log('Flying through the air')
+    console.log('Flying through the air');
   }
 }
 
 class SwimmingBehavior implements Behavior {
   perform(): void {
-    console.log('Swimming in water')
+    console.log('Swimming in water');
   }
 }
 
 class WalkingBehavior implements Behavior {
   perform(): void {
-    console.log('Walking on land')
+    console.log('Walking on land');
   }
 }
 
 class Animal {
-  private behaviors: Behavior[] = []
+  private behaviors: Behavior[] = [];
 
   addBehavior(behavior: Behavior): void {
-    this.behaviors.push(behavior)
+    this.behaviors.push(behavior);
   }
 
   performBehaviors(): void {
-    this.behaviors.forEach(b => b.perform())
+    this.behaviors.forEach((b) => b.perform());
   }
 }
 
 // Duck composes the behaviors it needs
-const duck = new Animal()
-duck.addBehavior(new FlyingBehavior())
-duck.addBehavior(new SwimmingBehavior())
-duck.addBehavior(new WalkingBehavior())
+const duck = new Animal();
+duck.addBehavior(new FlyingBehavior());
+duck.addBehavior(new SwimmingBehavior());
+duck.addBehavior(new WalkingBehavior());
 
 // Penguin has different combination
-const penguin = new Animal()
-penguin.addBehavior(new SwimmingBehavior())
-penguin.addBehavior(new WalkingBehavior())
+const penguin = new Animal();
+penguin.addBehavior(new SwimmingBehavior());
+penguin.addBehavior(new WalkingBehavior());
 
 // Behaviors can even be changed at runtime
 ```
 
 **When inheritance is appropriate:**
+
 - True "is-a" relationship with LSP compliance
 - Behavior rarely changes between subclasses
 - Framework requires it (React class components, etc.)

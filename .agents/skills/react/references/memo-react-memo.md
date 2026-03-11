@@ -63,10 +63,12 @@ const ProductCard = memo(
   },
   (prevProps, nextProps) => {
     // Return true if props are equal (skip re-render)
-    return prevProps.product.id === nextProps.product.id &&
-           prevProps.product.updatedAt === nextProps.product.updatedAt
+    return (
+      prevProps.product.id === nextProps.product.id &&
+      prevProps.product.updatedAt === nextProps.product.updatedAt
+    );
   }
-)
+);
 ```
 
 **Note:** If using [React Compiler v1.0+](https://react.dev/blog/2025/10/07/react-compiler-1) (works with React 17+), React.memo is handled automatically. Use manual memo only when the compiler can't optimize your case. Ensure props passed to memo'd components are stable (primitives, memoized objects/functions).

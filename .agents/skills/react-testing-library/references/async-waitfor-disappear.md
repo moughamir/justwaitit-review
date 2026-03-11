@@ -12,34 +12,34 @@ When waiting for elements to disappear (like loading spinners), use `waitForElem
 **Incorrect (queryBy with waitFor):**
 
 ```tsx
-render(<DataLoader />)
+render(<DataLoader />);
 
 await waitFor(() => {
-  expect(screen.queryByText('Loading...')).not.toBeInTheDocument()
-})
+  expect(screen.queryByText('Loading...')).not.toBeInTheDocument();
+});
 // Passes immediately if loading text never appeared
 ```
 
 **Correct (waitForElementToBeRemoved):**
 
 ```tsx
-render(<DataLoader />)
+render(<DataLoader />);
 
-await waitForElementToBeRemoved(() => screen.queryByText('Loading...'))
+await waitForElementToBeRemoved(() => screen.queryByText('Loading...'));
 // Verifies element existed, then waits for removal
 ```
 
 **Alternative with findBy then waitFor:**
 
 ```tsx
-render(<DataLoader />)
+render(<DataLoader />);
 
 // First confirm loading appears
-const loadingText = await screen.findByText('Loading...')
+const loadingText = await screen.findByText('Loading...');
 // Then wait for it to disappear
-await waitForElementToBeRemoved(loadingText)
+await waitForElementToBeRemoved(loadingText);
 
-expect(screen.getByText('Data loaded')).toBeInTheDocument()
+expect(screen.getByText('Data loaded')).toBeInTheDocument();
 ```
 
 **Tip:** The callback form re-queries on each check, while passing the element directly uses that reference.

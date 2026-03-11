@@ -21,7 +21,7 @@ function AnimatedList({ items }) {
         <MemoizedListItem
           key={item.id}
           item={item}
-          onAnimationComplete={() => console.log(`${item.id} animated`)}  // New function every render
+          onAnimationComplete={() => console.log(`${item.id} animated`)} // New function every render
         />
       ))}
     </motion.ul>
@@ -45,7 +45,7 @@ function AnimatedList({ items }) {
         <MemoizedListItem
           key={item.id}
           item={item}
-          onAnimationComplete={() => handleAnimationComplete(item.id)}  // Stable reference
+          onAnimationComplete={() => handleAnimationComplete(item.id)} // Stable reference
         />
       ))}
     </motion.ul>

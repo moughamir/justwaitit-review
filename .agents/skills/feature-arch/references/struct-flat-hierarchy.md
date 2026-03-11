@@ -47,10 +47,12 @@ import { CardInput } from '../components/CardInput';
 ```
 
 **When deeper nesting is acceptable:**
+
 - Feature has 20+ components (consider splitting into sub-features)
 - Clear categorical distinction (e.g., `forms/` vs `displays/`)
 
 **Guidelines:**
+
 - Maximum 3 levels within a feature folder
 - If you need deeper nesting, the feature is likely too large
 - Prefer flat with clear naming over deep with vague naming

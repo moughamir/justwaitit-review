@@ -35,7 +35,10 @@ test('navigate to about page', async ({ page }) => {
   await page.getByRole('link', { name: 'About' }).click();
 
   // For navigation elements
-  await page.getByRole('navigation').getByRole('link', { name: 'About' }).click();
+  await page
+    .getByRole('navigation')
+    .getByRole('link', { name: 'About' })
+    .click();
 
   // For buttons (even if styled as links)
   await page.getByRole('button', { name: 'Submit' }).click();
@@ -46,27 +49,28 @@ test('navigate to about page', async ({ page }) => {
 
 ```typescript
 // Buttons
-page.getByRole('button', { name: 'Save' })
+page.getByRole('button', { name: 'Save' });
 
 // Links
-page.getByRole('link', { name: 'Home' })
+page.getByRole('link', { name: 'Home' });
 
 // Headings
-page.getByRole('heading', { name: 'Welcome', level: 1 })
+page.getByRole('heading', { name: 'Welcome', level: 1 });
 
 // Form elements
-page.getByRole('textbox', { name: 'Email' })
-page.getByRole('checkbox', { name: 'Remember me' })
-page.getByRole('combobox', { name: 'Country' })
+page.getByRole('textbox', { name: 'Email' });
+page.getByRole('checkbox', { name: 'Remember me' });
+page.getByRole('combobox', { name: 'Country' });
 
 // Lists
-page.getByRole('list').getByRole('listitem')
+page.getByRole('list').getByRole('listitem');
 
 // Dialogs
-page.getByRole('dialog', { name: 'Confirm' })
+page.getByRole('dialog', { name: 'Confirm' });
 ```
 
 **Benefits:**
+
 - Selectors match how users perceive the page
 - Encourages accessible markup
 - Survives CSS refactors

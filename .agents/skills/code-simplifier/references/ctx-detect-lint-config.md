@@ -25,11 +25,11 @@ function greet(name) {
 
 ```javascript
 // .prettierrc: { "singleQuote": false }
-const message = "Hello, world";
-const items = ["one", "two", "three"];
+const message = 'Hello, world';
+const items = ['one', 'two', 'three'];
 
 function greet(name) {
-  return "Hello, " + name;
+  return 'Hello, ' + name;
 }
 ```
 

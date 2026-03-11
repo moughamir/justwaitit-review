@@ -23,14 +23,14 @@ class Customer {
   changeEmail(newEmail: string): void {
     // Validation scattered or missing
     if (!newEmail.includes('@')) {
-      throw new Error('Invalid email')
+      throw new Error('Invalid email');
     }
-    this.email = newEmail
+    this.email = newEmail;
   }
 }
 
 // Callers can pass any string
-const customer = new Customer('123', 'not-an-email', '123', 'invalid')
+const customer = new Customer('123', 'not-an-email', '123', 'invalid');
 ```
 
 **Correct (value objects for domain concepts):**
@@ -41,21 +41,21 @@ class Email {
 
   static create(value: string): Email {
     if (!Email.isValid(value)) {
-      throw new InvalidEmailError(value)
+      throw new InvalidEmailError(value);
     }
-    return new Email(value.toLowerCase())
+    return new Email(value.toLowerCase());
   }
 
   private static isValid(value: string): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
   equals(other: Email): boolean {
-    return this.value === other.value
+    return this.value === other.value;
   }
 
   toString(): string {
-    return this.value
+    return this.value;
   }
 }
 
@@ -67,7 +67,7 @@ class PhoneNumber {
 
   static create(countryCode: string, number: string): PhoneNumber {
     // Validation and normalization
-    return new PhoneNumber(countryCode, number.replace(/\D/g, ''))
+    return new PhoneNumber(countryCode, number.replace(/\D/g, ''));
   }
 }
 
@@ -79,7 +79,7 @@ class Customer {
   ) {}
 
   changeEmail(newEmail: Email): void {
-    this.email = newEmail  // Already validated
+    this.email = newEmail; // Already validated
   }
 }
 
@@ -88,10 +88,11 @@ const customer = new Customer(
   CustomerId.create('123'),
   Email.create('user@example.com'),
   PhoneNumber.create('+1', '555-1234')
-)
+);
 ```
 
 **Benefits:**
+
 - Invalid values cannot exist in the system
 - Domain concepts explicitly named in code
 - Validation logic centralized and reusable

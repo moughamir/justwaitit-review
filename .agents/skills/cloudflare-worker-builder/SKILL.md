@@ -35,6 +35,7 @@ npm install -D @cloudflare/vite-plugin vite
 ```
 
 Copy and customise the asset files from this skill's `assets/` directory:
+
 - `wrangler.jsonc` — Worker configuration
 - `vite.config.ts` — Vite + Cloudflare plugin
 - `src/index.ts` — Hono app with Static Assets fallback
@@ -55,12 +56,12 @@ Add bindings to `wrangler.jsonc` based on project needs. Wrangler 4.45+ auto-pro
     "directory": "./public/",
     "binding": "ASSETS",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/api/*"]
+    "run_worker_first": ["/api/*"],
   },
   // Add as needed:
   "d1_databases": [{ "binding": "DB", "database_name": "my-app-db" }],
   "r2_buckets": [{ "binding": "STORAGE", "bucket_name": "my-app-files" }],
-  "kv_namespaces": [{ "binding": "CACHE", "title": "my-app-cache" }]
+  "kv_namespaces": [{ "binding": "CACHE", "title": "my-app-cache" }],
 }
 ```
 
@@ -79,10 +80,10 @@ wrangler deploy       # Production deploy
 
 ```typescript
 // CORRECT — use this pattern
-export default app
+export default app;
 
 // WRONG — causes "Cannot read properties of undefined"
-export default { fetch: app.fetch }
+export default { fetch: app.fetch };
 ```
 
 Source: [honojs/hono #3955](https://github.com/honojs/hono/issues/3955)
@@ -103,10 +104,10 @@ Source: [workers-sdk #8879](https://github.com/cloudflare/workers-sdk/issues/887
 ### Vite Config
 
 ```typescript
-import { defineConfig } from 'vite'
-import { cloudflare } from '@cloudflare/vite-plugin'
+import { defineConfig } from 'vite';
+import { cloudflare } from '@cloudflare/vite-plugin';
 
-export default defineConfig({ plugins: [cloudflare()] })
+export default defineConfig({ plugins: [cloudflare()] });
 ```
 
 Always set the `main` field in wrangler.jsonc — the Vite plugin needs it.
@@ -118,8 +119,10 @@ When adding cron triggers, switch to explicit export:
 ```typescript
 export default {
   fetch: app.fetch,
-  scheduled: async (event, env, ctx) => { /* ... */ }
-}
+  scheduled: async (event, env, ctx) => {
+    /* ... */
+  },
+};
 ```
 
 ---

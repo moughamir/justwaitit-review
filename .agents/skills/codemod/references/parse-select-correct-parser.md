@@ -24,7 +24,7 @@ npx codemod jssg run ./transform.ts ./src --language javascript
 ```typescript
 // Transform fails to match typed code
 const matches = root.findAll({
-  rule: { pattern: "const $NAME: string = $VALUE" }
+  rule: { pattern: 'const $NAME: string = $VALUE' },
 });
 // Returns empty - 'javascript' parser doesn't understand ': string'
 ```
@@ -40,13 +40,13 @@ npx codemod jssg run ./transform.ts ./src --language typescript
 ```
 
 ```typescript
-import type { Transform } from "codemod:ast-grep";
-import type TSX from "codemod:ast-grep/langs/tsx";
+import type { Transform } from 'codemod:ast-grep';
+import type TSX from 'codemod:ast-grep/langs/tsx';
 
 // Explicitly type the transform for proper autocomplete
 const transform: Transform<TSX> = (root) => {
   const matches = root.findAll({
-    rule: { pattern: "const $NAME: string = $VALUE" }
+    rule: { pattern: 'const $NAME: string = $VALUE' },
   });
   // Correctly matches TypeScript code
   return null;
@@ -54,6 +54,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Parser selection guide:**
+
 - `.tsx` files → `tsx` (TypeScript + JSX)
 - `.ts` files → `typescript` or `tsx`
 - `.jsx` files → `jsx` (JavaScript + JSX)

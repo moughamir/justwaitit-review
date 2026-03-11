@@ -1,41 +1,12 @@
 'use client';
 
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useReducedMotion,
-} from 'framer-motion';
+import { useScroll, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
+
+import { ScrollWord } from './atoms/scroll-word';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { PhilosophySectionText } from '@/lib/content/philosophy';
-
-function ScrollWord({
-  word,
-  start,
-  end,
-  scrollYProgress,
-  animated,
-}: {
-  word: string;
-  start: number;
-  end: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  scrollYProgress: any;
-  animated: boolean;
-}) {
-  const opacity = useTransform(scrollYProgress, [start, end], [0.18, 1]);
-  return (
-    <motion.span
-      data-atom
-      style={animated ? { opacity } : {}}
-      className="mr-[0.28em] inline-block font-display text-[clamp(1.6rem,3.2vw,3.5rem)] font-light leading-tight text-foreground"
-    >
-      {word}
-    </motion.span>
-  );
-}
 
 export function PhilosophySection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -56,7 +27,7 @@ export function PhilosophySection() {
       ref={sectionRef}
       id="philosophy"
       aria-labelledby="philosophy-heading"
-      className="relative flex min-h-[140vh] flex-col items-center justify-center overflow-hidden px-4 md:px-16"
+      className="relative flex min-h-[120vh] flex-col items-center justify-center overflow-hidden px-4 md:px-16"
     >
       <h2 id="philosophy-heading" className="sr-only">
         {PhilosophySectionText.eyebrow}

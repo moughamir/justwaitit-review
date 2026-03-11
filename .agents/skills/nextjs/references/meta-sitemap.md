@@ -28,36 +28,36 @@ Create dynamic sitemaps that include all your pages with proper last-modified da
 
 ```typescript
 // app/sitemap.ts
-import type { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const products = await getProducts()
-  const posts = await getPosts()
+  const products = await getProducts();
+  const posts = await getPosts();
 
   const productUrls = products.map((product) => ({
     url: `https://example.com/products/${product.slug}`,
     lastModified: product.updatedAt,
     changeFrequency: 'weekly' as const,
-    priority: 0.8
-  }))
+    priority: 0.8,
+  }));
 
   const postUrls = posts.map((post) => ({
     url: `https://example.com/blog/${post.slug}`,
     lastModified: post.updatedAt,
     changeFrequency: 'monthly' as const,
-    priority: 0.6
-  }))
+    priority: 0.6,
+  }));
 
   return [
     {
       url: 'https://example.com',
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 1
+      priority: 1,
     },
     ...productUrls,
-    ...postUrls
-  ]
+    ...postUrls,
+  ];
 }
 ```
 
@@ -69,8 +69,8 @@ export async function GET(
   request: Request,
   { params }: { params: { id: string } }
 ) {
-  const page = parseInt(params.id)
-  const products = await getProductsPage(page, 10000)
+  const page = parseInt(params.id);
+  const products = await getProductsPage(page, 10000);
   // Generate sitemap XML for this page
 }
 ```

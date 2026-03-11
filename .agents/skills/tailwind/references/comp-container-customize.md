@@ -17,7 +17,7 @@ module.exports = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: '2rem',
     },
   },
 };
@@ -26,7 +26,7 @@ module.exports = {
 **Correct (v4 @utility customization):**
 
 ```css
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @utility container {
   margin-inline: auto;
@@ -52,6 +52,7 @@ module.exports = {
 ```
 
 **Benefits:**
+
 - Full CSS control over container behavior
 - Responsive customization without config
 - Consistent with CSS-first approach

@@ -68,7 +68,7 @@ function calculateTotalRevenue(orders: Order[]): number {
 
 function findSuspiciousOrders(orders: Order[]): Order[] {
   return orders.filter(
-    order => order.total > 10000 || order.items.length > 50
+    (order) => order.total > 10000 || order.items.length > 50
   );
 }
 
@@ -83,8 +83,8 @@ function countOrdersByCustomer(orders: Order[]): Map<string, number> {
 
 function prepareConfirmationEmails(orders: Order[]): Email[] {
   return orders
-    .filter(order => order.status === 'completed')
-    .map(order => ({
+    .filter((order) => order.status === 'completed')
+    .map((order) => ({
       to: order.customerEmail,
       subject: 'Order Confirmed',
       body: generateOrderEmail(order),

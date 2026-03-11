@@ -64,12 +64,12 @@ function NetworkStatus() {
 function useLocalStorage(key: string) {
   return useSyncExternalStore(
     (callback) => {
-      window.addEventListener('storage', callback)
-      return () => window.removeEventListener('storage', callback)
+      window.addEventListener('storage', callback);
+      return () => window.removeEventListener('storage', callback);
     },
     () => localStorage.getItem(key),
-    () => null  // SSR fallback
-  )
+    () => null // SSR fallback
+  );
 }
 ```
 

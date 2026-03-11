@@ -38,6 +38,7 @@ public void processOrder(Order order) {
 ```
 
 **Why delete it?**
+
 - Version control remembers everything
 - Commented code creates confusion: Is it needed? Why is it there?
 - It clutters the file and makes scanning harder

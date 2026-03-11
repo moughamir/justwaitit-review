@@ -14,23 +14,23 @@ Server Actions handle form submissions directly without creating API routes. The
 ```typescript
 // app/api/posts/route.ts
 export async function POST(request: Request) {
-  const data = await request.json()
-  const post = await db.posts.create({ data })
-  return Response.json(post)
+  const data = await request.json();
+  const post = await db.posts.create({ data });
+  return Response.json(post);
 }
 
 // app/posts/new/page.tsx
-'use client'
+('use client');
 
 export default function NewPostPage() {
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
+    e.preventDefault();
+    const formData = new FormData(e.target);
     await fetch('/api/posts', {
       method: 'POST',
-      body: JSON.stringify(Object.fromEntries(formData))
-    })
-  }
+      body: JSON.stringify(Object.fromEntries(formData)),
+    });
+  };
   // Requires client component, manual fetch, no type safety
 }
 ```
@@ -69,6 +69,7 @@ export default function NewPostPage() {
 ```
 
 **Benefits:**
+
 - Progressive enhancement (works without JavaScript)
 - Type-safe with TypeScript
 - Direct cache invalidation

@@ -46,7 +46,7 @@ export function FeatureCard({
         'group cursor-pointer rounded-xl border p-6 backdrop-blur-sm transition-all duration-300',
         'hover:-translate-y-1 hover:border-aq-blue/25 hover:shadow-[0_8px_30px_rgba(37,99,235,0.1)]',
         variant === 'default'
-          ? 'border-border/60 bg-white/50'
+          ? 'border-border/60 bg-white/5'
           : 'border-white/[0.08] bg-white/[0.04]',
         className
       )}

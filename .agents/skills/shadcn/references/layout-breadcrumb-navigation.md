@@ -19,7 +19,7 @@ function EditProductPage({ product }) {
       <h1>Edit {product.name}</h1>
       {/* User has no idea how to get back to products list */}
     </div>
-  )
+  );
 }
 ```
 
@@ -33,8 +33,8 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
-import Link from "next/link"
+} from '@/components/ui/breadcrumb';
+import Link from 'next/link';
 
 function EditProductPage({ product }) {
   return (
@@ -67,7 +67,7 @@ function EditProductPage({ product }) {
 
       <h1 className="mt-4">Edit {product.name}</h1>
     </div>
-  )
+  );
 }
 ```
 

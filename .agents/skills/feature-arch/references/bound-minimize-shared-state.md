@@ -25,8 +25,8 @@ export const globalStore = create((set) => ({
 import { globalStore } from '@/stores/globalStore';
 
 export function CheckoutForm() {
-  const cart = globalStore(s => s.cart);
-  const user = globalStore(s => s.user);
+  const cart = globalStore((s) => s.cart);
+  const user = globalStore((s) => s.user);
   // Checkout is now coupled to global store shape
 }
 ```
@@ -66,6 +66,7 @@ export function CheckoutForm({ items }: CheckoutFormProps) {
 ```
 
 **When shared state is acceptable:**
+
 - Auth state (current user) - rarely changes, many features need it
 - Theme/locale - application-wide concerns
 - Feature flags - read-only, system-level

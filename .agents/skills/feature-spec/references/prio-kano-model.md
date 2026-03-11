@@ -15,6 +15,7 @@ The Kano model categorizes features by how they affect customer satisfaction: Ba
 ## Feature Investment
 
 Equal effort on:
+
 - Bug-free login (users expect this)
 - Faster search (users appreciate this)
 - Confetti on milestones (users love this)
@@ -30,12 +31,13 @@ Equal effort on:
 ## Feature Categorization - Kano Model
 
 ### Basic Needs (Must be present, no extra satisfaction)
+
 _Users expect these; absence causes dissatisfaction_
 
-| Feature | Investment Strategy |
-|---------|---------------------|
-| Login works reliably | Meet threshold, don't over-invest |
-| Data doesn't get lost | Table stakes, not a differentiator |
+| Feature               | Investment Strategy                      |
+| --------------------- | ---------------------------------------- |
+| Login works reliably  | Meet threshold, don't over-invest        |
+| Data doesn't get lost | Table stakes, not a differentiator       |
 | Pages load eventually | Basic functionality, not a selling point |
 
 **Strategy:** Ensure quality, minimize excess investment
@@ -43,12 +45,13 @@ _Users expect these; absence causes dissatisfaction_
 ---
 
 ### Performance Needs (More is better, linear satisfaction)
+
 _Users appreciate improvements proportionally_
 
-| Feature | Investment Strategy |
-|---------|---------------------|
-| Search speed | Every 100ms improvement adds value |
-| Storage space | More is always appreciated |
+| Feature        | Investment Strategy                    |
+| -------------- | -------------------------------------- |
+| Search speed   | Every 100ms improvement adds value     |
+| Storage space  | More is always appreciated             |
 | Export formats | Each new format adds incremental value |
 
 **Strategy:** Invest based on competitive positioning
@@ -56,19 +59,21 @@ _Users appreciate improvements proportionally_
 ---
 
 ### Delighters (Unexpected, exponential satisfaction)
+
 _Users don't expect these; presence creates loyalty_
 
-| Feature | Investment Strategy |
-|---------|---------------------|
-| Keyboard shortcuts | Power users will evangelize |
-| Smart suggestions | "It read my mind!" moments |
-| Celebration animations | Emotional connection |
+| Feature                | Investment Strategy         |
+| ---------------------- | --------------------------- |
+| Keyboard shortcuts     | Power users will evangelize |
+| Smart suggestions      | "It read my mind!" moments  |
+| Celebration animations | Emotional connection        |
 
 **Strategy:** Small investment, high differentiation potential
 
 ---
 
 ### Investment Allocation
+
 - 50% on Performance (competitive advantage)
 - 30% on Basics (meet expectations)
 - 20% on Delighters (create loyalty)

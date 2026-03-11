@@ -14,9 +14,9 @@ Use rule operators (`any`, `all`, `not`) to compose complex matching logic in a 
 ```typescript
 const transform: Transform<TSX> = (root) => {
   // Three separate traversals
-  const logCalls = root.findAll({ rule: { pattern: "console.log($$$)" } });
-  const warnCalls = root.findAll({ rule: { pattern: "console.warn($$$)" } });
-  const errorCalls = root.findAll({ rule: { pattern: "console.error($$$)" } });
+  const logCalls = root.findAll({ rule: { pattern: 'console.log($$$)' } });
+  const warnCalls = root.findAll({ rule: { pattern: 'console.warn($$$)' } });
+  const errorCalls = root.findAll({ rule: { pattern: 'console.error($$$)' } });
 
   // Combine results manually
   const allCalls = [...logCalls, ...warnCalls, ...errorCalls];
@@ -33,22 +33,22 @@ const transform: Transform<TSX> = (root) => {
   const allCalls = root.findAll({
     rule: {
       any: [
-        { pattern: "console.log($$$ARGS)" },
-        { pattern: "console.warn($$$ARGS)" },
-        { pattern: "console.error($$$ARGS)" }
-      ]
-    }
+        { pattern: 'console.log($$$ARGS)' },
+        { pattern: 'console.warn($$$ARGS)' },
+        { pattern: 'console.error($$$ARGS)' },
+      ],
+    },
   });
 
   // Or use pattern with meta variable
   const consoleCalls = root.findAll({
     rule: {
-      pattern: "console.$METHOD($$$ARGS)",
+      pattern: 'console.$METHOD($$$ARGS)',
       all: [
-        { kind: "call_expression" },
-        { not: { pattern: "console.table($$$)" } }
-      ]
-    }
+        { kind: 'call_expression' },
+        { not: { pattern: 'console.table($$$)' } },
+      ],
+    },
   });
 
   return null;
@@ -56,6 +56,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Rule operators:**
+
 - `any: [rules]` - matches if ANY rule matches (OR)
 - `all: [rules]` - matches if ALL rules match (AND)
 - `not: rule` - matches if rule does NOT match

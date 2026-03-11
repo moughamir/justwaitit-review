@@ -14,12 +14,12 @@ When you have multiple competing features, use RICE (Reach × Impact × Confiden
 ```markdown
 ## Feature Backlog
 
-| Feature | Priority |
-|---------|----------|
-| Dark mode | High (CEO wants it) |
-| Search improvement | Medium |
-| Bulk export | Low |
-| Performance optimization | Medium |
+| Feature                  | Priority            |
+| ------------------------ | ------------------- |
+| Dark mode                | High (CEO wants it) |
+| Search improvement       | Medium              |
+| Bulk export              | Low                 |
+| Performance optimization | Medium              |
 
 // Priorities based on who asked loudest
 // No data to justify decisions
@@ -33,14 +33,15 @@ When you have multiple competing features, use RICE (Reach × Impact × Confiden
 
 **Formula:** RICE = (Reach × Impact × Confidence) ÷ Effort
 
-| Feature | Reach | Impact | Confidence | Effort | RICE Score |
-|---------|-------|--------|------------|--------|------------|
-| Search improvement | 5000 users/qtr | 2 (high) | 80% | 3 weeks | **2,667** |
-| Performance optimization | 8000 users/qtr | 1 (medium) | 90% | 2 weeks | **3,600** |
-| Bulk export | 500 users/qtr | 2 (high) | 70% | 1 week | **700** |
-| Dark mode | 2000 users/qtr | 0.5 (low) | 100% | 2 weeks | **500** |
+| Feature                  | Reach          | Impact     | Confidence | Effort  | RICE Score |
+| ------------------------ | -------------- | ---------- | ---------- | ------- | ---------- |
+| Search improvement       | 5000 users/qtr | 2 (high)   | 80%        | 3 weeks | **2,667**  |
+| Performance optimization | 8000 users/qtr | 1 (medium) | 90%        | 2 weeks | **3,600**  |
+| Bulk export              | 500 users/qtr  | 2 (high)   | 70%        | 1 week  | **700**    |
+| Dark mode                | 2000 users/qtr | 0.5 (low)  | 100%       | 2 weeks | **500**    |
 
 ### Prioritized Roadmap
+
 1. **Performance optimization** (RICE: 3,600) - Sprint 1
 2. **Search improvement** (RICE: 2,667) - Sprint 2
 3. **Bulk export** (RICE: 700) - Sprint 3
@@ -55,6 +56,7 @@ When you have multiple competing features, use RICE (Reach × Impact × Confiden
 ```
 
 **When to use RICE:**
+
 - Multiple competing features
 - Need to justify decisions to stakeholders
 - Want to remove HiPPO (highest paid person's opinion) bias

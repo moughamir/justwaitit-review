@@ -43,49 +43,63 @@ function FileUploader() {
 
 ```tsx
 type UploadState =
-  | { status: "idle" }
-  | { status: "validating"; file: File }
-  | { status: "uploading"; file: File; progress: number }
-  | { status: "complete"; file: File; url: string }
-  | { status: "error"; message: string; file: File };
+  | { status: 'idle' }
+  | { status: 'validating'; file: File }
+  | { status: 'uploading'; file: File; progress: number }
+  | { status: 'complete'; file: File; url: string }
+  | { status: 'error'; message: string; file: File };
 
 type UploadAction =
-  | { type: "SELECT_FILE"; file: File }
-  | { type: "VALIDATION_PASSED" }
-  | { type: "UPLOAD_PROGRESS"; progress: number }
-  | { type: "UPLOAD_COMPLETE"; url: string }
-  | { type: "FAIL"; message: string }
-  | { type: "RETRY" };
+  | { type: 'SELECT_FILE'; file: File }
+  | { type: 'VALIDATION_PASSED' }
+  | { type: 'UPLOAD_PROGRESS'; progress: number }
+  | { type: 'UPLOAD_COMPLETE'; url: string }
+  | { type: 'FAIL'; message: string }
+  | { type: 'RETRY' };
 
 function uploadReducer(state: UploadState, action: UploadAction): UploadState {
   switch (state.status) {
-    case "idle":
-      if (action.type === "SELECT_FILE") return { status: "validating", file: action.file };
+    case 'idle':
+      if (action.type === 'SELECT_FILE')
+        return { status: 'validating', file: action.file };
       return state;
-    case "validating":
-      if (action.type === "VALIDATION_PASSED") return { status: "uploading", file: state.file, progress: 0 };
-      if (action.type === "FAIL") return { status: "error", message: action.message, file: state.file };
+    case 'validating':
+      if (action.type === 'VALIDATION_PASSED')
+        return { status: 'uploading', file: state.file, progress: 0 };
+      if (action.type === 'FAIL')
+        return { status: 'error', message: action.message, file: state.file };
       return state;
-    case "uploading":
-      if (action.type === "UPLOAD_PROGRESS") return { ...state, progress: action.progress };
-      if (action.type === "UPLOAD_COMPLETE") return { status: "complete", file: state.file, url: action.url };
-      if (action.type === "FAIL") return { status: "error", message: action.message, file: state.file };
+    case 'uploading':
+      if (action.type === 'UPLOAD_PROGRESS')
+        return { ...state, progress: action.progress };
+      if (action.type === 'UPLOAD_COMPLETE')
+        return { status: 'complete', file: state.file, url: action.url };
+      if (action.type === 'FAIL')
+        return { status: 'error', message: action.message, file: state.file };
       return state;
-    case "error":
-      if (action.type === "RETRY") return { status: "validating", file: state.file };
+    case 'error':
+      if (action.type === 'RETRY')
+        return { status: 'validating', file: state.file };
       return state;
-    case "complete":
+    case 'complete':
       return state; // Terminal state — no transitions
   }
 }
 
 function FileUploader() {
-  const [state, dispatch] = useReducer(uploadReducer, { status: "idle" });
+  const [state, dispatch] = useReducer(uploadReducer, { status: 'idle' });
 
   // Each render branch handles exactly one state — no impossible combinations
-  if (state.status === "uploading") return <ProgressBar progress={state.progress} />;
-  if (state.status === "error") return <ErrorRetry message={state.message} onRetry={() => dispatch({ type: "RETRY" })} />;
-  if (state.status === "complete") return <UploadSuccess url={state.url} />;
+  if (state.status === 'uploading')
+    return <ProgressBar progress={state.progress} />;
+  if (state.status === 'error')
+    return (
+      <ErrorRetry
+        message={state.message}
+        onRetry={() => dispatch({ type: 'RETRY' })}
+      />
+    );
+  if (state.status === 'complete') return <UploadSuccess url={state.url} />;
 }
 ```
 

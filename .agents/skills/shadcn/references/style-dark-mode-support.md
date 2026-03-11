@@ -14,13 +14,13 @@ Use the shadcn/ui dark mode pattern with CSS variables. Define both light and da
 ```tsx
 function NotificationCard({ message }: { message: string }) {
   return (
-    <Card className="bg-white text-gray-900 border-gray-200">
+    <Card className="border-gray-200 bg-white text-gray-900">
       {/* No dark mode support - harsh white in dark environments */}
       <CardContent className="p-4">
         <p className="text-gray-600">{message}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 ```
 
@@ -52,31 +52,35 @@ function NotificationCard({ message }: { message: string }) {
 ```tsx
 function NotificationCard({ message }: { message: string }) {
   return (
-    <Card className="bg-card text-card-foreground border-border">
+    <Card className="border-border bg-card text-card-foreground">
       {/* Automatically adapts to light/dark mode */}
       <CardContent className="p-4">
         <p className="text-muted-foreground">{message}</p>
       </CardContent>
     </Card>
-  )
+  );
 }
 ```
 
 **Theme toggle implementation:**
 
 ```tsx
-import { useTheme } from "next-themes"
+import { useTheme } from 'next-themes';
 
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
-    <Button variant="outline" size="icon" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+    >
       <SunIcon className="h-4 w-4 rotate-0 scale-100 dark:-rotate-90 dark:scale-0" />
       <MoonIcon className="absolute h-4 w-4 rotate-90 scale-0 dark:rotate-0 dark:scale-100" />
       <span className="sr-only">Toggle theme</span>
     </Button>
-  )
+  );
 }
 ```
 

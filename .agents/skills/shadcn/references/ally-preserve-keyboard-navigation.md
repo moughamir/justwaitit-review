@@ -13,7 +13,7 @@ Radix components implement WAI-ARIA keyboard navigation patterns. Custom styling
 
 ```tsx
 function CustomTabs({ tabs }: { tabs: TabData[] }) {
-  const [activeTab, setActiveTab] = useState(0)
+  const [activeTab, setActiveTab] = useState(0);
 
   return (
     <div>
@@ -22,7 +22,7 @@ function CustomTabs({ tabs }: { tabs: TabData[] }) {
           <div
             key={tab.id}
             onClick={() => setActiveTab(index)}
-            className={activeTab === index ? "border-b-2" : ""}
+            className={activeTab === index ? 'border-b-2' : ''}
           >
             {/* div is not focusable, arrow keys don't work */}
             {tab.label}
@@ -31,14 +31,14 @@ function CustomTabs({ tabs }: { tabs: TabData[] }) {
       </div>
       <div>{tabs[activeTab].content}</div>
     </div>
-  )
+  );
 }
 ```
 
 **Correct (shadcn/ui Tabs with full keyboard support):**
 
 ```tsx
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 function CustomTabs({ tabs }: { tabs: TabData[] }) {
   return (
@@ -59,11 +59,12 @@ function CustomTabs({ tabs }: { tabs: TabData[] }) {
         </TabsContent>
       ))}
     </Tabs>
-  )
+  );
 }
 ```
 
 **Keyboard patterns by component:**
+
 - **Tabs**: Left/Right arrows, Home/End
 - **Menu/Dropdown**: Up/Down arrows, Enter to select
 - **Accordion**: Up/Down arrows, Enter to toggle

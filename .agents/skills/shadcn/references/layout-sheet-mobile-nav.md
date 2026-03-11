@@ -12,7 +12,7 @@ Use Sheet component for mobile navigation that slides in from the edge. Dialog-b
 **Incorrect (Dialog for mobile nav):**
 
 ```tsx
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 function MobileNav() {
   return (
@@ -26,7 +26,7 @@ function MobileNav() {
         <nav>{/* Navigation items */}</nav>
       </DialogContent>
     </Dialog>
-  )
+  );
   // Dialog centers on screen, doesn't feel like mobile nav
 }
 ```
@@ -34,8 +34,14 @@ function MobileNav() {
 **Correct (Sheet with side positioning):**
 
 ```tsx
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
 
 function MobileNav() {
   return (
@@ -51,17 +57,24 @@ function MobileNav() {
           <SheetTitle>Navigation</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col gap-4 py-4">
-          <a href="/dashboard" className="text-lg font-medium">Dashboard</a>
-          <a href="/settings" className="text-lg font-medium">Settings</a>
-          <a href="/help" className="text-lg font-medium">Help</a>
+          <a href="/dashboard" className="text-lg font-medium">
+            Dashboard
+          </a>
+          <a href="/settings" className="text-lg font-medium">
+            Settings
+          </a>
+          <a href="/help" className="text-lg font-medium">
+            Help
+          </a>
         </nav>
       </SheetContent>
     </Sheet>
-  )
+  );
 }
 ```
 
 **Sheet sides:**
+
 - `left`: Standard mobile nav (slides from left edge)
 - `right`: Settings/filters panel
 - `top`: Notifications, search

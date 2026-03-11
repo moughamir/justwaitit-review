@@ -70,6 +70,7 @@ async function UserList() {
 ```
 
 **Benefits:**
+
 - Declarative loading states
 - Independent loading per section
 - No manual loading state management

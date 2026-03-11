@@ -13,9 +13,9 @@ Write clear descriptions and keywords in codemod.yaml. Good metadata helps users
 
 ```yaml
 # codemod.yaml - unhelpful
-schema_version: "1.0"
+schema_version: '1.0'
 name: my-codemod
-version: "1.0.0"
+version: '1.0.0'
 # No description, author, keywords
 # Users can't tell what it does
 ```
@@ -24,16 +24,16 @@ version: "1.0.0"
 
 ```yaml
 # codemod.yaml - discoverable
-schema_version: "1.0"
-name: "@myorg/react-18-to-19"
-version: "1.0.0"
+schema_version: '1.0'
+name: '@myorg/react-18-to-19'
+version: '1.0.0'
 description: |
   Migrates React 18 applications to React 19.
   Handles: useEffect cleanup, Suspense boundaries,
   Server Components imports, and deprecated API removal.
-author: "Team Name <team@example.com>"
-license: "MIT"
-category: "migration"
+author: 'Team Name <team@example.com>'
+license: 'MIT'
+category: 'migration'
 
 targets:
   languages:
@@ -51,11 +51,12 @@ keywords:
   - suspense
 
 repository:
-  url: "https://github.com/myorg/codemods"
-  directory: "packages/react-18-to-19"
+  url: 'https://github.com/myorg/codemods'
+  directory: 'packages/react-18-to-19'
 ```
 
 **Keyword best practices:**
+
 - Include version tags: `v18-to-v19`
 - Include transformation type: `upgrade`, `migration`
 - Include framework name: `react`, `nextjs`

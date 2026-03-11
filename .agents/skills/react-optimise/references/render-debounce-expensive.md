@@ -12,17 +12,17 @@ Computing derived results on every keystroke forces the main thread to process e
 **Incorrect (filters 10,000 records on every keystroke):**
 
 ```tsx
-import { useState } from "react"
+import { useState } from 'react';
 
 interface Listing {
-  id: string
-  title: string
-  description: string
-  location: string
+  id: string;
+  title: string;
+  description: string;
+  location: string;
 }
 
 function ListingSearch({ listings }: { listings: Listing[] }) {
-  const [query, setQuery] = useState("")
+  const [query, setQuery] = useState('');
 
   // runs on every keystroke — blocks UI for 50-200ms per invocation
   const matchedListings = listings.filter(
@@ -30,7 +30,7 @@ function ListingSearch({ listings }: { listings: Listing[] }) {
       listing.title.toLowerCase().includes(query.toLowerCase()) ||
       listing.description.toLowerCase().includes(query.toLowerCase()) ||
       listing.location.toLowerCase().includes(query.toLowerCase())
-  )
+  );
 
   return (
     <div>
@@ -41,36 +41,36 @@ function ListingSearch({ listings }: { listings: Listing[] }) {
       />
       <ResultsList listings={matchedListings} />
     </div>
-  )
+  );
 }
 ```
 
 **Correct (deferred computation keeps input responsive):**
 
 ```tsx
-import { useState, useDeferredValue, useMemo } from "react"
+import { useState, useDeferredValue, useMemo } from 'react';
 
 interface Listing {
-  id: string
-  title: string
-  description: string
-  location: string
+  id: string;
+  title: string;
+  description: string;
+  location: string;
 }
 
 function ListingSearch({ listings }: { listings: Listing[] }) {
-  const [query, setQuery] = useState("")
-  const deferredQuery = useDeferredValue(query)
+  const [query, setQuery] = useState('');
+  const deferredQuery = useDeferredValue(query);
 
   const matchedListings = useMemo(() => {
-    if (!deferredQuery) return listings
-    const lowerQuery = deferredQuery.toLowerCase()
+    if (!deferredQuery) return listings;
+    const lowerQuery = deferredQuery.toLowerCase();
     return listings.filter(
       (listing) =>
         listing.title.toLowerCase().includes(lowerQuery) ||
         listing.description.toLowerCase().includes(lowerQuery) ||
         listing.location.toLowerCase().includes(lowerQuery)
-    )
-  }, [listings, deferredQuery])
+    );
+  }, [listings, deferredQuery]);
 
   return (
     <div>
@@ -81,7 +81,7 @@ function ListingSearch({ listings }: { listings: Listing[] }) {
       />
       <ResultsList listings={matchedListings} />
     </div>
-  )
+  );
 }
 ```
 
@@ -91,12 +91,12 @@ When you need a guaranteed minimum delay (e.g., rate-limiting API calls), use a 
 
 ```tsx
 function useDebouncedValue<T>(value: T, delayMs: number): T {
-  const [debouncedValue, setDebouncedValue] = useState(value)
+  const [debouncedValue, setDebouncedValue] = useState(value);
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedValue(value), delayMs)
-    return () => clearTimeout(timer)
-  }, [value, delayMs])
-  return debouncedValue
+    const timer = setTimeout(() => setDebouncedValue(value), delayMs);
+    return () => clearTimeout(timer);
+  }, [value, delayMs]);
+  return debouncedValue;
 }
 ```
 

@@ -13,10 +13,10 @@ tags: perf, immutability, object-freeze, const-assertion
 
 ```typescript
 const permissions = {
-  admin: ["read", "write", "delete"],
-  editor: ["read", "write"],
-  viewer: ["read"],
-} as const
+  admin: ['read', 'write', 'delete'],
+  editor: ['read', 'write'],
+  viewer: ['read'],
+} as const;
 
 // TypeScript prevents this, but runtime JS doesn't:
 // (permissions as any).admin.push("sudo")
@@ -26,15 +26,16 @@ const permissions = {
 
 ```typescript
 const permissions = Object.freeze({
-  admin: Object.freeze(["read", "write", "delete"] as const),
-  editor: Object.freeze(["read", "write"] as const),
-  viewer: Object.freeze(["read"] as const),
-})
+  admin: Object.freeze(['read', 'write', 'delete'] as const),
+  editor: Object.freeze(['read', 'write'] as const),
+  viewer: Object.freeze(['read'] as const),
+});
 
 // Runtime: Object.freeze prevents mutation
 // Compile-time: as const preserves literal types
 ```
 
 **When NOT to use this pattern:**
+
 - Hot paths where the freeze overhead matters (rare — freeze is cheap)
 - Objects that genuinely need to be mutable

@@ -13,19 +13,19 @@ Icon-only buttons must have accessible labels. Without them, screen readers anno
 
 ```tsx
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       <SunIcon className="h-4 w-4 dark:hidden" />
-      <MoonIcon className="h-4 w-4 hidden dark:block" />
+      <MoonIcon className="hidden h-4 w-4 dark:block" />
       {/* Screen reader announces: "button" - no context */}
     </Button>
-  )
+  );
 }
 ```
 
@@ -33,20 +33,20 @@ function ThemeToggle() {
 
 ```tsx
 function ThemeToggle() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <Button
       variant="outline"
       size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
       <SunIcon className="h-4 w-4 dark:hidden" />
-      <MoonIcon className="h-4 w-4 hidden dark:block" />
+      <MoonIcon className="hidden h-4 w-4 dark:block" />
       <span className="sr-only">Toggle theme</span>
       {/* Screen reader announces: "Toggle theme, button" */}
     </Button>
-  )
+  );
 }
 ```
 
@@ -63,11 +63,12 @@ function CloseButton({ onClose }: { onClose: () => void }) {
     >
       <XIcon className="h-4 w-4" />
     </Button>
-  )
+  );
 }
 ```
 
 **Use sr-only when:**
+
 - The label is longer or more descriptive
 - Multiple icons need different labels in the same context
 - You want visible fallback if CSS fails

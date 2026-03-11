@@ -66,10 +66,10 @@ Fast question without file context. Build prompt inline, write to file, call wit
 
 ## Model Selection
 
-| Mode | Model | Why |
-|------|-------|-----|
-| review, debug, quick | `gemini-2.5-flash` | Fast, good for straightforward analysis |
-| architect, security-scan | `gemini-2.5-pro` | Better reasoning for complex trade-offs |
+| Mode                     | Model              | Why                                     |
+| ------------------------ | ------------------ | --------------------------------------- |
+| review, debug, quick     | `gemini-2.5-flash` | Fast, good for straightforward analysis |
+| architect, security-scan | `gemini-2.5-pro`   | Better reasoning for complex trade-offs |
 
 Check current model IDs if errors occur — they change frequently:
 
@@ -80,12 +80,14 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API
 ## When to Use
 
 **Good use cases**:
+
 - Before committing major changes (final review)
 - When stuck debugging after multiple attempts
 - Architecture decisions with multiple valid options
 - Security-sensitive code review
 
 **Avoid using for**:
+
 - Simple syntax checks (Claude handles these faster)
 - Every single edit (too slow, unnecessary)
 - Questions with obvious answers
@@ -95,6 +97,7 @@ curl -s "https://generativelanguage.googleapis.com/v1beta/models?key=$GEMINI_API
 **Critical**: Always use the AI-to-AI prompting format. Write the full prompt to a file — never pass code inline via bash arguments (shell escaping will break it).
 
 When building the prompt:
+
 1. Start with the AI-to-AI header from [references/prompt-templates.md](references/prompt-templates.md)
 2. Append the mode-specific template
 3. Append the file contents with clear `--- filename ---` separators
@@ -103,6 +106,6 @@ When building the prompt:
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                          | Read                                                             |
+| ----------------------------- | ---------------------------------------------------------------- |
 | Building prompts for any mode | [references/prompt-templates.md](references/prompt-templates.md) |

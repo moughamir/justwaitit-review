@@ -12,37 +12,37 @@ Passing an empty callback or no callback to `waitFor` is meaningless. The test p
 **Incorrect (empty callback):**
 
 ```tsx
-render(<AsyncForm />)
+render(<AsyncForm />);
 
-await userEvent.click(screen.getByRole('button', { name: /submit/i }))
-await waitFor(() => {})
+await userEvent.click(screen.getByRole('button', { name: /submit/i }));
+await waitFor(() => {});
 // Waits for nothing, passes immediately
 
-expect(screen.getByText('Submitted!')).toBeInTheDocument()
+expect(screen.getByText('Submitted!')).toBeInTheDocument();
 // May fail if async operation hasn't completed
 ```
 
 **Correct (wait for specific condition):**
 
 ```tsx
-render(<AsyncForm />)
+render(<AsyncForm />);
 
-const user = userEvent.setup()
-await user.click(screen.getByRole('button', { name: /submit/i }))
+const user = userEvent.setup();
+await user.click(screen.getByRole('button', { name: /submit/i }));
 
-expect(await screen.findByText('Submitted!')).toBeInTheDocument()
+expect(await screen.findByText('Submitted!')).toBeInTheDocument();
 // Properly waits for text to appear
 ```
 
 **Alternative - wait for mock to be called:**
 
 ```tsx
-const user = userEvent.setup()
-await user.click(screen.getByRole('button', { name: /submit/i }))
+const user = userEvent.setup();
+await user.click(screen.getByRole('button', { name: /submit/i }));
 
 await waitFor(() => {
-  expect(mockSubmit).toHaveBeenCalled()
-})
+  expect(mockSubmit).toHaveBeenCalled();
+});
 // Waits for actual condition
 ```
 

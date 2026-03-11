@@ -10,6 +10,7 @@ Comprehensive best practices guide for Codemod (JSSG, ast-grep, workflows), desi
 ## When to Apply
 
 Reference these guidelines when:
+
 - Writing new codemods with JSSG or ast-grep
 - Designing workflow configurations for migrations
 - Debugging pattern matching or AST traversal issues
@@ -18,19 +19,19 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category | Impact | Prefix |
-|----------|----------|--------|--------|
-| 1 | AST Understanding | CRITICAL | `ast-` |
-| 2 | Pattern Efficiency | CRITICAL | `pattern-` |
-| 3 | Parsing Strategy | CRITICAL | `parse-` |
-| 4 | Node Traversal | HIGH | `traverse-` |
-| 5 | Semantic Analysis | HIGH | `semantic-` |
-| 6 | Edit Operations | MEDIUM-HIGH | `edit-` |
-| 7 | Workflow Design | MEDIUM-HIGH | `workflow-` |
-| 8 | Testing Strategy | MEDIUM | `test-` |
-| 9 | State Management | MEDIUM | `state-` |
-| 10 | Security and Capabilities | LOW-MEDIUM | `security-` |
-| 11 | Package Structure | LOW | `pkg-` |
+| Priority | Category                  | Impact      | Prefix      |
+| -------- | ------------------------- | ----------- | ----------- |
+| 1        | AST Understanding         | CRITICAL    | `ast-`      |
+| 2        | Pattern Efficiency        | CRITICAL    | `pattern-`  |
+| 3        | Parsing Strategy          | CRITICAL    | `parse-`    |
+| 4        | Node Traversal            | HIGH        | `traverse-` |
+| 5        | Semantic Analysis         | HIGH        | `semantic-` |
+| 6        | Edit Operations           | MEDIUM-HIGH | `edit-`     |
+| 7        | Workflow Design           | MEDIUM-HIGH | `workflow-` |
+| 8        | Testing Strategy          | MEDIUM      | `test-`     |
+| 9        | State Management          | MEDIUM      | `state-`    |
+| 10       | Security and Capabilities | LOW-MEDIUM  | `security-` |
+| 11       | Package Structure         | LOW         | `pkg-`      |
 
 ## Quick Reference
 

@@ -35,12 +35,12 @@ src/features/
 
 **Naming guidelines:**
 
-| Domain | Good Name | Bad Name |
-|--------|-----------|----------|
-| User management | `user`, `account` | `profile-component` |
-| Product catalog | `product`, `catalog` | `item-list` |
-| Shopping | `cart`, `checkout` | `purchase-flow` |
-| Authentication | `auth` | `login-system` |
+| Domain          | Good Name            | Bad Name            |
+| --------------- | -------------------- | ------------------- |
+| User management | `user`, `account`    | `profile-component` |
+| Product catalog | `product`, `catalog` | `item-list`         |
+| Shopping        | `cart`, `checkout`   | `purchase-flow`     |
+| Authentication  | `auth`               | `login-system`      |
 
 **Sub-features:**
 
@@ -53,6 +53,7 @@ src/features/
 ```
 
 **Ask these questions:**
+
 - Would a product manager understand this name?
 - Does this map to a business capability?
 - Would this name make sense in a requirements document?

@@ -65,6 +65,7 @@ queryClient.invalidateQueries({ queryKey: userKeys.detail(userId) });
 ```
 
 **Benefits:**
+
 - Clear ownership of cache keys
 - Predictable invalidation scope
 - No accidental cross-feature cache interference

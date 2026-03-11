@@ -7,19 +7,19 @@ Container queries allow components to respond to their parent container's size r
 ### Setup
 
 ```css
-@import "tailwindcss";
-@plugin "@tailwindcss/container-queries";
+@import 'tailwindcss';
+@plugin '@tailwindcss/container-queries';
 ```
 
 ### Basic Container Query
 
 ```html
 <div class="@container">
-  <article class="flex flex-col @md:flex-row @md:items-center gap-4">
-    <img class="w-full @md:w-48 aspect-video object-cover rounded-lg" />
+  <article class="@md:flex-row @md:items-center flex flex-col gap-4">
+    <img class="@md:w-48 aspect-video w-full rounded-lg object-cover" />
     <div>
-      <h3 class="text-lg @lg:text-xl font-semibold">Title</h3>
-      <p class="text-sm @md:text-base text-gray-600">Description</p>
+      <h3 class="@lg:text-xl text-lg font-semibold">Title</h3>
+      <p class="@md:text-base text-sm text-gray-600">Description</p>
     </div>
   </article>
 </div>
@@ -43,13 +43,13 @@ Container queries allow components to respond to their parent container's size r
 
 ### Container Query Breakpoints
 
-| Class | Min-width |
-|-------|-----------|
-| `@xs` | 20rem (320px) |
-| `@sm` | 24rem (384px) |
-| `@md` | 28rem (448px) |
-| `@lg` | 32rem (512px) |
-| `@xl` | 36rem (576px) |
+| Class  | Min-width     |
+| ------ | ------------- |
+| `@xs`  | 20rem (320px) |
+| `@sm`  | 24rem (384px) |
+| `@md`  | 28rem (448px) |
+| `@lg`  | 32rem (512px) |
+| `@xl`  | 36rem (576px) |
 | `@2xl` | 42rem (672px) |
 | `@3xl` | 48rem (768px) |
 
@@ -69,14 +69,10 @@ Container queries allow components to respond to their parent container's size r
 
 ```html
 <!-- Only between sm and md -->
-<div class="hidden sm:block md:hidden">
-  Tablet only content
-</div>
+<div class="hidden sm:block md:hidden">Tablet only content</div>
 
 <!-- Only on large screens (not xl+) -->
-<div class="hidden lg:flex xl:hidden">
-  Large but not extra-large
-</div>
+<div class="hidden lg:flex xl:hidden">Large but not extra-large</div>
 ```
 
 ### Max-Width Breakpoints
@@ -89,7 +85,7 @@ Container queries allow components to respond to their parent container's size r
 ```
 
 ```html
-<div class="max-md:flex-col flex flex-row">
+<div class="flex flex-row max-md:flex-col">
   Column on mobile, row on tablet+
 </div>
 ```
@@ -97,7 +93,7 @@ Container queries allow components to respond to their parent container's size r
 ### Orientation Variants
 
 ```html
-<div class="portrait:flex-col landscape:flex-row flex">
+<div class="flex portrait:flex-col landscape:flex-row">
   Adapts to device orientation
 </div>
 ```
@@ -105,13 +101,9 @@ Container queries allow components to respond to their parent container's size r
 ### Print Styles
 
 ```html
-<div class="print:hidden">
-  Hidden when printing
-</div>
+<div class="print:hidden">Hidden when printing</div>
 
-<div class="hidden print:block">
-  Only visible when printing
-</div>
+<div class="hidden print:block">Only visible when printing</div>
 
 <nav class="bg-blue-600 print:bg-transparent print:text-black">
   Printer-friendly navigation
@@ -169,14 +161,14 @@ Container queries allow components to respond to their parent container's size r
 ### Responsive Sidebar Layout
 
 ```html
-<div class="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-[280px_1fr]">
   <aside class="hidden lg:block">Sidebar</aside>
   <main>Content</main>
 </div>
 
 <!-- With collapsible sidebar -->
-<div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6">
-  <aside class="w-16 lg:w-64 transition-all duration-300">
+<div class="grid grid-cols-1 gap-6 lg:grid-cols-[auto_1fr]">
+  <aside class="w-16 transition-all duration-300 lg:w-64">
     <span class="hidden lg:inline">Full text</span>
     <span class="lg:hidden">Icon</span>
   </aside>
@@ -187,13 +179,15 @@ Container queries allow components to respond to their parent container's size r
 ### Holy Grail Layout
 
 ```html
-<div class="min-h-screen grid grid-rows-[auto_1fr_auto]">
-  <header class="h-16 bg-white border-b">Header</header>
+<div class="grid min-h-screen grid-rows-[auto_1fr_auto]">
+  <header class="h-16 border-b bg-white">Header</header>
 
-  <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] lg:grid-cols-[200px_1fr_200px]">
-    <nav class="hidden md:block bg-gray-50 p-4">Navigation</nav>
+  <div
+    class="grid grid-cols-1 md:grid-cols-[200px_1fr] lg:grid-cols-[200px_1fr_200px]"
+  >
+    <nav class="hidden bg-gray-50 p-4 md:block">Navigation</nav>
     <main class="p-6">Main Content</main>
-    <aside class="hidden lg:block bg-gray-50 p-4">Sidebar</aside>
+    <aside class="hidden bg-gray-50 p-4 lg:block">Sidebar</aside>
   </div>
 
   <footer class="h-16 bg-gray-900 text-white">Footer</footer>
@@ -209,7 +203,7 @@ Container queries allow components to respond to their parent container's size r
   <Logo />
 
   <!-- Desktop nav -->
-  <ul class="hidden md:flex items-center gap-6">
+  <ul class="hidden items-center gap-6 md:flex">
     <li><a href="#">Home</a></li>
     <li><a href="#">About</a></li>
     <li><a href="#">Services</a></li>
@@ -217,14 +211,14 @@ Container queries allow components to respond to their parent container's size r
   </ul>
 
   <!-- Mobile menu button -->
-  <button class="md:hidden p-2">
+  <button class="p-2 md:hidden">
     <MenuIcon />
   </button>
 </nav>
 
 <!-- Mobile nav (shown when open) -->
-<div class="md:hidden fixed inset-0 bg-white z-50">
-  <ul class="flex flex-col p-4 gap-4">
+<div class="fixed inset-0 z-50 bg-white md:hidden">
+  <ul class="flex flex-col gap-4 p-4">
     <li><a href="#">Home</a></li>
     <li><a href="#">About</a></li>
     <li><a href="#">Services</a></li>
@@ -241,28 +235,28 @@ Container queries allow components to respond to their parent container's size r
   <table class="w-full">
     <thead class="hidden md:table-header-group">
       <tr class="border-b">
-        <th class="text-left p-3">Name</th>
-        <th class="text-left p-3">Email</th>
-        <th class="text-left p-3">Role</th>
-        <th class="text-left p-3">Actions</th>
+        <th class="p-3 text-left">Name</th>
+        <th class="p-3 text-left">Email</th>
+        <th class="p-3 text-left">Role</th>
+        <th class="p-3 text-left">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="flex flex-col md:table-row border-b py-4 md:py-0">
+      <tr class="flex flex-col border-b py-4 md:table-row md:py-0">
         <td class="p-3" data-label="Name">
-          <span class="md:hidden font-medium">Name: </span>
+          <span class="font-medium md:hidden">Name: </span>
           John Doe
         </td>
         <td class="p-3" data-label="Email">
-          <span class="md:hidden font-medium">Email: </span>
+          <span class="font-medium md:hidden">Email: </span>
           john@example.com
         </td>
         <td class="p-3" data-label="Role">
-          <span class="md:hidden font-medium">Role: </span>
+          <span class="font-medium md:hidden">Role: </span>
           Admin
         </td>
         <td class="p-3">
-          <Button size="sm">Edit</Button>
+          <button size="sm">Edit</button>
         </td>
       </tr>
     </tbody>
@@ -275,22 +269,16 @@ Container queries allow components to respond to their parent container's size r
 ```html
 <!-- Card that changes layout at container breakpoint -->
 <div class="@container">
-  <article class="
-    flex flex-col @sm:flex-row
-    gap-4 p-4
-    bg-white rounded-xl shadow-sm
-  ">
+  <article
+    class="@sm:flex-row flex flex-col gap-4 rounded-xl bg-white p-4 shadow-sm"
+  >
     <img
       src="..."
-      class="
-        w-full @sm:w-32 @md:w-48
-        aspect-video @sm:aspect-square
-        object-cover rounded-lg
-      "
+      class="@sm:w-32 @md:w-48 @sm:aspect-square aspect-video w-full rounded-lg object-cover"
     />
     <div class="flex-1">
-      <h3 class="text-lg @md:text-xl font-semibold">Card Title</h3>
-      <p class="text-gray-600 mt-2 line-clamp-2 @md:line-clamp-3">
+      <h3 class="@md:text-xl text-lg font-semibold">Card Title</h3>
+      <p class="@md:line-clamp-3 mt-2 line-clamp-2 text-gray-600">
         Description text that adapts to available space...
       </p>
       <div class="mt-4 flex flex-wrap gap-2">
@@ -307,11 +295,9 @@ Container queries allow components to respond to their parent container's size r
 ### Reduced Motion
 
 ```html
-<div class="
-  transition-transform duration-300
-  motion-safe:hover:scale-105
-  motion-reduce:transition-none
-">
+<div
+  class="transition-transform duration-300 motion-safe:hover:scale-105 motion-reduce:transition-none"
+>
   Respects motion preferences
 </div>
 ```
@@ -319,10 +305,9 @@ Container queries allow components to respond to their parent container's size r
 ### Forced Colors Mode
 
 ```html
-<button class="
-  bg-blue-600 text-white
-  forced-colors:border-2 forced-colors:border-current
-">
+<button
+  class="bg-blue-600 text-white forced-colors:border-2 forced-colors:border-current"
+>
   Works in high contrast mode
 </button>
 ```
@@ -352,7 +337,7 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
 
 @utility safe-area-p {
   padding: env(safe-area-inset-top) env(safe-area-inset-right)
-           env(safe-area-inset-bottom) env(safe-area-inset-left);
+    env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 ```
 
@@ -360,19 +345,17 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
 
 ```html
 <!-- Header respects top notch -->
-<header class="sticky top-0 safe-area-pt bg-white border-b">
-  <nav class="h-14 flex items-center px-4">Navigation</nav>
+<header class="safe-area-pt sticky top-0 border-b bg-white">
+  <nav class="flex h-14 items-center px-4">Navigation</nav>
 </header>
 
 <!-- Bottom navigation respects home indicator -->
-<nav class="fixed bottom-0 inset-x-0 safe-area-pb bg-white border-t">
+<nav class="safe-area-pb fixed inset-x-0 bottom-0 border-t bg-white">
   <div class="flex justify-around py-2">Bottom nav</div>
 </nav>
 
 <!-- Full-screen app shell -->
-<div class="min-h-screen safe-area-p">
-  App content
-</div>
+<div class="safe-area-p min-h-screen">App content</div>
 ```
 
 ## Performance Optimizations for Responsive Design
@@ -402,15 +385,11 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
   alt="Description"
   loading="lazy"
   decoding="async"
-  class="w-full h-auto"
+  class="h-auto w-full"
 />
 
 <!-- Lazy load iframes -->
-<iframe
-  src="embed.html"
-  loading="lazy"
-  class="w-full aspect-video"
-></iframe>
+<iframe src="embed.html" loading="lazy" class="aspect-video w-full"></iframe>
 ```
 
 ### Reduced Data Mode
@@ -421,10 +400,10 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
 
 ```html
 <!-- Show simpler content on slow/metered connections -->
-<div class="block prefers-reduced-data:hidden">
+<div class="prefers-reduced-data:hidden block">
   <video autoplay muted loop>Full video</video>
 </div>
-<div class="hidden prefers-reduced-data:block">
+<div class="prefers-reduced-data:block hidden">
   <img src="poster.jpg" alt="Video poster" />
 </div>
 ```
@@ -440,9 +419,7 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
 ```
 
 ```html
-<div class="view-transition-name-card">
-  Animates during page transitions
-</div>
+<div class="view-transition-name-card">Animates during page transitions</div>
 ```
 
 ### Subgrid for Aligned Nested Grids
@@ -473,13 +450,13 @@ For devices with notches (iPhone X+, modern Android), respect safe areas:
 
 ## Best Practices Summary
 
-| Pattern | Implementation | Use Case |
-|---------|---------------|----------|
-| Viewport queries | `md:`, `lg:` prefixes | Page layouts |
-| Container queries | `@md:`, `@lg:` prefixes | Reusable components |
-| Fluid typography | `clamp()` in @theme | Smooth scaling |
-| Touch targets | `min-h-11 min-w-11` | Mobile interactions |
-| Safe areas | `env(safe-area-inset-*)` | Notched devices |
-| Reduced motion | `motion-reduce:` prefix | Accessibility |
-| Lazy loading | `loading="lazy"` | Performance |
+| Pattern            | Implementation             | Use Case            |
+| ------------------ | -------------------------- | ------------------- |
+| Viewport queries   | `md:`, `lg:` prefixes      | Page layouts        |
+| Container queries  | `@md:`, `@lg:` prefixes    | Reusable components |
+| Fluid typography   | `clamp()` in @theme        | Smooth scaling      |
+| Touch targets      | `min-h-11 min-w-11`        | Mobile interactions |
+| Safe areas         | `env(safe-area-inset-*)`   | Notched devices     |
+| Reduced motion     | `motion-reduce:` prefix    | Accessibility       |
+| Lazy loading       | `loading="lazy"`           | Performance         |
 | Content visibility | `content-visibility: auto` | Render optimization |

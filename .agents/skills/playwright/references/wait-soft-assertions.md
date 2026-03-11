@@ -65,12 +65,14 @@ test('complete checkout flow', async ({ page }) => {
 ```
 
 **When to use soft assertions:**
+
 - Checking multiple independent UI elements
 - Validating form field values
 - Verifying list contents
 - Visual regression checks
 
 **When NOT to use soft assertions:**
+
 - Critical preconditions for next steps
 - Navigation that affects subsequent tests
 - State changes that must succeed

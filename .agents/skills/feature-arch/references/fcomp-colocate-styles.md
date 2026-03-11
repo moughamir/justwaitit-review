@@ -81,6 +81,7 @@ src/shared/
 ```
 
 **Benefits:**
+
 - Moving a component moves its styles
 - Deleting a component deletes its styles
 - No orphaned CSS

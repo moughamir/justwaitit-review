@@ -27,11 +27,13 @@ Express requirements as user stories that capture who needs the feature, what th
 ## User Stories
 
 ### Story 1: Add Comment
+
 **As a** logged-in user
 **I want to** add a comment to a blog post
 **So that** I can share my thoughts and engage with the author
 
 **Acceptance Criteria:**
+
 - Comment appears immediately after submission
 - Comment shows my name, avatar, and timestamp
 - Maximum 2000 characters with character counter
@@ -40,11 +42,13 @@ Express requirements as user stories that capture who needs the feature, what th
 ---
 
 ### Story 2: View Comments
+
 **As a** blog reader
 **I want to** see comments on a post sorted by newest first
 **So that** I can read recent discussions
 
 **Acceptance Criteria:**
+
 - Comments load with the post (no extra click)
 - Show 10 comments initially, "Load more" for rest
 - Display comment count in post header
@@ -53,11 +57,13 @@ Express requirements as user stories that capture who needs the feature, what th
 ---
 
 ### Story 3: Delete Own Comment
+
 **As a** comment author
 **I want to** delete my own comment
 **So that** I can remove something I regret posting
 
 **Acceptance Criteria:**
+
 - Delete button visible only on my own comments
 - Confirmation dialog before deletion
 - Comment removed immediately from UI
@@ -65,6 +71,7 @@ Express requirements as user stories that capture who needs the feature, what th
 ```
 
 **User story components:**
+
 - **Role**: Who benefits from this feature
 - **Action**: What they want to do
 - **Benefit**: Why it matters to them

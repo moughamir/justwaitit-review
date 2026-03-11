@@ -86,10 +86,10 @@ export default defineConfig({
 
 **Benefits of reuse:**
 
-| Scenario | New Server | Reuse Server |
-|----------|------------|--------------|
-| Local test run | 30-60s startup | Instant |
-| Watch mode | New server per run | Same server |
-| CI | Fresh server (correct) | N/A |
+| Scenario       | New Server             | Reuse Server |
+| -------------- | ---------------------- | ------------ |
+| Local test run | 30-60s startup         | Instant      |
+| Watch mode     | New server per run     | Same server  |
+| CI             | Fresh server (correct) | N/A          |
 
 Reference: [Playwright Web Server](https://playwright.dev/docs/test-webserver)

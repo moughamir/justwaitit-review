@@ -71,6 +71,7 @@ private void sendWelcomeEmail(Employee employee) {
 **Test:** If you can extract another function from it with a name that is not merely a restatement of its implementation, the function is doing more than one thing.
 
 **When NOT to split:**
+
 - If the extracted function's name would just restate its body (e.g., `calculateTax` containing only `salary * TAX_RATE`), the extraction adds indirection without clarity.
 - Orchestration functions that call a sequence of steps at the same abstraction level (like `processEmployee` above) are doing "one thing" — orchestrating. Don't try to extract the orchestration further.
 

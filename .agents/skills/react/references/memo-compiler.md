@@ -75,10 +75,8 @@ npm install --save-dev --save-exact babel-plugin-react-compiler@latest
 ```javascript
 // babel.config.js
 module.exports = {
-  plugins: [
-    ['babel-plugin-react-compiler', {}]
-  ]
-}
+  plugins: [['babel-plugin-react-compiler', {}]],
+};
 ```
 
 **For React 17/18 projects**, also add `react-compiler-runtime`:
@@ -90,10 +88,8 @@ npm install react-compiler-runtime
 ```javascript
 // babel.config.js
 module.exports = {
-  plugins: [
-    ['babel-plugin-react-compiler', { target: '18' }]
-  ]
-}
+  plugins: [['babel-plugin-react-compiler', { target: '18' }]],
+};
 ```
 
 **Note:** `eslint-plugin-react-compiler` is deprecated — compiler rules are now in `eslint-plugin-react-hooks@latest`. Still use manual memoization for edge cases the compiler can't optimize, and measure with React Profiler.

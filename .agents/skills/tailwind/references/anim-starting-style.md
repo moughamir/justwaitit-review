@@ -16,7 +16,7 @@ function Popover({ isOpen }) {
   return (
     <div
       className={`transition-opacity duration-200 ${
-        isOpen ? "opacity-100" : "opacity-0"
+        isOpen ? 'opacity-100' : 'opacity-0'
       }`}
     >
       {/* Requires JavaScript state management */}
@@ -33,7 +33,7 @@ function Popover({ isOpen }) {
 <div
   popover
   id="my-popover"
-  class="transition-discrete opacity-100 starting:open:opacity-0"
+  class="transition-discrete starting:open:opacity-0 opacity-100"
 >
   <!-- Animates from 0 to 100% opacity when popover opens -->
   <!-- No JavaScript required -->
@@ -46,13 +46,7 @@ function Popover({ isOpen }) {
 <div
   popover
   id="menu"
-  class="
-    transition-discrete
-    opacity-100 scale-100 translate-y-0
-    starting:open:opacity-0
-    starting:open:scale-95
-    starting:open:translate-y-2
-  "
+  class="transition-discrete starting:open:opacity-0 starting:open:scale-95 starting:open:translate-y-2 translate-y-0 scale-100 opacity-100"
 >
   <!-- Fades in, scales up, and slides down -->
 </div>

@@ -13,7 +13,7 @@ Use `React.memo` for list items and expensive components to prevent re-renders w
 
 ```tsx
 function DataTable({ data, onRowSelect }: DataTableProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   return (
     <Table>
@@ -24,7 +24,9 @@ function DataTable({ data, onRowSelect }: DataTableProps) {
             <TableCell>{row.name}</TableCell>
             <TableCell>{row.email}</TableCell>
             <TableCell>
-              <Badge variant={row.status === "active" ? "default" : "secondary"}>
+              <Badge
+                variant={row.status === 'active' ? 'default' : 'secondary'}
+              >
                 {row.status}
               </Badge>
             </TableCell>
@@ -32,7 +34,7 @@ function DataTable({ data, onRowSelect }: DataTableProps) {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
 ```
 
@@ -43,30 +45,33 @@ const DataTableRow = memo(function DataTableRow({
   row,
   onSelect,
 }: {
-  row: DataRow
-  onSelect: (id: string) => void
+  row: DataRow;
+  onSelect: (id: string) => void;
 }) {
   return (
     <TableRow onClick={() => onSelect(row.id)}>
       <TableCell>{row.name}</TableCell>
       <TableCell>{row.email}</TableCell>
       <TableCell>
-        <Badge variant={row.status === "active" ? "default" : "secondary"}>
+        <Badge variant={row.status === 'active' ? 'default' : 'secondary'}>
           {row.status}
         </Badge>
       </TableCell>
     </TableRow>
-  )
-})
+  );
+});
 
 function DataTable({ data, onRowSelect }: DataTableProps) {
-  const [selectedId, setSelectedId] = useState<string | null>(null)
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   // Stable callback reference
-  const handleSelect = useCallback((id: string) => {
-    setSelectedId(id)
-    onRowSelect(id)
-  }, [onRowSelect])
+  const handleSelect = useCallback(
+    (id: string) => {
+      setSelectedId(id);
+      onRowSelect(id);
+    },
+    [onRowSelect]
+  );
 
   return (
     <Table>
@@ -77,11 +82,12 @@ function DataTable({ data, onRowSelect }: DataTableProps) {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
 ```
 
 **Memoization guidelines:**
+
 - Use `memo` for list items rendered 10+ times
 - Use `useCallback` for handlers passed to memoized children
 - Use `useMemo` for expensive computations

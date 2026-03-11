@@ -13,29 +13,33 @@ For tables requiring sorting, filtering, or pagination, use TanStack Table with 
 
 ```tsx
 function UserTable({ users }: { users: User[] }) {
-  const [sortField, setSortField] = useState<keyof User>("name")
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc")
+  const [sortField, setSortField] = useState<keyof User>('name');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
   const sortedUsers = [...users].sort((a, b) => {
     // Manual sorting - breaks for nested fields, dates, null values
-    const aVal = a[sortField]
-    const bVal = b[sortField]
-    return sortDirection === "asc"
-      ? aVal > bVal ? 1 : -1
-      : aVal < bVal ? 1 : -1
-  })
+    const aVal = a[sortField];
+    const bVal = b[sortField];
+    return sortDirection === 'asc'
+      ? aVal > bVal
+        ? 1
+        : -1
+      : aVal < bVal
+        ? 1
+        : -1;
+  });
 
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead onClick={() => setSortField("name")}>Name</TableHead>
+          <TableHead onClick={() => setSortField('name')}>Name</TableHead>
           {/* Missing sort indicators, accessibility */}
         </TableRow>
       </TableHeader>
       {/* ... */}
     </Table>
-  )
+  );
 }
 ```
 
@@ -51,15 +55,15 @@ import {
   flexRender,
   type ColumnDef,
   type SortingState,
-} from "@tanstack/react-table"
+} from '@tanstack/react-table';
 
 const columns: ColumnDef<User>[] = [
   {
-    accessorKey: "name",
+    accessorKey: 'name',
     header: ({ column }) => (
       <Button
         variant="ghost"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
       >
         Name
         <ArrowUpDown className="ml-2 h-4 w-4" />
@@ -67,18 +71,18 @@ const columns: ColumnDef<User>[] = [
     ),
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: 'email',
+    header: 'Email',
   },
   {
-    accessorKey: "status",
-    header: "Status",
-    cell: ({ row }) => <Badge>{row.getValue("status")}</Badge>,
+    accessorKey: 'status',
+    header: 'Status',
+    cell: ({ row }) => <Badge>{row.getValue('status')}</Badge>,
   },
-]
+];
 
 function UserTable({ users }: { users: User[] }) {
-  const [sorting, setSorting] = useState<SortingState>([])
+  const [sorting, setSorting] = useState<SortingState>([]);
 
   const table = useReactTable({
     data: users,
@@ -87,7 +91,7 @@ function UserTable({ users }: { users: User[] }) {
     getSortedRowModel: getSortedRowModel(),
     onSortingChange: setSorting,
     state: { sorting },
-  })
+  });
 
   return (
     <Table>
@@ -96,7 +100,10 @@ function UserTable({ users }: { users: User[] }) {
           <TableRow key={headerGroup.id}>
             {headerGroup.headers.map((header) => (
               <TableHead key={header.id}>
-                {flexRender(header.column.columnDef.header, header.getContext())}
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
+                )}
               </TableHead>
             ))}
           </TableRow>
@@ -114,7 +121,7 @@ function UserTable({ users }: { users: User[] }) {
         ))}
       </TableBody>
     </Table>
-  )
+  );
 }
 ```
 

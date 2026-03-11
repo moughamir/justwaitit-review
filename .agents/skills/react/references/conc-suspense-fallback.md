@@ -61,6 +61,7 @@ function App() {
 ```
 
 **Benefits:**
+
 - No layout shift from fallback
 - Previous content remains visible
 - Navigation feels instant with visual feedback (opacity)

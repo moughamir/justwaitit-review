@@ -15,7 +15,8 @@ Defining variants objects inside a component creates new object references on ev
 function FadeInCard({ isVisible }) {
   const [count, setCount] = useState(0);
 
-  const cardVariants = {  // New object created on every render
+  const cardVariants = {
+    // New object created on every render
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
@@ -33,7 +34,8 @@ function FadeInCard({ isVisible }) {
 **Correct (variants defined outside component):**
 
 ```tsx
-const cardVariants = {  // Stable reference, created once
+const cardVariants = {
+  // Stable reference, created once
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0 },
 };

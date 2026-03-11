@@ -50,26 +50,28 @@ function Timer() {
 ```typescript
 // Event listeners
 useEffect(() => {
-  const handler = () => { /* ... */ }
-  window.addEventListener('resize', handler)
-  return () => window.removeEventListener('resize', handler)
-}, [])
+  const handler = () => {
+    /* ... */
+  };
+  window.addEventListener('resize', handler);
+  return () => window.removeEventListener('resize', handler);
+}, []);
 
 // Abort fetch on unmount
 useEffect(() => {
-  const controller = new AbortController()
+  const controller = new AbortController();
 
   fetch('/api/data', { signal: controller.signal })
-    .then(res => res.json())
-    .then(setData)
+    .then((res) => res.json())
+    .then(setData);
 
-  return () => controller.abort()
-}, [])
+  return () => controller.abort();
+}, []);
 
 // WebSocket connection
 useEffect(() => {
-  const ws = new WebSocket(url)
-  ws.onmessage = handleMessage
-  return () => ws.close()
-}, [url])
+  const ws = new WebSocket(url);
+  ws.onmessage = handleMessage;
+  return () => ws.close();
+}, [url]);
 ```

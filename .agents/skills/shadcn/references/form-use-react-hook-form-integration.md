@@ -13,15 +13,15 @@ shadcn/ui's Form components are designed for React Hook Form integration. Using 
 
 ```tsx
 function LoginForm() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     // Manual validation logic...
     // Re-renders entire form on every keystroke
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -38,34 +38,41 @@ function LoginForm() {
       />
       <Button type="submit">Login</Button>
     </form>
-  )
+  );
 }
 ```
 
 **Correct (React Hook Form with shadcn/ui):**
 
 ```tsx
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
 
 const loginSchema = z.object({
-  email: z.string().email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
-})
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
 
-type LoginFormValues = z.infer<typeof loginSchema>
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 function LoginForm() {
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
-    defaultValues: { email: "", password: "" },
-  })
+    defaultValues: { email: '', password: '' },
+  });
 
   const onSubmit = (data: LoginFormValues) => {
     // Validated data, no re-renders during typing
-  }
+  };
 
   return (
     <Form {...form}>
@@ -99,7 +106,7 @@ function LoginForm() {
         <Button type="submit">Login</Button>
       </form>
     </Form>
-  )
+  );
 }
 ```
 

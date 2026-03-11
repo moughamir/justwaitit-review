@@ -65,12 +65,14 @@ public class SensorReader {
 ```
 
 **Benefits:**
+
 - One place to change when the third-party API changes
 - Easier to mock in tests (mock `LocalPort`, not the vendor library)
 - Freedom to switch vendors without rewriting the entire codebase
 - Consistent exception hierarchy under your control
 
 **When NOT to wrap:**
+
 - Stable, widely-used standard library APIs (e.g., `java.util.List`, `String`) do not need wrapping.
 - If the wrapper would be a 1:1 passthrough with no value added, it's premature. Wait until you have a concrete reason (testing, migration, or simplification).
 

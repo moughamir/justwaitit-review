@@ -141,12 +141,13 @@ For pre-releases add `--prerelease`. For drafts add `--draft`.
 #### 6. Report
 
 Show the user:
+
 - Release URL
 - Next steps (npm publish if applicable, announcements)
 
 ## Reference Files
 
-| When | Read |
-|------|------|
+| When                   | Read                                                             |
+| ---------------------- | ---------------------------------------------------------------- |
 | Detailed safety checks | [references/safety-checklist.md](references/safety-checklist.md) |
-| Release mechanics | [references/release-workflow.md](references/release-workflow.md) |
+| Release mechanics      | [references/release-workflow.md](references/release-workflow.md) |

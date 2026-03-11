@@ -59,6 +59,7 @@ export default function Page() {
 ```
 
 **Streaming order:**
+
 1. Static HTML (no async) - immediate
 2. Fast async components - as they resolve
 3. Slow async components - when ready

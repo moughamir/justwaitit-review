@@ -62,14 +62,17 @@ function UserBadge() {
 
 ```typescript
 const useUserBadgeData = () => {
-  const firstName = useUserStore((s) => s.firstName)
-  const lastName = useUserStore((s) => s.lastName)
+  const firstName = useUserStore((s) => s.firstName);
+  const lastName = useUserStore((s) => s.lastName);
 
-  return useMemo(() => ({
-    displayName: `${firstName} ${lastName}`,
-    initials: `${firstName[0]}${lastName[0]}`,
-  }), [firstName, lastName])
-}
+  return useMemo(
+    () => ({
+      displayName: `${firstName} ${lastName}`,
+      initials: `${firstName[0]}${lastName[0]}`,
+    }),
+    [firstName, lastName]
+  );
+};
 ```
 
 Reference: [Zustand Documentation](https://zustand.docs.pmnd.rs/)

@@ -19,26 +19,28 @@ Application-level performance optimization guide for React applications. Contain
 
 ## Rule Categories
 
-| Category | Impact | Rules | Key Topics |
-|----------|--------|-------|------------|
-| React Compiler Mastery | CRITICAL | 6 | Compiler-friendly code, bailout detection, incremental adoption |
-| Bundle & Loading | CRITICAL | 6 | Route splitting, barrel elimination, dynamic imports, prefetching |
-| Rendering Optimization | HIGH | 6 | Virtualization, children pattern, debouncing, CSS containment |
-| Data Fetching Performance | HIGH | 5 | Waterfall elimination, route preloading, SWR, deduplication |
-| Core Web Vitals | MEDIUM-HIGH | 5 | INP yielding, LCP priority, CLS prevention, image optimization |
-| State & Subscription Performance | MEDIUM-HIGH | 5 | Context splitting, selectors, atomic state, derived state |
-| Profiling & Measurement | MEDIUM | 5 | DevTools profiling, flame charts, CI budgets, production builds |
-| Memory Management | LOW-MEDIUM | 5 | Effect cleanup, async cancellation, closure leaks, heap analysis |
+| Category                         | Impact      | Rules | Key Topics                                                        |
+| -------------------------------- | ----------- | ----- | ----------------------------------------------------------------- |
+| React Compiler Mastery           | CRITICAL    | 6     | Compiler-friendly code, bailout detection, incremental adoption   |
+| Bundle & Loading                 | CRITICAL    | 6     | Route splitting, barrel elimination, dynamic imports, prefetching |
+| Rendering Optimization           | HIGH        | 6     | Virtualization, children pattern, debouncing, CSS containment     |
+| Data Fetching Performance        | HIGH        | 5     | Waterfall elimination, route preloading, SWR, deduplication       |
+| Core Web Vitals                  | MEDIUM-HIGH | 5     | INP yielding, LCP priority, CLS prevention, image optimization    |
+| State & Subscription Performance | MEDIUM-HIGH | 5     | Context splitting, selectors, atomic state, derived state         |
+| Profiling & Measurement          | MEDIUM      | 5     | DevTools profiling, flame charts, CI budgets, production builds   |
+| Memory Management                | LOW-MEDIUM  | 5     | Effect cleanup, async cancellation, closure leaks, heap analysis  |
 
 ## Quick Reference
 
 **Critical patterns** — get these right first:
+
 - Write compiler-friendly components to unlock automatic 2-10x optimization
 - Split code at route boundaries to reduce initial bundle by 40-70%
 - Eliminate barrel files to enable tree shaking
 - Detect and fix silent compiler bailouts
 
 **Common mistakes** — avoid these anti-patterns:
+
 - Reading refs during render (breaks compiler optimization)
 - Importing entire libraries when only using one function
 - Not profiling before optimizing (targeting the wrong bottleneck)

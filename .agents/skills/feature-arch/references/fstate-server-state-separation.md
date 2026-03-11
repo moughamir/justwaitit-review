@@ -42,7 +42,7 @@ export function useUsers(filters: UserFilters) {
   return useQuery({
     queryKey: userKeys.list(filters),
     queryFn: () => getUsers(filters),
-    staleTime: 60_000,  // Built-in cache management
+    staleTime: 60_000, // Built-in cache management
   });
 }
 
@@ -54,7 +54,8 @@ export const useUserUIStore = create((set) => ({
   sortOrder: 'asc' as const,
 
   selectUser: (id) => set({ selectedUserId: id }),
-  toggleFilterPanel: () => set(s => ({ filterPanelOpen: !s.filterPanelOpen })),
+  toggleFilterPanel: () =>
+    set((s) => ({ filterPanelOpen: !s.filterPanelOpen })),
   setSortOrder: (order) => set({ sortOrder: order }),
 }));
 ```
@@ -81,11 +82,13 @@ function UserListPage() {
 ```
 
 **Server state characteristics:**
+
 - Fetched from external source
 - Can become stale
 - Needs refetching, deduplication, caching
 
 **Client state characteristics:**
+
 - Created locally
 - Never stale (source of truth is client)
 - No network concerns

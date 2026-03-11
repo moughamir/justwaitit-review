@@ -16,7 +16,9 @@ Inconsistent hook names force developers to open each file to understand what a 
 function getData(endpoint: string) {
   const [result, setResult] = useState(null);
   useEffect(() => {
-    fetch(endpoint).then((r) => r.json()).then(setResult);
+    fetch(endpoint)
+      .then((r) => r.json())
+      .then(setResult);
   }, [endpoint]);
   return result;
 }
@@ -33,11 +35,14 @@ function fetchUserPermissions(userId: string) {
 // "do" prefix reads like a command, not a hook
 function doAuth() {
   const [session, setSession] = useState<Session | null>(null);
-  return { session, login: (creds: Credentials) => authenticate(creds).then(setSession) };
+  return {
+    session,
+    login: (creds: Credentials) => authenticate(creds).then(setSession),
+  };
 }
 ```
 
-**Correct (use* convention with return-type hints):**
+**Correct (use\* convention with return-type hints):**
 
 ```tsx
 // "useResource" pattern — returns { data, isLoading, error }
@@ -46,7 +51,10 @@ function useResource<T>(endpoint: string) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     setIsLoading(true);
-    fetch(endpoint).then((r) => r.json()).then(setData).finally(() => setIsLoading(false));
+    fetch(endpoint)
+      .then((r) => r.json())
+      .then(setData)
+      .finally(() => setIsLoading(false));
   }, [endpoint]);
   return { data, isLoading };
 }
@@ -63,7 +71,10 @@ function usePermissions(userId: string) {
 // "useAuth" — returns auth state and actions
 function useAuth() {
   const [session, setSession] = useState<Session | null>(null);
-  return { session, login: (creds: Credentials) => authenticate(creds).then(setSession) };
+  return {
+    session,
+    login: (creds: Credentials) => authenticate(creds).then(setSession),
+  };
 }
 ```
 

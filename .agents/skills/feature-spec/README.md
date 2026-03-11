@@ -55,16 +55,16 @@ pnpm validate
 
 ### Category Prefixes
 
-| Category | Prefix | Impact |
-|----------|--------|--------|
-| Scope Definition | `scope-` | CRITICAL |
-| Requirements Clarity | `req-` | CRITICAL |
-| Prioritization Frameworks | `prio-` | HIGH |
-| Acceptance Criteria | `accept-` | HIGH |
-| Stakeholder Alignment | `stake-` | MEDIUM-HIGH |
-| Technical Specification | `tech-` | MEDIUM |
-| Change Management | `change-` | MEDIUM |
-| Documentation Standards | `doc-` | LOW |
+| Category                  | Prefix    | Impact      |
+| ------------------------- | --------- | ----------- |
+| Scope Definition          | `scope-`  | CRITICAL    |
+| Requirements Clarity      | `req-`    | CRITICAL    |
+| Prioritization Frameworks | `prio-`   | HIGH        |
+| Acceptance Criteria       | `accept-` | HIGH        |
+| Stakeholder Alignment     | `stake-`  | MEDIUM-HIGH |
+| Technical Specification   | `tech-`   | MEDIUM      |
+| Change Management         | `change-` | MEDIUM      |
+| Documentation Standards   | `doc-`    | LOW         |
 
 ## Rule File Structure
 
@@ -102,20 +102,21 @@ Reference: [Reference Title](URL)
 Rule files follow the pattern: `{prefix}-{description}.md`
 
 Examples:
+
 - `scope-define-boundaries.md`
 - `req-user-stories.md`
 - `change-formal-process.md`
 
 ## Impact Levels
 
-| Level | Description |
-|-------|-------------|
-| CRITICAL | Rules that prevent major project failures |
-| HIGH | Rules that significantly improve project outcomes |
-| MEDIUM-HIGH | Rules that reduce friction and late-stage changes |
-| MEDIUM | Rules that improve quality and change control |
-| LOW-MEDIUM | Rules for specific scenarios |
-| LOW | Best practices for long-term knowledge preservation |
+| Level       | Description                                         |
+| ----------- | --------------------------------------------------- |
+| CRITICAL    | Rules that prevent major project failures           |
+| HIGH        | Rules that significantly improve project outcomes   |
+| MEDIUM-HIGH | Rules that reduce friction and late-stage changes   |
+| MEDIUM      | Rules that improve quality and change control       |
+| LOW-MEDIUM  | Rules for specific scenarios                        |
+| LOW         | Best practices for long-term knowledge preservation |
 
 ## Scripts
 

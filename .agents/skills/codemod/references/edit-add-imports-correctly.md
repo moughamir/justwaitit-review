@@ -14,7 +14,7 @@ When adding new imports, insert them at the correct position relative to existin
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const needsLogger = root.find({
-    rule: { pattern: "logger.$METHOD($$$)" }
+    rule: { pattern: 'logger.$METHOD($$$)' },
   });
 
   if (!needsLogger) return null;
@@ -32,20 +32,20 @@ const transform: Transform<TSX> = (root) => {
 ```typescript
 const transform: Transform<TSX> = (root) => {
   const needsLogger = root.find({
-    rule: { pattern: "logger.$METHOD($$$)" }
+    rule: { pattern: 'logger.$METHOD($$$)' },
   });
 
   if (!needsLogger) return null;
 
   // Check if import already exists
   const existingImport = root.find({
-    rule: { pattern: 'import { logger } from "utils/logger"' }
+    rule: { pattern: 'import { logger } from "utils/logger"' },
   });
 
-  if (existingImport) return null;  // Already imported
+  if (existingImport) return null; // Already imported
 
   // Find last import statement
-  const imports = root.findAll({ rule: { kind: "import_statement" } });
+  const imports = root.findAll({ rule: { kind: 'import_statement' } });
   const lastImport = imports[imports.length - 1];
 
   if (lastImport) {
@@ -71,6 +71,7 @@ const transform: Transform<TSX> = (root) => {
 ```
 
 **Import ordering conventions:**
+
 1. Node built-ins (`fs`, `path`)
 2. External packages (`react`, `lodash`)
 3. Internal aliases (`@/utils`, `~/lib`)

@@ -34,7 +34,7 @@ export function SolutionSection() {
       ref={sectionRef}
       id="solution"
       aria-labelledby="solution-heading"
-      className="relative flex min-h-[100dvh] flex-col items-center justify-center px-4 py-24"
+      className="relative flex min-h-[100dvh] flex-col items-center justify-center px-4 pb-24 pt-32 lg:pt-48"
     >
       <h2 id="solution-heading" className="sr-only">
         {eyebrow}: {headline.pre} {headline.gradient} {headline.post}

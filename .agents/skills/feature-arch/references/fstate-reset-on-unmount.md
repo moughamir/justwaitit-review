@@ -82,6 +82,7 @@ export function CheckoutProvider({ children }) {
 ```
 
 **When NOT to reset:**
+
 - User preferences (theme, language)
 - Draft content (auto-saved forms)
 - Explicitly preserved state (shopping cart)

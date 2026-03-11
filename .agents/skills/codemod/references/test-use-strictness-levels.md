@@ -39,12 +39,12 @@ npx codemod jssg test ./api-migration.ts --strictness ast
 
 **Strictness level guide:**
 
-| Level | Compares | Use When |
-|-------|----------|----------|
-| `strict` | Exact string | Formatting must be preserved |
-| `cst` | Syntax tree | Whitespace changes acceptable |
-| `ast` | Abstract tree | Only semantics matter |
-| `loose` | Semantic | Reordering is acceptable |
+| Level    | Compares      | Use When                      |
+| -------- | ------------- | ----------------------------- |
+| `strict` | Exact string  | Formatting must be preserved  |
+| `cst`    | Syntax tree   | Whitespace changes acceptable |
+| `ast`    | Abstract tree | Only semantics matter         |
+| `loose`  | Semantic      | Reordering is acceptable      |
 
 **Recommendation:** Start with `strict`, relax only when the transform naturally produces equivalent but differently-formatted output.
 

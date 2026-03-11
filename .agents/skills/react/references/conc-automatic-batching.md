@@ -12,16 +12,16 @@ React 19 automatically batches state updates in all contexts: event handlers, pr
 **Incorrect (forcing synchronous updates):**
 
 ```typescript
-import { flushSync } from 'react-dom'
+import { flushSync } from 'react-dom';
 
 function handleClick() {
   // Don't do this - breaks automatic batching
   flushSync(() => {
-    setCount(c => c + 1)
-  })
+    setCount((c) => c + 1);
+  });
   flushSync(() => {
-    setFlag(f => !f)
-  })
+    setFlag((f) => !f);
+  });
 }
 // Two renders instead of one
 ```
@@ -31,16 +31,16 @@ function handleClick() {
 ```typescript
 function handleClick() {
   // React batches these - single render
-  setCount(c => c + 1)
-  setFlag(f => !f)
+  setCount((c) => c + 1);
+  setFlag((f) => !f);
 }
 
 async function handleSubmit() {
-  const data = await fetchData()
+  const data = await fetchData();
   // React 19 batches even in async callbacks
-  setData(data)
-  setLoading(false)
-  setError(null)
+  setData(data);
+  setLoading(false);
+  setError(null);
 }
 // Single render for all three updates
 ```
@@ -49,15 +49,15 @@ async function handleSubmit() {
 
 ```typescript
 function handleInput(e: React.ChangeEvent<HTMLInputElement>) {
-  const value = e.target.value
-  setQuery(value)
+  const value = e.target.value;
+  setQuery(value);
 
   // Rare: need DOM measurement before next paint
   flushSync(() => {
-    setResults(search(value))
-  })
+    setResults(search(value));
+  });
   // Now can measure DOM synchronously
-  scrollToTop()
+  scrollToTop();
 }
 ```
 

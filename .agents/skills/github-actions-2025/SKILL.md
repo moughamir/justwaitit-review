@@ -10,6 +10,7 @@ description: GitHub Actions 2025 features including 1 vCPU runners, immutable re
 **What:** New lightweight runners optimized for automation tasks with lower cost.
 
 **Specs:**
+
 - 1 vCPU
 - 5 GB RAM
 - 15-minute job limit
@@ -18,6 +19,7 @@ description: GitHub Actions 2025 features including 1 vCPU runners, immutable re
 ### When to Use 1 vCPU Runners
 
 **Ideal for:**
+
 - Issue triage automation
 - Label management
 - PR comment automation
@@ -27,6 +29,7 @@ description: GitHub Actions 2025 features including 1 vCPU runners, immutable re
 - Notification tasks
 
 **NOT suitable for:**
+
 - Build operations
 - Test suites
 - Complex CI/CD pipelines
@@ -44,8 +47,8 @@ on:
 
 jobs:
   triage:
-    runs-on: ubuntu-latest-1-core  # New 1 vCPU runner
-    timeout-minutes: 10  # Max 15 minutes
+    runs-on: ubuntu-latest-1-core # New 1 vCPU runner
+    timeout-minutes: 10 # Max 15 minutes
     steps:
       - name: Triage Issue
         run: |
@@ -79,6 +82,7 @@ jobs:
 **What:** Releases can now be marked immutable - assets and Git tags cannot be changed or deleted once released.
 
 **Benefits:**
+
 - Supply chain security
 - Audit compliance
 - Prevent tampering
@@ -171,6 +175,7 @@ jobs:
 **What:** GitHub Actions migrating from Node20 to Node24 in fall 2025.
 
 **Timeline:**
+
 - September 2025: Node24 support added
 - October 2025: Deprecation notices for Node20
 - November 2025: Node20 phase-out begins
@@ -206,11 +211,11 @@ jobs:
 # Ensure runner supports Node24
 jobs:
   test:
-    runs-on: ubuntu-latest  # Runner v2.328.0+ supports Node24
+    runs-on: ubuntu-latest # Runner v2.328.0+ supports Node24
 
     steps:
       - name: Verify Node version
-        run: node --version  # Should show v24.x.x
+        run: node --version # Should show v24.x.x
 ```
 
 ### Custom Actions Migration
@@ -219,9 +224,8 @@ If you maintain custom actions:
 
 ```javascript
 // action.yml
-runs:
-  using: 'node24'  // Updated from 'node20'
-  main: 'index.js'
+runs: using: 'node24'; // Updated from 'node20'
+main: 'index.js';
 ```
 
 ```bash
@@ -263,6 +267,7 @@ jobs:
 ```
 
 **Environment configuration:**
+
 - Settings → Environments → production
 - Add protection rules:
   - Required reviewers
@@ -297,7 +302,7 @@ allowed-actions:
 - uses: actions/checkout@v4
 
 # After: SHA pinning (immutable)
-- uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11  # v4.1.1
+- uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 ```
 
 ### Generate SHA-Pinned Actions
@@ -344,6 +349,7 @@ jobs:
 **What:** Artifacts moved to new architecture on February 1, 2025.
 
 **Breaking changes:**
+
 - `actions/upload-artifact@v1-v2` retired March 1, 2025
 - Must use `actions/upload-artifact@v4+`
 
@@ -458,15 +464,17 @@ jobs:
 ## Troubleshooting
 
 **1 vCPU runner timeout:**
+
 ```yaml
 # Ensure task completes within 15 minutes
 jobs:
   task:
     runs-on: ubuntu-latest-1-core
-    timeout-minutes: 10  # Safety margin
+    timeout-minutes: 10 # Safety margin
 ```
 
 **Node24 compatibility issues:**
+
 ```bash
 # Test locally with Node24
 nvm install 24
@@ -475,9 +483,10 @@ npm test
 ```
 
 **Artifact upload failures:**
+
 ```yaml
 # Use v4 of artifact actions
-- uses: actions/upload-artifact@v4  # Not v1/v2
+- uses: actions/upload-artifact@v4 # Not v1/v2
 ```
 
 ## Resources

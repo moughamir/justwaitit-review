@@ -31,11 +31,13 @@ def get_user_value(data: dict, key: str) -> str | None:
 ```
 
 **When EAFP is better:**
+
 - Key/attribute usually exists (happy path is common)
 - Multiple conditions would need checking
 - Race conditions between check and use
 
 **When LBYL is better:**
+
 - Operation has side effects (file creation)
 - Check is cheap, exception is expensive to create
 - Failure is common (50%+ of cases)
