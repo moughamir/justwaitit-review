@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "home": {
+      "title": "ANAQIO — Studio d'IA pour la Mode | À Venir",
+      "description": "ANAQIO est un studio de mode alimenté par l'IA pour le marché du luxe marocain. Générez des lookbooks, modifiez les arrière-plans, ajustez l'éclairage et produisez des vidéos de mode cinématographiques. Lancement 2026."
+    },
+    "about": {
+      "title": "À propos d'Anaqio",
+      "desc": "Anaqio est un studio visuel alimenté par l'IA pour le commerce de la mode, construit à Casablanca par des designers et des ingénieurs passionnés par l'élévation de l'industrie de la mode marocaine."
+    },
+    "contact": {
+      "title": "Contacter Anaqio",
+      "desc": "Contactez Anaqio — Studio Visuel IA pour le Commerce de la Mode. Partenariats, support et demandes générales."
+    },
+    "login": { "title": "Connexion — Anaqio" },
+    "signup": { "title": "S'inscrire — Anaqio" },
+    "forgot": { "title": "Mot de passe oublié — Anaqio" },
+    "brand": { "title": "Directives d'Identité de Marque — Anaqio" },
+    "early": {
+      "title": "Accès Anticipé — Anaqio",
+      "desc": "Rejoignez la liste d'attente pour un accès anticipé au Studio Visuel IA d'Anaqio. Soyez le premier à vivre l'avenir du commerce de la mode."
+    }
+  },
+  "header": {
+    "nav": {
+      "about": "À Propos",
+      "brand": "Identité Visuelle",
+      "contact": "Nous Contacter",
+      "legal": "Légal",
+      "terms": "Conditions d'Utilisation",
+      "privacy": "Politique de Confidentialité",
+      "cookies": "Politique des Cookies",
+      "legalMentions": "Mentions Légales"
+    },
+    "button": { "waitlist": "Rejoindre la Liste d'Attente" },
+    "logo": { "aria": "Accueil Anaqio" },
+    "menu": { "aria": "Basculer le menu" }
+  },
+  "footer": {
+    "desc": "Votre Atelier Numérique. Créez des lookbooks époustouflants, modifiez les arrière-plans et générez des visuels éditoriaux — alimentés par l'IA, conçus pour les marques de mode marocaines.",
+    "copyright": "© 2026 Anaqio",
+    "rights": "Tous droits réservés.",
+    "platform": {
+      "title": "Plateforme",
+      "studio": "Studio d'IA",
+      "lookbook": "Générateur de Lookbook",
+      "tryon": "Essayage Virtuel",
+      "pricing": "Tarification"
+    },
+    "resources": {
+      "title": "Ressources",
+      "brand": "Identité Visuelle",
+      "blog": "Blog",
+      "help": "Centre d'Aide"
+    },
+    "company": {
+      "title": "Entreprise",
+      "about": "À Propos",
+      "early": "Accès Anticipé",
+      "badge": "REJOINDRE",
+      "privacy": "Politique de Confidentialité",
+      "terms": "Conditions d'Utilisation",
+      "legal": "Mentions Légales",
+      "cookies": "Cookies"
+    }
+  },
+  "social": {
+    "twitter": "X (Twitter)",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "linkedin": "LinkedIn",
+    "youtube": "YouTube",
+    "pinterest": "Pinterest"
+  },
+  "comingSoon": {
+    "hero": {
+      "tagline": "Arrivée Bientôt",
+      "main": "ANAQIO est un Studio Virtuel alimenté par l'IA, conçu pour le Commerce de Mode.",
+      "sub1": "Générez des lookbooks, modifiez les arrière-plans, ajustez l'éclairage et produisez des collections cinématographiques.",
+      "sub2": "— le tout à partir d'une seule photo."
+    },
+    "form": {
+      "email": {
+        "placeholder": "Entrez votre e-mail",
+        "aria": "Adresse e-mail"
+      },
+      "button": {
+        "submit": "Notifiez-moi",
+        "pending": "Envoi en cours..."
+      },
+      "terms": "En rejoignant, vous acceptez nos Conditions et notre Politique de Confidentialité."
+    },
+    "footer": {
+      "launch": "Lancement Q3 2026 · Casablanca",
+      "copyright": "Anaqio © 2026",
+      "links": {
+        "about": "À Propos",
+        "terms": "Conditions",
+        "policy": "Politique",
+        "legal": "Légal"
+      }
+    }
+  },
+  "loading": {
+    "tagline": "Atelier Numérique",
+    "stages": {
+      "initializing": "Initialisation",
+      "assets": "Chargement des ressources",
+      "rendering": "Rendu",
+      "studio": "Préparation du studio",
+      "ready": "Prêt"
+    }
+  },
+  "about": {
+    "hero": {
+      "label": "ANAQIO · Studio Visuel IA",
+      "title": "La Mode, Réimaginée.",
+      "desc": "Le studio visuel alimenté par l'IA donnant aux marques de mode marocaines l'infrastructure pour produire des images de qualité studio — sans studio.",
+      "founded": "Fondée 2026",
+      "location": "Casablanca, Maroc",
+      "launch": "Lancement Q3 2026",
+      "imageAlt": "Mannequin présentant les images de qualité studio Anaqio"
+    },
+    "problem": {
+      "overline": "Le Problème",
+      "title": "Le pipeline d'atelier brisé.",
+      "desc": "Chaque séance photo de mode au Maroc signifie louer un espace, réserver des mannequins, coordonner l'éclairage, post-traiter des centaines de fichiers RAW — et ensuite tout refaire la saison suivante. Le résultat : des marques qui évoluent lentement, dépensent lourdement, et finissent quand même avec des images qui ressemblent à celles de tout le monde."
+    },
+    "pain": {
+      "cost": { "number": "MAD 50K+", "label": "coût moyen par séance studio" },
+      "time": {
+        "number": "3–6 sem.",
+        "label": "cycle de production par collection"
+      },
+      "skus": {
+        "number": "Centaines",
+        "label": "de SKU, une seule séance ne peut pas tous les couvrir"
+      }
+    },
+    "solution": {
+      "overline": "La Solution",
+      "title": "Un espace de travail. Des looks infinis.",
+      "desc": "Téléchargez vos vêtements — modèles ou ressources de marque. Anaqio génère des images de qualité studio en minutes — pas en semaines."
+    },
+    "lookbook": {
+      "1alt": "Image lookbook — composition de mode éditoriale",
+      "2alt": "Image lookbook — scène de mode paysagère",
+      "3alt": "Image lookbook — photographie produit stylisée"
+    },
+    "workflow": {
+      "upload": {
+        "step": "01 — Télécharger",
+        "title": "Télécharger",
+        "desc": "Déposez vos vêtements, modèles ou ressources brutes."
+      },
+      "generate": {
+        "step": "02 — Générer",
+        "title": "Générer",
+        "desc": "L'IA compose des scènes de qualité studio en quelques minutes."
+      },
+      "export": {
+        "step": "03 — Exporter",
+        "title": "Exporter",
+        "desc": "Téléchargez des lookbooks, des vidéos ou des photos individuelles."
+      }
+    },
+    "morocco": {
+      "quote": "Le Maroc a l'une des cultures de la mode les plus riches du monde. Elle mérite des outils de classe mondiale.",
+      "attr": "— Anaqio, Casablanca 2026",
+      "imageAlt": "Mode marocaine — images de qualité studio générées par IA"
+    },
+    "team": {
+      "overline": "Équipe Fondatrice",
+      "title": "Deux fondateurs, une mission.",
+      "desc": "Construit par des personnes qui croient que la mode marocaine mérite la même infrastructure créative que le marché du luxe mondial."
+    },
+    "founder": {
+      "amal": {
+        "role": "Fondatrice",
+        "bio": "Amal apporte une compréhension approfondie du commerce de la mode et de l'identité de marque à Anaqio. Sa vision de ce que l'IA peut déverrouiller pour les marques de mode marocaines est au cœur du produit."
+      },
+      "mo": {
+        "role": "Co-Fondateur & Ingénieur",
+        "bio": "Mohamed est un développeur full-stack et designer d'expérience avec 9+ ans de création de produits numériques intuitifs. Il façonne la direction de l'ingénierie et du design depuis Bouskoura, Maroc."
+      },
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "twitter": "X / Twitter"
+    },
+    "cta": {
+      "overline": "Accès Anticipé",
+      "title": "Rejoignez la première vague.",
+      "desc": "Nous intégrons des marques de mode sélectionnées avant notre lancement Q3 2026. Rejoignez-nous tôt.",
+      "primary": "Rejoindre la liste d'attente",
+      "secondary": "Nous contacter"
+    }
+  },
+  "scrollNav": {
+    "intro": "Intro",
+    "problem": "Problème",
+    "solution": "Solution",
+    "morocco": "Maroc",
+    "team": "Équipe",
+    "join": "Rejoindre"
+  },
+  "contact": {
+    "title": "Contacter Anaqio",
+    "desc": "Pour les partenariats et les demandes générales utilisez cette page de contact.",
+    "section": { "heading": "Contact" },
+    "form": {
+      "name": { "label": "Nom", "placeholder": "Votre nom" },
+      "email": { "label": "E-mail", "placeholder": "vous@exemple.com" },
+      "message": {
+        "label": "Message",
+        "placeholder": "Comment pouvons-nous vous aider?"
+      },
+      "submit": "Envoyer (à venir)",
+      "note": "Pendant que nous finalisons la gestion des contacts contactez-nous via les liens sociaux ci-dessus."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Bienvenue",
+      "desc": "Connectez-vous à votre compte Anaqio Studio",
+      "email": { "label": "E-mail", "placeholder": "nom@entreprise.com" },
+      "password": { "label": "Mot de passe" },
+      "forgot": "Mot de passe oublié?",
+      "submit": "Connexion",
+      "submitPending": "Authentification...",
+      "signupIntro": "Nouveau sur Anaqio?",
+      "signupLink": "Créer un compte"
+    },
+    "signup": {
+      "title": "Rejoindre Anaqio",
+      "desc": "Créez votre compte studio pour commencer",
+      "passwordRepeat": "Répéter le mot de passe",
+      "submit": "Créer un compte",
+      "submitPending": "Provisionnement du compte...",
+      "loginIntro": "Vous avez déjà un compte?",
+      "loginLink": "Se connecter"
+    },
+    "forgot": {
+      "title": "Récupérer l'accès",
+      "desc": "Entrez votre e-mail pour recevoir les instructions de récupération",
+      "submit": "Récupérer le mot de passe",
+      "submitPending": "Envoi du lien...",
+      "success": {
+        "title": "Vérifiez votre boîte de réception",
+        "desc": "Instructions de réinitialisation envoyées",
+        "msg": "Si vous avez un compte associé à cet e-mail, vous recevrez sous peu un lien pour réinitialiser vos identifiants en toute sécurité."
+      },
+      "back": "Retour à la connexion"
+    }
+  }
+}

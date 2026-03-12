@@ -1,0 +1,255 @@
+{
+  "meta": {
+    "home": {
+      "title": "ANAQIO — AI Fashion Studio | Coming Soon",
+      "description": "ANAQIO is an AI-powered fashion studio for the Moroccan luxury market. Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic fashion videos. Launching 2026."
+    },
+    "about": {
+      "title": "About Anaqio",
+      "desc": "Anaqio is an AI-powered visual studio for fashion commerce, built in Casablanca by designers and engineers passionate about elevating the Moroccan fashion industry."
+    },
+    "contact": {
+      "title": "Contact Anaqio",
+      "desc": "Get in touch with Anaqio — AI Visual Studio for Fashion Commerce. Partnerships, support, and general inquiries."
+    },
+    "login": { "title": "Login — Anaqio" },
+    "signup": { "title": "Sign Up — Anaqio" },
+    "forgot": { "title": "Forgot Password — Anaqio" },
+    "brand": { "title": "Brand Identity Guidelines — Anaqio" },
+    "early": {
+      "title": "Early Access — Anaqio",
+      "desc": "Join the waitlist for early access to Anaqio's AI Visual Studio. Be the first to experience the future of fashion commerce."
+    }
+  },
+  "header": {
+    "nav": {
+      "about": "About",
+      "brand": "Brand",
+      "contact": "Contact",
+      "legal": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "cookies": "Cookie Policy",
+      "legalMentions": "Legal Mentions"
+    },
+    "button": { "waitlist": "Join Waitlist" },
+    "logo": { "aria": "Anaqio Home" },
+    "menu": { "aria": "Toggle menu" }
+  },
+  "footer": {
+    "desc": "Your Digital Atelier. Create stunning lookbooks, swap backgrounds, and generate editorial visuals — powered by AI, designed for Moroccan fashion brands.",
+    "copyright": "© 2026 Anaqio",
+    "rights": "All rights reserved.",
+    "platform": {
+      "title": "Platform",
+      "studio": "AI Studio",
+      "lookbook": "Lookbook Generator",
+      "tryon": "Virtual Try-On",
+      "pricing": "Pricing"
+    },
+    "resources": {
+      "title": "Resources",
+      "brand": "Brand",
+      "blog": "Blog",
+      "help": "Help Center"
+    },
+    "company": {
+      "title": "Company",
+      "about": "About",
+      "early": "Early Access",
+      "badge": "JOIN",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "legal": "Legal Mentions",
+      "cookies": "Cookies"
+    }
+  },
+  "social": {
+    "twitter": "X (Twitter)",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "linkedin": "LinkedIn",
+    "youtube": "YouTube",
+    "pinterest": "Pinterest"
+  },
+  "comingSoon": {
+    "hero": {
+      "tagline": "Coming Soon",
+      "main": "ANAQIO is an AI-Driven Virtual built for Fashion Commerce.",
+      "sub1": "Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic collections.",
+      "sub2": "— all from a single shot."
+    },
+    "form": {
+      "email": {
+        "placeholder": "Enter your email",
+        "aria": "Email address"
+      },
+      "button": {
+        "submit": "Notify me",
+        "pending": "Sending..."
+      },
+      "terms": "By joining, you agree to our Terms and Privacy Policy."
+    },
+    "footer": {
+      "launch": "Launching Q3 2026 · Casablanca",
+      "copyright": "Anaqio © 2026",
+      "links": {
+        "about": "About",
+        "terms": "Terms",
+        "policy": "Policy",
+        "legal": "Legal"
+      }
+    }
+  },
+  "loading": {
+    "tagline": "Digital Atelier",
+    "stages": {
+      "initializing": "Initializing",
+      "assets": "Loading assets",
+      "rendering": "Rendering",
+      "studio": "Preparing studio",
+      "ready": "Ready"
+    }
+  },
+  "about": {
+    "hero": {
+      "label": "ANAQIO · AI Visual Studio",
+      "title": "Fashion, Reimagined.",
+      "desc": "The AI-powered visual studio giving Moroccan fashion brands the infrastructure to produce studio-quality imagery — without a studio.",
+      "founded": "Est. 2026",
+      "location": "Casablanca, Morocco",
+      "launch": "Launching Q3 2026",
+      "imageAlt": "Fashion model showcasing Anaqio studio-quality imagery"
+    },
+    "problem": {
+      "overline": "The Problem",
+      "title": "The broken studio pipeline.",
+      "desc": "Every fashion shoot in Morocco means renting a space, booking models, coordinating lighting, post-processing hundreds of RAW files — and then doing it all again next season. The result: brands that move slowly, spend heavily, and still end up with imagery that looks like everyone else's."
+    },
+    "pain": {
+      "cost": {
+        "number": "MAD 50K+",
+        "label": "average cost per studio shoot"
+      },
+      "time": {
+        "number": "3–6 wks",
+        "label": "production cycle per collection"
+      },
+      "skus": {
+        "number": "100s",
+        "label": "of SKUs, one shoot can't cover them all"
+      }
+    },
+    "solution": {
+      "overline": "The Solution",
+      "title": "One workspace. Infinite looks.",
+      "desc": "Upload your garments — models or brand assets. Anaqio generates studio-quality imagery in minutes — not weeks."
+    },
+    "lookbook": {
+      "1alt": "Lookbook image — editorial fashion composition",
+      "2alt": "Lookbook image — landscape fashion scene",
+      "3alt": "Lookbook image — styled product photography"
+    },
+    "workflow": {
+      "upload": {
+        "step": "01 — Upload",
+        "title": "Upload",
+        "desc": "Drop in your garments, models, or raw assets."
+      },
+      "generate": {
+        "step": "02 — Generate",
+        "title": "Generate",
+        "desc": "AI composes studio-quality scenes in minutes."
+      },
+      "export": {
+        "step": "03 — Export",
+        "title": "Export",
+        "desc": "Download lookbooks, videos, or individual shots."
+      }
+    },
+    "morocco": {
+      "quote": "Morocco has one of the richest fashion cultures in the world. It deserves world-class tools.",
+      "attr": "— Anaqio, Casablanca 2026",
+      "imageAlt": "Moroccan fashion — studio-quality AI-generated imagery"
+    },
+    "team": {
+      "overline": "Founding Team",
+      "title": "Two founders, one mission.",
+      "desc": "Built by people who believe Moroccan fashion deserves the same creative infrastructure as the global luxury market."
+    },
+    "founder": {
+      "amal": {
+        "role": "Founder",
+        "bio": "Amal brings a deep understanding of fashion commerce and brand identity to Anaqio. Her vision for what AI can unlock for Moroccan fashion brands is at the heart of the product."
+      },
+      "mo": {
+        "role": "Co-Founder & Engineer",
+        "bio": "Mohamed is a full-stack developer and experience designer with 9+ years building intuitive digital products. He shapes the engineering and design direction from Bouskoura, Morocco."
+      },
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "twitter": "X / Twitter"
+    },
+    "cta": {
+      "overline": "Early Access",
+      "title": "Join the first wave.",
+      "desc": "We're onboarding select fashion brands ahead of our Q3 2026 launch. Get in early.",
+      "primary": "Join the waitlist",
+      "secondary": "Contact us"
+    }
+  },
+  "scrollNav": {
+    "intro": "Intro",
+    "problem": "Problem",
+    "solution": "Solution",
+    "morocco": "Morocco",
+    "team": "Team",
+    "join": "Join"
+  },
+  "contact": {
+    "title": "Contact Anaqio",
+    "desc": "For partnerships and general inquiries use this contact page.",
+    "section": { "heading": "Contact" },
+    "form": {
+      "name": { "label": "Name", "placeholder": "Your name" },
+      "email": { "label": "Email", "placeholder": "you@example.com" },
+      "message": { "label": "Message", "placeholder": "How can we help?" },
+      "submit": "Send (coming soon)",
+      "note": "While we finalize contact handling reach us via social links above."
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "desc": "Sign in to your Anaqio studio account",
+      "email": { "label": "Email", "placeholder": "name@company.com" },
+      "password": { "label": "Password" },
+      "forgot": "Forgot password?",
+      "submit": "Sign In",
+      "submitPending": "Authenticating...",
+      "signupIntro": "New to Anaqio?",
+      "signupLink": "Create an account"
+    },
+    "signup": {
+      "title": "Join Anaqio",
+      "desc": "Create your studio account to get started",
+      "passwordRepeat": "Repeat Password",
+      "submit": "Create Account",
+      "submitPending": "Provisioning Account...",
+      "loginIntro": "Already have an account?",
+      "loginLink": "Sign in"
+    },
+    "forgot": {
+      "title": "Recover Access",
+      "desc": "Enter your email to receive recovery instructions",
+      "submit": "Recover Password",
+      "submitPending": "Sending Link...",
+      "success": {
+        "title": "Check Your Inbox",
+        "desc": "Password reset instructions sent",
+        "msg": "If you have an account registered with that email, you will receive a link to securely reset your credentials shortly."
+      },
+      "back": "Back to Sign In"
+    }
+  }
+}

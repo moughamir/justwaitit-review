@@ -1,11 +1,12 @@
 import { useReducedMotion, motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { UTM_KEYS } from '../UTM_KEYS';
 import { type UtmParams } from '../UtmParams';
 
+import { Link } from '@/i18n/routing';
 import { notifyMe } from '@/lib/actions/notify';
 import { ease, fadeIn } from '@/lib/motion';
 
