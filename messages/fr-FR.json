@@ -119,7 +119,10 @@
       "founded": "Fondée 2026",
       "location": "Casablanca, Maroc",
       "launch": "Lancement Q3 2026",
-      "imageAlt": "Mannequin présentant les images de qualité studio Anaqio"
+      "imageAlt": "Mannequin présentant les images de qualité studio Anaqio",
+      "titleLine1": "La Mode,",
+      "titleLine2": "Réimaginée.",
+      "back": "Retour à l'accueil"
     },
     "problem": {
       "overline": "Le Problème",
@@ -140,7 +143,9 @@
     "solution": {
       "overline": "La Solution",
       "title": "Un espace de travail. Des looks infinis.",
-      "desc": "Téléchargez vos vêtements — modèles ou ressources de marque. Anaqio génère des images de qualité studio en minutes — pas en semaines."
+      "desc": "Téléchargez vos vêtements — modèles ou ressources de marque. Anaqio génère des images de qualité studio en minutes — pas en semaines.",
+      "titleLine1": "Un espace de travail.",
+      "titleLine2": "Des looks infinis."
     },
     "lookbook": {
       "1alt": "Image lookbook — composition de mode éditoriale",
@@ -165,14 +170,18 @@
       }
     },
     "morocco": {
-      "quote": "Le Maroc a l'une des cultures de la mode les plus riches du monde. Elle mérite des outils de classe mondiale.",
+      "quote": "Le Maroc a l'une des cultures de la mode les plus riches du monde. Elle mérite",
+      "quoteAccent": "des outils de classe mondiale.",
       "attr": "— Anaqio, Casablanca 2026",
-      "imageAlt": "Mode marocaine — images de qualité studio générées par IA"
+      "imageAlt": "Mode marocaine — images de qualité studio générées par IA",
+      "srLabel": "Conçu pour le Maroc"
     },
     "team": {
       "overline": "Équipe Fondatrice",
       "title": "Deux fondateurs, une mission.",
-      "desc": "Construit par des personnes qui croient que la mode marocaine mérite la même infrastructure créative que le marché du luxe mondial."
+      "desc": "Construit par des personnes qui croient que la mode marocaine mérite la même infrastructure créative que le marché du luxe mondial.",
+      "titleLine1": "Deux fondateurs,",
+      "titleLine2": "une mission."
     },
     "founder": {
       "amal": {
@@ -216,6 +225,12 @@
       },
       "submit": "Envoyer (à venir)",
       "note": "Pendant que nous finalisons la gestion des contacts contactez-nous via les liens sociaux ci-dessus."
+    },
+    "waitlistNote": "Pour les mises à jour d'accès produit, rejoignez la",
+    "waitlistLink": "liste d'accès anticipé",
+    "labels": {
+      "website": "Site web",
+      "social": "Réseaux sociaux"
     }
   },
   "auth": {

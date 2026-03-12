@@ -1,10 +1,17 @@
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-export default function AuthLayout({
+import { Link } from '@/i18n/routing';
+
+export default async function AuthLayout({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: Promise<{ locale: string }>;
 }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'footer' });
+
   return (
     <div className="noise-overlay relative flex min-h-screen flex-col bg-background">
       <nav className="absolute left-0 right-0 top-0 z-50 flex items-center justify-between p-8">
@@ -22,7 +29,7 @@ export default function AuthLayout({
 
       <footer className="relative z-10 p-8 text-center">
         <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          &copy; 2026 Anaqio Studio &middot; All Rights Reserved
+          {t('copyright')} &middot; {t('rights')}
         </p>
       </footer>
     </div>

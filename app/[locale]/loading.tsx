@@ -1,6 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
@@ -17,6 +18,7 @@ import { cn } from '@/lib/utils';
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Loading() {
+  const t = useTranslations('loading');
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
   const reduced = useReducedMotion();
@@ -178,7 +180,7 @@ export default function Loading() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
           >
-            Digital Atelier
+            {t('tagline')}
           </motion.p>
 
           {/* ── Logo with outline-fill animation ─────────────── */}
@@ -231,7 +233,7 @@ export default function Loading() {
             <div className="flex w-full items-center justify-between">
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={stage.label}
+                  key={stage.key}
                   data-atom
                   className="font-label text-[0.58rem] uppercase tracking-label text-muted-foreground/35"
                   initial={{ opacity: 0, y: 3 }}
@@ -239,7 +241,7 @@ export default function Loading() {
                   exit={{ opacity: 0, y: -3 }}
                   transition={{ duration: 0.18 }}
                 >
-                  {stage.label}
+                  {t(`stages.${stage.key}`)}
                 </motion.span>
               </AnimatePresence>
 

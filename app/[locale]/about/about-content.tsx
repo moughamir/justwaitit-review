@@ -2,42 +2,37 @@
 
 import { motion, useReducedMotion } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 import { clipReveal, fadeIn, fadeUp, flipReveal } from '@/lib/motion';
 
-/* ────────────────────────────────────────────────── */
-/*  Data                                               */
-/* ────────────────────────────────────────────────── */
-
-const founders = [
-  {
-    name: 'Amal AIT OUKHARAZ',
-    role: 'Founder',
-    bio: 'Amal brings a deep understanding of fashion commerce and brand identity to Anaqio. Her vision for what AI can unlock for Moroccan fashion brands is at the heart of the product.',
-    linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
-    photo: '/images/amal-founder.png',
-    initials: 'AA',
-  },
-  {
-    name: 'Mohamed MOUGHAMIR',
-    role: 'Tech',
-    bio: 'Mohamed is a full-stack developer and experience designer with 9+ years building intuitive digital products. He shapes the engineering and design direction from Bouskoura, Morocco.',
-    linkedin: 'https://www.linkedin.com/in/moughamir/',
-    github: 'https://github.com/moughamir',
-    twitter: 'https://twitter.com/omnizya',
-    photo: 'https://avatars.githubusercontent.com/u/8163598?v=4',
-    initials: 'MM',
-  },
-];
-
-/* ────────────────────────────────────────────────── */
-/*  Component                                          */
-/* ────────────────────────────────────────────────── */
-
 export default function AboutContent() {
+  const t = useTranslations('about');
+  const tMeta = useTranslations('meta');
   const reduced = useReducedMotion();
+
+  const founders = [
+    {
+      name: 'Amal AIT OUKHARAZ',
+      role: t('founder.amal.role'),
+      bio: t('founder.amal.bio'),
+      linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
+      photo: '/images/amal-founder.png',
+      initials: 'AA',
+    },
+    {
+      name: 'Mohamed MOUGHAMIR',
+      role: t('founder.mo.role'),
+      bio: t('founder.mo.bio'),
+      linkedin: 'https://www.linkedin.com/in/moughamir/',
+      github: 'https://github.com/moughamir',
+      twitter: 'https://twitter.com/omnizya',
+      photo: 'https://avatars.githubusercontent.com/u/8163598?v=4',
+      initials: 'MM',
+    },
+  ];
 
   return (
     <>
@@ -50,7 +45,7 @@ export default function AboutContent() {
         className="relative min-h-[92dvh] overflow-hidden px-4 py-24 sm:px-6 lg:px-8"
       >
         <h1 id="about-hero-heading" className="sr-only">
-          About Anaqio
+          {tMeta('about.title')}
         </h1>
 
         {/* Spotlight Effect */}
@@ -114,34 +109,29 @@ export default function AboutContent() {
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
-                  className="transition-transform group-hover:-translate-x-1"
+                  className="transition-transform group-hover:-translate-x-1 rtl:rotate-180"
                 >
                   <path d="m15 18-6-6 6-6" />
                 </svg>
-                Back to Home
+                {t('hero.back')}
               </Link>
             </div>
 
             <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-aq-blue">
-              ANAQIO &middot; AI Visual Studio
+              {t('hero.label')}
             </p>
 
             <h2
               aria-hidden="true"
               className="mt-6 font-display text-5xl font-light leading-[1.1] tracking-tight sm:text-6xl lg:text-7xl xl:text-[5.5rem]"
             >
-              Fashion,
+              {t('hero.titleLine1')}
               <br />
-              <span className="font-medium">Reimagined.</span>
+              <span className="font-medium">{t('hero.titleLine2')}</span>
             </h2>
 
             <p className="mt-8 max-w-xl text-lg leading-relaxed text-muted-foreground">
-              The AI-powered visual studio giving Moroccan fashion brands the
-              infrastructure to produce{' '}
-              <strong className="font-medium text-foreground">
-                studio-quality imagery
-              </strong>
-              &nbsp;&mdash; without a studio.
+              {t('hero.desc')}
             </p>
 
             <hr className="my-8 border-white/10" />
@@ -149,18 +139,18 @@ export default function AboutContent() {
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-sm font-medium text-muted-foreground/80">
               <span className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                Est. 2026
+                {t('hero.founded')}
               </span>
               <span className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-white/20" />
-                Casablanca, Morocco
+                {t('hero.location')}
               </span>
               <span className="flex items-center gap-2 text-aq-blue">
                 <span className="relative flex h-2 w-2">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-aq-blue opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-aq-blue" />
                 </span>
-                Launching Q3 2026
+                {t('hero.launch')}
               </span>
             </div>
           </motion.div>
@@ -172,7 +162,7 @@ export default function AboutContent() {
           >
             <Image
               src="/images/hero-model.png"
-              alt="Fashion model showcasing Anaqio studio-quality imagery"
+              alt={t('hero.imageAlt')}
               fill
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
               className="object-cover object-top"
@@ -203,21 +193,20 @@ export default function AboutContent() {
             {...fadeUp(reduced)}
           >
             <p className="font-label text-xs font-semibold uppercase tracking-[0.2em] text-aq-blue">
-              The Solution
+              {t('solution.overline')}
             </p>
             <h2
               id="about-solution-heading"
               className="mt-6 font-display text-4xl font-light leading-tight sm:text-5xl"
             >
-              One workspace.
+              {t('solution.titleLine1')}
               <br />
               <span className="font-medium text-foreground">
-                Infinite looks.
+                {t('solution.titleLine2')}
               </span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Upload your garments, models, or brand assets. Anaqio generates
-              studio-quality imagery in minutes&nbsp;&mdash; not weeks.
+              {t('solution.desc')}
             </p>
           </motion.div>
 
@@ -230,7 +219,7 @@ export default function AboutContent() {
             >
               <Image
                 src="/images/lookbook-1.png"
-                alt="Lookbook image — editorial fashion composition"
+                alt={t('lookbook.1alt')}
                 fill
                 sizes="(max-width: 640px) 100vw, 42vw"
                 className="object-cover transition-transform duration-1000 hover:scale-105"
@@ -244,7 +233,7 @@ export default function AboutContent() {
             >
               <Image
                 src="/images/lookbook-2.png"
-                alt="Lookbook image — landscape fashion scene"
+                alt={t('lookbook.2alt')}
                 fill
                 sizes="(max-width: 640px) 100vw, 58vw"
                 className="object-cover transition-transform duration-1000 hover:scale-105"
@@ -258,7 +247,7 @@ export default function AboutContent() {
             >
               <Image
                 src="/images/lookbook-3.png"
-                alt="Lookbook image — styled product photography"
+                alt={t('lookbook.3alt')}
                 fill
                 sizes="(max-width: 640px) 100vw, 58vw"
                 className="object-cover transition-transform duration-1000 hover:scale-105"
@@ -279,17 +268,16 @@ export default function AboutContent() {
         <div className="bg-brand-diag absolute inset-0 opacity-[0.03]" />
 
         <h2 id="about-morocco-heading" className="sr-only">
-          Built for Morocco
+          {t('morocco.srLabel')}
         </h2>
 
         <motion.blockquote
           className="relative z-10 mx-auto max-w-5xl text-center font-display text-4xl font-light italic leading-tight text-foreground sm:text-5xl lg:text-6xl"
           {...fadeUp(reduced)}
         >
-          &ldquo;Morocco has one of the richest fashion cultures in the world.
-          It deserves{' '}
+          &ldquo;{t('morocco.quote')}{' '}
           <span className="font-medium not-italic text-aq-blue">
-            world-class tools.
+            {t('morocco.quoteAccent')}
           </span>
           &rdquo;
         </motion.blockquote>
@@ -300,7 +288,7 @@ export default function AboutContent() {
         >
           <div className="h-px w-12 bg-white/20" />
           <p className="font-label text-sm uppercase tracking-[0.2em] text-muted-foreground/80">
-            Anaqio, Casablanca 2026
+            {t('morocco.attr')}
           </p>
           <div className="h-px w-12 bg-white/20" />
         </motion.div>
@@ -323,13 +311,12 @@ export default function AboutContent() {
               id="about-team-heading"
               className="font-display text-4xl font-light leading-tight sm:text-5xl"
             >
-              Two founders,
+              {t('team.titleLine1')}
               <br />
-              <span className="font-medium">one mission.</span>
+              <span className="font-medium">{t('team.titleLine2')}</span>
             </h2>
             <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
-              Built by people who believe Moroccan fashion deserves the same
-              creative infrastructure as the global luxury market.
+              {t('team.desc')}
             </p>
           </motion.div>
 
@@ -382,7 +369,7 @@ export default function AboutContent() {
                     rel="noopener noreferrer"
                     className="transition-colors hover:text-white"
                   >
-                    LinkedIn
+                    {t('founder.linkedin')}
                   </a>
                   {'github' in founder && founder.github && (
                     <a
@@ -391,7 +378,7 @@ export default function AboutContent() {
                       rel="noopener noreferrer"
                       className="transition-colors hover:text-white"
                     >
-                      GitHub
+                      {t('founder.github')}
                     </a>
                   )}
                   {'twitter' in founder && founder.twitter && (
@@ -401,7 +388,7 @@ export default function AboutContent() {
                       rel="noopener noreferrer"
                       className="transition-colors hover:text-white"
                     >
-                      X / Twitter
+                      {t('founder.twitter')}
                     </a>
                   )}
                 </div>
@@ -429,11 +416,10 @@ export default function AboutContent() {
             id="about-cta-heading"
             className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
           >
-            Join the first wave.
+            {t('cta.title')}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            We&rsquo;re onboarding select fashion brands ahead of our Q3 2026
-            launch. Secure your access to the future of visual commerce.
+            {t('cta.desc')}
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button
@@ -442,7 +428,7 @@ export default function AboutContent() {
               className="h-14 rounded-full px-8 text-base"
               asChild
             >
-              <Link href="/early-access">Reserve Access</Link>
+              <Link href="/early-access">{t('cta.primary')}</Link>
             </Button>
             <Button
               variant="outline"
@@ -450,7 +436,7 @@ export default function AboutContent() {
               className="h-14 rounded-full border-white/20 px-8 text-base hover:bg-white/5"
               asChild
             >
-              <Link href="/contact">Partner with us</Link>
+              <Link href="/contact">{t('cta.secondary')}</Link>
             </Button>
           </div>
         </motion.div>

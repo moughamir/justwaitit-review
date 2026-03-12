@@ -119,7 +119,10 @@
       "founded": "Est. 2026",
       "location": "Casablanca, Morocco",
       "launch": "Launching Q3 2026",
-      "imageAlt": "Fashion model showcasing Anaqio studio-quality imagery"
+      "imageAlt": "Fashion model showcasing Anaqio studio-quality imagery",
+      "titleLine1": "Fashion,",
+      "titleLine2": "Reimagined.",
+      "back": "Back to Home"
     },
     "problem": {
       "overline": "The Problem",
@@ -143,7 +146,9 @@
     "solution": {
       "overline": "The Solution",
       "title": "One workspace. Infinite looks.",
-      "desc": "Upload your garments — models or brand assets. Anaqio generates studio-quality imagery in minutes — not weeks."
+      "desc": "Upload your garments — models or brand assets. Anaqio generates studio-quality imagery in minutes — not weeks.",
+      "titleLine1": "One workspace.",
+      "titleLine2": "Infinite looks."
     },
     "lookbook": {
       "1alt": "Lookbook image — editorial fashion composition",
@@ -168,14 +173,18 @@
       }
     },
     "morocco": {
-      "quote": "Morocco has one of the richest fashion cultures in the world. It deserves world-class tools.",
+      "quote": "Morocco has one of the richest fashion cultures in the world. It deserves",
+      "quoteAccent": "world-class tools.",
       "attr": "— Anaqio, Casablanca 2026",
-      "imageAlt": "Moroccan fashion — studio-quality AI-generated imagery"
+      "imageAlt": "Moroccan fashion — studio-quality AI-generated imagery",
+      "srLabel": "Built for Morocco"
     },
     "team": {
       "overline": "Founding Team",
       "title": "Two founders, one mission.",
-      "desc": "Built by people who believe Moroccan fashion deserves the same creative infrastructure as the global luxury market."
+      "desc": "Built by people who believe Moroccan fashion deserves the same creative infrastructure as the global luxury market.",
+      "titleLine1": "Two founders,",
+      "titleLine2": "one mission."
     },
     "founder": {
       "amal": {
@@ -216,6 +225,12 @@
       "message": { "label": "Message", "placeholder": "How can we help?" },
       "submit": "Send (coming soon)",
       "note": "While we finalize contact handling reach us via social links above."
+    },
+    "waitlistNote": "For product access updates, consider joining the",
+    "waitlistLink": "early access waitlist",
+    "labels": {
+      "website": "Website",
+      "social": "Social"
     }
   },
   "auth": {

@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link, useRouter } from '@/i18n/routing';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 
@@ -21,6 +21,8 @@ export function SignUpForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const t = useTranslations('auth.signup');
+  const tLogin = useTranslations('auth.login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
@@ -62,11 +64,9 @@ export function SignUpForm({
       <Card className="noise-overlay border-white/5">
         <CardHeader>
           <CardTitle className="font-display text-3xl font-bold">
-            Join anaqio
+            {t('title')}
           </CardTitle>
-          <CardDescription className="font-body">
-            Create your studio account to get started
-          </CardDescription>
+          <CardDescription className="font-body">{t('desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSignUp}>
@@ -76,12 +76,12 @@ export function SignUpForm({
                   htmlFor="email"
                   className="font-body text-xs uppercase tracking-widest text-muted-foreground"
                 >
-                  Email
+                  {tLogin('email.label')}
                 </Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@company.com"
+                  placeholder={tLogin('email.placeholder')}
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -89,14 +89,12 @@ export function SignUpForm({
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label
-                    htmlFor="password"
-                    className="font-body text-xs uppercase tracking-widest text-muted-foreground"
-                  >
-                    Password
-                  </Label>
-                </div>
+                <Label
+                  htmlFor="password"
+                  className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                >
+                  {tLogin('password.label')}
+                </Label>
                 <Input
                   id="password"
                   type="password"
@@ -107,14 +105,12 @@ export function SignUpForm({
                 />
               </div>
               <div className="grid gap-2">
-                <div className="flex items-center">
-                  <Label
-                    htmlFor="repeat-password"
-                    className="font-body text-xs uppercase tracking-widest text-muted-foreground"
-                  >
-                    Repeat Password
-                  </Label>
-                </div>
+                <Label
+                  htmlFor="repeat-password"
+                  className="font-body text-xs uppercase tracking-widest text-muted-foreground"
+                >
+                  {t('passwordRepeat')}
+                </Label>
                 <Input
                   id="repeat-password"
                   type="password"
@@ -133,16 +129,16 @@ export function SignUpForm({
                 className="h-11 w-full"
                 disabled={isLoading}
               >
-                {isLoading ? 'Provisioning Account...' : 'Create Account'}
+                {isLoading ? t('submitPending') : t('submit')}
               </Button>
             </div>
             <div className="mt-6 text-center font-body text-sm text-muted-foreground">
-              Already have an account?{' '}
+              {t('loginIntro')}{' '}
               <Link
                 href="/auth/login"
                 className="font-semibold text-foreground underline underline-offset-4 transition-colors hover:text-aq-blue"
               >
-                Sign in
+                {t('loginLink')}
               </Link>
             </div>
           </form>

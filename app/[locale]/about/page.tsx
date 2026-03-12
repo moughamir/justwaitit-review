@@ -1,3 +1,6 @@
+// dangerouslySetInnerHTML is safe here — jsonLd is built from static strings and trusted env vars only, never from user input.
+import { getTranslations } from 'next-intl/server';
+
 import AboutContent from './about-content';
 
 import type { Metadata } from 'next';
@@ -8,37 +11,56 @@ const getBaseUrl = () => {
   return 'https://anaqio.com';
 };
 
-const baseUrl = getBaseUrl();
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
+  const baseUrl = getBaseUrl();
 
-export const metadata: Metadata = {
-  metadataBase: new URL(baseUrl),
-  title: 'About Anaqio',
-  description:
-    'Anaqio is an AI-powered visual studio for fashion commerce, built in Casablanca by designers and engineers passionate about elevating the Moroccan fashion industry.',
-  alternates: { canonical: '/about' },
-  openGraph: {
-    title: 'About Anaqio',
-    description:
-      'Meet the founding team behind Anaqio — AI visual studio for fashion commerce, built in Morocco.',
-    url: '/about',
-    siteName: 'Anaqio',
-    type: 'website',
-    images: [
-      { url: '/opengraph-image.png', width: 1200, height: 630, alt: 'Anaqio' },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'About Anaqio',
-    description:
-      'Meet the founding team behind Anaqio — AI visual studio for fashion commerce, built in Morocco.',
-    images: ['/twitter-image.png'],
-  },
-};
+  return {
+    metadataBase: new URL(baseUrl),
+    title: t('about.title'),
+    description: t('about.desc'),
+    alternates: {
+      canonical: `/${locale}/about`,
+      languages: {
+        'en-US': '/en-US/about',
+        'fr-FR': '/fr-FR/about',
+        'ar-MA': '/ar-MA/about',
+      },
+    },
+    openGraph: {
+      title: t('about.title'),
+      description: t('about.desc'),
+      url: `/${locale}/about`,
+      siteName: 'Anaqio',
+      type: 'website',
+      images: [
+        {
+          url: '/opengraph-image.png',
+          width: 1200,
+          height: 630,
+          alt: 'Anaqio',
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('about.title'),
+      description: t('about.desc'),
+      images: ['/twitter-image.png'],
+    },
+  };
+}
 
 const founders = [{ name: 'Amal AIT OUKHARAZ' }, { name: 'Mohamed MOUGHAMIR' }];
 
 export default function AboutPage() {
+  const baseUrl = getBaseUrl();
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'AboutPage',

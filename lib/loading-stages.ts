@@ -3,14 +3,15 @@
 // to keep stage labels and thresholds consistent.
 
 export const LOADING_STAGES = [
-  { threshold: 0, label: 'Initializing' },
-  { threshold: 25, label: 'Loading assets' },
-  { threshold: 60, label: 'Rendering' },
-  { threshold: 88, label: 'Preparing studio' },
-  { threshold: 100, label: 'Ready' },
+  { threshold: 0, key: 'initializing' },
+  { threshold: 25, key: 'assets' },
+  { threshold: 60, key: 'rendering' },
+  { threshold: 88, key: 'studio' },
+  { threshold: 100, key: 'ready' },
 ] as const;
 
 export type LoadingStage = (typeof LOADING_STAGES)[number];
+export type LoadingStageKey = LoadingStage['key'];
 export type ConnectionTier = 'fast' | 'moderate' | 'slow';
 export type DeviceTier = 'high' | 'mid' | 'low';
 
