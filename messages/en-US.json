@@ -15,6 +15,8 @@
     "login": { "title": "Login — Anaqio" },
     "signup": { "title": "Sign Up — Anaqio" },
     "forgot": { "title": "Forgot Password — Anaqio" },
+    "update": { "title": "Update Password — Anaqio" },
+    "protected": { "title": "Studio Overview — Anaqio" },
     "brand": { "title": "Brand Identity Guidelines — Anaqio" },
     "early": {
       "title": "Early Access — Anaqio",
@@ -307,6 +309,24 @@
       "workspace": "Virtual Workspace",
       "terms": "Terms",
       "privacy": "Privacy"
+    },
+    "workspace": {
+      "badge": "Workspace Dashboard",
+      "title": "Studio Overview",
+      "claims": {
+        "title": "System Claims",
+        "loading": "Decrypting claims..."
+      },
+      "access": {
+        "title": "Access Level",
+        "descPre": "You are currently viewing the",
+        "studio": "Anaqio Studio Alpha",
+        "descPost": ". Features like Lookbook Gen and Virtual Try-On are being enabled progressively."
+      },
+      "status": {
+        "title": "Account Status",
+        "verified": "Verified Member"
+      }
     }
   },
   "waitlist": {

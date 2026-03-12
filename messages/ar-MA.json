@@ -15,6 +15,8 @@
     "login": { "title": "تسجيل الدخول — Anaqio" },
     "signup": { "title": "التسجيل — Anaqio" },
     "forgot": { "title": "هل نسيت كلمة المرور — Anaqio" },
+    "update": { "title": "تحديث كلمة المرور — Anaqio" },
+    "protected": { "title": "نظرة عامة على الاستوديو — Anaqio" },
     "brand": { "title": "إرشادات هوية العلامة التجارية — Anaqio" },
     "early": {
       "title": "الوصول المبكر — Anaqio",
@@ -307,6 +309,24 @@
       "workspace": "مساحة العمل الافتراضية",
       "terms": "الشروط",
       "privacy": "الخصوصية"
+    },
+    "workspace": {
+      "badge": "لوحة تحكم مساحة العمل",
+      "title": "نظرة عامة على الاستوديو",
+      "claims": {
+        "title": "بيانات النظام",
+        "loading": "جارٍ فك التشفير..."
+      },
+      "access": {
+        "title": "مستوى الوصول",
+        "descPre": "أنت حاليًا تعرض",
+        "studio": "Anaqio Studio Alpha",
+        "descPost": ". يتم تفعيل الميزات مثل مولّد دفتر العرض والتجربة الافتراضية تدريجيًا."
+      },
+      "status": {
+        "title": "حالة الحساب",
+        "verified": "عضو موثق"
+      }
     }
   },
   "waitlist": {

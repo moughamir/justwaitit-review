@@ -15,6 +15,8 @@
     "login": { "title": "Connexion — Anaqio" },
     "signup": { "title": "S'inscrire — Anaqio" },
     "forgot": { "title": "Mot de passe oublié — Anaqio" },
+    "update": { "title": "Mettre à Jour le Mot de Passe — Anaqio" },
+    "protected": { "title": "Vue d'ensemble du Studio — Anaqio" },
     "brand": { "title": "Directives d'Identité de Marque — Anaqio" },
     "early": {
       "title": "Accès Anticipé — Anaqio",
@@ -307,6 +309,24 @@
       "workspace": "Espace de Travail Virtuel",
       "terms": "Conditions",
       "privacy": "Confidentialité"
+    },
+    "workspace": {
+      "badge": "Tableau de Bord",
+      "title": "Vue d'ensemble du Studio",
+      "claims": {
+        "title": "Revendications Système",
+        "loading": "Déchiffrement en cours..."
+      },
+      "access": {
+        "title": "Niveau d'Accès",
+        "descPre": "Vous consultez actuellement",
+        "studio": "Anaqio Studio Alpha",
+        "descPost": ". Des fonctionnalités comme le Générateur de Lookbook et l'Essayage Virtuel sont activées progressivement."
+      },
+      "status": {
+        "title": "Statut du Compte",
+        "verified": "Membre Vérifié"
+      }
     }
   },
   "waitlist": {

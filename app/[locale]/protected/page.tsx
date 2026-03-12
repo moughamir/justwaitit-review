@@ -1,16 +1,22 @@
-import { InfoIcon, User, Terminal } from 'lucide-react';
+import { InfoIcon, Terminal, User } from 'lucide-react';
 import { redirect } from 'next/navigation';
+import { getTranslations } from 'next-intl/server';
 import { Suspense } from 'react';
 
 import type { Metadata } from 'next';
 
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { createClient } from '@/lib/supabase/server';
 
-export const metadata: Metadata = {
-  title: 'Studio Overview — Anaqio',
-  robots: 'noindex, nofollow',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta.protected' });
+  return { title: t('title'), robots: 'noindex, nofollow' };
+}
 
 async function UserDetails() {
   const supabase = await createClient();
@@ -23,18 +29,20 @@ async function UserDetails() {
   return JSON.stringify(data.claims, null, 2);
 }
 
-export default function ProtectedPage() {
+export default async function ProtectedPage() {
+  const t = await getTranslations('protected.workspace');
+
   return (
     <div className="space-y-12">
       <div className="space-y-4">
         <div className="flex items-center gap-3">
           <div className="h-px w-8 bg-aq-blue" />
           <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-            Workspace Dashboard
+            {t('badge')}
           </span>
         </div>
         <h1 className="font-display text-4xl font-bold tracking-tight">
-          Studio Overview
+          {t('title')}
         </h1>
       </div>
 
@@ -44,7 +52,7 @@ export default function ProtectedPage() {
             <div className="mb-2 flex items-center gap-2">
               <Terminal className="h-4 w-4 text-aq-blue" />
               <CardTitle className="text-sm font-bold uppercase tracking-widest opacity-60">
-                System Claims
+                {t('claims.title')}
               </CardTitle>
             </div>
           </CardHeader>
@@ -53,7 +61,7 @@ export default function ProtectedPage() {
               <Suspense
                 fallback={
                   <div className="animate-pulse italic text-muted-foreground">
-                    Decrypting claims...
+                    {t('claims.loading')}
                   </div>
                 }
               >
@@ -69,18 +77,17 @@ export default function ProtectedPage() {
               <div className="flex items-center gap-2">
                 <InfoIcon className="h-4 w-4 text-aq-blue" />
                 <CardTitle className="text-sm font-bold uppercase tracking-widest">
-                  Access Level
+                  {t('access.title')}
                 </CardTitle>
               </div>
             </CardHeader>
             <CardContent>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                You are currently viewing the{' '}
+                {t('access.descPre')}{' '}
                 <span className="font-semibold text-foreground">
-                  Anaqio Studio Alpha
+                  {t('access.studio')}
                 </span>
-                . Features like Lookbook Gen and Virtual Try-On are being
-                enabled progressively.
+                {t('access.descPost')}
               </p>
             </CardContent>
           </Card>
@@ -90,7 +97,7 @@ export default function ProtectedPage() {
               <div className="flex items-center gap-2">
                 <User className="h-4 w-4 text-aq-purple" />
                 <CardTitle className="text-sm font-bold uppercase tracking-widest">
-                  Account Status
+                  {t('status.title')}
                 </CardTitle>
               </div>
             </CardHeader>
@@ -98,7 +105,7 @@ export default function ProtectedPage() {
               <div className="flex items-center gap-3">
                 <div className="h-2 w-2 animate-pulse rounded-full bg-green-500" />
                 <span className="text-xs font-bold uppercase tracking-widest text-foreground">
-                  Verified Member
+                  {t('status.verified')}
                 </span>
               </div>
             </CardContent>
