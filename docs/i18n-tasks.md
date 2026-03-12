@@ -144,6 +144,18 @@ const points = (t.raw('points') as Array<{title: string; body: string}>)
 
 ---
 
+## Phase 10 — Locale Switcher UX + Tests + CSV Export ✅
+
+> Upgrade the locale switcher to a flag-icon dropdown, add a full E2E test suite, and generate a translator-ready CSV.
+
+- [x] `components/locale-switcher.tsx` — redesigned with `LOCALE_META` (flag emoji + 2-letter code); compact trigger `[🇺🇸] [EN] [▾]`; `AnimatePresence` dropdown with `role="listbox"`; outside-click close via `useRef`/`useEffect`; active dot indicator; `data-testid` contract: `locale-switcher`, `locale-switcher-trigger`, `locale-option-{locale}`; `aria-haspopup="listbox"`, `aria-expanded`, `aria-selected` on `<li>`; RTL `dir` preserved per option
+- [x] `__tests__/i18n/locale-switcher.test.ts` — 6 Playwright describe suites covering: Component Visibility, Dropdown Interaction, URL Navigation, RTL Support (`dir=rtl` on `<html>`), Active State (`aria-selected`), Accessibility (`aria-haspopup`, `aria-expanded`, keyboard focus)
+- [x] `scripts/export-i18n.ts` — Bun CLI: flattens `messages/*.json` → 4-column CSV (`key,en-US,fr-FR,ar-MA`); JSON arrays expanded with indexed keys; proper CSV escaping; run with `bun run export:i18n`
+- [x] `i18n/translations.csv` — 346 translation keys × 3 locales; ready to upload to Google Drive for translators
+- [x] `package.json` — added `"export:i18n"` script
+
+---
+
 ## Remaining / Out of Scope
 
 | File                                         | Reason deferred                                                   |
