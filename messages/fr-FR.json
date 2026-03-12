@@ -292,5 +292,43 @@
       "terms": "Conditions",
       "privacy": "Confidentialité"
     }
+  },
+  "waitlist": {
+    "disclaimer": {
+      "prefix": "En vous inscrivant, vous acceptez nos",
+      "terms": "Conditions",
+      "and": "et notre",
+      "privacy": "Politique de Confidentialité"
+    }
+  },
+  "earlyAccess": {
+    "meta": {
+      "title": "Accès Anticipé — Anaqio",
+      "desc": "Rejoignez la liste d'attente pour un accès anticipé au Studio Visuel IA d'Anaqio. Soyez le premier à vivre l'avenir du commerce de la mode."
+    },
+    "badge": "Accès Anticipé · T3 2026",
+    "hero": {
+      "titleLine1": "Le Studio",
+      "titleGradient": "Virtuel de Mode",
+      "titleLine3": "propulsé par l'IA.",
+      "desc": "Anaqio fournit un espace de travail professionnel basé sur l'IA pour créer, mettre en scène et vendre de la mode — sans frais de production traditionnels."
+    },
+    "disclaimer": {
+      "prefix": "En vous inscrivant, vous acceptez notre",
+      "privacy": "Confidentialité",
+      "and": "&",
+      "terms": "Conditions"
+    },
+    "stats": {
+      "speed": { "num": "10×", "label": "Création de Contenu Plus Rapide" },
+      "cost": { "num": "90%", "label": "Réduction des Coûts de Production" },
+      "creative": { "num": "∞", "label": "Liberté Créative" },
+      "platform": { "num": "01", "label": "Plateforme Studio Unifiée" }
+    },
+    "cta": {
+      "titlePre": "Soyez le premier à entrer dans",
+      "titleGradient": "l'avenir de la mode",
+      "subtext": "Places limitées pour la v1.0"
+    }
   }
 }

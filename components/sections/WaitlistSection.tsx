@@ -1,12 +1,14 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { Section } from '@/components/ui/section';
+import { Link } from '@/i18n/routing';
 import { WaitlistSectionText } from '@/lib/content/waitlist';
 
 export function WaitlistSection() {
+  const t = useTranslations('waitlist');
   const { headline, formHeadline, formSubline } = WaitlistSectionText;
 
   // Render client-only without showing loading flash
@@ -77,19 +79,19 @@ export function WaitlistSection() {
           </div>
 
           <p className="mt-12 text-center font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60">
-            By joining you agree to our{' '}
+            {t('disclaimer.prefix')}{' '}
             <Link
               href="/terms"
               className="text-foreground/80 transition-colors hover:text-aq-blue"
             >
-              Terms
+              {t('disclaimer.terms')}
             </Link>{' '}
-            and{' '}
+            {t('disclaimer.and')}{' '}
             <Link
               href="/privacy"
               className="text-foreground/80 transition-colors hover:text-aq-blue"
             >
-              Privacy
+              {t('disclaimer.privacy')}
             </Link>
             .
           </p>
