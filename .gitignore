@@ -51,3 +51,7 @@ test-results
 .**/*
 ui-designer.md
 .mcp.json
+
+# repomix generated artifacts
+index.json
+repomix-output.xml
