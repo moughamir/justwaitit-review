@@ -1,0 +1,30 @@
+name: Chore / Task
+description: Non-feature, non-bug work (refactor, CI, deps, docs).
+title: 'chore: <short description>'
+labels: [chore]
+body:
+  - type: textarea
+    attributes:
+      label: Task description
+      description: What needs to be done and why.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Scope / Files
+      placeholder: components/..., lib/..., app/..., tests/...
+  - type: textarea
+    attributes:
+      label: Subtasks
+      description: Use checklist items for trackable steps.
+      placeholder: |
+        - [ ] Update dependency X
+        - [ ] Refactor component Y
+  - type: textarea
+    attributes:
+      label: Risk / Impact
+      placeholder: Breaking changes, migrations, performance considerations.
+  - type: textarea
+    attributes:
+      label: Testing plan
+      placeholder: Commands (bun run lint/test) and manual steps.

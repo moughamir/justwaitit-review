@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "../ui/button";
+import { useState } from 'react';
+
+import { Button } from '../ui/button';
 
 const CopyIcon = () => (
   <svg
@@ -15,8 +16,8 @@ const CopyIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
   </svg>
 );
 
@@ -32,7 +33,7 @@ const CheckIcon = () => (
     strokeLinecap="round"
     strokeLinejoin="round"
   >
-    <polyline points="20 6 9 17 4 12"></polyline>
+    <polyline points="20 6 9 17 4 12" />
   </svg>
 );
 
@@ -46,16 +47,16 @@ export function CodeBlock({ code }: { code: string }) {
   };
 
   return (
-    <pre className="bg-muted rounded-md p-6 my-6 relative">
+    <pre className="relative my-6 rounded-md bg-muted p-6">
       <Button
         size="icon"
         onClick={copy}
-        variant={"outline"}
+        variant={'outline'}
         className="absolute right-2 top-2"
       >
         {icon}
       </Button>
-      <code className="text-xs p-3">{code}</code>
+      <code className="p-3 text-xs">{code}</code>
     </pre>
   );
 }

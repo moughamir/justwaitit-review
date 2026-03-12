@@ -1,0 +1,48 @@
+name: Bug report
+description: File a bug report. Help us reproduce and fix it.
+title: 'fix: <short description>'
+labels: [bug]
+body:
+  - type: checkboxes
+    attributes:
+      label: Pre-checks
+      options:
+        - label: I searched existing issues and no duplicate exists.
+          required: true
+        - label: I’m using the latest commit on `main`/`develop`.
+          required: true
+  - type: textarea
+    attributes:
+      label: What happened?
+      description: Describe the unexpected behavior.
+      placeholder: Actual vs expected behavior.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Reproduction steps
+      description: Provide clear steps to reproduce.
+      placeholder: |
+        1. Go to ...
+        2. Click ...
+        3. See error ...
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Logs / Console output
+      description: Paste relevant errors or traces.
+      render: shell
+  - type: input
+    attributes:
+      label: Affected areas
+      placeholder: app route, component, hook, lib, tests, etc.
+  - type: textarea
+    attributes:
+      label: Environment
+      description: OS, Browser, Node, Bun, commit SHA.
+      placeholder: 'macOS 14, Chrome 122, Node 20.x, Bun 1.x, SHA abc123'
+  - type: textarea
+    attributes:
+      label: Screenshots
+      description: Drag-and-drop images that illustrate the issue.
