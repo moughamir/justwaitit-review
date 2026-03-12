@@ -265,6 +265,32 @@
         "msg": "If you have an account registered with that email, you will receive a link to securely reset your credentials shortly."
       },
       "back": "Back to Sign In"
+    },
+    "update": {
+      "title": "Security Update",
+      "desc": "Configure your new studio access credentials",
+      "password": { "label": "New Password" },
+      "submit": "Confirm New Password",
+      "submitPending": "Updating Security..."
+    },
+    "button": {
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "greeting": "Hey, {email}!",
+      "logout": "Logout"
+    }
+  },
+  "notFound": {
+    "title": "System Anomaly",
+    "desc": "This space does not exist in our current simulation. It may have been moved, renamed, or is still rendering in the void.",
+    "back": "Return to Reality",
+    "waitlist": "Access Waitlist"
+  },
+  "protected": {
+    "footer": {
+      "workspace": "Virtual Workspace",
+      "terms": "Terms",
+      "privacy": "Privacy"
     }
   }
 }

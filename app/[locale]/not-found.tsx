@@ -1,8 +1,13 @@
-import Link from 'next/link';
+'use client';
+
+import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 
 export default function NotFound() {
+  const t = useTranslations('notFound');
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-background px-6">
       {/* Background radial glow */}
@@ -43,11 +48,10 @@ export default function NotFound() {
 
         <div className="relative z-10 space-y-3">
           <h1 className="font-display text-3xl font-bold italic tracking-tight text-foreground">
-            System Anomaly
+            {t('title')}
           </h1>
           <p className="text-sm font-medium leading-relaxed text-muted-foreground/80">
-            This space does not exist in our current simulation. It may have
-            been moved, renamed, or is still rendering in the void.
+            {t('desc')}
           </p>
         </div>
 
@@ -57,14 +61,14 @@ export default function NotFound() {
             variant="brand"
             className="h-12 rounded-xl font-bold transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_2rem_-0.5rem_rgba(37,99,235,0.4)]"
           >
-            <Link href="/">Return to Reality</Link>
+            <Link href="/">{t('back')}</Link>
           </Button>
           <Button
             asChild
             variant="ghost"
             className="text-xs font-bold uppercase tracking-widest text-muted-foreground transition-all hover:text-foreground"
           >
-            <Link href="/#waitlist">Access Waitlist</Link>
+            <Link href="/#waitlist">{t('waitlist')}</Link>
           </Button>
         </div>
       </div>

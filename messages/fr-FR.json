@@ -265,6 +265,32 @@
         "msg": "Si vous avez un compte associé à cet e-mail, vous recevrez sous peu un lien pour réinitialiser vos identifiants en toute sécurité."
       },
       "back": "Retour à la connexion"
+    },
+    "update": {
+      "title": "Mise à Jour Sécurité",
+      "desc": "Configurez vos nouveaux identifiants d'accès studio",
+      "password": { "label": "Nouveau Mot de Passe" },
+      "submit": "Confirmer le Nouveau Mot de Passe",
+      "submitPending": "Mise à jour en cours..."
+    },
+    "button": {
+      "signIn": "Connexion",
+      "signUp": "S'inscrire",
+      "greeting": "Bonjour, {email} !",
+      "logout": "Déconnexion"
+    }
+  },
+  "notFound": {
+    "title": "Anomalie Système",
+    "desc": "Cet espace n'existe pas dans notre simulation actuelle. Il a peut-être été déplacé, renommé, ou se rend encore dans le vide.",
+    "back": "Retour à la Réalité",
+    "waitlist": "Accéder à la Liste d'Attente"
+  },
+  "protected": {
+    "footer": {
+      "workspace": "Espace de Travail Virtuel",
+      "terms": "Conditions",
+      "privacy": "Confidentialité"
     }
   }
 }
