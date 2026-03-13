@@ -31,6 +31,11 @@ export const socialLinks = [
     label: 'Pinterest',
     Icon: PinterestIcon,
   },
+  {
+    href: 'https://tiktok.com/@anaqio',
+    label: 'TikTok',
+    Icon: TiktokIcon,
+  },
 ];
 
 export const footerColumns = [
