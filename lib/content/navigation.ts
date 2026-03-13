@@ -17,11 +17,6 @@ export const socialLinks = [
     Icon: InstagramIcon,
   },
   {
-    href: 'https://x.com/anaqio',
-    label: 'X (Twitter)',
-    Icon: NewTwitterIcon,
-  },
-  {
     href: 'https://www.linkedin.com/company/anaqio',
     label: 'LinkedIn',
     Icon: LinkedinIcon,
