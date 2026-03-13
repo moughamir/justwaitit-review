@@ -8,6 +8,7 @@ import { type Phase } from './Phase';
 import { SocialLinks } from '../layout/SocialLinks';
 import { NotifyForm } from './atoms/notify';
 
+import { LocaleSwitcher } from '@/components/locale-switcher';
 import { LoadingScreen } from '@/components/sections/LoadingScreen';
 import AbstractBackground from '@/components/ui/AbstractBackground';
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
@@ -74,6 +75,15 @@ export function ComingSoonPage() {
             transition={{ duration: 0.8, ease }}
             className="relative z-20 flex min-h-[100dvh] flex-col items-center justify-center px-6 pb-24 pt-16 sm:h-[calc(100vh-4rem)] sm:pb-32 sm:pt-20"
           >
+            {/* Locale switcher — top-right atom */}
+            <motion.div
+              data-atom
+              className="absolute right-6 top-4 z-30 sm:right-8 sm:top-6"
+              {...fadeIn(reduced, 0.3)}
+            >
+              <LocaleSwitcher />
+            </motion.div>
+
             {/* Atmospheric Background Text */}
             <motion.div
               data-atom
