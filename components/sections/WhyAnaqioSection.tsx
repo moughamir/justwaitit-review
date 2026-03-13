@@ -6,14 +6,21 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import { Move3D, Ruler, ShieldCheck, Sun, Zap } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { WhyAnaqioSectionText } from '@/lib/content/why-anaqio';
 import { ease } from '@/lib/motion';
 
 export function WhyAnaqioSection() {
-  const { eyebrow, headline, footer, points } = WhyAnaqioSectionText;
+  const t = useTranslations('landing.whyAnaqio');
+  const POINT_ICONS = [Ruler, Move3D, Sun, Zap, ShieldCheck];
+  const points = (t.raw('points') as Array<{title: string; body: string}>).map((p, i) => ({
+    ...p,
+    icon: POINT_ICONS[i],
+  }));
+
   const sectionRef = useRef<HTMLElement>(null);
 
   const reduced = useReducedMotion();
@@ -38,7 +45,7 @@ export function WhyAnaqioSection() {
       className="relative h-[300vh] bg-background"
     >
       <h2 id="why-heading" className="sr-only">
-        {eyebrow}: {headline.pre} {headline.gradient}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
       </h2>
 
       <div className="sticky top-0 flex h-screen w-full flex-col overflow-hidden px-4 pt-24 md:px-16 md:pt-32">
@@ -59,18 +66,18 @@ export function WhyAnaqioSection() {
             data-atom
             className="mb-4 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
           >
-            {eyebrow}
+            {t('eyebrow')}
           </p>
           <p
             data-atom
             aria-hidden="true"
             className="max-w-2xl font-display text-[clamp(2.5rem,5vw,5rem)] font-light leading-[1] text-foreground"
           >
-            {headline.pre}{' '}
+            {t('headline.pre')}{' '}
             <em className="text-brand-gradient not-italic">
-              {headline.gradient}
+              {t('headline.gradient')}
             </em>{' '}
-            {headline.post}
+            {t('headline.post')}
           </p>
         </div>
 
@@ -109,7 +116,7 @@ export function WhyAnaqioSection() {
           data-atom
           className="absolute bottom-8 left-4 z-20 text-xs text-muted-foreground md:left-16"
         >
-          {footer}
+          {t('footer')}
         </p>
       </div>
     </section>

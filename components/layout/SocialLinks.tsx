@@ -5,6 +5,15 @@ import Link from 'next/link';
 
 import { socialLinks } from '@/lib/content/navigation';
 
+/**
+ * SocialLinks component — intentionally NOT internationalized.
+ *
+ * All social media links point to external URLs (target="_blank") with
+ * platform names as aria-labels (Twitter, Instagram, LinkedIn, etc.).
+ * These are universal brand names that don't require translation.
+ *
+ * Adding i18n here would add complexity without user-facing benefit.
+ */
 export function SocialLinks() {
   return (
     <div className="flex w-full flex-wrap justify-center gap-4 sm:justify-between sm:gap-5 md:gap-6">

@@ -12,16 +12,16 @@ header.nav.legal-mentions,components/layout/Header.tsx,Legal Mentions,Mentions L
 header.button.waitlist,components/layout/Header.tsx,Join Waitlist,Rejoindre la Liste d'Attente,انضم إلى قائمة الانتظار
 header.logo.aria,components/layout/Header.tsx,Anaqio Home,Accueil Anaqio,الصفحة الرئيسية لـ Anaqio
 header.menu.aria,components/layout/Header.tsx,Toggle menu,Basculer le menu,تبديل القائمة
-footer.section.platform,lib/content/navigation.ts,Platform,Plateforme,المنصة
+footer.platform.title,lib/content/navigation.ts,Platform,Plateforme,المنصة
 footer.platform.studio,lib/content/navigation.ts,AI Studio,Studio d'IA,استوديو الذكاء الاصطناعي
 footer.platform.lookbook,lib/content/navigation.ts,Lookbook Generator,Générateur de Lookbook,مولّد الكتالوجات
 footer.platform.tryon,lib/content/navigation.ts,Virtual Try-On,Essayage Virtuel,التجربة الافتراضية
 footer.platform.pricing,lib/content/navigation.ts,Pricing,Tarification,التسعير
-footer.section.resources,lib/content/navigation.ts,Resources,Ressources,الموارد
+footer.resources.title,lib/content/navigation.ts,Resources,Ressources,الموارد
 footer.resources.brand,lib/content/navigation.ts,Brand,Identité Visuelle,الهوية البصرية
 footer.resources.blog,lib/content/navigation.ts,Blog,Blog,المدونة
 footer.resources.help,lib/content/navigation.ts,Help Center,Centre d'Aide,مركز المساعدة
-footer.section.company,lib/content/navigation.ts,Company,Entreprise,الشركة
+footer.company.title,lib/content/navigation.ts,Company,Entreprise,الشركة
 footer.company.about,lib/content/navigation.ts,About,À Propos,حول
 footer.company.early,lib/content/navigation.ts,Early Access,Accès Anticipé,الوصول المبكر
 footer.company.badge,lib/content/navigation.ts,JOIN,REJOINDRE,انضم
@@ -38,26 +38,26 @@ social.tiktok,lib/content/navigation.ts,TikTok,TikTok,تيك توك
 social.linkedin,lib/content/navigation.ts,LinkedIn,LinkedIn,لينكدإن
 social.youtube,lib/content/navigation.ts,YouTube,YouTube,يوتيوب
 social.pinterest,lib/content/navigation.ts,Pinterest,Pinterest,بينتريست
-coming-soon.hero.tagline,components/sections/ComingSoonPage.tsx,Coming Soon,Arrivée Bientôt,قريباً جداً
-coming-soon.hero.main,"components/sections/ComingSoonPage.tsx","ANAQIO is an AI-Driven Virtual built for Fashion Commerce.","ANAQIO est un Studio Virtuel alimenté par l'IA, conçu pour le Commerce de Mode.","ANAQIO هو استوديو افتراضي مدعوم بالذكاء الاصطناعي، مصمم لتجارة الموضة."
-coming-soon.hero.sub1,components/sections/ComingSoonPage.tsx,"Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic collections.","Générez des lookbooks, modifiez les arrière-plans, ajustez l'éclairage et produisez des collections cinématographiques.","أنشئ دفاتر العرض، بدّل الخلفيات، اضبط الإضاءة، وأنتج مجموعات سينمائية."
-coming-soon.hero.sub2,components/sections/ComingSoonPage.tsx,— all from a single shot.,— le tout à partir d'une seule photo.,— كل هذا من صورة واحدة.
-coming-soon.form.email.placeholder,components/sections/atoms/notify.tsx,Enter your email,Entrez votre e-mail,أدخل بريدك الإلكتروني
-coming-soon.form.email.aria,components/sections/atoms/notify.tsx,Email address,Adresse e-mail,عنوان البريد الإلكتروني
-coming-soon.form.button.submit,components/sections/atoms/notify.tsx,Notify me,Notifiez-moi,أخبرني
-coming-soon.form.button.pending,components/sections/atoms/notify.tsx,Sending...,Envoi en cours...,جاري الإرسال...
-coming-soon.form.terms,components/sections/atoms/notify.tsx,"By joining, you agree to our Terms and Privacy Policy.","En rejoignant, vous acceptez nos Conditions et notre Politique de Confidentialité.","بالانضمام، أنت توافق على شروطنا وسياسة الخصوصية."
-coming-soon.footer.launch,components/sections/ComingSoonPage.tsx,Launching Q3 2026 · Casablanca,Lancement Q3 2026 · Casablanca,إطلاق Q3 2026 · الدار البيضاء
-coming-soon.footer.copyright,components/sections/ComingSoonPage.tsx,Anaqio © 2026,Anaqio © 2026,Anaqio © 2026
-coming-soon.footer.links.about,components/sections/ComingSoonPage.tsx,About,À Propos,حول
-coming-soon.footer.links.terms,components/sections/ComingSoonPage.tsx,Terms,Conditions,الشروط
-coming-soon.footer.links.policy,components/sections/ComingSoonPage.tsx,Policy,Politique,السياسة
-coming-soon.footer.links.legal,components/sections/ComingSoonPage.tsx,Legal,Légal,قانوني
-loading.stage.initializing,lib/loading-stages.ts,Initializing,Initialisation,التهيئة
-loading.stage.assets,lib/loading-stages.ts,Loading assets,Chargement des ressources,تحميل الأصول
-loading.stage.rendering,lib/loading-stages.ts,Rendering,Rendu,العرض
-loading.stage.studio,lib/loading-stages.ts,Preparing studio,Préparation du studio,تحضير الاستوديو
-loading.stage.ready,lib/loading-stages.ts,Ready,Prêt,جاهز
+comingSoon.hero.tagline,components/sections/ComingSoonPage.tsx,Coming Soon,Arrivée Bientôt,قريباً جداً
+comingSoon.hero.main,"components/sections/ComingSoonPage.tsx","ANAQIO is an AI-Driven Virtual built for Fashion Commerce.","ANAQIO est un Studio Virtuel alimenté par l'IA, conçu pour le Commerce de Mode.","ANAQIO هو استوديو افتراضي مدعوم بالذكاء الاصطناعي، مصمم لتجارة الموضة."
+comingSoon.hero.sub1,components/sections/ComingSoonPage.tsx,"Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic collections.","Générez des lookbooks, modifiez les arrière-plans, ajustez l'éclairage et produisez des collections cinématographiques.","أنشئ دفاتر العرض، بدّل الخلفيات، اضبط الإضاءة، وأنتج مجموعات سينمائية."
+comingSoon.hero.sub2,components/sections/ComingSoonPage.tsx,— all from a single shot.,— le tout à partir d'une seule photo.,— كل هذا من صورة واحدة.
+comingSoon.form.email.placeholder,components/sections/atoms/notify.tsx,Enter your email,Entrez votre e-mail,أدخل بريدك الإلكتروني
+comingSoon.form.email.aria,components/sections/atoms/notify.tsx,Email address,Adresse e-mail,عنوان البريد الإلكتروني
+comingSoon.form.button.submit,components/sections/atoms/notify.tsx,Notify me,Notifiez-moi,أخبرني
+comingSoon.form.button.pending,components/sections/atoms/notify.tsx,Sending...,Envoi en cours...,جاري الإرسال...
+comingSoon.form.terms,components/sections/atoms/notify.tsx,"By joining, you agree to our Terms and Privacy Policy.","En rejoignant, vous acceptez nos Conditions et notre Politique de Confidentialité.","بالانضمام، أنت توافق على شروطنا وسياسة الخصوصية."
+comingSoon.footer.launch,components/sections/ComingSoonPage.tsx,Launching Q3 2026 · Casablanca,Lancement Q3 2026 · Casablanca,إطلاق Q3 2026 · الدار البيضاء
+comingSoon.footer.copyright,components/sections/ComingSoonPage.tsx,Anaqio © 2026,Anaqio © 2026,Anaqio © 2026
+comingSoon.footer.links.about,components/sections/ComingSoonPage.tsx,About,À Propos,حول
+comingSoon.footer.links.terms,components/sections/ComingSoonPage.tsx,Terms,Conditions,الشروط
+comingSoon.footer.links.policy,components/sections/ComingSoonPage.tsx,Policy,Politique,السياسة
+comingSoon.footer.links.legal,components/sections/ComingSoonPage.tsx,Legal,Légal,قانوني
+loading.stages.initializing,lib/loading-stages.ts,Initializing,Initialisation,التهيئة
+loading.stages.assets,lib/loading-stages.ts,Loading assets,Chargement des ressources,تحميل الأصول
+loading.stages.rendering,lib/loading-stages.ts,Rendering,Rendu,العرض
+loading.stages.studio,lib/loading-stages.ts,Preparing studio,Préparation du studio,تحضير الاستوديو
+loading.stages.ready,lib/loading-stages.ts,Ready,Prêt,جاهز
 loading.tagline,app/loading.tsx,Digital Atelier,Atelier Numérique,أتيليه رقمي
 about.hero.label,app/about/about-content.tsx,ANAQIO · AI Visual Studio,ANAQIO · Studio Visuel IA,ANAQIO · استوديو بصري بالذكاء الاصطناعي
 about.hero.title,app/about/about-content.tsx,"Fashion, Reimagined.","La Mode, Réimaginée.","الموضة، أعيد تخيّلها."
@@ -65,7 +65,7 @@ about.hero.desc,app/about/about-content.tsx,The AI-powered visual studio giving 
 about.hero.founded,app/about/about-content.tsx,Est. 2026,Fondée 2026,مؤسسة 2026
 about.hero.location,app/about/about-content.tsx,"Casablanca, Morocco","Casablanca, Maroc","الدار البيضاء، المغرب"
 about.hero.launch,app/about/about-content.tsx,Launching Q3 2026,Lancement Q3 2026,إطلاق Q3 2026
-about.hero.image.alt,app/about/about-content.tsx,Fashion model showcasing Anaqio studio-quality imagery,Mannequin présentant les images de qualité studio Anaqio,عارضة أزياء تعرض صور بجودة استوديو Anaqio
+about.hero.imageAlt,app/about/about-content.tsx,Fashion model showcasing Anaqio studio-quality imagery,Mannequin présentant les images de qualité studio Anaqio,عارضة أزياء تعرض صور بجودة استوديو Anaqio
 about.problem.overline,app/about/about-content.tsx,The Problem,Le Problème,المشكلة
 about.problem.title,app/about/about-content.tsx,The broken studio pipeline.,Le pipeline d'atelier brisé.,خط إنتاج الاستوديو المكسور.
 about.problem.desc,app/about/about-content.tsx,"Every fashion shoot in Morocco means renting a space, booking models, coordinating lighting, post-processing hundreds of RAW files — and then doing it all again next season. The result: brands that move slowly, spend heavily, and still end up with imagery that looks like everyone else's.","Chaque séance photo de mode au Maroc signifie louer un espace, réserver des mannequins, coordonner l'éclairage, post-traiter des centaines de fichiers RAW — et ensuite tout refaire la saison suivante. Le résultat : des marques qui évoluent lentement, dépensent lourdement, et finissent quand même avec des images qui ressemblent à celles de tout le monde.","كل جلسة تصوير أزياء في المغرب تعني استئجار مساحة، حجز نماذج، تنسيق الإضاءة، ومعالجة مئات من ملفات RAW — ثم تكرار كل هذا في الموسم التالي. النتيجة: علامات تجارية تتحرك ببطء، تنفق بكثرة، وتنتهي بصور تبدو مثل صور الجميع."
@@ -78,21 +78,21 @@ about.pain.skus.label,app/about/about-content.tsx,"of SKUs, one shoot can't cove
 about.solution.overline,app/about/about-content.tsx,The Solution,La Solution,الحل
 about.solution.title,app/about/about-content.tsx,One workspace. Infinite looks.,Un espace de travail. Des looks infinis.,مساحة عمل واحدة. مظاهر لا نهاية لها.
 about.solution.desc,app/about/about-content.tsx,Upload your garments — models or brand assets. Anaqio generates studio-quality imagery in minutes — not weeks.,Téléchargez vos vêtements — modèles ou ressources de marque. Anaqio génère des images de qualité studio en minutes — pas en semaines.,حمّل ملابسك أو نماذجك أو أصول العلامة التجارية. ينشئ Anaqio صوراً بجودة الاستوديو في دقائق — وليس أسابيع.
-about.lookbook.1.alt,app/about/about-content.tsx,Lookbook image — editorial fashion composition,Image lookbook — composition de mode éditoriale,صورة الكتالوج — تركيبة موضة افتتاحية
-about.lookbook.2.alt,app/about/about-content.tsx,Lookbook image — landscape fashion scene,Image lookbook — scène de mode paysagère,صورة الكتالوج — مشهد موضة بانورامي
-about.lookbook.3.alt,app/about/about-content.tsx,Lookbook image — styled product photography,Image lookbook — photographie produit stylisée,صورة الكتالوج — تصوير منتج مصمم
-about.workflow.01.step,app/about/about-content.tsx,01 — Upload,01 — Télécharger,01 — تحميل
-about.workflow.01.title,app/about/about-content.tsx,Upload,Télécharger,تحميل
-about.workflow.01.desc,app/about/about-content.tsx,"Drop in your garments, models, or raw assets.","Déposez vos vêtements, modèles ou ressources brutes.","أسقط ملابسك أو نماذجك أو الأصول الخام."
-about.workflow.02.step,app/about/about-content.tsx,02 — Generate,02 — Générer,02 — توليد
-about.workflow.02.title,app/about/about-content.tsx,Generate,Générer,توليد
-about.workflow.02.desc,app/about/about-content.tsx,AI composes studio-quality scenes in minutes.,L'IA compose des scènes de qualité studio en quelques minutes.,يؤلف الذكاء الاصطناعي مشاهد بجودة الاستوديو في دقائق.
-about.workflow.03.step,app/about/about-content.tsx,03 — Export,03 — Exporter,03 — تصدير
-about.workflow.03.title,app/about/about-content.tsx,Export,Exporter,تصدير
-about.workflow.03.desc,app/about/about-content.tsx,"Download lookbooks, videos, or individual shots.","Téléchargez des lookbooks, des vidéos ou des photos individuelles.","حمّل الكتالوجات أو الفيديوهات أو الصور الفردية."
+about.lookbook.1alt,app/about/about-content.tsx,Lookbook image — editorial fashion composition,Image lookbook — composition de mode éditoriale,صورة الكتالوج — تركيبة موضة افتتاحية
+about.lookbook.2alt,app/about/about-content.tsx,Lookbook image — landscape fashion scene,Image lookbook — scène de mode paysagère,صورة الكتالوج — مشهد موضة بانورامي
+about.lookbook.3alt,app/about/about-content.tsx,Lookbook image — styled product photography,Image lookbook — photographie produit stylisée,صورة الكتالوج — تصوير منتج مصمم
+about.workflow.upload.step,app/about/about-content.tsx,01 — Upload,01 — Télécharger,01 — تحميل
+about.workflow.upload.title,app/about/about-content.tsx,Upload,Télécharger,تحميل
+about.workflow.upload.desc,app/about/about-content.tsx,"Drop in your garments, models, or raw assets.","Déposez vos vêtements, modèles ou ressources brutes.","أسقط ملابسك أو نماذجك أو الأصول الخام."
+about.workflow.generate.step,app/about/about-content.tsx,02 — Generate,02 — Générer,02 — توليد
+about.workflow.generate.title,app/about/about-content.tsx,Generate,Générer,توليد
+about.workflow.generate.desc,app/about/about-content.tsx,AI composes studio-quality scenes in minutes.,L'IA compose des scènes de qualité studio en quelques minutes.,يؤلف الذكاء الاصطناعي مشاهد بجودة الاستوديو في دقائق.
+about.workflow.export.step,app/about/about-content.tsx,03 — Export,03 — Exporter,03 — تصدير
+about.workflow.export.title,app/about/about-content.tsx,Export,Exporter,تصدير
+about.workflow.export.desc,app/about/about-content.tsx,"Download lookbooks, videos, or individual shots.","Téléchargez des lookbooks, des vidéos ou des photos individuelles.","حمّل الكتالوجات أو الفيديوهات أو الصور الفردية."
 about.morocco.quote,app/about/about-content.tsx,"Morocco has one of the richest fashion cultures in the world. It deserves world-class tools.","Le Maroc a l'une des cultures de la mode les plus riches du monde. Elle mérite des outils de classe mondiale.","المغرب لديه واحدة من أغنى ثقافات الموضة في العالم. يستحق أدوات عالمية المستوى."
 about.morocco.attr,app/about/about-content.tsx,"— Anaqio, Casablanca 2026","— Anaqio, Casablanca 2026","— Anaqio، الدار البيضاء 2026"
-about.morocco.image.alt,app/about/about-content.tsx,Moroccan fashion — studio-quality AI-generated imagery,Mode marocaine — images de qualité studio générées par IA,موضة مغربية — صور بجودة الاستوديو يولدها الذكاء الاصطناعي
+about.morocco.imageAlt,app/about/about-content.tsx,Moroccan fashion — studio-quality AI-generated imagery,Mode marocaine — images de qualité studio générées par IA,موضة مغربية — صور بجودة الاستوديو يولدها الذكاء الاصطناعي
 about.team.overline,app/about/about-content.tsx,Founding Team,Équipe Fondatrice,الفريق المؤسس
 about.team.title,app/about/about-content.tsx,"Two founders, one mission.","Deux fondateurs, une mission.","مؤسسان، هدف واحد."
 about.team.desc,app/about/about-content.tsx,Built by people who believe Moroccan fashion deserves the same creative infrastructure as the global luxury market.,Construit par des personnes qui croient que la mode marocaine mérite la même infrastructure créative que le marché du luxe mondial.,بني من قبل أشخاص يؤمنون بأن الموضة المغربية تستحق نفس البنية التحتية الإبداعية كسوق الفخامة العالمي.
@@ -137,7 +137,7 @@ auth.login.signup.intro,components/login-form.tsx,New to Anaqio?,Nouveau sur Ana
 auth.login.signup.link,components/login-form.tsx,Create an account,Créer un compte,إنشاء حساب
 auth.signup.title,components/sign-up-form.tsx,Join Anaqio,Rejoindre Anaqio,انضم إلى Anaqio
 auth.signup.desc,components/sign-up-form.tsx,Create your studio account to get started,Créez votre compte studio pour commencer,أنشئ حساب الاستوديو الخاص بك للبدء
-auth.signup.password.repeat,components/sign-up-form.tsx,Repeat Password,Répéter le mot de passe,تكرار كلمة المرور
+auth.signup.passwordRepeat,components/sign-up-form.tsx,Repeat Password,Répéter le mot de passe,تكرار كلمة المرور
 auth.signup.submit,components/sign-up-form.tsx,Create Account,Créer un compte,إنشاء حساب
 auth.signup.submit.pending,components/sign-up-form.tsx,Provisioning Account...,Provisionnement du compte...,جاري توفير الحساب...
 auth.signup.login.intro,components/sign-up-form.tsx,Already have an account?,Vous avez déjà un compte?,هل لديك حساب بالفعل؟

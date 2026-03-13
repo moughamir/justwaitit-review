@@ -6,16 +6,22 @@ import {
   useTransform,
   useReducedMotion,
 } from 'framer-motion';
+import { Globe, RefreshCw, Rocket } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { VisionPointAtom } from './atoms/vision-point-atom';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { VisionSectionText } from '@/lib/content/vision';
 import { ease } from '@/lib/motion';
 
 export function VisionSection() {
-  const { eyebrow, headline, intro, quote, points } = VisionSectionText;
+  const t = useTranslations('landing.vision');
+  const VISION_ICONS = [Rocket, RefreshCw, Globe];
+  const points = (t.raw('points') as Array<{ text: string }>).map((p, i) => ({
+    ...p,
+    icon: VISION_ICONS[i],
+  }));
   const sectionRef = useRef<HTMLElement>(null);
 
   const reduced = useReducedMotion();
@@ -38,7 +44,7 @@ export function VisionSection() {
       className="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden bg-background px-4 pb-24 pt-32 sm:px-12 lg:pt-48"
     >
       <h2 id="vision-heading" className="sr-only">
-        {eyebrow}: {headline.pre} {headline.gradient}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
       </h2>
 
       {/* Atmospheric Background Atom */}
@@ -63,20 +69,20 @@ export function VisionSection() {
           className="text-center"
         >
           <p className="mb-6 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground">
-            {eyebrow}
+            {t('eyebrow')}
           </p>
           <p
             data-atom
             aria-hidden="true"
             className="font-display text-[clamp(2.5rem,5vw,5rem)] font-light leading-tight"
           >
-            {headline.pre}{' '}
+            {t('headline.pre')}{' '}
             <em className="text-brand-gradient not-italic">
-              {headline.gradient}
+              {t('headline.gradient')}
             </em>
           </p>
           <p className="mx-auto mt-8 max-w-2xl font-body text-[0.95rem] leading-relaxed text-muted-foreground">
-            {intro}
+            {t('intro')}
           </p>
         </motion.div>
 
@@ -100,7 +106,7 @@ export function VisionSection() {
           transition={{ duration: 0.8, delay: 0.4, ease }}
           className="mx-auto max-w-xl text-center font-editorial text-[clamp(1.2rem,2.5vw,1.8rem)] italic leading-relaxed text-muted-foreground/60"
         >
-          &quot;{quote}&quot;
+          &quot;{t('quote')}&quot;
         </motion.p>
       </div>
     </section>

@@ -1,14 +1,15 @@
 'use client';
 
 import { useScroll, useReducedMotion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { ScrollWord } from './atoms/scroll-word';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { PhilosophySectionText } from '@/lib/content/philosophy';
 
 export function PhilosophySection() {
+  const t = useTranslations('landing.philosophy');
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
@@ -19,7 +20,7 @@ export function PhilosophySection() {
     offset: ['start center', 'end center'],
   });
 
-  const words = PhilosophySectionText.body.split(' ');
+  const words = t('body').split(' ');
   const wordCount = words.length;
 
   return (
@@ -30,7 +31,7 @@ export function PhilosophySection() {
       className="relative flex min-h-[120vh] flex-col items-center justify-center overflow-hidden px-4 md:px-16"
     >
       <h2 id="philosophy-heading" className="sr-only">
-        {PhilosophySectionText.eyebrow}
+        {t('eyebrow')}
       </h2>
 
       {/* Atmospheric Atom */}

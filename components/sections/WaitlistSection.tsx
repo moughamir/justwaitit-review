@@ -1,13 +1,13 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 import { Section } from '@/components/ui/section';
-import { WaitlistSectionText } from '@/lib/content/waitlist';
+import { Link } from '@/i18n/routing';
 
 export function WaitlistSection() {
-  const { headline, formHeadline, formSubline } = WaitlistSectionText;
+  const t = useTranslations('waitlist');
 
   // Render client-only without showing loading flash
   const WaitlistForm = dynamic(
@@ -49,9 +49,9 @@ export function WaitlistSection() {
           data-atom
           className="mb-16 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-tight text-foreground"
         >
-          {headline.pre}{' '}
+          {t('headline.pre')}{' '}
           <em className="text-brand-gradient not-italic">
-            {headline.gradient}
+            {t('headline.gradient')}
           </em>
         </h2>
 
@@ -65,10 +65,10 @@ export function WaitlistSection() {
               className="font-display font-light tracking-wide text-foreground/90"
               style={{ fontSize: 'clamp(1.4rem, 2.5vw, 2rem)' }}
             >
-              {formHeadline}
+              {t('formHeadline')}
             </h3>
             <p className="font-body text-sm font-light text-muted-foreground">
-              {formSubline}
+              {t('formSubline')}
             </p>
           </div>
 
@@ -77,19 +77,19 @@ export function WaitlistSection() {
           </div>
 
           <p className="mt-12 text-center font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60">
-            By joining you agree to our{' '}
+            {t('disclaimer.prefix')}{' '}
             <Link
               href="/terms"
               className="text-foreground/80 transition-colors hover:text-aq-blue"
             >
-              Terms
+              {t('disclaimer.terms')}
             </Link>{' '}
-            and{' '}
+            {t('disclaimer.and')}{' '}
             <Link
               href="/privacy"
               className="text-foreground/80 transition-colors hover:text-aq-blue"
             >
-              Privacy
+              {t('disclaimer.privacy')}
             </Link>
             .
           </p>

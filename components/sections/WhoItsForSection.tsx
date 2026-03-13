@@ -1,15 +1,22 @@
 'use client';
 
 import { motion, AnimatePresence, useReducedMotion } from 'framer-motion';
+import { Briefcase, LayoutGrid, Palette, Store } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { useInterval } from '@/hooks/use-interval';
-import { WhoItsForSectionText } from '@/lib/content/who-its-for';
 import { slideInLeft, ease } from '@/lib/motion';
 
 export function WhoItsForSection() {
-  const { eyebrow, headline, audiences } = WhoItsForSectionText;
+  const t = useTranslations('landing.whoItsFor');
+  const AUDIENCE_ICONS = [Store, Palette, Briefcase, LayoutGrid];
+  const audiences = (
+    t.raw('audiences') as Array<{ title: string; body: string }>
+  ).map((a, i) => ({ ...a, icon: AUDIENCE_ICONS[i] }));
+  const features = t.raw('features') as string[];
+
   const [active, setActive] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const reduced = useReducedMotion();
@@ -23,8 +30,6 @@ export function WhoItsForSection() {
   const audience = audiences[active];
   const CurrentIcon = audience.icon;
 
-  const { features } = WhoItsForSectionText;
-
   return (
     <section
       id="who-its-for"
@@ -32,7 +37,7 @@ export function WhoItsForSection() {
       className="relative flex min-h-screen flex-col justify-center px-4 pb-24 pt-32 sm:px-16 lg:pt-48"
     >
       <h2 id="who-heading" className="sr-only">
-        {eyebrow}: {headline.pre} {headline.gradient}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
       </h2>
 
       <div className="mx-auto w-full max-w-6xl">
@@ -40,7 +45,7 @@ export function WhoItsForSection() {
           data-atom
           className="mb-6 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
         >
-          {eyebrow}
+          {t('eyebrow')}
         </p>
 
         <p
@@ -48,9 +53,9 @@ export function WhoItsForSection() {
           aria-hidden="true"
           className="mb-16 font-display text-[clamp(2.5rem,5vw,4.5rem)] font-light leading-tight"
         >
-          {headline.pre}{' '}
+          {t('headline.pre')}{' '}
           <em className="text-brand-gradient not-italic">
-            {headline.gradient}
+            {t('headline.gradient')}
           </em>
         </p>
 

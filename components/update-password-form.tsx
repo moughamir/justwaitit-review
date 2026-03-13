@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { useRouter } from '@/i18n/routing';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +21,7 @@ export function UpdatePasswordForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const t = useTranslations('auth.update');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +36,6 @@ export function UpdatePasswordForm({
     try {
       const { error } = await supabase.auth.updateUser({ password });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
       router.push('/protected');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred');
@@ -48,10 +49,10 @@ export function UpdatePasswordForm({
       <Card className="noise-overlay border-white/5">
         <CardHeader>
           <CardTitle className="font-display text-3xl font-bold tracking-tight">
-            Security Update
+            {t('title')}
           </CardTitle>
           <CardDescription className="pt-2 font-body">
-            Configure your new studio access credentials
+            {t('desc')}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -62,12 +63,12 @@ export function UpdatePasswordForm({
                   htmlFor="password"
                   className="font-body text-xs uppercase tracking-widest text-muted-foreground"
                 >
-                  New Password
+                  {t('password.label')}
                 </Label>
                 <Input
                   id="password"
                   type="password"
-                  placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                  placeholder="••••••••"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -83,7 +84,7 @@ export function UpdatePasswordForm({
                 className="h-11 w-full"
                 disabled={isLoading}
               >
-                {isLoading ? 'Updating Security...' : 'Confirm New Password'}
+                {isLoading ? t('submitPending') : t('submit')}
               </Button>
             </div>
           </form>

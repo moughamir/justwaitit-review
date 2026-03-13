@@ -1,9 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { forwardRef, useCallback } from 'react';
 
+import { Link, useRouter } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
 type ViewTransitionLinkProps = React.ComponentPropsWithoutRef<typeof Link> & {

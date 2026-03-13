@@ -7,16 +7,17 @@ import {
   useReducedMotion,
 } from 'framer-motion';
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { ScrollLink } from '@/components/ui/scroll-link';
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { HeroSectionText } from '@/lib/content/hero';
 import { charReveal, ease } from '@/lib/motion';
 
 export function HeroSection() {
+  const t = useTranslations('landing.hero');
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
@@ -29,8 +30,8 @@ export function HeroSection() {
 
   const headlineY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
 
-  const subheadlineWords = HeroSectionText.subheadline.a.split(' ');
-  const proWords = HeroSectionText.headline.pro.split(' ');
+  const subheadlineWords = t('subheadline.a').split(' ');
+  const proWords = t('headline.pro').split(' ');
 
   return (
     <section
@@ -40,7 +41,7 @@ export function HeroSection() {
     >
       {/* Semantic duplicate for screen readers / SEO */}
       <h1 id="hero-heading" className="sr-only">
-        ANAQIO — {HeroSectionText.headline.pre} {HeroSectionText.headline.pro}
+        ANAQIO — {t('headline.pre')} {t('headline.pro')}
       </h1>
 
       {/* Layer 0: Background */}
@@ -79,7 +80,7 @@ export function HeroSection() {
         >
           <div className="h-px w-10 bg-muted-foreground/40" />
           <span className="font-label text-[0.65rem] font-medium uppercase tracking-label text-muted-foreground">
-            {HeroSectionText.eyebrow}
+            {t('eyebrow')}
           </span>
           <div className="h-px w-10 bg-muted-foreground/40" />
         </motion.div>
@@ -91,7 +92,7 @@ export function HeroSection() {
           style={animated ? { y: headlineY } : {}}
           className="flex flex-wrap justify-center font-display font-light text-foreground"
         >
-          {HeroSectionText.headline.pre.split('').map((char, i) => (
+          {t('headline.pre').split('').map((char, i) => (
             <motion.span
               key={`pre-${char}-${i}`}
               data-atom
@@ -167,7 +168,7 @@ export function HeroSection() {
               className="group h-12 gap-3 rounded-xl px-8 text-[0.7rem] font-semibold uppercase tracking-[0.18em]"
             >
               <ScrollLink targetId="waitlist">
-                <span>{HeroSectionText.cta.act}</span>
+                <span>{t('cta.act')}</span>
                 <ArrowDownRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </ScrollLink>
             </Button>
@@ -178,7 +179,7 @@ export function HeroSection() {
             className="h-11 gap-2 rounded-xl px-7 text-[0.7rem] font-medium uppercase tracking-[0.18em]"
           >
             <ScrollLink targetId="how-it-works">
-              {HeroSectionText.cta.learn}
+              {t('cta.learn')}
             </ScrollLink>
           </Button>
         </motion.div>

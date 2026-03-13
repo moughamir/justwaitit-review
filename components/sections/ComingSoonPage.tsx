@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useCallback, useState } from 'react';
 
 import { type Phase } from './Phase';
@@ -13,11 +13,13 @@ import AbstractBackground from '@/components/ui/AbstractBackground';
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { PerspectiveGrid } from '@/components/ui/PerspectiveGrid';
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { Link } from '@/i18n/routing';
 import { ease, fadeIn, fadeUp } from '@/lib/motion';
 
 // ─── Main Component ──────────────────────────────────────────────────────────
 
 export function ComingSoonPage() {
+  const t = useTranslations('comingSoon');
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
@@ -83,7 +85,7 @@ export function ComingSoonPage() {
               transition={{ duration: 2, ease: 'easeOut' }}
             >
               <h2 className="w-full whitespace-nowrap px-[3vw] text-center font-display text-[12vw] font-black uppercase leading-none tracking-tighter text-foreground">
-                Coming Soon
+                {t('hero.tagline')}
               </h2>
             </motion.div>
 
@@ -100,7 +102,7 @@ export function ComingSoonPage() {
             </motion.div>
             <div className="pointer-events-none inset-0 z-0 flex h-auto items-center justify-center">
               <span className="bg-brand-gradient animate-shimmer leading select-none whitespace-nowrap bg-clip-text font-display text-5xl font-light text-transparent mix-blend-plus-lighter [text-shadow:0_20px_80px_rgba(37,99,235,0.4)]">
-                Coming Soon
+                {t('hero.tagline')}
               </span>
             </div>
             <motion.div
@@ -108,15 +110,12 @@ export function ComingSoonPage() {
               className="relative z-20 mt-8 max-w-[46ch] text-left font-body text-base leading-relaxed text-muted-foreground sm:text-justify sm:text-lg"
               {...fadeUp(reduced, 0.1)}
             >
-              <p className="text-base font-bold sm:text-lg">
-                ANAQIO is an AI-Driven Virtual built for Fashion Commerce.
-              </p>
+              <p className="text-base font-bold sm:text-lg">{t('hero.main')}</p>
               <p className="mt-2 text-sm italic sm:mt-1 sm:text-base">
-                Generate lookbooks, swap backgrounds, adjust lighting, and
-                produce cinematic collections.
+                {t('hero.sub1')}
               </p>
               <p className="mt-2 text-right text-sm italic sm:mt-1 sm:text-base">
-                — all from a single shot.
+                {t('hero.sub2')}
               </p>
             </motion.div>
 
@@ -154,52 +153,50 @@ export function ComingSoonPage() {
                 {...fadeIn(reduced, 0.25)}
               >
                 <div className="flex items-center justify-center gap-2">
-                  <p>Launching Q3 2026 &middot; Casablanca</p>
+                  <p>{t('footer.launch')}</p>
                   <span className="hidden sm:inline">&middot;</span>
                   <p className="hidden sm:block">
                     <Link
-                      href={'/'}
+                      href="/"
                       className="transition-colors hover:text-foreground"
                     >
-                      Anaqio
-                    </Link>{' '}
-                    &copy; 2026
+                      {t('footer.copyright')}
+                    </Link>
                   </p>
                 </div>
                 <div className="flex items-center justify-center gap-3">
                   <p className="sm:hidden">
                     <Link
-                      href={'/'}
+                      href="/"
                       className="transition-colors hover:text-foreground"
                     >
-                      Anaqio
-                    </Link>{' '}
-                    &copy; 2026
+                      {t('footer.copyright')}
+                    </Link>
                   </p>
                   <span className="sm:hidden">&middot;</span>
                   <Link
-                    href={'/about'}
+                    href="/about"
                     className="transition-colors hover:text-foreground"
                   >
-                    About
+                    {t('footer.links.about')}
                   </Link>
                   <Link
-                    href={'/terms'}
+                    href="/terms"
                     className="transition-colors hover:text-foreground"
                   >
-                    Terms
+                    {t('footer.links.terms')}
                   </Link>
                   <Link
-                    href={'/privacy'}
+                    href="/privacy"
                     className="transition-colors hover:text-foreground"
                   >
-                    Policy
+                    {t('footer.links.policy')}
                   </Link>
                   <Link
-                    href={'/legal-mentions'}
+                    href="/legal-mentions"
                     className="transition-colors hover:text-foreground"
                   >
-                    Legal
+                    {t('footer.links.legal')}
                   </Link>
                 </div>
               </motion.div>

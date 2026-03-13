@@ -6,13 +6,15 @@ import {
   useScroll,
   useTransform,
 } from 'framer-motion';
+import { Camera, LayoutList, Share2, ShoppingBag } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { ProblemSectionText } from '@/lib/content/problem';
 import { clipReveal } from '@/lib/motion';
 
 export function ProblemSection() {
+  const t = useTranslations('landing.problem');
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
@@ -26,7 +28,13 @@ export function ProblemSection() {
   const headlineY = useTransform(scrollYProgress, [0, 0.4], ['60px', '0px']);
   const headlineOpacity = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
 
-  const { eyebrow, visualHeadline, painPoints } = ProblemSectionText;
+  const PAIN_ICONS = [Camera, Share2, ShoppingBag, LayoutList];
+  const painPoints = (t.raw('painPoints') as Array<{ text: string }>).map(
+    (p, i) => ({
+      text: p.text,
+      icon: PAIN_ICONS[i],
+    })
+  );
 
   return (
     <section
@@ -36,7 +44,7 @@ export function ProblemSection() {
       className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden px-6 pb-24 pt-32 sm:px-12 md:px-[8.33%] lg:pt-48"
     >
       <h2 id="problem-heading" className="sr-only">
-        {eyebrow}: {visualHeadline.line1} {visualHeadline.line2}
+        {t('eyebrow')}: {t('visualHeadline.line1')} {t('visualHeadline.line2')}
       </h2>
 
       {/* Atmospheric "?" [PINNED, right-5% top-15%] */}
@@ -56,7 +64,7 @@ export function ProblemSection() {
           data-atom
           className="font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
         >
-          {eyebrow}
+          {t('eyebrow')}
         </p>
 
         {/* Large statement */}
@@ -74,10 +82,10 @@ export function ProblemSection() {
           }
           className="max-w-[14ch] font-display font-light leading-[0.95] text-foreground"
         >
-          {visualHeadline.line1}
+          {t('visualHeadline.line1')}
           <br />
           <em className="text-brand-gradient pt-2 not-italic">
-            {visualHeadline.line2}
+            {t('visualHeadline.line2')}
           </em>
         </motion.div>
 

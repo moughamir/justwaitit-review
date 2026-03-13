@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -13,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link } from '@/i18n/routing';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 
@@ -20,6 +21,8 @@ export function ForgotPasswordForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const t = useTranslations('auth.forgot');
+  const tLogin = useTranslations('auth.login');
   const [email, setEmail] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
@@ -32,7 +35,6 @@ export function ForgotPasswordForm({
     setError(null);
 
     try {
-      // The url which will be included in the email. This URL needs to be configured in your redirect URLs in the Supabase dashboard at https://supabase.com/dashboard/project/_/auth/url-configuration
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/update-password`,
       });
@@ -51,16 +53,15 @@ export function ForgotPasswordForm({
         <Card className="noise-overlay border-white/5">
           <CardHeader>
             <CardTitle className="font-display text-3xl font-bold tracking-tight">
-              Check Your Inbox
+              {t('success.title')}
             </CardTitle>
             <CardDescription className="pt-2 font-body">
-              Password reset instructions sent
+              {t('success.desc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
             <p className="font-body text-sm leading-relaxed text-muted-foreground">
-              If you have an account registered with that email, you will
-              receive a link to securely reset your credentials shortly.
+              {t('success.msg')}
             </p>
           </CardContent>
         </Card>
@@ -68,10 +69,10 @@ export function ForgotPasswordForm({
         <Card className="noise-overlay border-white/5">
           <CardHeader>
             <CardTitle className="font-display text-3xl font-bold tracking-tight">
-              Recover Access
+              {t('title')}
             </CardTitle>
             <CardDescription className="pt-2 font-body">
-              Enter your email to receive recovery instructions
+              {t('desc')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -82,12 +83,12 @@ export function ForgotPasswordForm({
                     htmlFor="email"
                     className="font-body text-xs uppercase tracking-widest text-muted-foreground"
                   >
-                    Email Address
+                    {tLogin('email.label')}
                   </Label>
                   <Input
                     id="email"
                     type="email"
-                    placeholder="name@company.com"
+                    placeholder={tLogin('email.placeholder')}
                     required
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -105,7 +106,7 @@ export function ForgotPasswordForm({
                   className="h-11 w-full"
                   disabled={isLoading}
                 >
-                  {isLoading ? 'Sending Link...' : 'Recover Password'}
+                  {isLoading ? t('submitPending') : t('submit')}
                 </Button>
               </div>
               <div className="mt-6 text-center font-body text-sm">
@@ -113,7 +114,7 @@ export function ForgotPasswordForm({
                   href="/auth/login"
                   className="font-semibold text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
                 >
-                  Back to Sign In
+                  {t('back')}
                 </Link>
               </div>
             </form>

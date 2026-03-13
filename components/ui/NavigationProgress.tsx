@@ -1,8 +1,9 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+
+import { usePathname } from '@/i18n/routing';
 
 /**
  * Dispatched on the window BEFORE router.push() is called so the bar can

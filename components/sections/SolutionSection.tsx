@@ -7,13 +7,20 @@ import {
   useTransform,
 } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { Fragment, useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { SolutionSectionText } from '@/lib/content/solution';
 import { flipReveal, scatterIn } from '@/lib/motion';
 
 export function SolutionSection() {
+  const t = useTranslations('landing.solution');
+  const PIPELINE_COLORS = ['default', 'purple', 'amber'] as const;
+  const pipeline = (t.raw('pipeline') as Array<{stage: string; label: string; body: string}>).map((p, i) => ({
+    ...p,
+    color: PIPELINE_COLORS[i],
+  }));
+
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
@@ -23,8 +30,6 @@ export function SolutionSection() {
     target: sectionRef,
     offset: ['start end', 'end start'],
   });
-
-  const { eyebrow, headline, pipeline } = SolutionSectionText;
 
   const headerY = useTransform(scrollYProgress, [0, 0.3], ['60px', '0px']);
   const headerOp = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
@@ -37,7 +42,7 @@ export function SolutionSection() {
       className="relative flex min-h-[100dvh] flex-col items-center justify-center px-4 pb-24 pt-32 lg:pt-48"
     >
       <h2 id="solution-heading" className="sr-only">
-        {eyebrow}: {headline.pre} {headline.gradient} {headline.post}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')} {t('headline.post')}
       </h2>
 
       {/* Eyebrow [ANCHORED] */}
@@ -46,7 +51,7 @@ export function SolutionSection() {
         style={animated ? { y: headerY, opacity: headerOp } : {}}
         className="mb-8 text-center font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
       >
-        {eyebrow}
+        {t('eyebrow')}
       </motion.p>
 
       {/* Headline [ANCHORED] */}
@@ -57,11 +62,11 @@ export function SolutionSection() {
         className="mb-16 text-center font-display font-light leading-tight"
       >
         <span className="text-[clamp(2.5rem,5vw,6rem)]">
-          {headline.pre}{' '}
+          {t('headline.pre')}{' '}
           <em className="text-brand-gradient animate-gradient not-italic">
-            {headline.gradient}
+            {t('headline.gradient')}
           </em>{' '}
-          {headline.post}
+          {t('headline.post')}
         </span>
       </motion.div>
 
@@ -74,10 +79,10 @@ export function SolutionSection() {
           className="flex flex-col items-center text-center"
         >
           <span className="font-display text-[clamp(2rem,4vw,4.5rem)] text-muted-foreground/30 line-through">
-            14 days
+            {t('stat.traditional.value')}
           </span>
           <span className="mt-2 font-label text-xs uppercase tracking-label text-muted-foreground/40">
-            Traditional shoot
+            {t('stat.traditional.label')}
           </span>
         </motion.div>
 
@@ -88,10 +93,10 @@ export function SolutionSection() {
           className="flex flex-col items-center text-center"
         >
           <span className="font-display text-[clamp(2rem,4vw,4.5rem)] text-aq-blue">
-            2 hours
+            {t('stat.anaqio.value')}
           </span>
           <span className="mt-2 font-label text-xs uppercase tracking-label text-aq-blue/60">
-            With ANAQIO
+            {t('stat.anaqio.label')}
           </span>
         </motion.div>
       </div>

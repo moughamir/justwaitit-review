@@ -1,14 +1,15 @@
 'use client';
 
 import { useReducedMotion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 import { StepAtom } from './atoms/step-atom';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { HowItWorksSectionText } from '@/lib/content/how-it-works';
 
 export function HowItWorksSection() {
-  const { eyebrow, headline, steps } = HowItWorksSectionText;
+  const t = useTranslations('landing.howItWorks');
+  const steps = t.raw('steps') as Array<{num: string; title: string; body: string}>;
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
@@ -21,7 +22,7 @@ export function HowItWorksSection() {
     >
       {/* Semantic Headings */}
       <h2 id="how-it-works-heading" className="sr-only">
-        {eyebrow}: {headline.pre} {headline.gradient}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
       </h2>
 
       <div className="mx-auto w-full max-w-7xl">
@@ -29,7 +30,7 @@ export function HowItWorksSection() {
           data-atom
           className="mb-6 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
         >
-          {eyebrow}
+          {t('eyebrow')}
         </p>
 
         <p
@@ -37,11 +38,11 @@ export function HowItWorksSection() {
           aria-hidden="true"
           className="mb-20 max-w-2xl font-display text-[clamp(2.5rem,5vw,5rem)] font-light leading-tight"
         >
-          {headline.pre}{' '}
+          {t('headline.pre')}{' '}
           <em className="text-brand-gradient not-italic">
-            {headline.gradient}
+            {t('headline.gradient')}
           </em>{' '}
-          {headline.post}
+          {t('headline.post')}
         </p>
 
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">

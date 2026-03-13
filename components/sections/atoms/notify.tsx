@@ -1,6 +1,6 @@
 import { useReducedMotion, motion } from 'framer-motion';
 import { Check, ArrowRight } from 'lucide-react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState, useRef, useEffect, useCallback } from 'react';
 
 import { UTM_KEYS } from '../UTM_KEYS';
@@ -10,6 +10,7 @@ import { notifyMe } from '@/lib/actions/notify';
 import { ease, fadeIn } from '@/lib/motion';
 
 export function NotifyForm({ animated }: { animated: boolean }) {
+  const t = useTranslations('comingSoon.form');
   const reduced = useReducedMotion();
   const [status, setStatus] = useState<
     'idle' | 'pending' | 'success' | 'error'
@@ -80,8 +81,8 @@ export function NotifyForm({ animated }: { animated: boolean }) {
             type="email"
             name="email"
             required
-            placeholder="Enter your email"
-            aria-label="Email address"
+            placeholder={t('email.placeholder')}
+            aria-label={t('email.aria')}
             disabled={status === 'pending'}
             className="h-12 w-full rounded-lg border border-border/30 bg-card/40 px-4 font-body text-sm text-foreground backdrop-blur-lg transition-colors placeholder:text-muted-foreground/60 focus:border-aq-blue/50 focus:outline-none focus-visible:ring-2 focus-visible:ring-aq-blue disabled:opacity-50"
           />
@@ -94,10 +95,10 @@ export function NotifyForm({ animated }: { animated: boolean }) {
           {...fadeIn(reduced, 0.15)}
         >
           {status === 'pending' ? (
-            'Sending...'
+            t('button.pending')
           ) : (
             <>
-              Notify me
+              {t('button.submit')}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </>
           )}
@@ -110,21 +111,7 @@ export function NotifyForm({ animated }: { animated: boolean }) {
         className="text-center font-body text-[10px] text-muted-foreground/60 sm:text-left"
         {...fadeIn(reduced, 0.2)}
       >
-        By joining, you agree to our{' '}
-        <Link
-          href="/terms"
-          className="underline underline-offset-2 transition-colors hover:text-foreground"
-        >
-          Terms
-        </Link>{' '}
-        and{' '}
-        <Link
-          href="/privacy"
-          className="underline underline-offset-2 transition-colors hover:text-foreground"
-        >
-          Privacy Policy
-        </Link>
-        .
+        {t('terms')}
       </motion.p>
     </div>
   );

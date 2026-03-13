@@ -839,3 +839,21 @@
     @apply font-wordmark font-light italic;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Arabic / RTL typography
+   Noto Sans Arabic replaces DM Sans for body text in ar-MA.
+   Cormorant Garamond brand headings are kept for visual
+   consistency — the script mix is intentional.
+   ═══════════════════════════════════════════════════════════ */
+:lang(ar) body,
+:lang(ar) .font-body {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+}
+
+:lang(ar) h1,
+:lang(ar) h2,
+:lang(ar) h3,
+:lang(ar) .font-display {
+  font-family: var(--font-arabic), serif;
+}

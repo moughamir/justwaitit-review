@@ -1,12 +1,49 @@
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
 import { SocialLinks } from './SocialLinks';
 
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { AnaqioLogo } from '@/components/ui/AnaqioLogo';
-import { footerColumns, footerContent } from '@/lib/content/navigation';
+import { Link } from '@/i18n/routing';
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations('footer');
+
+  const footerColumns = [
+    {
+      titleKey: 'platform.title',
+      links: [
+        { labelKey: 'platform.studio', href: '/early-access' },
+        { labelKey: 'platform.lookbook', href: '/early-access' },
+        { labelKey: 'platform.tryon', href: '/early-access' },
+        { labelKey: 'platform.pricing', href: '/early-access' },
+      ],
+    },
+    {
+      titleKey: 'resources.title',
+      links: [
+        { labelKey: 'resources.brand', href: '/brand' },
+        { labelKey: 'resources.blog', href: '/blog' },
+        { labelKey: 'resources.help', href: '/help' },
+      ],
+    },
+    {
+      titleKey: 'company.title',
+      links: [
+        { labelKey: 'company.about', href: '/about' },
+        {
+          labelKey: 'company.early',
+          href: '/early-access',
+          badgeKey: 'company.badge',
+        },
+        { labelKey: 'company.privacy', href: '/privacy' },
+        { labelKey: 'company.terms', href: '/terms' },
+        { labelKey: 'company.legal', href: '/legal-mentions' },
+        { labelKey: 'company.cookies', href: '/cookies' },
+      ],
+    },
+  ];
+
   return (
     <div className="px-4 pt-20">
       <footer className="bg-brand-gradient mx-auto w-full max-w-[1350px] overflow-x-hidden rounded-tl-3xl rounded-tr-3xl px-4 pt-8 text-aq-white backdrop-blur-sm sm:px-8 md:px-16 lg:px-28 lg:pt-12">
@@ -19,7 +56,7 @@ export function Footer() {
             </Link>
 
             <p className="max-w-96 font-serif text-sm/6 text-neutral-400">
-              {footerContent.description}
+              {t('desc')}
             </p>
 
             <SocialLinks />
@@ -28,20 +65,22 @@ export function Footer() {
           {/* Link Columns */}
           <div className="grid grid-cols-2 items-start gap-8 md:grid-cols-3 md:gap-12 lg:col-span-3 lg:gap-16">
             {footerColumns.map((col) => (
-              <div key={col.title}>
-                <h3 className="mb-4 text-sm font-medium">{col.title}</h3>
+              <div key={col.titleKey}>
+                <h3 className="mb-4 text-sm font-medium">
+                  {t(col.titleKey as never)}
+                </h3>
                 <ul className="space-y-3 text-sm text-neutral-300">
                   {col.links.map((link) => (
-                    <li key={link.label} className="flex items-center gap-2">
+                    <li key={link.labelKey} className="flex items-center gap-2">
                       <Link
                         href={link.href}
                         className="transition-colors duration-200 hover:text-neutral-100"
                       >
-                        {link.label}
+                        {t(link.labelKey as never)}
                       </Link>
-                      {link.badge && (
+                      {link.badgeKey && (
                         <span className="rounded-full border border-aq-blue/40 bg-aq-blue/5 px-2 py-0.5 text-[11px] text-aq-blue">
-                          {link.badge}
+                          {t(link.badgeKey as never)}
                         </span>
                       )}
                     </li>
@@ -63,12 +102,8 @@ export function Footer() {
 
           {/* Copyright bar */}
           <div className="relative z-10 flex items-center justify-between border-t border-white/10 pb-4">
-            <p className="text-sm text-neutral-400">
-              {footerContent.copyright}
-            </p>
-            <p className="text-sm text-neutral-400">
-              {footerContent.allRightsReserved}
-            </p>
+            <p className="text-sm text-neutral-400">{t('copyright')}</p>
+            <p className="text-sm text-neutral-400">{t('rights')}</p>
           </div>
         </div>
       </footer>

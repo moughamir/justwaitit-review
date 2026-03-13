@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import Loading from '@/app/loading';
+import Loading from '@/app/[locale]/loading';
 import { ease } from '@/lib/motion';
 
 interface LoadingScreenProps {

@@ -2,27 +2,31 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown, Menu, X } from 'lucide-react';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { LocaleSwitcher } from '@/components/locale-switcher';
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { Button } from '@/components/ui/button';
+import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
 
-const NAV_LINKS = [
-  { label: 'About', href: '/about' },
-  { label: 'Brand', href: '/brand' },
-  { label: 'Contact', href: '/contact' },
-] as const;
-
-const LEGAL_LINKS = [
-  { label: 'Terms of Service', href: '/terms' },
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Cookie Policy', href: '/cookies' },
-  { label: 'Legal Mentions', href: '/legal-mentions' },
-] as const;
-
 export function Header() {
+  const t = useTranslations('header');
+
+  const NAV_LINKS = [
+    { label: t('nav.about'), href: '/about' },
+    { label: t('nav.brand'), href: '/brand' },
+    { label: t('nav.contact'), href: '/contact' },
+  ] as const;
+
+  const LEGAL_LINKS = [
+    { label: t('nav.terms'), href: '/terms' },
+    { label: t('nav.privacy'), href: '/privacy' },
+    { label: t('nav.cookies'), href: '/cookies' },
+    { label: t('nav.legalMentions'), href: '/legal-mentions' },
+  ] as const;
+
   const [isHidden, setIsHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -113,7 +117,7 @@ export function Header() {
         <Link
           href="/"
           className="flex items-center"
-          aria-label="Anaqio Home"
+          aria-label={t('logo.aria')}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{ viewTransitionName: 'site-logo' }}
@@ -150,7 +154,7 @@ export function Header() {
                   isLegalOpen && 'text-aq-blue'
                 )}
               >
-                Legal
+                {t('nav.legal')}
                 <ChevronDown
                   size={12}
                   className={cn(
@@ -199,15 +203,17 @@ export function Header() {
                 ?.scrollIntoView({ behavior: 'smooth' });
               setIsMobileMenuOpen(false);
             }}
-            aria-label="Scroll to Waitlist Section"
+            aria-label={t('button.waitlist')}
           >
-            Join Waitlist
+            {t('button.waitlist')}
           </Button>
+
+          <LocaleSwitcher />
 
           <button
             className="flex items-center justify-center p-1 text-foreground/70 transition-colors hover:text-aq-blue md:hidden"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label="Toggle menu"
+            aria-label={t('menu.aria')}
             aria-expanded={isMobileMenuOpen}
           >
             {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -240,7 +246,7 @@ export function Header() {
               {/* Legal section */}
               <div className="mt-2 border-t border-border/30 pt-2">
                 <p className="mb-1 px-3 text-[10px] uppercase tracking-widest text-muted-foreground">
-                  Legal
+                  {t('nav.legal')}
                 </p>
                 {LEGAL_LINKS.map(({ label, href }) => (
                   <Link

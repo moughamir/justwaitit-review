@@ -1,7 +1,6 @@
 'use client';
 
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -14,6 +13,7 @@ import {
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Link, useRouter } from '@/i18n/routing';
 import { createClient } from '@/lib/supabase/client';
 import { cn } from '@/lib/utils';
 
@@ -21,6 +21,7 @@ export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<'div'>) {
+  const t = useTranslations('auth.login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,6 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      // Update this route to redirect to an authenticated route. The user already has an active session.
       router.push('/protected');
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : 'An error occurred');
@@ -53,11 +53,9 @@ export function LoginForm({
       <Card className="noise-overlay border-white/5">
         <CardHeader>
           <CardTitle className="font-display text-3xl font-bold">
-            Welcome back
+            {t('title')}
           </CardTitle>
-          <CardDescription className="font-body">
-            Sign in to your anaqio studio account
-          </CardDescription>
+          <CardDescription className="font-body">{t('desc')}</CardDescription>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleLogin}>
@@ -67,12 +65,12 @@ export function LoginForm({
                   htmlFor="email"
                   className="font-body text-xs uppercase tracking-widest text-muted-foreground"
                 >
-                  Email
+                  {t('email.label')}
                 </Label>
                 <Input
                   id="email"
                   type="email"
-                  placeholder="name@company.com"
+                  placeholder={t('email.placeholder')}
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -85,13 +83,13 @@ export function LoginForm({
                     htmlFor="password"
                     className="font-body text-xs uppercase tracking-widest text-muted-foreground"
                   >
-                    Password
+                    {t('password.label')}
                   </Label>
                   <Link
                     href="/auth/forgot-password"
                     className="ml-auto inline-block text-xs font-semibold text-aq-blue transition-colors hover:text-aq-purple"
                   >
-                    Forgot password?
+                    {t('forgot')}
                   </Link>
                 </div>
                 <Input
@@ -112,16 +110,16 @@ export function LoginForm({
                 className="h-11 w-full"
                 disabled={isLoading}
               >
-                {isLoading ? 'Authenticating...' : 'Sign In'}
+                {isLoading ? t('submitPending') : t('submit')}
               </Button>
             </div>
             <div className="mt-6 text-center font-body text-sm text-muted-foreground">
-              New to anaqio?{' '}
+              {t('signupIntro')}{' '}
               <Link
                 href="/auth/sign-up"
                 className="font-semibold text-foreground underline underline-offset-4 transition-colors hover:text-aq-blue"
               >
-                Create an account
+                {t('signupLink')}
               </Link>
             </div>
           </form>
