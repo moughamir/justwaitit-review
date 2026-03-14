@@ -19,9 +19,11 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
+      include: ['components/**', 'lib/**', 'hooks/**'],
       exclude: [
         'node_modules',
         '.next',
+        '**/*.d.ts',
         'vitest.config.ts',
         'vitest.setup.ts',
         'playwright.config.ts',
