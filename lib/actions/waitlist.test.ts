@@ -118,4 +118,15 @@ describe('joinWaitlist', () => {
     const insertPayload = mockInsert.mock.calls[0][0];
     expect(insertPayload.full_name).toBe('Early Access User');
   });
+
+  // Behaviour 10: Returns generic error when Supabase client itself throws
+  it('returns a generic error message when the Supabase client throws', async () => {
+    const { createClient } = await import('@/lib/supabase/server');
+    vi.mocked(createClient).mockRejectedValueOnce(
+      new Error('Supabase client failed')
+    );
+    const result = await joinWaitlist(makeFormData(validFullData));
+    expect(result.success).toBe(false);
+    expect(result.message).toMatch(/something went wrong/i);
+  });
 });

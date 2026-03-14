@@ -2,7 +2,11 @@ import { describe, expect, it } from 'vitest';
 
 import type { FormStep } from '@/lib/types/waitlist-form';
 
-import { sanitizeEmail, validateStep } from '@/lib/utils/form-validation';
+import {
+  sanitizeEmail,
+  validateEmail,
+  validateStep,
+} from '@/lib/utils/form-validation';
 
 // ── Step fixtures ──────────────────────────────────────────────────────────────
 
@@ -98,6 +102,27 @@ describe('validateStep', () => {
   });
 });
 
+// ── validateEmail ─────────────────────────────────────────────────────────────
+
+describe('validateEmail', () => {
+  it('returns true for valid email addresses', () => {
+    expect(validateEmail('user@example.com')).toBe(true);
+    expect(validateEmail('user.name+tag@company.co.uk')).toBe(true);
+  });
+
+  it('returns false for email missing @', () => {
+    expect(validateEmail('userexample.com')).toBe(false);
+  });
+
+  it('returns false for email missing TLD', () => {
+    expect(validateEmail('user@domain')).toBe(false);
+  });
+
+  it('returns false for empty string', () => {
+    expect(validateEmail('')).toBe(false);
+  });
+});
+
 // ── sanitizeEmail ──────────────────────────────────────────────────────────────
 
 describe('sanitizeEmail', () => {
@@ -111,6 +136,11 @@ describe('sanitizeEmail', () => {
     expect(sanitizeEmail('user@example.com  ')).toBe('user@example.com');
   });
 
+  // Behaviour 20a
+  it('trims tab and newline characters', () => {
+    expect(sanitizeEmail('\tuser@example.com\n')).toBe('user@example.com');
+  });
+
   // Behaviour 21
   it('converts uppercase to lowercase', () => {
     expect(sanitizeEmail('USER@EXAMPLE.COM')).toBe('user@example.com');
@@ -120,5 +150,30 @@ describe('sanitizeEmail', () => {
   it('is idempotent — running it twice gives the same result as running it once', () => {
     const input = '  USER@EXAMPLE.COM  ';
     expect(sanitizeEmail(sanitizeEmail(input))).toBe(sanitizeEmail(input));
+  });
+});
+
+// ── validateStep — optional field with value ───────────────────────────────────
+
+describe('validateStep — optional field with a non-empty value', () => {
+  const stepWithOptionalText: FormStep = {
+    id: 1,
+    title: 'Step',
+    description: '',
+    fields: [
+      { name: 'company', type: 'text', label: 'Company', required: false },
+    ],
+  };
+
+  it('still validates type rules for a non-empty optional text field (< 2 chars fails)', () => {
+    const result = validateStep(stepWithOptionalText, { company: 'A' });
+    expect(result.isValid).toBe(false);
+    expect(result.errors).toHaveProperty('company');
+  });
+
+  it('passes when a non-empty optional text field meets the minimum length', () => {
+    const result = validateStep(stepWithOptionalText, { company: 'ACME' });
+    expect(result.isValid).toBe(true);
+    expect(result.errors).toEqual({});
   });
 });
