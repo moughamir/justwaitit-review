@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { isRTL, localeLabels, locales, type Locale } from '@/i18n/config';
 import { usePathname, useRouter } from '@/i18n/routing';
+import { trackUserBehavior } from '@/lib/analytics';
 
 const LOCALE_META: Record<Locale, { flag: string; short: string }> = {
   'en-US': { flag: '🇺🇸', short: 'EN' },
@@ -35,6 +36,7 @@ export function LocaleSwitcher() {
 
   function switchLocale(loc: Locale) {
     setOpen(false);
+    trackUserBehavior.trackClick(`locale_change_${loc}`, 'settings');
     router.replace(pathname, { locale: loc });
   }
 

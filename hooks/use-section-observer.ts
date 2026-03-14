@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackUserBehavior } from '@/lib/analytics';
 
 /**
  * Tracks which section (by id) is currently in the viewport's central zone.
@@ -12,6 +13,7 @@ export function useSectionObserver(ids: readonly string[]) {
   const idsRef = useRef(ids);
   const [activeIndex, setActiveIndex] = useState(0);
   const [visible, setVisible] = useState(false);
+  const trackedIds = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     const currentIds = idsRef.current;
@@ -21,8 +23,17 @@ export function useSectionObserver(ids: readonly string[]) {
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          const idx = currentIds.indexOf(entry.target.id);
-          if (idx !== -1) setActiveIndex(idx);
+          const id = entry.target.id;
+          const idx = currentIds.indexOf(id);
+          if (idx !== -1) {
+            setActiveIndex(idx);
+            
+            // Track section view if not already tracked in this session
+            if (!trackedIds.current.has(id)) {
+              trackUserBehavior.trackSectionView(id);
+              trackedIds.current.add(id);
+            }
+          }
         });
       },
       { rootMargin: '-35% 0px -35% 0px', threshold: 0 }
