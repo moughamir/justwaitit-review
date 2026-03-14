@@ -52,4 +52,9 @@ vi.mock('@/i18n/routing', () => ({
   usePathname() {
     return '/';
   },
+  Link: ({ children, href, ...props }: React.ComponentProps<'a'>) => (
+    <a href={href} {...props}>
+      {children}
+    </a>
+  ),
 }));
