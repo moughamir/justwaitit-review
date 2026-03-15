@@ -2,6 +2,7 @@
 
 import dynamic from 'next/dynamic';
 
+import { StyleShowcase } from './StyleShowcase';
 import SupportLine from './SupportLine';
 import { VideoHeroSection } from './VideoHeroSection';
 
@@ -87,6 +88,7 @@ export function NewLandingPage() {
   return (
     <div className="flex w-full flex-col">
       <VideoHeroSection />
+      <StyleShowcase />
       <SupportLine />
       <ProblemSection />
       <SolutionSection />

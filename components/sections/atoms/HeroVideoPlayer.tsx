@@ -5,6 +5,7 @@ import { Play } from 'lucide-react';
 import { useState } from 'react';
 
 import { useLazyVideo } from '@/hooks/use-lazy-video';
+import { NANOBANANA_VISUALS } from '@/lib/content/nanobanana-assets';
 import { cn } from '@/lib/utils';
 
 export function HeroVideoPlayer() {
@@ -70,7 +71,7 @@ export function HeroVideoPlayer() {
               playsInline
               preload="auto"
               onLoadedData={() => {}}
-              poster="/images/hero-video-poster.webp"
+              poster={NANOBANANA_VISUALS.heroPoster}
             >
               {/* Multiple sources for browser compatibility */}
               <source src="/videos/hero-showcase.mp4" type="video/mp4" />

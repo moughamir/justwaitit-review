@@ -367,6 +367,14 @@
         "learn": "Voir comment ça marche"
       }
     },
+    "styleShowcase": {
+      "eyebrow": "L'Esthétique",
+      "title": {
+        "pre": "Des styles infinis pour les",
+        "accent": "Marques de Luxe"
+      },
+      "description": "Des Riads de Marrakech aux studios minimalistes. Générez n'importe quelle esthétique exigée par votre marque sans louer un seul projecteur."
+    },
     "problem": {
       "eyebrow": "Le Défi",
       "headline": {

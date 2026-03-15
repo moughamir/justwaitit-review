@@ -364,6 +364,11 @@
       },
       "cta": { "act": "Join the Waitlist", "learn": "See How It Works" }
     },
+    "styleShowcase": {
+      "eyebrow": "The Aesthetic",
+      "title": { "pre": "Endless styles for", "accent": "High-End Brands" },
+      "description": "From Marrakech Riads to Minimalist Studios. Generate any aesthetic your brand demands without renting a single light."
+    },
     "problem": {
       "eyebrow": "The Challenge",
       "headline": { "pre": "Fashion Content Demand.", "gradient": "Exploding" },

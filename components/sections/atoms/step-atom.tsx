@@ -1,6 +1,8 @@
 import { motion, useInView } from 'framer-motion';
+import Image from 'next/image';
 import { useRef } from 'react';
 
+import { NANOBANANA_VISUALS } from '@/lib/content/nanobanana-assets';
 import { ease } from '@/lib/motion';
 
 export function StepAtom({
@@ -56,45 +58,43 @@ export function StepAtom({
           </p>
         </div>
 
-        {/* Abstract UI Representations */}
+        {/* Visual Representations */}
         <div className="relative mt-4 flex h-48 w-full items-center justify-center overflow-hidden rounded-2xl border border-border/10 bg-card/5 backdrop-blur-md">
           {index === 0 && (
-            <div className="flex flex-col items-center gap-3 opacity-60">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-dashed border-aq-blue/40 bg-aq-blue/5">
-                <div className="h-4 w-4 rounded-sm bg-aq-blue/50" />
-              </div>
-              <div className="h-1.5 w-20 rounded-full bg-foreground/20" />
-              <div className="h-1.5 w-12 rounded-full bg-foreground/10" />
-            </div>
+            <Image
+              src={NANOBANANA_VISUALS.fashion.silk}
+              alt="Upload stage"
+              fill
+              className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-60 group-hover:grayscale-0"
+            />
           )}
           {index === 1 && (
-            <div className="flex w-full flex-col gap-4 px-8 opacity-60">
-              <div className="h-2 w-full rounded-full bg-foreground/10">
-                <div className="h-full w-2/3 rounded-full bg-aq-blue/50" />
-              </div>
-              <div className="h-2 w-full rounded-full bg-foreground/10">
-                <div className="h-full w-1/3 rounded-full bg-aq-purple/50" />
-              </div>
-              <div className="flex gap-2">
-                <div className="h-6 w-6 rounded-md bg-foreground/10" />
-                <div className="h-6 w-6 rounded-md bg-foreground/10" />
-                <div className="h-6 w-6 rounded-md border border-aq-blue/30 bg-aq-blue/10" />
-              </div>
-            </div>
+            <Image
+              src={NANOBANANA_VISUALS.studio.arches}
+              alt="Style definition"
+              fill
+              className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-60 group-hover:grayscale-0"
+            />
           )}
           {index === 2 && (
-            <div className="relative flex h-full w-full items-center justify-center">
-              <div className="absolute h-24 w-24 animate-pulse rounded-full bg-aq-blue/20 blur-2xl" />
-              <div className="z-10 h-16 w-16 overflow-hidden rounded-xl border border-white/10 bg-gradient-to-tr from-aq-blue/20 to-aq-purple/20 backdrop-blur-xl" />
-            </div>
+            <Image
+              src={NANOBANANA_VISUALS.studio.riad}
+              alt="AI generation"
+              fill
+              className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-60 group-hover:grayscale-0"
+            />
           )}
           {index === 3 && (
-            <div className="relative flex h-full w-full items-center justify-center">
-              <div className="absolute left-1/2 top-1/2 h-20 w-16 -translate-x-[70%] -translate-y-[60%] rotate-[-10deg] rounded-lg border border-white/5 bg-card/40 backdrop-blur-md" />
-              <div className="absolute left-1/2 top-1/2 h-20 w-16 -translate-x-[30%] -translate-y-[40%] rotate-[10deg] rounded-lg border border-white/5 bg-card/60 backdrop-blur-md" />
-              <div className="absolute left-1/2 top-1/2 z-10 h-24 w-20 -translate-x-1/2 -translate-y-1/2 rounded-lg border border-white/10 bg-card/80 shadow-2xl backdrop-blur-xl" />
-            </div>
+            <Image
+              src={NANOBANANA_VISUALS.fashion.emerald}
+              alt="Scaling"
+              fill
+              className="object-cover opacity-40 grayscale transition-all duration-700 group-hover:opacity-60 group-hover:grayscale-0"
+            />
           )}
+
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60" />
         </div>
       </div>
     </motion.div>

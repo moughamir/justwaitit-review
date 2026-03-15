@@ -6,7 +6,7 @@
  */
 
 // Target launch date: March 20, 2026 at 00:00 UTC
-const LANDING_PAGE_SWITCH_DATE = '2026-03-20T00:00:00Z';
+const LANDING_PAGE_SWITCH_DATE = '2026-03-10T00:00:00Z';
 
 /**
  * Check if the new landing page should be shown

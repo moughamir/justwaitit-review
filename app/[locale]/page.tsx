@@ -1,17 +1,15 @@
-import { redirect } from 'next/navigation';
 import { getTranslations } from 'next-intl/server';
 
 import type { Metadata } from 'next';
 
-import { ComingSoonPage } from '@/components/sections/ComingSoonPage';
-import { PWAInstallPrompt } from '@/components/ui/PWAInstallPrompt';
+import { Header } from '@/components/layout/Header';
+import { NewLandingPage } from '@/components/sections/NewLandingPage';
+import { ScrollTriggered } from '@/components/sections/ScrollTriggered';
 import { isNewLandingPageActive } from '@/lib/landing-page-config';
 
 /**
- * Home Page with Date-Based Routing
- *
- * Before March 20, 2026: Shows the Coming Soon page
- * After March 20, 2026: Redirects to the experiment page (which shows the new landing page)
+ * Home Page
+ * Now defaults to the new landing page or the original experiment page.
  */
 export async function generateMetadata({
   params,
@@ -23,34 +21,24 @@ export async function generateMetadata({
 
   return {
     title: t('home.title', {
-      defaultValue: 'ANAQIO — AI Fashion Studio | Coming Soon',
+      defaultValue: 'ANAQIO — AI Fashion Studio | Visual Infrastructure',
     }),
     description: t('home.desc', {
       defaultValue:
-        'ANAQIO is an AI-powered fashion studio for the Moroccan luxury market. Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic fashion videos. Launching 2026.',
+        'ANAQIO is an AI-powered fashion studio for the Moroccan luxury market. Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic fashion videos.',
     }),
   };
 }
 
-export default async function HomePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
-  const { locale } = await params;
-
-  // Check if new landing page should be active
+export default async function HomePage() {
+  // Always show the new landing page content if active,
+  // otherwise fallback to the original ScrollTriggered layout.
   const showNewLandingPage = isNewLandingPageActive();
 
-  if (showNewLandingPage) {
-    // Redirect to experiment page which now serves the new landing page
-    redirect(`/${locale}/expirement`);
-  }
-
   return (
-    <>
-      <ComingSoonPage />
-      <PWAInstallPrompt />
-    </>
+    <main id="main-content" className="relative">
+      <Header />
+      {showNewLandingPage ? <NewLandingPage /> : <ScrollTriggered />}
+    </main>
   );
 }

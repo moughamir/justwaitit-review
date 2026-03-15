@@ -28,7 +28,10 @@ A "try-before-you-buy" simulation component. Uses Framer Motion for smooth trans
 ### 2. Multi-Step Waitlist Engine
 A sophisticated lead-capture system with state persistence via `localStorage` and `useMultiStepForm` hook. Validates brand role and style preferences.
 
-### 3. Remotion Automation
+### 3. Style Showcase
+A masonry-style visual grid featuring high-end AI fashion photography. Demonstrates the platform's ability to generate diverse aesthetics from traditional Moroccan riads to minimalist studios.
+
+### 4. Remotion Automation
 Custom-built video sequences that take static product shots and generate luxury fashion content for social media at 9:16 and 16:9 aspect ratios.
 
 ## Accessibility & Performance
