@@ -17,8 +17,9 @@ Anaqio operates as a SaaS platform designed for Moroccan fashion brand owners, c
 
 ## Startup Team
 Based in Morocco, Anaqio was founded by a team passionate about bringing global luxury creative infrastructure to the local fashion market.
-- **Amal Ait Oukharaz (Founder)**: Brings deep expertise in fashion commerce and brand identity. She leads the product vision and market strategy.
-- **Mohamed Moughamir (Co-Founder & Engineer)**: A full-stack developer and experience designer with 9+ years of experience building intuitive digital products. He leads the engineering and design direction.
+- **Amal Ait Oukharaz (Founder)**: Deep expertise in fashion commerce and brand identity. Leads the product vision and market strategy.
+- **Mohamed Moughamir (Co-Founder & CTO)**: Full-stack developer and experience designer with 9+ years of experience building intuitive digital products. Leads engineering and design direction.
+- **Zahir Chaimae (Marketing Director)**: Expert in fashion marketing and community building. Leads brand storytelling and growth strategy.
 
 ## Key Pages
 - [Homepage](https://anaqio.com/)

@@ -42,7 +42,7 @@ export async function generateMetadata({
 
   return {
     title: t('title'),
-    description: t('description'),
+    description: t('desc'),
     alternates: {
       canonical: `${defaultUrl}/${locale}`,
       languages: {
@@ -54,7 +54,7 @@ export async function generateMetadata({
     },
     openGraph: {
       title: t('title'),
-      description: t('description'),
+      description: t('desc'),
       url: `${defaultUrl}/${locale}`,
       siteName: 'Anaqio',
       type: 'website',
@@ -70,7 +70,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
-      description: t('description'),
+      description: t('desc'),
       images: ['/twitter-image.png'],
     },
   };

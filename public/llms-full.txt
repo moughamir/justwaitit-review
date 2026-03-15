@@ -1,0 +1,52 @@
+# Anaqio — Technical Specification & Comprehensive Overview
+
+## Project Mission
+Anaqio provides high-end visual infrastructure for the Moroccan fashion ecosystem. By leveraging AI, we automate the most expensive and time-consuming parts of fashion production: photography, location scouting, and video editing.
+
+## Core Technology Stack
+- **Frontend**: Next.js 16.1 (App Router), React 19, TypeScript 5.
+- **Backend/Auth**: Supabase (PostgreSQL, Auth, SSR client).
+- **Styling**: Tailwind CSS 3.4, shadcn/ui (New York style).
+- **Animations**: Framer Motion 12.34 (Cinematic scroll choreography).
+- **Video Engine**: Remotion (Automated fashion video generation).
+- **Validation**: Zod 4.3 (Schema-first validation).
+- **Runtime/Package Manager**: Bun 1.3.10.
+
+## Design Philosophy: Omnizya
+Anaqio uses the **Omnizya** design principle — a free-atom composition philosophy.
+- **Principle**: Every visual element is an independent atom positioned in the viewport canvas.
+- **Layers**: Semantic (HTML/SEO), Visual (Absolute positioning), Kinetic (Scroll choreography), Resilience (Device tiers).
+- **Color Rule (60-30-10)**: 
+  - 60% Dominant: `aq-ink` (#0F172A)
+  - 30% Secondary: `aq-indigo` (#3F57AF)
+  - 10% Accent: `aq-gold` (#D4AF37)
+
+## Feature Breakdown
+### 1. Interactive AI Preview
+A "try-before-you-buy" simulation component. Uses Framer Motion for smooth transitions between backgrounds (Sahara, Marrakech, Atlas) and AI-driven relighting simulations.
+
+### 2. Multi-Step Waitlist Engine
+A sophisticated lead-capture system with state persistence via `localStorage` and `useMultiStepForm` hook. Validates brand role and style preferences.
+
+### 3. Remotion Automation
+Custom-built video sequences that take static product shots and generate luxury fashion content for social media at 9:16 and 16:9 aspect ratios.
+
+## Accessibility & Performance
+- **Reduced Motion**: All animations respect `prefers-reduced-motion`.
+- **Device Tiers**: The UI adapts its kinetic complexity based on device performance (High/Mid/Low tiers).
+- **SEO**: Static Metadata, JSON-LD structured data, and i18n support (English, French, Arabic).
+
+## Development Guidelines
+- **Kiro CLI**: Used for architectural steering and sub-agent orchestration.
+- **Atomic Workflow**: Components are built as modular atoms for scalability.
+- **Convention**: Kebab-case filenames, PascalCase React exports.
+
+## Founders & Team
+- **Amal Ait Oukharaz**: CEO & Product Vision. Focuses on luxury brand identity and market positioning.
+- **Mohamed Moughamir**: CTO & Engineering. Leads development of the AI pipeline and cinematic UI.
+- **Zahir Chaimae**: Marketing Director. Manages brand storytelling and community growth.
+
+## Contact & Links
+- Website: https://anaqio.com
+- LinkedIn: https://www.linkedin.com/company/anaqio
+- Email: contact@anaqio.com

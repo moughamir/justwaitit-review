@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 import { Button } from '@/components/ui/button';
+import { MagneticButton } from '@/components/ui/MagneticButton';
 import { Link } from '@/i18n/routing';
 import { clipReveal, fadeIn, fadeUp, flipReveal } from '@/lib/motion';
 
@@ -13,7 +14,7 @@ export default function AboutContent() {
   const tMeta = useTranslations('meta');
   const reduced = useReducedMotion();
 
-  const founders = [
+  const team = [
     {
       name: 'Amal AIT OUKHARAZ',
       role: t('founder.amal.role'),
@@ -31,6 +32,15 @@ export default function AboutContent() {
       twitter: 'https://twitter.com/omnizya',
       photo: 'https://avatars.githubusercontent.com/u/8163598?v=4',
       initials: 'MM',
+    },
+    {
+      name: 'Zahir CHAIMAE',
+      role: t('founder.chaimae.role'),
+      bio: t('founder.chaimae.bio'),
+      linkedin: 'https://shazo.anaqio.com',
+      email: 'marketing@anaqio.com',
+      photo: null,
+      initials: 'ZC',
     },
   ];
 
@@ -295,100 +305,112 @@ export default function AboutContent() {
       </section>
 
       {/* ═══════════════════════════════════════════ */}
-      {/* SECTION 5 — FOUNDING TEAM                   */}
+      {/* SECTION 5 — THE TEAM                        */}
       {/* ═══════════════════════════════════════════ */}
       <section
         id="about-team"
         aria-labelledby="about-team-heading"
-        className="bg-background px-4 py-32 sm:px-6 lg:px-8"
+        className="relative overflow-hidden bg-background px-4 py-32 sm:px-6 lg:px-8"
       >
-        <div className="mx-auto max-w-6xl">
+        {/* Atmospheric grid behind team */}
+        <div className="animated-grid absolute inset-0 opacity-[0.03]" />
+
+        <div className="relative z-10 mx-auto max-w-7xl">
           <motion.div
             className="mx-auto flex max-w-3xl flex-col items-center text-center"
             {...fadeUp(reduced)}
           >
+            <p className="text-aq-gold/80 font-label text-xs font-semibold uppercase tracking-[0.3em]">
+              {t('team.overline')}
+            </p>
             <h2
               id="about-team-heading"
-              className="font-display text-4xl font-light leading-tight sm:text-5xl"
+              className="mt-6 font-display text-4xl font-light leading-tight sm:text-5xl lg:text-6xl"
             >
               {t('team.titleLine1')}
               <br />
-              <span className="font-medium">{t('team.titleLine2')}</span>
+              <span className="text-brand-gradient italic">
+                {t('team.titleLine2')}
+              </span>
             </h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
+            <p className="mt-8 text-lg leading-relaxed text-muted-foreground">
               {t('team.desc')}
             </p>
           </motion.div>
 
-          <div className="mt-20 grid gap-8 sm:grid-cols-2">
-            {founders.map((founder, i) => (
+          <div className="mt-24 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {team.map((member, i) => (
               <motion.div
-                key={founder.name}
-                className="glass flex flex-col gap-6 rounded-[2rem] p-10 transition-transform duration-500 hover:-translate-y-2"
+                key={member.name}
+                className="hover:border-aq-gold/20 group relative flex flex-col gap-8 rounded-[2.5rem] border border-white/5 bg-white/[0.02] p-10 backdrop-blur-md transition-all duration-500 hover:bg-white/[0.04]"
                 {...flipReveal(reduced, i)}
               >
+                {/* Visual Accent */}
+                <div className="absolute right-8 top-8 opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+                  <div className="bg-aq-gold h-2 w-2 rounded-full shadow-[0_0_15px_rgba(212,175,55,0.5)]" />
+                </div>
+
                 {/* Avatar + name */}
-                <div className="flex items-center gap-5">
-                  {founder.photo ? (
-                    <Image
-                      src={founder.photo}
-                      alt={founder.name}
-                      width={80}
-                      height={80}
-                      className="rounded-full object-cover ring-4 ring-white/5"
-                      unoptimized
-                    />
-                  ) : (
-                    <div
-                      aria-label={founder.initials}
-                      className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-aq-blue to-aq-purple text-2xl font-bold text-white ring-4 ring-white/5"
-                    >
-                      {founder.initials}
-                    </div>
-                  )}
+                <div className="flex flex-col items-center gap-6 text-center lg:items-start lg:text-left">
+                  <div className="relative h-24 w-24 overflow-hidden rounded-2xl ring-1 ring-white/10 transition-transform duration-500 group-hover:scale-105">
+                    {member.photo ? (
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                    ) : (
+                      <div
+                        aria-label={member.initials}
+                        className="from-aq-indigo flex h-full w-full items-center justify-center bg-gradient-to-br to-aq-blue text-2xl font-bold text-white"
+                      >
+                        {member.initials}
+                      </div>
+                    )}
+                  </div>
                   <div>
-                    <p className="font-display text-2xl font-semibold leading-tight text-foreground">
-                      {founder.name}
+                    <p className="font-display text-2xl font-medium tracking-tight text-foreground">
+                      {member.name}
                     </p>
-                    <p className="mt-1 text-sm font-medium text-aq-blue">
-                      {founder.role}
+                    <p className="text-aq-gold mt-1 font-label text-[0.65rem] font-bold uppercase tracking-widest">
+                      {member.role}
                     </p>
                   </div>
                 </div>
 
                 {/* Bio */}
-                <p className="text-base leading-relaxed text-muted-foreground/90">
-                  {founder.bio}
+                <p className="text-sm leading-[1.8] text-muted-foreground/80">
+                  {member.bio}
                 </p>
 
                 {/* Links */}
-                <div className="mt-auto flex flex-wrap gap-6 pt-4 font-label text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+                <div className="mt-auto flex flex-wrap justify-center gap-6 pt-6 font-label text-[0.65rem] font-bold uppercase tracking-widest text-muted-foreground lg:justify-start">
                   <a
-                    href={founder.linkedin}
+                    href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="transition-colors hover:text-white"
+                    className="hover:text-aq-gold transition-colors"
                   >
                     {t('founder.linkedin')}
                   </a>
-                  {'github' in founder && founder.github && (
+                  {'github' in member && member.github && (
                     <a
-                      href={founder.github}
+                      href={member.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="transition-colors hover:text-white"
+                      className="hover:text-aq-gold transition-colors"
                     >
                       {t('founder.github')}
                     </a>
                   )}
-                  {'twitter' in founder && founder.twitter && (
+                  {'email' in member && member.email && (
                     <a
-                      href={founder.twitter}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-colors hover:text-white"
+                      href={`mailto:${member.email}`}
+                      className="hover:text-aq-gold transition-colors"
                     >
-                      {t('founder.twitter')}
+                      Email
                     </a>
                   )}
                 </div>
@@ -404,9 +426,9 @@ export default function AboutContent() {
       <section
         id="about-cta"
         aria-labelledby="about-cta-heading"
-        className="relative overflow-hidden border-t border-white/10 bg-background px-4 py-32 sm:px-6 lg:px-8"
+        className="relative overflow-hidden border-t border-white/5 bg-background px-4 py-32 sm:px-6 lg:px-8"
       >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] from-aq-blue/10 via-background to-background" />
+        <div className="from-aq-indigo/10 absolute inset-0 bg-[radial-gradient(ellipse_at_bottom,_var(--tw-gradient-stops))] via-background to-background" />
 
         <motion.div
           className="glass-strong relative mx-auto max-w-4xl flex-col items-center justify-center rounded-[3rem] p-12 text-center md:p-20"
@@ -414,26 +436,28 @@ export default function AboutContent() {
         >
           <h2
             id="about-cta-heading"
-            className="font-display text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl"
+            className="font-display text-4xl font-light tracking-tight sm:text-5xl lg:text-6xl"
           >
             {t('cta.title')}
           </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground">
             {t('cta.desc')}
           </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <div className="mt-12 flex flex-wrap justify-center gap-6">
+            <MagneticButton strength={0.2}>
+              <Button
+                variant="brand"
+                size="lg"
+                className="h-14 rounded-full px-10 text-[0.7rem] font-bold uppercase tracking-[0.2em] shadow-[0_0_40px_rgba(212,175,55,0.2)]"
+                asChild
+              >
+                <Link href="/early-access">{t('cta.primary')}</Link>
+              </Button>
+            </MagneticButton>
             <Button
-              variant="brand"
+              variant="heroOutline"
               size="lg"
-              className="h-14 rounded-full px-8 text-base"
-              asChild
-            >
-              <Link href="/early-access">{t('cta.primary')}</Link>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-14 rounded-full border-white/20 px-8 text-base hover:bg-white/5"
+              className="h-14 rounded-full border-white/10 px-10 text-[0.7rem] font-bold uppercase tracking-[0.2em] hover:bg-white/5"
               asChild
             >
               <Link href="/contact">{t('cta.secondary')}</Link>

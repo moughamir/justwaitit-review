@@ -1,81 +1,51 @@
-# Hero Video Assets
+# Video Asset Guidelines - ANAQIO
 
-This directory contains the video assets for the new landing page hero section.
+This directory contains video assets used across the platform, specifically for the Video Hero sections.
 
-## Required Files
+## Assets Needed for Video Hero
 
-### Video Files (16:9 aspect ratio, recommended 1920x1080)
+To ensure optimal performance and cross-browser compatibility, provide the following assets:
 
-1. **hero-showcase.mp4** (primary format)
-   - Format: MP4 (H.264 codec)
-   - Aspect Ratio: 16:9
-   - Resolution: 1920x1080 (or higher for retina)
-   - Duration: 15-30 seconds recommended
-   - File size: < 5MB optimized
-   - Loop: Seamless loop recommended
-   - Audio: Optional (video plays muted by default)
+### 1. `hero-showcase.mp4` (Primary)
 
-2. **hero-showcase.webm** (fallback format)
-   - Format: WebM (VP9 codec)
-   - Same specifications as MP4
-   - Provides better compression for supported browsers
+- **Container:** MP4
+- **Codec:** H.264 (High Profile)
+- **Resolution:** 1920x1080 (16:9 aspect ratio)
+- **Frame Rate:** 24fps or 30fps
+- **Target Size:** < 5MB (Use tools like Handbrake or ffmpeg to optimize)
+- **Duration:** 15-30 seconds (Seamless loop)
+- **Audio:** None (Stripped for smaller size)
 
-### Poster Image
+### 2. `hero-showcase.webm` (Fallback)
 
-3. **hero-video-poster.webp**
-   - Format: WebP (with PNG fallback if needed)
-   - Aspect Ratio: 16:9
-   - Resolution: 1920x1080
-   - File size: < 200KB
-   - This is shown as a placeholder while the video loads
+- **Container:** WebM
+- **Codec:** VP9
+- **Resolution:** Same as MP4
+- **Target Size:** < 4MB
+- **Audio:** None
 
-## Video Content Guidelines
+### 3. `/public/images/hero-video-poster.webp` (Placeholder)
 
-The hero video should showcase:
+- **Format:** WebP
+- **Resolution:** 1920x1080
+- **Target Size:** < 200KB
+- **Description:** A high-quality still frame from the video to be shown while it loads.
 
-- AI-powered fashion photography capabilities
-- Before/after transformations
-- Background replacement examples
-- Lighting adjustment demonstrations
-- Lookbook generation previews
-- Cinematic fashion moments
+## Optimization with ffmpeg
 
-## Optimization Tips
-
-1. **Compress video** using HandBrake or FFmpeg
-2. **Use constant quality** (CRF 23-28 for H.264)
-3. **Remove audio track** if not needed (saves space)
-4. **Consider shortening** to 15-20 seconds for better loop
-5. **Test loading** on slow connections (3G throttling)
-
-## Example FFmpeg Commands
+Use the following commands to generate optimized versions:
 
 ```bash
-# Compress MP4 for web
-ffmpeg -i input.mov -c:v libx264 -crf 25 -preset slow -c:a aac -b:a 128k hero-showcase.mp4
+# Generate optimized MP4
+ffmpeg -i input.mov -vcodec h264 -acodec none -crf 28 -an hero-showcase.mp4
 
-# Create WebM version
-ffmpeg -i input.mov -c:v libvpx-vp9 -crf 30 -b:v 0 -c:a libopus hero-showcase.webm
+# Generate optimized WebM
+ffmpeg -i input.mov -vcodec libvpx-vp9 -b:v 1M -acodec none -an hero-showcase.webm
 
-# Extract poster frame
-ffmpeg -i input.mov -ss 00:00:02 -vframes 1 -vf scale=1920:1080 hero-video-poster.webp
+# Generate poster frame
+ffmpeg -i input.mov -ss 00:00:01 -vframes 1 hero-video-poster.webp
 ```
 
-## Lazy Loading Behavior
+## Naming Convention
 
-The video component implements lazy loading:
-
-- Loads when 10% visible in viewport
-- 200px root margin for early loading
-- Shows placeholder poster while loading
-- Muted autoplay for better browser compatibility
-- User can unmute or pause/play as needed
-
-## Fallback Behavior
-
-If video fails to load:
-
-1. Browser tries WebM format
-2. Then tries MP4 format
-3. Shows "Your browser does not support the video tag" message
-4. Page remains fully functional without video
+Always use kebab-case for filenames: `feature-name-description.ext`.

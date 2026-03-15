@@ -46,6 +46,7 @@ export function WaitlistForm({
     markFieldTouched,
     validateCurrentStep,
     setIsAnimating,
+    resetForm,
   } = useMultiStepForm(steps);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -58,7 +59,7 @@ export function WaitlistForm({
         if (result.success) {
           setStatus('success');
           setMessage(result.message);
-          (e.target as HTMLFormElement).reset();
+          resetForm();
         } else {
           setStatus('error');
           setMessage(result.message);
@@ -108,6 +109,7 @@ export function WaitlistForm({
         if (result.success) {
           setStatus('success');
           setMessage(result.message);
+          resetForm();
         } else {
           setStatus('error');
           setMessage(result.message);

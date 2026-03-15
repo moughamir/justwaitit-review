@@ -29,11 +29,19 @@ export const appConstants = {
 export const appFounders = [
   {
     name: 'Amal AIT OUKHARAZ',
+    role: 'Founder & CEO',
     linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
   },
   {
     name: 'Mohamed MOUGHAMIR',
+    role: 'Co-Founder & CTO',
     linkedin: 'https://www.linkedin.com/in/moughamir/',
+  },
+  {
+    name: 'Zahir CHAIMAE',
+    role: 'Marketing Director',
+    linkedin: 'https://shazo.anaqio.com',
+    email: 'marketing@anaqio.com',
   },
 ];
 
