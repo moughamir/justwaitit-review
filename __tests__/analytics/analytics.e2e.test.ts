@@ -3,9 +3,9 @@ import { test, expect } from '@playwright/test';
 test.describe('Analytics Utility', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    
+
     await page.evaluate(() => {
-      (window as any).gtag = function(...args: any[]) {
+      (window as any).gtag = function (...args: any[]) {
         (window as any).gtagCalls = (window as any).gtagCalls || [];
         (window as any).gtagCalls.push(args);
       };
@@ -17,11 +17,11 @@ test.describe('Analytics Utility', () => {
       const GA_TRACKING_ID = 'G-TEST-ID';
       const ALLOWED_DOMAINS = ['anaqio.com'];
       const url = '/test-page';
-      
+
       if (window.gtag) {
         window.gtag('config', GA_TRACKING_ID, {
           page_path: url,
-          linker: { domains: ALLOWED_DOMAINS }
+          linker: { domains: ALLOWED_DOMAINS },
         });
       }
     });
@@ -38,16 +38,20 @@ test.describe('Analytics Utility', () => {
         window.gtag('event', 'form_submission', {
           event_category: 'conversion',
           event_label: 'waitlist',
-          form_field_email: 't***@example.com'
+          form_field_email: 't***@example.com',
         });
       }
     });
 
     const calls = await page.evaluate(() => (window as any).gtagCalls);
-    expect(calls[0]).toEqual(['event', 'form_submission', {
-      event_category: 'conversion',
-      event_label: 'waitlist',
-      form_field_email: 't***@example.com'
-    }]);
+    expect(calls[0]).toEqual([
+      'event',
+      'form_submission',
+      {
+        event_category: 'conversion',
+        event_label: 'waitlist',
+        form_field_email: 't***@example.com',
+      },
+    ]);
   });
 });
