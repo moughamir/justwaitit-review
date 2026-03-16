@@ -23,7 +23,7 @@
       "@/*": ["./*"]
     },
     "typeRoots": ["./node_modules/@types", "./node_modules"],
-    "types": ["node"]
+    "types": ["node", "vitest/globals", "@testing-library/jest-dom"]
   },
   "include": [
     "next-env.d.ts",

@@ -19,13 +19,13 @@ const WaitlistSchema = z.object({
 
 export async function joinWaitlist(formData: FormData) {
   const rawData = {
-    email: formData.get('email'),
-    full_name: formData.get('full_name'),
-    role: formData.get('role'),
-    company: formData.get('company'),
-    revenue_range: formData.get('revenue_range'),
-    aesthetic: formData.get('aesthetic'),
-    source: formData.get('source'),
+    email: formData.get('email')?.toString().trim() || '',
+    full_name: formData.get('full_name')?.toString().trim() || '',
+    role: formData.get('role')?.toString().trim() || '',
+    company: formData.get('company')?.toString().trim() || null,
+    revenue_range: formData.get('revenue_range')?.toString().trim() || null,
+    aesthetic: formData.get('aesthetic')?.toString().trim() || undefined,
+    source: formData.get('source')?.toString().trim() || undefined,
   };
 
   const validatedFields = WaitlistSchema.safeParse(rawData);
