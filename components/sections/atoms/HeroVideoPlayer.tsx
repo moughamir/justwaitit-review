@@ -71,11 +71,10 @@ export function HeroVideoPlayer() {
               playsInline
               preload="auto"
               onLoadedData={() => {}}
-              poster={NANOBANANA_VISUALS.heroPoster}
+              poster="/videos/hero-poster.jpg"
             >
               {/* Multiple sources for browser compatibility */}
-              <source src="/videos/hero-showcase.mp4" type="video/mp4" />
-              <source src="/videos/hero-showcase.webm" type="video/webm" />
+              <source src="/videos/hero-optimized.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 

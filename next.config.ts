@@ -77,6 +77,26 @@ const nextConfig = {
     ];
   },
 
+  async redirects() {
+    return [
+      {
+        source: '/llms.txt',
+        destination: '/en-US/llms.txt',
+        permanent: true,
+      },
+      {
+        source: '/llms-full.txt',
+        destination: '/en-US/llms-full.txt',
+        permanent: true,
+      },
+      {
+        source: '/sitemap.xml',
+        destination: '/en-US/sitemap.xml',
+        permanent: true,
+      },
+    ];
+  },
+
   experimental: {
     cssChunking: true,
     inlineCss: true,
