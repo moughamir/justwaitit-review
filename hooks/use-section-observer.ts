@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+
 import { trackUserBehavior } from '@/lib/analytics';
 
 /**
@@ -27,7 +28,7 @@ export function useSectionObserver(ids: readonly string[]) {
           const idx = currentIds.indexOf(id);
           if (idx !== -1) {
             setActiveIndex(idx);
-            
+
             // Track section view if not already tracked in this session
             if (!trackedIds.current.has(id)) {
               trackUserBehavior.trackSectionView(id);

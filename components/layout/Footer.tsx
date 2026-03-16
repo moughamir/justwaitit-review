@@ -1,4 +1,6 @@
-import { getTranslations } from 'next-intl/server';
+'use client';
+
+import { useTranslations } from 'next-intl';
 
 import { SocialLinks } from './SocialLinks';
 
@@ -6,8 +8,8 @@ import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { AnaqioLogo } from '@/components/ui/AnaqioLogo';
 import { Link } from '@/i18n/routing';
 
-export async function Footer() {
-  const t = await getTranslations('footer');
+export function Footer() {
+  const t = useTranslations('footer');
 
   const footerColumns = [
     {

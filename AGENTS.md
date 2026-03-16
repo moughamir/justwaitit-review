@@ -9,6 +9,22 @@
 - `public/`: Static assets. `docs/`: Project docs. `supabase/`: Supabase config.
 - `__tests__/`: Playwright tests by feature (e.g., `performance/`, `preservation/`).
 
+## Skills & Sub-Agents
+
+This repository is equipped with specialized AI skills and sub-agents to maintain high standards:
+
+- **Skills (@.agents/skills/):**
+  - `react-refactor`: Architectural refactoring for React.
+  - `nextjs-performance`: Next.js optimization patterns.
+  - `tailwind-ui-refactor`: UI polish and hierarchy with Tailwind.
+  - `typescript-refactor`: Modern TypeScript patterns.
+  - `clean-code`: General best practices and maintainability.
+- **Sub-Agents (@.claude/agents/):**
+  - `anaqio-ui-designer`: Specialized in high-end luxury fashion aesthetics.
+  - `code-improver`: Batch refactoring and optimization.
+
+Use `kiro chat "..."` to dispatch tasks to these experts.
+
 ## Build, Test, and Development Commands
 
 - `bun dev`: Start local dev server at `http://localhost:3000`.
@@ -17,7 +33,8 @@
 - `bun run format` / `bun run format:check`: Format with Prettier.
 - `bun run test`: Run Playwright tests (build and start handled via config).
   - Example: `bun run test -- __tests__/performance/landing-page-performance.test.ts`.
-  - npm alternative: replace `bun run` with `npm run`.
+- `bunx repomix`: Index the codebase for AI context.
+- npm alternative: replace `bun run` with `npm run`.
 
 ## Coding Style & Naming Conventions
 

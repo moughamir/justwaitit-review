@@ -3,6 +3,7 @@ Site: Anaqio — AI Visual Studio for Fashion Commerce
 Company: Anaqio
 Founder: Amal AIT OUKHARAZ https://www.linkedin.com/in/aitoukhraz/
 Co-founder: Mohamed MOUGHAMIR https://www.linkedin.com/in/moughamir/
+Marketing: Zahir CHAIMAE https://shazo.anaqio.com
 Team: Anaqio Team
 Twitter: https://twitter.com/anaqio
 LinkedIn: https://www.linkedin.com/company/anaqio

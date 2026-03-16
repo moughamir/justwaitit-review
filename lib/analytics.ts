@@ -12,11 +12,7 @@ export const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
  * - ^([a-z0-9-]+\.)?vercel\.app$
  * - anaqio.com and *.anaqio.com
  */
-export const ALLOWED_DOMAINS = [
-  'anaqio.com',
-  'vercel.app',
-  'vusercontent.net',
-];
+export const ALLOWED_DOMAINS = ['anaqio.com', 'vercel.app', 'vusercontent.net'];
 
 export const DOMAIN_REGEX = {
   vusercontent: /^([a-z0-9-]+\.)?vusercontent\.net$/,
@@ -37,10 +33,7 @@ export const pageview = (url: string) => {
 };
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/events
-export const event = (
-  action: string,
-  params?: Record<string, any>
-) => {
+export const event = (action: string, params?: Record<string, any>) => {
   if (typeof window !== 'undefined' && window.gtag) {
     window.gtag('event', action, params);
   }

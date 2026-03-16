@@ -1,8 +1,8 @@
 'use client';
 
-import { Suspense, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { Suspense, useEffect } from 'react';
 
 import { ALLOWED_DOMAINS, pageview } from '@/lib/analytics';
 
@@ -22,7 +22,8 @@ const GoogleAnalytics = dynamic(
 );
 
 const GoogleTagManager = dynamic(
-  () => import('@next/third-parties/google').then((mod) => mod.GoogleTagManager),
+  () =>
+    import('@next/third-parties/google').then((mod) => mod.GoogleTagManager),
   { ssr: true }
 );
 
@@ -35,7 +36,9 @@ function GoogleAnalyticsTracker() {
 
   useEffect(() => {
     if (pathname) {
-      const url = pathname + (searchParams?.toString() ? `?${searchParams.toString()}` : '');
+      const url =
+        pathname +
+        (searchParams?.toString() ? `?${searchParams.toString()}` : '');
       pageview(url);
     }
   }, [pathname, searchParams]);
@@ -55,12 +58,12 @@ export function AnaqioAnalytica() {
         <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID} />
       )}
       {process.env.NEXT_PUBLIC_GA_ID && (
-        <GoogleAnalytics 
-          gaId={process.env.NEXT_PUBLIC_GA_ID} 
+        <GoogleAnalytics
+          gaId={process.env.NEXT_PUBLIC_GA_ID}
           config={{
             linker: {
               domains: ALLOWED_DOMAINS,
-            }
+            },
           }}
         />
       )}

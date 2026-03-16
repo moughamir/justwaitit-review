@@ -15,13 +15,19 @@ This project, named **ANAQIO**, is a high-end AI fashion studio platform tailore
 
 ## Tech Stack
 
-- **Framework:** [Next.js 15+](https://nextjs.org) (App Router)
+- **Framework:** [Next.js 16.1.6+](https://nextjs.org) (App Router)
+- **Runtime:** [Bun 1.3.10](https://bun.sh)
 - **Backend/Auth:** [Supabase](https://supabase.com) (DB, Auth, SSR)
 - **Video Production:** [Remotion](https://remotion.dev)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com) & [shadcn/ui](https://ui.shadcn.com)
-- **Animations:** [Framer Motion](https://framer.com/motion)
-- **Validation:** [Zod](https://zod.dev)
-- **Language:** TypeScript
+- **Styling:** [Tailwind CSS 3.4+](https://tailwindcss.com) & [shadcn/ui](https://ui.shadcn.com)
+- **Hooks:** [@uidotdev/usehooks 2.4+](https://usehooks.com)
+- **Animations:** [Framer Motion 12.34+](https://framer.com/motion)
+- **Validation:** [Zod 4.3+](https://zod.dev)
+- **Language:** [TypeScript 5.x](https://www.typescriptlang.org/)
+
+## Architectural Goal
+
+The goal is to maintain a **Scalable, Atomic, and Component-based workflow** following **DRY (Don't Repeat Yourself)** and **KISS (Keep It Simple, Stupid)** principles. We leverage specialized AI Skills and Sub-Agents via the **Kiro CLI** to ensure codebase integrity and high-end aesthetic consistency.
 
 ## Directory Structure
 
@@ -50,6 +56,7 @@ This project, named **ANAQIO**, is a high-end AI fashion studio platform tailore
 - `bun build`: Builds the project for production.
 - `bun start`: Runs the built production server.
 - `bun lint`: Runs ESLint for code quality checks.
+- `bunx repomix`: Index the codebase for AI analysis.
 
 ## Development Conventions
 

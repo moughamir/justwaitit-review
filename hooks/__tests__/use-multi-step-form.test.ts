@@ -63,7 +63,7 @@ describe('useMultiStepForm', () => {
 
   it('should initialize with provided initialData', () => {
     const { result } = renderHook(() =>
-      useMultiStepForm(mockSteps, { field1: 'test' })
+      useMultiStepForm(mockSteps, 'test-storage-key', { field1: 'test' })
     );
 
     expect(result.current.formData).toEqual({ field1: 'test' });
@@ -108,7 +108,9 @@ describe('useMultiStepForm', () => {
 
     it('should NOT advance to next step if validation fails', () => {
       const { result } = renderHook(() =>
-        useMultiStepForm(mockSteps, { failValidation: 'true' })
+        useMultiStepForm(mockSteps, 'test-storage-key-validation', {
+          failValidation: 'true',
+        })
       );
 
       act(() => {

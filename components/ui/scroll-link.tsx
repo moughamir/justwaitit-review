@@ -1,6 +1,7 @@
 'use client';
 
 import { type ComponentPropsWithoutRef } from 'react';
+
 import { trackUserBehavior } from '@/lib/analytics';
 
 type ScrollLinkProps = ComponentPropsWithoutRef<'a'> & {

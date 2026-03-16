@@ -46,6 +46,7 @@
     "@remotion/player": "4",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
+    "@uidotdev/usehooks": "^2.4.1",
     "@vercel/analytics": "^2.0.0",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
