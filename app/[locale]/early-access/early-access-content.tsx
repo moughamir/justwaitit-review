@@ -4,11 +4,12 @@ import { useTranslations } from 'next-intl';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { AtelierInvitationForm } from '@/components/sections/atelier-invitation-form';
+import { AtelierInvitationForm } from '@/components/sections/atelier-invitation';
 import { BackButton } from '@/components/ui/back-button';
 
 export function EarlyAccessContent() {
   const t = useTranslations('earlyAccess');
+  const tAtelier = useTranslations('atelierInvitation');
 
   return (
     <div className="min-h-screen">
@@ -79,10 +80,10 @@ export function EarlyAccessContent() {
 
                   <div className="relative z-10 mb-8 space-y-1">
                     <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-                      Application
+                      {tAtelier('card.eyebrow')}
                     </p>
                     <h2 className="font-cormorant text-2xl font-medium text-foreground sm:text-3xl">
-                      Request an invitation to the atelier
+                      {tAtelier('card.title')}
                     </h2>
                   </div>
 
@@ -92,7 +93,7 @@ export function EarlyAccessContent() {
                 </div>
 
                 <p className="mt-4 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground/50">
-                  Each application is reviewed personally
+                  {tAtelier('card.footnote')}
                 </p>
               </div>
             </div>
