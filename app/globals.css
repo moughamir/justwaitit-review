@@ -847,6 +847,82 @@
   .text-wordmark {
     @apply font-wordmark font-light italic;
   }
+
+  /* ── .typography prose container ─────────────────────────────
+     Apply to any long-form content block (legal pages, about,
+     docs). Children inherit heading fonts from the global h* rule.
+     Mirrors shadcn/ui typography page patterns, mapped to ANAQIO
+     font tokens.                                               */
+
+  .typography {
+    @apply max-w-prose text-foreground;
+  }
+  .typography > * + * {
+    @apply mt-5;
+  }
+  .typography h1 {
+    @apply scroll-m-20 font-display text-4xl font-bold leading-tight tracking-tight;
+  }
+  .typography h2 {
+    @apply scroll-m-20 border-b border-border/40 pb-2 font-display text-3xl font-semibold leading-tight tracking-tight first:mt-0;
+  }
+  .typography h3 {
+    @apply scroll-m-20 font-display text-2xl font-semibold leading-snug tracking-tight;
+  }
+  .typography h4 {
+    @apply scroll-m-20 font-display text-xl font-semibold leading-snug tracking-tight;
+  }
+  .typography p {
+    @apply font-body leading-7;
+  }
+  .typography blockquote {
+    @apply mt-6 border-l-2 border-aq-blue/40 pl-6 font-editorial text-lg italic leading-relaxed;
+  }
+  .typography ul {
+    @apply my-4 ml-6 list-disc [&>li]:mt-2;
+  }
+  .typography ol {
+    @apply my-4 ml-6 list-decimal [&>li]:mt-2;
+  }
+  .typography li {
+    @apply font-body leading-7;
+  }
+  .typography table {
+    @apply w-full text-sm;
+  }
+  .typography thead {
+    @apply border-b border-border;
+  }
+  .typography th {
+    @apply h-12 px-4 text-left align-middle font-label text-xs font-medium uppercase tracking-label text-muted-foreground;
+  }
+  .typography td {
+    @apply p-4 align-middle font-body;
+  }
+  .typography tr {
+    @apply border-b border-border/50 transition-colors hover:bg-muted/20;
+  }
+  .typography code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  .typography pre {
+    @apply mt-6 overflow-x-auto rounded-xl bg-muted p-4;
+  }
+  .typography pre code {
+    @apply bg-transparent p-0 font-normal;
+  }
+  .typography hr {
+    @apply my-8 border-border/40;
+  }
+  .typography a {
+    @apply font-medium text-aq-blue underline underline-offset-4 hover:text-aq-blue/80;
+  }
+  .typography strong {
+    @apply font-semibold;
+  }
+  .typography em {
+    @apply font-editorial italic;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
