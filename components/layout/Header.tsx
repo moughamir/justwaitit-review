@@ -1,7 +1,7 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -10,6 +10,9 @@ import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { Button } from '@/components/ui/button';
 import { Link } from '@/i18n/routing';
 import { cn } from '@/lib/utils';
+
+/* CodePen-matched cubic-bezier for the collapsing pill */
+const EASE_PILL = 'cubic-bezier(0.075, 0.82, 0.165, 1)';
 
 export function Header() {
   const t = useTranslations('header');
@@ -27,46 +30,27 @@ export function Header() {
     { label: t('nav.legalMentions'), href: '/legal-mentions' },
   ] as const;
 
-  const [isHidden, setIsHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLegalOpen, setIsLegalOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [hoverKey, setHoverKey] = useState(0);
   const lastScrollYRef = useRef(0);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const legalRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const onScroll = () => {
       const current = window.scrollY;
-      const prev = lastScrollYRef.current;
-      const isScrollingDown = current > prev && current > 80;
-
-      setIsHidden(isScrollingDown);
-      setIsScrolled(current > 40);
+      setIsScrolled(current > 100);
       lastScrollYRef.current = current;
 
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-
-      if (isScrollingDown) {
-        scrollTimeoutRef.current = setTimeout(() => {
-          setIsHidden(false);
-        }, 1000);
-      }
+      // Close menu on scroll (matches CodePen behavior)
+      if (isMenuOpen) setIsMenuOpen(false);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      if (scrollTimeoutRef.current) {
-        clearTimeout(scrollTimeoutRef.current);
-      }
-    };
-  }, []);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isMenuOpen]);
 
   /* Close legal dropdown on outside click */
   useEffect(() => {
@@ -88,160 +72,261 @@ export function Header() {
     setIsHovered(false);
   }, []);
 
-  const linkClass = cn(
-    'transition-all duration-500 hover:text-aq-blue',
-    isScrolled ? 'text-xs' : 'text-sm'
-  );
+  const handleHamburgerClick = useCallback(() => {
+    setIsMenuOpen((prev) => !prev);
+  }, []);
 
   return (
-    <header
-      className={cn(
-        'ease-smooth pointer-events-none fixed left-0 right-0 top-0 z-50 p-2 transition-all duration-500',
-        'animate-in fade-in slide-in-from-top-full fill-mode-both',
-        isHidden
-          ? '-translate-y-[120px] opacity-0'
-          : 'translate-y-0 opacity-100',
-        isScrolled ? 'py-2' : 'py-4'
-      )}
-      style={{ viewTransitionName: 'site-header' }}
-    >
-      <nav
-        aria-label="Main Navigation"
-        className={cn(
-          'ease-smooth pointer-events-auto mx-auto flex max-w-5xl items-center justify-between rounded-xl border border-border/40 bg-background/40 shadow-md backdrop-blur-xl backdrop-saturate-150 transition-[padding,opacity,transform,box-shadow] duration-500',
-          isScrolled ? 'px-3 py-2 sm:px-5' : 'px-4 py-3 sm:px-6'
-        )}
-        style={{ touchAction: 'manipulation' }}
-      >
-        {/* Logo */}
+    <header className="pointer-events-none fixed left-0 right-0 top-0 z-[9999]">
+      {/* ─── Logo: centered above the pill, fades on scroll ─── */}
+      <div className="flex justify-center">
         <Link
           href="/"
-          className="flex items-center"
+          className="pointer-events-auto"
           aria-label={t('logo.aria')}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          style={{ viewTransitionName: 'site-logo' }}
+          style={{
+            viewTransitionName: 'site-logo',
+            transition: `0.3s all ${EASE_PILL}`,
+            transitionDelay: isScrolled ? '0.5s' : '0.6s',
+          }}
         >
           <AnaqioTypographyLogo
             key={hoverKey}
             className={cn(
-              'ease-smooth transition-all duration-500',
-              isScrolled ? 'w-24' : 'w-32'
+              'transition-all duration-300',
+              isScrolled
+                ? 'mt-0 w-20 scale-[0.8] opacity-0'
+                : 'mt-7 w-24 opacity-100'
             )}
             variant={isHovered ? 'outline-fill' : 'none'}
           />
           <span className="sr-only">anaqio</span>
         </Link>
+      </div>
 
-        {/* Desktop links */}
-        <div className="flex items-center gap-3 sm:gap-6">
-          <div className="hidden items-center gap-4 text-sm font-medium text-foreground/70 md:flex">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link key={href} href={href} className={linkClass}>
-                {label}
-              </Link>
-            ))}
-
-            {/* Legal dropdown */}
-            <div ref={legalRef} className="relative">
-              <button
-                onClick={() => setIsLegalOpen((v) => !v)}
-                aria-expanded={isLegalOpen}
-                aria-haspopup="menu"
-                className={cn(
-                  'flex items-center gap-1 transition-all duration-500 hover:text-aq-blue',
-                  isScrolled ? 'text-xs' : 'text-sm',
-                  isLegalOpen && 'text-aq-blue'
-                )}
-              >
-                {t('nav.legal')}
-                <ChevronDown
-                  size={12}
-                  className={cn(
-                    'transition-transform duration-200',
-                    isLegalOpen && 'rotate-180'
-                  )}
-                />
-              </button>
-
-              <AnimatePresence>
-                {isLegalOpen && (
-                  <motion.div
-                    role="menu"
-                    initial={{ opacity: 0, y: -6, scale: 0.97 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.97 }}
-                    transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-[calc(100%+0.5rem)] z-50 min-w-[180px] rounded-xl border border-border/40 bg-background/95 py-2 shadow-xl backdrop-blur-xl"
-                  >
-                    {LEGAL_LINKS.map(({ label, href }) => (
-                      <Link
-                        key={href}
-                        href={href}
-                        role="menuitem"
-                        onClick={() => setIsLegalOpen(false)}
-                        className="block px-4 py-2 text-xs text-foreground/70 transition-colors hover:bg-secondary/40 hover:text-aq-blue"
-                      >
-                        {label}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-          </div>
-
-          <Button
-            variant="brand"
+      {/* ─── Desktop: collapsing pill nav ─── */}
+      <nav
+        aria-label="Main Navigation"
+        className={cn(
+          'pointer-events-auto relative mx-auto hidden items-center justify-center overflow-hidden md:flex',
+          'rounded-full border border-white/[0.06] bg-white/[0.05] shadow-lg backdrop-blur-md'
+        )}
+        style={{
+          transition: `1s all ${EASE_PILL}`,
+          transitionDelay: isScrolled ? '0.5s' : '0.2s',
+          width: isScrolled ? '72px' : '520px',
+          height: isScrolled ? '72px' : '72px',
+          marginTop: isScrolled ? '20px' : '8px',
+          touchAction: 'manipulation',
+        }}
+      >
+        {/* Nav links — fade out when collapsed */}
+        {NAV_LINKS.map(({ label, href }) => (
+          <Link
+            key={href}
+            href={href}
             className={cn(
-              'mr-1 rounded backdrop-blur-xl transition-all duration-500 sm:mr-2',
-              isScrolled ? 'text-xs' : 'text-sm'
+              'whitespace-nowrap text-[15px] font-bold lowercase tracking-wider text-white',
+              isScrolled && 'pointer-events-none'
             )}
-            onClick={() => {
-              document
-                .getElementById('waitlist')
-                ?.scrollIntoView({ behavior: 'smooth' });
-              setIsMobileMenuOpen(false);
+            style={{
+              transition: `0.3s all ${EASE_PILL}`,
+              transitionDelay: isScrolled ? '0.2s' : '0.6s',
+              padding: isScrolled ? '0' : '10px 20px',
+              opacity: isScrolled ? 0 : 1,
+              letterSpacing: isScrolled ? '0' : '2px',
+              transform: isScrolled ? 'scale(0.3)' : 'scale(1)',
             }}
-            aria-label={t('button.waitlist')}
           >
-            {t('button.waitlist')}
-          </Button>
+            {label}
+          </Link>
+        ))}
 
-          <LocaleSwitcher />
-
+        {/* Legal dropdown — also fades */}
+        <div
+          ref={legalRef}
+          className={cn('relative', isScrolled && 'pointer-events-none')}
+          style={{
+            transition: `0.3s all ${EASE_PILL}`,
+            transitionDelay: isScrolled ? '0.2s' : '0.6s',
+            opacity: isScrolled ? 0 : 1,
+            transform: isScrolled ? 'scale(0.3)' : 'scale(1)',
+          }}
+        >
           <button
-            className="flex items-center justify-center p-1 text-foreground/70 transition-colors hover:text-aq-blue md:hidden"
-            onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            aria-label={t('menu.aria')}
-            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsLegalOpen((v) => !v)}
+            aria-expanded={isLegalOpen}
+            aria-haspopup="menu"
+            className={cn(
+              'flex items-center gap-1 whitespace-nowrap px-5 py-2.5 text-[15px] font-bold lowercase tracking-wider text-white transition-colors hover:text-foreground',
+              isLegalOpen && 'text-foreground'
+            )}
           >
-            {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            {t('nav.legal')}
+            <ChevronDown
+              size={12}
+              className={cn(
+                'transition-transform duration-200',
+                isLegalOpen && 'rotate-180'
+              )}
+            />
           </button>
+
+          <AnimatePresence>
+            {isLegalOpen && !isScrolled && (
+              <motion.div
+                role="menu"
+                initial={{ opacity: 0, y: -6, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -6, scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+                className="absolute end-0 top-[calc(100%+0.75rem)] z-50 min-w-[180px] rounded-xl border border-white/[0.08] bg-background/95 py-2 shadow-xl backdrop-blur-xl"
+              >
+                {LEGAL_LINKS.map(({ label, href }) => (
+                  <Link
+                    key={href}
+                    href={href}
+                    role="menuitem"
+                    onClick={() => setIsLegalOpen(false)}
+                    className="block px-4 py-2 text-xs text-foreground/70 transition-colors hover:bg-secondary/40 hover:text-foreground"
+                  >
+                    {label}
+                  </Link>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
+
+        {/* Divider — fades with links */}
+        <div
+          className="h-5 w-px bg-white/10"
+          style={{
+            transition: `0.3s all ${EASE_PILL}`,
+            transitionDelay: isScrolled ? '0.2s' : '0.6s',
+            opacity: isScrolled ? 0 : 1,
+            transform: isScrolled ? 'scale(0)' : 'scale(1)',
+          }}
+        />
+
+        {/* Locale switcher — fades with links */}
+        <div
+          className={isScrolled ? 'pointer-events-none' : ''}
+          style={{
+            transition: `0.3s all ${EASE_PILL}`,
+            transitionDelay: isScrolled ? '0.2s' : '0.6s',
+            opacity: isScrolled ? 0 : 1,
+            transform: isScrolled ? 'scale(0.3)' : 'scale(1)',
+          }}
+        >
+          <LocaleSwitcher />
+        </div>
+
+        {/* Hamburger button — centered inside pill, scales in when collapsed */}
+        <button
+          className={cn(
+            'absolute inset-0 m-auto flex items-center justify-center rounded-full',
+            'bg-black/30 backdrop-blur-md',
+            'border border-white/[0.1] outline-none',
+            'cursor-pointer',
+            !isScrolled && 'pointer-events-none'
+          )}
+          style={{
+            width: '56px',
+            height: '56px',
+            transition: `0.3s all ${EASE_PILL}`,
+            transitionDelay: isScrolled ? '0.6s' : '0.2s',
+            transform: isScrolled ? 'scale(1)' : 'scale(0)',
+          }}
+          onClick={handleHamburgerClick}
+          aria-label={t('menu.aria')}
+          aria-expanded={isMenuOpen}
+        >
+          <div className="flex flex-col gap-[5px]">
+            <span
+              className="mx-auto block h-[2px] w-5 bg-white"
+              style={{
+                transition: `0.6s transform ${EASE_PILL}`,
+                transitionDelay: isScrolled ? '0.8s' : '0s',
+                transform: isScrolled ? 'scaleX(1)' : 'scaleX(0)',
+              }}
+            />
+            <span
+              className="mx-auto block h-[2px] w-5 bg-white"
+              style={{
+                transition: `0.6s transform ${EASE_PILL}`,
+                transitionDelay: isScrolled ? '0.8s' : '0s',
+                transform: isScrolled ? 'scaleX(1)' : 'scaleX(0)',
+              }}
+            />
+          </div>
+        </button>
       </nav>
 
-      {/* Mobile menu */}
+      {/* ─── Mobile: always-visible circular glass hamburger ─── */}
+      <button
+        className={cn(
+          'pointer-events-auto absolute end-4 top-5 flex h-11 w-11 items-center justify-center md:hidden',
+          'rounded-full border border-white/[0.06] bg-white/[0.05] shadow-lg backdrop-blur-md',
+          'text-foreground/60 transition-all duration-300 hover:border-white/20 hover:text-foreground'
+        )}
+        onClick={handleHamburgerClick}
+        aria-label={t('menu.aria')}
+        aria-expanded={isMenuOpen}
+      >
+        <div className="flex flex-col gap-[5px]">
+          <span
+            className={cn(
+              'mx-auto block h-[2px] w-4 bg-white transition-all duration-300',
+              isMenuOpen && 'translate-y-[3.5px] rotate-45'
+            )}
+          />
+          <span
+            className={cn(
+              'mx-auto block h-[2px] w-4 bg-white transition-all duration-300',
+              isMenuOpen && '-translate-y-[3.5px] -rotate-45'
+            )}
+          />
+        </div>
+      </button>
+
+      {/* ─── Dropdown menu (shared for mobile + desktop-scrolled hamburger) ─── */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-auto absolute left-4 right-4 top-[calc(100%+0.5rem)] rounded-xl border border-border/40 bg-background/95 p-4 shadow-xl backdrop-blur-xl md:hidden"
+            className="pointer-events-auto mx-auto mt-3 max-w-sm rounded-2xl border border-white/[0.08] bg-background/95 p-4 shadow-xl backdrop-blur-xl md:mt-3"
           >
             <div className="flex flex-col gap-1 text-sm font-medium text-foreground/70">
               {NAV_LINKS.map(({ label, href }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary/40 hover:text-aq-blue"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="rounded-lg px-3 py-2 transition-colors hover:bg-secondary/40 hover:text-foreground"
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {label}
                 </Link>
               ))}
+
+              <Button
+                variant="brand"
+                className="mt-2 rounded-lg text-sm"
+                onClick={() => {
+                  document
+                    .getElementById('waitlist')
+                    ?.scrollIntoView({ behavior: 'smooth' });
+                  setIsMenuOpen(false);
+                }}
+                aria-label={t('button.waitlist')}
+              >
+                {t('button.waitlist')}
+              </Button>
 
               {/* Legal section */}
               <div className="mt-2 border-t border-border/30 pt-2">
@@ -252,12 +337,17 @@ export function Header() {
                   <Link
                     key={href}
                     href={href}
-                    className="block rounded-lg px-3 py-2 text-xs transition-colors hover:bg-secondary/40 hover:text-aq-blue"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block rounded-lg px-3 py-2 text-xs transition-colors hover:bg-secondary/40 hover:text-foreground"
+                    onClick={() => setIsMenuOpen(false)}
                   >
                     {label}
                   </Link>
                 ))}
+              </div>
+
+              {/* Locale switcher in dropdown */}
+              <div className="mt-2 flex justify-center border-t border-border/30 pt-3">
+                <LocaleSwitcher />
               </div>
             </div>
           </motion.div>

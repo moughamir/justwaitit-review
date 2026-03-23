@@ -1,20 +1,15 @@
-import {
-  Cormorant_Garamond,
-  DM_Sans,
-  Instrument_Serif,
-} from 'next/font/google';
+import { Instrument_Serif, Plus_Jakarta_Sans, Syne } from 'next/font/google';
 
-const cormorant = Cormorant_Garamond({
-  variable: '--font-cormorant',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+const syne = Syne({
+  variable: '--font-syne',
+  subsets: ['latin', 'latin-ext'],
+  weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin'],
+const jakartaSans = Plus_Jakarta_Sans({
+  variable: '--font-jakarta',
+  subsets: ['latin', 'latin-ext'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
 });
@@ -29,7 +24,7 @@ const instrumentSerif = Instrument_Serif({
 });
 
 export const appFonts = {
-  cormorant,
-  dmSans,
+  syne,
+  jakartaSans,
   instrumentSerif,
 };

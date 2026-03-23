@@ -58,9 +58,9 @@ export function VideoHeroSection() {
       </div>
 
       {/* Layer 2: Content - Two Column Layout */}
-      <div className="relative z-20 mx-auto flex w-full flex-1 flex-col items-center justify-center px-6 pt-20 sm:px-12 lg:flex-row lg:items-start lg:gap-16 lg:pt-24">
+      <div className="relative z-20 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center justify-center px-6 pt-20 sm:px-12 lg:flex-row lg:items-center lg:gap-12 lg:pt-24">
         {/* Left Column: Text & CTAs */}
-        <div className="flex w-full flex-col items-center lg:w-1/2 lg:items-start">
+        <div className="flex w-full flex-col items-center lg:w-7/12 lg:items-start">
           <HeroText animated={animated} reduced={!!reduced} />
           <HeroCTAs animated={animated} tier={tier} />
         </div>

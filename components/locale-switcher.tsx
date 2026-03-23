@@ -76,7 +76,7 @@ export function LocaleSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-50 mt-1.5 min-w-[140px] overflow-hidden rounded-xl border border-border/20 bg-card/90 shadow-xl backdrop-blur-xl"
+            className="absolute end-0 top-full z-50 mt-1.5 min-w-[140px] overflow-hidden rounded-xl border border-border/20 bg-card/90 shadow-xl backdrop-blur-xl"
           >
             {locales.map((loc) => {
               const meta = LOCALE_META[loc];

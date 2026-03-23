@@ -16,10 +16,15 @@ bun run lint         # Run ESLint
 bun run lint:fix     # Auto-fix linting issues
 bun run format       # Format all files with Prettier
 bun run format:check # Check formatting without writing
-bun run test         # Run all Playwright E2E tests (builds app first)
+bun run test         # Run Vitest unit tests (components, hooks, lib)
+bun run test:e2e     # Run Playwright E2E tests (builds app first)
+bun run test:coverage # Vitest with coverage report
 
-# Run a single test file:
-bun run test -- __tests__/performance/landing-page-performance.test.ts
+# Run a single unit test file:
+bun run test -- components/ui/__tests__/button.test.tsx
+
+# Run a single E2E test file:
+bun run test:e2e -- __tests__/performance/landing-page-performance.test.ts
 ```
 
 ## Environment Setup

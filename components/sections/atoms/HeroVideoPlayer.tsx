@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Play } from 'lucide-react';
 import { useState } from 'react';
 
@@ -35,11 +34,11 @@ export function HeroVideoPlayer() {
   return (
     <div
       ref={containerRef}
-      className="relative mt-12 flex w-full justify-center lg:mt-0 lg:w-1/2"
+      className="relative mt-12 flex w-full justify-center lg:mt-0 lg:w-5/12"
     >
       <div
         className={cn(
-          'relative aspect-[9/16] w-full max-w-xs overflow-hidden rounded-2xl',
+          'relative aspect-[3/4] w-full max-w-sm overflow-hidden rounded-2xl lg:max-h-[70vh]',
           'bg-gradient-to-br from-white/5 to-white/[0.02]',
           'border border-white/10 shadow-2xl shadow-black/50',
           'transition-all duration-700',
@@ -176,16 +175,6 @@ export function HeroVideoPlayer() {
           )}
         />
       </div>
-
-      {/* Video caption */}
-      <motion.p
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 1.5 }}
-        className="mt-4 text-center text-xs text-muted-foreground/60 lg:text-left"
-      >
-        AI-powered fashion photography redefined
-      </motion.p>
     </div>
   );
 }

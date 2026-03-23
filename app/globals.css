@@ -110,12 +110,17 @@
     --radius: 0.75rem;
 
     /* Typography System Variables */
-    --font-display: var(--font-cormorant);
-    --font-ui: var(--font-dm-sans);
-    --font-body: var(--font-dm-sans);
-    --font-label: var(--font-dm-sans);
+    --font-display: var(--font-syne);
+    --font-ui: var(--font-jakarta);
+    --font-body: var(--font-jakarta);
+    --font-label: var(--font-jakarta);
     --font-editorial: var(--font-instrument-serif);
     --font-wordmark: Georgia, serif;
+
+    /* Anaqio Brand Tokens (always use these — never inline hex) */
+    --aq-navy: #1b2f52;
+    --aq-gold: #d4af37;
+    --aq-anaqio-white: #f8f6f0;
 
     /* 60-30-10 tone mapping (dominant-secondary-accent) */
     --tone-dominant: var(--background);

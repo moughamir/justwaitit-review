@@ -1,10 +1,11 @@
 'use client';
 
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
-import { charReveal, ease } from '@/lib/motion';
+import { isRTL, type Locale } from '@/i18n/config';
+import { charReveal, ease, wordReveal } from '@/lib/motion';
 
 interface HeroTextProps {
   animated: boolean;
@@ -13,6 +14,8 @@ interface HeroTextProps {
 
 export function HeroText({ animated, reduced }: HeroTextProps) {
   const t = useTranslations('landing.hero');
+  const locale = useLocale();
+  const rtl = isRTL(locale as Locale);
   const textRef = useRef<HTMLDivElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -27,7 +30,7 @@ export function HeroText({ animated, reduced }: HeroTextProps) {
   return (
     <div
       ref={textRef}
-      className="flex flex-col items-center text-center lg:items-start lg:text-left"
+      className="flex flex-col items-center text-center lg:items-start lg:text-start"
     >
       {/* Eyebrow */}
       <motion.div
@@ -54,7 +57,23 @@ export function HeroText({ animated, reduced }: HeroTextProps) {
         {(() => {
           const headline = t('headline.pre');
           const words = headline.split(' ');
-          // Precompute each word's starting character index to avoid mutations inside map
+
+          if (rtl) {
+            return words.map((word, wi) => (
+              <motion.span
+                key={`pre-word-${wi}`}
+                data-atom
+                aria-hidden="true"
+                {...(animated ? wordReveal(reduced, wi) : {})}
+                className="me-[0.22em] inline-block"
+                style={{ fontSize: 'clamp(2.5rem, 6vw, 6rem)' }}
+              >
+                {word}
+              </motion.span>
+            ));
+          }
+
+          // LTR: per-character animation
           const wordOffsets = words.map((_, wi) =>
             words.slice(0, wi).reduce((sum, w) => sum + w.length + 1, 0)
           );
@@ -96,7 +115,7 @@ export function HeroText({ animated, reduced }: HeroTextProps) {
             initial={animated ? { y: 20, opacity: 0 } : false}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.55, delay: 0.72 + i * 0.07, ease }}
-            className="text-brand-gradient mr-[0.25em] inline-block"
+            className="text-brand-gradient me-[0.25em] inline-block"
             style={{
               fontSize: 'clamp(1.5rem, 3vw, 3rem)',
               letterSpacing: '-0.01em',
@@ -119,7 +138,7 @@ export function HeroText({ animated, reduced }: HeroTextProps) {
             initial={animated ? { y: 16, opacity: 0 } : false}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.45, delay: 1.0 + i * 0.055, ease }}
-            className="mr-[0.3em] inline-block"
+            className="me-[0.3em] inline-block"
           >
             {word}
           </motion.span>

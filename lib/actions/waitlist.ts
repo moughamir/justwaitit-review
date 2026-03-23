@@ -17,6 +17,45 @@ const WaitlistSchema = z.object({
   source: z.string().default('home'),
 });
 
+/**
+ * Fire-and-forget: create/update Brevo contact + send a welcome event.
+ * Silently skips if BREVO_API_KEY is not set.
+ */
+async function triggerBrevoWelcome(
+  email: string,
+  firstName: string
+): Promise<void> {
+  const apiKey = process.env.BREVO_API_KEY;
+  if (!apiKey) {
+    console.warn('[Brevo] BREVO_API_KEY is not set — skipping welcome trigger');
+    return;
+  }
+
+  try {
+    // Upsert the contact into Brevo
+    await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        'api-key': apiKey,
+      },
+      body: JSON.stringify({
+        email,
+        attributes: { FIRSTNAME: firstName },
+        // Add to the Anaqio waitlist list if BREVO_LIST_ID is configured
+        ...(process.env.BREVO_LIST_ID
+          ? { listIds: [Number(process.env.BREVO_LIST_ID)] }
+          : {}),
+        updateEnabled: true,
+      }),
+    });
+  } catch (err) {
+    // Non-fatal — Brevo failure must never block the user
+    console.error('[Brevo] Failed to trigger welcome sequence:', err);
+  }
+}
+
 export async function joinWaitlist(formData: FormData) {
   const rawData = {
     email: formData.get('email')?.toString().trim() ?? '',
@@ -68,6 +107,12 @@ export async function joinWaitlist(formData: FormData) {
         message: 'Something went wrong. Please try again later.',
       };
     }
+
+    // Fire Brevo welcome sequence — do not await (non-blocking)
+    void triggerBrevoWelcome(
+      email.toLowerCase().trim(),
+      full_name.trim().split(' ')[0] ?? full_name.trim()
+    );
 
     return {
       success: true,

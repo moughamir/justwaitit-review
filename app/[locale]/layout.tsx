@@ -5,7 +5,6 @@ import { getMessages, getTranslations } from 'next-intl/server';
 
 import type { Metadata, Viewport } from 'next';
 
-import { AnaqioAnalytica } from '@/components/brand/Analytica';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { NavigationProgress } from '@/components/ui/NavigationProgress';
 import { isRTL, locales, type Locale } from '@/i18n/config';
@@ -125,7 +124,7 @@ export default async function LocaleLayout({
         ))}
       </head>
       <body
-        className={`${appFonts.cormorant.variable} ${appFonts.dmSans.variable} ${appFonts.instrumentSerif.variable} ${notoArabic.variable} relative antialiased`}
+        className={`${appFonts.syne.variable} ${appFonts.jakartaSans.variable} ${appFonts.instrumentSerif.variable} ${notoArabic.variable} relative antialiased`}
         suppressHydrationWarning
       >
         <a
@@ -171,7 +170,6 @@ export default async function LocaleLayout({
         </NextIntlClientProvider>
         <GrainOverlay />
       </body>
-      <AnaqioAnalytica />
     </html>
   );
 }
