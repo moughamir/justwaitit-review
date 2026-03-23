@@ -15,11 +15,11 @@ import { cn } from '@/lib/utils';
 const EASE_PILL = 'cubic-bezier(0.075, 0.82, 0.165, 1)';
 
 /* Shared fade style for pill children */
-const pillChildStyle = (isScrolled: boolean) => ({
+const pillChildStyle = (collapsed: boolean) => ({
   transition: `0.3s all ${EASE_PILL}`,
-  transitionDelay: isScrolled ? '0.2s' : '0.6s',
-  opacity: isScrolled ? 0 : 1,
-  transform: isScrolled ? 'scale(0.3)' : 'scale(1)',
+  transitionDelay: collapsed ? '0.2s' : '0.6s',
+  opacity: collapsed ? 0 : 1,
+  transform: collapsed ? 'scale(0.3)' : 'scale(1)',
 });
 
 export function Header() {
@@ -48,42 +48,66 @@ export function Header() {
 
   /* ─── State ─── */
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isPillForced, setIsPillForced] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMoreOpen, setIsMoreOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const [hoverKey, setHoverKey] = useState(0);
   const lastScrollYRef = useRef(0);
   const moreRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
 
-  /* ─── Scroll: collapse pill at 100px, close menus ─── */
+  /*
+   * Desktop: pill is "collapsed" only when scrolled AND not force-expanded.
+   * Mobile: isMenuOpen controls the dropdown independently.
+   */
+  const pillCollapsed = isScrolled && !isPillForced;
+
+  /* ─── Scroll: collapse pill at 100px, close forced pill & mobile menu ─── */
   useEffect(() => {
     const onScroll = () => {
       const current = window.scrollY;
       setIsScrolled(current > 100);
       lastScrollYRef.current = current;
+      if (isPillForced) setIsPillForced(false);
       if (isMenuOpen) setIsMenuOpen(false);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, [isMenuOpen]);
+  }, [isPillForced, isMenuOpen]);
 
-  /* ─── Outside click: close "More" dropdown ─── */
+  /* ─── Outside click: close forced pill & "More" dropdown ─── */
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
         setIsMoreOpen(false);
       }
+      if (
+        isPillForced &&
+        navRef.current &&
+        !navRef.current.contains(e.target as Node)
+      ) {
+        setIsPillForced(false);
+      }
     };
     document.addEventListener('mousedown', handler);
     return () => document.removeEventListener('mousedown', handler);
-  }, []);
+  }, [isPillForced]);
 
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
     setHoverKey((k) => k + 1);
   }, []);
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
-  const handleHamburgerClick = useCallback(
+
+  /* Desktop hamburger: toggle pill expansion */
+  const handleDesktopHamburger = useCallback(() => {
+    setIsPillForced((prev) => !prev);
+    setIsMoreOpen(false);
+  }, []);
+
+  /* Mobile hamburger: toggle dropdown menu */
+  const handleMobileHamburger = useCallback(
     () => setIsMenuOpen((prev) => !prev),
     []
   );
@@ -92,6 +116,7 @@ export function Header() {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
     setIsMoreOpen(false);
+    setIsPillForced(false);
   }, []);
 
   return (
@@ -107,14 +132,14 @@ export function Header() {
           style={{
             viewTransitionName: 'site-logo',
             transition: `0.3s all ${EASE_PILL}`,
-            transitionDelay: isScrolled ? '0.5s' : '0.6s',
+            transitionDelay: pillCollapsed ? '0.5s' : '0.6s',
           }}
         >
           <AnaqioTypographyLogo
             key={hoverKey}
             className={cn(
               'transition-all duration-300',
-              isScrolled
+              pillCollapsed
                 ? 'mt-0 w-20 scale-[0.8] opacity-0'
                 : 'mt-7 w-24 opacity-100'
             )}
@@ -124,8 +149,9 @@ export function Header() {
         </Link>
       </div>
 
-      {/* ─── Desktop: collapsing pill nav (DESIGN.md glass) ─── */}
+      {/* ─── Desktop: collapsing pill nav ─── */}
       <nav
+        ref={navRef}
         aria-label="Main Navigation"
         className={cn(
           'pointer-events-auto relative mx-auto hidden items-center justify-center overflow-visible md:flex',
@@ -133,10 +159,10 @@ export function Header() {
         )}
         style={{
           transition: `1s all ${EASE_PILL}`,
-          transitionDelay: isScrolled ? '0.5s' : '0.2s',
-          width: isScrolled ? '72px' : '640px',
+          transitionDelay: pillCollapsed ? '0.5s' : '0.2s',
+          width: pillCollapsed ? '72px' : '640px',
           height: '72px',
-          marginTop: isScrolled ? '20px' : '8px',
+          marginTop: pillCollapsed ? '20px' : '8px',
           touchAction: 'manipulation',
         }}
       >
@@ -147,11 +173,11 @@ export function Header() {
             targetId={targetId}
             className={cn(
               'whitespace-nowrap text-[13px] font-medium uppercase tracking-wider text-white/80 transition-colors hover:text-aq-gold',
-              isScrolled && 'pointer-events-none'
+              pillCollapsed && 'pointer-events-none'
             )}
             style={{
-              ...pillChildStyle(isScrolled),
-              padding: isScrolled ? '0' : '10px 16px',
+              ...pillChildStyle(pillCollapsed),
+              padding: pillCollapsed ? '0' : '10px 16px',
             }}
           >
             {label}
@@ -161,8 +187,8 @@ export function Header() {
         {/* "More" dropdown — page links + legal */}
         <div
           ref={moreRef}
-          className={cn('relative', isScrolled && 'pointer-events-none')}
-          style={pillChildStyle(isScrolled)}
+          className={cn('relative', pillCollapsed && 'pointer-events-none')}
+          style={pillChildStyle(pillCollapsed)}
         >
           <button
             onClick={() => setIsMoreOpen((v) => !v)}
@@ -184,7 +210,7 @@ export function Header() {
           </button>
 
           <AnimatePresence>
-            {isMoreOpen && !isScrolled && (
+            {isMoreOpen && !pillCollapsed && (
               <motion.div
                 role="menu"
                 initial={{ opacity: 0, y: -6, scale: 0.97 }}
@@ -230,15 +256,15 @@ export function Header() {
         <div
           className="h-5 w-px bg-white/10"
           style={{
-            ...pillChildStyle(isScrolled),
-            transform: isScrolled ? 'scale(0)' : 'scale(1)',
+            ...pillChildStyle(pillCollapsed),
+            transform: pillCollapsed ? 'scale(0)' : 'scale(1)',
           }}
         />
 
         {/* Locale switcher */}
         <div
-          className={isScrolled ? 'pointer-events-none' : ''}
-          style={pillChildStyle(isScrolled)}
+          className={pillCollapsed ? 'pointer-events-none' : ''}
+          style={pillChildStyle(pillCollapsed)}
         >
           <LocaleSwitcher />
         </div>
@@ -250,34 +276,34 @@ export function Header() {
             'bg-[#131b2e]/80 backdrop-blur-[20px]',
             'outline-none',
             'cursor-pointer',
-            !isScrolled && 'pointer-events-none'
+            !pillCollapsed && 'pointer-events-none'
           )}
           style={{
             width: '56px',
             height: '56px',
             transition: `0.3s all ${EASE_PILL}`,
-            transitionDelay: isScrolled ? '0.6s' : '0.2s',
-            transform: isScrolled ? 'scale(1)' : 'scale(0)',
+            transitionDelay: pillCollapsed ? '0.6s' : '0.2s',
+            transform: pillCollapsed ? 'scale(1)' : 'scale(0)',
           }}
-          onClick={handleHamburgerClick}
+          onClick={handleDesktopHamburger}
           aria-label={t('menu.aria')}
-          aria-expanded={isMenuOpen}
+          aria-expanded={isPillForced}
         >
           <div className="flex flex-col gap-[5px]">
             <span
               className="mx-auto block h-[2px] w-5 bg-white"
               style={{
                 transition: `0.6s transform ${EASE_PILL}`,
-                transitionDelay: isScrolled ? '0.8s' : '0s',
-                transform: isScrolled ? 'scaleX(1)' : 'scaleX(0)',
+                transitionDelay: pillCollapsed ? '0.8s' : '0s',
+                transform: pillCollapsed ? 'scaleX(1)' : 'scaleX(0)',
               }}
             />
             <span
               className="mx-auto block h-[2px] w-5 bg-white"
               style={{
                 transition: `0.6s transform ${EASE_PILL}`,
-                transitionDelay: isScrolled ? '0.8s' : '0s',
-                transform: isScrolled ? 'scaleX(1)' : 'scaleX(0)',
+                transitionDelay: pillCollapsed ? '0.8s' : '0s',
+                transform: pillCollapsed ? 'scaleX(1)' : 'scaleX(0)',
               }}
             />
           </div>
@@ -291,7 +317,7 @@ export function Header() {
           'rounded-full bg-[#131b2e]/70 shadow-lg backdrop-blur-[20px]',
           'text-white/60 transition-all duration-300 hover:text-white'
         )}
-        onClick={handleHamburgerClick}
+        onClick={handleMobileHamburger}
         aria-label={t('menu.aria')}
         aria-expanded={isMenuOpen}
       >
@@ -311,7 +337,7 @@ export function Header() {
         </div>
       </button>
 
-      {/* ─── Dropdown menu (mobile + desktop-scrolled hamburger) ─── */}
+      {/* ─── Mobile dropdown menu ─── */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -319,7 +345,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2 }}
-            className="pointer-events-auto mx-auto mt-3 max-w-sm rounded-2xl bg-[#131b2e]/95 p-5 shadow-[0_16px_48px_rgba(0,0,0,0.4)] backdrop-blur-[20px] md:mt-3"
+            className="pointer-events-auto mx-auto mt-3 max-w-sm rounded-2xl bg-[#131b2e]/95 p-5 shadow-[0_16px_48px_rgba(0,0,0,0.4)] backdrop-blur-[20px] md:hidden"
           >
             <div className="flex flex-col gap-1 text-sm font-medium">
               {/* Section scroll links */}
