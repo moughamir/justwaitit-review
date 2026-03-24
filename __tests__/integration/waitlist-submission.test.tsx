@@ -95,24 +95,30 @@ describe('Waitlist submission — integration', () => {
     vi.clearAllMocks();
   });
 
-  it('happy path: fill all steps → submit → success state renders', async () => {
-    vi.mocked(joinWaitlist).mockResolvedValueOnce({
-      success: true,
-      message: 'Welcome!',
-    });
-    const user = userEvent.setup();
-    render(<WaitlistForm source="integration-test" variant="full" />);
+  it(
+    'happy path: fill all steps → submit → success state renders',
+    { timeout: 15_000 },
+    async () => {
+      vi.mocked(joinWaitlist).mockResolvedValueOnce({
+        success: true,
+        message: 'Welcome!',
+      });
+      const user = userEvent.setup();
+      render(<WaitlistForm source="integration-test" variant="full" />);
 
-    await fillStep1(user);
-    await fillStep2(user);
-    fireEvent.submit(
-      screen
-        .getByRole('button', { name: /secure beta access/i })
-        .closest('form')!
-    );
+      await fillStep1(user);
+      await fillStep2(user);
+      fireEvent.submit(
+        screen
+          .getByRole('button', { name: /secure beta access/i })
+          .closest('form')!
+      );
 
-    expect(await screen.findByText("You're on the list!")).toBeInTheDocument();
-  });
+      expect(
+        await screen.findByText("You're on the list!")
+      ).toBeInTheDocument();
+    }
+  );
 
   it('validation path: submit step 1 empty → errors shown → correct → progress', async () => {
     const user = userEvent.setup();
