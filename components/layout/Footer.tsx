@@ -4,7 +4,6 @@ import { useTranslations } from 'next-intl';
 
 import { SocialLinks } from './SocialLinks';
 
-import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { Link } from '@/i18n/routing';
 
 export function Footer() {
@@ -13,10 +12,11 @@ export function Footer() {
   return (
     <footer className="border-t border-white/[0.06] px-4 py-12">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-8">
-        {/* Logo */}
-        <Link href="/" aria-label="Anaqio Home">
-          <AnaqioTypographyLogo className="w-20 opacity-60" variant="none" />
-        </Link>
+        {/*
+          <Link href="/" aria-label="Anaqio Home">
+            <AnaqioTypographyLogo className="w-20 opacity-60" variant="none" />
+          </Link>
+          Logo */}
 
         {/* Tagline */}
         <p className="max-w-md text-center font-serif text-sm/6 text-white/40">

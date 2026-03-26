@@ -31,8 +31,6 @@ import { requestAtelierInvitation } from '@/lib/actions/atelier-invitation';
 import { ATELIER_STEP_CONFIGS } from '@/lib/content/atelier-invitation';
 import { sanitizeEmail, validateEmail } from '@/lib/utils/form-validation';
 
-// ─── Icon map ─────────────────────────────────────────────────────────────────
-
 const ICONS = {
   Mail: <Mail className="h-6 w-6" />,
   Building2: <Building2 className="h-6 w-6" />,
@@ -41,8 +39,6 @@ const ICONS = {
   TrendingUp: <TrendingUp className="h-6 w-6" />,
   Compass: <Compass className="h-6 w-6" />,
 } as const;
-
-// ─── Animation variants ────────────────────────────────────────────────────────
 
 const SLIDE_VARIANTS = {
   enter: (dir: number) => ({ y: dir > 0 ? 60 : -60, opacity: 0 }),

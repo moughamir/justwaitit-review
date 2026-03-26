@@ -13,6 +13,8 @@ type ScrollLinkProps = ComponentPropsWithoutRef<'a'> & {
  * Renders as `<a href="#id">` for keyboard/screen-reader accessibility
  * and intercepts click for smooth scrolling. Compose with Button asChild:
  *
+ * After scrolling, cleans up the URL hash to prevent auto-scroll on page reload.
+ *
  * @example
  * <Button variant="hero" asChild>
  *   <ScrollLink targetId="waitlist">Join Waitlist</ScrollLink>
@@ -26,9 +28,17 @@ export function ScrollLink({ targetId, children, ...props }: ScrollLinkProps) {
       onClick={(e) => {
         e.preventDefault();
         trackUserBehavior.trackClick(`scroll_to_${targetId}`, 'navigation');
-        document
-          .getElementById(targetId)
-          ?.scrollIntoView({ behavior: 'smooth' });
+        const element = document.getElementById(targetId);
+        element?.scrollIntoView({ behavior: 'smooth' });
+
+        // Clean up URL hash after scrolling to prevent auto-scroll on reload
+        // Use replaceState to avoid breaking browser back button
+        window.history.replaceState(
+          null,
+          '',
+          window.location.pathname + window.location.search
+        );
+
         props.onClick?.(e);
       }}
     >

@@ -6,6 +6,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 import type { Metadata, Viewport } from 'next';
 
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
+import { HashScrollSuppressor } from '@/components/ui/HashScrollSuppressor';
 import { NavigationProgress } from '@/components/ui/NavigationProgress';
 import { isRTL, locales, type Locale } from '@/i18n/config';
 import {
@@ -165,6 +166,7 @@ export default async function LocaleLayout({
         </div>
 
         <NextIntlClientProvider messages={messages}>
+          <HashScrollSuppressor />
           <NavigationProgress />
           {children}
         </NextIntlClientProvider>

@@ -184,7 +184,10 @@ describe('WaitlistForm', () => {
     });
 
     it('shows loading state during submission', async () => {
-      let resolveSubmit!: (v: unknown) => void;
+      let resolveSubmit!: (value: {
+        success: boolean;
+        message: string;
+      }) => void;
       vi.mocked(joinWaitlist).mockReturnValueOnce(
         new Promise((r) => {
           resolveSubmit = r;
@@ -224,7 +227,9 @@ describe('WaitlistForm', () => {
         ).toBeDisabled();
       });
 
-      resolveSubmit({ success: true, message: 'Done' });
+      await act(async () => {
+        resolveSubmit({ success: true, message: 'Done' });
+      });
     });
 
     it('shows success state on successful submission', async () => {

@@ -137,6 +137,7 @@ export function Header() {
         >
           <AnaqioTypographyLogo
             key={hoverKey}
+            instanceId="anaqio-header-logo"
             className={cn(
               'transition-all duration-300',
               pillCollapsed

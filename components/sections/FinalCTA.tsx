@@ -11,7 +11,6 @@ import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
-import { ScrollLink } from '@/components/ui/scroll-link';
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { Link } from '@/i18n/routing';
 import { ease } from '@/lib/motion';
@@ -43,7 +42,6 @@ export function FinalCTA() {
         {t('srHeading')}
       </h2>
 
-      {/* Atmospheric glow */}
       <div
         data-atom
         data-decorative
@@ -103,9 +101,13 @@ export function FinalCTA() {
             </Link>
           </Button>
         </MagneticButton>
-        <p className="mt-8 font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60 transition-colors hover:text-foreground/80">
-          <ScrollLink targetId="how-it-works">{t('cta.tertiary')}</ScrollLink>
-        </p>
+        {/*
+
+          <p className="mt-8 font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60 transition-colors hover:text-foreground/80">
+
+            <ScrollLink targetId="how-it-works">{t('cta.tertiary')}</ScrollLink>
+          </p>
+          */}
       </motion.div>
     </section>
   );

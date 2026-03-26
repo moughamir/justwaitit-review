@@ -16,12 +16,17 @@ describe('ScrollLink', () => {
   it('should call scrollIntoView on click', async () => {
     const user = userEvent.setup();
     const mockScrollIntoView = vi.fn();
+    const mockReplaceState = vi.fn();
 
     // Mock document.getElementById
     const originalGetElementById = document.getElementById;
     document.getElementById = vi.fn().mockReturnValue({
       scrollIntoView: mockScrollIntoView,
     });
+
+    // Mock window.history.replaceState
+    const originalReplaceState = window.history.replaceState;
+    window.history.replaceState = mockReplaceState;
 
     render(<ScrollLink targetId="target-section">Go to Target</ScrollLink>);
     const link = screen.getByRole('link', { name: /go to target/i });
@@ -30,9 +35,15 @@ describe('ScrollLink', () => {
 
     expect(document.getElementById).toHaveBeenCalledWith('target-section');
     expect(mockScrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth' });
+    expect(mockReplaceState).toHaveBeenCalledWith(
+      null,
+      '',
+      expect.stringMatching(/^\/[^#]*$/)
+    );
 
-    // Restore original
+    // Restore originals
     document.getElementById = originalGetElementById;
+    window.history.replaceState = originalReplaceState;
   });
 
   it('should call custom onClick handler if provided', async () => {
@@ -45,6 +56,10 @@ describe('ScrollLink', () => {
       scrollIntoView: vi.fn(),
     });
 
+    // Mock window.history.replaceState
+    const originalReplaceState = window.history.replaceState;
+    window.history.replaceState = vi.fn();
+
     render(
       <ScrollLink targetId="target-section" onClick={mockOnClick}>
         Go to Target
@@ -56,7 +71,8 @@ describe('ScrollLink', () => {
 
     expect(mockOnClick).toHaveBeenCalled();
 
-    // Restore original
+    // Restore originals
     document.getElementById = originalGetElementById;
+    window.history.replaceState = originalReplaceState;
   });
 });
