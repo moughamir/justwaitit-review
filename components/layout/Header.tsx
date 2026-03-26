@@ -116,8 +116,8 @@ export function Header() {
         {/* Logo */}
         <Link
           href="/"
-          className="flex items-center"
-          aria-label={t('logo.aria')}
+          className="flex items-center gap-2"
+          aria-label="Anaqio — AI Fashion Studio Home"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
           style={{ viewTransitionName: 'site-logo' }}
@@ -130,7 +130,7 @@ export function Header() {
             )}
             variant={isHovered ? 'outline-fill' : 'none'}
           />
-          <span className="sr-only">anaqio</span>
+          <span className="sr-only">Anaqio Home — AI Fashion Studio</span>
         </Link>
 
         {/* Desktop links */}

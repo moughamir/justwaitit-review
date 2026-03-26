@@ -51,13 +51,20 @@ export async function Footer() {
         <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 md:gap-12 lg:grid-cols-6">
           {/* Brand Column */}
           <div className="space-y-6 lg:col-span-3">
-            <Link href="/" aria-label="Anaqio Home" className="block">
-              <AnaqioLogo theme="dark" className="w-48" />
+            <Link href="/" aria-label="Anaqio — AI Fashion Studio Home" className="block group">
+              <div className="transition-transform duration-300 group-hover:scale-105">
+                <AnaqioLogo theme="dark" className="w-48" />
+              </div>
             </Link>
 
-            <p className="max-w-96 font-serif text-sm/6 text-neutral-400">
-              {t('desc')}
-            </p>
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-widest text-aq-blue/80">
+                AI Fashion Studio
+              </p>
+              <p className="max-w-96 font-serif text-sm/6 text-neutral-400">
+                {t('desc')}
+              </p>
+            </div>
 
             <SocialLinks />
           </div>
@@ -101,9 +108,10 @@ export async function Footer() {
           />
 
           {/* Copyright bar */}
-          <div className="relative z-10 flex items-center justify-between border-t border-white/10 pb-4">
+          <div className="relative z-10 flex flex-col items-start gap-2 border-t border-white/10 py-4 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-sm text-neutral-400">{t('copyright')}</p>
             <p className="text-sm text-neutral-400">{t('rights')}</p>
+            <p className="text-[11px] text-neutral-500">Crafted with precision in Casablanca 🇲🇦</p>
           </div>
         </div>
       </footer>

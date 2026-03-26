@@ -5,7 +5,7 @@ import { getMessages, getTranslations } from 'next-intl/server';
 
 import type { Metadata, Viewport } from 'next';
 
-import { AnaqioAnalytica } from '@/components/brand/Analytica';
+import { AnaqioAnalytica } from '@/components/brand/AnaqioAnalytics';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
 import { NavigationProgress } from '@/components/ui/NavigationProgress';
 import { isRTL, locales, type Locale } from '@/i18n/config';
