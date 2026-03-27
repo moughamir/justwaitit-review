@@ -9,7 +9,11 @@ import { useDeviceTier } from '@/hooks/use-device-tier';
 
 export function HowItWorksSection() {
   const t = useTranslations('landing.howItWorks');
-  const steps = t.raw('steps') as Array<{num: string; title: string; body: string}>;
+  const steps = t.raw('steps') as Array<{
+    num: string;
+    title: string;
+    body: string;
+  }>;
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';

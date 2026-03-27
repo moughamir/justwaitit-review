@@ -16,7 +16,9 @@ import { ease } from '@/lib/motion';
 export function WhyAnaqioSection() {
   const t = useTranslations('landing.whyAnaqio');
   const POINT_ICONS = [Ruler, Move3D, Sun, Zap, ShieldCheck];
-  const points = (t.raw('points') as Array<{title: string; body: string}>).map((p, i) => ({
+  const points = (
+    t.raw('points') as Array<{ title: string; body: string }>
+  ).map((p, i) => ({
     ...p,
     icon: POINT_ICONS[i],
   }));

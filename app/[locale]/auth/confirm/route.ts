@@ -8,7 +8,15 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const token_hash = searchParams.get('token_hash');
   const type = searchParams.get('type') as EmailOtpType | null;
-  const next = searchParams.get('next') ?? '/';
+  const nextParam = searchParams.get('next') ?? '/';
+
+  // Security: Prevent Open Redirect Vulnerability
+  // Ensure the redirect path starts with exactly one '/' and doesn't use backslashes
+  const isValidNext =
+    nextParam.startsWith('/') &&
+    !nextParam.startsWith('//') &&
+    !nextParam.startsWith('/\\');
+  const next = isValidNext ? nextParam : '/';
 
   if (token_hash && type) {
     const supabase = await createClient();
