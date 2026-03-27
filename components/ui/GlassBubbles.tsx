@@ -26,6 +26,10 @@ export const GlassBubbles: React.FC<GlassBubblesProps> = ({
 }) => {
   const [bubbles, setBubbles] = useState<Bubble[]>([]);
   const rafRef = useRef<number>(0);
+  const lastStateRef = useRef<{ isSmall: boolean; count: number }>({
+    isSmall: false,
+    count: 0,
+  });
 
   useEffect(() => {
     const gen = () => {
@@ -35,17 +39,33 @@ export const GlassBubbles: React.FC<GlassBubblesProps> = ({
       const min = isSmall ? 40 : minSize;
       const max = isSmall ? 100 : maxSize;
 
-      const arr: Bubble[] = [];
-      for (let i = 0; i < actualCount; i++) {
-        const size = Math.round(min + Math.random() * (max - min));
-        arr.push({
-          id: `b-${i}`,
-          x: Math.round(Math.random() * 100),
-          y: Math.round(Math.random() * 100),
-          size,
-        });
-      }
-      setBubbles(arr);
+      setBubbles((prev) => {
+        // Only regenerate if the size category or count has changed
+        if (
+          prev.length === actualCount &&
+          lastStateRef.current.isSmall === isSmall
+        ) {
+          return prev;
+        }
+
+        lastStateRef.current = { isSmall, count: actualCount };
+        const newBubbles: Bubble[] = [];
+
+        for (let i = 0; i < actualCount; i++) {
+          // If we have an existing bubble, reuse its coordinates
+          // but update its size if the breakpoint changed.
+          const existing = prev[i];
+          const size = Math.round(min + Math.random() * (max - min));
+
+          newBubbles.push({
+            id: `b-${i}`,
+            x: existing ? existing.x : Math.round(Math.random() * 100),
+            y: existing ? existing.y : Math.round(Math.random() * 100),
+            size: size,
+          });
+        }
+        return newBubbles;
+      });
     };
 
     gen();
@@ -59,7 +79,10 @@ export const GlassBubbles: React.FC<GlassBubblesProps> = ({
     };
 
     window.addEventListener('resize', onResize, { passive: true });
-    return () => window.removeEventListener('resize', onResize);
+    return () => {
+      window.removeEventListener('resize', onResize);
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
   }, [count, minSize, maxSize]);
 
   return (
