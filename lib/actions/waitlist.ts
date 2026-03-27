@@ -3,6 +3,7 @@
 import { z } from 'zod';
 
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/utils/logger';
 
 const WaitlistSchema = z.object({
   email: z.string().email('Please provide a valid email address.'),
@@ -62,7 +63,7 @@ export async function joinWaitlist(formData: FormData) {
           message: 'This email is already on the waitlist!',
         };
       }
-      console.error('Waitlist insert error:', error);
+      logger.error('Waitlist insert error', { error });
       return {
         success: false,
         message: 'Something went wrong. Please try again later.',
@@ -74,7 +75,7 @@ export async function joinWaitlist(formData: FormData) {
       message: "You're on the list! We'll be in touch soon.",
     };
   } catch (err) {
-    console.error('Waitlist error:', err);
+    logger.error('Waitlist error', { error: err });
     return {
       success: false,
       message: 'Something went wrong. Please try again later.',
