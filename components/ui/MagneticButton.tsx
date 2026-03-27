@@ -1,8 +1,9 @@
 'use client';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { useIsTouch } from '@/hooks/use-is-touch';
 
 export function MagneticButton({
   children,
@@ -24,13 +25,7 @@ export function MagneticButton({
   const y = useSpring(rawY, { stiffness: 400, damping: 30 });
 
   const tier = useDeviceTier();
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    // Check if it's a touch device
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsTouch(window.matchMedia('(pointer: coarse)').matches);
-  }, []);
+  const isTouch = useIsTouch();
 
   const effectiveStrength = tier === 'high' && !isTouch ? strength : 0;
 

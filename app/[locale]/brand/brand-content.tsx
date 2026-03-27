@@ -1,34 +1,42 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useSyncExternalStore, useCallback } from 'react';
 
 import { Link } from '@/i18n/routing';
 
+const subscribe = () => () => {};
+const getSnapshot = () =>
+  typeof window !== 'undefined' &&
+  sessionStorage.getItem('brand_authorized') === 'true';
+const getServerSnapshot = () => false;
+
 export function BrandIdentityContent() {
   const [password, setPassword] = useState('');
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [localAuthorized, setLocalAuthorized] = useState(false);
   const [error, setError] = useState(false);
 
-  // Check if already authorized in this session
-  useEffect(() => {
-    const authorized = sessionStorage.getItem('brand_authorized');
-    if (authorized === 'true') {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setIsAuthorized(true);
-    }
-  }, []);
+  const isSessionAuthorized = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password === 'anaqio2026') {
-      setIsAuthorized(true);
-      setError(false);
-      sessionStorage.setItem('brand_authorized', 'true');
-    } else {
-      setError(true);
-      setPassword('');
-    }
-  };
+  const isAuthorized = localAuthorized || isSessionAuthorized;
+
+  const handleLogin = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (password === 'anaqio2026') {
+        setLocalAuthorized(true);
+        setError(false);
+        sessionStorage.setItem('brand_authorized', 'true');
+      } else {
+        setError(true);
+        setPassword('');
+      }
+    },
+    [password]
+  );
 
   if (!isAuthorized) {
     return (
