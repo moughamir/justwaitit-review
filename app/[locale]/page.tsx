@@ -1,19 +1,35 @@
+import { getTranslations } from 'next-intl/server';
+
 import type { Metadata } from 'next';
 
-import { ComingSoonPage } from '@/components/sections/ComingSoonPage';
-import { PWAInstallPrompt } from '@/components/ui/PWAInstallPrompt';
+export const dynamic = 'force-dynamic';
 
-export const metadata: Metadata = {
-  title: 'ANAQIO — AI Fashion Studio | Coming Soon',
-  description:
-    'ANAQIO is an AI-powered fashion studio for the Moroccan luxury market. Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic fashion videos. Launching 2026.',
-};
+import { Header } from '@/components/layout/Header';
+import { NewLandingPage } from '@/components/sections/NewLandingPage';
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'meta' });
 
-export default function HomePage() {
+  return {
+    title: t('home.title', {
+      defaultValue: 'ANAQIO — AI Fashion Studio | Visual Infrastructure',
+    }),
+    description: t('home.desc', {
+      defaultValue:
+        'ANAQIO is an AI-powered fashion studio for the Moroccan luxury market. Generate lookbooks, swap backgrounds, adjust lighting, and produce cinematic fashion videos.',
+    }),
+  };
+}
+
+export default async function HomePage() {
   return (
-    <>
-      <ComingSoonPage />
-      <PWAInstallPrompt />
-    </>
+    <main id="main-content" className="relative">
+      <Header />
+      <NewLandingPage />
+    </main>
   );
 }

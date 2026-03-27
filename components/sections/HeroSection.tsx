@@ -7,17 +7,20 @@ import {
   useReducedMotion,
 } from 'framer-motion';
 import { ArrowDownRight, ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { ScrollLink } from '@/components/ui/scroll-link';
 import { useDeviceTier } from '@/hooks/use-device-tier';
-import { charReveal, ease } from '@/lib/motion';
+import { isRTL, type Locale } from '@/i18n/config';
+import { charReveal, ease, wordReveal } from '@/lib/motion';
 
 export function HeroSection() {
   const t = useTranslations('landing.hero');
+  const locale = useLocale();
+  const rtl = isRTL(locale as Locale);
   const sectionRef = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
@@ -37,7 +40,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       aria-labelledby="hero-heading"
-      className="relative flex min-h-[100dvh] flex-col overflow-hidden bg-background"
+      className="relative flex min-h-[100dvh] flex-col overflow-hidden"
     >
       {/* Semantic duplicate for screen readers / SEO */}
       <h1 id="hero-heading" className="sr-only">
@@ -49,42 +52,10 @@ export function HeroSection() {
         data-atom
         data-decorative
         aria-hidden="true"
-        className="hero-gradient pointer-events-none absolute inset-0 z-0"
+        className="pointer-events-none absolute inset-0 z-0"
       />
-      <div
-        data-atom
-        data-decorative
-        aria-hidden="true"
-        className="animated-grid pointer-events-none absolute inset-0 z-0 opacity-25"
-      />
-
-      {/* Layer 1: Perspective Grid Overlay */}
-      <div
-        data-atom
-        data-decorative
-        aria-hidden="true"
-        className="absolute inset-0 z-10 overflow-hidden"
-      >
-        <div className="perspective-grid mx-auto h-[160%] w-[120%]" />
-      </div>
-
       {/* Layer 2: Content Column */}
       <div className="relative z-20 mx-auto flex w-full flex-1 flex-col items-center justify-center px-6 pt-24 text-center sm:px-12">
-        {/* Eyebrow atom: x: -24→0, opacity: 0→1 (0.6s, delay 0.15s) */}
-        <motion.div
-          data-atom
-          initial={animated ? { opacity: 0, x: -24 } : false}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.15, ease }}
-          className="flex items-center justify-center gap-4"
-        >
-          <div className="h-px w-10 bg-muted-foreground/40" />
-          <span className="font-label text-[0.65rem] font-medium uppercase tracking-label text-muted-foreground">
-            {t('eyebrow')}
-          </span>
-          <div className="h-px w-10 bg-muted-foreground/40" />
-        </motion.div>
-
         {/* Atom A: pre — charReveal per character */}
         <motion.p
           data-atom
@@ -92,23 +63,39 @@ export function HeroSection() {
           style={animated ? { y: headlineY } : {}}
           className="flex flex-wrap justify-center font-display font-light text-foreground"
         >
-          {t('headline.pre')
-            .split('')
-            .map((char, i) => (
-              <motion.span
-                key={`pre-${char}-${i}`}
-                data-atom
-                aria-hidden="true"
-                {...(animated ? charReveal(reduced, i) : {})}
-                className="inline-block"
-                style={{
-                  fontSize: 'clamp(3.5rem, 8vw, 9rem)',
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
+          {rtl
+            ? t('headline.pre')
+                .split(' ')
+
+                .map((word, i) => (
+                  <motion.span
+                    key={`pre-word-${i}`}
+                    data-atom
+                    aria-hidden="true"
+                    {...(animated ? wordReveal(reduced, i) : {})}
+                    className="me-[0.22em] inline-block"
+                    style={{ fontSize: 'clamp(3.5rem, 8vw, 9rem)' }}
+                  >
+                    {word}
+                  </motion.span>
+                ))
+            : t('headline.pre')
+                .split('')
+                .map((char, i) => (
+                  <motion.span
+                    key={`pre-${char}-${i}`}
+                    data-atom
+                    aria-hidden="true"
+                    {...(animated ? charReveal(reduced, i) : {})}
+                    className="inline-block"
+                    style={{
+                      fontSize: 'clamp(3.5rem, 8vw, 9rem)',
+                      letterSpacing: '-0.02em',
+                    }}
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </motion.span>
+                ))}
         </motion.p>
         {/* Atom B: pro — word-by-word y: 20→0, gradient italic */}
         <p
@@ -124,7 +111,7 @@ export function HeroSection() {
               initial={animated ? { y: 20, opacity: 0 } : false}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.55, delay: 0.72 + i * 0.07, ease }}
-              className="text-brand-gradient mr-[0.25em] inline-block"
+              className="text-brand-gradient me-[0.25em] inline-block"
               style={{
                 fontSize: 'clamp(2rem, 4vw, 4.5rem)',
                 letterSpacing: '-0.01em',
@@ -146,7 +133,7 @@ export function HeroSection() {
               initial={animated ? { y: 16, opacity: 0 } : false}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.45, delay: 1.0 + i * 0.055, ease }}
-              className="mr-[0.3em] inline-block"
+              className="me-[0.3em] inline-block"
             >
               {word}
             </motion.span>
@@ -169,7 +156,7 @@ export function HeroSection() {
               asChild
               className="group h-12 gap-3 rounded-xl px-8 text-[0.7rem] font-semibold uppercase tracking-[0.18em]"
             >
-              <ScrollLink targetId="waitlist">
+              <ScrollLink targetId="final-cta">
                 <span>{t('cta.act')}</span>
                 <ArrowDownRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </ScrollLink>

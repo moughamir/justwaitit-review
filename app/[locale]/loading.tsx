@@ -205,6 +205,7 @@ export default function Loading() {
             transition={{ duration: 0.8, ease }}
           >
             <AnaqioTypographyLogo
+              instanceId="anaqio-loading-logo"
               variant={animated ? 'outline-fill' : 'none'}
               progress={progressMv}
               className="min-w-screen/2 max-w-1/2 w-[80dvw] sm:w-72"

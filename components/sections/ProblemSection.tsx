@@ -7,10 +7,12 @@ import {
   useTransform,
 } from 'framer-motion';
 import { Camera, LayoutList, Share2, ShoppingBag } from 'lucide-react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { NANOBANANA_VISUALS } from '@/lib/content/nanobanana-assets';
 import { clipReveal } from '@/lib/motion';
 
 export function ProblemSection() {
@@ -27,6 +29,7 @@ export function ProblemSection() {
 
   const headlineY = useTransform(scrollYProgress, [0, 0.4], ['60px', '0px']);
   const headlineOpacity = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
+  const visualY = useTransform(scrollYProgress, [0, 1], ['0px', '-80px']);
 
   const PAIN_ICONS = [Camera, Share2, ShoppingBag, LayoutList];
   const painPoints = (t.raw('painPoints') as Array<{ text: string }>).map(
@@ -47,7 +50,19 @@ export function ProblemSection() {
         {t('eyebrow')}: {t('visualHeadline.line1')} {t('visualHeadline.line2')}
       </h2>
 
-      {/* Atmospheric "?" [PINNED, right-5% top-15%] */}
+      <motion.div
+        data-atom
+        style={animated ? { y: visualY } : {}}
+        className="absolute -right-24 bottom-[10%] z-0 hidden h-[450px] w-80 overflow-hidden rounded-[3rem] border border-white/5 opacity-40 grayscale transition-all duration-1000 hover:grayscale-0 lg:block xl:right-[5%]"
+      >
+        <Image
+          src={NANOBANANA_VISUALS.fashion.portrait}
+          alt=""
+          fill
+          className="object-cover"
+        />
+      </motion.div>
+
       <span
         data-atom
         data-decorative
@@ -59,7 +74,6 @@ export function ProblemSection() {
       </span>
 
       <div className="relative z-10 flex w-full max-w-4xl flex-col gap-8 md:gap-12">
-        {/* Eyebrow */}
         <p
           data-atom
           className="font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
@@ -67,7 +81,6 @@ export function ProblemSection() {
           {t('eyebrow')}
         </p>
 
-        {/* Large statement */}
         <motion.div
           data-atom
           aria-hidden="true"

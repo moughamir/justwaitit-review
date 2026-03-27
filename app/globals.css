@@ -79,48 +79,62 @@
 @layer base {
   :root {
     color-scheme: dark;
-    /* 60% dominant — dark ink */
+    /* 60% dominant — ANAQIO Ink */
     --background: 222 47% 11%;
     --foreground: 210 40% 98%;
+
+    /* 30% secondary — ANAQIO Indigo (Heritage Soul) */
+    --secondary: 227 47% 47%;
+    --secondary-foreground: 210 40% 98%;
+
+    /* 10% accent — Burnished Gold (Luxury Spark) */
+    --primary: 46 65% 52%;
+    --primary-foreground: 222 47% 11%;
+
     /* Card surfaces */
     --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
     --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
-    /* 10% accent — brand blue for CTAs and highlights */
-    --primary: 221 83% 53%;
-    --primary-foreground: 210 40% 98%;
-    /* 30% secondary — deep slate for contrast sections */
-    --secondary: 215 25% 27%;
-    --secondary-foreground: 210 40% 98%;
+
     /* Supporting tones */
     --muted: 215 25% 27%;
     --muted-foreground: 215 20% 65%;
-    --accent: 215 25% 27%;
+    --accent: 227 47% 47%;
     --accent-foreground: 210 40% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     --border: 215 25% 27%;
     --input: 215 25% 27%;
-    --ring: 221 83% 53%;
+    --ring: 46 65% 52%;
     --radius: 0.75rem;
 
     /* Typography System Variables */
-    --font-display: var(--font-cormorant);
-    --font-ui: var(--font-dm-sans);
-    --font-body: var(--font-dm-sans);
-    --font-label: var(--font-dm-sans);
+    --font-display: var(--font-syne);
+    --font-ui: var(--font-jakarta);
+    --font-body: var(--font-jakarta);
+    --font-label: var(--font-jakarta);
     --font-editorial: var(--font-instrument-serif);
     --font-wordmark: Georgia, serif;
+
+    /* Anaqio Brand Tokens (always use these — never inline hex) */
+    --aq-navy: #1b2f52;
+    --aq-gold: #d4af37;
+    --aq-anaqio-white: #f8f6f0;
 
     /* 60-30-10 tone mapping (dominant-secondary-accent) */
     --tone-dominant: var(--background);
     --tone-dominant-foreground: var(--foreground);
     --tone-secondary: var(--secondary);
     --tone-secondary-foreground: var(--secondary-foreground);
-    /* Use primary as accent by default; swap to --accent if preferred */
     --tone-accent: var(--primary);
     --tone-accent-foreground: var(--primary-foreground);
+
+    /* Brand Gradient Stops (Indigo to Gold) */
+    --aq-grad-start: #3f57af;
+    --aq-grad-mid1: #484da9;
+    --aq-grad-mid2: #d4af37; /* Replaced purple stop with Gold for warmer Moroccan feel */
+    --aq-grad-end: #c58940; /* Burnished Bronze */
   }
 }
 
@@ -837,6 +851,82 @@
 
   .text-wordmark {
     @apply font-wordmark font-light italic;
+  }
+
+  /* ── .typography prose container ─────────────────────────────
+     Apply to any long-form content block (legal pages, about,
+     docs). Children inherit heading fonts from the global h* rule.
+     Mirrors shadcn/ui typography page patterns, mapped to ANAQIO
+     font tokens.                                               */
+
+  .typography {
+    @apply max-w-prose text-foreground;
+  }
+  .typography > * + * {
+    @apply mt-5;
+  }
+  .typography h1 {
+    @apply scroll-m-20 font-display text-4xl font-bold leading-tight tracking-tight;
+  }
+  .typography h2 {
+    @apply scroll-m-20 border-b border-border/40 pb-2 font-display text-3xl font-semibold leading-tight tracking-tight first:mt-0;
+  }
+  .typography h3 {
+    @apply scroll-m-20 font-display text-2xl font-semibold leading-snug tracking-tight;
+  }
+  .typography h4 {
+    @apply scroll-m-20 font-display text-xl font-semibold leading-snug tracking-tight;
+  }
+  .typography p {
+    @apply font-body leading-7;
+  }
+  .typography blockquote {
+    @apply mt-6 border-l-2 border-aq-blue/40 pl-6 font-editorial text-lg italic leading-relaxed;
+  }
+  .typography ul {
+    @apply my-4 ml-6 list-disc [&>li]:mt-2;
+  }
+  .typography ol {
+    @apply my-4 ml-6 list-decimal [&>li]:mt-2;
+  }
+  .typography li {
+    @apply font-body leading-7;
+  }
+  .typography table {
+    @apply w-full text-sm;
+  }
+  .typography thead {
+    @apply border-b border-border;
+  }
+  .typography th {
+    @apply h-12 px-4 text-left align-middle font-label text-xs font-medium uppercase tracking-label text-muted-foreground;
+  }
+  .typography td {
+    @apply p-4 align-middle font-body;
+  }
+  .typography tr {
+    @apply border-b border-border/50 transition-colors hover:bg-muted/20;
+  }
+  .typography code {
+    @apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold;
+  }
+  .typography pre {
+    @apply mt-6 overflow-x-auto rounded-xl bg-muted p-4;
+  }
+  .typography pre code {
+    @apply bg-transparent p-0 font-normal;
+  }
+  .typography hr {
+    @apply my-8 border-border/40;
+  }
+  .typography a {
+    @apply font-medium text-aq-blue underline underline-offset-4 hover:text-aq-blue/80;
+  }
+  .typography strong {
+    @apply font-semibold;
+  }
+  .typography em {
+    @apply font-editorial italic;
   }
 }
 

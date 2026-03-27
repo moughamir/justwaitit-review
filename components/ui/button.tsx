@@ -9,13 +9,14 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        brand: 'bg-brand-diag text-white hover:shadow-lg   font-semibold',
+        brand:
+          'bg-aq-gold text-aq-navy hover:bg-aq-gold/90 hover:shadow-lg font-semibold',
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
 
         destructive: 'bg-destructive hover:bg-destructive/90',
 
         ghost: 'hover:bg-accent hover:text-accent-foreground',
-        hero: 'bg-brand-diag hover:opacity-90 shadow-[0_0_40px_rgba(124,58,237,0.25)] font-semibold tracking-wide',
+        hero: 'bg-aq-gold text-aq-navy hover:bg-aq-gold/90 hover:scale-[1.04] shadow-[0_0_40px_rgba(212,175,55,0.25)] font-semibold tracking-wide transition-transform',
         heroOutline: 'border bg-transparent hover:bg-primary/10 tracking-wide',
         link: 'text-primary underline-offset-4 hover:underline',
 

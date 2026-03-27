@@ -56,6 +56,6 @@ export async function proxy(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except static assets and Next.js internals
-    '/((?!_next/static|_next/image|favicon.ico|icon.*|apple-icon.*|manifest.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|woff2?|ttf|eot|otf|css|js|map)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon.*|apple-icon.*|manifest.*|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|mp4|webm|ogv|mov|woff2?|ttf|eot|otf|css|js|map|txt|xml|pdf)$).*)',
   ],
 };

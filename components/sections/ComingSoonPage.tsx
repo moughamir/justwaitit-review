@@ -108,7 +108,11 @@ export function ComingSoonPage() {
               className="z-20 mb-12 w-[min(80vw,600px)]"
               {...fadeUp(reduced)}
             >
-              <AnaqioTypographyLogo variant="none" aria-label="ANAQIO" />
+              <AnaqioTypographyLogo
+                instanceId="anaqio-coming-soon-logo"
+                variant="none"
+                aria-label="ANAQIO"
+              />
             </motion.div>
             <div className="pointer-events-none inset-0 z-0 flex h-auto items-center justify-center">
               <span className="bg-brand-gradient animate-shimmer leading select-none whitespace-nowrap bg-clip-text font-display text-5xl font-light text-transparent mix-blend-plus-lighter [text-shadow:0_20px_80px_rgba(37,99,235,0.4)]">

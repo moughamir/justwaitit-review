@@ -22,8 +22,7 @@ export type LogoAnimationVariant =
   | 'breathing'
   | 'lock-in';
 
-export interface AnaqioTypographyLogoProps
-  extends React.SVGProps<SVGSVGElement> {
+export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement> {
   /** @deprecated Use `variant` instead */
   animated?: boolean;
   variant?: LogoAnimationVariant;
@@ -33,6 +32,12 @@ export interface AnaqioTypographyLogoProps
    * Phase 2 (40–100%): fill fades in, stroke fades out.
    */
   progress?: number | MotionValue<number>;
+  /**
+   * Stable instance ID for SVG gradient namespacing.
+   * Pass a static string when the component is rendered after dynamic imports
+   * to avoid React hydration mismatches caused by useId() counter drift.
+   */
+  instanceId?: string;
 }
 
 // ─── Letter Path Data ───────────────────────────────────────────────────────
@@ -233,7 +238,7 @@ function OutlineFillLetters({
   }, [progress, internalProgressMv]);
 
   const progressMv =
-    typeof progress === 'number' ? internalProgressMv : progress;
+    progress && typeof progress !== 'number' ? progress : internalProgressMv;
 
   return (
     <>
@@ -395,6 +400,7 @@ export function AnaqioTypographyLogo({
   animated = false,
   variant,
   progress = 0,
+  instanceId: instanceIdProp,
   className,
   ...props
 }: AnaqioTypographyLogoProps) {
@@ -402,8 +408,11 @@ export function AnaqioTypographyLogo({
   const resolvedVariant: LogoAnimationVariant =
     variant ?? (animated ? 'stagger' : 'none');
 
-  // Unique instance id so multiple logos on a page don't clash gradient ids
-  const instanceId = React.useId().replace(/:/g, '');
+  // Unique instance id so multiple logos on a page don't clash gradient ids.
+  // useId() can drift when dynamic (ssr:false) imports add extra hook calls
+  // client-side — pass instanceId prop for stable usages (e.g. Footer watermark).
+  const generatedId = React.useId().replace(/:/g, '');
+  const instanceId = instanceIdProp ?? generatedId;
 
   const renderLetters = () => {
     switch (resolvedVariant) {

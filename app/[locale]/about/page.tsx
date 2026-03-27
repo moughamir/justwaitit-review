@@ -25,17 +25,12 @@ export async function generateMetadata({
     title: t('about.title'),
     description: t('about.desc'),
     alternates: {
-      canonical: `/${locale}/about`,
-      languages: {
-        'en-US': '/en-US/about',
-        'fr-FR': '/fr-FR/about',
-        'ar-MA': '/ar-MA/about',
-      },
+      canonical: `${baseUrl}/about`,
     },
     openGraph: {
       title: t('about.title'),
       description: t('about.desc'),
-      url: `/${locale}/about`,
+      url: `${baseUrl}/about`,
       siteName: 'Anaqio',
       type: 'website',
       images: [

@@ -10,6 +10,7 @@ import { Move3D, Ruler, ShieldCheck, Sun, Zap } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
+import { Section } from '@/components/ui/section';
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { ease } from '@/lib/motion';
 
@@ -34,17 +35,19 @@ export function WhyAnaqioSection() {
     offset: ['start start', 'end end'],
   });
 
-  const scrollX = useTransform(scrollYProgress, [0, 1], ['0%', '-60%']);
+  // Use a wider range for scrollX to ensure all 5 cards are fully revealed and pass through.
+  // -100% means the entire track has moved past the starting point.
+  const scrollX = useTransform(scrollYProgress, [0.05, 0.95], ['0%', '-85%']);
 
   // Randomish vertical offsets for the organic layout
   const verticalOffsets = ['0', '15%', '-10%', '20%', '-5%'];
 
   return (
-    <section
+    <Section
       ref={sectionRef}
       id="why-anaqio"
       aria-labelledby="why-heading"
-      className="relative h-[300vh] bg-background"
+      className="relative h-[300vh] min-h-screen bg-background"
     >
       <h2 id="why-heading" className="sr-only">
         {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
@@ -121,6 +124,6 @@ export function WhyAnaqioSection() {
           {t('footer')}
         </p>
       </div>
-    </section>
+    </Section>
   );
 }
