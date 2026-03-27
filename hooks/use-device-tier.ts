@@ -1,6 +1,18 @@
 'use client';
 import { useState, useEffect } from 'react';
 
+/**
+ * Extended Navigator interface to include non-standard/experimental properties
+ * used for device capability detection.
+ */
+interface NavigatorWithCapabilities extends Navigator {
+  deviceMemory?: number;
+  connection?: {
+    effectiveType: string;
+    saveData: boolean;
+  };
+}
+
 export function useDeviceTier(): 'high' | 'mid' | 'low' {
   const [tier, setTier] = useState<'high' | 'mid' | 'low'>('high');
 
@@ -8,15 +20,13 @@ export function useDeviceTier(): 'high' | 'mid' | 'low' {
     // Only access navigator on client
     if (typeof window === 'undefined') return;
 
-    const cores = navigator.hardwareConcurrency ?? 4;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - deviceMemory is non-standard but useful in Chrome
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const memory = (navigator as any).deviceMemory ?? 4;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore - connection is non-standard
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const connection = (navigator as any).connection?.effectiveType ?? '4g';
+    const nav = navigator as NavigatorWithCapabilities;
+
+    const cores = nav.hardwareConcurrency ?? 4;
+    // deviceMemory is non-standard but useful in Chrome
+    const memory = nav.deviceMemory ?? 4;
+    // connection is non-standard
+    const connection = nav.connection?.effectiveType ?? '4g';
 
     if (
       cores <= 2 ||
