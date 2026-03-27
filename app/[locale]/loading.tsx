@@ -1,6 +1,14 @@
 'use client';
 
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  useMotionValue,
+  useMotionValueEvent,
+  animate,
+  useTransform,
+} from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 
@@ -19,44 +27,56 @@ import { cn } from '@/lib/utils';
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Loading() {
   const t = useTranslations('loading');
-  const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(true);
   const reduced = useReducedMotion();
   const tier = useDeviceTier();
   const animated = !reduced && tier !== 'low';
-  const rafRef = useRef<number>(0);
-  const current = useRef(0);
+
+  // Performance optimization: use MotionValue for high-frequency updates
+  const progressMv = useMotionValue(0);
+  const progressTextRef = useRef<HTMLSpanElement>(null);
+  const [currentStageKey, setCurrentStageKey] = useState(resolveStage(0).key);
+
+  // Derived values for smooth updates without re-renders
+  const scaleX = useTransform(progressMv, [0, 100], [0, 1]);
+  const widthPercent = useTransform(progressMv, (v) => `${v}%`);
+
+  // Synchronize percentage text and stage state without full re-renders
+  useMotionValueEvent(progressMv, 'change', (latest) => {
+    const rounded = Math.round(latest);
+
+    // Direct DOM update for percentage text
+    if (progressTextRef.current) {
+      progressTextRef.current.textContent = `${rounded}%`;
+    }
+
+    // Update stage state only when it actually changes
+    const stage = resolveStage(rounded);
+    if (stage.key !== currentStageKey) {
+      setCurrentStageKey(stage.key);
+    }
+  });
 
   useEffect(() => {
     const conn = getConnectionTier();
     const safetyMs = getSafetyTimeout(tier, conn);
 
-    // lerp speed: faster connections feel snappier
-    const lerpSpeed =
-      conn === 'fast' ? 0.09 : conn === 'moderate' ? 0.07 : 0.05;
+    // duration: faster connections feel snappier
+    const duration = conn === 'fast' ? 0.6 : conn === 'moderate' ? 0.8 : 1.2;
 
     // ── Smooth eased animation toward target ──────────────────────────────
     const animateTo = (to: number, onDone?: () => void) => {
-      cancelAnimationFrame(rafRef.current);
       if (!animated) {
-        current.current = to;
-        setProgress(to);
+        progressMv.set(to);
         onDone?.();
         return;
       }
-      const tick = () => {
-        const gap = to - current.current;
-        if (Math.abs(gap) > 0.15) {
-          current.current += gap * lerpSpeed;
-          setProgress(Math.round(current.current));
-          rafRef.current = requestAnimationFrame(tick);
-        } else {
-          current.current = to;
-          setProgress(to);
-          onDone?.();
-        }
-      };
-      rafRef.current = requestAnimationFrame(tick);
+
+      animate(progressMv, to, {
+        duration,
+        ease: 'easeOut',
+        onComplete: onDone,
+      });
     };
 
     const complete = () =>
@@ -67,33 +87,28 @@ export default function Loading() {
     animateTo(initialJump);
 
     // ── Real-time resource tracking via bytes ─────────────────────────────
-    // We track decoded bytes (actual render weight) as a ratio of the
-    // expected total. The expected total grows as more resources arrive.
     let expectedTotalBytes = 0;
 
     const updateFromResources = () => {
       const transferred = getBytesTransferred();
       const decoded = getBytesDecoded();
 
-      // Keep a high-water mark of expected total
       expectedTotalBytes = Math.max(expectedTotalBytes, decoded, transferred);
 
       if (expectedTotalBytes > 0 && transferred > 0) {
-        // Byte-ratio progress, capped at 85 to leave room for render work
         const ratio = Math.min(0.85, transferred / expectedTotalBytes);
         const byteProgress = Math.round(
           initialJump + ratio * (85 - initialJump)
         );
-        if (byteProgress > current.current) animateTo(byteProgress);
+        if (byteProgress > progressMv.get()) animateTo(byteProgress);
       } else {
-        // Fallback: count-based with connection-tuned baseline
         const baseline = conn === 'fast' ? 18 : conn === 'moderate' ? 12 : 8;
         const entries = performance.getEntriesByType('resource').length;
         const countProgress = Math.min(
           85,
-          current.current + (entries / baseline) * 25
+          progressMv.get() + (entries / baseline) * 25
         );
-        if (countProgress > current.current) animateTo(countProgress);
+        if (countProgress > progressMv.get()) animateTo(countProgress);
       }
     };
 
@@ -107,7 +122,7 @@ export default function Loading() {
 
     // ── DOM lifecycle milestones ──────────────────────────────────────────
     const onReadyState = () => {
-      if (document.readyState === 'interactive' && current.current < 40)
+      if (document.readyState === 'interactive' && progressMv.get() < 40)
         animateTo(40);
       if (document.readyState === 'complete') animateTo(90);
     };
@@ -116,7 +131,7 @@ export default function Loading() {
 
     // ── Web fonts resolved (blocks first paint) ───────────────────────────
     document.fonts?.ready.then(() => {
-      if (current.current < 85) animateTo(85);
+      if (progressMv.get() < 85) animateTo(85);
     });
 
     // ── window.onload (all sub-resources including images) ────────────────
@@ -130,7 +145,6 @@ export default function Loading() {
     const safety = setTimeout(complete, safetyMs);
 
     return () => {
-      cancelAnimationFrame(rafRef.current);
       document.removeEventListener('readystatechange', onReadyState);
       clearTimeout(safety);
       po?.disconnect();
@@ -138,7 +152,6 @@ export default function Loading() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const stage = resolveStage(progress);
   const connTier = getConnectionTier();
 
   return (
@@ -193,7 +206,7 @@ export default function Loading() {
           >
             <AnaqioTypographyLogo
               variant={animated ? 'outline-fill' : 'none'}
-              progress={progress}
+              progress={progressMv}
               className="min-w-screen/2 max-w-1/2 w-[80dvw] sm:w-72"
             />
           </motion.div>
@@ -215,17 +228,14 @@ export default function Loading() {
                   data-decorative
                   aria-hidden="true"
                   className="bg-brand-gradient absolute -top-0.5 bottom-0 left-0 h-[3px] rounded-full blur-sm"
-                  animate={{ width: `${progress}%` }}
-                  transition={{ duration: 0.45, ease: 'easeOut' }}
-                  style={{ opacity: 0.5 }}
+                  style={{ width: widthPercent, opacity: 0.5 }}
                 />
               )}
               {/* Sharp fill */}
               <motion.div
                 data-atom
-                className="bg-brand-gradient absolute inset-y-0 left-0 rounded-full"
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.45, ease: 'easeOut' }}
+                className="bg-brand-gradient absolute inset-y-0 left-0 w-full origin-left"
+                style={{ scaleX }}
               />
             </div>
 
@@ -233,7 +243,7 @@ export default function Loading() {
             <div className="flex w-full items-center justify-between">
               <AnimatePresence mode="wait">
                 <motion.span
-                  key={stage.key}
+                  key={currentStageKey}
                   data-atom
                   className="font-label text-[0.58rem] uppercase tracking-label text-muted-foreground/35"
                   initial={{ opacity: 0, y: 3 }}
@@ -241,7 +251,7 @@ export default function Loading() {
                   exit={{ opacity: 0, y: -3 }}
                   transition={{ duration: 0.18 }}
                 >
-                  {t(`stages.${stage.key}`)}
+                  {t(`stages.${currentStageKey}`)}
                 </motion.span>
               </AnimatePresence>
 
@@ -264,8 +274,9 @@ export default function Loading() {
                 <span
                   data-atom
                   className="font-label text-[0.58rem] tabular-nums tracking-label text-muted-foreground/35"
+                  ref={progressTextRef}
                 >
-                  {progress}%
+                  {Math.round(progressMv.get())}%
                 </span>
               </div>
             </div>

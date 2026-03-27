@@ -1,6 +1,11 @@
 'use client';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -17,7 +22,8 @@ export type LogoAnimationVariant =
   | 'breathing'
   | 'lock-in';
 
-export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement> {
+export interface AnaqioTypographyLogoProps
+  extends React.SVGProps<SVGSVGElement> {
   /** @deprecated Use `variant` instead */
   animated?: boolean;
   variant?: LogoAnimationVariant;
@@ -26,7 +32,7 @@ export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement>
    * Phase 1 (0–40%): stroke draws on via pathLength.
    * Phase 2 (40–100%): fill fades in, stroke fades out.
    */
-  progress?: number;
+  progress?: number | MotionValue<number>;
 }
 
 // ─── Letter Path Data ───────────────────────────────────────────────────────
@@ -209,14 +215,25 @@ function OutlineFillLetters({
   progress,
 }: {
   instanceId: string;
-  progress: number;
+  progress?: number | MotionValue<number>;
 }) {
-  const progressMv = useMotionValue(progress);
+  const initialValue = React.useMemo(() => {
+    if (typeof progress === 'number') return progress;
+    if (progress && 'get' in progress) return progress.get();
+    return 0;
+  }, [progress]);
 
-  // Sync the MotionValue when the progress prop changes
+  const internalProgressMv = useMotionValue(initialValue);
+
+  // Sync the MotionValue when the progress prop changes (if it's a number)
   React.useEffect(() => {
-    progressMv.set(progress);
-  }, [progress, progressMv]);
+    if (typeof progress === 'number') {
+      internalProgressMv.set(progress);
+    }
+  }, [progress, internalProgressMv]);
+
+  const progressMv =
+    typeof progress === 'number' ? internalProgressMv : progress;
 
   return (
     <>
