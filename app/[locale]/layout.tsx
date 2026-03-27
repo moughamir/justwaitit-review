@@ -41,6 +41,7 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: 'meta.home' });
 
   return {
+    metadataBase: new URL(defaultUrl),
     title: t('title'),
     description: t('desc'),
     alternates: {

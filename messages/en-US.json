@@ -383,7 +383,7 @@
       "privacy": "Privacy"
     },
     "headline": {
-      "pre": "Why Join",
+      "prefix": "Why Join",
       "gradient": "Early?"
     },
     "socialProof": "Join 200+ Moroccan brands upgrading their visual commerce.",
@@ -421,10 +421,7 @@
     },
     "problem": {
       "eyebrow": "The Challenge",
-      "headline": {
-        "pre": "Fashion Content Demand.",
-        "gradient": "Exploding"
-      },
+      "headline": { "pre": "Fashion Content Demand.", "gradient": "Exploding" },
       "visualHeadline": {
         "line1": "Fashion moves fast.",
         "line2": "Production doesn't."
