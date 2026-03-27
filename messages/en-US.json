@@ -176,7 +176,7 @@
         "label": "average cost per studio shoot"
       },
       "time": {
-        "number": "3–6 wks",
+        "number": "3-6 wks",
         "label": "production cycle per collection"
       },
       "skus": {
@@ -421,10 +421,7 @@
     },
     "problem": {
       "eyebrow": "The Challenge",
-      "headline": {
-        "pre": "Fashion Content Demand.",
-        "gradient": "Exploding"
-      },
+      "headline": { "pre": "Fashion Content Demand.", "gradient": "Exploding" },
       "visualHeadline": {
         "line1": "Fashion moves fast.",
         "line2": "Production doesn't."
@@ -699,7 +696,7 @@
       },
       "whatsapp": {
         "question": "Your WhatsApp number?",
-        "hint": "Optional — for a faster personal welcome.",
+        "hint": "(Optional) for a faster personal welcome.",
         "placeholder": "+212 6XX XXX XXX"
       },
       "role": {
@@ -722,8 +719,8 @@
         "options": {
           "pre-revenue": "Pre-revenue / Starting out",
           "0-10k": "Under 10 000 DH",
-          "10k-50k": "10 000 – 50 000 DH",
-          "50k-250k": "50 000 – 250 000 DH",
+          "10k-50k": "10 000 - 50 000 DH",
+          "50k-250k": "50 000 - 250 000 DH",
           "250k+": "250 000 DH +"
         }
       },

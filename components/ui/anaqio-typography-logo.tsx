@@ -1,6 +1,11 @@
 'use client';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -26,7 +31,7 @@ export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement>
    * Phase 1 (0–40%): stroke draws on via pathLength.
    * Phase 2 (40–100%): fill fades in, stroke fades out.
    */
-  progress?: number;
+  progress?: number | MotionValue<number>;
   /**
    * Stable instance ID for SVG gradient namespacing.
    * Pass a static string when the component is rendered after dynamic imports
@@ -215,14 +220,25 @@ function OutlineFillLetters({
   progress,
 }: {
   instanceId: string;
-  progress: number;
+  progress?: number | MotionValue<number>;
 }) {
-  const progressMv = useMotionValue(progress);
+  const initialValue = React.useMemo(() => {
+    if (typeof progress === 'number') return progress;
+    if (progress && 'get' in progress) return progress.get();
+    return 0;
+  }, [progress]);
 
-  // Sync the MotionValue when the progress prop changes
+  const internalProgressMv = useMotionValue(initialValue);
+
+  // Sync the MotionValue when the progress prop changes (if it's a number)
   React.useEffect(() => {
-    progressMv.set(progress);
-  }, [progress, progressMv]);
+    if (typeof progress === 'number') {
+      internalProgressMv.set(progress);
+    }
+  }, [progress, internalProgressMv]);
+
+  const progressMv =
+    progress && typeof progress !== 'number' ? progress : internalProgressMv;
 
   return (
     <>

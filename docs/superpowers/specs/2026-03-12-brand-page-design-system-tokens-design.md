@@ -82,13 +82,13 @@ Remotion compositions        ← runtime color/font access without CSS
 
 **Token naming convention** (CSS vars generated from token keys):
 
-| Token key | CSS var | Tailwind class |
-|---|---|---|
-| `colors.brand.blue` | `--aq-blue` | `text-aq-blue` / `bg-aq-blue` |
-| `colors.brand.purple` | `--aq-purple` | `text-aq-purple` / `bg-aq-purple` |
-| `colors.semantic.background` | `--background` | `bg-background` |
-| `typography.family.display` | `--font-display` | `font-display` |
-| `motion.duration.base` | `--duration-base` | — (JS only) |
+| Token key                    | CSS var           | Tailwind class                    |
+| ---------------------------- | ----------------- | --------------------------------- |
+| `colors.brand.blue`          | `--aq-blue`       | `text-aq-blue` / `bg-aq-blue`     |
+| `colors.brand.purple`        | `--aq-purple`     | `text-aq-purple` / `bg-aq-purple` |
+| `colors.semantic.background` | `--background`    | `bg-background`                   |
+| `typography.family.display`  | `--font-display`  | `font-display`                    |
+| `motion.duration.base`       | `--duration-base` | — (JS only)                       |
 
 ### 4.2 Brand Page Structure
 
@@ -114,10 +114,10 @@ app/[locale]/brand/
 
 ### 4.3 Multi-Agent Work Distribution
 
-| Agent | Owns | Files |
-|---|---|---|
-| **Qwen** | Token system | `lib/tokens.ts`, update `tailwind.config.ts`, update `globals.css :root {}` |
-| **Gemini** | Brand page sections A–D | `BrandHero`, `LogoShowcase`, `ColorPalette`, `TypographySpecimen` |
+| Agent      | Owns                                  | Files                                                                                       |
+| ---------- | ------------------------------------- | ------------------------------------------------------------------------------------------- |
+| **Qwen**   | Token system                          | `lib/tokens.ts`, update `tailwind.config.ts`, update `globals.css :root {}`                 |
+| **Gemini** | Brand page sections A–D               | `BrandHero`, `LogoShowcase`, `ColorPalette`, `TypographySpecimen`                           |
 | **Claude** | Brand page sections E–H + integration | `MotionPrinciples`, `ComponentGallery`, `UsageRules`, `DownloadAssets`, `brand-content.tsx` |
 
 Each agent receives a focused system prompt covering only their file boundary. No shared state — agents communicate through the token imports only.
@@ -125,12 +125,15 @@ Each agent receives a focused system prompt covering only their file boundary. N
 ### 4.4 Agent System Prompts
 
 **Qwen system prompt (Token System):**
+
 > You are implementing the Design System Token centralization for ANAQIO. Your ONLY job is: (1) Create `lib/tokens.ts` exporting typed color, typography, spacing, motion, radius, shadow, and gradient constants using the exact values from `tailwind.config.ts` and `app/globals.css`. (2) Update `tailwind.config.ts` to import and consume `lib/tokens.ts` instead of hardcoded values. (3) Update the `:root {}` block in `app/globals.css` to reference token values. Do NOT touch any component files. Run `bun run lint` before finishing.
 
 **Gemini system prompt (Brand Sections A–D):**
+
 > You are implementing the first 4 sections of the ANAQIO brand page. Import all colors/typography from `lib/tokens.ts`. Use only Tailwind classes — no inline styles, no raw hex. Use the `AnaqioLogo` component from `components/ui/AnaqioLogo.tsx`. Sections to build: `BrandHero.tsx` (hero lockup), `LogoShowcase.tsx` (logo on 3 backgrounds), `ColorPalette.tsx` (color swatches grid), `TypographySpecimen.tsx` (font family specimens). Each section is a named export. Run `bun run lint` before finishing.
 
 **Claude system prompt (Brand Sections E–H + integration):**
+
 > You are implementing the final 4 sections and the orchestrator for the ANAQIO brand page. Import from `lib/tokens.ts`. Use Framer Motion for `MotionPrinciples.tsx` (easing visualizations). Build `ComponentGallery.tsx` using existing shadcn/ui components. Build `UsageRules.tsx` with do/don't grids. Build `DownloadAssets.tsx` with `<a href="/brand/...svg" download>` links. Finally rewrite `brand-content.tsx` to compose all 8 sections — remove the password gate entirely.
 
 ---
@@ -138,27 +141,35 @@ Each agent receives a focused system prompt covering only their file boundary. N
 ## 5. Section Designs
 
 ### 5.1 BrandHero
+
 Full-width dark section. AnaqioLogo at 64px. Tagline in Cormorant Italic. Animated gradient orb background using `AbstractBackground` component. Scroll-down caret.
 
 ### 5.2 LogoShowcase
+
 Three side-by-side panels: (1) graphic mark on `bg-background` (dark ink), (2) wordmark on `bg-aq-purple` gradient, (3) graphic mark on `bg-white` with `theme="light"`. Each panel has a copy-to-clipboard hex color button. Downloads for SVG and PNG variants.
 
 ### 5.3 ColorPalette
+
 Grid of swatches using the `aq.*` token namespace. Four groups: Primary (blue, purple), Neutral (ink, slate, muted, border, surface, white), Gradient Spectrum (4 stops), Semantic (background, foreground, card, primary, secondary). Each swatch shows token name, hex value, CSS var name, and Tailwind class.
 
 ### 5.4 TypographySpecimen
+
 Three stacked rows, one per font family. Each row: font family name in `font-label tracking-label` uppercase, a large display specimen in the font, and a metadata row showing use cases (Display / Editorial / UI Body).
 
 ### 5.5 MotionPrinciples
+
 Duration token table (`fast: 150ms`, `base: 250ms`, `slow: 400ms`, `cinematic: 800ms`). Four animated Framer Motion boxes demonstrating each easing curve (`easeOut`, `easeInOut`, spring). Reduced-motion note.
 
 ### 5.6 ComponentGallery
+
 Live renders: primary button, secondary button, ghost button, badge variants, feature card, input field, gradient text span. Caption beneath each showing the Tailwind classes used.
 
 ### 5.7 UsageRules
+
 Two-column grid: ✅ Correct use / ❌ Incorrect use. Cases: logo on correct backgrounds, minimum size, gradient misuse, font substitution, color ratio violations.
 
 ### 5.8 DownloadAssets
+
 Minimal table: asset name, format, dimensions, `<a download>` button. Assets: `anaqio-graphic-logo.svg`, `anaqio-typography-logo.svg`, `logo.svg` (combined mark).
 
 ---
@@ -166,41 +177,44 @@ Minimal table: asset name, format, dimensions, `<a download>` button. Assets: `a
 ## 6. Design Token Reference (Canonical Values)
 
 ### Colors
-| Token | Value | CSS Var |
-|---|---|---|
-| `colors.brand.blue` | `#2563EB` | `--aq-blue` |
-| `colors.brand.purple` | `#7C3AED` | `--aq-purple` |
-| `colors.brand.white` | `#F8FAFC` | `--aq-white` |
-| `colors.brand.ink` | `#0F172A` | `--aq-ink` |
-| `colors.brand.slate` | `#334155` | `--aq-slate` |
-| `colors.brand.muted` | `#94A3B8` | `--aq-muted` |
-| `colors.brand.border` | `#E2E8F0` | `--aq-border` |
-| `colors.brand.surface` | `#F1F5F9` | `--aq-surface` |
+
+| Token                   | Value     | CSS Var           |
+| ----------------------- | --------- | ----------------- |
+| `colors.brand.blue`     | `#2563EB` | `--aq-blue`       |
+| `colors.brand.purple`   | `#7C3AED` | `--aq-purple`     |
+| `colors.brand.white`    | `#F8FAFC` | `--aq-white`      |
+| `colors.brand.ink`      | `#0F172A` | `--aq-ink`        |
+| `colors.brand.slate`    | `#334155` | `--aq-slate`      |
+| `colors.brand.muted`    | `#94A3B8` | `--aq-muted`      |
+| `colors.brand.border`   | `#E2E8F0` | `--aq-border`     |
+| `colors.brand.surface`  | `#F1F5F9` | `--aq-surface`    |
 | `colors.gradient.start` | `#3F57AF` | `--aq-grad-start` |
-| `colors.gradient.mid1` | `#484DA9` | `--aq-grad-mid1` |
-| `colors.gradient.mid2` | `#6049A8` | `--aq-grad-mid2` |
-| `colors.gradient.end` | `#6F47A7` | `--aq-grad-end` |
+| `colors.gradient.mid1`  | `#484DA9` | `--aq-grad-mid1`  |
+| `colors.gradient.mid2`  | `#6049A8` | `--aq-grad-mid2`  |
+| `colors.gradient.end`   | `#6F47A7` | `--aq-grad-end`   |
 
 ### Typography
-| Token | Value |
-|---|---|
-| `typography.family.display` | `var(--font-cormorant)` |
-| `typography.family.ui` | `var(--font-dm-sans)` |
-| `typography.family.editorial` | `var(--font-instrument-serif)` |
-| `typography.tracking.display` | `0.01em` |
-| `typography.tracking.editorial` | `0.04em` |
-| `typography.tracking.label` | `0.3em` |
+
+| Token                           | Value                          |
+| ------------------------------- | ------------------------------ |
+| `typography.family.display`     | `var(--font-cormorant)`        |
+| `typography.family.ui`          | `var(--font-dm-sans)`          |
+| `typography.family.editorial`   | `var(--font-instrument-serif)` |
+| `typography.tracking.display`   | `0.01em`                       |
+| `typography.tracking.editorial` | `0.04em`                       |
+| `typography.tracking.label`     | `0.3em`                        |
 
 ### Motion
-| Token | Value |
-|---|---|
-| `motion.duration.fast` | `150` (ms) |
-| `motion.duration.base` | `250` (ms) |
-| `motion.duration.slow` | `400` (ms) |
-| `motion.duration.cinematic` | `800` (ms) |
-| `motion.easing.out` | `[0.22, 1, 0.36, 1]` |
-| `motion.easing.inOut` | `[0.4, 0, 0.2, 1]` |
-| `motion.easing.spring` | `{ type: 'spring', stiffness: 300, damping: 30 }` |
+
+| Token                       | Value                                             |
+| --------------------------- | ------------------------------------------------- |
+| `motion.duration.fast`      | `150` (ms)                                        |
+| `motion.duration.base`      | `250` (ms)                                        |
+| `motion.duration.slow`      | `400` (ms)                                        |
+| `motion.duration.cinematic` | `800` (ms)                                        |
+| `motion.easing.out`         | `[0.22, 1, 0.36, 1]`                              |
+| `motion.easing.inOut`       | `[0.4, 0, 0.2, 1]`                                |
+| `motion.easing.spring`      | `{ type: 'spring', stiffness: 300, damping: 30 }` |
 
 ---
 
@@ -208,17 +222,17 @@ Minimal table: asset name, format, dimensions, `<a download>` button. Assets: `a
 
 **Epic:** `BRAND-001 — Brand Page & Design System Token Centralization`
 
-| Story | Title | Agent | Points |
-|---|---|---|---|
-| SCRUM-B1 | Create `lib/tokens.ts` — single source of truth | Qwen | 3 |
-| SCRUM-B2 | Wire `tailwind.config.ts` + `globals.css` to consume `lib/tokens.ts` | Qwen | 2 |
-| SCRUM-B3 | Build `BrandHero` + `LogoShowcase` sections | Gemini | 3 |
-| SCRUM-B4 | Build `ColorPalette` + `TypographySpecimen` sections | Gemini | 3 |
-| SCRUM-B5 | Build `MotionPrinciples` + `ComponentGallery` sections | Claude | 3 |
-| SCRUM-B6 | Build `UsageRules` + `DownloadAssets` sections | Claude | 2 |
-| SCRUM-B7 | Rewrite `brand-content.tsx` — remove gate, compose all sections | Claude | 2 |
-| SCRUM-B8 | Write `docs/design-tokens.md` reference for developers | Claude | 1 |
-| SCRUM-B9 | Playwright tests — brand page renders all 8 sections, downloads work | Claude | 2 |
+| Story    | Title                                                                | Agent  | Points |
+| -------- | -------------------------------------------------------------------- | ------ | ------ |
+| SCRUM-B1 | Create `lib/tokens.ts` — single source of truth                      | Qwen   | 3      |
+| SCRUM-B2 | Wire `tailwind.config.ts` + `globals.css` to consume `lib/tokens.ts` | Qwen   | 2      |
+| SCRUM-B3 | Build `BrandHero` + `LogoShowcase` sections                          | Gemini | 3      |
+| SCRUM-B4 | Build `ColorPalette` + `TypographySpecimen` sections                 | Gemini | 3      |
+| SCRUM-B5 | Build `MotionPrinciples` + `ComponentGallery` sections               | Claude | 3      |
+| SCRUM-B6 | Build `UsageRules` + `DownloadAssets` sections                       | Claude | 2      |
+| SCRUM-B7 | Rewrite `brand-content.tsx` — remove gate, compose all sections      | Claude | 2      |
+| SCRUM-B8 | Write `docs/design-tokens.md` reference for developers               | Claude | 1      |
+| SCRUM-B9 | Playwright tests — brand page renders all 8 sections, downloads work | Claude | 2      |
 
 **Sprint order:** B1 → B2 → (B3, B4, B5, B6 in parallel) → B7 → B8 → B9
 
@@ -242,19 +256,19 @@ Minimal table: asset name, format, dimensions, `<a download>` button. Assets: `a
 
 ## 9. File Change Summary
 
-| File | Action |
-|---|---|
-| `lib/tokens.ts` | **Create** |
-| `tailwind.config.ts` | **Update** — import from `lib/tokens.ts` |
-| `app/globals.css` | **Update** — `:root {}` references token constants |
-| `app/[locale]/brand/brand-content.tsx` | **Rewrite** — remove gate, compose sections |
-| `app/[locale]/brand/sections/BrandHero.tsx` | **Create** |
-| `app/[locale]/brand/sections/LogoShowcase.tsx` | **Create** |
-| `app/[locale]/brand/sections/ColorPalette.tsx` | **Create** |
-| `app/[locale]/brand/sections/TypographySpecimen.tsx` | **Create** |
-| `app/[locale]/brand/sections/MotionPrinciples.tsx` | **Create** |
-| `app/[locale]/brand/sections/ComponentGallery.tsx` | **Create** |
-| `app/[locale]/brand/sections/UsageRules.tsx` | **Create** |
-| `app/[locale]/brand/sections/DownloadAssets.tsx` | **Create** |
-| `docs/design-tokens.md` | **Create** |
-| `__tests__/brand/brand-page.test.ts` | **Create** |
+| File                                                 | Action                                             |
+| ---------------------------------------------------- | -------------------------------------------------- |
+| `lib/tokens.ts`                                      | **Create**                                         |
+| `tailwind.config.ts`                                 | **Update** — import from `lib/tokens.ts`           |
+| `app/globals.css`                                    | **Update** — `:root {}` references token constants |
+| `app/[locale]/brand/brand-content.tsx`               | **Rewrite** — remove gate, compose sections        |
+| `app/[locale]/brand/sections/BrandHero.tsx`          | **Create**                                         |
+| `app/[locale]/brand/sections/LogoShowcase.tsx`       | **Create**                                         |
+| `app/[locale]/brand/sections/ColorPalette.tsx`       | **Create**                                         |
+| `app/[locale]/brand/sections/TypographySpecimen.tsx` | **Create**                                         |
+| `app/[locale]/brand/sections/MotionPrinciples.tsx`   | **Create**                                         |
+| `app/[locale]/brand/sections/ComponentGallery.tsx`   | **Create**                                         |
+| `app/[locale]/brand/sections/UsageRules.tsx`         | **Create**                                         |
+| `app/[locale]/brand/sections/DownloadAssets.tsx`     | **Create**                                         |
+| `docs/design-tokens.md`                              | **Create**                                         |
+| `__tests__/brand/brand-page.test.ts`                 | **Create**                                         |

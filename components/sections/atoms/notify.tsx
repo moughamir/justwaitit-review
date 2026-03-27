@@ -23,7 +23,8 @@ export function NotifyForm({ animated }: { animated: boolean }) {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const collected: UtmParams = {};
-    for (const key of UTM_KEYS) {
+    for (let i = 0; i < UTM_KEYS.length; i++) {
+      const key = UTM_KEYS[i];
       const val = params.get(key);
       if (val) collected[key] = val;
     }

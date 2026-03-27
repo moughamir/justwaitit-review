@@ -464,10 +464,7 @@
           "value": "14 jours",
           "label": "Shooting traditionnel"
         },
-        "anaqio": {
-          "value": "2 heures",
-          "label": "Avec ANAQIO"
-        }
+        "anaqio": { "value": "2 heures", "label": "Avec ANAQIO" }
       },
       "pipeline": [
         {
@@ -588,12 +585,8 @@
       "intro": "L'industrie de la mode entre dans une nouvelle ère où la production visuelle doit suivre le rythme du commerce numérique.",
       "quote": "La vision d'Anaqio est de devenir la couche d'infrastructure visuelle de l'industrie mondiale de la mode, transformant la production visuelle d'un goulot d'étranglement en moteur de croissance.",
       "points": [
-        {
-          "text": "Les collections se lancent plus vite."
-        },
-        {
-          "text": "Les cycles de contenu s'accélèrent."
-        },
+        { "text": "Les collections se lancent plus vite." },
+        { "text": "Les cycles de contenu s'accélèrent." },
         {
           "text": "Les marques atteignent des audiences mondiales instantanément."
         }
