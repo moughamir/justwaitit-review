@@ -1,17 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 
-/**
- * Extended Navigator interface to include non-standard/experimental properties
- * used for device capability detection.
- */
-interface NavigatorWithCapabilities extends Navigator {
-  deviceMemory?: number;
-  connection?: {
-    effectiveType: string;
-    saveData: boolean;
-  };
-}
+import type { NavigatorWithCapabilities } from '@/lib/types/navigator';
 
 export function useDeviceTier(): 'high' | 'mid' | 'low' {
   const [tier, setTier] = useState<'high' | 'mid' | 'low'>('high');

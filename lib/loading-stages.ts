@@ -2,6 +2,8 @@
 // Used by both app/loading.tsx and components/sections/LoadingScreen.tsx
 // to keep stage labels and thresholds consistent.
 
+import type { NavigatorWithCapabilities } from '@/lib/types/navigator';
+
 export const LOADING_STAGES = [
   { threshold: 0, key: 'initializing' },
   { threshold: 25, key: 'assets' },
@@ -28,13 +30,9 @@ export function resolveStage(progress: number): LoadingStage {
  */
 export function getConnectionTier(): ConnectionTier {
   if (typeof navigator === 'undefined') return 'moderate';
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const conn = (navigator as any).connection;
+  const conn = (navigator as NavigatorWithCapabilities).connection;
   if (!conn) return 'moderate';
-  const { effectiveType, downlink } = conn as {
-    effectiveType?: string;
-    downlink?: number;
-  };
+  const { effectiveType, downlink } = conn;
   if (
     effectiveType === 'slow-2g' ||
     effectiveType === '2g' ||
