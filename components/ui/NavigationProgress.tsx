@@ -1,6 +1,13 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
+import {
+  AnimatePresence,
+  motion,
+  useMotionValue,
+  useTransform,
+  animate,
+  useMotionValueEvent,
+} from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 
 import { usePathname } from '@/i18n/routing';
@@ -29,30 +36,34 @@ export const NAV_START_EVENT = 'anaqio:nav:start' as const;
  */
 export function NavigationProgress() {
   const pathname = usePathname();
-  const [progress, setProgress] = useState(0);
+  const progress = useMotionValue(0);
+  const progressPercent = useTransform(progress, (v) => `${Math.round(v)}%`);
+
   const [visible, setVisible] = useState(false);
-  const rafRef = useRef<number>(0);
-  const currentRef = useRef(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const animControls = useRef<{ stop: () => void } | null>(null);
   const prevPathname = useRef(pathname);
   const hideTimer = useRef<NodeJS.Timeout | undefined>(undefined);
   const isNavigating = useRef(false);
 
+  // Synchronize aria-valuenow directly to DOM to avoid React re-renders on tick
+  useMotionValueEvent(progress, 'change', (latest) => {
+    if (containerRef.current) {
+      containerRef.current.setAttribute(
+        'aria-valuenow',
+        Math.round(latest).toString()
+      );
+    }
+  });
+
   // ── Helpers ──────────────────────────────────────────────────────────
   const animateTo = (target: number, onDone?: () => void) => {
-    cancelAnimationFrame(rafRef.current);
-    const tick = () => {
-      const gap = target - currentRef.current;
-      if (Math.abs(gap) > 0.4) {
-        currentRef.current += gap * 0.11;
-        setProgress(Math.round(currentRef.current));
-        rafRef.current = requestAnimationFrame(tick);
-      } else {
-        currentRef.current = target;
-        setProgress(target);
-        onDone?.();
-      }
-    };
-    rafRef.current = requestAnimationFrame(tick);
+    animControls.current?.stop();
+    animControls.current = animate(progress, target, {
+      duration: 0.4,
+      ease: 'easeOut',
+      onComplete: onDone,
+    });
   };
 
   const complete = () => {
@@ -60,8 +71,7 @@ export function NavigationProgress() {
     animateTo(100, () => {
       hideTimer.current = setTimeout(() => {
         setVisible(false);
-        currentRef.current = 0;
-        setProgress(0);
+        progress.set(0);
       }, 380);
     });
   };
@@ -72,25 +82,23 @@ export function NavigationProgress() {
       if (isNavigating.current) return; // already in progress
       isNavigating.current = true;
 
-      cancelAnimationFrame(rafRef.current);
+      animControls.current?.stop();
       clearTimeout(hideTimer.current);
 
-      currentRef.current = 0;
-
-      setProgress(0);
+      progress.set(0);
 
       setVisible(true);
 
       // Immediate jump + ease to 80 % (leaves room for completion)
       requestAnimationFrame(() => {
-        currentRef.current = 25;
-        setProgress(25);
+        progress.set(25);
         animateTo(80);
       });
     };
 
     window.addEventListener(NAV_START_EVENT, onNavStart);
     return () => window.removeEventListener(NAV_START_EVENT, onNavStart);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── Phase 2: complete when the new route renders ───────────────────────
@@ -107,9 +115,7 @@ export function NavigationProgress() {
       isNavigating.current = true;
 
       setVisible(true);
-      currentRef.current = 60;
-
-      setProgress(60);
+      progress.set(60);
       complete();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -118,7 +124,7 @@ export function NavigationProgress() {
   // ── Safety: clean up on unmount ───────────────────────────────────────
   useEffect(() => {
     return () => {
-      cancelAnimationFrame(rafRef.current);
+      animControls.current?.stop();
       clearTimeout(hideTimer.current);
     };
   }, []);
@@ -127,10 +133,10 @@ export function NavigationProgress() {
     <AnimatePresence>
       {visible && (
         <motion.div
+          ref={containerRef}
           key="nav-progress"
           aria-hidden="true"
           role="progressbar"
-          aria-valuenow={progress}
           aria-valuemin={0}
           aria-valuemax={100}
           className="pointer-events-none fixed left-0 right-0 top-0 z-[300] h-[2px]"
@@ -141,20 +147,17 @@ export function NavigationProgress() {
           {/* Glow */}
           <motion.div
             className="bg-brand-gradient absolute inset-y-0 left-0 h-[4px] -translate-y-px rounded-full opacity-60 blur-sm"
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
+            style={{ width: progressPercent }}
           />
           {/* Fill */}
           <motion.div
             className="bg-brand-gradient absolute inset-0 left-0 rounded-r-full"
-            animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
+            style={{ width: progressPercent }}
           />
           {/* Leading shimmer dot */}
           <motion.div
             className="absolute top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-aq-purple/80 blur-[3px]"
-            animate={{ left: `${progress}%` }}
-            transition={{ duration: 0.28, ease: 'easeOut' }}
+            style={{ left: progressPercent }}
           />
         </motion.div>
       )}
