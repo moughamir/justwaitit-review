@@ -176,7 +176,7 @@
         "label": "coût moyen par séance studio"
       },
       "time": {
-        "number": "3–6 sem.",
+        "number": "3-6 sem.",
         "label": "cycle de production par collection"
       },
       "skus": {
@@ -431,7 +431,7 @@
       },
       "intro": {
         "a": "Les marques de mode ont aujourd'hui besoin d'un volume considérable de visuels.",
-        "b": "Mais la production traditionnelle n'a pas été conçue pour cette cadence.",
+        "b": "But la production traditionnelle n'a pas été conçue pour cette cadence.",
         "detail": "Les shootings nécessitent des studios, des mannequins, une logistique et de la post-production — les rendant coûteux, lents et difficiles à mettre à l'échelle. Pour les designers émergents et les marques en croissance, cela crée un goulot d'étranglement entre la vision créative et la croissance commerciale.",
         "quote": "La mode est un art. Le commerce exige de l'optimisation."
       },
@@ -593,8 +593,8 @@
       ]
     },
     "philosophy": {
-      "eyebrow": "Notre Philosophie",
-      "body": "La mode a toujours été une forme d'expression artistique. La technologie ne devrait pas remplacer la créativité — elle devrait la renforcer. Anaqio a été construit avec une conviction simple : l'IA doit optimiser le côté opérationnel de la production de mode afin que les designers et les marques puissent se concentrer sur la créativité et la narration. Nous ne remplaçons pas l'art de la mode. Nous construisons l'infrastructure qui lui permet de grandir."
+      "eyebrow": "Our Philosophy",
+      "body": "Fashion has always been a form of artistic expression. Technology should not replace creativity — it should empower it. Anaqio was built with a simple belief: AI should optimize the operational side of fashion production so designers and brands can focus on creativity and storytelling. We are not replacing fashion art. We are building the infrastructure that allows it to scale."
     },
     "finalCta": {
       "srHeading": "Accès anticipé",

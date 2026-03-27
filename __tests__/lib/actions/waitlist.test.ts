@@ -1,4 +1,5 @@
 import { expect, test, mock, describe, beforeEach } from 'bun:test';
+
 import { joinWaitlist } from '@/lib/actions/waitlist';
 
 // Mock Supabase server client
@@ -92,7 +93,9 @@ describe('joinWaitlist', () => {
     const result = await joinWaitlist(formData);
 
     expect(result.success).toBe(false);
-    expect(result.message).toBe('Something went wrong. Please try again later.');
+    expect(result.message).toBe(
+      'Something went wrong. Please try again later.'
+    );
   });
 
   test('handles unexpected exceptions', async () => {
@@ -104,6 +107,8 @@ describe('joinWaitlist', () => {
     const result = await joinWaitlist(formData);
 
     expect(result.success).toBe(false);
-    expect(result.message).toBe('Something went wrong. Please try again later.');
+    expect(result.message).toBe(
+      'Something went wrong. Please try again later.'
+    );
   });
 });

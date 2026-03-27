@@ -110,6 +110,12 @@ export async function joinWaitlist(formData: FormData) {
       role: role,
       preferences: aesthetic ? { aesthetic } : {},
       source: source,
+      utm_source,
+      utm_medium,
+      utm_campaign,
+      utm_content,
+      utm_term,
+      referrer,
     };
 
     const trimmedCompany = company?.trim();

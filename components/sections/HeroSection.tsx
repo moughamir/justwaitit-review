@@ -66,7 +66,6 @@ export function HeroSection() {
           {rtl
             ? t('headline.pre')
                 .split(' ')
-
                 .map((word, i) => (
                   <motion.span
                     key={`pre-word-${i}`}
