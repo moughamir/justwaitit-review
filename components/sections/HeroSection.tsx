@@ -51,7 +51,9 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 z-0"
       />
+      {/* Layer 2: Content Column */}
       <div className="relative z-20 mx-auto flex w-full flex-1 flex-col items-center justify-center px-6 pt-24 text-center sm:px-12">
+        {/* Atom A: pre — charReveal per character */}
         <motion.p
           data-atom
           aria-hidden="true"

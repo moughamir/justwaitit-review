@@ -23,8 +23,19 @@ export type LogoAnimationVariant =
 
 export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement> {
   variant?: LogoAnimationVariant;
+  /**
+   * Loading progress (0–100). Only used when `variant="outline-fill"`.
+   * Phase 1 (0–40%): stroke draws on via pathLength.
+   * Phase 2 (40–100%): fill fades in, stroke fades out.
+   */
   progress?: number | MotionValue<number>;
+  /**
+   * Stable instance ID for SVG gradient namespacing.
+   * Pass a static string when the component is rendered after dynamic imports
+   * to avoid React hydration mismatches caused by useId() counter drift.
+   */
   instanceId?: string;
+  animated?: boolean;
 }
 
 const letterPaths = [
@@ -200,6 +211,7 @@ function OutlineFillLetters({
 
   const internalProgressMv = useMotionValue(initialValue);
 
+  // Sync the MotionValue when the progress prop changes (if it's a number)
   React.useEffect(() => {
     if (typeof progress === 'number') {
       internalProgressMv.set(progress);
@@ -363,11 +375,19 @@ export function AnaqioTypographyLogo({
   progress = 0,
   instanceId: instanceIdProp,
   className,
+  animated = false,
   ...props
 }: AnaqioTypographyLogoProps) {
-  const resolvedVariant: LogoAnimationVariant = variant ?? 'none';
+  // Backwards compat: `animated` maps to 'stagger'
+  const resolvedVariant: LogoAnimationVariant =
+    variant ?? (animated ? 'stagger' : 'none');
+
+  // Unique instance id so multiple logos on a page don't clash gradient ids.
+  // useId() can drift when dynamic (ssr:false) imports add extra hook calls
+  // client-side — pass instanceId prop for stable usages (e.g. Footer watermark).
   const generatedId = React.useId().replace(/:/g, '');
   const instanceId = instanceIdProp ?? generatedId;
+
   const renderLetters = () => {
     switch (resolvedVariant) {
       case 'stagger':
