@@ -1,22 +1,27 @@
 'use client';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import {
+  type HTMLMotionProps,
+  motion,
+  useMotionValue,
+  useSpring,
+} from 'framer-motion';
 import { useRef } from 'react';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
 import { useIsTouch } from '@/hooks/use-is-touch';
+
+export interface MagneticButtonProps extends HTMLMotionProps<'div'> {
+  children: React.ReactNode;
+  className?: string;
+  strength?: number;
+}
 
 export function MagneticButton({
   children,
   className = '',
   strength = 0.35,
   ...props
-}: {
-  children: React.ReactNode;
-  className?: string;
-  strength?: number;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any;
-}) {
+}: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
   const rawX = useMotionValue(0);
   const rawY = useMotionValue(0);

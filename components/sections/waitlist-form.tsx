@@ -94,13 +94,17 @@ export function WaitlistForm({
     submitFormData.append('source', source);
 
     // Add all form data with email sanitization
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'email') {
-        submitFormData.append(key, sanitizeEmail(value));
-      } else {
-        submitFormData.append(key, value);
+    // Optimization: Directly handle email and use a standard for loop for other fields
+    submitFormData.append('email', sanitizeEmail(formData.email || ''));
+
+    const formKeys = Object.keys(formData);
+    const formKeysLen = formKeys.length;
+    for (let i = 0; i < formKeysLen; i++) {
+      const key = formKeys[i];
+      if (key !== 'email') {
+        submitFormData.append(key, formData[key as keyof typeof formData]);
       }
-    });
+    }
 
     startTransition(async () => {
       try {

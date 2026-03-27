@@ -25,7 +25,10 @@ export function LocaleSwitcher() {
   useEffect(() => {
     if (!open) return;
     function handleOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     }
@@ -77,11 +80,7 @@ export function LocaleSwitcher() {
               const meta = LOCALE_META[loc];
               const active = loc === locale;
               return (
-                <li
-                  key={loc}
-                  role="option"
-                  aria-selected={active}
-                >
+                <li key={loc} role="option" aria-selected={active}>
                   <button
                     data-testid={`locale-option-${loc}`}
                     onClick={() => switchLocale(loc)}
@@ -96,7 +95,10 @@ export function LocaleSwitcher() {
                     <span aria-hidden="true">{meta.flag}</span>
                     <span>{localeLabels[loc]}</span>
                     {active && (
-                      <span className="ms-auto h-1.5 w-1.5 rounded-full bg-aq-blue" aria-hidden="true" />
+                      <span
+                        className="ms-auto h-1.5 w-1.5 rounded-full bg-aq-blue"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 </li>

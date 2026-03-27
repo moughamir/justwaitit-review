@@ -92,21 +92,23 @@ export function HeroSection() {
           style={animated ? { y: headlineY } : {}}
           className="flex flex-wrap justify-center font-display font-light text-foreground"
         >
-          {t('headline.pre').split('').map((char, i) => (
-            <motion.span
-              key={`pre-${char}-${i}`}
-              data-atom
-              aria-hidden="true"
-              {...(animated ? charReveal(reduced, i) : {})}
-              className="inline-block"
-              style={{
-                fontSize: 'clamp(3.5rem, 8vw, 9rem)',
-                letterSpacing: '-0.02em',
-              }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
+          {t('headline.pre')
+            .split('')
+            .map((char, i) => (
+              <motion.span
+                key={`pre-${char}-${i}`}
+                data-atom
+                aria-hidden="true"
+                {...(animated ? charReveal(reduced, i) : {})}
+                className="inline-block"
+                style={{
+                  fontSize: 'clamp(3.5rem, 8vw, 9rem)',
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
         </motion.p>
         {/* Atom B: pro — word-by-word y: 20→0, gradient italic */}
         <p
@@ -178,9 +180,7 @@ export function HeroSection() {
             asChild
             className="h-11 gap-2 rounded-xl px-7 text-[0.7rem] font-medium uppercase tracking-[0.18em]"
           >
-            <ScrollLink targetId="how-it-works">
-              {t('cta.learn')}
-            </ScrollLink>
+            <ScrollLink targetId="how-it-works">{t('cta.learn')}</ScrollLink>
           </Button>
         </motion.div>
       </div>

@@ -1,20 +1,20 @@
 'use client';
-
 import { useSyncExternalStore } from 'react';
 
-function subscribe(callback: () => void) {
+const subscribe = (callback: () => void) => {
+  if (typeof window === 'undefined') return () => {};
+
   const mql = window.matchMedia('(pointer: coarse)');
   mql.addEventListener('change', callback);
   return () => mql.removeEventListener('change', callback);
-}
+};
 
-function getSnapshot() {
+const getSnapshot = () => {
+  if (typeof window === 'undefined') return false;
   return window.matchMedia('(pointer: coarse)').matches;
-}
+};
 
-function getServerSnapshot() {
-  return false;
-}
+const getServerSnapshot = () => false;
 
 export function useIsTouch() {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

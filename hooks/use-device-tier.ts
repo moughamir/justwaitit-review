@@ -1,24 +1,26 @@
 'use client';
-
 import { useSyncExternalStore } from 'react';
 
 type Tier = 'high' | 'mid' | 'low';
 
-function subscribe() {
-  // Device properties typically don't change during a session
-  return () => {};
-}
+const subscribe = (callback: () => void) => {
+  if (typeof window === 'undefined') return () => {};
 
-function getSnapshot(): Tier {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const connection = (navigator as any).connection;
+  if (connection) {
+    connection.addEventListener('change', callback);
+    return () => connection.removeEventListener('change', callback);
+  }
+  return () => {};
+};
+
+const getSnapshot = (): Tier => {
   if (typeof window === 'undefined') return 'high';
 
   const cores = navigator.hardwareConcurrency ?? 4;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore - deviceMemory is non-standard but useful in Chrome
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const memory = (navigator as any).deviceMemory ?? 4;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore - connection is non-standard
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const connection = (navigator as any).connection?.effectiveType ?? '4g';
 
@@ -34,11 +36,9 @@ function getSnapshot(): Tier {
   } else {
     return 'high';
   }
-}
+};
 
-function getServerSnapshot(): Tier {
-  return 'high';
-}
+const getServerSnapshot = (): Tier => 'high';
 
 export function useDeviceTier(): Tier {
   return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);

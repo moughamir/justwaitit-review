@@ -344,7 +344,10 @@
   "landing": {
     "hero": {
       "eyebrow": "Là où les vêtements deviennent des campagnes",
-      "headline": { "pre": "Infrastructure visuelle", "pro": "pour la mode commerciale" },
+      "headline": {
+        "pre": "Infrastructure visuelle",
+        "pro": "pour la mode commerciale"
+      },
       "subheadline": {
         "a": "Transformez des vêtements en visuels de campagne photoréalistes en quelques minutes.",
         "b": "Anaqio optimise la production visuelle pour la mode commerciale à grande échelle."
@@ -354,12 +357,21 @@
         "words": ["designers", "marques", "agences"],
         "post": " qui ont besoin de visuels cohérents à grande échelle."
       },
-      "cta": { "act": "Rejoindre la liste d'attente", "learn": "Voir comment ça marche" }
+      "cta": {
+        "act": "Rejoindre la liste d'attente",
+        "learn": "Voir comment ça marche"
+      }
     },
     "problem": {
       "eyebrow": "Le Défi",
-      "headline": { "pre": "La demande en contenu mode.", "gradient": "Explosive" },
-      "visualHeadline": { "line1": "La mode va vite.", "line2": "La production, non." },
+      "headline": {
+        "pre": "La demande en contenu mode.",
+        "gradient": "Explosive"
+      },
+      "visualHeadline": {
+        "line1": "La mode va vite.",
+        "line2": "La production, non."
+      },
       "intro": {
         "a": "Les marques de mode ont aujourd'hui besoin d'un volume considérable de visuels.",
         "b": "Mais la production traditionnelle n'a pas été conçue pour cette cadence.",
@@ -383,35 +395,89 @@
       "description": "Anaqio transforme de simples images de vêtements en visuels photoréalistes grâce à un pipeline IA structuré, spécialement conçu pour les marques de mode.",
       "footer": "Pas de shooting. Pas de délais de production. Juste une génération visuelle évolutive.",
       "stat": {
-        "traditional": { "value": "14 jours", "label": "Shooting traditionnel" },
+        "traditional": {
+          "value": "14 jours",
+          "label": "Shooting traditionnel"
+        },
         "anaqio": { "value": "2 heures", "label": "Avec ANAQIO" }
       },
       "pipeline": [
-        { "stage": "Entrée", "label": "À plat", "body": "Téléchargez vos images de vêtements brutes et vos ressources de marque." },
-        { "stage": "Traitement", "label": "Pipeline IA", "body": "Nous orchestrons la génération de vos ressources avec des pipelines de pointe." },
-        { "stage": "Sortie", "label": "Visuel de campagne", "body": "Recevez des visuels de campagne photoréalistes prêts pour le commerce." }
+        {
+          "stage": "Entrée",
+          "label": "À plat",
+          "body": "Téléchargez vos images de vêtements brutes et vos ressources de marque."
+        },
+        {
+          "stage": "Traitement",
+          "label": "Pipeline IA",
+          "body": "Nous orchestrons la génération de vos ressources avec des pipelines de pointe."
+        },
+        {
+          "stage": "Sortie",
+          "label": "Visuel de campagne",
+          "body": "Recevez des visuels de campagne photoréalistes prêts pour le commerce."
+        }
       ]
     },
     "howItWorks": {
       "eyebrow": "Comment ça marche",
-      "headline": { "pre": "Quatre étapes vers des", "gradient": "Visuels prêts", "post": "pour la campagne" },
+      "headline": {
+        "pre": "Quatre étapes vers des",
+        "gradient": "Visuels prêts",
+        "post": "pour la campagne"
+      },
       "steps": [
-        { "num": "01", "title": "Téléchargez votre vêtement", "body": "Téléchargez une image à plat ou sur mannequin invisible." },
-        { "num": "02", "title": "Définissez le style visuel", "body": "Choisissez des poses, un éclairage et des environnements conçus pour les campagnes de mode." },
-        { "num": "03", "title": "Générez un résultat photoréaliste", "body": "Notre pipeline IA transforme le vêtement en visuels de haute qualité prêts pour l'e-commerce, les campagnes et les réseaux sociaux." },
-        { "num": "04", "title": "Évoluez instantanément", "body": "Générez plusieurs variations pour différents marchés, campagnes ou lancements. En quelques minutes — pas des semaines." }
+        {
+          "num": "01",
+          "title": "Téléchargez votre vêtement",
+          "body": "Téléchargez une image à plat ou sur mannequin invisible."
+        },
+        {
+          "num": "02",
+          "title": "Définissez le style visuel",
+          "body": "Choisissez des poses, un éclairage et des environnements conçus pour les campagnes de mode."
+        },
+        {
+          "num": "03",
+          "title": "Générez un résultat photoréaliste",
+          "body": "Notre pipeline IA transforme le vêtement en visuels de haute qualité prêts pour l'e-commerce, les campagnes et les réseaux sociaux."
+        },
+        {
+          "num": "04",
+          "title": "Évoluez instantanément",
+          "body": "Générez plusieurs variations pour différents marchés, campagnes ou lancements. En quelques minutes — pas des semaines."
+        }
       ]
     },
     "whyAnaqio": {
       "eyebrow": "Avantages du produit",
-      "headline": { "pre": "Pourquoi", "gradient": "Anaqio", "post": "est meilleur ?" },
+      "headline": {
+        "pre": "Pourquoi",
+        "gradient": "Anaqio",
+        "post": "est meilleur ?"
+      },
       "footer": "Anaqio est conçu pour la fiabilité, la cohérence et l'évolutivité.",
       "points": [
-        { "title": "Précision des vêtements", "body": "Reproduction fidèle des textures, coupes, couleurs et détails de marque." },
-        { "title": "Poses contrôlées", "body": "Positionnement cohérent sur toutes les collections de produits." },
-        { "title": "Cohérence de l'éclairage", "body": "Éclairage uniforme qui préserve une représentation précise des couleurs." },
-        { "title": "Production évolutive", "body": "Générez des centaines de visuels sans augmenter les coûts de production." },
-        { "title": "Résultats sécurisés pour la marque", "body": "Pipelines IA structurés conçus pour les marques de mode — pas de génération expérimentale." }
+        {
+          "title": "Précision des vêtements",
+          "body": "Reproduction fidèle des textures, coupes, couleurs et détails de marque."
+        },
+        {
+          "title": "Poses contrôlées",
+          "body": "Positionnement cohérent sur toutes les collections de produits."
+        },
+        {
+          "title": "Cohérence de l'éclairage",
+          "body": "Éclairage uniforme qui préserve une représentation précise des couleurs."
+        },
+        {
+          "title": "Production évolutive",
+          "body": "Générez des centaines de visuels sans augmenter les coûts de production."
+        },
+        {
+          "title": "Résultats sécurisés pour la marque",
+          "body": "Pipelines IA structurés conçus pour les marques de mode — pas de génération expérimentale."
+        }
       ]
     },
     "whoItsFor": {
@@ -419,10 +485,22 @@
       "headline": { "pre": "Conçu pour l'écosystème", "gradient": "Mode" },
       "footer": "Quiconque produit des visuels de mode à grande échelle.",
       "audiences": [
-        { "title": "Marques de mode", "body": "Développez les visuels de produits pour l'e-commerce et les campagnes marketing." },
-        { "title": "Designers émergents", "body": "Créez des visuels professionnels sans shootings coûteux." },
-        { "title": "Studios créatifs", "body": "Accélérez la production pour les campagnes clients." },
-        { "title": "Marchés en ligne", "body": "Standardisez la qualité visuelle sur de grands inventaires de produits." }
+        {
+          "title": "Marques de mode",
+          "body": "Développez les visuels de produits pour l'e-commerce et les campagnes marketing."
+        },
+        {
+          "title": "Designers émergents",
+          "body": "Créez des visuels professionnels sans shootings coûteux."
+        },
+        {
+          "title": "Studios créatifs",
+          "body": "Accélérez la production pour les campagnes clients."
+        },
+        {
+          "title": "Marchés en ligne",
+          "body": "Standardisez la qualité visuelle sur de grands inventaires de produits."
+        }
       ],
       "features": [
         "Espace studio dédié",
@@ -438,7 +516,9 @@
       "points": [
         { "text": "Les collections se lancent plus vite." },
         { "text": "Les cycles de contenu s'accélèrent." },
-        { "text": "Les marques atteignent des audiences mondiales instantanément." }
+        {
+          "text": "Les marques atteignent des audiences mondiales instantanément."
+        }
       ]
     },
     "philosophy": {
@@ -447,7 +527,10 @@
     },
     "finalCta": {
       "srHeading": "Accès anticipé",
-      "headline": { "pre": "Rejoignez l'évolution de la", "gradient": "Production Mode" },
+      "headline": {
+        "pre": "Rejoignez l'évolution de la",
+        "gradient": "Production Mode"
+      },
       "cta": {
         "primary": "Rejoindre la liste d'attente",
         "secondary": "Voir comment ça marche",
