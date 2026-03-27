@@ -1,4 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+
+import { useLocalStorage } from './use-local-storage';
 
 import type { FormStep } from '@/lib/types/waitlist-form';
 
@@ -18,25 +20,38 @@ export interface MultiStepFormReturn {
   markFieldTouched: (name: string) => void;
   validateCurrentStep: () => boolean;
   setIsAnimating: (animating: boolean) => void;
+  resetForm: () => void;
 }
 
 /**
- * Custom hook for managing multi-step form state and navigation
+ * Custom hook for managing multi-step form state and navigation.
+ * Now persists form data to localStorage to prevent loss on refresh.
+ *
  * @param steps - Array of form step configurations
+ * @param storageKey - Key for localStorage persistence
  * @param initialData - Optional initial form data
  * @returns Form state and control functions
  */
 export function useMultiStepForm(
   steps: FormStep[],
+  storageKey = 'anaqio-form-data',
   initialData?: Record<string, string>
 ): MultiStepFormReturn {
+  const [persistedData, setPersistedData] = useLocalStorage<
+    Record<string, string>
+  >(storageKey, initialData ?? {});
+
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState<Record<string, string>>(
-    initialData ?? {}
-  );
+  const [formData, setFormData] =
+    useState<Record<string, string>>(persistedData);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [isAnimating, setIsAnimating] = useState(false);
+
+  // Sync state to localStorage
+  useEffect(() => {
+    setPersistedData(formData);
+  }, [formData, setPersistedData]);
 
   const totalSteps = steps.length;
 
@@ -116,6 +131,17 @@ export function useMultiStepForm(
     [totalSteps]
   );
 
+  /**
+   * Resets form data and clears localStorage
+   */
+  const resetForm = useCallback(() => {
+    setFormData(initialData ?? {});
+    setPersistedData(initialData ?? {});
+    setErrors({});
+    setTouched({});
+    setCurrentStep(1);
+  }, [initialData, setPersistedData]);
+
   return {
     currentStep,
     totalSteps,
@@ -130,5 +156,6 @@ export function useMultiStepForm(
     markFieldTouched,
     validateCurrentStep,
     setIsAnimating,
+    resetForm,
   };
 }

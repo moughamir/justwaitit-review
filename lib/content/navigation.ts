@@ -5,7 +5,7 @@
 
 import InstagramIcon from '@/components/ui/icons/instagram';
 import LinkedinIcon from '@/components/ui/icons/linkedin';
-import NewTwitterIcon from '@/components/ui/icons/NewTwitter';
+import _NewTwitterIcon from '@/components/ui/icons/NewTwitter';
 import PinterestIcon from '@/components/ui/icons/pinterest';
 import TiktokIcon from '@/components/ui/icons/tiktok';
 import YoutubeIcon from '@/components/ui/icons/youtube';

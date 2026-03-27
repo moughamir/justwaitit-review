@@ -7,12 +7,14 @@ import {
   useReducedMotion,
 } from 'framer-motion';
 import { Globe, RefreshCw, Rocket } from 'lucide-react';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 
 import { VisionPointAtom } from './atoms/vision-point-atom';
 
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { NANOBANANA_VISUALS } from '@/lib/content/nanobanana-assets';
 import { ease } from '@/lib/motion';
 
 export function VisionSection() {
@@ -35,6 +37,7 @@ export function VisionSection() {
 
   const headerY = useTransform(scrollYProgress, [0, 0.4], ['60px', '0px']);
   const headerOp = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
+  const visualY = useTransform(scrollYProgress, [0, 1], ['0px', '120px']);
 
   return (
     <section
@@ -61,6 +64,20 @@ export function VisionSection() {
       >
         2027
       </motion.span>
+
+      {/* Visual Image Atom [DRIFTING] */}
+      <motion.div
+        data-atom
+        style={animated ? { y: visualY } : {}}
+        className="absolute -left-32 top-[20%] z-0 hidden h-[500px] w-96 overflow-hidden rounded-[4rem] border border-white/5 opacity-[0.07] grayscale transition-all duration-1000 hover:opacity-[0.15] hover:grayscale-0 lg:block"
+      >
+        <Image
+          src={NANOBANANA_VISUALS.studio.goldenHour}
+          alt=""
+          fill
+          className="object-cover"
+        />
+      </motion.div>
 
       <div className="relative z-10 w-full max-w-3xl space-y-16">
         <motion.div

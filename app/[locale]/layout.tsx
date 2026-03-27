@@ -5,8 +5,8 @@ import { getMessages, getTranslations } from 'next-intl/server';
 
 import type { Metadata, Viewport } from 'next';
 
-import { AnaqioAnalytica } from '@/components/brand/Analytica';
 import { GrainOverlay } from '@/components/ui/GrainOverlay';
+import { HashScrollSuppressor } from '@/components/ui/HashScrollSuppressor';
 import { NavigationProgress } from '@/components/ui/NavigationProgress';
 import { isRTL, locales, type Locale } from '@/i18n/config';
 import {
@@ -43,20 +43,14 @@ export async function generateMetadata({
   return {
     metadataBase: new URL(defaultUrl),
     title: t('title'),
-    description: t('description'),
+    description: t('desc'),
     alternates: {
-      canonical: `${defaultUrl}/${locale}`,
-      languages: {
-        'x-default': `${defaultUrl}/en-US`,
-        'en-US': `${defaultUrl}/en-US`,
-        'fr-FR': `${defaultUrl}/fr-FR`,
-        'ar-MA': `${defaultUrl}/ar-MA`,
-      },
+      canonical: defaultUrl,
     },
     openGraph: {
       title: t('title'),
-      description: t('description'),
-      url: `${defaultUrl}/${locale}`,
+      description: t('desc'),
+      url: defaultUrl,
       siteName: 'Anaqio',
       type: 'website',
       images: [
@@ -71,7 +65,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: t('title'),
-      description: t('description'),
+      description: t('desc'),
       images: ['/twitter-image.png'],
     },
   };
@@ -132,7 +126,7 @@ export default async function LocaleLayout({
         ))}
       </head>
       <body
-        className={`${appFonts.cormorant.variable} ${appFonts.dmSans.variable} ${appFonts.instrumentSerif.variable} ${notoArabic.variable} relative antialiased`}
+        className={`${appFonts.syne.variable} ${appFonts.jakartaSans.variable} ${appFonts.instrumentSerif.variable} ${notoArabic.variable} relative antialiased`}
         suppressHydrationWarning
       >
         <a
@@ -173,12 +167,12 @@ export default async function LocaleLayout({
         </div>
 
         <NextIntlClientProvider messages={messages}>
+          <HashScrollSuppressor />
           <NavigationProgress />
           {children}
         </NextIntlClientProvider>
         <GrainOverlay />
       </body>
-      <AnaqioAnalytica />
     </html>
   );
 }

@@ -29,11 +29,24 @@ export const appConstants = {
 export const appFounders = [
   {
     name: 'Amal AIT OUKHARAZ',
+    role: 'Founder & CEO',
     linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
   },
   {
     name: 'Mohamed MOUGHAMIR',
+    role: 'Co-Founder & CTO',
     linkedin: 'https://www.linkedin.com/in/moughamir/',
+  },
+];
+
+// Non-founder team members — kept separate so they are never emitted as
+// schema.org founders in structured data or layout microdata.
+export const appTeam = [
+  {
+    name: 'Zahir CHAIMAE',
+    role: 'Marketing Director',
+    linkedin: 'https://shazo.anaqio.com',
+    email: 'marketing@anaqio.com',
   },
 ];
 

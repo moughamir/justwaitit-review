@@ -136,10 +136,12 @@ Branch: `feature/i18n` · PR: [#17](https://github.com/anaqio/justwaitit/pull/17
 ### icon-array pattern (t.raw)
 
 Icon arrays (lucide-react `LucideIcon` components) cannot be stored in JSON. Pattern used:
+
 ```typescript
 const POINT_ICONS = [Ruler, Move3D, Sun, Zap, ShieldCheck];
-const points = (t.raw('points') as Array<{title: string; body: string}>)
-  .map((p, i) => ({ ...p, icon: POINT_ICONS[i] }));
+const points = (t.raw('points') as Array<{ title: string; body: string }>).map(
+  (p, i) => ({ ...p, icon: POINT_ICONS[i] })
+);
 ```
 
 ---

@@ -1,32 +1,14 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
+
+import { WaitlistForm } from './waitlist-form';
 
 import { Section } from '@/components/ui/section';
 import { Link } from '@/i18n/routing';
 
 export function WaitlistSection() {
   const t = useTranslations('waitlist');
-
-  // Render client-only without showing loading flash
-  const WaitlistForm = dynamic(
-    () => import('./waitlist-form').then((mod) => mod.WaitlistForm),
-    {
-      ssr: false,
-      loading: () => (
-        <div
-          className="space-y-3"
-          aria-busy="true"
-          aria-label="Loading registration form"
-        >
-          <div className="h-2 w-1/3 animate-pulse rounded bg-foreground/5" />
-          <div className="h-14 w-full animate-pulse rounded-xl bg-foreground/5" />
-          <div className="h-14 w-full animate-pulse rounded-xl bg-foreground/5" />
-        </div>
-      ),
-    }
-  );
 
   return (
     <Section

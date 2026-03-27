@@ -16,7 +16,9 @@ import { flipReveal, scatterIn } from '@/lib/motion';
 export function SolutionSection() {
   const t = useTranslations('landing.solution');
   const PIPELINE_COLORS = ['default', 'purple', 'amber'] as const;
-  const pipeline = (t.raw('pipeline') as Array<{stage: string; label: string; body: string}>).map((p, i) => ({
+  const pipeline = (
+    t.raw('pipeline') as Array<{ stage: string; label: string; body: string }>
+  ).map((p, i) => ({
     ...p,
     color: PIPELINE_COLORS[i],
   }));
@@ -42,7 +44,8 @@ export function SolutionSection() {
       className="relative flex min-h-[100dvh] flex-col items-center justify-center px-4 pb-24 pt-32 lg:pt-48"
     >
       <h2 id="solution-heading" className="sr-only">
-        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')} {t('headline.post')}
+        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}{' '}
+        {t('headline.post')}
       </h2>
 
       {/* Eyebrow [ANCHORED] */}

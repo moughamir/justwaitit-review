@@ -55,3 +55,12 @@ ui-designer.md
 # repomix generated artifacts
 index.json
 repomix-output.xml
+# Workflow outputs — don't commit screenshots or reports
+tools/workflow/reports/
+tools/workflow/shots/
+tools/workflow/node_modules/
+.agents/workflows/node_modules/
+.agents/workflows/reports/
+.agents/workflows/shots/.agents/workflows/node_modules/
+.agents/workflows/reports/
+.agents/workflows/shots/

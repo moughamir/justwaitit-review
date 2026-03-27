@@ -18,7 +18,7 @@ export function ScrollWord({
     <motion.span
       data-atom
       style={animated ? { opacity } : {}}
-      className="mr-[0.28em] inline-block font-display text-[clamp(1.6rem,3.2vw,3.5rem)] font-light leading-tight text-foreground"
+      className="me-[0.28em] inline-block font-display text-[clamp(1.6rem,3.2vw,3.5rem)] font-light leading-tight text-foreground"
     >
       {word}
     </motion.span>

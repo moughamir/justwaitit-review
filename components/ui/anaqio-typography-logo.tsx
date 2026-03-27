@@ -1,6 +1,11 @@
 'use client';
 
-import { motion, useMotionValue, useTransform } from 'framer-motion';
+import {
+  motion,
+  useMotionValue,
+  useTransform,
+  type MotionValue,
+} from 'framer-motion';
 import * as React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -26,7 +31,13 @@ export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement>
    * Phase 1 (0–40%): stroke draws on via pathLength.
    * Phase 2 (40–100%): fill fades in, stroke fades out.
    */
-  progress?: number;
+  progress?: number | MotionValue<number>;
+  /**
+   * Stable instance ID for SVG gradient namespacing.
+   * Pass a static string when the component is rendered after dynamic imports
+   * to avoid React hydration mismatches caused by useId() counter drift.
+   */
+  instanceId?: string;
 }
 
 // ─── Letter Path Data ───────────────────────────────────────────────────────
@@ -209,14 +220,25 @@ function OutlineFillLetters({
   progress,
 }: {
   instanceId: string;
-  progress: number;
+  progress?: number | MotionValue<number>;
 }) {
-  const progressMv = useMotionValue(progress);
+  const initialValue = React.useMemo(() => {
+    if (typeof progress === 'number') return progress;
+    if (progress && 'get' in progress) return progress.get();
+    return 0;
+  }, [progress]);
 
-  // Sync the MotionValue when the progress prop changes
+  const internalProgressMv = useMotionValue(initialValue);
+
+  // Sync the MotionValue when the progress prop changes (if it's a number)
   React.useEffect(() => {
-    progressMv.set(progress);
-  }, [progress, progressMv]);
+    if (typeof progress === 'number') {
+      internalProgressMv.set(progress);
+    }
+  }, [progress, internalProgressMv]);
+
+  const progressMv =
+    progress && typeof progress !== 'number' ? progress : internalProgressMv;
 
   return (
     <>
@@ -378,6 +400,7 @@ export function AnaqioTypographyLogo({
   animated = false,
   variant,
   progress = 0,
+  instanceId: instanceIdProp,
   className,
   ...props
 }: AnaqioTypographyLogoProps) {
@@ -385,8 +408,11 @@ export function AnaqioTypographyLogo({
   const resolvedVariant: LogoAnimationVariant =
     variant ?? (animated ? 'stagger' : 'none');
 
-  // Unique instance id so multiple logos on a page don't clash gradient ids
-  const instanceId = React.useId().replace(/:/g, '');
+  // Unique instance id so multiple logos on a page don't clash gradient ids.
+  // useId() can drift when dynamic (ssr:false) imports add extra hook calls
+  // client-side — pass instanceId prop for stable usages (e.g. Footer watermark).
+  const generatedId = React.useId().replace(/:/g, '');
+  const instanceId = instanceIdProp ?? generatedId;
 
   const renderLetters = () => {
     switch (resolvedVariant) {

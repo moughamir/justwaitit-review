@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { isRTL, localeLabels, locales, type Locale } from '@/i18n/config';
 import { usePathname, useRouter } from '@/i18n/routing';
+import { trackUserBehavior } from '@/lib/analytics';
 
 const LOCALE_META: Record<Locale, { flag: string; short: string }> = {
   'en-US': { flag: '🇺🇸', short: 'EN' },
@@ -25,7 +26,10 @@ export function LocaleSwitcher() {
   useEffect(() => {
     if (!open) return;
     function handleOutside(e: MouseEvent) {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(e.target as Node)
+      ) {
         setOpen(false);
       }
     }
@@ -35,6 +39,7 @@ export function LocaleSwitcher() {
 
   function switchLocale(loc: Locale) {
     setOpen(false);
+    trackUserBehavior.trackClick(`locale_change_${loc}`, 'settings');
     router.replace(pathname, { locale: loc });
   }
 
@@ -71,17 +76,13 @@ export function LocaleSwitcher() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -6, scale: 0.97 }}
             transition={{ duration: 0.15 }}
-            className="absolute right-0 top-full z-50 mt-1.5 min-w-[140px] overflow-hidden rounded-xl border border-border/20 bg-card/90 shadow-xl backdrop-blur-xl"
+            className="absolute end-0 top-full z-50 mt-1.5 min-w-[140px] overflow-hidden rounded-xl border border-border/20 bg-card/90 shadow-xl backdrop-blur-xl"
           >
             {locales.map((loc) => {
               const meta = LOCALE_META[loc];
               const active = loc === locale;
               return (
-                <li
-                  key={loc}
-                  role="option"
-                  aria-selected={active}
-                >
+                <li key={loc} role="option" aria-selected={active}>
                   <button
                     data-testid={`locale-option-${loc}`}
                     onClick={() => switchLocale(loc)}
@@ -96,7 +97,10 @@ export function LocaleSwitcher() {
                     <span aria-hidden="true">{meta.flag}</span>
                     <span>{localeLabels[loc]}</span>
                     {active && (
-                      <span className="ms-auto h-1.5 w-1.5 rounded-full bg-aq-blue" aria-hidden="true" />
+                      <span
+                        className="ms-auto h-1.5 w-1.5 rounded-full bg-aq-blue"
+                        aria-hidden="true"
+                      />
                     )}
                   </button>
                 </li>

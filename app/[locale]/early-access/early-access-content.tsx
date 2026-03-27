@@ -4,125 +4,98 @@ import { useTranslations } from 'next-intl';
 
 import { Footer } from '@/components/layout/Footer';
 import { Header } from '@/components/layout/Header';
-import { WaitlistForm } from '@/components/sections/waitlist-form';
+import { AtelierInvitationForm } from '@/components/sections/atelier-invitation';
 import { BackButton } from '@/components/ui/back-button';
-import { Link } from '@/i18n/routing';
 
 export function EarlyAccessContent() {
   const t = useTranslations('earlyAccess');
+  const tAtelier = useTranslations('atelierInvitation');
 
   return (
     <div className="min-h-screen">
       <Header />
 
       <main className="noise-overlay">
-        {/* HERO */}
-        <section className="relative flex min-h-screen items-center overflow-hidden px-6 pt-20">
-          <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            <div className="relative z-10 space-y-8">
-              <BackButton />
-              <div className="flex items-center gap-3">
-                <div className="h-px w-8 bg-aq-blue" />
-                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-                  {t('badge')}
-                </span>
-              </div>
+        {/* ── Hero + Form ─────────────────────────────────────── */}
+        <section className="relative flex min-h-screen items-center overflow-hidden px-6 pb-16 pt-24">
+          {/* Ambient glow */}
+          <div
+            className="pointer-events-none absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-3xl"
+            style={{
+              background:
+                'radial-gradient(circle, var(--color-aq-blue) 0%, transparent 70%)',
+            }}
+          />
 
-              <h1 className="font-display text-6xl font-bold leading-[0.9] tracking-tight sm:text-7xl lg:text-8xl">
-                {t('hero.titleLine1')} <br />
-                <span className="text-brand-gradient">
-                  {t('hero.titleGradient')}
-                </span>{' '}
-                <br />
-                <span className="font-normal italic">
-                  {t('hero.titleLine3')}
-                </span>
-              </h1>
+          <div className="relative z-10 mx-auto w-full max-w-7xl">
+            <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_520px]">
+              {/* Left — copy */}
+              <div className="space-y-8 lg:pt-4">
+                <BackButton />
 
-              <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
-                {t('hero.desc')}
-              </p>
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-8 bg-aq-blue" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
+                    {t('badge')}
+                  </span>
+                </div>
 
-              <div className="relative max-w-md">
-                <WaitlistForm source="early-access-hero" variant="simple" />
-                <p className="mt-4 text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
-                  {t('disclaimer.prefix')}{' '}
-                  <Link href="/privacy" className="text-foreground underline">
-                    {t('disclaimer.privacy')}
-                  </Link>{' '}
-                  {t('disclaimer.and')}{' '}
-                  <Link href="/terms" className="text-foreground underline">
-                    {t('disclaimer.terms')}
-                  </Link>
+                <h1 className="font-display text-5xl font-bold leading-[0.92] tracking-tight sm:text-6xl lg:text-7xl">
+                  {t('hero.titleLine1')} <br />
+                  <span className="text-brand-gradient">
+                    {t('hero.titleGradient')}
+                  </span>{' '}
+                  <br />
+                  <span className="font-normal italic">
+                    {t('hero.titleLine3')}
+                  </span>
+                </h1>
+
+                <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
+                  {t('hero.desc')}
                 </p>
-              </div>
-            </div>
 
-            <div className="relative hidden lg:block">
-              <div className="group relative aspect-[4/5] overflow-hidden rounded-[3rem] border border-white/5 bg-secondary/20 shadow-2xl">
-                <div className="bg-brand-gradient absolute inset-0 opacity-10 transition-opacity duration-700 group-hover:opacity-20" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="animate-glow flex h-32 w-32 items-center justify-center rounded-full border border-aq-blue/20">
-                    <div className="flex h-24 w-24 animate-pulse items-center justify-center rounded-full border border-aq-purple/20 text-center font-display text-[10px] font-bold uppercase tracking-widest text-aq-blue">
-                      Studio
-                      <br />
-                      Layer
-                    </div>
+                {/* Stats — compact horizontal row */}
+                <div className="grid grid-cols-2 gap-6 border-t border-border/30 pt-8 sm:grid-cols-4">
+                  {(['speed', 'cost', 'creative', 'platform'] as const).map(
+                    (key) => (
+                      <div key={key} className="space-y-1">
+                        <div className="font-display text-3xl font-bold tracking-tighter text-foreground">
+                          {t(`stats.${key}.num`)}
+                        </div>
+                        <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-aq-blue/80">
+                          {t(`stats.${key}.label`)}
+                        </div>
+                      </div>
+                    )
+                  )}
+                </div>
+              </div>
+
+              {/* Right — Typeform form card */}
+              <div className="w-full lg:sticky lg:top-28">
+                <div className="border-white/8 relative overflow-hidden rounded-3xl border bg-white/[0.03] p-8 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-10">
+                  {/* Card shimmer */}
+                  <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.06] via-transparent to-transparent" />
+
+                  <div className="relative z-10 mb-8 space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
+                      {tAtelier('card.eyebrow')}
+                    </p>
+                    <h2 className="font-cormorant text-2xl font-medium text-foreground sm:text-3xl">
+                      {tAtelier('card.title')}
+                    </h2>
+                  </div>
+
+                  <div className="relative z-10">
+                    <AtelierInvitationForm />
                   </div>
                 </div>
-                <div className="absolute bottom-12 left-12 space-y-2">
-                  <div className="h-px w-12 bg-white/20" />
-                  <p className="text-xs font-bold uppercase tracking-[0.4em] text-white/40">
-                    Visual Engine v1.0
-                  </p>
-                </div>
-              </div>
-              <div className="animate-float absolute -right-6 -top-6 flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-aq-ink shadow-xl">
-                <span className="font-display text-xs font-bold tracking-tighter text-aq-blue">
-                  AI-D
-                </span>
-              </div>
-            </div>
-          </div>
-        </section>
 
-        {/* STATS */}
-        <section className="border-y border-border/50 py-24">
-          <div className="mx-auto grid max-w-7xl grid-cols-2 gap-12 px-6 lg:grid-cols-4">
-            {(['speed', 'cost', 'creative', 'platform'] as const).map((key) => (
-              <div key={key} className="space-y-2">
-                <div className="font-display text-5xl font-bold tracking-tighter text-foreground">
-                  {t(`stats.${key}.num`)}
-                </div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-aq-blue">
-                  {t(`stats.${key}.label`)}
-                </div>
+                <p className="mt-4 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground/50">
+                  {tAtelier('card.footnote')}
+                </p>
               </div>
-            ))}
-          </div>
-        </section>
-
-        {/* CTA */}
-        <section className="px-6 py-32">
-          <div className="relative mx-auto max-w-5xl space-y-12 overflow-hidden rounded-[3rem] border border-white/5 bg-aq-ink p-12 text-center shadow-2xl lg:p-24">
-            <div className="bg-brand-gradient pointer-events-none absolute inset-0 opacity-5" />
-            <h2 className="relative z-10 font-display text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-6xl">
-              {t('cta.titlePre')} <br />
-              <span className="text-brand-gradient">
-                {t('cta.titleGradient')}
-              </span>
-              .
-            </h2>
-
-            <div className="relative z-10 mx-auto max-w-md space-y-6">
-              <WaitlistForm
-                source="early-access-cta"
-                variant="simple"
-                className="flex-col sm:flex-row"
-              />
-              <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
-                {t('cta.subtext')}
-              </p>
             </div>
           </div>
         </section>

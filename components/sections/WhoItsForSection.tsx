@@ -40,7 +40,13 @@ export function WhoItsForSection() {
         {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
       </h2>
 
-      <div className="mx-auto w-full max-w-6xl">
+      <motion.div
+        initial={animated ? { opacity: 0, y: 40 } : false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        transition={{ duration: 0.8, ease }}
+        className="mx-auto w-full max-w-6xl"
+      >
         <p
           data-atom
           className="mb-6 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
@@ -88,18 +94,22 @@ export function WhoItsForSection() {
 
         {/* Canvas Panel */}
         <div
-          className="relative min-h-[400px] w-full"
+          className="relative min-h-[450px] w-full"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={animated ? { opacity: 0, x: 40 } : false}
-              animate={{ opacity: 1, x: 0 }}
-              exit={animated ? { opacity: 0, x: -40 } : {}}
-              transition={{ duration: 0.35, ease }}
-              className="relative rounded-3xl border border-border/10 bg-card/20 p-8 sm:p-12 md:w-[70%]"
+              initial={
+                animated ? { opacity: 0, x: 20, filter: 'blur(10px)' } : false
+              }
+              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+              exit={
+                animated ? { opacity: 0, x: -20, filter: 'blur(10px)' } : {}
+              }
+              transition={{ duration: 0.4, ease }}
+              className="relative rounded-[2.5rem] border border-border/10 bg-white/[0.02] p-8 backdrop-blur-md sm:p-16 md:w-[85%] lg:w-[75%]"
             >
               {/* Atmospheric Icon Atom - PINNED Right */}
               <motion.div
@@ -107,14 +117,14 @@ export function WhoItsForSection() {
                 data-atom
                 data-decorative
                 initial={
-                  animated ? { scale: 0.8, opacity: 0, rotate: -10 } : false
+                  animated ? { scale: 0.8, opacity: 0, rotate: -15 } : false
                 }
                 animate={{ scale: 1, opacity: 1, rotate: 0 }}
-                transition={{ duration: 0.6, ease }}
-                className="absolute right-[-10%] top-[-20%] z-0 hidden text-aq-blue/[0.04] md:block"
-                style={{ fontSize: 'clamp(8rem, 18vw, 16rem)' }}
+                transition={{ duration: 0.8, ease, delay: 0.1 }}
+                className="absolute right-[-5%] top-[-10%] z-0 hidden text-aq-blue/[0.03] md:block lg:right-[-10%]"
+                style={{ fontSize: 'clamp(10rem, 22vw, 20rem)' }}
               >
-                <CurrentIcon />
+                <CurrentIcon strokeWidth={0.5} />
               </motion.div>
 
               <div className="relative z-10">
@@ -154,7 +164,7 @@ export function WhoItsForSection() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

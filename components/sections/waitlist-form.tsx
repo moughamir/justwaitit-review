@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { ProgressIndicator } from '@/components/ui/progress-indicator';
 import { useMultiStepForm } from '@/hooks/use-multi-step-form';
 import { joinWaitlist } from '@/lib/actions/waitlist';
+import { trackUserBehavior } from '@/lib/analytics';
 import { FULL_VARIANT_STEPS } from '@/lib/types/waitlist-form';
 import { cn } from '@/lib/utils';
 import { sanitizeEmail } from '@/lib/utils/form-validation';
@@ -46,19 +47,25 @@ export function WaitlistForm({
     markFieldTouched,
     validateCurrentStep,
     setIsAnimating,
+    resetForm,
   } = useMultiStepForm(steps);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const rawFormData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(rawFormData.entries()) as Record<
+      string,
+      string
+    >;
 
     startTransition(async () => {
       try {
-        const result = await joinWaitlist(formData);
+        const result = await joinWaitlist(rawFormData);
         if (result.success) {
+          trackUserBehavior.trackFormSubmit(`waitlist_simple_${source}`, data);
           setStatus('success');
           setMessage(result.message);
-          (e.target as HTMLFormElement).reset();
+          resetForm();
         } else {
           setStatus('error');
           setMessage(result.message);
@@ -68,6 +75,15 @@ export function WaitlistForm({
         setMessage('Something went wrong. Please try again.');
       }
     });
+  };
+
+  // Clear server error when user modifies any field
+  const handleFieldChange = (name: string, value: string) => {
+    if (status === 'error') {
+      setStatus('idle');
+      setMessage('');
+    }
+    updateField(name, value);
   };
 
   const handleMultiStepSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -83,6 +99,10 @@ export function WaitlistForm({
       setDirection('forward');
       setIsAnimating(true);
       setTimeout(() => {
+        trackUserBehavior.trackClick(
+          `waitlist_next_step_${currentStep}`,
+          'form_navigation'
+        );
         next();
         setIsAnimating(false);
       }, 400);
@@ -94,20 +114,29 @@ export function WaitlistForm({
     submitFormData.append('source', source);
 
     // Add all form data with email sanitization
-    Object.entries(formData).forEach(([key, value]) => {
-      if (key === 'email') {
-        submitFormData.append(key, sanitizeEmail(value));
-      } else {
-        submitFormData.append(key, value);
+    // Optimization: Directly handle email and use a standard for loop for other fields
+    submitFormData.append('email', sanitizeEmail(formData.email || ''));
+
+    const formKeys = Object.keys(formData);
+    const formKeysLen = formKeys.length;
+    for (let i = 0; i < formKeysLen; i++) {
+      const key = formKeys[i];
+      if (key !== 'email') {
+        submitFormData.append(key, formData[key as keyof typeof formData]);
       }
-    });
+    }
 
     startTransition(async () => {
       try {
         const result = await joinWaitlist(submitFormData);
         if (result.success) {
+          trackUserBehavior.trackFormSubmit(`waitlist_full_${source}`, {
+            ...formData,
+            source,
+          });
           setStatus('success');
           setMessage(result.message);
+          resetForm();
         } else {
           setStatus('error');
           setMessage(result.message);
@@ -221,7 +250,7 @@ export function WaitlistForm({
           step={steps[currentStep - 1]}
           formData={formData}
           errors={errors}
-          onChange={updateField}
+          onChange={handleFieldChange}
           onBlur={markFieldTouched}
           disabled={isPending || isAnimating}
         />

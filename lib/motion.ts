@@ -75,6 +75,18 @@ export const charReveal = (reduced: Reduced, index = 0) => ({
   },
 });
 
+// Word-level rotate-X reveal (for Arabic/RTL where char splitting breaks ligatures)
+export const wordReveal = (reduced: Reduced, index = 0) => ({
+  initial: reduced ? false : { rotateX: 60, opacity: 0, y: 16 },
+  animate: { rotateX: 0, opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay: index * 0.12, ease },
+  style: {
+    display: 'inline-block',
+    transformOrigin: 'bottom center',
+    perspective: '600px',
+  },
+});
+
 // Scatter converge — atom starts offset from multiple axes
 export const scatterIn = (reduced: Reduced, x = 0, y = 60, delay = 0) => ({
   initial: reduced ? false : { x, y, opacity: 0 },

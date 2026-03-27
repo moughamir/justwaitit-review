@@ -42,3 +42,4 @@ lerna-debug.log*
 # Typescript
 *.tsbuildinfo
 next-env.d.ts
+docs

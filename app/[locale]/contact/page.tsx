@@ -24,17 +24,12 @@ export async function generateMetadata({
     title: t('contact.title'),
     description: t('contact.desc'),
     alternates: {
-      canonical: `/${locale}/contact`,
-      languages: {
-        'en-US': '/en-US/contact',
-        'fr-FR': '/fr-FR/contact',
-        'ar-MA': '/ar-MA/contact',
-      },
+      canonical: `${baseUrl}/contact`,
     },
     openGraph: {
       title: t('contact.title'),
       description: t('contact.desc'),
-      url: `${baseUrl}/${locale}/contact`,
+      url: `${baseUrl}/contact`,
       siteName: 'Anaqio',
       type: 'website',
       images: [

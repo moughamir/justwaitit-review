@@ -11,8 +11,8 @@ import { useRef } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
-import { ScrollLink } from '@/components/ui/scroll-link';
 import { useDeviceTier } from '@/hooks/use-device-tier';
+import { Link } from '@/i18n/routing';
 import { ease } from '@/lib/motion';
 
 export function FinalCTA() {
@@ -42,7 +42,6 @@ export function FinalCTA() {
         {t('srHeading')}
       </h2>
 
-      {/* Atmospheric glow */}
       <div
         data-atom
         data-decorative
@@ -92,19 +91,23 @@ export function FinalCTA() {
             asChild
             className="group relative flex h-14 items-center justify-center overflow-hidden rounded-full px-10 text-[0.75rem] font-bold uppercase tracking-[0.2em] shadow-[0_0_40px_rgba(37,99,235,0.3)] transition-all hover:shadow-[0_0_60px_rgba(37,99,235,0.5)]"
           >
-            <ScrollLink targetId="waitlist">
+            <Link href="/early-access">
               <span className="relative z-10">{t('cta.primary')}</span>
               {/* Glow ring inner overlay */}
               <div
                 aria-hidden="true"
                 className="absolute inset-0 z-0 bg-gradient-to-r from-aq-blue/0 via-white/20 to-aq-blue/0 opacity-0 transition-opacity group-hover:opacity-100"
               />
-            </ScrollLink>
+            </Link>
           </Button>
         </MagneticButton>
-        <p className="mt-8 font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60 transition-colors hover:text-foreground/80">
-          <ScrollLink targetId="how-it-works">{t('cta.tertiary')}</ScrollLink>
-        </p>
+        {/*
+
+          <p className="mt-8 font-label text-[0.65rem] uppercase tracking-wider text-muted-foreground/60 transition-colors hover:text-foreground/80">
+
+            <ScrollLink targetId="how-it-works">{t('cta.tertiary')}</ScrollLink>
+          </p>
+          */}
       </motion.div>
     </section>
   );
