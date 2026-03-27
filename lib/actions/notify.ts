@@ -3,6 +3,7 @@
 import { z } from 'zod';
 
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/utils/logger';
 
 const NotifySchema = z.object({
   email: z.email('Please provide a valid email address.'),
@@ -72,7 +73,7 @@ export async function notifyMe(formData: FormData) {
           message: 'This email is already on the list.',
         };
       }
-      console.error('Notify insert error:', error);
+      logger.error('Notify insert error', error);
       return {
         success: false,
         message: 'Something went wrong. Please try again.',
@@ -84,7 +85,7 @@ export async function notifyMe(formData: FormData) {
       message: "You're in. We'll reach out when the studio opens.",
     };
   } catch (err) {
-    console.error('Notify error:', err);
+    logger.error('Notify error', err);
     return {
       success: false,
       message: 'Something went wrong. Please try again.',
