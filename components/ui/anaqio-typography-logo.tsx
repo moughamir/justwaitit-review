@@ -22,7 +22,8 @@ export type LogoAnimationVariant =
   | 'breathing'
   | 'lock-in';
 
-export interface AnaqioTypographyLogoProps extends React.SVGProps<SVGSVGElement> {
+export interface AnaqioTypographyLogoProps
+  extends React.SVGProps<SVGSVGElement> {
   /** @deprecated Use `variant` instead */
   animated?: boolean;
   variant?: LogoAnimationVariant;
