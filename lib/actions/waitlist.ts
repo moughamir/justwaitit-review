@@ -15,20 +15,19 @@ const WaitlistSchema = z.object({
   revenue_range: z.string().optional().nullable(),
   aesthetic: z.string().optional(),
   source: z.string().default('home'),
+  // UTM attribution fields
+  utm_source: z.string().max(100).optional().nullable(),
+  utm_medium: z.string().max(100).optional().nullable(),
+  utm_campaign: z.string().max(100).optional().nullable(),
+  utm_content: z.string().max(100).optional().nullable(),
+  utm_term: z.string().max(100).optional().nullable(),
+  referrer: z.string().max(500).optional().nullable(),
 });
 
 export async function joinWaitlist(formData: FormData) {
-  const rawData = {
-    email: formData.get('email'),
-    full_name: formData.get('full_name'),
-    role: formData.get('role'),
-    company: formData.get('company'),
-    revenue_range: formData.get('revenue_range'),
-    aesthetic: formData.get('aesthetic'),
-    source: formData.get('source'),
-  };
-
-  const validatedFields = WaitlistSchema.safeParse(rawData);
+  const validatedFields = WaitlistSchema.safeParse(
+    Object.fromEntries(formData.entries())
+  );
 
   if (!validatedFields.success) {
     return {
@@ -37,23 +36,43 @@ export async function joinWaitlist(formData: FormData) {
     };
   }
 
-  const { email, full_name, role, company, revenue_range, aesthetic, source } =
-    validatedFields.data;
+  const {
+    email,
+    full_name,
+    role,
+    company,
+    revenue_range,
+    aesthetic,
+    source,
+    utm_source,
+    utm_medium,
+    utm_campaign,
+    utm_content,
+    utm_term,
+    referrer,
+  } = validatedFields.data;
 
   try {
     const supabase = await createClient();
 
-    const { error } = await supabase.from('waitlist').insert({
+    const payload: any = {
       email: email.toLowerCase().trim(),
       full_name: full_name.trim(),
       role: role,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      company: company?.trim() || null,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      revenue_range: revenue_range || null,
       preferences: aesthetic ? { aesthetic } : {},
       source: source,
-    });
+    };
+
+    const trimmedCompany = company?.trim();
+    if (trimmedCompany) {
+      payload.company = trimmedCompany;
+    }
+
+    if (revenue_range) {
+      payload.revenue_range = revenue_range;
+    }
+
+    const { error } = await supabase.from('waitlist').insert(payload);
 
     if (error) {
       if (error.code === '23505') {

@@ -344,7 +344,10 @@
   "landing": {
     "hero": {
       "eyebrow": "Where garments become campaigns",
-      "headline": { "pre": "Visual Infrastructure", "pro": "for Fashion Commerce" },
+      "headline": {
+        "pre": "Visual Infrastructure",
+        "pro": "for Fashion Commerce"
+      },
       "subheadline": {
         "a": "Transform garments into photorealistic campaign visuals in minutes.",
         "b": "Anaqio optimizes fashion art for scalable commerce."
@@ -359,7 +362,10 @@
     "problem": {
       "eyebrow": "The Challenge",
       "headline": { "pre": "Fashion Content Demand.", "gradient": "Exploding" },
-      "visualHeadline": { "line1": "Fashion moves fast.", "line2": "Production doesn't." },
+      "visualHeadline": {
+        "line1": "Fashion moves fast.",
+        "line2": "Production doesn't."
+      },
       "intro": {
         "a": "Fashion brands today need an enormous volume of visuals.",
         "b": "But traditional production wasn't built for this speed.",
@@ -387,19 +393,51 @@
         "anaqio": { "value": "2 hours", "label": "With ANAQIO" }
       },
       "pipeline": [
-        { "stage": "Input", "label": "Flat Lay", "body": "Upload your raw garment imagery and brand assets to begin." },
-        { "stage": "Process", "label": "AI Pipeline", "body": "We orchestrate your asset generation using bleeding-edge pipelines." },
-        { "stage": "Output", "label": "Campaign Visual", "body": "Receive photorealistic campaign visuals ready for commerce." }
+        {
+          "stage": "Input",
+          "label": "Flat Lay",
+          "body": "Upload your raw garment imagery and brand assets to begin."
+        },
+        {
+          "stage": "Process",
+          "label": "AI Pipeline",
+          "body": "We orchestrate your asset generation using bleeding-edge pipelines."
+        },
+        {
+          "stage": "Output",
+          "label": "Campaign Visual",
+          "body": "Receive photorealistic campaign visuals ready for commerce."
+        }
       ]
     },
     "howItWorks": {
       "eyebrow": "How It Works",
-      "headline": { "pre": "Four Steps to", "gradient": "Campaign-Ready", "post": "Visuals" },
+      "headline": {
+        "pre": "Four Steps to",
+        "gradient": "Campaign-Ready",
+        "post": "Visuals"
+      },
       "steps": [
-        { "num": "01", "title": "Upload Your Garment", "body": "Upload a flat lay or ghost mannequin image." },
-        { "num": "02", "title": "Define the Visual Style", "body": "Choose poses, lighting, and environments designed for fashion campaigns." },
-        { "num": "03", "title": "Generate Photorealistic Output", "body": "Our AI pipeline transforms the garment into high-quality visuals ready for e-commerce, campaigns, and social media." },
-        { "num": "04", "title": "Scale Instantly", "body": "Generate multiple variations for different markets, campaigns, or product launches. Minutes — not weeks." }
+        {
+          "num": "01",
+          "title": "Upload Your Garment",
+          "body": "Upload a flat lay or ghost mannequin image."
+        },
+        {
+          "num": "02",
+          "title": "Define the Visual Style",
+          "body": "Choose poses, lighting, and environments designed for fashion campaigns."
+        },
+        {
+          "num": "03",
+          "title": "Generate Photorealistic Output",
+          "body": "Our AI pipeline transforms the garment into high-quality visuals ready for e-commerce, campaigns, and social media."
+        },
+        {
+          "num": "04",
+          "title": "Scale Instantly",
+          "body": "Generate multiple variations for different markets, campaigns, or product launches. Minutes — not weeks."
+        }
       ]
     },
     "whyAnaqio": {
@@ -407,11 +445,26 @@
       "headline": { "pre": "Why", "gradient": "Anaqio", "post": "is Better?" },
       "footer": "Anaqio is built for reliability, consistency, and scale.",
       "points": [
-        { "title": "Garment Precision", "body": "Faithful reproduction of textures, cuts, colors, and brand details." },
-        { "title": "Controlled Poses", "body": "Consistent positioning across product collections." },
-        { "title": "Lighting Consistency", "body": "Uniform lighting that preserves accurate color representation." },
-        { "title": "Scalable Production", "body": "Generate hundreds of visuals without increasing production costs." },
-        { "title": "Brand-Safe Outputs", "body": "Structured AI pipelines designed for fashion brands — not experimental image generation." }
+        {
+          "title": "Garment Precision",
+          "body": "Faithful reproduction of textures, cuts, colors, and brand details."
+        },
+        {
+          "title": "Controlled Poses",
+          "body": "Consistent positioning across product collections."
+        },
+        {
+          "title": "Lighting Consistency",
+          "body": "Uniform lighting that preserves accurate color representation."
+        },
+        {
+          "title": "Scalable Production",
+          "body": "Generate hundreds of visuals without increasing production costs."
+        },
+        {
+          "title": "Brand-Safe Outputs",
+          "body": "Structured AI pipelines designed for fashion brands — not experimental image generation."
+        }
       ]
     },
     "whoItsFor": {
@@ -419,10 +472,22 @@
       "headline": { "pre": "Built for the Fashion", "gradient": "Ecosystem" },
       "footer": "Anyone producing fashion visuals at scale.",
       "audiences": [
-        { "title": "Fashion Brands", "body": "Scale product visuals for e-commerce and marketing campaigns." },
-        { "title": "Emerging Designers", "body": "Create professional visuals without expensive photoshoots." },
-        { "title": "Creative Studios", "body": "Accelerate production for client campaigns." },
-        { "title": "Marketplaces", "body": "Standardize visual quality across large product inventories." }
+        {
+          "title": "Fashion Brands",
+          "body": "Scale product visuals for e-commerce and marketing campaigns."
+        },
+        {
+          "title": "Emerging Designers",
+          "body": "Create professional visuals without expensive photoshoots."
+        },
+        {
+          "title": "Creative Studios",
+          "body": "Accelerate production for client campaigns."
+        },
+        {
+          "title": "Marketplaces",
+          "body": "Standardize visual quality across large product inventories."
+        }
       ],
       "features": [
         "Dedicated studio workspace",
@@ -447,7 +512,10 @@
     },
     "finalCta": {
       "srHeading": "Get Early Access",
-      "headline": { "pre": "Join the Evolution of", "gradient": "Fashion Production" },
+      "headline": {
+        "pre": "Join the Evolution of",
+        "gradient": "Fashion Production"
+      },
       "cta": {
         "primary": "Join the Waitlist",
         "secondary": "See How It Works",

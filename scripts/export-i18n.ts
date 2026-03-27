@@ -17,7 +17,10 @@ function flattenObject(obj: JSONObject, prefix = ''): Record<string, string> {
     if (Array.isArray(value)) {
       (value as JSONArray).forEach((item, i) => {
         if (item !== null && typeof item === 'object' && !Array.isArray(item)) {
-          Object.assign(result, flattenObject(item as JSONObject, `${fullKey}.${i}`));
+          Object.assign(
+            result,
+            flattenObject(item as JSONObject, `${fullKey}.${i}`)
+          );
         } else {
           result[`${fullKey}.${i}`] = String(item ?? '');
         }
@@ -47,7 +50,9 @@ for (const locale of LOCALES) {
 const allKeys = Object.keys(messages['en-US']).sort();
 const header = ['key', ...LOCALES].map(escapeCSV).join(',');
 const rows = allKeys.map((key) =>
-  [key, ...LOCALES.map((locale) => messages[locale]?.[key] ?? '')].map(escapeCSV).join(',')
+  [key, ...LOCALES.map((locale) => messages[locale]?.[key] ?? '')]
+    .map(escapeCSV)
+    .join(',')
 );
 
 const csv = [header, ...rows].join('\n');
