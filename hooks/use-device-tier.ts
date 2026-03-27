@@ -1,47 +1,45 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useSyncExternalStore } from 'react';
 
-/**
- * Extended Navigator interface to include non-standard/experimental properties
- * used for device capability detection.
- */
-interface NavigatorWithCapabilities extends Navigator {
-  deviceMemory?: number;
-  connection?: {
-    effectiveType: string;
-    saveData: boolean;
-  };
-}
+type Tier = 'high' | 'mid' | 'low';
 
-export function useDeviceTier(): 'high' | 'mid' | 'low' {
-  const [tier, setTier] = useState<'high' | 'mid' | 'low'>('high');
+const subscribe = (callback: () => void) => {
+  if (typeof window === 'undefined') return () => {};
 
-  useEffect(() => {
-    // Only access navigator on client
-    if (typeof window === 'undefined') return;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const connection = (navigator as any).connection;
+  if (connection) {
+    connection.addEventListener('change', callback);
+    return () => connection.removeEventListener('change', callback);
+  }
+  return () => {};
+};
 
-    const nav = navigator as NavigatorWithCapabilities;
+const getSnapshot = (): Tier => {
+  if (typeof window === 'undefined') return 'high';
 
-    const cores = nav.hardwareConcurrency ?? 4;
-    // deviceMemory is non-standard but useful in Chrome
-    const memory = nav.deviceMemory ?? 4;
-    // connection is non-standard
-    const connection = nav.connection?.effectiveType ?? '4g';
+  const cores = navigator.hardwareConcurrency ?? 4;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const memory = (navigator as any).deviceMemory ?? 4;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const connection = (navigator as any).connection?.effectiveType ?? '4g';
 
-    if (
-      cores <= 2 ||
-      memory <= 1 ||
-      connection === '2g' ||
-      connection === 'slow-2g'
-    ) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setTier('low');
-    } else if (cores <= 4 || memory <= 2 || connection === '3g') {
-      setTier('mid');
-    } else {
-      setTier('high');
-    }
-  }, []);
+  if (
+    cores <= 2 ||
+    memory <= 1 ||
+    connection === '2g' ||
+    connection === 'slow-2g'
+  ) {
+    return 'low';
+  } else if (cores <= 4 || memory <= 2 || connection === '3g') {
+    return 'mid';
+  } else {
+    return 'high';
+  }
+};
 
-  return tier;
+const getServerSnapshot = (): Tier => 'high';
+
+export function useDeviceTier(): Tier {
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
