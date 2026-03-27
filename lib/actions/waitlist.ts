@@ -12,8 +12,17 @@ const WaitlistSchema = z.object({
     .min(2, 'Name is too short.')
     .max(100, 'Name is too long.'),
   role: z.string().min(1, 'Please select your role.'),
-  company: z.string().max(100).optional().nullable(),
-  revenue_range: z.string().optional().nullable(),
+  company: z
+    .string()
+    .max(100)
+    .optional()
+    .nullable()
+    .transform((val) => (val?.trim() === '' ? null : val)),
+  revenue_range: z
+    .string()
+    .optional()
+    .nullable()
+    .transform((val) => (val?.trim() === '' ? null : val)),
   aesthetic: z.string().optional(),
   source: z.string().default('home'),
 });
@@ -87,10 +96,8 @@ export async function joinWaitlist(formData: FormData) {
       email: email.toLowerCase().trim(),
       full_name: full_name.trim(),
       role: role,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      company: company?.trim() || null,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      revenue_range: revenue_range || null,
+      company: company?.trim() ?? null,
+      revenue_range: revenue_range ?? null,
       preferences: aesthetic ? { aesthetic } : {},
       source: source,
     });

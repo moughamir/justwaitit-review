@@ -198,4 +198,24 @@ describe('joinWaitlist action', () => {
       expect.objectContaining({ email: 'upper@example.com' })
     );
   });
+
+  it('normalizes empty or whitespace-only optional fields to null', async () => {
+    mockInsert.mockResolvedValue({ error: null });
+
+    const formData = new FormData();
+    formData.append('email', 'test@example.com');
+    formData.append('full_name', 'Jane Doe');
+    formData.append('role', 'Brand');
+    formData.append('company', '   '); // Whitespace-only
+    formData.append('revenue_range', ''); // Empty string
+
+    await joinWaitlist(formData);
+
+    expect(mockInsert).toHaveBeenCalledWith(
+      expect.objectContaining({
+        company: null,
+        revenue_range: null,
+      })
+    );
+  });
 });
