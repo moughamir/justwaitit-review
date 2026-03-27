@@ -55,23 +55,24 @@ export async function joinWaitlist(formData: FormData) {
   try {
     const supabase = await createClient();
 
-    const { error } = await supabase.from('waitlist').insert({
+    const payload: any = {
       email: email.toLowerCase().trim(),
       full_name: full_name.trim(),
       role: role,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      company: company?.trim() || null,
-      // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-      revenue_range: revenue_range || null,
       preferences: aesthetic ? { aesthetic } : {},
       source: source,
-      utm_source: utm_source ?? null,
-      utm_medium: utm_medium ?? null,
-      utm_campaign: utm_campaign ?? null,
-      utm_content: utm_content ?? null,
-      utm_term: utm_term ?? null,
-      referrer: referrer ?? null,
-    });
+    };
+
+    const trimmedCompany = company?.trim();
+    if (trimmedCompany) {
+      payload.company = trimmedCompany;
+    }
+
+    if (revenue_range) {
+      payload.revenue_range = revenue_range;
+    }
+
+    const { error } = await supabase.from('waitlist').insert(payload);
 
     if (error) {
       if (error.code === '23505') {
