@@ -1,14 +1,6 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-  Building2,
-  Compass,
-  Mail,
-  Phone,
-  TrendingUp,
-  User,
-} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import {
   useRef,
@@ -29,119 +21,47 @@ import { AtelierTextInput } from './atoms/atelier-text-input';
 
 import { requestAtelierInvitation } from '@/lib/actions/atelier-invitation';
 import { ATELIER_STEP_CONFIGS } from '@/lib/content/atelier-invitation';
+import {
+  ICONS,
+  SLIDE_TRANSITION,
+  SLIDE_VARIANTS,
+} from '@/lib/data/atelier-form-data';
+import { DataManager } from '@/lib/utils/data-manager';
 import { sanitizeEmail, validateEmail } from '@/lib/utils/form-validation';
 
-const ICONS = {
-  Mail: <Mail className="h-6 w-6" />,
-  Building2: <Building2 className="h-6 w-6" />,
-  Phone: <Phone className="h-6 w-6" />,
-  User: <User className="h-6 w-6" />,
-  TrendingUp: <TrendingUp className="h-6 w-6" />,
-  Compass: <Compass className="h-6 w-6" />,
-} as const;
-
-const SLIDE_VARIANTS = {
-  enter: (dir: number) => ({ y: dir > 0 ? 60 : -60, opacity: 0 }),
-  center: { y: 0, opacity: 1 },
-  exit: (dir: number) => ({ y: dir > 0 ? -60 : 60, opacity: 0 }),
-};
-
-const SLIDE_TRANSITION = { duration: 0.35, ease: [0.32, 0, 0.18, 1] as const };
+interface RawStepTranslation {
+  question: string;
+  hint?: string;
+  placeholder?: string;
+  errors?: Record<string, string>;
+  options?: Record<string, string>;
+}
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export function AtelierInvitationForm() {
   const t = useTranslations('atelierInvitation');
 
-  // Pre-build per-step translated content once (avoids dynamic key access)
+  // Build per-step translated content from configs + raw translation data
   const stepContent = useMemo(
-    () => [
-      {
-        question: t('steps.email.question'),
-        hint: t('steps.email.hint'),
-        placeholder: t('steps.email.placeholder'),
-        errorRequired: t('steps.email.errors.required'),
-        errorInvalid: t('steps.email.errors.invalid'),
-        options: [] as { value: string; label: string }[],
-      },
-      {
-        question: t('steps.entity_name.question'),
-        hint: t('steps.entity_name.hint'),
-        placeholder: t('steps.entity_name.placeholder'),
-        errorRequired: t('steps.entity_name.errors.required'),
-        errorTooShort: t('steps.entity_name.errors.tooShort'),
-        options: [] as { value: string; label: string }[],
-      },
-      {
-        question: t('steps.whatsapp.question'),
-        hint: t('steps.whatsapp.hint'),
-        placeholder: t('steps.whatsapp.placeholder'),
-        errorRequired: '',
-        options: [] as { value: string; label: string }[],
-      },
-      {
-        question: t('steps.role.question'),
-        hint: '',
-        placeholder: '',
-        errorRequired: t('steps.role.errors.required'),
-        options: [
-          { value: 'Brand', label: t('steps.role.options.Brand') },
-          { value: 'Designer', label: t('steps.role.options.Designer') },
-          { value: 'Stylist', label: t('steps.role.options.Stylist') },
-          { value: 'Ecommerce', label: t('steps.role.options.Ecommerce') },
-          {
-            value: 'Photographer',
-            label: t('steps.role.options.Photographer'),
-          },
-          { value: 'Other', label: t('steps.role.options.Other') },
-        ],
-      },
-      {
-        question: t('steps.revenue_range.question'),
-        hint: t('steps.revenue_range.hint'),
-        placeholder: '',
-        errorRequired: '',
-        options: [
-          {
-            value: 'pre-revenue',
-            label: t('steps.revenue_range.options.pre-revenue'),
-          },
-          { value: '0-10k', label: t('steps.revenue_range.options.0-10k') },
-          { value: '10k-50k', label: t('steps.revenue_range.options.10k-50k') },
-          {
-            value: '50k-250k',
-            label: t('steps.revenue_range.options.50k-250k'),
-          },
-          { value: '250k+', label: t('steps.revenue_range.options.250k+') },
-        ],
-      },
-      {
-        question: t('steps.referral_source.question'),
-        hint: t('steps.referral_source.hint'),
-        placeholder: '',
-        errorRequired: '',
-        options: [
-          {
-            value: 'Instagram',
-            label: t('steps.referral_source.options.Instagram'),
-          },
-          {
-            value: 'LinkedIn',
-            label: t('steps.referral_source.options.LinkedIn'),
-          },
-          {
-            value: 'Word of mouth',
-            label: t('steps.referral_source.options.Word of mouth'),
-          },
-          {
-            value: 'Press / Media',
-            label: t('steps.referral_source.options.Press / Media'),
-          },
-          { value: 'Search', label: t('steps.referral_source.options.Search') },
-          { value: 'Other', label: t('steps.referral_source.options.Other') },
-        ],
-      },
-    ],
+    () =>
+      ATELIER_STEP_CONFIGS.map((cfg) => {
+        const raw = DataManager<RawStepTranslation>(t, `steps.${cfg.id}`);
+        return {
+          question: raw.question,
+          hint: raw.hint ?? '',
+          placeholder: raw.placeholder ?? '',
+          errorRequired: raw.errors?.required ?? '',
+          errorInvalid: raw.errors?.invalid,
+          errorTooShort: raw.errors?.tooShort,
+          options: cfg.optionValues
+            ? cfg.optionValues.map((v) => ({
+                value: v,
+                label: raw.options?.[v] ?? v,
+              }))
+            : [],
+        };
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [] // t is stable; memoize once on mount
   );
@@ -184,20 +104,14 @@ export function AtelierInvitationForm() {
       currentValue &&
       !validateEmail(currentValue)
     ) {
-      return (
-        (content as (typeof stepContent)[0]).errorInvalid ??
-        t('ui.fieldRequired')
-      );
+      return content.errorInvalid ?? t('ui.fieldRequired');
     }
     if (
       config.type === 'text' &&
       currentValue &&
       currentValue.trim().length < 2
     ) {
-      return (
-        (content as (typeof stepContent)[1]).errorTooShort ??
-        t('ui.fieldRequired')
-      );
+      return content.errorTooShort ?? t('ui.fieldRequired');
     }
     return null;
   }, [config, content, currentValue, t]);
@@ -293,7 +207,7 @@ export function AtelierInvitationForm() {
   }
 
   return (
-    <div className="flex w-full flex-col gap-0">
+    <article className="flex w-full flex-col gap-0">
       <AtelierProgressBar progress={progress} />
 
       <AtelierStepCounter
@@ -364,6 +278,6 @@ export function AtelierInvitationForm() {
         onBack={goBack}
         onContinue={isLastStep ? handleSubmit : advance}
       />
-    </div>
+    </article>
   );
 }

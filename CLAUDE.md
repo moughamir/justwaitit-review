@@ -21,10 +21,10 @@ bun run test:e2e     # Run Playwright E2E tests (builds app first)
 bun run test:coverage # Vitest with coverage report
 
 # Run a single unit test file:
-bun run test -- components/ui/__tests__/button.test.tsx
+bun run test -- __spec__/components/ui/button.test.tsx
 
 # Run a single E2E test file:
-bun run test:e2e -- __tests__/performance/landing-page-performance.test.ts
+bun run test:e2e -- __tests__/performance/landing-page-performance.e2e.test.ts
 ```
 
 ## Environment Setup
@@ -46,7 +46,8 @@ Copy `.env.example` → `.env.local` and set:
 - `lib/actions/` — Server Actions (use `'use server'` + Zod validation). Example: `waitlist.ts`.
 - `lib/supabase/` — Supabase clients: `client.ts` (browser), `server.ts` (RSC), `middleware.ts` (session refresh).
 - `hooks/` — Custom React hooks (e.g., `use-multi-step-form.ts`).
-- `__tests__/` — Playwright tests organized by category: `performance/` and `preservation/`.
+- `__tests__/` — Playwright E2E tests (`*.e2e.test.ts`) organized by category: `analytics/`, `i18n/`, `performance/`, `preservation/`, `waitlist/`.
+- `__spec__/` — Vitest unit tests mirroring source tree: `components/`, `hooks/`, `lib/`, `integration/`.
 - `supabase/migrations/` — SQL migrations with timestamped filenames.
 - `remotion/` — Video composition components integrated via `@remotion/player`.
 - `docs/` — Project docs and feature plans.

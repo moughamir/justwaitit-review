@@ -9,13 +9,13 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./vitest.setup.ts'],
+    include: ['__spec__/**/*.test.{ts,tsx}'],
     exclude: [
       'node_modules',
       '.next',
       '.claude',
       'test-results',
       'playwright-report',
-      '**/*.e2e.test.ts',
     ],
     coverage: {
       provider: 'v8',

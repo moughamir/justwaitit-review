@@ -64,3 +64,4 @@ tools/workflow/node_modules/
 .agents/workflows/shots/.agents/workflows/node_modules/
 .agents/workflows/reports/
 .agents/workflows/shots/
+test-results
