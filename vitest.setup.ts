@@ -53,3 +53,13 @@ vi.mock('@/i18n/routing', () => ({
     return '/';
   },
 }));
+
+// Mock IntersectionObserver for Framer Motion whileInView
+class MockIntersectionObserver {
+  observe = vi.fn();
+  unobserve = vi.fn();
+  disconnect = vi.fn();
+}
+global.IntersectionObserver = vi.fn(function () {
+  return new MockIntersectionObserver();
+} as never);

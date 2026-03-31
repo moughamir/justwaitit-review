@@ -15,12 +15,7 @@
     "video:render:16x9": "remotion render remotion/index.ts AnaqioDemo16x9 out/anaqio-demo-16x9.mp4",
     "video:render:9x16": "remotion render remotion/index.ts AnaqioDemo9x16 out/anaqio-demo-9x16.mp4",
     "prepare": "husky",
-    "export:i18n": "bun run scripts/export-i18n.ts",
-    "audit": "node tools/workflow/workflow.mjs --all",
-    "audit:brand": "node tools/workflow/workflow.mjs --brand",
-    "audit:shots": "node tools/workflow/workflow.mjs --shots",
-    "audit:supabase": "node tools/workflow/workflow.mjs --supabase",
-    "audit:lh": "node tools/workflow/workflow.mjs --lh"
+    "export:i18n": "bun run scripts/export-i18n.ts"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

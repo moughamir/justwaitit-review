@@ -1,4 +1,3 @@
-// __spec__/lib/data/pricing-section.test.ts
 import { describe, it, expect } from 'vitest';
 
 import { PRICING_TIERS } from '@/lib/data/pricing-section';

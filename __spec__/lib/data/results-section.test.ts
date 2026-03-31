@@ -1,4 +1,3 @@
-// __spec__/lib/data/results-section.test.ts
 import { describe, it, expect } from 'vitest';
 
 import { RESULTS } from '@/lib/data/results-section';

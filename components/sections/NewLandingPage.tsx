@@ -8,6 +8,13 @@ import { VideoHeroSection } from './VideoHeroSection';
 import { AtelierInvitationForm } from '@/components/sections/atelier-invitation';
 import { BackButton } from '@/components/ui/back-button';
 // Below-fold sections: dynamic imports for code-splitting (ssr: true for SEO)
+const MarqueeSection = dynamic(
+  () =>
+    import('@/components/sections/MarqueeSection').then(
+      (mod) => mod.MarqueeSection
+    ),
+  { ssr: true }
+);
 const ProblemSection = dynamic(
   () =>
     import('@/components/sections/ProblemSection').then(
@@ -19,6 +26,34 @@ const SolutionSection = dynamic(
   () =>
     import('@/components/sections/SolutionSection').then(
       (mod) => mod.SolutionSection
+    ),
+  { ssr: true }
+);
+const FeaturesSection = dynamic(
+  () =>
+    import('@/components/sections/FeaturesSection').then(
+      (mod) => mod.FeaturesSection
+    ),
+  { ssr: true }
+);
+const ResultsSection = dynamic(
+  () =>
+    import('@/components/sections/ResultsSection').then(
+      (mod) => mod.ResultsSection
+    ),
+  { ssr: true }
+);
+const SegmentsSection = dynamic(
+  () =>
+    import('@/components/sections/SegmentsSection').then(
+      (mod) => mod.SegmentsSection
+    ),
+  { ssr: true }
+);
+const PricingSection = dynamic(
+  () =>
+    import('@/components/sections/PricingSection').then(
+      (mod) => mod.PricingSection
     ),
   { ssr: true }
 );
@@ -55,8 +90,14 @@ export function NewLandingPage() {
   return (
     <div className="flex w-full flex-col">
       <VideoHeroSection />
+      <MarqueeSection />
       <ProblemSection />
       <SolutionSection />
+      <MarqueeSection background="bg-foreground/[0.03]" />
+      <FeaturesSection />
+      <ResultsSection />
+      <SegmentsSection />
+      <PricingSection />
       <HowItWorksSection />
       <WhyAnaqioSection />
       <VisionSection />
