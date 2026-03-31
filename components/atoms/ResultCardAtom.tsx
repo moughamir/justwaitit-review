@@ -16,20 +16,20 @@ export function ResultCardAtom({ result, index = 0 }: ResultCardAtomProps) {
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="overflow-hidden rounded-lg border border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800"
+      className="overflow-hidden rounded-lg border border-border bg-card"
     >
-      <div className="border-b border-slate-200 bg-slate-50 p-4 dark:border-slate-700 dark:bg-slate-700/50">
-        <h3 className="text-sm font-semibold text-slate-900 dark:text-white">
+      <div className="border-b border-border bg-muted/50 p-4">
+        <h3 className="text-sm font-semibold text-foreground">
           {result.metric}
         </h3>
       </div>
 
       <div className="grid grid-cols-3 gap-4 p-4">
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
             Traditional
           </p>
-          <p className="mt-1 text-base font-semibold text-slate-900 dark:text-white">
+          <p className="mt-1 text-base font-semibold text-foreground">
             {result.traditional}
           </p>
         </div>
@@ -38,24 +38,24 @@ export function ResultCardAtom({ result, index = 0 }: ResultCardAtomProps) {
           <motion.div
             animate={{ x: [0, 5, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="text-2xl text-slate-300 dark:text-slate-600"
+            className="text-2xl text-muted-foreground/40"
           >
             →
           </motion.div>
         </div>
 
         <div>
-          <p className="text-xs font-medium uppercase tracking-wide text-aq-blue dark:text-aq-blue">
+          <p className="text-xs font-medium uppercase tracking-wide text-aq-blue">
             ANAQIO
           </p>
-          <p className="mt-1 text-base font-semibold text-aq-blue dark:text-aq-blue">
+          <p className="mt-1 text-base font-semibold text-aq-blue">
             {result.anaqio}
           </p>
         </div>
       </div>
 
-      <div className="border-t border-slate-200 bg-gradient-to-r from-aq-blue/5 to-aq-purple/5 p-4 dark:border-slate-700">
-        <p className="text-center text-sm font-semibold text-aq-blue dark:text-aq-blue">
+      <div className="border-t border-border bg-gradient-to-r from-aq-blue/5 to-aq-purple/5 p-4">
+        <p className="text-center text-sm font-semibold text-aq-blue">
           {result.improvement}
         </p>
       </div>

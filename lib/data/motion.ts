@@ -101,7 +101,7 @@ export function marqueeScroll(reduced: boolean | null) {
     x: [0, -1000],
     transition: {
       duration: 40,
-      ease: 'linear',
+      ease: 'linear' as const,
       repeat: Infinity,
     },
   };

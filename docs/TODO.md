@@ -29,19 +29,45 @@
   - ResultsSection.tsx — wraps ResultCardAtom with comparison cards
   - SegmentsSection.tsx — wraps SegmentCardAtom with vertical stack
   - PricingSection.tsx — wraps PricingTierAtom with 3-column grid
+  - MarqueeSection.tsx — wraps MarqueeTickerAtom with variant background support
 
 ## Integration & Testing (COMPLETE)
 - [x] Task 13: Integrate Sections into NewLandingPage
-  - All 10 sections dynamically imported with SSR for code-splitting
+  - All sections dynamically imported with SSR for code-splitting
+  - MarqueeSection inserted after VideoHeroSection and after SolutionSection
   - Page layout verified and flowing correctly
 - [x] Task 14: Run Full Test Suite and Performance Verification
   - `bun run test` — ALL 167 TESTS PASSING (29 test files)
-  - Fixed IntersectionObserver mock in vitest.setup.ts
+  - Fixed IntersectionObserver mock in vitest.setup.ts (class-based, constructor-safe)
+  - Bumped testTimeout to 10s to prevent timing flakes under full-suite CPU load
   - All atom and section components verified
   - E2E tests ready with `bun run test:e2e`
 
-## Post-Expo Status (as of 2026-03-30)
+## Phase 2 — Visual Polish & Vooban Fidelity (TODO)
+- [ ] Task 15: Fix MarqueeTickerAtom theme-awareness
+  - Replace hardcoded `text-white` with `text-foreground`
+  - Add separator dots between items (·) for Vooban ticker style
+  - Support `direction` prop (ltr/rtl) for reversed row effect
+- [ ] Task 16: Improve FeatureCardAtom design
+  - Replace `bg-white dark:bg-slate-800` with CSS variable tokens
+  - Add icon container with accent color ring
+  - Ensure border uses `border-border` token
+- [ ] Task 17: Add alternating section backgrounds
+  - Odd sections: `bg-background`, Even sections: `bg-muted/30`
+  - Enforce via section wrapper className convention
+- [ ] Task 18: Typography pass on all new sections
+  - All section headings: `font-display` with `clamp()` sizing
+  - All section eyebrows: `font-label uppercase tracking-label`
+  - Consistent with existing Omnizya design system sections
+- [ ] Task 19: PricingSection dark-mode accent fix
+  - Replace `border-primary` with `border-aq-blue` for brand alignment
+  - Add `Popular` badge above plan name for highlighted tier
+- [ ] Task 20: Add ScrollTriggered entrance to ResultsSection metrics
+  - Animated number counter on scroll into view
+  - Uses existing `ScrollTriggered` component pattern
+
+## Post-Expo Status (as of 2026-03-31)
 - Expo deadline (2026-03-28) has passed
-- Landing page fully functional with all sections and animations
-- Test suite healthy and comprehensive
-- Performance audit commands removed (tools/workflow/workflow.mjs not in scope for post-expo phase)
+- Phase 1 complete: all data, atoms, sections, integration, and tests committed
+- Test suite healthy: 167 unit tests passing, E2E tests ready
+- Phase 2 focus: visual polish and Vooban design fidelity

@@ -22,8 +22,8 @@ export function PricingTierAtom({ tier, index = 0 }: PricingTierAtomProps) {
       }
       className={`group relative flex flex-col rounded-xl border transition-all ${
         tier.highlighted
-          ? 'border-aq-blue bg-gradient-to-b from-aq-blue/5 to-transparent shadow-xl ring-1 ring-aq-blue/20 dark:from-aq-blue/10'
-          : 'border-slate-200 bg-white dark:border-slate-700 dark:bg-slate-800'
+          ? 'border-aq-blue bg-gradient-to-b from-aq-blue/5 to-transparent shadow-xl ring-1 ring-aq-blue/20'
+          : 'border-border bg-card'
       }`}
     >
       {tier.highlighted && (
@@ -34,26 +34,22 @@ export function PricingTierAtom({ tier, index = 0 }: PricingTierAtomProps) {
         </div>
       )}
 
-      <div className="flex flex-col gap-4 border-b border-slate-200 p-6 dark:border-slate-700">
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white">
-          {tier.name}
-        </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400">
-          {tier.description}
-        </p>
+      <div className="flex flex-col gap-4 border-b border-border p-6">
+        <h3 className="text-xl font-bold text-foreground">{tier.name}</h3>
+        <p className="text-sm text-muted-foreground">{tier.description}</p>
 
         <div className="flex items-baseline gap-1">
           {typeof tier.price === 'number' ? (
             <>
-              <span className="text-4xl font-bold text-slate-900 dark:text-white">
+              <span className="text-4xl font-bold text-foreground">
                 {tier.price.toLocaleString()}
               </span>
-              <span className="text-sm font-medium text-slate-600 dark:text-slate-400">
+              <span className="text-sm font-medium text-muted-foreground">
                 {tier.currency} / {tier.period}
               </span>
             </>
           ) : (
-            <span className="text-3xl font-bold text-slate-900 dark:text-white">
+            <span className="text-3xl font-bold text-foreground">
               {tier.price}
             </span>
           )}
@@ -65,10 +61,10 @@ export function PricingTierAtom({ tier, index = 0 }: PricingTierAtomProps) {
           className={`w-full rounded-lg px-4 py-3 font-semibold transition-all ${
             tier.highlighted
               ? 'bg-gradient-to-r from-aq-blue to-aq-purple text-white hover:shadow-lg'
-              : 'border border-slate-300 text-slate-900 hover:bg-slate-50 dark:border-slate-600 dark:text-white dark:hover:bg-slate-700'
+              : 'border border-border text-foreground hover:bg-muted'
           }`}
         >
-          Get Started
+          {tier.price === 'Custom' ? 'Contact Sales' : 'Get Started'}
         </motion.button>
       </div>
 
@@ -82,10 +78,8 @@ export function PricingTierAtom({ tier, index = 0 }: PricingTierAtomProps) {
               transition={{ duration: 0.3, delay: idx * 0.05 }}
               className="flex items-start gap-3"
             >
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-aq-blue dark:text-aq-blue" />
-              <span className="text-sm text-slate-700 dark:text-slate-300">
-                {feature}
-              </span>
+              <Check className="mt-0.5 h-5 w-5 shrink-0 text-aq-blue" />
+              <span className="text-sm text-foreground/80">{feature}</span>
             </motion.li>
           ))}
         </ul>
