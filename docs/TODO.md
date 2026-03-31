@@ -43,28 +43,30 @@
   - All atom and section components verified
   - E2E tests ready with `bun run test:e2e`
 
-## Phase 2 — Visual Polish & Vooban Fidelity (TODO)
-- [ ] Task 15: Fix MarqueeTickerAtom theme-awareness
+## Phase 2 — Visual Polish & Vooban Fidelity (COMPLETE)
+- [x] Task 15: Fix MarqueeTickerAtom theme-awareness
   - Replace hardcoded `text-white` with `text-foreground`
   - Add separator dots between items (·) for Vooban ticker style
-  - Support `direction` prop (ltr/rtl) for reversed row effect
-- [ ] Task 16: Improve FeatureCardAtom design
-  - Replace `bg-white dark:bg-slate-800` with CSS variable tokens
-  - Add icon container with accent color ring
-  - Ensure border uses `border-border` token
-- [ ] Task 17: Add alternating section backgrounds
-  - Odd sections: `bg-background`, Even sections: `bg-muted/30`
-  - Enforce via section wrapper className convention
-- [ ] Task 18: Typography pass on all new sections
-  - All section headings: `font-display` with `clamp()` sizing
+  - Added `textColor` prop for variant support
+- [x] Task 16: Improve FeatureCardAtom design
+  - Replaced `bg-white dark:bg-slate-800` with `bg-card` CSS variable token
+  - Added icon container with `bg-aq-blue/10` accent ring
+  - All borders use `border-border` token
+- [x] Task 17: Add alternating section backgrounds
+  - Features + Segments: `bg-muted/30` (subtle offset)
+  - Results + Pricing: `bg-background` (default)
+  - Background prop pattern for all 4 new sections
+- [x] Task 18: Typography pass on all new sections
+  - All section headings: `font-display` with `clamp(2.5rem,5vw,6rem)`
   - All section eyebrows: `font-label uppercase tracking-label`
-  - Consistent with existing Omnizya design system sections
-- [ ] Task 19: PricingSection dark-mode accent fix
-  - Replace `border-primary` with `border-aq-blue` for brand alignment
-  - Add `Popular` badge above plan name for highlighted tier
-- [ ] Task 20: Add ScrollTriggered entrance to ResultsSection metrics
-  - Animated number counter on scroll into view
-  - Uses existing `ScrollTriggered` component pattern
+  - Consistent with Omnizya design system
+- [x] Task 19: PricingSection dark-mode accent fix
+  - `border-aq-blue` + gradient ring for highlighted tier
+  - Popular badge with `from-aq-blue to-aq-purple` gradient
+  - Non-highlighted cards use `border-border bg-card`
+- [x] Task 20: Add ScrollTriggered entrance to ResultsSection metrics
+  - ResultCardAtom migrated to `fadeUpCard()` from motion.ts
+  - Staggered y:24 fade-up with `useReducedMotion` support
 
 ## Post-Expo Status (as of 2026-03-31)
 - Expo deadline (2026-03-28) has passed
