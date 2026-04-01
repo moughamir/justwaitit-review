@@ -91,9 +91,11 @@ test.describe('Waitlist form — full variant', () => {
     await page.getByRole('button', { name: /back/i }).click();
     await page.waitForTimeout(500);
 
-    await expect(page.getByDisplayValue('Back Nav User').first()).toBeVisible();
     await expect(
-      page.getByDisplayValue('backnav@example.com').first()
+      page.locator('input[value="Back Nav User"]').first()
+    ).toBeVisible();
+    await expect(
+      page.locator('input[value="backnav@example.com"]').first()
     ).toBeVisible();
   });
 });
