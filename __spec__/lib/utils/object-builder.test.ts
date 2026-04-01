@@ -37,7 +37,7 @@ describe('ObjectBuilder', () => {
     it('should transform values using function mapping', () => {
       const input = { first: 'John', last: 'Doe' };
       const format = {
-        fullName: (i) => `${i.first} ${i.last}`,
+        fullName: (i: Record<string, unknown>) => `${i.first} ${i.last}`,
       };
       const result = ObjectBuilder(input, format);
 
@@ -47,8 +47,10 @@ describe('ObjectBuilder', () => {
     it('should compute derived values', () => {
       const input = { price: 100, quantity: 5 };
       const format = {
-        total: (i) => i.price * i.quantity,
-        formatted: (i) => `$${i.price * i.quantity}`,
+        total: (i: Record<string, unknown>) =>
+          (i.price as number) * (i.quantity as number),
+        formatted: (i: Record<string, unknown>) =>
+          `$${(i.price as number) * (i.quantity as number)}`,
       };
       const result = ObjectBuilder(input, format);
 
@@ -58,7 +60,7 @@ describe('ObjectBuilder', () => {
     it('should access multiple input keys in transformation', () => {
       const input = { city: 'Casablanca', country: 'Morocco' };
       const format = {
-        location: (i) => `${i.city}, ${i.country}`,
+        location: (i: Record<string, unknown>) => `${i.city}, ${i.country}`,
       };
       const result = ObjectBuilder(input, format);
 
@@ -91,10 +93,11 @@ describe('ObjectBuilder', () => {
     it('should handle all mapping types in single format', () => {
       const input = { firstName: 'John', lastName: 'Doe', age: 30 };
       const format = {
-        fullName: (i) => `${i.firstName} ${i.lastName}`,
+        fullName: (i: Record<string, unknown>) =>
+          `${i.firstName} ${i.lastName}`,
         name: 'firstName' as keyof typeof input,
         type: 'premium' as const,
-        isAdult: (i) => i.age >= 18,
+        isAdult: (i: Record<string, unknown>) => (i.age as number) >= 18,
       };
       const result = ObjectBuilder(input, format);
 
@@ -110,7 +113,7 @@ describe('ObjectBuilder', () => {
       const input = { a: 1, b: 2, c: 3 };
       const format = {
         x: 'a' as keyof typeof input,
-        y: (i: typeof input) => i.b * 2,
+        y: (i: Record<string, unknown>) => (i.b as number) * 2,
         z: 100,
       };
       const result = ObjectBuilder(input, format);
@@ -162,7 +165,7 @@ describe('ObjectBuilder', () => {
       const input = { tags: ['a', 'b', 'c'] };
       const format = {
         tags: 'tags' as keyof typeof input,
-        count: (i) => i.tags.length,
+        count: (i: Record<string, unknown>) => (i.tags as unknown[]).length,
       };
       const result = ObjectBuilder(input, format);
 
@@ -187,7 +190,7 @@ describe('ObjectBuilder', () => {
     it('should transform types correctly', () => {
       const input = { value: '42' };
       const format = {
-        numeric: (i) => Number(i.value),
+        numeric: (i: Record<string, unknown>) => Number(i.value),
       };
       const result = ObjectBuilder(input, format);
 
