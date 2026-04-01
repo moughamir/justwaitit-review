@@ -229,15 +229,18 @@
     },
     "founder": {
       "amal": {
+        "name": "Amal AIT OUKHARAZ",
         "role": "Founder & CEO",
         "bio": "Amal brings a deep understanding of fashion commerce and brand identity to Anaqio. Her vision for what AI can unlock for Moroccan fashion brands is at the heart of the product."
       },
       "mo": {
-        "role": "Co-Founder & CTO",
+        "name": "Mohamed MOUGHAMIR",
+        "role": "Co-Founder & CIO",
         "bio": "Mohamed is a full-stack developer and experience designer with 9+ years building intuitive digital products. He shapes the engineering and design direction of Anaqio's AI pipeline."
       },
       "chaimae": {
         "role": "Marketing Director",
+        "name": "Chaimae ZAHIR",
         "bio": "Chaimae leads marketing strategy and community building. She bridges the gap between AI technology and creative storytelling to elevate Moroccan fashion heritage."
       },
       "linkedin": "LinkedIn",

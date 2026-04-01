@@ -10,9 +10,9 @@ import { usePathname, useRouter } from '@/i18n/routing';
 import { trackUserBehavior } from '@/lib/analytics';
 
 const LOCALE_META: Record<Locale, { flag: string; short: string }> = {
-  'en-US': { flag: '🇺🇸', short: 'EN' },
-  'fr-FR': { flag: '🇫🇷', short: 'FR' },
-  'ar-MA': { flag: '🇲🇦', short: 'AR' },
+  en: { flag: '🇺🇸', short: 'EN' },
+  fr: { flag: '🇫🇷', short: 'FR' },
+  ar: { flag: '🇲🇦', short: 'AR' },
 };
 
 export function LocaleSwitcher() {

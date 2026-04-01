@@ -2,6 +2,8 @@
 
 AI-driven virtual studio for fashion commerce.
 
+[![Crowdin](https://badges.crowdin.net/anaqio/localized.svg)](https://crowdin.com)
+
 ## Features
 
 - Works across the entire [Next.js](https://nextjs.org) stack

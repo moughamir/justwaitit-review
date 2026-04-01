@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { MagneticButton } from '@/components/ui/MagneticButton';
 import { Link } from '@/i18n/routing';
+import { getAboutTeam } from '@/lib/data/about-page-content';
 import { clipReveal, fadeIn, fadeUp } from '@/lib/data/motion';
 
 export default function AboutContent() {
@@ -14,35 +15,7 @@ export default function AboutContent() {
   const tMeta = useTranslations('meta');
   const reduced = useReducedMotion();
 
-  const team = [
-    {
-      name: 'Amal AIT OUKHARAZ',
-      role: t('founder.amal.role'),
-      bio: t('founder.amal.bio'),
-      linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
-      photo: '/images/amal-founder.png',
-      initials: 'AA',
-    },
-    {
-      name: 'Mohamed MOUGHAMIR',
-      role: t('founder.mo.role'),
-      bio: t('founder.mo.bio'),
-      linkedin: 'https://www.linkedin.com/in/moughamir/',
-      github: 'https://github.com/moughamir',
-      twitter: 'https://twitter.com/omnizya',
-      photo: 'https://avatars.githubusercontent.com/u/8163598?v=4',
-      initials: 'MM',
-    },
-    {
-      name: 'Zahir CHAIMAE',
-      role: t('founder.chaimae.role'),
-      bio: t('founder.chaimae.bio'),
-      linkedin: 'https://shazo.anaqio.com',
-      email: 'marketing@anaqio.com',
-      photo: null,
-      initials: 'ZC',
-    },
-  ];
+  const team = getAboutTeam(t);
 
   return (
     <>
