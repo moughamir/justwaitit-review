@@ -361,7 +361,7 @@ export function Header() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="pointer-events-auto fixed inset-0 z-[9998] flex h-[100dvh] w-full flex-col overflow-y-auto bg-[#1b2f52] px-6 pb-12 pt-28 md:hidden"
+            className="pointer-events-auto fixed inset-0 z-[9998] flex h-[100dvh] w-full flex-col overflow-y-auto bg-[#1b2f52]/50 px-6 pb-12 pt-28 backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-6 text-center">
               {/* Section scroll links */}
