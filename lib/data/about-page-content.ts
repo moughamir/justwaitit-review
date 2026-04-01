@@ -33,8 +33,8 @@ export const getAboutTeam = (t: (key: string) => string): TeamI[] => [
       linkedin: 'https://www.linkedin.com/in/aitoukhraz/',
       photo: '/images/amal-founder.png',
       initials: 'AA',
-    } as unknown as Record<string, unknown>,
-    TEAM_FORMAT as Record<string, unknown>
+    },
+    TEAM_FORMAT
   ),
   ObjectBuilder<TeamI>(
     {
@@ -46,8 +46,8 @@ export const getAboutTeam = (t: (key: string) => string): TeamI[] => [
       twitter: 'https://x.com/omnizya',
       photo: 'https://avatars.githubusercontent.com/u/8163598?v=4',
       initials: 'MM',
-    } as unknown as Record<string, unknown>,
-    TEAM_FORMAT as Record<string, unknown>
+    },
+    TEAM_FORMAT
   ),
   ObjectBuilder<TeamI>(
     {
@@ -58,7 +58,7 @@ export const getAboutTeam = (t: (key: string) => string): TeamI[] => [
       email: 'marketing@anaqio.com',
       photo: null,
       initials: 'ZC',
-    } as unknown as Record<string, unknown>,
-    TEAM_FORMAT as Record<string, unknown>
+    },
+    TEAM_FORMAT
   ),
 ];

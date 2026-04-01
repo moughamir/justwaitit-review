@@ -42,33 +42,32 @@ type FormatDefinition<TInput, TOutput> = {
  * ObjectBuilder({ id: 1 }, { id: 1, type: 'user' })
  * // { id: 1, type: 'user' }
  */
-export function ObjectBuilder<
-  TInput extends Record<string, unknown>,
-  TOutput extends Record<string, unknown>,
->(input: TInput, format?: FormatDefinition<TInput, TOutput>): TOutput {
+export function ObjectBuilder<TOutput>(
+  input: Record<string, unknown>,
+  format?: FormatDefinition<Record<string, unknown>, TOutput>
+): TOutput {
   if (!format) {
     return input as unknown as TOutput;
   }
 
   const result = {} as TOutput;
 
-  Object.keys(format).forEach((key) => {
-    const mapping = format[key];
+  for (const key of Object.keys(format)) {
+    const mapping = format[key as keyof TOutput];
     const outputKey = key as keyof TOutput;
 
     if (typeof mapping === 'function') {
       result[outputKey] = (
-        mapping as MappingFunction<TInput, TOutput[typeof outputKey]>
+        mapping as MappingFunction<typeof input, TOutput[typeof outputKey]>
       )(input);
     } else if (typeof mapping === 'string' && mapping in input) {
       // String mapping: only treat as key reference if it exists in input
-      const inputKey = mapping as keyof TInput;
-      result[outputKey] = input[inputKey] as TOutput[typeof outputKey];
+      result[outputKey] = input[mapping] as TOutput[typeof outputKey];
     } else {
       // Literal value: use the value directly
       result[outputKey] = mapping as TOutput[typeof outputKey];
     }
-  });
+  }
 
   return result;
 }
