@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 
 import { SocialLinks } from './SocialLinks';
 
+import { LocaleSwitcher } from '@/components/locale-switcher';
 import { AnaqioTypographyLogo } from '@/components/ui/anaqio-typography-logo';
 import { Link } from '@/i18n/routing';
 
@@ -11,41 +12,138 @@ export function Footer() {
   const t = useTranslations('footer');
 
   return (
-    <footer className="border-t border-white/[0.06] px-4 py-12">
-      <div className="mx-auto flex max-w-5xl flex-col items-center gap-8">
-        <Link href="/" aria-label="Anaqio Home">
-          <AnaqioTypographyLogo className="w-20 opacity-60" variant="none" />
-        </Link>
-        <p className="max-w-md text-center font-serif text-sm/6 text-white/40">
-          {t('desc')}
-        </p>
-        <SocialLinks />
-        <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-white/30">
-          <Link
-            href="/privacy"
-            className="transition-colors hover:text-white/60"
-          >
-            {t('company.privacy')}
+    <footer className="vb-white border-t border-black/10 px-8 py-16 md:px-16">
+      {/* Top grid */}
+      <div className="mb-12 grid grid-cols-1 gap-12 md:grid-cols-[1fr_auto_auto_auto]">
+        {/* Brand */}
+        <div>
+          <Link href="/" aria-label="Anaqio Home">
+            <AnaqioTypographyLogo
+              instanceId="footer-logo"
+              className="mb-3 w-24"
+              variant="none"
+            />
           </Link>
-          <Link href="/terms" className="transition-colors hover:text-white/60">
-            {t('company.terms')}
-          </Link>
-          <Link
-            href="/legal-mentions"
-            className="transition-colors hover:text-white/60"
-          >
-            {t('company.legal')}
-          </Link>
-          <Link
-            href="/cookies"
-            className="transition-colors hover:text-white/60"
-          >
-            {t('company.cookies')}
-          </Link>
+          <p className="max-w-xs text-sm text-black/50">{t('desc')}</p>
+          <div className="mt-4">
+            <SocialLinks />
+          </div>
         </div>
-        <div className="text-xs text-white/20">
+
+        {/* Platform */}
+        <div>
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+            {t('platform.title')}
+          </p>
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('platform.studio')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('platform.lookbook')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('platform.tryon')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('platform.pricing')}
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Company */}
+        <div>
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+            {t('company.title')}
+          </p>
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/about"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('company.about')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/brand"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('resources.brand')}
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Legal */}
+        <div>
+          <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+            Legal
+          </p>
+          <ul className="space-y-2">
+            <li>
+              <Link
+                href="/privacy"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('company.privacy')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/terms"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('company.terms')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/legal-mentions"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('company.legal')}
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/cookies"
+                className="text-sm text-black/60 transition-colors hover:text-black"
+              >
+                {t('company.cookies')}
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="flex flex-col items-start justify-between gap-4 border-t border-black/10 pt-6 md:flex-row md:items-center">
+        <p className="text-xs text-black/40">
           {t('copyright')} · {t('rights')}
-        </div>
+        </p>
+        <LocaleSwitcher />
       </div>
     </footer>
   );

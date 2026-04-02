@@ -3,9 +3,10 @@
 import dynamic from 'next/dynamic';
 import { useTranslations } from 'next-intl';
 
-import { VideoHeroSection } from './VideoHeroSection';
+import { VoobanHeroSection } from './VoobanHeroSection';
 
-import { AtelierInvitationForm } from '@/components/sections/atelier-invitation';
+import { MenuSidebar } from '@/components/layout/MenuSidebar';
+import { AtelierForm } from '@/components/sections/waitlist/atelier-form';
 import { BackButton } from '@/components/ui/back-button';
 // Below-fold sections: dynamic imports for code-splitting (ssr: true for SEO)
 const MarqueeSection = dynamic(
@@ -50,13 +51,6 @@ const SegmentsSection = dynamic(
     ),
   { ssr: true }
 );
-const PricingSection = dynamic(
-  () =>
-    import('@/components/sections/PricingSection').then(
-      (mod) => mod.PricingSection
-    ),
-  { ssr: true }
-);
 const HowItWorksSection = dynamic(
   () =>
     import('@/components/sections/HowItWorksSection').then(
@@ -78,6 +72,18 @@ const VisionSection = dynamic(
     ),
   { ssr: true }
 );
+const TeamSection = dynamic(
+  () =>
+    import('@/components/sections/TeamSection').then((mod) => mod.TeamSection),
+  { ssr: true }
+);
+const ScrollGridSection = dynamic(
+  () =>
+    import('@/components/sections/ScrollGridSection').then(
+      (mod) => mod.ScrollGridSection
+    ),
+  { ssr: true }
+);
 
 const Footer = dynamic(
   () => import('@/components/layout/Footer').then((mod) => mod.Footer),
@@ -89,104 +95,104 @@ export function NewLandingPage() {
   const tAtelier = useTranslations('atelierInvitation');
   return (
     <div className="flex w-full flex-col">
-      <VideoHeroSection />
-      <MarqueeSection />
+      <MenuSidebar />
+      <VoobanHeroSection />
+      <ScrollGridSection />
+      <MarqueeSection variant="blue" />
       <ProblemSection />
       <SolutionSection />
-      <MarqueeSection background="bg-foreground/[0.03]" />
-      <FeaturesSection background="bg-muted/30" />
+      <MarqueeSection variant="white" />
+      <FeaturesSection />
       <ResultsSection />
-      <SegmentsSection background="bg-muted/30" />
-      <PricingSection />
+      <SegmentsSection />
+      {/* <PricingSection /> */}
       <HowItWorksSection />
       <WhyAnaqioSection />
       <VisionSection />
+      <TeamSection />
       <>
-        <main className="noise-overlay">
-          {/* ── Hero + Form ─────────────────────────────────────── */}
-          <section className="relative flex min-h-screen items-center overflow-hidden px-6 pb-16 pt-24">
-            {/* Ambient glow */}
-            <div
-              className="pointer-events-none absolute left-1/2 top-1/3 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-10 blur-3xl"
-              style={{
-                background:
-                  'radial-gradient(circle, var(--color-aq-blue) 0%, transparent 70%)',
-              }}
-            />
+        <section
+          id="final-cta"
+          className="vb-white relative overflow-hidden px-8 py-24 md:px-16"
+        >
+          <div className="mx-auto w-full max-w-7xl">
+            <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_520px]">
+              {/* Left — copy */}
+              <div className="space-y-8 lg:pt-4">
+                <BackButton />
 
-            <div className="relative z-10 mx-auto w-full max-w-7xl">
-              <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-[1fr_520px]">
-                {/* Left — copy */}
-                <div className="space-y-8 lg:pt-4">
-                  <BackButton />
-
-                  <div className="flex items-center gap-3">
-                    <div className="h-px w-8 bg-aq-blue" />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-                      {t('badge')}
-                    </span>
-                  </div>
-
-                  <h1 className="font-display text-5xl font-bold leading-[0.92] tracking-tight sm:text-6xl lg:text-7xl">
-                    {t('hero.titleLine1')} <br />
-                    <span className="text-brand-gradient">
-                      {t('hero.titleGradient')}
-                    </span>{' '}
-                    <br />
-                    <span className="font-normal italic">
-                      {t('hero.titleLine3')}
-                    </span>
-                  </h1>
-
-                  <p className="max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-                    {t('hero.desc')}
-                  </p>
-
-                  {/* Stats — compact horizontal row */}
-                  <div className="grid grid-cols-2 gap-6 border-t border-border/30 pt-8 sm:grid-cols-4">
-                    {(['speed', 'cost', 'creative', 'platform'] as const).map(
-                      (key) => (
-                        <div key={key} className="space-y-1">
-                          <div className="font-display text-3xl font-bold tracking-tighter text-foreground">
-                            {t(`stats.${key}.num`)}
-                          </div>
-                          <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-aq-blue/80">
-                            {t(`stats.${key}.label`)}
-                          </div>
-                        </div>
-                      )
-                    )}
-                  </div>
+                <div className="flex items-center gap-3">
+                  <div className="h-px w-8 bg-[#2B3AE7]" />
+                  <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2B3AE7]">
+                    {t('badge')}
+                  </span>
                 </div>
 
-                {/* Right — Typeform form card */}
-                <div className="w-full lg:sticky lg:top-28">
-                  <div className="border-white/8 relative overflow-hidden rounded-3xl border bg-white/[0.03] p-8 shadow-2xl shadow-black/40 backdrop-blur-xl sm:p-10">
-                    {/* Card shimmer */}
-                    <div className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.06] via-transparent to-transparent" />
+                <h1 className="font-display text-5xl font-bold leading-[0.92] tracking-tight text-black sm:text-6xl lg:text-7xl">
+                  {t('hero.titleLine1')} <br />
+                  <span className="text-[#2B3AE7]">
+                    {t('hero.titleGradient')}
+                  </span>{' '}
+                  <br />
+                  <span className="font-normal italic">
+                    {t('hero.titleLine3')}
+                  </span>
+                </h1>
 
-                    <div className="relative z-10 mb-8 space-y-1">
-                      <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-aq-blue">
-                        {tAtelier('card.eyebrow')}
-                      </p>
-                      <h2 className="font-cormorant text-2xl font-medium text-foreground sm:text-3xl">
-                        {tAtelier('card.title')}
-                      </h2>
-                    </div>
+                <p className="max-w-md text-base leading-relaxed text-black/60 sm:text-lg">
+                  {t('hero.desc')}
+                </p>
 
-                    <div className="relative z-10">
-                      <AtelierInvitationForm />
-                    </div>
-                  </div>
-
-                  <p className="mt-4 text-center text-[10px] font-medium uppercase tracking-widest text-muted-foreground/50">
-                    {tAtelier('card.footnote')}
-                  </p>
+                {/* Stats — compact horizontal row */}
+                <div className="grid grid-cols-2 gap-6 border-t border-black/10 pt-8 sm:grid-cols-4">
+                  {(['speed', 'cost', 'creative', 'platform'] as const).map(
+                    (key) => (
+                      <div key={key} className="space-y-1">
+                        <div className="font-display text-3xl font-bold tracking-tighter text-black">
+                          {t(`stats.${key}.num`)}
+                        </div>
+                        <div className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#2B3AE7]/80">
+                          {t(`stats.${key}.label`)}
+                        </div>
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
+
+              {/* Right — CTA button + Drawer */}
+              <div className="w-full lg:sticky lg:top-28">
+                <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white p-8 shadow-sm sm:p-10">
+                  <div className="relative z-10 mb-8 space-y-1">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#2B3AE7]">
+                      {tAtelier('card.eyebrow')}
+                    </p>
+                    <h2 className="font-cormorant text-2xl font-medium text-black sm:text-3xl">
+                      {tAtelier('card.title')}
+                    </h2>
+                  </div>
+
+                  <div className="relative z-10">
+                    <AtelierForm
+                      trigger={
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#2B3AE7] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1e2fc7]"
+                        >
+                          {tAtelier('ui.requestInvitation')}
+                        </button>
+                      }
+                    />
+                  </div>
+                </div>
+
+                <p className="mt-4 text-center text-[10px] font-medium uppercase tracking-widest text-black/30">
+                  {tAtelier('card.footnote')}
+                </p>
+              </div>
             </div>
-          </section>
-        </main>
+          </div>
+        </section>
       </>
 
       <Footer />

@@ -25,6 +25,7 @@ export function HeroSection() {
   });
 
   const headlineY = useTransform(scrollYProgress, [0, 1], ['0px', '-40px']);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
 
   const subheadlineWords = t('subheadline.a').split(' ');
   const proWords = t('headline.pro').split(' ');
@@ -38,12 +39,25 @@ export function HeroSection() {
       <h1 id="hero-heading" className="sr-only">
         ANAQIO — {t('headline.pre')} {t('headline.pro')}
       </h1>
-      <div
+      <motion.div
         data-atom
         data-decorative
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0"
-      />
+        style={animated ? { scale: videoScale } : {}}
+        className="pointer-events-none absolute inset-0 z-0 will-change-transform"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/videos/hero-poster.jpg"
+          className="h-full w-full object-cover brightness-[0.45] contrast-[1.05]"
+        >
+          <source src="/videos/hero-optimized.mp4" type="video/mp4" />
+          <source src="/videos/16-9-hero-clip.webm" type="video/webm" />
+        </video>
+      </motion.div>
       {/* Layer 2: Content Column */}
       <div className="relative z-20 mx-auto flex w-full flex-1 flex-col items-center justify-center px-6 pt-24 text-center sm:px-12">
         {/* Atom A: pre — charReveal per character */}

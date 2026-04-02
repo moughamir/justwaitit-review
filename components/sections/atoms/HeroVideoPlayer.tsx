@@ -39,11 +39,11 @@ export function HeroVideoPlayer() {
       <div
         className={cn(
           'relative aspect-[3/4] w-full max-w-sm overflow-hidden rounded-2xl lg:max-h-[70vh]',
-          'bg-gradient-to-br from-white/5 to-white/[0.02]',
-          'border border-white/10 shadow-2xl shadow-black/50',
+          'bg-transparent',
+          'border border-white/[0.04] shadow-xl shadow-black/20',
           'transition-all duration-700',
-          !shouldLoad && 'animate-pulse bg-white/[0.02]',
-          hasLoaded && 'shadow-black/70'
+          !shouldLoad && 'animate-pulse bg-white/[0.03]',
+          hasLoaded && 'shadow-black/30'
         )}
         onMouseEnter={() => setShowControls(true)}
         onMouseLeave={() => setShowControls(false)}
@@ -75,7 +75,7 @@ export function HeroVideoPlayer() {
               poster="/videos/hero-poster.jpg"
             >
               {/* Multiple sources for browser compatibility */}
-              <source src="/videos/hero-optimized.mp4" type="video/mp4" />
+              <source src="/videos/output-blurred.mp4" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -169,7 +169,7 @@ export function HeroVideoPlayer() {
         <div
           className={cn(
             'pointer-events-none absolute inset-0 rounded-2xl',
-            'border border-white/10',
+            'border border-white/[0.04]',
             'transition-opacity duration-700',
             hasLoaded ? 'opacity-100' : 'opacity-0'
           )}

@@ -1,44 +1,49 @@
 'use client';
 
-import { FeatureCardAtom } from '@/components/atoms/FeatureCardAtom';
+import { motion } from 'framer-motion';
+
 import { useAnimationReady } from '@/hooks/use-animation-ready';
 import { FEATURES } from '@/lib/data/features-section';
 
-export function FeaturesSection({
-  background = 'bg-background',
-}: {
-  background?: string;
-}) {
-  const { animated } = useAnimationReady();
+export function FeaturesSection() {
+  const { animated, reduced } = useAnimationReady();
 
   return (
     <section
       id="features"
       aria-labelledby="features-heading"
-      className={`relative flex min-h-[100dvh] flex-col items-center justify-center px-4 pb-24 pt-32 lg:pt-48 ${background}`}
+      className="vb-white relative overflow-hidden px-8 py-24 md:px-16"
     >
-      <h2 id="features-heading" className="sr-only">
-        Our Features
+      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+        Core Capabilities
+      </p>
+      <h2
+        id="features-heading"
+        className="mb-16 max-w-2xl font-display font-black text-black"
+        style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
+      >
+        Everything you need to <span className="vb-underline">transform</span>{' '}
+        your production
       </h2>
 
-      <div className="mb-16 text-center">
-        <p className="mb-4 text-center font-label text-[0.65rem] uppercase tracking-label text-muted-foreground">
-          Core Capabilities
-        </p>
-        <h3 className="text-center font-display text-[clamp(2.5rem,5vw,6rem)] font-light leading-tight">
-          Everything you need to{' '}
-          <em className="text-brand-gradient not-italic">transform</em> your
-          production
-        </h3>
-      </div>
-
-      <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {FEATURES.map((feature, index) => (
-          <FeatureCardAtom
+      <div className="grid grid-cols-1 gap-px bg-black/10 sm:grid-cols-2 lg:grid-cols-3">
+        {FEATURES.map((feature, i) => (
+          <motion.div
             key={feature.title}
-            feature={feature}
-            index={animated ? index : 0}
-          />
+            initial={reduced ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            whileInView={reduced ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: animated ? i * 0.1 : 0 }}
+            className="bg-[#F5F5F0] p-8"
+          >
+            <div className="mb-4 flex h-10 w-10 items-center justify-center rounded bg-[#2B3AE7] text-xl text-white">
+              {feature.icon}
+            </div>
+            <h3 className="mb-2 font-display text-lg font-bold text-black">
+              {feature.title}
+            </h3>
+            <p className="text-sm text-black/60">{feature.description}</p>
+          </motion.div>
         ))}
       </div>
     </section>

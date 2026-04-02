@@ -1,128 +1,44 @@
 'use client';
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Camera, LayoutList, Share2, ShoppingBag } from 'lucide-react';
-import Image from 'next/image';
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-import { useRef } from 'react';
 
 import { useAnimationReady } from '@/hooks/use-animation-ready';
-import { clipReveal } from '@/lib/data/motion';
-import { NANOBANANA_VISUALS } from '@/lib/data/nanobanana-assets';
 
 export function ProblemSection() {
   const t = useTranslations('landing.problem');
-  const { reduced, animated } = useAnimationReady();
-  const sectionRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const headlineY = useTransform(scrollYProgress, [0, 0.4], ['60px', '0px']);
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.35], [0, 1]);
-  const visualY = useTransform(scrollYProgress, [0, 1], ['0px', '-80px']);
-
-  const PAIN_ICONS = [Camera, Share2, ShoppingBag, LayoutList];
-  const painPoints = (t.raw('painPoints') as Array<{ text: string }>).map(
-    (p, i) => ({
-      text: p.text,
-      icon: PAIN_ICONS[i],
-    })
-  );
+  const { animated } = useAnimationReady();
 
   return (
     <section
-      ref={sectionRef}
       id="problem"
       aria-labelledby="problem-heading"
-      className="relative flex min-h-[100dvh] w-full flex-col justify-center overflow-hidden px-6 pb-24 pt-32 sm:px-12 md:px-[8.33%] lg:pt-48"
+      className="vb-blue relative overflow-hidden px-8 py-32 md:px-16 md:py-48"
     >
-      <h2 id="problem-heading" className="sr-only">
-        {t('eyebrow')}: {t('visualHeadline.line1')} {t('visualHeadline.line2')}
-      </h2>
-
-      <motion.div
-        data-atom
-        style={animated ? { y: visualY } : {}}
-        className="absolute -right-24 bottom-[10%] z-0 hidden h-[450px] w-80 overflow-hidden rounded-[3rem] border border-white/5 opacity-40 grayscale transition-all duration-1000 hover:grayscale-0 lg:block xl:right-[5%]"
+      {/* Small label */}
+      <motion.p
+        initial={animated ? { opacity: 0, y: 10 } : false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mb-12 text-[10px] font-bold uppercase tracking-[0.3em] text-white/50"
       >
-        <Image
-          src={NANOBANANA_VISUALS.fashion.portrait}
-          alt=""
-          fill
-          className="object-cover"
-        />
-      </motion.div>
+        {t('eyebrow')}
+      </motion.p>
 
-      <span
-        data-atom
-        data-decorative
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-4 top-[10%] z-0 select-none font-display font-light leading-none text-foreground opacity-[0.03] md:right-[5%] md:top-[15%]"
-        style={{ fontSize: 'clamp(12rem, 30vw, 30rem)' }}
+      {/* Large editorial statement */}
+      <motion.h2
+        id="problem-heading"
+        initial={animated ? { opacity: 0, y: 30 } : false}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, delay: 0.1 }}
+        className="max-w-5xl font-display font-black text-white"
+        style={{ fontSize: 'clamp(2.5rem, 5vw, 5rem)', lineHeight: 1.1 }}
       >
-        ?
-      </span>
-
-      <div className="relative z-10 flex w-full max-w-4xl flex-col gap-8 md:gap-12">
-        <p
-          data-atom
-          className="font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
-        >
-          {t('eyebrow')}
-        </p>
-
-        <motion.div
-          data-atom
-          aria-hidden="true"
-          style={
-            animated
-              ? {
-                  y: headlineY,
-                  opacity: headlineOpacity,
-                  fontSize: 'clamp(2.8rem, 7vw, 7rem)',
-                }
-              : { fontSize: 'clamp(2.8rem, 7vw, 7rem)' }
-          }
-          className="max-w-[14ch] font-display font-light leading-[0.95] text-foreground"
-        >
-          {t('visualHeadline.line1')}
-          <br />
-          <em className="text-brand-gradient pt-2 not-italic">
-            {t('visualHeadline.line2')}
-          </em>
-        </motion.div>
-
-        {/* Accent line */}
-        <div
-          data-atom
-          data-decorative
-          aria-hidden="true"
-          className="h-px w-1/3 bg-border/40 sm:w-1/4"
-        />
-
-        {/* Pain points */}
-        <div className="mt-4 flex flex-col gap-8 sm:gap-12">
-          {painPoints.map((point, i) => (
-            <motion.div
-              key={point.text}
-              data-atom
-              {...(animated ? clipReveal(reduced, i * 0.12) : {})}
-              className="flex items-start gap-4 border-l border-aq-blue/30 pl-4 sm:max-w-[38ch]"
-            >
-              <point.icon
-                className="mt-0.5 h-4 w-4 shrink-0 text-aq-blue"
-                aria-hidden="true"
-              />
-              <span className="font-label text-xs uppercase tracking-label text-muted-foreground">
-                {point.text}
-              </span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+        {t('visualHeadline.line1')}{' '}
+        <span className="vb-underline">{t('visualHeadline.line2')}</span>
+      </motion.h2>
     </section>
   );
 }

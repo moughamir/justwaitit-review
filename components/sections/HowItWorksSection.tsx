@@ -1,8 +1,7 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
-
-import { StepAtom } from './atoms/step-atom';
 
 import { useAnimationReady } from '@/hooks/use-animation-ready';
 
@@ -19,38 +18,44 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       aria-labelledby="how-it-works-heading"
-      className="relative flex flex-col justify-center px-4 pb-16 pt-32 sm:px-12 lg:px-24 lg:pt-48"
+      className="vb-white relative overflow-hidden px-8 py-24 md:px-16"
     >
-      {/* Semantic Headings */}
-      <h2 id="how-it-works-heading" className="sr-only">
-        {t('eyebrow')}: {t('headline.pre')} {t('headline.gradient')}
+      <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.3em] text-black/40">
+        {t('eyebrow')}
+      </p>
+      <h2
+        id="how-it-works-heading"
+        className="mb-20 max-w-xl font-display font-black text-black"
+        style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)' }}
+      >
+        {t('headline.pre')}{' '}
+        <span className="vb-underline">{t('headline.gradient')}</span>
       </h2>
 
-      <div className="mx-auto w-full max-w-7xl">
-        <p
-          data-atom
-          className="mb-6 font-label text-[0.65rem] uppercase tracking-label text-muted-foreground"
-        >
-          {t('eyebrow')}
-        </p>
-
-        <p
-          data-atom
-          aria-hidden="true"
-          className="mb-20 max-w-2xl font-display text-[clamp(2.5rem,5vw,5rem)] font-light leading-tight"
-        >
-          {t('headline.pre')}{' '}
-          <em className="text-brand-gradient not-italic">
-            {t('headline.gradient')}
-          </em>{' '}
-          {t('headline.post')}
-        </p>
-
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-          {steps.map((s, i) => (
-            <StepAtom key={s.num} step={s} index={i} animated={animated} />
-          ))}
-        </div>
+      <div className="flex flex-col divide-y divide-black/10">
+        {steps.map((step, i) => (
+          <motion.div
+            key={step.num}
+            initial={animated ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="grid grid-cols-[80px_1fr] gap-8 py-10 md:grid-cols-[120px_1fr]"
+          >
+            <p
+              className="font-display font-black text-black/10"
+              style={{ fontSize: 'clamp(3rem, 6vw, 6rem)', lineHeight: 1 }}
+            >
+              {String(i + 1).padStart(2, '0')}
+            </p>
+            <div>
+              <h3 className="mb-2 font-display text-xl font-bold text-black md:text-2xl">
+                {step.title}
+              </h3>
+              <p className="text-sm text-black/60">{step.body}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

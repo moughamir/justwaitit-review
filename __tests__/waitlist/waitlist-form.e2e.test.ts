@@ -1,13 +1,12 @@
 import { test, expect } from '@playwright/test';
 
+import type { Page } from '@playwright/test';
+
 /**
  * E2E tests for the WaitlistForm component.
  *
- * Simple variant: rendered in HeroSection on the main landing page.
- * Full variant:   rendered in WaitlistSection (ScrollTriggered layout).
- *                 Requires isNewLandingPageActive() === false, i.e. the
- *                 LANDING_PAGE_SWITCH_DATE has not yet passed, OR the
- *                 ScrollTriggered layout is otherwise active.
+ * The form is now inside a shadcn Drawer, triggered by a CTA button
+ * in the #final-cta section on the landing page.
  *
  * Run with: bun run test:e2e -- __tests__/waitlist/waitlist-form.e2e.test.ts
  */
@@ -15,19 +14,33 @@ import { test, expect } from '@playwright/test';
 const BASE = 'http://localhost:3000';
 const LOCALE = 'en-US';
 
+async function openDrawer(page: Page) {
+  await page.evaluate(() => {
+    const el = document.getElementById('final-cta');
+    el?.scrollIntoView({ behavior: 'instant' });
+  });
+  await page.waitForTimeout(1000);
+
+  const trigger = page
+    .locator('#final-cta button')
+    .filter({ hasText: /invitation/i })
+    .first();
+  await expect(trigger).toBeVisible({ timeout: 10000 });
+  await trigger.click();
+  await page.waitForTimeout(600);
+
+  // Wait for the drawer form to appear
+  await expect(page.locator('form').first()).toBeVisible({ timeout: 10000 });
+}
+
 test.describe('Waitlist form — simple variant', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${BASE}/${LOCALE}`);
-    // Scroll to the waitlist section
-    await page.evaluate(() => {
-      const el = document.getElementById('waitlist');
-      el?.scrollIntoView();
-    });
-    await page.waitForTimeout(500);
+    await openDrawer(page);
   });
 
   test('type email → submit → success message visible', async ({ page }) => {
-    const emailInput = page.locator('#waitlist input[type="email"]').first();
+    const emailInput = page.locator('form input[type="email"]').first();
     await emailInput.fill('e2e-simple@example.com');
     await emailInput.press('Enter');
     await expect(page.getByText("You're on the list!").first()).toBeVisible({
@@ -39,11 +52,7 @@ test.describe('Waitlist form — simple variant', () => {
 test.describe('Waitlist form — full variant', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto(`${BASE}/${LOCALE}`);
-    await page.evaluate(() => {
-      const el = document.getElementById('waitlist');
-      el?.scrollIntoView();
-    });
-    await page.waitForTimeout(500);
+    await openDrawer(page);
   });
 
   test('complete all 3 steps → success visible', async ({ page }) => {
