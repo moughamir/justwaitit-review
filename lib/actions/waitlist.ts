@@ -104,7 +104,7 @@ export async function joinWaitlist(formData: FormData) {
   try {
     const supabase = await createClient();
 
-    const payload: any = {
+    const payload: Record<string, unknown> = {
       email: email.toLowerCase().trim(),
       full_name: full_name.trim(),
       role: role,
@@ -120,6 +120,14 @@ export async function joinWaitlist(formData: FormData) {
     if (revenue_range) {
       payload.revenue_range = revenue_range;
     }
+
+    // UTM attribution fields — only include non-nullish values
+    if (utm_source) payload.utm_source = utm_source;
+    if (utm_medium) payload.utm_medium = utm_medium;
+    if (utm_campaign) payload.utm_campaign = utm_campaign;
+    if (utm_content) payload.utm_content = utm_content;
+    if (utm_term) payload.utm_term = utm_term;
+    if (referrer) payload.referrer = referrer;
 
     const { error } = await supabase.from('waitlist').insert(payload);
 
