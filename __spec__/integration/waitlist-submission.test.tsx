@@ -193,10 +193,17 @@ describe('Waitlist submission — integration', () => {
       await screen.findByText('Server error');
 
       // Navigate back to step 2, then step 1
+      // Wait for Back button to be enabled (isPending resolves after server error)
+      await waitFor(() =>
+        expect(screen.getByRole('button', { name: /back/i })).not.toBeDisabled()
+      );
       fireEvent.click(screen.getByRole('button', { name: /back/i }));
       await advanceStep();
       await screen.findByText('Profile');
 
+      await waitFor(() =>
+        expect(screen.getByRole('button', { name: /back/i })).not.toBeDisabled()
+      );
       fireEvent.click(screen.getByRole('button', { name: /back/i }));
       await advanceStep();
       await screen.findByText('Identity');
