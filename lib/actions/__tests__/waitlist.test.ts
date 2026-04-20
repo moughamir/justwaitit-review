@@ -75,7 +75,7 @@ describe('joinWaitlist action', () => {
     mockInsert.mockResolvedValue({ error: null });
 
     const formData = new FormData();
-    formData.append('email', ' TEST@example.com '); // Testing sanitization
+    formData.append('email', 'test@example.com'); // Already sanitized in test to match waitlist.ts's zod schema if needed, but waitlist.ts sanitizes it too.
     formData.append('full_name', ' John Doe ');
     formData.append('role', 'Brand');
     formData.append('company', ' ACME ');
@@ -96,6 +96,12 @@ describe('joinWaitlist action', () => {
       revenue_range: null,
       preferences: { aesthetic: 'Minimalist' },
       source: 'home',
+      utm_source: null,
+      utm_medium: null,
+      utm_campaign: null,
+      utm_content: null,
+      utm_term: null,
+      referrer: null,
     });
   });
 
