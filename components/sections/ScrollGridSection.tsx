@@ -157,7 +157,7 @@ export function ScrollGridSection() {
 
   // Scale the center scaler from viewport-fill → natural cell size.
   // Uses transform scale (not width/height) so the element stays in grid flow —
-  // the scaler sits at grid-area 2/3 (center column), which is the viewport center
+  // The scaler sits at grid-area 2/3 (center column), which is the viewport center
   // for a centered 5-col grid, so scaleX/scaleY expands symmetrically outward.
   const scalerScaleX = useTransform(
     scrollYProgress,
