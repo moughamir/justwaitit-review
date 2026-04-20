@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { createClient } from '@/lib/supabase/server';
 
 const WaitlistSchema = z.object({
-  email: z.email('Please provide a valid email address.'),
+  email: z.string().email('Please provide a valid email address.'),
   full_name: z
     .string()
     .min(2, 'Name is too short.')
@@ -108,24 +108,17 @@ export async function joinWaitlist(formData: FormData) {
       email: email.toLowerCase().trim(),
       full_name: full_name.trim(),
       role: role,
+      company: company?.trim() || null,
+      revenue_range: revenue_range || null,
       preferences: aesthetic ? { aesthetic } : {},
       source: source,
-      utm_source,
-      utm_medium,
-      utm_campaign,
-      utm_content,
-      utm_term,
-      referrer,
+      utm_source: utm_source || null,
+      utm_medium: utm_medium || null,
+      utm_campaign: utm_campaign || null,
+      utm_content: utm_content || null,
+      utm_term: utm_term || null,
+      referrer: referrer || null,
     };
-
-    const trimmedCompany = company?.trim();
-    if (trimmedCompany) {
-      payload.company = trimmedCompany;
-    }
-
-    if (revenue_range) {
-      payload.revenue_range = revenue_range;
-    }
 
     const { error } = await supabase.from('waitlist').insert(payload);
 
