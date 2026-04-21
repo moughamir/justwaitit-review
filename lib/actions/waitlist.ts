@@ -4,6 +4,7 @@ import { after } from 'next/server';
 import { z } from 'zod';
 
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/utils/logger';
 
 const WaitlistSchema = z.object({
   email: z.string().email('Please provide a valid email address.'),
@@ -44,7 +45,7 @@ async function triggerBrevoWelcome(
 ): Promise<void> {
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
-    console.warn('[Brevo] BREVO_API_KEY is not set — skipping welcome trigger');
+    logger.warn('[Brevo] BREVO_API_KEY is not set — skipping welcome trigger');
     return;
   }
 
@@ -69,7 +70,10 @@ async function triggerBrevoWelcome(
     });
   } catch (err) {
     // Non-fatal — Brevo failure must never block the user
-    console.error('[Brevo] Failed to trigger welcome sequence:', err);
+    logger.error('[Brevo] Failed to trigger welcome sequence', {
+      error: err instanceof Error ? err.message : String(err),
+      email,
+    });
   }
 }
 
@@ -129,7 +133,7 @@ export async function joinWaitlist(formData: FormData) {
           message: 'This email is already on the waitlist!',
         };
       }
-      console.error('Waitlist insert error:', error);
+      logger.error('Waitlist insert error', { error, email });
       return {
         success: false,
         message: 'Something went wrong. Please try again later.',
@@ -149,7 +153,9 @@ export async function joinWaitlist(formData: FormData) {
       message: "You're on the list! We'll be in touch soon.",
     };
   } catch (err) {
-    console.error('Waitlist error:', err);
+    logger.error('Waitlist error', {
+      error: err instanceof Error ? err.message : String(err),
+    });
     return {
       success: false,
       message: 'Something went wrong. Please try again later.',
