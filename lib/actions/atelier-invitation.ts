@@ -3,6 +3,7 @@
 import { z } from 'zod';
 
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/utils/logger';
 
 const AtelierInvitationSchema = z.object({
   email: z
@@ -70,7 +71,7 @@ export async function requestAtelierInvitation(formData: FormData) {
           message: 'This email has already requested an invitation.',
         };
       }
-      console.error('Atelier invitation insert error:', error);
+      logger.error('Atelier invitation insert error', { error, email });
       return {
         success: false,
         message: 'Something went wrong. Please try again later.',
@@ -82,7 +83,9 @@ export async function requestAtelierInvitation(formData: FormData) {
       message: "Your request has been received. We'll be in touch soon.",
     };
   } catch (err) {
-    console.error('Atelier invitation error:', err);
+    logger.error('Atelier invitation error', {
+      error: err instanceof Error ? err.message : String(err),
+    });
     return {
       success: false,
       message: 'Something went wrong. Please try again later.',
