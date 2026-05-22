@@ -75,7 +75,8 @@ export function HeroVideoPlayer() {
               poster="/videos/hero-poster.jpg"
             >
               {/* Multiple sources for browser compatibility */}
-              <source src="/videos/output-blurred.mp4" type="video/mp4" />
+              <source src="/videos/hero-showcase.mp4" type="video/mp4" />
+              <source src="/videos/hero-showcase.webm" type="video/webm" />
               Your browser does not support the video tag.
             </video>
 

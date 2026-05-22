@@ -93,8 +93,8 @@ justwaitit/
 └── public/
     ├── videos/
     │   ├── README.md                   # NEW: Video asset guidelines
-    │   ├── hero-showcase.mp4           # TODO: Add video file
-    │   └── hero-showcase.webm          # TODO: Add video file
+    │   ├── hero-showcase.mp4           # Primary format
+    │   └── hero-showcase.webm          # Fallback format
     └── images/
         └── hero-video-poster.webp      # TODO: Add poster image
 ```
