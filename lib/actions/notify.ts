@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { utmFieldsSchema } from '@/lib/actions/shared';
 import { ERROR_MESSAGES } from '@/lib/constants/errors';
 import { createClient } from '@/lib/supabase/server';
+import { logger } from '@/lib/utils/logger';
 
 const NotifySchema = z.object({
   email: z.email(ERROR_MESSAGES.VALID_EMAIL),
@@ -68,7 +69,7 @@ export async function notifyMe(formData: FormData) {
           message: 'This email is already on the list.',
         };
       }
-      console.error('Notify insert error:', error);
+      logger.error('Notify insert error', { error });
       return {
         success: false,
         message: ERROR_MESSAGES.GENERIC_SHORT,
@@ -80,7 +81,7 @@ export async function notifyMe(formData: FormData) {
       message: "You're in. We'll reach out when the studio opens.",
     };
   } catch (err) {
-    console.error('Notify error:', err);
+    logger.error('Notify error', { error: err });
     return {
       success: false,
       message: ERROR_MESSAGES.GENERIC_SHORT,

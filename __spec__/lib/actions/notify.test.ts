@@ -4,6 +4,10 @@ import { notifyMe } from '@/lib/actions/notify';
 import { ERROR_MESSAGES } from '@/lib/constants/errors';
 import { createClient } from '@/lib/supabase/server';
 
+
+vi.mock('@/lib/analytics', () => ({
+  maskPII: vi.fn((val) => `***${val}`),
+}));
 vi.mock('@/lib/supabase/server', () => ({
   createClient: vi.fn(),
 }));
@@ -21,6 +25,7 @@ describe('notifyMe action', () => {
     } as any);
 
     vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
   });
 
   afterEach(() => {
@@ -82,6 +87,7 @@ describe('notifyMe action', () => {
 
     expect(result.success).toBe(false);
     expect(result.message).toBe(ERROR_MESSAGES.GENERIC_SHORT);
+    expect(console.error).toHaveBeenCalled();
   });
 
   it('catches unexpected exceptions', async () => {
@@ -94,5 +100,6 @@ describe('notifyMe action', () => {
 
     expect(result.success).toBe(false);
     expect(result.message).toBe(ERROR_MESSAGES.GENERIC_SHORT);
+    expect(console.error).toHaveBeenCalled();
   });
 });
