@@ -47,8 +47,8 @@
     "@remotion/cli": "4",
     "@remotion/google-fonts": "4",
     "@remotion/player": "4",
-    "@anaqio/supabase": "workspace:*",
-    "@anaqio/utils": "workspace:*",
+    "@anaqio/supabase": "*",
+    "@anaqio/utils": "*",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "@uidotdev/usehooks": "^2.4.1",
@@ -71,8 +71,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@anaqio/eslint-config": "workspace:*",
-    "@anaqio/tsconfig": "workspace:*",
+    "@anaqio/eslint-config": "*",
+    "@anaqio/tsconfig": "*",
     "@eslint/js": "^9.39.0",
     "@next/eslint-plugin-next": "^16.1.6",
     "@playwright/test": "^1.58.2",

@@ -43,7 +43,7 @@ export const event = (action: string, params?: Record<string, unknown>) => {
  * Helper to mask PII (Personally Identifiable Information) before sending to GA
  * It's generally against GA Terms of Service to send raw emails/names.
  */
-const maskPII = (value: string) => {
+export const maskPII = (value: string) => {
   if (!value) return '';
   // Simple "masking" for GA - you might want to use a real SHA-256 hash if needed
   // For now, we'll just send a placeholder or "hashed" version if it looks like an email
